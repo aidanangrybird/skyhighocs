@@ -1,0 +1,27 @@
+{
+  "display": {
+    "name": "Omega-Xis: The Fugitive",
+    "hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/gui/nodes/star_force.png"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:wave_beings",
+    "fiskheroes:tier10"
+  ],
+  "criteria": {
+    "chance": {
+      "trigger": "fiskheroes:player_struck_by_lightning",
+      "description": {
+        "translate": "Fate has choosen you"
+      },
+      "condition": {
+        "variables": {
+          "entity": "PLAYER_STRUCK"
+          },
+        "check": "(entity.world().getLocation(entity.pos().add(6, 0, 0)).biome().startsWith('Beach') || entity.world().getLocation(entity.pos().add(-6, 0, 0)).biome().startsWith('Beach') || entity.world().getLocation(entity.pos().add(0, 0, -6)).biome().startsWith('Beach') ||  entity.world().getLocation(entity.pos().add(0, 0, 6)).biome().startsWith('Beach')) && entity.world().getLocation(entity.pos()).biome().startsWith('Plains')"
+      }
+    }
+  }
+}
