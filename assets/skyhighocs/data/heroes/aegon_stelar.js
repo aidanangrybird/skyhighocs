@@ -6,8 +6,8 @@ var transerMessaging = implement("skyhighheroes:external/transer_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
-var roseSupernova = implement("skyhighheroes:external/rose_supernova");
-var supernova = implement("skyhighheroes:external/supernova");
+var roseSupernova = implement("skyhighocs:external/rose_supernova");
+var supernova = implement("skyhighocs:external/supernova");
 var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, roseSupernova, supernova]);
 function init(hero) {
   hero.setAliases("aegon_stelar");

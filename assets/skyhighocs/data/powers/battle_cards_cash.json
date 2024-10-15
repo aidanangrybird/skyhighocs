@@ -77,8 +77,8 @@
     },
     "fiskheroes:transformation|gravity_pulse": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/gravity_pulse",
-        "timerData": "skyhighheroes:dyn/gravity_pulse_timer",
+        "toggleData": "skyhighocs:dyn/gravity_pulse",
+        "timerData": "skyhighocs:dyn/gravity_pulse_timer",
         "time": 10
       },
       "isToggle": true
@@ -96,8 +96,8 @@
     },
     "fiskheroes:transformation|planetary_blast": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/planetary_blast",
-        "timerData": "skyhighheroes:dyn/planetary_blast_timer",
+        "toggleData": "skyhighocs:dyn/planetary_blast",
+        "timerData": "skyhighocs:dyn/planetary_blast_timer",
         "time": 10
       },
       "isToggle": true
@@ -123,8 +123,8 @@
     },
     "fiskheroes:transformation|star_cutter": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/star_cutter",
-        "timerData": "skyhighheroes:dyn/star_cutter_timer",
+        "toggleData": "skyhighocs:dyn/star_cutter",
+        "timerData": "skyhighocs:dyn/star_cutter_timer",
         "time": 10
       },
       "isToggle": true
@@ -152,7 +152,7 @@
     "fiskheroes:transformation|gravity_manipulation": {
       "transformation": {
         "toggleData": "fiskheroes:gravity_manip",
-        "timerData": "skyhighheroes:dyn/gravity_manip_timer",
+        "timerData": "skyhighocs:dyn/gravity_manip_timer",
         "time": 10
       }
     }

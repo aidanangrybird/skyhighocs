@@ -6,8 +6,8 @@ var transerMessaging = implement("skyhighheroes:external/transer_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
-var solarFlame = implement("skyhighheroes:external/solar_flame");
-var solar = implement("skyhighheroes:external/solar");
+var solarFlame = implement("skyhighocs:external/solar_flame");
+var solar = implement("skyhighocs:external/solar");
 var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, solarFlame, solar]);
 function init(hero) {
   hero.setAliases("ace_stelar");

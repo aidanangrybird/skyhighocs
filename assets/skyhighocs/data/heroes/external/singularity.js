@@ -14,7 +14,7 @@ function init(transer) {
       return [
         "skyhighheroes:em_wave_change",
         "skyhighheroes:battle_card_predation",
-        "skyhighheroes:blaze_buster"
+        "skyhighocs:blaze_buster"
       ];
     },
     keyBinds: function (hero) {

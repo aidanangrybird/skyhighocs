@@ -77,8 +77,8 @@
     },
     "fiskheroes:transformation|asteroid_crash": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/asteroid_crash",
-        "timerData": "skyhighheroes:dyn/asteroid_crash_timer",
+        "toggleData": "skyhighocs:dyn/asteroid_crash",
+        "timerData": "skyhighocs:dyn/asteroid_crash_timer",
         "time": 10
       },
       "isToggle": true
@@ -103,8 +103,8 @@
     },
     "fiskheroes:transformation|asteroid_pull": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/asteroid_pull",
-        "timerData": "skyhighheroes:dyn/asteroid_pull_timer",
+        "toggleData": "skyhighocs:dyn/asteroid_pull",
+        "timerData": "skyhighocs:dyn/asteroid_pull_timer",
         "time": 10
       },
       "isToggle": true
@@ -127,8 +127,8 @@
     },
     "fiskheroes:transformation|asteroid_blast": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/asteroid_blast",
-        "timerData": "skyhighheroes:dyn/asteroid_blast_timer",
+        "toggleData": "skyhighocs:dyn/asteroid_blast",
+        "timerData": "skyhighocs:dyn/asteroid_blast_timer",
         "time": 10
       },
       "isToggle": true
@@ -155,7 +155,7 @@
     "fiskheroes:transformation|telekinesis": {
       "transformation": {
         "toggleData": "fiskheroes:telekinesis",
-        "timerData": "skyhighheroes:dyn/telekinesis_timer",
+        "timerData": "skyhighocs:dyn/telekinesis_timer",
         "time": 10
       }
     }

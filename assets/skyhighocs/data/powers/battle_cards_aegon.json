@@ -77,8 +77,8 @@
     },
     "fiskheroes:transformation|cosmic_intervention": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/cosmic_intervention",
-        "timerData": "skyhighheroes:dyn/cosmic_intervention_timer",
+        "toggleData": "skyhighocs:dyn/cosmic_intervention",
+        "timerData": "skyhighocs:dyn/cosmic_intervention_timer",
         "time": 10
       },
       "isToggle": true
@@ -104,8 +104,8 @@
     },
     "fiskheroes:transformation|star_collapse": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/star_collapse",
-        "timerData": "skyhighheroes:dyn/star_collapse_timer",
+        "toggleData": "skyhighocs:dyn/star_collapse",
+        "timerData": "skyhighocs:dyn/star_collapse_timer",
         "time": 10
       },
       "isToggle": true
@@ -125,8 +125,8 @@
     },
     "fiskheroes:transformation|dark_matter_grip": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/dark_matter_grip",
-        "timerData": "skyhighheroes:dyn/dark_matter_grip_timer",
+        "toggleData": "skyhighocs:dyn/dark_matter_grip",
+        "timerData": "skyhighocs:dyn/dark_matter_grip_timer",
         "time": 10
       },
       "isToggle": true
@@ -150,7 +150,7 @@
     "fiskheroes:transformation|telekinesis": {
       "transformation": {
         "toggleData": "fiskheroes:telekinesis",
-        "timerData": "skyhighheroes:dyn/telekinesis_timer",
+        "timerData": "skyhighocs:dyn/telekinesis_timer",
         "time": 10
       }
     }

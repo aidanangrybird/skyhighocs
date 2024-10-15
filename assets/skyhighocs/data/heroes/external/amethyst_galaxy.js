@@ -35,7 +35,7 @@ function init(transer) {
     powers: function () {
       return [
         "skyhighheroes:em_wave_being",
-        "skyhighheroes:battle_cards_cash",
+        "skyhighocs:battle_cards_cash",
       ]
     },
     keyBinds: function (hero) {

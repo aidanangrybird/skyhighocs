@@ -77,8 +77,8 @@
     },
     "fiskheroes:transformation|voids_grasp": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/voids_grasp",
-        "timerData": "skyhighheroes:dyn/voids_grasp_timer",
+        "toggleData": "skyhighocs:dyn/voids_grasp",
+        "timerData": "skyhighocs:dyn/voids_grasp_timer",
         "time": 10
       },
       "isToggle": true
@@ -101,8 +101,8 @@
     },
     "fiskheroes:transformation|galaxys_weight": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/galaxys_weight",
-        "timerData": "skyhighheroes:dyn/galaxys_weight_timer",
+        "toggleData": "skyhighocs:dyn/galaxys_weight",
+        "timerData": "skyhighocs:dyn/galaxys_weight_timer",
         "time": 10
       },
       "isToggle": true
@@ -120,8 +120,8 @@
     },
     "fiskheroes:transformation|nebula_burst": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/nebula_burst",
-        "timerData": "skyhighheroes:dyn/nebula_burst_timer",
+        "toggleData": "skyhighocs:dyn/nebula_burst",
+        "timerData": "skyhighocs:dyn/nebula_burst_timer",
         "time": 10
       },
       "isToggle": true
@@ -149,14 +149,14 @@
     "fiskheroes:transformation|telekinesis": {
       "transformation": {
         "toggleData": "fiskheroes:telekinesis",
-        "timerData": "skyhighheroes:dyn/telekinesis_timer",
+        "timerData": "skyhighocs:dyn/telekinesis_timer",
         "time": 10
       }
     },
     "fiskheroes:transformation|gravity_manipulation": {
       "transformation": {
         "toggleData": "fiskheroes:gravity_manip",
-        "timerData": "skyhighheroes:dyn/gravity_manip_timer",
+        "timerData": "skyhighocs:dyn/gravity_manip_timer",
         "time": 10
       }
     }

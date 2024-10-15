@@ -6,8 +6,8 @@ var transerMessaging = implement("skyhighheroes:external/transer_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
-var squallVortex = implement("skyhighheroes:external/squall_vortex");
-var jetStreak = implement("skyhighheroes:external/jet_streak");
+var squallVortex = implement("skyhighocs:external/squall_vortex");
+var jetStreak = implement("skyhighocs:external/jet_streak");
 var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, squallVortex, jetStreak]);
 function init(hero) {
   hero.setAliases("aidan_stelar");

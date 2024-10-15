@@ -6,8 +6,8 @@ var transerMessaging = implement("skyhighheroes:external/transer_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
-var crimsonAsteroid = implement("skyhighheroes:external/crimson_asteroid");
-var crimson = implement("skyhighheroes:external/crimson");
+var crimsonAsteroid = implement("skyhighocs:external/crimson_asteroid");
+var crimson = implement("skyhighocs:external/crimson");
 var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, crimsonAsteroid, crimson]);
 function init(hero) {
   hero.setAliases("lucas_stelar");

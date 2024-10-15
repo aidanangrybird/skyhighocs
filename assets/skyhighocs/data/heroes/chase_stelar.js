@@ -6,8 +6,8 @@ var transerMessaging = implement("skyhighheroes:external/transer_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
-var pryetakNebula = implement("skyhighheroes:external/pryetak_nebula");
-var pryetak = implement("skyhighheroes:external/pryetak");
+var pryetakNebula = implement("skyhighocs:external/pryetak_nebula");
+var pryetak = implement("skyhighocs:external/pryetak");
 var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, pryetakNebula, pryetak]);
 function init(hero) {
   hero.setAliases("chase_stelar");

@@ -77,8 +77,8 @@
     },
     "fiskheroes:transformation|solar_flare": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/solar_flare",
-        "timerData": "skyhighheroes:dyn/solar_flare_timer",
+        "toggleData": "skyhighocs:dyn/solar_flare",
+        "timerData": "skyhighocs:dyn/solar_flare_timer",
         "time": 10
       },
       "isToggle": true
@@ -106,8 +106,8 @@
     },
     "fiskheroes:transformation|solar_wind": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/solar_wind",
-        "timerData": "skyhighheroes:dyn/solar_wind_timer",
+        "toggleData": "skyhighocs:dyn/solar_wind",
+        "timerData": "skyhighocs:dyn/solar_wind_timer",
         "time": 10
       },
       "isToggle": true
@@ -134,8 +134,8 @@
     },
     "fiskheroes:transformation|solar_blast": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/solar_blast",
-        "timerData": "skyhighheroes:dyn/solar_blast_timer",
+        "toggleData": "skyhighocs:dyn/solar_blast",
+        "timerData": "skyhighocs:dyn/solar_blast_timer",
         "time": 10
       },
       "isToggle": true
