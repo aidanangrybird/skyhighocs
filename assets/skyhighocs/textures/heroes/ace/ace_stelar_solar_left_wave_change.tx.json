@@ -1,13 +1,13 @@
 {
   "texture": {
-    "in": "skyhighocs:ace/ace_stelar_flame_left",
+    "in": "skyhighocs:ace/ace_stelar_solar_left",
     "transform": [
       {
         "operation": "XOR",
         "supply": "skyhighheroes:xor/omega_xis_left_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighocs:generated/ace_stelar_flame_left_<TIMER>"
+    "out": "skyhighocs:generated/ace_stelar_solar_left_<TIMER>"
   },
   "getters": {
     "TIMER": {
