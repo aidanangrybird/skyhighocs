@@ -27,8 +27,8 @@ function init(transer) {
         manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
         manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
         manager.setData(player, "skyhighheroes:dyn/predation", false);
-        manager.setData(player, "skyhighheroes:dyn/jet_streak_timer", 0);
-        manager.setData(player, "skyhighheroes:dyn/jet_streak", false);
+        manager.setData(player, "skyhighocs:dyn/jet_streak_timer", 0);
+        manager.setData(player, "skyhighocs:dyn/jet_streak", false);
         if (player.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
           manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
         };
@@ -47,8 +47,8 @@ function init(transer) {
           manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
           manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
           manager.setData(player, "skyhighheroes:dyn/predation", false);
-          manager.setData(player, "skyhighheroes:dyn/jet_streak_timer", 0);
-          manager.setData(player, "skyhighheroes:dyn/jet_streak", false);
+          manager.setData(player, "skyhighocs:dyn/jet_streak_timer", 0);
+          manager.setData(player, "skyhighocs:dyn/jet_streak", false);
           manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
         } else {
           if (PackLoader.getSide() == "CLIENT") {
@@ -78,7 +78,7 @@ function init(transer) {
       var result = false;
       var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
       if (keyBind == "PREDATION") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("skyhighheroes:dyn/battle_card") > 0 || entity.getData("skyhighheroes:dyn/jet_streak_timer") < 1);
+        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("skyhighheroes:dyn/battle_card") > 0 || entity.getData("skyhighocs:dyn/jet_streak_timer") < 1);
       };
       if (keyBind == "BATTLE_CARD_RESET_PREDATION") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.isSneaking() && (entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/selected_battle_card") > 0);
@@ -96,7 +96,7 @@ function init(transer) {
         result = entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking()) || (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25));
       };
       if (keyBind == "AIM") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/jet_streak_timer") < 1 && !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighheroes:dyn/battle_card") == 0;
+        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/jet_streak_timer") < 1 && !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighheroes:dyn/battle_card") == 0;
       };
       if (keyBind == "COLD_TEMPERATURE") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") <= -0.25;
@@ -130,7 +130,7 @@ function init(transer) {
         manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
         manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         manager.setData(entity, "skyhighheroes:dyn/sword", false);
-        manager.setData(entity, "skyhighheroes:dyn/jet_streak", false);
+        manager.setData(entity, "skyhighocs:dyn/jet_streak", false);
       };
     },
     name: function () {
