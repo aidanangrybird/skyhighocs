@@ -11,7 +11,7 @@
         "supply": "skyhighheroes:tenma_rockets"
       }
     ],
-    "out": "skyhighheroes:generated/lucas_tenma_<CLOTHING><FLYING>_rocket_legs"
+    "out": "skyhighocs:generated/lucas_tenma_<CLOTHING><FLYING>_rocket_legs"
   },
   "getters": {
     "CLOTHING": {

@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:xor/sword_front_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/aidan_stelar_hail_cannon_front_<TIMER>"
+    "out": "skyhighocs:generated/aidan_stelar_hail_cannon_front_<TIMER>"
   },
   "getters": {
     "TIMER": {

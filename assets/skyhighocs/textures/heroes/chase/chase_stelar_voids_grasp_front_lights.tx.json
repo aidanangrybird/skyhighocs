@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:xor/sword_front_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/chase_stelar_voids_grasp_front_lights_<TIMER>"
+    "out": "skyhighocs:generated/chase_stelar_voids_grasp_front_lights_<TIMER>"
   },
   "getters": {
     "TIMER": {

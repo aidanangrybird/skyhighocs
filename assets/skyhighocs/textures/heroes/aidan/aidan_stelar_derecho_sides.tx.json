@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:xor/omega_xis_bottom_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/aidan_stelar_derecho_sides_<TIMER>"
+    "out": "skyhighocs:generated/aidan_stelar_derecho_sides_<TIMER>"
   },
   "getters": {
     "TIMER": {

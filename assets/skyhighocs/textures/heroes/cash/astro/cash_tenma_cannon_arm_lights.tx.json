@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:astro_boy_cannon_arms_lights"
       }
     ],
-    "out": "skyhighheroes:generated/cash_tenma_cannon_arms_lights"
+    "out": "skyhighocs:generated/cash_tenma_cannon_arms_lights"
   },
   "isDynamic": true
 }

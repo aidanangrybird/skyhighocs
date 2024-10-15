@@ -11,7 +11,7 @@
         "supply": "skyhighheroes:tenma_rockets_xor"
       }
     ],
-    "out": "skyhighheroes:generated/chase_tenma_rocket_legs_lights"
+    "out": "skyhighocs:generated/chase_tenma_rocket_legs_lights"
   },
   "isDynamic": true
 }

@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:xor/stelar_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/lucas_stelar_suit_<TIMER>"
+    "out": "skyhighocs:generated/lucas_stelar_suit_<TIMER>"
   },
   "getters": {
     "TIMER": {

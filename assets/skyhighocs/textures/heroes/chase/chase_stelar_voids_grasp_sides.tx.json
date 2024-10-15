@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:xor/omega_xis_bottom_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/chase_stelar_voids_grasp_sides_<TIMER>"
+    "out": "skyhighocs:generated/chase_stelar_voids_grasp_sides_<TIMER>"
   },
   "getters": {
     "TIMER": {

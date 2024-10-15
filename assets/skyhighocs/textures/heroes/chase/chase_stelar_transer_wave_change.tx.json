@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:xor/stelar_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/chase_stelar_<VISUALIZER>_<CLOTHING>_<TIMER>"
+    "out": "skyhighocs:generated/chase_stelar_<VISUALIZER>_<CLOTHING>_<TIMER>"
   },
   "getters": {
     "CLOTHING": {

@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:xor/sword_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/aegon_stelar_sword_<TIMER>"
+    "out": "skyhighocs:generated/aegon_stelar_sword_<TIMER>"
   },
   "getters": {
     "TIMER": {

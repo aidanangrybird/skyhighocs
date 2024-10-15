@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:xor/lucas_stelar_helmet_wave_changing_lights_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/lucas_stelar_helmet_wave_changing_lights_<TIMER>"
+    "out": "skyhighocs:generated/lucas_stelar_helmet_wave_changing_lights_<TIMER>"
   },
   "getters": {
     "TIMER": {

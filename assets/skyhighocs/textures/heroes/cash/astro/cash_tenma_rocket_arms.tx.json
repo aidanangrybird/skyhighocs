@@ -11,7 +11,7 @@
         "supply": "skyhighheroes:tenma_rockets"
       }
     ],
-    "out": "skyhighheroes:generated/cash_tenma_<CLOTHING><FLYING>_rocket_arms"
+    "out": "skyhighocs:generated/cash_tenma_<CLOTHING><FLYING>_rocket_arms"
   },
   "getters": {
     "CLOTHING": {

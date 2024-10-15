@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:xor/sword_front_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/grand_stelar_gravity_strike_front_<TIMER>"
+    "out": "skyhighocs:generated/grand_stelar_gravity_strike_front_<TIMER>"
   },
   "getters": {
     "TIMER": {

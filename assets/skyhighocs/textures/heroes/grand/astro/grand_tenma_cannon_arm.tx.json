@@ -11,7 +11,7 @@
         "supply": "skyhighheroes:tenma_cannons"
       }
     ],
-    "out": "skyhighheroes:generated/grand_tenma_<CLOTHING><FLYING>_cannon_arms"
+    "out": "skyhighocs:generated/grand_tenma_<CLOTHING><FLYING>_cannon_arms"
   },
   "getters": {
     "CLOTHING": {

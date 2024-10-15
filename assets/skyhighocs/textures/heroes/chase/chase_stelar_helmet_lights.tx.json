@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:xor/chase_stelar_helmet_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/chase_stelar_helmet_lights_<TIMER>"
+    "out": "skyhighocs:generated/chase_stelar_helmet_lights_<TIMER>"
   },
   "getters": {
     "TIMER": {

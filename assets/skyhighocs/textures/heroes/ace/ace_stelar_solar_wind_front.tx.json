@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:xor/sword_front_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/ace_stelar_solar_wind_front_<TIMER>"
+    "out": "skyhighocs:generated/ace_stelar_solar_wind_front_<TIMER>"
   },
   "getters": {
     "TIMER": {
