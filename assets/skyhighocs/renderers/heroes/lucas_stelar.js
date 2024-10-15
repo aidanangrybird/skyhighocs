@@ -4,66 +4,66 @@ var stelar = implement("skyhighheroes:external/stelar");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
-  "base": "skyhighheroes:lucas/lucas_stelar_base",
-  "lights": "skyhighheroes:lucas/lucas_stelar_lights",
-  "base_wave_change": "skyhighheroes:lucas/lucas_stelar_wave_change.tx.json",
-  "lights_wave_change": "skyhighheroes:lucas/lucas_stelar_wave_change_lights.tx.json",
-  "wave_changing_lights": "skyhighheroes:lucas/lucas_stelar_wave_changing_lights.tx.json",
-  "helmet": "skyhighheroes:lucas/lucas_stelar_helmet.tx.json",
-  "helmet_lights": "skyhighheroes:lucas/lucas_stelar_helmet_lights.tx.json",
-  "helmet_wave_changing_lights": "skyhighheroes:lucas/lucas_stelar_helmet_wave_changing_lights.tx.json",
-  "predation_sides_wave_changing_lights": "skyhighheroes:lucas/lucas_stelar_predation_sides_wave_changing_lights.tx.json",
-  "predation_front_wave_changing_lights": "skyhighheroes:lucas/lucas_stelar_predation_front_wave_changing_lights.tx.json",
-  "sword_blade": "skyhighheroes:lucas/lucas_stelar_sword_blade.tx.json",
-  "sword": "skyhighheroes:lucas/lucas_stelar_sword.tx.json",
-  "sword_wave_changing_lights": "skyhighheroes:lucas/lucas_stelar_sword_wave_changing_lights.tx.json",
-  "sword_sides": "skyhighheroes:lucas/lucas_stelar_sword_sides.tx.json",
-  "sword_front": "skyhighheroes:lucas/lucas_stelar_sword_front.tx.json",
-  "asteroid_pull_sides": "skyhighheroes:lucas/lucas_stelar_asteroid_pull_sides.tx.json",
-  "asteroid_pull_front": "skyhighheroes:lucas/lucas_stelar_asteroid_pull_front.tx.json",
-  "asteroid_pull_front_lights": "skyhighheroes:lucas/lucas_stelar_asteroid_pull_front_lights.tx.json",
-  "asteroid_blast_sides": "skyhighheroes:lucas/lucas_stelar_asteroid_blast_sides.tx.json",
-  "asteroid_blast_front": "skyhighheroes:lucas/lucas_stelar_asteroid_blast_front.tx.json",
-  "asteroid_blast_front_lights": "skyhighheroes:lucas/lucas_stelar_asteroid_blast_front_lights.tx.json",
-  "asteroid_crash_sides": "skyhighheroes:lucas/lucas_stelar_asteroid_crash_sides.tx.json",
-  "asteroid_crash_front": "skyhighheroes:lucas/lucas_stelar_asteroid_crash_front.tx.json",
-  "head_right": "skyhighheroes:lucas/lucas_stelar_crimson_right.tx.json",
-  "head_right_wave_change": "skyhighheroes:lucas/lucas_stelar_crimson_right_wave_change.tx.json",
-  "head_right_wave_change_lights": "skyhighheroes:lucas/lucas_stelar_crimson_right_wave_change_lights.tx.json",
-  "head_right_lights": "skyhighheroes:lucas/lucas_stelar_crimson_right_lights.tx.json",
-  "head_right_wave_changing_lights": "skyhighheroes:lucas/lucas_stelar_crimson_right_wave_changing_lights.tx.json",
-  "head_left": "skyhighheroes:lucas/lucas_stelar_crimson_left.tx.json",
-  "head_left_wave_change": "skyhighheroes:lucas/lucas_stelar_crimson_left_wave_change.tx.json",
-  "head_left_lights": "skyhighheroes:lucas/lucas_stelar_crimson_left_lights.tx.json",
-  "head_left_wave_change_lights": "skyhighheroes:lucas/lucas_stelar_crimson_left_wave_change_lights.tx.json",
-  "head_left_wave_changing_lights": "skyhighheroes:lucas/lucas_stelar_crimson_left_wave_changing_lights.tx.json",
-  "head_top": "skyhighheroes:lucas/lucas_stelar_crimson_top.tx.json",
-  "head_top_wave_change": "skyhighheroes:lucas/lucas_stelar_crimson_top_wave_change.tx.json",
-  "head_top_lights": "skyhighheroes:lucas/lucas_stelar_crimson_top_lights.tx.json",
-  "head_top_wave_change_lights": "skyhighheroes:lucas/lucas_stelar_crimson_top_wave_change_lights.tx.json",
-  "head_top_wave_changing_lights": "skyhighheroes:lucas/lucas_stelar_crimson_top_wave_changing_lights.tx.json",
-  "head_bottom": "skyhighheroes:lucas/lucas_stelar_crimson_bottom.tx.json",
-  "head_bottom_wave_change": "skyhighheroes:lucas/lucas_stelar_crimson_bottom_wave_change.tx.json",
-  "head_bottom_lights": "skyhighheroes:lucas/lucas_stelar_crimson_bottom_lights.tx.json",
-  "head_bottom_wave_change_lights": "skyhighheroes:lucas/lucas_stelar_crimson_bottom_wave_change_lights.tx.json",
-  "head_bottom_wave_changing_lights": "skyhighheroes:lucas/lucas_stelar_crimson_bottom_wave_changing_lights.tx.json",
-  "head_front": "skyhighheroes:lucas/lucas_stelar_crimson_front.tx.json",
-  "head_front_wave_change": "skyhighheroes:lucas/lucas_stelar_crimson_front_wave_change.tx.json",
-  "head_front_wave_changing_lights": "skyhighheroes:lucas/lucas_stelar_crimson_front_wave_changing_lights.tx.json",
-  "transer": "skyhighheroes:lucas/lucas_stelar_transer.tx.json",
-  "transer_wave_change": "skyhighheroes:lucas/lucas_stelar_transer_wave_change.tx.json",
-  "visualizer_lights": "skyhighheroes:lucas/lucas_stelar_visualizer_lights.tx.json",
-  "visualizer_lights_wave_change": "skyhighheroes:lucas/lucas_stelar_visualizer_lights_wave_change.tx.json",
-  "transer_default": "skyhighheroes:lucas/lucas_stelar_transer",
-  "transer_default_lights": "skyhighheroes:lucas/lucas_stelar_transer_lights",
-  "shield": "skyhighheroes:lucas/lucas_stelar_shield",
-  "shield_lights": "skyhighheroes:lucas/lucas_stelar_shield_lights",
-  "katana": "skyhighheroes:lucas/lucas_stelar_katana",
-  "katana_lights": "skyhighheroes:lucas/lucas_stelar_katana_lights",
-  "scythe": "skyhighheroes:lucas/lucas_stelar_scythe",
-  "scythe_lights": "skyhighheroes:lucas/lucas_stelar_scythe_lights",
-  "rifle": "skyhighheroes:lucas/lucas_stelar_rifle",
-  "rifle_lights": "skyhighheroes:lucas/lucas_stelar_rifle_lights"
+  "base": "skyhighocs:lucas/lucas_stelar_base",
+  "lights": "skyhighocs:lucas/lucas_stelar_lights",
+  "base_wave_change": "skyhighocs:lucas/lucas_stelar_wave_change.tx.json",
+  "lights_wave_change": "skyhighocs:lucas/lucas_stelar_wave_change_lights.tx.json",
+  "wave_changing_lights": "skyhighocs:lucas/lucas_stelar_wave_changing_lights.tx.json",
+  "helmet": "skyhighocs:lucas/lucas_stelar_helmet.tx.json",
+  "helmet_lights": "skyhighocs:lucas/lucas_stelar_helmet_lights.tx.json",
+  "helmet_wave_changing_lights": "skyhighocs:lucas/lucas_stelar_helmet_wave_changing_lights.tx.json",
+  "predation_sides_wave_changing_lights": "skyhighocs:lucas/lucas_stelar_predation_sides_wave_changing_lights.tx.json",
+  "predation_front_wave_changing_lights": "skyhighocs:lucas/lucas_stelar_predation_front_wave_changing_lights.tx.json",
+  "sword_blade": "skyhighocs:lucas/lucas_stelar_sword_blade.tx.json",
+  "sword": "skyhighocs:lucas/lucas_stelar_sword.tx.json",
+  "sword_wave_changing_lights": "skyhighocs:lucas/lucas_stelar_sword_wave_changing_lights.tx.json",
+  "sword_sides": "skyhighocs:lucas/lucas_stelar_sword_sides.tx.json",
+  "sword_front": "skyhighocs:lucas/lucas_stelar_sword_front.tx.json",
+  "asteroid_pull_sides": "skyhighocs:lucas/lucas_stelar_asteroid_pull_sides.tx.json",
+  "asteroid_pull_front": "skyhighocs:lucas/lucas_stelar_asteroid_pull_front.tx.json",
+  "asteroid_pull_front_lights": "skyhighocs:lucas/lucas_stelar_asteroid_pull_front_lights.tx.json",
+  "asteroid_blast_sides": "skyhighocs:lucas/lucas_stelar_asteroid_blast_sides.tx.json",
+  "asteroid_blast_front": "skyhighocs:lucas/lucas_stelar_asteroid_blast_front.tx.json",
+  "asteroid_blast_front_lights": "skyhighocs:lucas/lucas_stelar_asteroid_blast_front_lights.tx.json",
+  "asteroid_crash_sides": "skyhighocs:lucas/lucas_stelar_asteroid_crash_sides.tx.json",
+  "asteroid_crash_front": "skyhighocs:lucas/lucas_stelar_asteroid_crash_front.tx.json",
+  "head_right": "skyhighocs:lucas/lucas_stelar_crimson_right.tx.json",
+  "head_right_wave_change": "skyhighocs:lucas/lucas_stelar_crimson_right_wave_change.tx.json",
+  "head_right_wave_change_lights": "skyhighocs:lucas/lucas_stelar_crimson_right_wave_change_lights.tx.json",
+  "head_right_lights": "skyhighocs:lucas/lucas_stelar_crimson_right_lights.tx.json",
+  "head_right_wave_changing_lights": "skyhighocs:lucas/lucas_stelar_crimson_right_wave_changing_lights.tx.json",
+  "head_left": "skyhighocs:lucas/lucas_stelar_crimson_left.tx.json",
+  "head_left_wave_change": "skyhighocs:lucas/lucas_stelar_crimson_left_wave_change.tx.json",
+  "head_left_lights": "skyhighocs:lucas/lucas_stelar_crimson_left_lights.tx.json",
+  "head_left_wave_change_lights": "skyhighocs:lucas/lucas_stelar_crimson_left_wave_change_lights.tx.json",
+  "head_left_wave_changing_lights": "skyhighocs:lucas/lucas_stelar_crimson_left_wave_changing_lights.tx.json",
+  "head_top": "skyhighocs:lucas/lucas_stelar_crimson_top.tx.json",
+  "head_top_wave_change": "skyhighocs:lucas/lucas_stelar_crimson_top_wave_change.tx.json",
+  "head_top_lights": "skyhighocs:lucas/lucas_stelar_crimson_top_lights.tx.json",
+  "head_top_wave_change_lights": "skyhighocs:lucas/lucas_stelar_crimson_top_wave_change_lights.tx.json",
+  "head_top_wave_changing_lights": "skyhighocs:lucas/lucas_stelar_crimson_top_wave_changing_lights.tx.json",
+  "head_bottom": "skyhighocs:lucas/lucas_stelar_crimson_bottom.tx.json",
+  "head_bottom_wave_change": "skyhighocs:lucas/lucas_stelar_crimson_bottom_wave_change.tx.json",
+  "head_bottom_lights": "skyhighocs:lucas/lucas_stelar_crimson_bottom_lights.tx.json",
+  "head_bottom_wave_change_lights": "skyhighocs:lucas/lucas_stelar_crimson_bottom_wave_change_lights.tx.json",
+  "head_bottom_wave_changing_lights": "skyhighocs:lucas/lucas_stelar_crimson_bottom_wave_changing_lights.tx.json",
+  "head_front": "skyhighocs:lucas/lucas_stelar_crimson_front.tx.json",
+  "head_front_wave_change": "skyhighocs:lucas/lucas_stelar_crimson_front_wave_change.tx.json",
+  "head_front_wave_changing_lights": "skyhighocs:lucas/lucas_stelar_crimson_front_wave_changing_lights.tx.json",
+  "transer": "skyhighocs:lucas/lucas_stelar_transer.tx.json",
+  "transer_wave_change": "skyhighocs:lucas/lucas_stelar_transer_wave_change.tx.json",
+  "visualizer_lights": "skyhighocs:lucas/lucas_stelar_visualizer_lights.tx.json",
+  "visualizer_lights_wave_change": "skyhighocs:lucas/lucas_stelar_visualizer_lights_wave_change.tx.json",
+  "transer_default": "skyhighocs:lucas/lucas_stelar_transer",
+  "transer_default_lights": "skyhighocs:lucas/lucas_stelar_transer_lights",
+  "shield": "skyhighocs:lucas/lucas_stelar_shield",
+  "shield_lights": "skyhighocs:lucas/lucas_stelar_shield_lights",
+  "katana": "skyhighocs:lucas/lucas_stelar_katana",
+  "katana_lights": "skyhighocs:lucas/lucas_stelar_katana_lights",
+  "scythe": "skyhighocs:lucas/lucas_stelar_scythe",
+  "scythe_lights": "skyhighocs:lucas/lucas_stelar_scythe_lights",
+  "rifle": "skyhighocs:lucas/lucas_stelar_rifle",
+  "rifle_lights": "skyhighocs:lucas/lucas_stelar_rifle_lights"
 });
 
 function getColor() {
@@ -79,7 +79,7 @@ function init(renderer) {
   initEffects(renderer);
   stelar.addAnimationWithData(renderer, "stelar.ASTEROID_BLAST_AIM", "skyhighheroes:stelar_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
-  stelar.addAnimationWithData(renderer, "stelar.ASTEROID_PULL_AIM", "skyhighheroes:stelar_aim", "skyhighheroes:dyn/telekinesis_timer")
+  stelar.addAnimationWithData(renderer, "stelar.ASTEROID_PULL_AIM", "skyhighheroes:stelar_aim", "skyhighocs:dyn/telekinesis_timer")
   .priority = 10;
   renderer.setItemIcon("CHESTPLATE", "dragon_transer");
 };
@@ -90,15 +90,15 @@ function initEffects(renderer) {
   helmetWaveChangingLights.texture.set(null, "helmet_wave_changing_lights");
   helmet = renderer.createEffect("fiskheroes:overlay");
   helmet.texture.set("helmet", "helmet_lights");
-  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighheroes:wave_asteroid_blast_lucas", "rightArm", 0xFF0000, [
+  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:wave_asteroid_blast_lucas", "rightArm", 0xFF0000, [
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [4.0, 4.0] }
   ]);
-  stuff.bindCloud(renderer, "fiskheroes:telekinesis", "skyhighheroes:wave_asteroid_pull_lucas");
-  var chain = stuff.bindCloud(renderer, "fiskheroes:telekinesis_chain", "skyhighheroes:wave_asteroid_pull_lucas");
+  stuff.bindCloud(renderer, "fiskheroes:telekinesis", "skyhighocs:wave_asteroid_pull_lucas");
+  var chain = stuff.bindCloud(renderer, "fiskheroes:telekinesis_chain", "skyhighocs:wave_asteroid_pull_lucas");
   chain.anchor.set("rightArm");
   chain.setOffset(-0.5, 10.0, 0.0);
   chain.setFirstPerson(-4.75, 4.0, -8.5);
-  stuff.bindFlightTrail(renderer, "skyhighheroes:lucas_stelar_flight");
+  stuff.bindFlightTrail(renderer, "skyhighocs:lucas_stelar_flight");
   //Battle card predation wave changing
   //Right
   predationRightWaveChanging = renderer.createEffect("fiskheroes:shield");

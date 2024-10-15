@@ -4,68 +4,68 @@ var stelar = implement("skyhighheroes:external/stelar");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
-  "base": "skyhighheroes:chase/chase_stelar_base",
-  "lights": "skyhighheroes:chase/chase_stelar_lights",
-  "base_wave_change": "skyhighheroes:chase/chase_stelar_wave_change.tx.json",
-  "lights_wave_change": "skyhighheroes:chase/chase_stelar_wave_change_lights.tx.json",
-  "wave_changing_lights": "skyhighheroes:chase/chase_stelar_wave_changing_lights.tx.json",
-  "helmet": "skyhighheroes:chase/chase_stelar_helmet.tx.json",
-  "helmet_lights": "skyhighheroes:chase/chase_stelar_helmet_lights.tx.json",
-  "helmet_wave_changing_lights": "skyhighheroes:chase/chase_stelar_helmet_wave_changing_lights.tx.json",
-  "sword_blade": "skyhighheroes:chase/chase_stelar_sword_blade.tx.json",
-  "sword": "skyhighheroes:chase/chase_stelar_sword.tx.json",
-  "sword_wave_changing_lights": "skyhighheroes:chase/chase_stelar_sword_wave_changing_lights.tx.json",
-  "sword_sides": "skyhighheroes:chase/chase_stelar_sword_sides.tx.json",
-  "sword_front": "skyhighheroes:chase/chase_stelar_sword_front.tx.json",
-  "galaxys_weight_sides": "skyhighheroes:chase/chase_stelar_galaxys_weight_sides.tx.json",
-  "galaxys_weight_front": "skyhighheroes:chase/chase_stelar_galaxys_weight_front.tx.json",
-  "galaxys_weight_front_lights": "skyhighheroes:chase/chase_stelar_galaxys_weight_front_lights.tx.json",
-  "nebula_burst_sides": "skyhighheroes:chase/chase_stelar_nebula_burst_sides.tx.json",
-  "nebula_burst_front": "skyhighheroes:chase/chase_stelar_nebula_burst_front.tx.json",
-  "nebula_burst_front_lights": "skyhighheroes:chase/chase_stelar_nebula_burst_front_lights.tx.json",
-  "voids_grasp_sides": "skyhighheroes:chase/chase_stelar_voids_grasp_sides.tx.json",
-  "voids_grasp_sides_lights": "skyhighheroes:chase/chase_stelar_voids_grasp_sides_lights.tx.json",
-  "voids_grasp_front": "skyhighheroes:chase/chase_stelar_voids_grasp_front.tx.json",
-  "voids_grasp_front_lights": "skyhighheroes:chase/chase_stelar_voids_grasp_front_lights.tx.json",
-  "predation_sides_wave_changing_lights": "skyhighheroes:chase/chase_stelar_predation_sides_wave_changing_lights.tx.json",
-  "predation_front_wave_changing_lights": "skyhighheroes:chase/chase_stelar_predation_front_wave_changing_lights.tx.json",
-  "head_right": "skyhighheroes:chase/chase_stelar_pryetak_right.tx.json",
-  "head_right_wave_change": "skyhighheroes:chase/chase_stelar_pryetak_right_wave_change.tx.json",
-  "head_right_wave_change_lights": "skyhighheroes:chase/chase_stelar_pryetak_right_wave_change_lights.tx.json",
-  "head_right_lights": "skyhighheroes:chase/chase_stelar_pryetak_right_lights.tx.json",
-  "head_right_wave_changing_lights": "skyhighheroes:chase/chase_stelar_pryetak_right_wave_changing_lights.tx.json",
-  "head_left": "skyhighheroes:chase/chase_stelar_pryetak_left.tx.json",
-  "head_left_wave_change": "skyhighheroes:chase/chase_stelar_pryetak_left_wave_change.tx.json",
-  "head_left_lights": "skyhighheroes:chase/chase_stelar_pryetak_left_lights.tx.json",
-  "head_left_wave_change_lights": "skyhighheroes:chase/chase_stelar_pryetak_left_wave_change_lights.tx.json",
-  "head_left_wave_changing_lights": "skyhighheroes:chase/chase_stelar_pryetak_left_wave_changing_lights.tx.json",
-  "head_top": "skyhighheroes:chase/chase_stelar_pryetak_top.tx.json",
-  "head_top_wave_change": "skyhighheroes:chase/chase_stelar_pryetak_top_wave_change.tx.json",
-  "head_top_lights": "skyhighheroes:chase/chase_stelar_pryetak_top_lights.tx.json",
-  "head_top_wave_change_lights": "skyhighheroes:chase/chase_stelar_pryetak_top_wave_change_lights.tx.json",
-  "head_top_wave_changing_lights": "skyhighheroes:chase/chase_stelar_pryetak_top_wave_changing_lights.tx.json",
-  "head_bottom": "skyhighheroes:chase/chase_stelar_pryetak_bottom.tx.json",
-  "head_bottom_wave_change": "skyhighheroes:chase/chase_stelar_pryetak_bottom_wave_change.tx.json",
-  "head_bottom_lights": "skyhighheroes:chase/chase_stelar_pryetak_bottom_lights.tx.json",
-  "head_bottom_wave_change_lights": "skyhighheroes:chase/chase_stelar_pryetak_bottom_wave_change_lights.tx.json",
-  "head_bottom_wave_changing_lights": "skyhighheroes:chase/chase_stelar_pryetak_bottom_wave_changing_lights.tx.json",
-  "head_front": "skyhighheroes:chase/chase_stelar_pryetak_front.tx.json",
-  "head_front_wave_change": "skyhighheroes:chase/chase_stelar_pryetak_front_wave_change.tx.json",
-  "head_front_wave_changing_lights": "skyhighheroes:chase/chase_stelar_pryetak_front_wave_changing_lights.tx.json",
-  "transer": "skyhighheroes:chase/chase_stelar_transer.tx.json",
-  "transer_wave_change": "skyhighheroes:chase/chase_stelar_transer_wave_change.tx.json",
-  "visualizer_lights": "skyhighheroes:chase/chase_stelar_visualizer_lights.tx.json",
-  "visualizer_lights_wave_change": "skyhighheroes:chase/chase_stelar_visualizer_lights_wave_change.tx.json",
-  "transer_default": "skyhighheroes:chase/chase_stelar_transer",
-  "transer_default_lights": "skyhighheroes:chase/chase_stelar_transer_lights",
-  "shield": "skyhighheroes:chase/chase_stelar_shield",
-  "shield_lights": "skyhighheroes:chase/chase_stelar_shield_lights",
-  "katana": "skyhighheroes:chase/chase_stelar_katana",
-  "katana_lights": "skyhighheroes:chase/chase_stelar_katana_lights",
-  "scythe": "skyhighheroes:chase/chase_stelar_scythe",
-  "scythe_lights": "skyhighheroes:chase/chase_stelar_scythe_lights",
-  "rifle": "skyhighheroes:chase/chase_stelar_rifle",
-  "rifle_lights": "skyhighheroes:chase/chase_stelar_rifle_lights"
+  "base": "skyhighocs:chase/chase_stelar_base",
+  "lights": "skyhighocs:chase/chase_stelar_lights",
+  "base_wave_change": "skyhighocs:chase/chase_stelar_wave_change.tx.json",
+  "lights_wave_change": "skyhighocs:chase/chase_stelar_wave_change_lights.tx.json",
+  "wave_changing_lights": "skyhighocs:chase/chase_stelar_wave_changing_lights.tx.json",
+  "helmet": "skyhighocs:chase/chase_stelar_helmet.tx.json",
+  "helmet_lights": "skyhighocs:chase/chase_stelar_helmet_lights.tx.json",
+  "helmet_wave_changing_lights": "skyhighocs:chase/chase_stelar_helmet_wave_changing_lights.tx.json",
+  "sword_blade": "skyhighocs:chase/chase_stelar_sword_blade.tx.json",
+  "sword": "skyhighocs:chase/chase_stelar_sword.tx.json",
+  "sword_wave_changing_lights": "skyhighocs:chase/chase_stelar_sword_wave_changing_lights.tx.json",
+  "sword_sides": "skyhighocs:chase/chase_stelar_sword_sides.tx.json",
+  "sword_front": "skyhighocs:chase/chase_stelar_sword_front.tx.json",
+  "galaxys_weight_sides": "skyhighocs:chase/chase_stelar_galaxys_weight_sides.tx.json",
+  "galaxys_weight_front": "skyhighocs:chase/chase_stelar_galaxys_weight_front.tx.json",
+  "galaxys_weight_front_lights": "skyhighocs:chase/chase_stelar_galaxys_weight_front_lights.tx.json",
+  "nebula_burst_sides": "skyhighocs:chase/chase_stelar_nebula_burst_sides.tx.json",
+  "nebula_burst_front": "skyhighocs:chase/chase_stelar_nebula_burst_front.tx.json",
+  "nebula_burst_front_lights": "skyhighocs:chase/chase_stelar_nebula_burst_front_lights.tx.json",
+  "voids_grasp_sides": "skyhighocs:chase/chase_stelar_voids_grasp_sides.tx.json",
+  "voids_grasp_sides_lights": "skyhighocs:chase/chase_stelar_voids_grasp_sides_lights.tx.json",
+  "voids_grasp_front": "skyhighocs:chase/chase_stelar_voids_grasp_front.tx.json",
+  "voids_grasp_front_lights": "skyhighocs:chase/chase_stelar_voids_grasp_front_lights.tx.json",
+  "predation_sides_wave_changing_lights": "skyhighocs:chase/chase_stelar_predation_sides_wave_changing_lights.tx.json",
+  "predation_front_wave_changing_lights": "skyhighocs:chase/chase_stelar_predation_front_wave_changing_lights.tx.json",
+  "head_right": "skyhighocs:chase/chase_stelar_pryetak_right.tx.json",
+  "head_right_wave_change": "skyhighocs:chase/chase_stelar_pryetak_right_wave_change.tx.json",
+  "head_right_wave_change_lights": "skyhighocs:chase/chase_stelar_pryetak_right_wave_change_lights.tx.json",
+  "head_right_lights": "skyhighocs:chase/chase_stelar_pryetak_right_lights.tx.json",
+  "head_right_wave_changing_lights": "skyhighocs:chase/chase_stelar_pryetak_right_wave_changing_lights.tx.json",
+  "head_left": "skyhighocs:chase/chase_stelar_pryetak_left.tx.json",
+  "head_left_wave_change": "skyhighocs:chase/chase_stelar_pryetak_left_wave_change.tx.json",
+  "head_left_lights": "skyhighocs:chase/chase_stelar_pryetak_left_lights.tx.json",
+  "head_left_wave_change_lights": "skyhighocs:chase/chase_stelar_pryetak_left_wave_change_lights.tx.json",
+  "head_left_wave_changing_lights": "skyhighocs:chase/chase_stelar_pryetak_left_wave_changing_lights.tx.json",
+  "head_top": "skyhighocs:chase/chase_stelar_pryetak_top.tx.json",
+  "head_top_wave_change": "skyhighocs:chase/chase_stelar_pryetak_top_wave_change.tx.json",
+  "head_top_lights": "skyhighocs:chase/chase_stelar_pryetak_top_lights.tx.json",
+  "head_top_wave_change_lights": "skyhighocs:chase/chase_stelar_pryetak_top_wave_change_lights.tx.json",
+  "head_top_wave_changing_lights": "skyhighocs:chase/chase_stelar_pryetak_top_wave_changing_lights.tx.json",
+  "head_bottom": "skyhighocs:chase/chase_stelar_pryetak_bottom.tx.json",
+  "head_bottom_wave_change": "skyhighocs:chase/chase_stelar_pryetak_bottom_wave_change.tx.json",
+  "head_bottom_lights": "skyhighocs:chase/chase_stelar_pryetak_bottom_lights.tx.json",
+  "head_bottom_wave_change_lights": "skyhighocs:chase/chase_stelar_pryetak_bottom_wave_change_lights.tx.json",
+  "head_bottom_wave_changing_lights": "skyhighocs:chase/chase_stelar_pryetak_bottom_wave_changing_lights.tx.json",
+  "head_front": "skyhighocs:chase/chase_stelar_pryetak_front.tx.json",
+  "head_front_wave_change": "skyhighocs:chase/chase_stelar_pryetak_front_wave_change.tx.json",
+  "head_front_wave_changing_lights": "skyhighocs:chase/chase_stelar_pryetak_front_wave_changing_lights.tx.json",
+  "transer": "skyhighocs:chase/chase_stelar_transer.tx.json",
+  "transer_wave_change": "skyhighocs:chase/chase_stelar_transer_wave_change.tx.json",
+  "visualizer_lights": "skyhighocs:chase/chase_stelar_visualizer_lights.tx.json",
+  "visualizer_lights_wave_change": "skyhighocs:chase/chase_stelar_visualizer_lights_wave_change.tx.json",
+  "transer_default": "skyhighocs:chase/chase_stelar_transer",
+  "transer_default_lights": "skyhighocs:chase/chase_stelar_transer_lights",
+  "shield": "skyhighocs:chase/chase_stelar_shield",
+  "shield_lights": "skyhighocs:chase/chase_stelar_shield_lights",
+  "katana": "skyhighocs:chase/chase_stelar_katana",
+  "katana_lights": "skyhighocs:chase/chase_stelar_katana_lights",
+  "scythe": "skyhighocs:chase/chase_stelar_scythe",
+  "scythe_lights": "skyhighocs:chase/chase_stelar_scythe_lights",
+  "rifle": "skyhighocs:chase/chase_stelar_rifle",
+  "rifle_lights": "skyhighocs:chase/chase_stelar_rifle_lights"
 });
 
 function getColor() {
@@ -80,9 +80,9 @@ function getID() {
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
-  stelar.addAnimationWithData(renderer, "stelar.VOIDS_GRASP_AIM", "skyhighheroes:stelar_aim", "skyhighheroes:dyn/telekinesis_timer")
+  stelar.addAnimationWithData(renderer, "stelar.VOIDS_GRASP_AIM", "skyhighheroes:stelar_aim", "skyhighocs:dyn/telekinesis_timer")
   .priority = 10;
-  stelar.addAnimationWithData(renderer, "stelar.GALAXYS_WEIGHT_AIM", "skyhighheroes:stelar_aim", "skyhighheroes:dyn/gravity_manip_timer")
+  stelar.addAnimationWithData(renderer, "stelar.GALAXYS_WEIGHT_AIM", "skyhighheroes:stelar_aim", "skyhighocs:dyn/gravity_manip_timer")
   .priority = 10;
   stelar.addAnimationWithData(renderer, "stelar.NEBULA_BURST_AIM", "skyhighheroes:stelar_aim", "fiskheroes:beam_charge")
   .priority = 10;
@@ -99,12 +99,12 @@ function initEffects(renderer) {
       { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-1.0, 9.0, -0.5], "size": [3.0, 3.0] }
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   renderer.bindProperty("fiskheroes:gravity_manipulation").color.set(0x44FF00);
-  stuff.bindCloud(renderer, "fiskheroes:telekinesis", "skyhighheroes:wave_voids_grasp_chase");
-  var chain = stuff.bindCloud(renderer, "fiskheroes:telekinesis_chain", "skyhighheroes:wave_voids_grasp_chase");
+  stuff.bindCloud(renderer, "fiskheroes:telekinesis", "skyhighocs:wave_voids_grasp_chase");
+  var chain = stuff.bindCloud(renderer, "fiskheroes:telekinesis_chain", "skyhighocs:wave_voids_grasp_chase");
   chain.anchor.set("rightArm");
   chain.setOffset(-0.5, 10.0, 0.0);
   chain.setFirstPerson(-4.75, 4.0, -8.5);
-  stuff.bindFlightTrail(renderer, "skyhighheroes:chase_stelar_flight");
+  stuff.bindFlightTrail(renderer, "skyhighocs:chase_stelar_flight");
   //Battle card predation wave changing
   //Right
   predationRightWaveChanging = renderer.createEffect("fiskheroes:shield");

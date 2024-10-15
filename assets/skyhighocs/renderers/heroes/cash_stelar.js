@@ -4,66 +4,66 @@ var stelar = implement("skyhighheroes:external/stelar");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
-  "base": "skyhighheroes:cash/cash_stelar_base",
-  "lights": "skyhighheroes:cash/cash_stelar_lights",
-  "base_wave_change": "skyhighheroes:cash/cash_stelar_wave_change.tx.json",
-  "lights_wave_change": "skyhighheroes:cash/cash_stelar_wave_change_lights.tx.json",
-  "wave_changing_lights": "skyhighheroes:cash/cash_stelar_wave_changing_lights.tx.json",
-  "predation_sides_wave_changing_lights": "skyhighheroes:cash/cash_stelar_predation_sides_wave_changing_lights.tx.json",
-  "predation_front_wave_changing_lights": "skyhighheroes:cash/cash_stelar_predation_front_wave_changing_lights.tx.json",
-  "sword_blade": "skyhighheroes:cash/cash_stelar_sword_blade.tx.json",
-  "sword": "skyhighheroes:cash/cash_stelar_sword.tx.json",
-  "sword_wave_changing_lights": "skyhighheroes:cash/cash_stelar_sword_wave_changing_lights.tx.json",
-  "sword_sides": "skyhighheroes:cash/cash_stelar_sword_sides.tx.json",
-  "sword_front": "skyhighheroes:cash/cash_stelar_sword_front.tx.json",
-  "planetary_blast_sides": "skyhighheroes:cash/cash_stelar_planetary_blast_sides.tx.json",
-  "planetary_blast_front": "skyhighheroes:cash/cash_stelar_planetary_blast_front.tx.json",
-  "planetary_blast_front_lights": "skyhighheroes:cash/cash_stelar_planetary_blast_front_lights.tx.json",
-  "star_cutter_sides": "skyhighheroes:cash/cash_stelar_star_cutter_sides.tx.json",
-  "star_cutter_front": "skyhighheroes:cash/cash_stelar_star_cutter_front.tx.json",
-  "star_cutter_front_lights": "skyhighheroes:cash/cash_stelar_star_cutter_front_lights.tx.json",
-  "gravity_pulse_sides": "skyhighheroes:cash/cash_stelar_gravity_pulse_sides.tx.json",
-  "gravity_pulse_front": "skyhighheroes:cash/cash_stelar_gravity_pulse_front.tx.json",
-  "gravity_pulse_front_lights": "skyhighheroes:cash/cash_stelar_gravity_pulse_front_lights.tx.json",
-  "head_right": "skyhighheroes:cash/cash_stelar_amethyst_right.tx.json",
-  "head_right_wave_change": "skyhighheroes:cash/cash_stelar_amethyst_right_wave_change.tx.json",
-  "head_right_wave_change_lights": "skyhighheroes:cash/cash_stelar_amethyst_right_wave_change_lights.tx.json",
-  "head_right_lights": "skyhighheroes:cash/cash_stelar_amethyst_right_lights.tx.json",
-  "head_right_wave_changing_lights": "skyhighheroes:cash/cash_stelar_amethyst_right_wave_changing_lights.tx.json",
-  "head_left": "skyhighheroes:cash/cash_stelar_amethyst_left.tx.json",
-  "head_left_wave_change": "skyhighheroes:cash/cash_stelar_amethyst_left_wave_change.tx.json",
-  "head_left_lights": "skyhighheroes:cash/cash_stelar_amethyst_left_lights.tx.json",
-  "head_left_wave_change_lights": "skyhighheroes:cash/cash_stelar_amethyst_left_wave_change_lights.tx.json",
-  "head_left_wave_changing_lights": "skyhighheroes:cash/cash_stelar_amethyst_left_wave_changing_lights.tx.json",
-  "head_top": "skyhighheroes:cash/cash_stelar_amethyst_top.tx.json",
-  "head_top_wave_change": "skyhighheroes:cash/cash_stelar_amethyst_top_wave_change.tx.json",
-  "head_top_lights": "skyhighheroes:cash/cash_stelar_amethyst_top_lights.tx.json",
-  "head_top_wave_change_lights": "skyhighheroes:cash/cash_stelar_amethyst_top_wave_change_lights.tx.json",
-  "head_top_wave_changing_lights": "skyhighheroes:cash/cash_stelar_amethyst_top_wave_changing_lights.tx.json",
-  "head_bottom": "skyhighheroes:cash/cash_stelar_amethyst_bottom.tx.json",
-  "head_bottom_wave_change": "skyhighheroes:cash/cash_stelar_amethyst_bottom_wave_change.tx.json",
-  "head_bottom_lights": "skyhighheroes:cash/cash_stelar_amethyst_bottom_lights.tx.json",
-  "head_bottom_wave_change_lights": "skyhighheroes:cash/cash_stelar_amethyst_bottom_wave_change_lights.tx.json",
-  "head_bottom_wave_changing_lights": "skyhighheroes:cash/cash_stelar_amethyst_bottom_wave_changing_lights.tx.json",
-  "head_front": "skyhighheroes:cash/cash_stelar_amethyst_front.tx.json",
-  "head_front_wave_change": "skyhighheroes:cash/cash_stelar_amethyst_front_wave_change.tx.json",
-  "head_front_lights": "skyhighheroes:cash/cash_stelar_amethyst_front_lights.tx.json",
-  "head_front_wave_change_lights": "skyhighheroes:cash/cash_stelar_amethyst_front_wave_change_lights.tx.json",
-  "head_front_wave_changing_lights": "skyhighheroes:cash/cash_stelar_amethyst_front_wave_changing_lights.tx.json",
-  "transer": "skyhighheroes:cash/cash_stelar_transer.tx.json",
-  "transer_wave_change": "skyhighheroes:cash/cash_stelar_transer_wave_change.tx.json",
-  "visualizer_lights": "skyhighheroes:cash/cash_stelar_visualizer_lights.tx.json",
-  "visualizer_lights_wave_change": "skyhighheroes:cash/cash_stelar_visualizer_lights_wave_change.tx.json",
-  "transer_default": "skyhighheroes:cash/cash_stelar_transer",
-  "transer_default_lights": "skyhighheroes:cash/cash_stelar_transer_lights",
-  "shield": "skyhighheroes:cash/cash_stelar_shield",
-  "shield_lights": "skyhighheroes:cash/cash_stelar_shield_lights",
-  "katana": "skyhighheroes:cash/cash_stelar_katana",
-  "katana_lights": "skyhighheroes:cash/cash_stelar_katana_lights",
-  "scythe": "skyhighheroes:cash/cash_stelar_scythe",
-  "scythe_lights": "skyhighheroes:cash/cash_stelar_scythe_lights",
-  "rifle": "skyhighheroes:cash/cash_stelar_rifle",
-  "rifle_lights": "skyhighheroes:cash/cash_stelar_rifle_lights"
+  "base": "skyhighocs:cash/cash_stelar_base",
+  "lights": "skyhighocs:cash/cash_stelar_lights",
+  "base_wave_change": "skyhighocs:cash/cash_stelar_wave_change.tx.json",
+  "lights_wave_change": "skyhighocs:cash/cash_stelar_wave_change_lights.tx.json",
+  "wave_changing_lights": "skyhighocs:cash/cash_stelar_wave_changing_lights.tx.json",
+  "predation_sides_wave_changing_lights": "skyhighocs:cash/cash_stelar_predation_sides_wave_changing_lights.tx.json",
+  "predation_front_wave_changing_lights": "skyhighocs:cash/cash_stelar_predation_front_wave_changing_lights.tx.json",
+  "sword_blade": "skyhighocs:cash/cash_stelar_sword_blade.tx.json",
+  "sword": "skyhighocs:cash/cash_stelar_sword.tx.json",
+  "sword_wave_changing_lights": "skyhighocs:cash/cash_stelar_sword_wave_changing_lights.tx.json",
+  "sword_sides": "skyhighocs:cash/cash_stelar_sword_sides.tx.json",
+  "sword_front": "skyhighocs:cash/cash_stelar_sword_front.tx.json",
+  "planetary_blast_sides": "skyhighocs:cash/cash_stelar_planetary_blast_sides.tx.json",
+  "planetary_blast_front": "skyhighocs:cash/cash_stelar_planetary_blast_front.tx.json",
+  "planetary_blast_front_lights": "skyhighocs:cash/cash_stelar_planetary_blast_front_lights.tx.json",
+  "star_cutter_sides": "skyhighocs:cash/cash_stelar_star_cutter_sides.tx.json",
+  "star_cutter_front": "skyhighocs:cash/cash_stelar_star_cutter_front.tx.json",
+  "star_cutter_front_lights": "skyhighocs:cash/cash_stelar_star_cutter_front_lights.tx.json",
+  "gravity_pulse_sides": "skyhighocs:cash/cash_stelar_gravity_pulse_sides.tx.json",
+  "gravity_pulse_front": "skyhighocs:cash/cash_stelar_gravity_pulse_front.tx.json",
+  "gravity_pulse_front_lights": "skyhighocs:cash/cash_stelar_gravity_pulse_front_lights.tx.json",
+  "head_right": "skyhighocs:cash/cash_stelar_amethyst_right.tx.json",
+  "head_right_wave_change": "skyhighocs:cash/cash_stelar_amethyst_right_wave_change.tx.json",
+  "head_right_wave_change_lights": "skyhighocs:cash/cash_stelar_amethyst_right_wave_change_lights.tx.json",
+  "head_right_lights": "skyhighocs:cash/cash_stelar_amethyst_right_lights.tx.json",
+  "head_right_wave_changing_lights": "skyhighocs:cash/cash_stelar_amethyst_right_wave_changing_lights.tx.json",
+  "head_left": "skyhighocs:cash/cash_stelar_amethyst_left.tx.json",
+  "head_left_wave_change": "skyhighocs:cash/cash_stelar_amethyst_left_wave_change.tx.json",
+  "head_left_lights": "skyhighocs:cash/cash_stelar_amethyst_left_lights.tx.json",
+  "head_left_wave_change_lights": "skyhighocs:cash/cash_stelar_amethyst_left_wave_change_lights.tx.json",
+  "head_left_wave_changing_lights": "skyhighocs:cash/cash_stelar_amethyst_left_wave_changing_lights.tx.json",
+  "head_top": "skyhighocs:cash/cash_stelar_amethyst_top.tx.json",
+  "head_top_wave_change": "skyhighocs:cash/cash_stelar_amethyst_top_wave_change.tx.json",
+  "head_top_lights": "skyhighocs:cash/cash_stelar_amethyst_top_lights.tx.json",
+  "head_top_wave_change_lights": "skyhighocs:cash/cash_stelar_amethyst_top_wave_change_lights.tx.json",
+  "head_top_wave_changing_lights": "skyhighocs:cash/cash_stelar_amethyst_top_wave_changing_lights.tx.json",
+  "head_bottom": "skyhighocs:cash/cash_stelar_amethyst_bottom.tx.json",
+  "head_bottom_wave_change": "skyhighocs:cash/cash_stelar_amethyst_bottom_wave_change.tx.json",
+  "head_bottom_lights": "skyhighocs:cash/cash_stelar_amethyst_bottom_lights.tx.json",
+  "head_bottom_wave_change_lights": "skyhighocs:cash/cash_stelar_amethyst_bottom_wave_change_lights.tx.json",
+  "head_bottom_wave_changing_lights": "skyhighocs:cash/cash_stelar_amethyst_bottom_wave_changing_lights.tx.json",
+  "head_front": "skyhighocs:cash/cash_stelar_amethyst_front.tx.json",
+  "head_front_wave_change": "skyhighocs:cash/cash_stelar_amethyst_front_wave_change.tx.json",
+  "head_front_lights": "skyhighocs:cash/cash_stelar_amethyst_front_lights.tx.json",
+  "head_front_wave_change_lights": "skyhighocs:cash/cash_stelar_amethyst_front_wave_change_lights.tx.json",
+  "head_front_wave_changing_lights": "skyhighocs:cash/cash_stelar_amethyst_front_wave_changing_lights.tx.json",
+  "transer": "skyhighocs:cash/cash_stelar_transer.tx.json",
+  "transer_wave_change": "skyhighocs:cash/cash_stelar_transer_wave_change.tx.json",
+  "visualizer_lights": "skyhighocs:cash/cash_stelar_visualizer_lights.tx.json",
+  "visualizer_lights_wave_change": "skyhighocs:cash/cash_stelar_visualizer_lights_wave_change.tx.json",
+  "transer_default": "skyhighocs:cash/cash_stelar_transer",
+  "transer_default_lights": "skyhighocs:cash/cash_stelar_transer_lights",
+  "shield": "skyhighocs:cash/cash_stelar_shield",
+  "shield_lights": "skyhighocs:cash/cash_stelar_shield_lights",
+  "katana": "skyhighocs:cash/cash_stelar_katana",
+  "katana_lights": "skyhighocs:cash/cash_stelar_katana_lights",
+  "scythe": "skyhighocs:cash/cash_stelar_scythe",
+  "scythe_lights": "skyhighocs:cash/cash_stelar_scythe_lights",
+  "rifle": "skyhighocs:cash/cash_stelar_rifle",
+  "rifle_lights": "skyhighocs:cash/cash_stelar_rifle_lights"
 });
 
 function getColor() {
@@ -77,7 +77,7 @@ function getID() {
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
-  stelar.addAnimationWithData(renderer, "stelar.GALAXYS_PULSE_AIM", "skyhighheroes:stelar_aim", "skyhighheroes:dyn/gravity_manip_timer")
+  stelar.addAnimationWithData(renderer, "stelar.GALAXYS_PULSE_AIM", "skyhighheroes:stelar_aim", "skyhighocs:dyn/gravity_manip_timer")
   .priority = 10;
   stelar.addAnimationWithData(renderer, "stelar.PLANETARY_BLAST_AIM", "skyhighheroes:stelar_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
@@ -88,14 +88,14 @@ function init(renderer) {
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighheroes:wave_planetary_blast_cash", "rightArm", 0xD000FF, [
+  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:wave_planetary_blast_cash", "rightArm", 0xD000FF, [
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [4.0, 4.0] }
   ]);
-  stelar.bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:wave_star_cutter_cash", "rightArm", 0xD000FF, [
+  stelar.bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:wave_star_cutter_cash", "rightArm", 0xD000FF, [
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-1.0, 9.0, -0.5], "size": [3.0, 3.0] }
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   renderer.bindProperty("fiskheroes:gravity_manipulation").color.set(0xD000FF);
-  stuff.bindFlightTrail(renderer, "skyhighheroes:cash_stelar_flight");
+  stuff.bindFlightTrail(renderer, "skyhighocs:cash_stelar_flight");
   //Battle card predation wave changing
   //Right
   predationRightWaveChanging = renderer.createEffect("fiskheroes:shield");
