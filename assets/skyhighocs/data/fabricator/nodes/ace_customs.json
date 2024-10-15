@@ -3,7 +3,7 @@
     "name": "Ace's Custom Suits",
     "hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/gui/nodes/ace_head.png"
+      "texture":  "skyhighocs:textures/gui/nodes/ace_head.png"
     }
   },
   "requirements": [

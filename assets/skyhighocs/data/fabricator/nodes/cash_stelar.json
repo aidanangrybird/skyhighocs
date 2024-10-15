@@ -1,10 +1,10 @@
 {
-  "suit": "skyhighheroes:cash_stelar",
+  "suit": "skyhighocs:cash_stelar",
   "display": {
     "hideUntilAvailable": true
   },
   "requirements": [
-    "skyhighheroes:cash_customs"
+    "skyhighocs:cash_customs"
   ],
   "price": {
     "XP_LEVELS": 1

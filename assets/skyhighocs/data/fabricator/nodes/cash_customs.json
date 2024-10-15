@@ -3,7 +3,7 @@
     "name": "Cash's Custom Suits",
     "hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/gui/nodes/cash_head.png"
+      "texture":  "skyhighocs:textures/gui/nodes/cash_head.png"
     }
   },
   "requirements": [

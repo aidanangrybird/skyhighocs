@@ -1,10 +1,10 @@
 {
-  "suit": "skyhighheroes:lucas_tenma",
+  "suit": "skyhighocs:lucas_tenma",
   "display": {
     "hideUntilAvailable": true
   },
   "requirements": [
-    "skyhighheroes:lucas_customs"
+    "skyhighocs:lucas_customs"
   ],
   "price": {
     "XP_LEVELS": 1

@@ -1,10 +1,10 @@
 {
-  "suit": "skyhighheroes:aegon_stelar",
+  "suit": "skyhighocs:aegon_stelar",
   "display": {
     "hideUntilAvailable": true
   },
   "requirements": [
-    "skyhighheroes:aegon_customs"
+    "skyhighocs:aegon_customs"
   ],
   "price": {
     "XP_LEVELS": 1

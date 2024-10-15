@@ -3,7 +3,7 @@
     "name": "Grand's Custom Suits",
     "hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/gui/nodes/grand_head.png"
+      "texture":  "skyhighocs:textures/gui/nodes/grand_head.png"
     }
   },
   "requirements": [

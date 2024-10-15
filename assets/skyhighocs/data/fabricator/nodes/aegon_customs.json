@@ -3,7 +3,7 @@
     "name": "Aegon's Custom Suits",
     "hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/gui/nodes/aegon_head.png"
+      "texture":  "skyhighocs:textures/gui/nodes/aegon_head.png"
     }
   },
   "requirements": [

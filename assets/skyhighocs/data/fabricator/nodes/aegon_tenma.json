@@ -1,10 +1,10 @@
 {
-  "suit": "skyhighheroes:aegon_tenma",
+  "suit": "skyhighocs:aegon_tenma",
   "display": {
     "hideUntilAvailable": true
   },
   "requirements": [
-    "skyhighheroes:aegon_customs"
+    "skyhighocs:aegon_customs"
   ],
   "price": {
     "XP_LEVELS": 1

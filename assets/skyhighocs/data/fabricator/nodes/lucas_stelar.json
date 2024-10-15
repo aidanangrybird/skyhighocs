@@ -1,10 +1,10 @@
 {
-  "suit": "skyhighheroes:lucas_stelar",
+  "suit": "skyhighocs:lucas_stelar",
   "display": {
     "hideUntilAvailable": true
   },
   "requirements": [
-    "skyhighheroes:lucas_customs"
+    "skyhighocs:lucas_customs"
   ],
   "price": {
     "XP_LEVELS": 1

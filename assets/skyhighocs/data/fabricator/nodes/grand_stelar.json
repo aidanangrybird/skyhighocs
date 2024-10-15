@@ -1,10 +1,10 @@
 {
-  "suit": "skyhighheroes:grand_stelar",
+  "suit": "skyhighocs:grand_stelar",
   "display": {
     "hideUntilAvailable": true
   },
   "requirements": [
-    "skyhighheroes:grand_customs"
+    "skyhighocs:grand_customs"
   ],
   "price": {
     "XP_LEVELS": 1

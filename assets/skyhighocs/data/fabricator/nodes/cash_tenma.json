@@ -1,10 +1,10 @@
 {
-  "suit": "skyhighheroes:cash_tenma",
+  "suit": "skyhighocs:cash_tenma",
   "display": {
     "hideUntilAvailable": true
   },
   "requirements": [
-    "skyhighheroes:cash_customs"
+    "skyhighocs:cash_customs"
   ],
   "price": {
     "XP_LEVELS": 1

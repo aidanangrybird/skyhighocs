@@ -3,7 +3,7 @@
     "name": "Lucas's Custom Suits",
     "hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/gui/nodes/lucas_head.png"
+      "texture":  "skyhighocs:textures/gui/nodes/lucas_head.png"
     }
   },
   "requirements": [

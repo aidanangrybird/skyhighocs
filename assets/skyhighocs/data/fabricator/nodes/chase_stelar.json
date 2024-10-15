@@ -1,10 +1,10 @@
 {
-  "suit": "skyhighheroes:chase_stelar",
+  "suit": "skyhighocs:chase_stelar",
   "display": {
   "hideUntilAvailable": true
   },
   "requirements": [
-    "skyhighheroes:chase_customs"
+    "skyhighocs:chase_customs"
   ],
   "price": {
     "XP_LEVELS": 1
