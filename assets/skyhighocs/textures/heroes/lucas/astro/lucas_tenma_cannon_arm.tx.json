@@ -15,7 +15,7 @@
   },
   "getters": {
     "CLOTHING": {
-      "key": "entity.getData('skyhighheroes:dyn/tenma_clothes') == 0 ? 'base' : entity.getData('skyhighheroes:dyn/tenma_clothes') == 1 ? 'long' : entity.getData('skyhighheroes:dyn/tenma_clothes') == 2 ? 'short' : 'normal'",
+      "key": "entity.getData('skyhighocs:dyn/tenma_clothes') == 0 ? 'base' : entity.getData('skyhighocs:dyn/tenma_clothes') == 1 ? 'long' : entity.getData('skyhighocs:dyn/tenma_clothes') == 2 ? 'short' : 'normal'",
       "values": ["base", "long", "short", "normal"]
     },
     "FLYING": {
