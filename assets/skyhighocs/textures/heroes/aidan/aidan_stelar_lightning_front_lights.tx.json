@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aidan/aidan_stelar_lightning_front_lights",
+    "in": "skyhighocs:aidan/aidan_stelar_lightning_front_lights",
     "transform": [
       {
         "operation": "XOR",

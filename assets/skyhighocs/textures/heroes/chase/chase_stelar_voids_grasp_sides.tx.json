@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:chase/chase_stelar_voids_grasp_sides",
+    "in": "skyhighocs:chase/chase_stelar_voids_grasp_sides",
     "transform": [
       {
         "operation": "XOR",

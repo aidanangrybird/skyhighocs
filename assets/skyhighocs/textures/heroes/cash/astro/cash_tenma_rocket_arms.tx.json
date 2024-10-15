@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:cash/astro/cash_tenma_<CLOTHING><FLYING>",
+    "in": "skyhighocs:cash/astro/cash_tenma_<CLOTHING><FLYING>",
     "transform": [
       {
         "operation": "STITCH",

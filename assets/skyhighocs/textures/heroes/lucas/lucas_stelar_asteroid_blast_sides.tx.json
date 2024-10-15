@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:lucas/lucas_stelar_asteroid_blast_sides",
+    "in": "skyhighocs:lucas/lucas_stelar_asteroid_blast_sides",
     "transform": [
       {
         "operation": "XOR",

@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:chase/astro/chase_tenma_arms_lights",
+    "in": "skyhighocs:chase/astro/chase_tenma_arms_lights",
     "transform": [
       {
         "operation": "STITCH",

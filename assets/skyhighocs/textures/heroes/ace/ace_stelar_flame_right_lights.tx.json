@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:ace/ace_stelar_flame_right_lights",
+    "in": "skyhighocs:ace/ace_stelar_flame_right_lights",
     "transform": [
       {
         "operation": "XOR",

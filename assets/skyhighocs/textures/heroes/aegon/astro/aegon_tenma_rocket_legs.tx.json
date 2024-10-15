@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aegon/astro/aegon_tenma_<CLOTHING><FLYING>",
+    "in": "skyhighocs:aegon/astro/aegon_tenma_<CLOTHING><FLYING>",
     "transform": [
       {
         "operation": "STITCH",

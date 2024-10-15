@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:grand/astro/grand_tenma_<CLOTHING><FLYING>",
+    "in": "skyhighocs:grand/astro/grand_tenma_<CLOTHING><FLYING>",
     "transform": [
       {
         "operation": "STITCH",

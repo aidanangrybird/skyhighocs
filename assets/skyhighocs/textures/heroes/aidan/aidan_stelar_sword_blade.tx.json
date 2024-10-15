@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aidan/aidan_stelar_sword_blade",
+    "in": "skyhighocs:aidan/aidan_stelar_sword_blade",
     "transform": [
       {
         "operation": "XOR",

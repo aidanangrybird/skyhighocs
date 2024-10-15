@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:lucas/lucas_stelar_crimson_bottom",
+    "in": "skyhighocs:lucas/lucas_stelar_crimson_bottom",
     "transform": [
       {
         "operation": "XOR",

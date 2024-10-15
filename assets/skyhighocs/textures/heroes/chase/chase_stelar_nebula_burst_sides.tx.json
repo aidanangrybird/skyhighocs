@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:chase/chase_stelar_nebula_burst_sides",
+    "in": "skyhighocs:chase/chase_stelar_nebula_burst_sides",
     "transform": [
       {
         "operation": "XOR",

@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:lucas/lucas_stelar_sword",
+    "in": "skyhighocs:lucas/lucas_stelar_sword",
     "transform": [
       {
         "operation": "XOR",

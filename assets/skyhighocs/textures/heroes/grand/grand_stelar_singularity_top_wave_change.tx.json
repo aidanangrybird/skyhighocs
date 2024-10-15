@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:grand/grand_stelar_singularity_top",
+    "in": "skyhighocs:grand/grand_stelar_singularity_top",
     "transform": [
       {
         "operation": "XOR",

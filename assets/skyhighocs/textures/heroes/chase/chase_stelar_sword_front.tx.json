@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:chase/chase_stelar_sword_front",
+    "in": "skyhighocs:chase/chase_stelar_sword_front",
     "transform": [
       {
         "operation": "XOR",

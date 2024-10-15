@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aidan/astro/aidan_tenma_<CLOTHING><FLYING>",
+    "in": "skyhighocs:aidan/astro/aidan_tenma_<CLOTHING><FLYING>",
     "transform": [
       {
         "operation": "STITCH",

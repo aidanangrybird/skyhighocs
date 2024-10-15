@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:grand/grand_stelar_ember_ray_sides",
+    "in": "skyhighocs:grand/grand_stelar_ember_ray_sides",
     "transform": [
       {
         "operation": "XOR",

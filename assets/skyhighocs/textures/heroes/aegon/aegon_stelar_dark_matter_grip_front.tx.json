@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aegon/aegon_stelar_dark_matter_grip_front",
+    "in": "skyhighocs:aegon/aegon_stelar_dark_matter_grip_front",
     "transform": [
       {
         "operation": "XOR",

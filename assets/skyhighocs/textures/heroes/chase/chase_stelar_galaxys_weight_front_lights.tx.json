@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:chase/chase_stelar_galaxys_weight_front_lights",
+    "in": "skyhighocs:chase/chase_stelar_galaxys_weight_front_lights",
     "transform": [
       {
         "operation": "XOR",

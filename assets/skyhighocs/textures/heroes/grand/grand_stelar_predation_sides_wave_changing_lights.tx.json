@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:grand/grand_stelar_predation_sides_wave_changing_lights",
+    "in": "skyhighocs:grand/grand_stelar_predation_sides_wave_changing_lights",
     "transform": [
       {
         "operation": "XOR",

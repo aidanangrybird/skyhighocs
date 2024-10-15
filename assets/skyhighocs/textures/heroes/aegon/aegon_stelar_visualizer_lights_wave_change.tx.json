@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aegon/aegon_stelar_<VISUALIZER>_lights",
+    "in": "skyhighocs:aegon/aegon_stelar_<VISUALIZER>_lights",
     "transform": [
       {
         "operation": "XOR",

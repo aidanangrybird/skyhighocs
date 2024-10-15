@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:lucas/astro/lucas_tenma_cannon_lights",
+    "in": "skyhighocs:lucas/astro/lucas_tenma_cannon_lights",
     "transform": [
       {
         "operation": "STITCH",

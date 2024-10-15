@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aegon/aegon_stelar_cosmic_intervention_sides",
+    "in": "skyhighocs:aegon/aegon_stelar_cosmic_intervention_sides",
     "transform": [
       {
         "operation": "XOR",

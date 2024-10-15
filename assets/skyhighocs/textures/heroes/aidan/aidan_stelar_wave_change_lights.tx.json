@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aidan/aidan_stelar_lights",
+    "in": "skyhighocs:aidan/aidan_stelar_lights",
     "transform": [
       {
         "operation": "XOR",

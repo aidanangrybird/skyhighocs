@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:grand/grand_stelar_gravity_strike_front_lights",
+    "in": "skyhighocs:grand/grand_stelar_gravity_strike_front_lights",
     "transform": [
       {
         "operation": "XOR",

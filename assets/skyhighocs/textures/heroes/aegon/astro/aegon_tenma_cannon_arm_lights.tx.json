@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aegon/astro/aegon_tenma_cannon_lights",
+    "in": "skyhighocs:aegon/astro/aegon_tenma_cannon_lights",
     "transform": [
       {
         "operation": "STITCH",

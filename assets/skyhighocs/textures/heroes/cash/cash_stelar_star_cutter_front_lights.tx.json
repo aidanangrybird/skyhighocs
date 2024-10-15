@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:cash/cash_stelar_star_cutter_front_lights",
+    "in": "skyhighocs:cash/cash_stelar_star_cutter_front_lights",
     "transform": [
       {
         "operation": "XOR",

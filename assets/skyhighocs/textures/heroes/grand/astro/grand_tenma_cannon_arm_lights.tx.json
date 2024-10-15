@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:grand/astro/grand_tenma_cannon_lights",
+    "in": "skyhighocs:grand/astro/grand_tenma_cannon_lights",
     "transform": [
       {
         "operation": "STITCH",

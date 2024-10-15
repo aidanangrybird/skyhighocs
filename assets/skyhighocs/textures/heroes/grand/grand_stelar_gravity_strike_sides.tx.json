@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:grand/grand_stelar_gravity_strike_sides",
+    "in": "skyhighocs:grand/grand_stelar_gravity_strike_sides",
     "transform": [
       {
         "operation": "XOR",

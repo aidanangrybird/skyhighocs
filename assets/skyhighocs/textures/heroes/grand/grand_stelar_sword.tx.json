@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:grand/grand_stelar_sword",
+    "in": "skyhighocs:grand/grand_stelar_sword",
     "transform": [
       {
         "operation": "XOR",

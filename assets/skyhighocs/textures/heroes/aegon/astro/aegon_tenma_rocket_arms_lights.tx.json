@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aegon/astro/aegon_tenma_arms_lights",
+    "in": "skyhighocs:aegon/astro/aegon_tenma_arms_lights",
     "transform": [
       {
         "operation": "STITCH",

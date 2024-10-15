@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:ace/ace_stelar_solar_blast_front",
+    "in": "skyhighocs:ace/ace_stelar_solar_blast_front",
     "transform": [
       {
         "operation": "XOR",

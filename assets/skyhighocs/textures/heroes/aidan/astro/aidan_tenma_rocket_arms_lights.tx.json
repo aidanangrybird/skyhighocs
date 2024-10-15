@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aidan/astro/aidan_tenma_arms_lights",
+    "in": "skyhighocs:aidan/astro/aidan_tenma_arms_lights",
     "transform": [
       {
         "operation": "STITCH",

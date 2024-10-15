@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:grand/grand_stelar_base",
+    "in": "skyhighocs:grand/grand_stelar_base",
     "transform": [
       {
         "operation": "XOR",

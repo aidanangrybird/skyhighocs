@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:lucas/lucas_stelar_<VISUALIZER>_<CLOTHING>",
+    "in": "skyhighocs:lucas/lucas_stelar_<VISUALIZER>_<CLOTHING>",
     "transform": [
       {
         "operation": "XOR",

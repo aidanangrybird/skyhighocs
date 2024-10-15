@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:chase/chase_stelar_lights",
+    "in": "skyhighocs:chase/chase_stelar_lights",
     "transform": [
       {
         "operation": "XOR",

@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:cash/cash_stelar_amethyst_right_lights",
+    "in": "skyhighocs:cash/cash_stelar_amethyst_right_lights",
     "transform": [
       {
         "operation": "XOR",

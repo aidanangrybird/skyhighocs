@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:cash/cash_stelar_planetary_blast_front",
+    "in": "skyhighocs:cash/cash_stelar_planetary_blast_front",
     "transform": [
       {
         "operation": "XOR",

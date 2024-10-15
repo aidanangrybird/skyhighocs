@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aegon/aegon_stelar_supernova_bottom_wave_changing_lights",
+    "in": "skyhighocs:aegon/aegon_stelar_supernova_bottom_wave_changing_lights",
     "transform": [
       {
         "operation": "XOR",

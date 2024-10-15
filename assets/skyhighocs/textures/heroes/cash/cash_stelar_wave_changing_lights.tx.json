@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:cash/cash_stelar_wave_changing_lights",
+    "in": "skyhighocs:cash/cash_stelar_wave_changing_lights",
     "transform": [
       {
         "operation": "XOR",

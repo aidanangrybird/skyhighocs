@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aidan/aidan_stelar_jet_streak_top",
+    "in": "skyhighocs:aidan/aidan_stelar_jet_streak_top",
     "transform": [
       {
         "operation": "XOR",

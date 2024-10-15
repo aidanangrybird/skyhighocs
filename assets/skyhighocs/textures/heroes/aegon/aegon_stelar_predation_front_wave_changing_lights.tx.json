@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aegon/aegon_stelar_predation_front_wave_changing_lights",
+    "in": "skyhighocs:aegon/aegon_stelar_predation_front_wave_changing_lights",
     "transform": [
       {
         "operation": "XOR",

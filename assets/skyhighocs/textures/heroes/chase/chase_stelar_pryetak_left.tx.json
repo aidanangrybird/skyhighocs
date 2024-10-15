@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:chase/chase_stelar_pryetak_left",
+    "in": "skyhighocs:chase/chase_stelar_pryetak_left",
     "transform": [
       {
         "operation": "XOR",
