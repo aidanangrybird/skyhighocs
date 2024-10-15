@@ -47,8 +47,8 @@ function init(transer) {
           manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
           manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
           manager.setData(player, "skyhighheroes:dyn/predation", false);
-          manager.setData(player, "skyhighheroes:dyn/pryetak_timer", 0);
-          manager.setData(player, "skyhighheroes:dyn/pryetak", false);
+          manager.setData(player, "skyhighheroes:dyn/supernova_timer", 0);
+          manager.setData(player, "skyhighheroes:dyn/supernova", false);
           manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
         } else {
           if (PackLoader.getSide() == "CLIENT") {
