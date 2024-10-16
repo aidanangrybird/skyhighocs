@@ -1,4 +1,4 @@
-extend("skyhighheroes:base_tenma");
+extend("skyhighocs:base_tenma");
 
 var tenma = implement("skyhighheroes:external/tenma");
 var stuff = implement("skyhighheroes:external/stuff");

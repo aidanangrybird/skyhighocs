@@ -74,6 +74,9 @@ function init(transer) {
       }, "\u00A7mEM Wave Change!\u00A7r You are too hot", 5);
       hero.addKeyBindFunc("BATTLE_CARD_RESET", (player, manager) => resetBattleCard(player, manager), "Return To Supernova Buster", 5);
     },
+    canAim: function (entity) {
+      return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighocs:dyn/supernova_timer") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+    },
     isKeyBindEnabled: function (entity, keyBind) {
       var result = false;
       var uuid = "411ed8b9-b246-449c-b941-02790d0971dd";

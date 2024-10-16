@@ -1,4 +1,4 @@
-var bodyTemp = implement("skyhighheroes:external/body_temperature");
+var bodyTemp = implement("skyhighocs:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "c4bc5db6-3cf6-44fe-8427-304a7b211bc4";
 var transerSystem = implement("skyhighheroes:external/transer_system");
@@ -32,7 +32,7 @@ function init(hero) {
   hero.setHasProperty(hasProperty);
   hero.setHasPermission((entity, permission) => stelar.hasPermission(entity, permission));
   stelar.initProfiles(hero);
-  hero.supplyFunction("canAim", entity => stelar.canAim(entity, "crimson"));
+  transerOS.canAim(hero);
   hero.setModifierEnabled((entity, modifier) => {
     if (modifier.name() == "fiskheroes:shape_shifting") {
       return true;
@@ -60,7 +60,7 @@ function init(hero) {
       return entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
     };
     if (keyBind == "SHAPE_SHIFT") {
-      return entity.getData("skyhighheroes:dyn/battle_card") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/crimson_timer") == 1);
+      return entity.getData("skyhighheroes:dyn/battle_card") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighocs:dyn/crimson_timer") == 1);
     };
     return transerOS.isKeyBindEnabled(entity, keyBind);
   });

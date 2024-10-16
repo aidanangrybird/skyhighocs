@@ -1,4 +1,4 @@
-extend("skyhighheroes:base_stelar");
+extend("skyhighocs:base_stelar");
 
 var stelar = implement("skyhighheroes:external/stelar");
 var stuff = implement("skyhighheroes:external/stuff");
@@ -407,21 +407,21 @@ function render(entity, renderLayer, isFirstPersonArm) {
         swordBlade.render();
       };
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/galaxys_weight_timer") > 0) {
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/galaxys_weight_timer") > 0) {
       galaxysWeightRight.render();
       galaxysWeightLeft.render();
       galaxysWeightTop.render();
       galaxysWeightBottom.render();
       galaxysWeightFront.render();
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/voids_grasp_timer") > 0) {
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/voids_grasp_timer") > 0) {
       voidsGraspRight.render();
       voidsGraspLeft.render();
       voidsGraspTop.render();
       voidsGraspBottom.render();
       voidsGraspFront.render();
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/nebula_burst_timer") > 0) {
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/nebula_burst_timer") > 0) {
       nebulaBurstRight.render();
       nebulaBurstLeft.render();
       nebulaBurstTop.render();

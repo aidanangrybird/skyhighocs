@@ -4,7 +4,7 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/aidan_stelar_helmet_wave_changing_lights_<TIMER>"
+        "supply": "skyhighocs:xor/aidan_stelar_helmet_wave_changing_lights_<TIMER>"
       }
     ],
     "out": "skyhighocs:generated/aidan_stelar_helmet_wave_changing_lights_<TIMER>"

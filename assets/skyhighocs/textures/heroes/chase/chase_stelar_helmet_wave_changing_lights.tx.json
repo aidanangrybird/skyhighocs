@@ -4,7 +4,7 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/chase_stelar_helmet_wave_changing_lights_<TIMER>"
+        "supply": "skyhighocs:xor/chase_stelar_helmet_wave_changing_lights_<TIMER>"
       }
     ],
     "out": "skyhighocs:generated/chase_stelar_helmet_wave_changing_lights_<TIMER>"

@@ -1,4 +1,4 @@
-extend("skyhighheroes:base_stelar");
+extend("skyhighocs:base_stelar");
 
 var stelar = implement("skyhighheroes:external/stelar");
 var stuff = implement("skyhighheroes:external/stuff");
@@ -359,14 +359,14 @@ function render(entity, renderLayer, isFirstPersonArm) {
         headBottomWaveChange.render();
         headFrontWaveChange.render();
       };
-      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/solar_flare_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/solar_wind_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/solar_blast_timer") < 1)) {
+      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_flare_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_wind_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_blast_timer") < 1)) {
         headRight.render();
         headLeft.render();
         headTop.render();
         headBottom.render();
         headFront.render();
       }
-      if ((entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/solar_flare_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/solar_wind_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/solar_blast_timer") < 1)) {
+      if ((entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_flare_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_wind_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_blast_timer") < 1)) {
         headRightWaveChanging.render();
         headLeftWaveChanging.render();
         headTopWaveChanging.render();
@@ -393,21 +393,21 @@ function render(entity, renderLayer, isFirstPersonArm) {
         swordBlade.render();
       };
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/solar_flare_timer") > 0) {
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/solar_flare_timer") > 0) {
       solarFlareRight.render();
       solarFlareLeft.render();
       solarFlareTop.render();
       solarFlareBottom.render();
       solarFlareFront.render();
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/solar_wind_timer") > 0) {
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/solar_wind_timer") > 0) {
       solarWindRight.render();
       solarWindLeft.render();
       solarWindTop.render();
       solarWindBottom.render();
       solarWindFront.render();
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/solar_blast_timer") > 0) {
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/solar_blast_timer") > 0) {
       solarBlastRight.render();
       solarBlastLeft.render();
       solarBlastTop.render();

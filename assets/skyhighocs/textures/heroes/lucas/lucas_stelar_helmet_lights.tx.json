@@ -4,7 +4,7 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/lucas_stelar_helmet_wave_change_<TIMER>"
+        "supply": "skyhighocs:xor/lucas_stelar_helmet_wave_change_<TIMER>"
       }
     ],
     "out": "skyhighocs:generated/lucas_stelar_helmet_lights_<TIMER>"
