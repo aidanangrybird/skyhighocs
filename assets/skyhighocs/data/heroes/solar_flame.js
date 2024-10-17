@@ -10,7 +10,7 @@ var solarFlame = implement("skyhighocs:external/solar_flame");
 var solar = implement("skyhighocs:external/solar");
 var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, solarFlame, solar]);
 function init(hero) {
-  hero.setAliases("ace_stelar");
+  hero.setAliases("solar_flame");
   hero.setName("\u00A74Solar Flame");
   hero.setTier(10);
   hero.setChestplate("Transer");

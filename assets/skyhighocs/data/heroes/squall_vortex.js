@@ -10,7 +10,7 @@ var squallVortex = implement("skyhighocs:external/squall_vortex");
 var jetStreak = implement("skyhighocs:external/jet_streak");
 var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, squallVortex, jetStreak]);
 function init(hero) {
-  hero.setAliases("aidan_stelar");
+  hero.setAliases("squall_vortex");
   hero.setName("\u00A76Squall Vortex");
   hero.setTier(10);
   hero.setChestplate("Transer");

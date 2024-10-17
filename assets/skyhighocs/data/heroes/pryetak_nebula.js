@@ -10,7 +10,7 @@ var pryetakNebula = implement("skyhighocs:external/pryetak_nebula");
 var pryetak = implement("skyhighocs:external/pryetak");
 var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, pryetakNebula, pryetak]);
 function init(hero) {
-  hero.setAliases("chase_stelar");
+  hero.setAliases("pryetak_nebula");
   hero.setName("\u00A72Pryetak Nebula");
   hero.setTier(10);
   hero.setChestplate("Transer");

@@ -369,7 +369,6 @@ function init(transer) {
     waveChangeInfo: function () {
       return {
         name: "Pryetak Nebula",
-        human: "Chase Stelar",
         color: "\u00A72"
       };
     }

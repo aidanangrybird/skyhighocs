@@ -1,0 +1,66 @@
+var bodyTemp = implement("skyhighocs:external/body_temperature");
+var stelar = implement("skyhighheroes:external/stelar");
+var uuid = "c4bc5db6-3cf6-44fe-8427-304a7b211bc4";
+var transerSystem = implement("skyhighheroes:external/transer_system");
+var transerMessaging = implement("skyhighheroes:external/transer_messaging");
+var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
+var transerContacts = implement("skyhighheroes:external/transer_contacts");
+var transerScanner = implement("skyhighheroes:external/transer_scanner");
+var crimson = implement("skyhighocs:external/crimson");
+var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, crimson]);
+function init(hero) {
+  hero.setAliases("lucas_stelar");
+  hero.setName("Lucas Stelar");
+  hero.setTier(1);
+  hero.setChestplate("Transer");
+  hero.setTierOverride(entity => 0);
+  hero.setVersion("Mega Man Star Force (OC)");
+  hero.hide();
+
+  transerOS.keyBinds(hero);
+
+  transerOS.addPowers(hero);
+
+  hero.addKeyBindFunc("CYCLE_CLOTHES", (player, manager) => stelar.cycleClothes(player, manager), "Change Clothes", 1);
+  hero.addKeyBindFunc("SHIMMER_TOGGLE", (player, manager) => stelar.shimmerToggle(player, manager), "Shimmer Toggle", 1);
+  hero.addKeyBindFunc("VISUALIZER_TOGGLE", (player, manager) => stelar.visualizerToggle(player, manager), "Toggle Visualizer", 2);
+  hero.addKeyBindFunc("HOOD_TOGGLE", (player, manager) => stelar.hoodToggle(player, manager), "Toggle Hood", 2);
+  
+  hero.setDefaultScale(1.0);
+  stelar.initProfiles(hero);
+  hero.setModifierEnabled((entity, modifier) => {
+    if (modifier.name() == "fiskheroes:shape_shifting") {
+      return true;
+    };
+    return transerOS.isModifierEnabled(entity, modifier);
+  });
+  hero.setTierOverride(entity => stelar.getTierOverride(entity));
+  hero.setKeyBindEnabled((entity, keyBind) => {
+    if (keyBind == "VISUALIZER_TOGGLE") {
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && ((entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
+    };
+    if (keyBind == "CYCLE_CLOTHES") {
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && !entity.isSneaking() && entity.getUUID() == uuid;
+    };
+    if (keyBind == "SHIMMER_TOGGLE") {
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.isSneaking() && entity.getUUID() == uuid;
+    };
+    if (keyBind == "HOOD_TOGGLE") {
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
+    };
+    if (keyBind == "CYCLE_CHATS") {
+      return !entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+    };
+    if (keyBind == "CYCLE_CHAT_MODES") {
+      return entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+    };
+    if (keyBind == "SHAPE_SHIFT") {
+      return entity.getData("skyhighheroes:dyn/battle_card") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighocs:dyn/jet_streak_timer") == 1);
+    };
+    return transerOS.isKeyBindEnabled(entity, keyBind);
+  });
+  hero.setTickHandler((entity, manager) => {
+    transerOS.tickHandler(entity, manager);
+    bodyTemp.change(entity, manager, stelar.tempProfiles(), "skyhighheroes:dyn/body_temperature", 400.0, "skyhighheroes:dyn/stelar_clothes");
+  });
+};

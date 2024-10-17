@@ -70,18 +70,6 @@ function initEffects(renderer) {
   ears.anchor.set("head");
   ears.angle = 0;
   ears.inset = -0.039;
-  /*opacity_creetle = renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
-    return (entity.getData("skyhighheroes:dyn/battle_card") == 4) ? 1.0 : 0.0;
-  });
-  var creetle = renderer.createResource("MODEL", "skyhighheroes:creetle");
-  creetle.texture.set("creetle");
-  creetle.bindAnimation("skyhighheroes:creetle").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer"));
-    data.load(1, entity.loop(1));
-  });
-  the_creetle = renderer.createEffect("fiskheroes:model").setModel(creetle);
-  the_creetle.anchor.set("body");
-  the_creetle.setScale(1.0);*/
 };
 
 function initAnimations(renderer) {

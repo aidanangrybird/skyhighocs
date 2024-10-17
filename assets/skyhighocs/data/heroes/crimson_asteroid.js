@@ -10,7 +10,7 @@ var crimsonAsteroid = implement("skyhighocs:external/crimson_asteroid");
 var crimson = implement("skyhighocs:external/crimson");
 var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, crimsonAsteroid, crimson]);
 function init(hero) {
-  hero.setAliases("lucas_stelar");
+  hero.setAliases("crimson_asteroid");
   hero.setName("\u00A74Crimson Asteroid");
   hero.setTier(10);
   hero.setChestplate("Transer");

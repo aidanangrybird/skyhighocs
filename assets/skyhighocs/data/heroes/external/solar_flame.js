@@ -365,7 +365,6 @@ function init(transer) {
     waveChangeInfo: function () {
       return {
         name: "Solar Flame",
-        human: "Ace Stelar",
         color: "\u00A74"
       };
     }

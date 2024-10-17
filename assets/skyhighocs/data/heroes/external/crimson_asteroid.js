@@ -370,7 +370,6 @@ function init(transer) {
     waveChangeInfo: function () {
       return {
         name: "Crimson Asteroid",
-        human: "Lucas Stelar",
         color: "\u00A74"
       };
     }

@@ -370,7 +370,6 @@ function init(transer) {
     waveChangeInfo: function () {
       return {
         name: "Squall Vortex",
-        human: "Aidan Stelar",
         color: "\u00A76"
       };
     }
