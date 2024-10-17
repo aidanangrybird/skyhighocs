@@ -367,14 +367,14 @@ function render(entity, renderLayer, isFirstPersonArm) {
         headBottomWaveChange.render();
         headFrontWaveChange.render();
       };
-      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/asteroid_crash_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/asteroid_pull_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/asteroid_blast_timer") < 1)) {
+      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_crash_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_pull_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_blast_timer") < 1)) {
         headRight.render();
         headLeft.render();
         headTop.render();
         headBottom.render();
         headFront.render();
       }
-      if ((entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/asteroid_crash_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/asteroid_pull_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/asteroid_blast_timer") < 1)) {
+      if ((entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_crash_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_pull_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_blast_timer") < 1)) {
         headRightWaveChanging.render();
         headLeftWaveChanging.render();
         headTopWaveChanging.render();
