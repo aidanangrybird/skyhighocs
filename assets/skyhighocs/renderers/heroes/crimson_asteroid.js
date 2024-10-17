@@ -1,4 +1,4 @@
-extend("skyhighocs:base_stelar");
+extend("skyhighocs:base_em_being");
 
 var stelar = implement("skyhighheroes:external/stelar");
 var stuff = implement("skyhighheroes:external/stuff");
