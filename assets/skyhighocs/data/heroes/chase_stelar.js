@@ -40,7 +40,6 @@ function init(hero) {
     };
     return transerOS.isModifierEnabled(entity, modifier);
   });
-  hero.setTierOverride(entity => transerOS.getTierOverride(entity));
   hero.setKeyBindEnabled((entity, keyBind) => {
     if (keyBind == "VISUALIZER_TOGGLE") {
       return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && ((entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
