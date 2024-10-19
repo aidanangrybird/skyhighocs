@@ -155,11 +155,6 @@ function init(transer) {
     name: function () {
       return "pryetak";
     },
-    waveChangeInfo: function () {
-      return {
-        human: "Chase Stelar"
-      };
-    },
     waveHandler: function (entity, manager) {
       if (entity.getUUID() == "4da600b8-582a-4fc3-ac2e-ada03d3e478c" && entity.world().isUnobstructed(entity.eyePos(), entity.pos().eyePos(0,1000,0)) && !entity.world().isRaining() && !entity.world().isThundering() && entity.world().getLocation(entity.pos()).biome().startsWith("Cold Taiga Hills")) {
         var value = Math.random();
@@ -171,6 +166,11 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/calling_timer") == 1) {
           manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighocs:pryetak_nebula");
         };
+      };
+    },
+    emBeingInfo: function () {
+      return {
+        human: "Chase Stelar"
       };
     }
   };
