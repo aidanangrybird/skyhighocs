@@ -83,17 +83,17 @@
     "WAVE_WIND": "Wind (Wave)"
   },
   "alts" : {
-    "skyhighocs:aidan_stelar": {
+    "skyhighocs:squall_vortex": {
       "$DEFAULT": {
         "maskToggleTicks": 10
       }
     },
-    "skyhighocs:chase_stelar": {
+    "skyhighocs:pryetak_nebula": {
       "$DEFAULT": {
         "maskToggleTicks": 10
       }
     },
-    "skyhighocs:lucas_stelar": {
+    "skyhighocs:crimson_asteroid": {
       "$DEFAULT": {
         "maskToggleTicks": 10
       }
