@@ -151,7 +151,7 @@
         }
       },
       "quantity": 50,
-      "spread": 10,
+      "spread": 0.1,
       "cooldownTime": 5
     }
   },
