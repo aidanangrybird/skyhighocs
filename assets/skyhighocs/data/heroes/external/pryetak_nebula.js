@@ -87,7 +87,7 @@ function init(transer) {
         };
         return true;
       }, "Battle Card! Nebula Burst!", 2);
-      hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
+      hero.addKeyBind("INVISIBILITY", "Wave World", 3);
       hero.addKeyBindFunc("CYCLE_DOWN_CARD", (player, manager) => cycleDownCard(player, manager), "Previous Battle Card", 3);
       hero.addKeyBind("TELEKINESIS", "Void's Grasp", 4);
       hero.addKeyBind("GRAVITY_MANIPULATION", "Galaxy's Weight", 4);

@@ -87,7 +87,7 @@ function init(transer) {
         };
         return true;
       }, "Battle Card! Asteroid Blast!", 2);
-      hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
+      hero.addKeyBind("INVISIBILITY", "Wave World", 3);
       hero.addKeyBindFunc("CYCLE_DOWN_CARD", (player, manager) => cycleDownCard(player, manager), "Previous Battle Card", 3);
       hero.addKeyBind("EARTHQUAKE", "Asteroid Crash", 4);
       hero.addKeyBind("TELEKINESIS", "Asteroid Pull", 4);

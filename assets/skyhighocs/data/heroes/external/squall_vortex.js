@@ -87,7 +87,7 @@ function init(transer) {
         };
         return true;
       }, "Battle Card! Hail Cannon!", 2);
-      hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
+      hero.addKeyBind("INVISIBILITY", "Wave World", 3);
       hero.addKeyBindFunc("CYCLE_DOWN_CARD", (player, manager) => cycleDownCard(player, manager), "Previous Battle Card", 3);
       hero.addKeyBind("ENERGY_PROJECTION", "Derecho", 4);
       hero.addKeyBindFunc("FORTUNE_SWITCH", (player, manager) => toolSwitchEnchant(player, manager), "Active Enchant: Silk Touch", 4);
