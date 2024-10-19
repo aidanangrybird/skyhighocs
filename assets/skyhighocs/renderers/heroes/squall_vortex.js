@@ -89,13 +89,13 @@ function initEffects(renderer) {
   helmetWaveChangingLights.texture.set(null, "helmet_wave_changing_lights");
   helmet = renderer.createEffect("fiskheroes:overlay");
   helmet.texture.set("helmet", "helmet_lights");
-  stelar.bindBeam(renderer, "fiskheroes:lightning_cast", "skyhighocs:wave_lightning_aidan", "rightArm", 0xFFFF00, [
+  stelar.bindBeam(renderer, "fiskheroes:lightning_cast", "skyhighocs:squall_vortex_lightning", "rightArm", 0xFFFF00, [
     { "firstPerson": [-8.0, 4.5, -10.0], "offset": [-0.5, 9.0, 0.0], "size": [1.0, 1.0] }
   ]);
-  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:wave_derecho_aidan", "rightArm", 0x777777, [
+  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:squall_vortex_derecho", "rightArm", 0x777777, [
     { "firstPerson": [-4.5, 4.5, -20.0], "offset": [-0.5, 14.0, 0.0], "size": [50.0, 50.0] }
   ]);
-  stuff.bindFlightTrail(renderer, "skyhighocs:aidan_stelar_flight");
+  stuff.bindFlightTrail(renderer, "skyhighocs:squall_vortex_flight");
   //Battle card predation wave changing
   //Right
   predationRightWaveChanging = renderer.createEffect("fiskheroes:shield");

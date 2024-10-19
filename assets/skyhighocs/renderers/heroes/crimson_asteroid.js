@@ -90,15 +90,15 @@ function initEffects(renderer) {
   helmetWaveChangingLights.texture.set(null, "helmet_wave_changing_lights");
   helmet = renderer.createEffect("fiskheroes:overlay");
   helmet.texture.set("helmet", "helmet_lights");
-  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:wave_asteroid_blast_lucas", "rightArm", 0xFF0000, [
+  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:crimson_asteroid_asteroid_blast", "rightArm", 0xFF0000, [
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [4.0, 4.0] }
   ]);
-  stuff.bindCloud(renderer, "fiskheroes:telekinesis", "skyhighocs:wave_asteroid_pull_lucas");
-  var chain = stuff.bindCloud(renderer, "fiskheroes:telekinesis_chain", "skyhighocs:wave_asteroid_pull_lucas");
+  stuff.bindCloud(renderer, "fiskheroes:telekinesis", "skyhighocs:crimson_asteroid_asteroid_pull");
+  var chain = stuff.bindCloud(renderer, "fiskheroes:telekinesis_chain", "skyhighocs:crimson_asteroid_asteroid_pull");
   chain.anchor.set("rightArm");
   chain.setOffset(-0.5, 10.0, 0.0);
   chain.setFirstPerson(-4.75, 4.0, -8.5);
-  stuff.bindFlightTrail(renderer, "skyhighocs:lucas_stelar_flight");
+  stuff.bindFlightTrail(renderer, "skyhighocs:crimson_asteroid_flight");
   //Battle card predation wave changing
   //Right
   predationRightWaveChanging = renderer.createEffect("fiskheroes:shield");

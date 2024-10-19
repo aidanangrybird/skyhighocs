@@ -1,10 +1,10 @@
 {
-  "suit": "skyhighocs:lucas_stelar",
+  "suit": "skyhighocs:crimson_asteroid",
   "display": {
     "hideUntilAvailable": true
   },
   "requirements": [
-    "skyhighocs:lucas_customs"
+    "skyhighocs:lucas_stelar"
   ],
   "price": {
     "XP_LEVELS": 1

@@ -99,8 +99,8 @@ function initEffects(renderer) {
       { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-1.0, 9.0, -0.5], "size": [3.0, 3.0] }
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   renderer.bindProperty("fiskheroes:gravity_manipulation").color.set(0x44FF00);
-  stuff.bindCloud(renderer, "fiskheroes:telekinesis", "skyhighocs:wave_voids_grasp_chase");
-  var chain = stuff.bindCloud(renderer, "fiskheroes:telekinesis_chain", "skyhighocs:wave_voids_grasp_chase");
+  stuff.bindCloud(renderer, "fiskheroes:telekinesis", "skyhighocs:pryetak_nebula_voids_grasp");
+  var chain = stuff.bindCloud(renderer, "fiskheroes:telekinesis_chain", "skyhighocs:pryetak_nebula_voids_grasp");
   chain.anchor.set("rightArm");
   chain.setOffset(-0.5, 10.0, 0.0);
   chain.setFirstPerson(-4.75, 4.0, -8.5);

@@ -1,10 +1,10 @@
 {
-  "suit": "skyhighocs:ace_stelar",
+  "suit": "skyhighocs:solar_flame",
   "display": {
     "hideUntilAvailable": true
   },
   "requirements": [
-    "skyhighocs:ace_customs"
+    "skyhighocs:ace_stelar"
   ],
   "price": {
     "XP_LEVELS": 1

@@ -88,13 +88,13 @@ function initEffects(renderer) {
   stelar.bindBeam(renderer, "fiskheroes:lightning_cast", "fiskheroes:lightning_cast", "rightArm", 0xFF0000, [
     { "firstPerson": [-8.0, 4.5, -10.0], "offset": [-0.5, 9.0, 0.0], "size": [1.0, 1.0] }
   ]);
-  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:wave_solar_wind_ace", "rightArm", 0xFF0000, [
+  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:solar_flame_solar_wind", "rightArm", 0xFF0000, [
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [6.0, 6.0] }
   ]);
-  stelar.bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:wave_solar_blast_ace", "rightArm", 0xFF0000, [
+  stelar.bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:solar_flame_solar_blast", "rightArm", 0xFF0000, [
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-1.0, 9.0, -0.5], "size": [3.0, 3.0] }
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  stuff.bindFlightTrail(renderer, "skyhighocs:ace_stelar_flight");
+  stuff.bindFlightTrail(renderer, "skyhighocs:solar_flame_flight");
   //Battle card predation wave changing
   //Right
   predationRightWaveChanging = renderer.createEffect("fiskheroes:shield");

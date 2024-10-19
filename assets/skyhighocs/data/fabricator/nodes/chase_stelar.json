@@ -1,10 +1,10 @@
 {
-  "suit": "skyhighocs:pryetak_nebula",
+  "suit": "skyhighocs:chase_stelar",
   "display": {
   "hideUntilAvailable": true
   },
   "requirements": [
-    "skyhighocs:chase_stelar"
+    "skyhighocs:chase_customs"
   ],
   "price": {
     "XP_LEVELS": 1

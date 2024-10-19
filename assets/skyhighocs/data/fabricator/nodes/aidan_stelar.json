@@ -1,10 +1,10 @@
 {
-  "suit": "skyhighocs:squall_vortex",
+  "suit": "skyhighocs:aidan_stelar",
   "display": {
     "hideUntilAvailable": true
   },
   "requirements": [
-    "skyhighocs:aidan_stelar"
+    "skyhighocs:aidan_customs"
   ],
   "price": {
     "XP_LEVELS": 1
