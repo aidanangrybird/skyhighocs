@@ -135,6 +135,8 @@
       },
       "isToggle": true
     },
+    "fiskheroes:cryo_charge": {
+    },
     "fiskheroes:icicles": {
       "damageProfile": {
         "damage": 15.0,
@@ -152,5 +154,12 @@
       "spread": 10,
       "cooldownTime": 5
     }
-  }
+  },
+  "hud": [
+    {
+      "type": "CHARGE",
+      "texture": "fiskheroes:textures/gui/bars/cryo_charge.png",
+      "data": "fiskheroes:cryo_charge"
+    }
+  ]
 }
