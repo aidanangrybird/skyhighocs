@@ -132,7 +132,7 @@
         "types": {
           "WAVE_ENERGY": 1.0,
           "WAVE_EXPLOSION": 1.0,
-          "WAVE_SHOCKWAVE": 1.0
+          "WAVE_COLD": 1.0
         },
         "properties": {
           "COOK_ENTITY": true,

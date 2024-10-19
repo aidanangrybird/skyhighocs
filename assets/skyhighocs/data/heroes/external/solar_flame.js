@@ -127,12 +127,15 @@ function init(transer) {
     initDamageProfiles: function (hero) {
       hero.addDamageProfile("SWORD", {
         "types": {
-          "WAVE_SHARP": 1.0
+          "WAVE_SHARP": 1.0,
+          "WAVE_FIRE": 1.0,
+          "WAVE_LIGHT": 1.0
         }
       });
       hero.addDamageProfile("MAIN", {
         "types": {
-          "WAVE_BLUNT": 1.0
+          "WAVE_BLUNT": 1.0,
+          "WAVE_FIRE": 1.0
         }
       });
     },
