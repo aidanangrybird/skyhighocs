@@ -14,7 +14,7 @@ function init(transer) {
       return [
         "skyhighheroes:em_wave_change",
         "skyhighheroes:battle_card_predation",
-        "skyhighocs:flame_buster"
+        "skyhighocs:solar_buster"
       ];
     },
     powers: function () {
@@ -25,7 +25,7 @@ function init(transer) {
     keyBinds: function (hero) {
       hero.addKeyBindFunc("BATTLE_CARD_RESET_PREDATION", (player, manager) => resetBattleCard(player, manager), "Return To Flame Buster", 2);
       hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
-      hero.addKeyBind("AIM", "Aim Flame Buster", 4);
+      hero.addKeyBind("AIM", "Aim Solar Buster", 4);
       hero.addKeyBindFunc("DESYNCHRONIZE_WAVES", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
         manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
