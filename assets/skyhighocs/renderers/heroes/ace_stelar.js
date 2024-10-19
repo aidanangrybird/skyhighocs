@@ -5,8 +5,8 @@ loadTextures({
   "visualizer_lights": "skyhighocs:ace/ace_stelar_visualizer_lights.tx.json",
   "transer_default": "skyhighocs:ace/ace_stelar_transer",
   "transer_default_lights": "skyhighocs:ace/ace_stelar_transer_lights",
-  "base": "skyhighocs:ace/ace_stelar_base",
-  "lights": "skyhighocs:ace/ace_stelar_lights",
+  "base": "skyhighocs:ace/solar_flame_base",
+  "lights": "skyhighocs:ace/solar_flame_lights",
 });
 
 function getColor() {
