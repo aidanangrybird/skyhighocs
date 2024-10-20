@@ -7,6 +7,7 @@ loadTextures({
   "transer_default_lights": "skyhighocs:chase/chase_stelar_transer_lights",
   "base": "skyhighocs:chase/pryetak_nebula_base",
   "lights": "skyhighocs:chase/pryetak_nebula_lights",
+  "wave_changing_lights": "skyhighocs:chase/pryetak_nebula_wave_changing_lights",
 });
 
 function getColor() {

@@ -7,6 +7,7 @@ loadTextures({
   "transer_default_lights": "skyhighocs:lucas/lucas_stelar_transer_lights",
   "base": "skyhighocs:lucas/crimson_asteroid_base",
   "lights": "skyhighocs:lucas/crimson_asteroid_lights",
+  "wave_changing_lights": "skyhighocs:lucas/crimson_asteroid_wave_changing_lights",
 });
 
 function getColor() {

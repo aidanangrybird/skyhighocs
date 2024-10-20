@@ -1,3 +1,7 @@
+loadTextures({
+  "null": "skyhighocs:null",
+});
+
 function init(renderer) {
   renderer.setTexture((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
@@ -33,9 +37,22 @@ function init(renderer) {
 
 var forcefield;
 var callingLine;
-var callingBeam;
+var callingBeam;/* 
+var waveChangeLights;
+var waveChange;
+var normal; */
 
-function initEffects(renderer) {
+function initEffects(renderer) {/* 
+  normal = renderer.createEffect("fiskheroes:overlay");
+  normal.texture.set("transer", "visualizer_lights");
+  waveChange = renderer.createEffect("fiskheroes:overlay");
+  waveChange.texture.set("base", "lights");
+  waveChangeLights = renderer.createEffect("fiskheroes:overlay");
+  waveChangeLights.texture.set(null, "wave_changing_lights"); */
+  ears = renderer.createEffect("fiskheroes:ears");
+  ears.anchor.set("head");
+  ears.angle = 0;
+  ears.inset = -0.039;
   beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:wave_calling");
   var callingShape = renderer.createResource("SHAPE", null);
   callingLine = callingShape.bindLine({ "start": [0.0, -300.0, 0.0], "end": [0.0, -300.0, 0.0], "size": [20.0, 20.0] });
@@ -56,10 +73,18 @@ function initAnimations(renderer) {
 
 function render(entity, renderLayer, isFirstPersonArm) {
   var color = getColor(entity);
-  var callingTimer = entity.getInterpolatedData("skyhighheroes:dyn/calling_timer");
+  var callingTimer = entity.getInterpolatedData("skyhighheroes:dyn/calling_timer");/* 
+  normal.opacity = -1*timerAnimate2(callingTimer, 0.35, 0.25, 0.05, 0.1)+1;
+  if (entity.getUUID() == getID()) {
+    normal.render();
+  };
+  waveChange.opacity = timerAnimate2(callingTimer, 0.2, 0.4, 0.05, 0.1);
+  waveChange.render();
+  waveChangeLights.opacity = timerAnimate2(callingTimer, 0.15, 0.25, 0.05, 0.05);
+  waveChangeLights.render(); */
+  ears.render();
   forcefield.color.set(color);
   callingBeam.color.set(color);
-  //callingBeam.progress = timerAnimate2(callingTimer, 1.0, 0.0, 0.1, 0.0);
   callingLine.size.x = callingLine.size.y = timerAnimate2(callingTimer, 0.7, 0.3, 0.1, 0.0)*40+20;
   callingLine.end.y = timerAnimate2(callingTimer, 0.85, 0.15, 0.1, 0.0)*302-300;
   callingLine.start.y = timerAnimate2(callingTimer, 0.55, 0.45, 0.05, 0.0)*302-300;
