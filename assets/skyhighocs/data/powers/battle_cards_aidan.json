@@ -150,7 +150,7 @@
           "REDUCE_KNOCKBACK": 0.5
         }
       },
-      "quantity": 50,
+      "quantity": 25,
       "spread": 0.1,
       "cooldownTime": 5
     }
