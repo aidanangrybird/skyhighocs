@@ -30,6 +30,7 @@ function init(hero) {
   hero.setDefaultScale(1.0);
   hero.setAttributeProfile(entity => {
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
+      return bodyTemp.getAttributeProfile(entity); 
     } else {
       return transerOS.getAttributeProfile(entity);
     };
