@@ -402,7 +402,7 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 3) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Asteroid Crash<n> battle card!");
+            transer.systemMessage(entity, "<n>Inserted <nh>Shurikens<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
@@ -411,7 +411,7 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 4) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Asteroid Pull<n> battle card!");
+            transer.systemMessage(entity, "<n>Inserted <nh>Asteroid Crash<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
@@ -419,7 +419,7 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 5) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Asteroid Blast<n> battle card!");
+            transer.systemMessage(entity, "<n>Inserted <nh>Asteroid Pull<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
@@ -427,7 +427,7 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 6) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Shurikens<n> battle card!");
+            transer.systemMessage(entity, "<n>Inserted <nh>Asteroid Blast<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);

@@ -407,20 +407,6 @@ function init(transer) {
           manager.setData(entity, "fiskheroes:utility_belt_type", 1);
         };
         if (entity.getData("skyhighheroes:dyn/battle_card") == 4) {
-          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Shurikens<n> battle card!");
-          };
-          entity.playSound("skyhighheroes:wave.equip", 1, 1);
-          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Shurikens<n> battle card!");
-          };
-          manager.setData(entity, "skyhighocs:dyn/jet_streak", true);
-          manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
-        };
-        if (entity.getData("skyhighheroes:dyn/battle_card") == 5) {
-          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Shurikens<n> battle card!");
-          };
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
             transer.systemMessage(entity, "<n>Inserted <nh>Lightning<n> battle card!");
@@ -428,10 +414,15 @@ function init(transer) {
           manager.setData(entity, "skyhighocs:dyn/jet_streak", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         };
-        if (entity.getData("skyhighheroes:dyn/battle_card") == 6) {
+        if (entity.getData("skyhighheroes:dyn/battle_card") == 5) {
+          entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
             transer.systemMessage(entity, "<n>Inserted <nh>Derecho<n> battle card!");
           };
+          manager.setData(entity, "skyhighocs:dyn/jet_streak", true);
+          manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
+        };
+        if (entity.getData("skyhighheroes:dyn/battle_card") == 6) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
             transer.systemMessage(entity, "<n>Inserted <nh>Hail Cannon<n> battle card!");
