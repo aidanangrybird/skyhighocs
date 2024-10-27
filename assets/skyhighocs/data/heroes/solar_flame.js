@@ -3,12 +3,13 @@ var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0";
 var transerSystem = implement("skyhighheroes:external/transer_system");
 var transerMessaging = implement("skyhighheroes:external/transer_messaging");
+var transerGroupMessaging = implement("skyhighheroes:external/transer_group_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
 var solarFlame = implement("skyhighocs:external/solar_flame");
 var solar = implement("skyhighocs:external/solar");
-var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, solarFlame, solar]);
+var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, solarFlame, solar], "solarFlame");
 function init(hero) {
   hero.setAliases("solar_flame");
   hero.setName("\u00A74Solar Flame");
@@ -72,7 +73,8 @@ function init(hero) {
   });
   hero.setDamageProfile(entity => transerOS.getDamageProfile(entity));
   hero.setTickHandler((entity, manager) => {
-    transerOS.tickHandler(entity, manager);
+    transerOS.transerHandler(entity, manager);
+    transerOS.emWaveHandler(entity, manager);
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };

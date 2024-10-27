@@ -3,11 +3,12 @@ var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "c4bc5db6-3cf6-44fe-8427-304a7b211bc4";
 var transerSystem = implement("skyhighheroes:external/transer_system");
 var transerMessaging = implement("skyhighheroes:external/transer_messaging");
+var transerGroupMessaging = implement("skyhighheroes:external/transer_group_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
-var crimson = implement("skyhighocs:external/crimson");
-var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, crimson]);
+var stargazing = implement("skyhighocs:external/stargazing");
+var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, stargazing], "lucasStelar");
 function init(hero) {
   hero.setAliases("lucas_stelar");
   hero.setName("Lucas Stelar");
@@ -66,7 +67,7 @@ function init(hero) {
     return transerOS.isKeyBindEnabled(entity, keyBind);
   });
   hero.setTickHandler((entity, manager) => {
-    transerOS.tickHandler(entity, manager);
+    transerOS.transerHandler(entity, manager);
     bodyTemp.change(entity, manager, stelar.tempProfiles(), "skyhighheroes:dyn/body_temperature", 400.0, "skyhighheroes:dyn/stelar_clothes");
   });
 };

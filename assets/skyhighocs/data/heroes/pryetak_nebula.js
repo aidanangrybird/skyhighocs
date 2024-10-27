@@ -3,12 +3,13 @@ var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "4da600b8-582a-4fc3-ac2e-ada03d3e478c";
 var transerSystem = implement("skyhighheroes:external/transer_system");
 var transerMessaging = implement("skyhighheroes:external/transer_messaging");
+var transerGroupMessaging = implement("skyhighheroes:external/transer_group_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
 var pryetakNebula = implement("skyhighocs:external/pryetak_nebula");
 var pryetak = implement("skyhighocs:external/pryetak");
-var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, pryetakNebula, pryetak]);
+var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, pryetakNebula, pryetak], "pryetakNebula");
 function init(hero) {
   hero.setAliases("pryetak_nebula");
   hero.setName("\u00A72Pryetak Nebula");
@@ -71,7 +72,8 @@ function init(hero) {
   });
   hero.setDamageProfile(entity => transerOS.getDamageProfile(entity));
   hero.setTickHandler((entity, manager) => {
-    transerOS.tickHandler(entity, manager);
+    transerOS.transerHandler(entity, manager);
+    transerOS.emWaveHandler(entity, manager);
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };

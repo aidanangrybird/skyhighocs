@@ -32,12 +32,15 @@ function init(transer) {
   };
   //All of the required functions and stuff go here
   return {
-    emPowers: function () {
-      return [
-        "skyhighheroes:em_wave_being",
-        "skyhighocs:battle_cards_chase",
-      ]
-    },
+    name: "pryetakNebula",
+    type: 9,
+    waveChange: "Pryetak Nebula",
+    color: "\u00A72",
+    human: "Chase Stelar",
+    powers: [
+      "skyhighheroes:em_wave_being",
+      "skyhighocs:battle_cards_chase",
+    ],
     keyBinds: function (hero) {
       hero.addKeyBind("TELEPORT", "Transmit", 1);
       hero.addKeyBindFunc("CYCLE_UP_CARD", (player, manager) => cycleUpCard(player, manager), "Next Battle Card", 1);
@@ -465,14 +468,5 @@ function init(transer) {
         };
       };
     },
-    name: function () {
-      return "pryetakNebula";
-    },
-    waveChangeInfo: function () {
-      return {
-        name: "Pryetak Nebula",
-        color: "\u00A72"
-      };
-    }
   };
 };

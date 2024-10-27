@@ -10,18 +10,15 @@ function init(transer) {
     return true;
   };
   return {
-    emPowers: function () {
-      return [
-        "skyhighheroes:em_wave_change",
-        "skyhighheroes:battle_card_predation",
-        "skyhighocs:nebula_buster"
-      ];
-    },
-    powers: function () {
-      return [
-        "skyhighocs:pryetak"
-      ];
-    },
+    name: "pryetak",
+    type: 8,
+    emBeing: "Pryetak",
+    powers: [
+      "skyhighocs:pryetak",
+      "skyhighheroes:em_wave_change",
+      "skyhighheroes:battle_card_predation",
+      "skyhighocs:nebula_buster"
+    ],
     keyBinds: function (hero) {
       hero.addKeyBindFunc("BATTLE_CARD_RESET_PREDATION", (player, manager) => resetBattleCard(player, manager), "Return To Nebula Buster", 2);
       hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
@@ -152,26 +149,5 @@ function init(transer) {
         manager.setData(entity, "skyhighocs:dyn/pryetak", false);
       };
     },
-    name: function () {
-      return "pryetak";
-    },
-    waveHandler: function (entity, manager) {
-      if (entity.getUUID() == "4da600b8-582a-4fc3-ac2e-ada03d3e478c" && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && !entity.world().isRaining() && !entity.world().isThundering() && entity.world().getLocation(entity.pos()).biome().startsWith("Cold Taiga Hills")) {
-        var value = Math.random();
-        if (value < 0.01) {
-          if (!entity.getData("skyhighheroes:dyn/calling")) {
-            manager.setData(entity, "skyhighheroes:dyn/calling", true);
-          };
-        };
-        if (entity.getData("skyhighheroes:dyn/calling_timer") == 1) {
-          manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighocs:pryetak_nebula");
-        };
-      };
-    },
-    emBeingInfo: function () {
-      return {
-        human: "Chase Stelar"
-      };
-    }
   };
 };

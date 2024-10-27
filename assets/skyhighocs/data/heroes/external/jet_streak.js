@@ -10,18 +10,15 @@ function init(transer) {
     return true;
   };
   return {
-    emPowers: function () {
-      return [
-        "skyhighheroes:em_wave_change",
-        "skyhighheroes:battle_card_predation",
-        "skyhighocs:vortex_buster"
-      ];
-    },
-    powers: function () {
-      return [
-        "skyhighocs:jet_streak"
-      ];
-    },
+    name: "jetStreak",
+    type: 8,
+    emBeing: "Jet-Streak",
+    powers: [
+      "skyhighocs:jet_streak",
+      "skyhighheroes:em_wave_change",
+      "skyhighheroes:battle_card_predation",
+      "skyhighocs:vortex_buster"
+    ],
     keyBinds: function (hero) {
       hero.addKeyBindFunc("BATTLE_CARD_RESET_PREDATION", (player, manager) => resetBattleCard(player, manager), "Return To Vortex Buster", 2);
       hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
@@ -141,26 +138,5 @@ function init(transer) {
         manager.setData(entity, "skyhighocs:dyn/jet_streak", false);
       };
     },
-    name: function () {
-      return "jetStreak";
-    },
-    waveHandler: function (entity, manager) {
-      if (entity.getUUID() == "a3d071d4-c912-41e1-a6b2-c0de99ea4a84" && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && entity.world().isRaining() && entity.world().isThundering() && entity.world().getLocation(entity.pos()).biome().startsWith("Plains")) {
-        var value = Math.random();
-        if (value < 0.01) {
-          if (!entity.getData("skyhighheroes:dyn/calling")) {
-            manager.setData(entity, "skyhighheroes:dyn/calling", true);
-          };
-        };
-        if (entity.getData("skyhighheroes:dyn/calling_timer") == 1) {
-          manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighocs:squall_vortex");
-        };
-      };
-    },
-    emBeingInfo: function () {
-      return {
-        human: "Aidan Stelar"
-      };
-    }
   };
 };

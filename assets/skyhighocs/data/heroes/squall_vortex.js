@@ -3,12 +3,13 @@ var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
 var transerSystem = implement("skyhighheroes:external/transer_system");
 var transerMessaging = implement("skyhighheroes:external/transer_messaging");
+var transerGroupMessaging = implement("skyhighheroes:external/transer_group_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
 var squallVortex = implement("skyhighocs:external/squall_vortex");
 var jetStreak = implement("skyhighocs:external/jet_streak");
-var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, squallVortex, jetStreak]);
+var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, squallVortex, jetStreak], "squallVortex");
 function init(hero) {
   hero.setAliases("squall_vortex");
   hero.setName("\u00A76Squall Vortex");
@@ -71,7 +72,8 @@ function init(hero) {
   });
   hero.setDamageProfile(entity => transerOS.getDamageProfile(entity));
   hero.setTickHandler((entity, manager) => {
-    transerOS.tickHandler(entity, manager);
+    transerOS.transerHandler(entity, manager);
+    transerOS.emWaveHandler(entity, manager);
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };

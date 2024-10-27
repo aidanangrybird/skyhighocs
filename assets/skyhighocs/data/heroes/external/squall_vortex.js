@@ -32,12 +32,15 @@ function init(transer) {
   };
   //All of the required functions and stuff go here
   return {
-    emPowers: function () {
-      return [
-        "skyhighheroes:em_wave_being",
-        "skyhighocs:battle_cards_aidan"
-      ];
-    },
+    name: "squallVortex",
+    type: 9,
+    waveChange: "Squall Vortex",
+    color: "\u00A76",
+    human: "Aidan Stelar",
+    powers: [
+      "skyhighheroes:em_wave_being",
+      "skyhighocs:battle_cards_aidan"
+    ],
     keyBinds: function (hero) {
       hero.addKeyBind("TELEPORT", "Transmit", 1);
       hero.addKeyBindFunc("CYCLE_UP_CARD", (player, manager) => cycleUpCard(player, manager), "Next Battle Card", 1);
@@ -464,14 +467,5 @@ function init(transer) {
         };
       };
     },
-    name: function () {
-      return "squallVortex";
-    },
-    waveChangeInfo: function () {
-      return {
-        name: "Squall Vortex",
-        color: "\u00A76"
-      };
-    }
   };
 };

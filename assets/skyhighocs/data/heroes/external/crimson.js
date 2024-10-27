@@ -10,18 +10,15 @@ function init(transer) {
     return true;
   };
   return {
-    emPowers: function () {
-      return [
-        "skyhighheroes:em_wave_change",
-        "skyhighheroes:battle_card_predation",
-        "skyhighocs:crimson_buster"
-      ];
-    },
-    powers: function () {
-      return [
-        "skyhighocs:crimson"
-      ];
-    },
+    name: "crimson",
+    type: 8,
+    emBeing: "Crimson",
+    powers: [
+      "skyhighocs:crimson",
+      "skyhighheroes:em_wave_change",
+      "skyhighheroes:battle_card_predation",
+      "skyhighocs:crimson_buster"
+    ],
     keyBinds: function (hero) {
       hero.addKeyBindFunc("BATTLE_CARD_RESET_PREDATION", (player, manager) => resetBattleCard(player, manager), "Return To Crimson Buster", 2);
       hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
@@ -141,26 +138,5 @@ function init(transer) {
         manager.setData(entity, "skyhighocs:dyn/crimson", false);
       };
     },
-    name: function () {
-      return "crimson";
-    },
-    waveHandler: function (entity, manager) {
-      if (entity.getUUID() == "c4bc5db6-3cf6-44fe-8427-304a7b211bc4" && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && entity.posY() >= 105 && entity.world().getLocation(entity.pos()).biome().startsWith("Extreme") && !entity.world().isRaining() && !entity.world().isThundering()) {
-        var value = Math.random();
-        if (value < 0.01) {
-          if (!entity.getData("skyhighheroes:dyn/calling")) {
-            manager.setData(entity, "skyhighheroes:dyn/calling", true);
-          };
-        };
-        if (entity.getData("skyhighheroes:dyn/calling_timer") == 1) {
-          manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighocs:crimson_asteroid");
-        };
-      };
-    },
-    emBeingInfo: function () {
-      return {
-        human: "Lucas Stelar"
-      };
-    }
   };
 };
