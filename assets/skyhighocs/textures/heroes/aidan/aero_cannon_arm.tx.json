@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighocs:aidan/astro/aero_<CLOTHING><FLYING>",
+    "in": "skyhighocs:aidan/aero_<CLOTHING><FLYING>",
     "transform": [
       {
         "operation": "STITCH",

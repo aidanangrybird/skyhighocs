@@ -16,13 +16,6 @@ loadTextures({
   "boots": "skyhighocs:lucas/astro/lucas_tenma_boots",
   "shorts": "skyhighocs:lucas/astro/lucas_tenma_shorts",
   "cannon_lights": "skyhighocs:lucas/astro/lucas_tenma_cannon_lights",
-  "shield": "skyhighocs:lucas/astro/lucas_tenma_shield",
-  "katana": "skyhighocs:lucas/astro/lucas_tenma_katana",
-  "katana_lights": "skyhighocs:lucas/astro/lucas_tenma_katana_lights",
-  "scythe": "skyhighocs:lucas/astro/lucas_tenma_scythe",
-  "scythe_lights": "skyhighocs:lucas/astro/lucas_tenma_scythe_lights",
-  "rifle": "skyhighocs:lucas/astro/lucas_tenma_rifle",
-  "rifle_lights": "skyhighocs:lucas/astro/lucas_tenma_rifle_lights"
 });
 
 function initEffects(renderer) {

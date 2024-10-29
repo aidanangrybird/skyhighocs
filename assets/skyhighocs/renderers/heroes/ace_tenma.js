@@ -16,13 +16,6 @@ loadTextures({
   "boots": "skyhighocs:ace/astro/ace_tenma_boots",
   "shorts": "skyhighocs:ace/astro/ace_tenma_shorts",
   "cannon_lights": "skyhighocs:ace/astro/ace_tenma_cannon_lights",
-  "shield": "skyhighocs:ace/astro/ace_tenma_shield",
-  "katana": "skyhighocs:ace/astro/ace_tenma_katana",
-  "katana_lights": "skyhighocs:ace/astro/ace_tenma_katana_lights",
-  "scythe": "skyhighocs:ace/astro/ace_tenma_scythe",
-  "scythe_lights": "skyhighocs:ace/astro/ace_tenma_scythe_lights",
-  "rifle": "skyhighocs:ace/astro/ace_tenma_rifle",
-  "rifle_lights": "skyhighocs:ace/astro/ace_tenma_rifle_lights"
 });
 
 function initEffects(renderer) {

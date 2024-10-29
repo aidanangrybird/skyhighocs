@@ -16,13 +16,6 @@ loadTextures({
   "boots": "skyhighocs:chase/astro/chase_tenma_boots",
   "shorts": "skyhighocs:chase/astro/chase_tenma_shorts",
   "cannon_lights": "skyhighocs:chase/astro/chase_tenma_cannon_lights",
-  "shield": "skyhighocs:chase/astro/chase_tenma_shield",
-  "katana": "skyhighocs:chase/astro/chase_tenma_katana",
-  "katana_lights": "skyhighocs:chase/astro/chase_tenma_katana_lights",
-  "scythe": "skyhighocs:chase/astro/chase_tenma_scythe",
-  "scythe_lights": "skyhighocs:chase/astro/chase_tenma_scythe_lights",
-  "rifle": "skyhighocs:chase/astro/chase_tenma_rifle",
-  "rifle_lights": "skyhighocs:chase/astro/chase_tenma_rifle_lights"
 });
 
 function initEffects(renderer) {

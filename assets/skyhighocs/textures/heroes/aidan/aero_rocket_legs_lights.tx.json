@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighocs:aidan/astro/aero_boots_lights",
+    "in": "skyhighocs:aidan/aero_boots_lights",
     "transform": [
       {
         "operation": "STITCH",

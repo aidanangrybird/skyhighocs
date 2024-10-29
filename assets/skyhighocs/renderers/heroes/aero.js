@@ -4,25 +4,18 @@ var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
-  "base": "skyhighocs:aidan/astro/aero.tx.json",
-  "rocket_legs": "skyhighocs:aidan/astro/aero_rocket_legs.tx.json",
-  "rocket_arms_lights": "skyhighocs:aidan/astro/aero_rocket_arms_lights.tx.json",
-  "rocket_legs_lights": "skyhighocs:aidan/astro/aero_rocket_legs_lights.tx.json",
-  "cannon_arm": "skyhighocs:aidan/astro/aero_cannon_arm.tx.json",
-  "cannon_arm_lights": "skyhighocs:aidan/astro/aero_cannon_arm_lights.tx.json",
-  "eyes": "skyhighocs:aidan/astro/aero_eyes",
-  "boots_lights": "skyhighocs:aidan/astro/aero_boots_lights",
-  "arms_lights": "skyhighocs:aidan/astro/aero_arms_lights",
-  "boots": "skyhighocs:aidan/astro/aero_boots",
-  "shorts": "skyhighocs:aidan/astro/aero_shorts",
-  "cannon_lights": "skyhighocs:aidan/astro/aero_cannon_lights",
-  "shield": "skyhighocs:aidan/astro/aero_shield",
-  "katana": "skyhighocs:aidan/astro/aero_katana",
-  "katana_lights": "skyhighocs:aidan/astro/aero_katana_lights",
-  "scythe": "skyhighocs:aidan/astro/aero_scythe",
-  "scythe_lights": "skyhighocs:aidan/astro/aero_scythe_lights",
-  "rifle": "skyhighocs:aidan/astro/aero_rifle",
-  "rifle_lights": "skyhighocs:aidan/astro/aero_rifle_lights"
+  "base": "skyhighocs:aidan/aero.tx.json",
+  "rocket_legs": "skyhighocs:aidan/aero_rocket_legs.tx.json",
+  "rocket_arms_lights": "skyhighocs:aidan/aero_rocket_arms_lights.tx.json",
+  "rocket_legs_lights": "skyhighocs:aidan/aero_rocket_legs_lights.tx.json",
+  "cannon_arm": "skyhighocs:aidan/aero_cannon_arm.tx.json",
+  "cannon_arm_lights": "skyhighocs:aidan/aero_cannon_arm_lights.tx.json",
+  "eyes": "skyhighocs:aidan/aero_eyes",
+  "boots_lights": "skyhighocs:aidan/aero_boots_lights",
+  "arms_lights": "skyhighocs:aidan/aero_arms_lights",
+  "boots": "skyhighocs:aidan/aero_boots",
+  "shorts": "skyhighocs:aidan/aero_shorts",
+  "cannon_lights": "skyhighocs:aidan/aero_cannon_lights",
 });
 
 function initEffects(renderer) {

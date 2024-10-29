@@ -243,7 +243,6 @@ function initEffects(renderer) {
   rocket_normal_opening_right_leg_model.setScale(1.0);
 
   astro.initNV(renderer, getID());
-  astro.initCustomEquipment(renderer, getID());
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
   metal_heat.includeEffects(eyes_model, head_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model, cannon_right_arm_model, cannon_right_arm_lights_model, cannon_left_arm_model, cannon_left_arm_lights_model, rocket_left_arm_lights_model, rocket_right_arm_lights_model, rocket_left_leg_model, rocket_left_leg_lights_model, rocket_right_leg_model, rocket_right_leg_lights_model, cannon_normal_left_arm_model, cannon_normal_right_arm_model, rocket_normal_lights_left_arm_model, rocket_normal_lights_right_arm_model, rocket_normal_lights_left_leg_model, rocket_normal_lights_right_leg_model, rocket_normal_opening_left_leg_model, rocket_normal_opening_right_leg_model);
   renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
