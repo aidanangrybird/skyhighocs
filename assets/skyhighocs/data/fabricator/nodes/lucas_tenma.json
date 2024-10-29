@@ -1,12 +1,20 @@
 {
   "suit": "skyhighocs:lucas_tenma",
-  "display": {
-    "hideUntilAvailable": true
-  },
   "requirements": [
-    "skyhighocs:lucas_customs"
+    "skyhighheroes:astro_boy"
   ],
-  "price": {
-    "XP_LEVELS": 1
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as pezzo134"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == 'c4bc5db6-3cf6-44fe-8427-304a7b211bc4'"
+      }
+    }
   }
 }
