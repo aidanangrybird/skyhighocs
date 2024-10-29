@@ -1,7 +1,7 @@
 {
   "suit": "skyhighocs:chase_stelar",
   "requirements": [
-    "skyhighheroes:base"
+    "skyhighocs:base"
   ],
   "criteria": {
     "exist": {

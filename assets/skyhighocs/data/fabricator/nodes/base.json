@@ -1,0 +1,16 @@
+{
+  "display": {
+    "name": {
+      "translate": "Sky High OCs"
+    },
+    "description": {
+      "translate": "All OCs from the Sky High OCs heropack"
+    },
+    "icon": {
+      "text": "OCs"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:base"
+  ]
+}

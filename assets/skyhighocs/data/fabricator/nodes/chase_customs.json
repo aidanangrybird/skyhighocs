@@ -7,7 +7,7 @@
     }
   },
   "requirements": [
-    "skyhighheroes:base"
+    "skyhighocs:base"
   ],
   "criteria": {
     "exist": {
