@@ -1,12 +1,24 @@
 {
   "suit": "skyhighocs:pryetak_nebula",
   "display": {
-  "hideUntilAvailable": true
+    "hideUntilAvailable": false
   },
   "requirements": [
     "skyhighocs:chase_stelar"
   ],
-  "price": {
-    "XP_LEVELS": 1
+  "criteria": {
+    "chance": {
+      "trigger": "fiskheroes:player_hurt",
+      "description": {
+        "translate": "Frostbite"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_HURT",
+          "damage": "DAMAGE_SOURCE"
+        },
+        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('WAVE_COLD') && damage.hasDamageType('WAVE_ICE') && !player.world().isRaining() && !player.world().isThundering() && player.world().getLocation(player.pos()).biome().startsWith('Cold Taiga Hills') && player.getWornChestplate().suitType() == 'skyhighocs:chase_stelar'"
+      }
+    }
   }
 }
