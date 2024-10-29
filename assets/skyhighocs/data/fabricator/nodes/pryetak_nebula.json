@@ -1,8 +1,5 @@
 {
   "suit": "skyhighocs:pryetak_nebula",
-  "display": {
-    "hideUntilAvailable": false
-  },
   "requirements": [
     "skyhighocs:chase_stelar"
   ],

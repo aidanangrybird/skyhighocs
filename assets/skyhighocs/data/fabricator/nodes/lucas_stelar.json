@@ -1,8 +1,5 @@
 {
   "suit": "skyhighocs:lucas_stelar",
-  "display": {
-    "hideUntilAvailable": false
-  },
   "requirements": [
     "skyhighheroes:base"
   ],

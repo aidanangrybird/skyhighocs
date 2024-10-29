@@ -1,8 +1,5 @@
 {
   "suit": "skyhighocs:aidan_stelar",
-  "display": {
-    "hideUntilAvailable": false
-  },
   "requirements": [
     "skyhighheroes:base"
   ],

@@ -1,8 +1,5 @@
 {
   "suit": "skyhighocs:squall_vortex",
-  "display": {
-    "hideUntilAvailable": false
-  },
   "requirements": [
     "skyhighocs:aidan_stelar"
   ],

@@ -1,8 +1,5 @@
 {
   "suit": "skyhighocs:solar_flame",
-  "display": {
-    "hideUntilAvailable": true
-  },
   "requirements": [
     "skyhighocs:ace_stelar"
   ],

@@ -1,8 +1,5 @@
 {
   "suit": "skyhighocs:chase_stelar",
-  "display": {
-    "hideUntilAvailable": false
-  },
   "requirements": [
     "skyhighheroes:base"
   ],

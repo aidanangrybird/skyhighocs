@@ -1,8 +1,5 @@
 {
   "suit": "skyhighocs:ace_stelar",
-  "display": {
-    "hideUntilAvailable": true
-  },
   "requirements": [
     "skyhighheroes:base"
   ],
