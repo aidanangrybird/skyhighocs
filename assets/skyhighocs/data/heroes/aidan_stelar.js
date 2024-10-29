@@ -21,6 +21,7 @@ function init(hero) {
 
   transerOS.keyBinds(hero);
   transerOS.addPowers(hero);
+  transerOS.profileWave(hero);
 
   bodyTemp.initProfiles(hero);
 
@@ -31,10 +32,10 @@ function init(hero) {
   
   hero.setDefaultScale(1.0);
   hero.setAttributeProfile(entity => {
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
+    if (entity.getData("skyhighheroes:dyn/calling_timer") == 0) {
       return bodyTemp.getAttributeProfile(entity); 
     } else {
-      return transerOS.getAttributeProfile(entity);
+      return transerOS.getWaveProfile(entity);
     };
   });
   hero.setModifierEnabled((entity, modifier) => {
@@ -69,6 +70,7 @@ function init(hero) {
   });
   hero.setTickHandler((entity, manager) => {
     transerOS.transerHandler(entity, manager);
+    transerOS.callingHandler(entity, hero);
     bodyTemp.change(entity, manager, stelar.tempProfiles(), "skyhighheroes:dyn/body_temperature", 400.0, "skyhighheroes:dyn/stelar_clothes");
   });
 };
