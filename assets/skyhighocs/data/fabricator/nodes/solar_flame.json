@@ -6,7 +6,19 @@
   "requirements": [
     "skyhighocs:ace_stelar"
   ],
-  "price": {
-    "XP_LEVELS": 1
+  "criteria": {
+    "chance": {
+      "trigger": "fiskheroes:player_hurt",
+      "description": {
+        "translate": "Suffering in the desert "
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_HURT",
+          "damage": "DAMAGE_SOURCE"
+        },
+        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && && damage.hasDamageType('WAVE_FIRE') && damage.hasDamageType('WAVE_LIGHT') && !player.world().isRaining() && !player.world().isThundering() && player.world().getLocation(player.pos()).biome().startsWith('Desert') && player.getWornChestplate().suitType() == 'skyhighocs:ace_stelar'"
+      }
+    }
   }
 }
