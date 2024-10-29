@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighocs:aidan/astro/aidan_tenma_<CLOTHING><FLYING>",
+    "in": "skyhighocs:aidan/astro/aero_<CLOTHING><FLYING>",
     "transform": [
       {
         "operation": "STITCH",
@@ -11,11 +11,11 @@
         "supply": "skyhighheroes:tenma_rockets"
       }
     ],
-    "out": "skyhighocs:generated/aidan_tenma_<CLOTHING><FLYING>_rocket_arms"
+    "out": "skyhighocs:generated/aero_<CLOTHING><FLYING>_rocket_arms"
   },
   "getters": {
     "CLOTHING": {
-      "key": "entity.getData('skyhighocs:dyn/tenma_clothes') == 0 ? 'base' : entity.getData('skyhighocs:dyn/tenma_clothes') == 1 ? 'long' : entity.getData('skyhighocs:dyn/tenma_clothes') == 2 ? 'short' : 'normal'",
+      "key": "entity.getData('skyhighheroes:dyn/astro_clothes') == 0 ? 'base' : entity.getData('skyhighheroes:dyn/astro_clothes') == 1 ? 'long' : entity.getData('skyhighheroes:dyn/astro_clothes') == 2 ? 'short' : 'normal'",
       "values": ["base", "long", "short", "normal"]
     },
     "FLYING": {

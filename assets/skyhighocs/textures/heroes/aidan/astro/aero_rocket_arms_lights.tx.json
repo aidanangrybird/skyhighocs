@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighocs:aidan/astro/aidan_tenma_arms_lights",
+    "in": "skyhighocs:aidan/astro/aero_arms_lights",
     "transform": [
       {
         "operation": "STITCH",
@@ -11,7 +11,7 @@
         "supply": "skyhighheroes:tenma_rockets_xor"
       }
     ],
-    "out": "skyhighocs:generated/aidan_tenma_rocket_arms_lights"
+    "out": "skyhighocs:generated/aero_rocket_arms_lights"
   },
   "isDynamic": true
 }

@@ -1,5 +1,5 @@
 {
-  "texture": "skyhighocs:lucas/astro/lucas_tenma_<CLOTHING><FLYING>",
+  "texture": "skyhighocs:aidan/astro/aero_<CLOTHING><FLYING>",
   "getters": {
     "CLOTHING": {
       "key": "entity.getData('skyhighheroes:dyn/astro_clothes') == 0 ? 'base' : entity.getData('skyhighheroes:dyn/astro_clothes') == 1 ? 'long' : entity.getData('skyhighheroes:dyn/astro_clothes') == 2 ? 'short' : 'normal'",

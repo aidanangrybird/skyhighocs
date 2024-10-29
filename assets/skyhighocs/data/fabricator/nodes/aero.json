@@ -1,7 +1,7 @@
 {
-  "suit": "skyhighocs:aidan_tenma",
+  "suit": "skyhighocs:aero",
   "requirements": [
-    "skyhighheroes:astro_boy"
+    "skyhighheroes:astro"
   ],
   "criteria": {
     "exist": {

@@ -1,6 +1,6 @@
 extend("skyhighocs:base_tenma");
 
-var tenma = implement("skyhighheroes:external/tenma");
+var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
@@ -27,8 +27,8 @@ loadTextures({
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  rockets = tenma.initCustomBoosters(renderer, 0xFF0000);
-  tenma.initBeams(renderer, 0xFF0000);
+  rockets = astro.initCustomBoosters(renderer, 0xFF0000);
+  astro.initBeams(renderer, 0xFF0000);
   stuff.bindSpeedTrail(renderer, "skyhighocs:lucas_tenma_speed");
 };
 
