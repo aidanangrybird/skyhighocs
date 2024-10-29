@@ -37,7 +37,7 @@ function init(transer) {
         var nearbyPlayers = entity.world().getEntitiesInRangeOf(entity.pos(), 10);
         nearbyPlayers.forEach(other => {
           if (other.getName() != entity.getName()) {
-            other.hurt(hero, "OTHER", "%1$s died by Omega-Xis", 10.0);
+            other.hurt(hero, "OTHER", "%1$s died by Jet-Streak", 10.0);
           };
         });
       };
