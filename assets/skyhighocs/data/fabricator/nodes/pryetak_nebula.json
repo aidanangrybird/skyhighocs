@@ -6,6 +6,8 @@
     }
   },
   "requirements": [
+    "skyhighheroes:wave_change",
+    "skyhighheroes:leo_transer",
     "skyhighocs:chase_stelar"
   ],
   "criteria": {

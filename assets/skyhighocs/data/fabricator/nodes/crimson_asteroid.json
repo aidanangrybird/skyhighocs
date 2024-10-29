@@ -6,6 +6,8 @@
     }
   },
   "requirements": [
+    "skyhighheroes:wave_change",
+    "skyhighheroes:dragon_transer",
     "skyhighocs:lucas_stelar"
   ],
   "criteria": {

@@ -1,7 +1,8 @@
 {
   "suit": "skyhighocs:chase_tenma",
   "requirements": [
-    "skyhighheroes:astro_boy"
+    "skyhighheroes:robot",
+    "skyhighocs:base"
   ],
   "criteria": {
     "exist": {

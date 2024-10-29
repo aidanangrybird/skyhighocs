@@ -1,7 +1,8 @@
 {
   "suit": "skyhighocs:aero",
   "requirements": [
-    "skyhighheroes:astro"
+    "skyhighheroes:robot",
+    "skyhighocs:base"
   ],
   "criteria": {
     "exist": {

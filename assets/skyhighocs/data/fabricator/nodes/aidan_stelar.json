@@ -1,6 +1,7 @@
 {
   "suit": "skyhighocs:aidan_stelar",
   "requirements": [
+    "skyhighheroes:pegasus_transer",
     "skyhighocs:base"
   ],
   "criteria": {

@@ -6,6 +6,8 @@
     }
   },
   "requirements": [
+    "skyhighheroes:wave_change",
+    "skyhighheroes:pegasus_transer",
     "skyhighocs:ace_stelar"
   ],
   "criteria": {
