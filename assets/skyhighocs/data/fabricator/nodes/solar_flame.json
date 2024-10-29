@@ -10,7 +10,7 @@
     "chance": {
       "trigger": "fiskheroes:player_hurt",
       "description": {
-        "translate": "Suffering in the desert "
+        "translate": "Suffering in the desert"
       },
       "condition": {
         "variables": {
