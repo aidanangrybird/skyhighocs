@@ -1,12 +1,24 @@
 {
   "suit": "skyhighocs:squall_vortex",
   "display": {
-    "hideUntilAvailable": true
+    "hideUntilAvailable": false
   },
   "requirements": [
     "skyhighocs:aidan_stelar"
   ],
-  "price": {
-    "XP_LEVELS": 1
+  "criteria": {
+    "chance": {
+      "trigger": "fiskheroes:player_hurt",
+      "description": {
+        "translate": "That one storm"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_HURT",
+          "damage": "DAMAGE_SOURCE"
+        },
+        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('WAVE_WIND') && damage.hasDamageType('WAVE_ICE') && damage.hasDamageType('WAVE_ELECTRICITY') && player.world().isRaining() && player.world().isThundering() && player.world().getLocation(player.pos()).biome().startsWith('Plains') && player.getWornChestplate().suitType() == 'skyhighocs:aidan_stelar'"
+      }
+    }
   }
 }

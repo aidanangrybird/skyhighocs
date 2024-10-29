@@ -1,12 +1,23 @@
 {
   "suit": "skyhighocs:aidan_stelar",
   "display": {
-    "hideUntilAvailable": true
+    "hideUntilAvailable": false
   },
   "requirements": [
-    "skyhighocs:aidan_customs"
+    "skyhighheroes:base"
   ],
-  "price": {
-    "XP_LEVELS": 1
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as aidanangrybird"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == 'a3d071d4-c912-41e1-a6b2-c0de99ea4a84'"
+      }
+    }
   }
 }
