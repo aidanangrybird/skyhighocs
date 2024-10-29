@@ -1,5 +1,10 @@
 {
   "suit": "skyhighocs:crimson_asteroid",
+  "display": {
+    "description": {
+      "translate": "EM Wave Change! Lucas Stelar, On-Air!"
+    }
+  },
   "requirements": [
     "skyhighocs:lucas_stelar"
   ],

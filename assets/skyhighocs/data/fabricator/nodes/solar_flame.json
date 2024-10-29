@@ -1,5 +1,10 @@
 {
   "suit": "skyhighocs:solar_flame",
+  "display": {
+    "description": {
+      "translate": "EM Wave Change! Ace Stelar, On-Air!"
+    }
+  },
   "requirements": [
     "skyhighocs:ace_stelar"
   ],

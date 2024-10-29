@@ -1,6 +1,13 @@
 {
   "suit": "skyhighocs:squall_vortex",
+  "display": {
+    "description": {
+      "translate": "EM Wave Change! Aidan Stelar, On-Air!"
+    }
+  },
   "requirements": [
+    "skyhighheroes:wave_change",
+    "skyhighheroes:pegasus_transer",
     "skyhighocs:aidan_stelar"
   ],
   "criteria": {

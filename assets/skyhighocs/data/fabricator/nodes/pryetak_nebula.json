@@ -1,5 +1,10 @@
 {
   "suit": "skyhighocs:pryetak_nebula",
+  "display": {
+    "description": {
+      "translate": "EM Wave Change! Chase Stelar, On-Air!"
+    }
+  },
   "requirements": [
     "skyhighocs:chase_stelar"
   ],
