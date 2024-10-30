@@ -1,7 +1,8 @@
 {
   "suit": "skyhighocs:lucas_stelar",
   "requirements": [
-    "skyhighheroes:dragon_transer",
+    "skyhighheroes:transers",
+    "fiskheroes:tier1",
     "skyhighocs:base"
   ],
   "criteria": {

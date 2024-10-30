@@ -1,7 +1,8 @@
 {
   "suit": "skyhighocs:ace_stelar",
   "requirements": [
-    "skyhighheroes:pegasus_transer",
+    "skyhighheroes:transers",
+    "fiskheroes:tier1",
     "skyhighocs:base"
   ],
   "criteria": {

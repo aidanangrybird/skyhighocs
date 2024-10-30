@@ -1,7 +1,8 @@
 {
   "suit": "skyhighocs:chase_stelar",
   "requirements": [
-    "skyhighheroes:leo_transer",
+    "skyhighheroes:transers",
+    "fiskheroes:tier1",
     "skyhighocs:base"
   ],
   "criteria": {
