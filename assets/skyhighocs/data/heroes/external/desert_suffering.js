@@ -1,6 +1,6 @@
 function init(transer) {
   return {
-    name: "Burning man",
+    name: "Suffering in the desert",
     type: 7,
     human: "Ace Stelar",
     selfProfile: function (hero) {
