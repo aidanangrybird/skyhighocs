@@ -9,7 +9,7 @@ var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
 var transerWaypoints = implement("skyhighheroes:external/transer_waypoint");
 var desertSuffering = implement("skyhighocs:external/desert_suffering");
-var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, transerWaypoints, desertSun], "aceStelar");
+var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, transerWaypoints, desertSuffering], "aceStelar");
 function init(hero) {
   hero.setAliases("ace_stelar");
   hero.setName("Ace Stelar");
