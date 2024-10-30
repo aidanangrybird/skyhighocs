@@ -362,7 +362,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
       helmetWaveChangingLights.render();
       helmet.render();
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || ((entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW"))) {
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || (entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND")) {
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
         headRightWaveChange.render();
         headLeftWaveChange.render();
