@@ -9,6 +9,9 @@ loadTextures({
   "base_wave_change": "skyhighocs:ace/solar_flame_wave_change.tx.json",
   "lights_wave_change": "skyhighocs:ace/solar_flame_wave_change_lights.tx.json",
   "wave_changing_lights": "skyhighocs:ace/solar_flame_wave_changing_lights.tx.json",
+  "helmet": "skyhighocs:ace/solar_flame_helmet.tx.json",
+  "helmet_lights": "skyhighocs:ace/solar_flame_helmet_lights.tx.json",
+  "helmet_wave_changing_lights": "skyhighocs:ace/solar_flame_helmet_wave_changing_lights.tx.json",
   "predation_sides_wave_changing_lights": "skyhighocs:ace/solar_flame_predation_sides_wave_changing_lights.tx.json",
   "predation_front_wave_changing_lights": "skyhighocs:ace/solar_flame_predation_front_wave_changing_lights.tx.json",
   "sword_blade": "skyhighocs:ace/solar_flame_sword_blade.tx.json",
@@ -85,6 +88,10 @@ function init(renderer) {
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
+  helmetWaveChangingLights = renderer.createEffect("fiskheroes:overlay");
+  helmetWaveChangingLights.texture.set(null, "helmet_wave_changing_lights");
+  helmet = renderer.createEffect("fiskheroes:overlay");
+  helmet.texture.set("helmet", "helmet_lights");
   stelar.bindBeam(renderer, "fiskheroes:lightning_cast", "fiskheroes:lightning_cast", "rightArm", 0xFF0000, [
     { "firstPerson": [-8.0, 4.5, -10.0], "offset": [-0.5, 9.0, 0.0], "size": [1.0, 1.0] }
   ]);
@@ -351,6 +358,10 @@ function initEffects(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
   if (renderLayer == "CHESTPLATE") {
+    if ((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("fiskheroes:mask_open_timer2") > 0) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND")) {
+      helmetWaveChangingLights.render();
+      helmet.render();
+    };
     if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || ((entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW"))) {
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
         headRightWaveChange.render();

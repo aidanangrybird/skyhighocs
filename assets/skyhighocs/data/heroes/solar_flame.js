@@ -105,7 +105,3 @@ function init(hero) {
     bodyTemp.change(entity, manager, stelar.tempProfiles(), "skyhighheroes:dyn/body_temperature", 400.0, "skyhighheroes:dyn/stelar_clothes");
   });
 };
-
-function hasProperty(entity, property) {
-  return (property == "BREATHE_SPACE") && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1);
-};
