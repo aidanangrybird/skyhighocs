@@ -57,24 +57,6 @@
       },
       "isToggle": true
     },
-    "fiskheroes:equipment": {
-      "equipment": {
-        "fiskheroes:throwing_star": {
-          "cooldown": 10,
-          "uses": 100,
-          "damageProfile": {
-            "damage": 10.0,
-            "types": {
-              "WAVE_SHURIKEN": 1.0
-            },
-            "properties": {
-              "DAMAGE_DROPOFF": 0.0,
-              "HIT_COOLDOWN": 0
-            }
-          }
-        }
-      }
-    },
     "fiskheroes:transformation|voids_grasp": {
       "transformation": {
         "toggleData": "skyhighocs:dyn/voids_grasp",

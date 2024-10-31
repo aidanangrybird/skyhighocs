@@ -18,7 +18,7 @@ function init(transer) {
   };
   function cycleUpCard(player, manager) {
     manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") + 1);
-    if (player.getData("skyhighheroes:dyn/selected_battle_card") > 6) {
+    if (player.getData("skyhighheroes:dyn/selected_battle_card") > 5) {
       manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
     };
     return true;
@@ -26,7 +26,7 @@ function init(transer) {
   function cycleDownCard(player, manager) {
     manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") - 1);
     if (player.getData("skyhighheroes:dyn/selected_battle_card") < 0) {
-      manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 6);
+      manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 5);
     };
     return true;
   };
@@ -65,25 +65,18 @@ function init(transer) {
       hero.addKeyBindFunc("BATTLE_CARD_3", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
         if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A74Crimson Asteroid\u00A7r> Battle Card Predation! \u00A74Shurikens\u00A7r!");
-        };
-        return true;
-      }, "Battle Card! Shurikens!", 2);
-      hero.addKeyBindFunc("BATTLE_CARD_4", (player, manager) => {
-        manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
-        if (PackLoader.getSide() == "CLIENT") {
           PackLoader.printChat("\u00A7r<\u00A74Crimson Asteroid\u00A7r> Battle Card Predation! \u00A74Asteroid Crash\u00A7r!");
         };
         return true;
       }, "Battle Card! Asteroid Crash!", 2);
-      hero.addKeyBindFunc("BATTLE_CARD_5", (player, manager) => {
+      hero.addKeyBindFunc("BATTLE_CARD_4", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
         if (PackLoader.getSide() == "CLIENT") {
           PackLoader.printChat("\u00A7r<\u00A74Crimson Asteroid\u00A7r> Battle Card Predation! \u00A74Asteroid Pull\u00A7r!");
         };
         return true;
       }, "Battle Card! Asteroid Pull!", 2);
-      hero.addKeyBindFunc("BATTLE_CARD_6", (player, manager) => {
+      hero.addKeyBindFunc("BATTLE_CARD_5", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
         if (PackLoader.getSide() == "CLIENT") {
           PackLoader.printChat("\u00A7r<\u00A74Crimson Asteroid\u00A7r> Battle Card Predation! \u00A74Asteroid Blast\u00A7r!");
@@ -249,12 +242,6 @@ function init(transer) {
       if (keyBind == "BATTLE_CARD_5") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/selected_battle_card") == 5;
       };
-      if (keyBind == "BATTLE_CARD_6") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/selected_battle_card") == 6;
-      };
-      if (keyBind == "AIM") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/crimson_timer") < 1 && !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighheroes:dyn/battle_card") == 0;
-      };
       if (keyBind == "EARTHQUAKE") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighheroes:dyn/battle_card") == 4;
       };
@@ -316,9 +303,6 @@ function init(transer) {
       };
       if (modifier.name() == "fiskheroes:blade") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
-      };
-      if (modifier.name() == "fiskheroes:equipment") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 3 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
       };
       if (modifier.name() == "fiskheroes:earthquake") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 4 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
@@ -405,21 +389,12 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 3) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Shurikens<n> battle card!");
-          };
-          manager.setData(entity, "skyhighocs:dyn/crimson", true);
-          manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
-          manager.setData(entity, "fiskheroes:utility_belt_type", 1);
-        };
-        if (entity.getData("skyhighheroes:dyn/battle_card") == 4) {
-          entity.playSound("skyhighheroes:wave.equip", 1, 1);
-          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
             transer.systemMessage(entity, "<n>Inserted <nh>Asteroid Crash<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         };
-        if (entity.getData("skyhighheroes:dyn/battle_card") == 5) {
+        if (entity.getData("skyhighheroes:dyn/battle_card") == 4) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
             transer.systemMessage(entity, "<n>Inserted <nh>Asteroid Pull<n> battle card!");
@@ -427,7 +402,7 @@ function init(transer) {
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         };
-        if (entity.getData("skyhighheroes:dyn/battle_card") == 6) {
+        if (entity.getData("skyhighheroes:dyn/battle_card") == 5) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
             transer.systemMessage(entity, "<n>Inserted <nh>Asteroid Blast<n> battle card!");
@@ -453,17 +428,12 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 3) {
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
-          manager.setData(entity, "fiskheroes:utility_belt_type", 1);
         };
         if (entity.getData("skyhighheroes:dyn/battle_card") == 4) {
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         };
         if (entity.getData("skyhighheroes:dyn/battle_card") == 5) {
-          manager.setData(entity, "skyhighocs:dyn/crimson", true);
-          manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
-        };
-        if (entity.getData("skyhighheroes:dyn/battle_card") == 6) {
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         };
