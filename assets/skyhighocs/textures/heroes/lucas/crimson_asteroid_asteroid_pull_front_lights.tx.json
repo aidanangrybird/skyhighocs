@@ -4,7 +4,7 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/omega_xis_bottom_wave_change_<TIMER>"
+        "supply": "skyhighheroes:xor/em_being_bottom_wave_change_<TIMER>"
       }
     ],
     "out": "skyhighocs:generated/crimson_asteroid_asteroid_pull_front_lights_<TIMER>"
