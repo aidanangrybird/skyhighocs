@@ -1,4 +1,4 @@
-extend("skyhighocs:base_em_being");
+extend("skyhighocs:base_em_wave_change");
 
 var stelar = implement("skyhighheroes:external/stelar");
 var stuff = implement("skyhighheroes:external/stuff");
