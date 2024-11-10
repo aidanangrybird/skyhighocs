@@ -10,7 +10,6 @@ function initRobot(hero, uuid, name) {
   hero.setLeggings("Shorts");
   hero.setBoots("Boots");
   hero.setVersion("OC");
-  hero.hide();
 
   hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_engine", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain", "skyhighheroes:astro_machine_guns");
   hero.addAttribute("SPRINT_SPEED", 0.5, 1);

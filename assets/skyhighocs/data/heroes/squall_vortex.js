@@ -17,7 +17,6 @@ function init(hero) {
   hero.setTier(10);
   hero.setChestplate("Transer");
   hero.setVersion("OC");
-  hero.hide();
 
   transerOS.keyBinds(hero);
   transerOS.initEMWaveChange(hero);

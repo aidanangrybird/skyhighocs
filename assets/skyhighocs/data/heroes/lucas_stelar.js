@@ -17,7 +17,6 @@ function init(hero) {
   hero.setChestplate("Transer");
   hero.setTierOverride(entity => 0);
   hero.setVersion("OC");
-  hero.hide();
 
   transerOS.keyBinds(hero);
   transerOS.addPowers(hero);
