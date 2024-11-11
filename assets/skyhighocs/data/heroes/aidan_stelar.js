@@ -9,7 +9,8 @@ var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
 var transerWaypoints = implement("skyhighheroes:external/transer_waypoint");
 var stormChasing = implement("skyhighocs:external/storm_chasing");
-var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, transerWaypoints, stormChasing], "aidanStelar");
+var environment = implement("skyhighocs:external/environment");
+var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, transerWaypoints, stormChasing, environment], "aidanStelar");
 function init(hero) {
   hero.setAliases("aidan_stelar");
   hero.setName("Aidan Stelar");

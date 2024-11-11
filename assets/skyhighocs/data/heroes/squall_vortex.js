@@ -10,7 +10,8 @@ var transerScanner = implement("skyhighheroes:external/transer_scanner");
 var transerWaypoints = implement("skyhighheroes:external/transer_waypoint");
 var squallVortex = implement("skyhighocs:external/squall_vortex");
 var jetStreak = implement("skyhighocs:external/jet_streak");
-var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, transerWaypoints, squallVortex, jetStreak], "squallVortex");
+var environment = implement("skyhighocs:external/environment");
+var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, transerWaypoints, squallVortex, jetStreak, environment], "squallVortex");
 function init(hero) {
   hero.setAliases("squall_vortex");
   hero.setName("\u00A76Squall Vortex");
