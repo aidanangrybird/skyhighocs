@@ -65,7 +65,7 @@ function init(hero) {
   });
   hero.setTickHandler((entity, manager) => {
     transerOS.transerHandler(entity, manager);
-    transerOS.callingHandler(entity, hero);
+    transerOS.waveHandler(entity, hero);
     bodyTemp.change(entity, manager, stelar.tempProfiles(), "skyhighheroes:dyn/body_temperature", 400.0, "skyhighheroes:dyn/stelar_clothes");
   });
 };
