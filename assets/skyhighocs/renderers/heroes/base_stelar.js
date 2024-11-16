@@ -91,6 +91,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
   forcefield.opacity = timerAnimate2(callingTimer, 0.4, 0.25, 0.05, 0.05);
   var ffScale = timerAnimate2(callingTimer, 0.75, 0.25, 0.05, 0.0)*1 + timerAnimate2(callingTimer, 0.7, 0.3, 0.1, 0.0)*3;
   forcefield.setScale(ffScale);
+  callingBeam.anchor.ignoreAnchor(isFirstPersonArm);
   if (callingTimer > 0 && entity.getData("skyhighheroes:dyn/calling") && callingTimer < 0.5) {
     callingBeam.render();
   };
