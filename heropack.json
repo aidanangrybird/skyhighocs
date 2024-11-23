@@ -39,7 +39,6 @@
     "asteroid_pull_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "asteroid_blast": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "asteroid_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "shimmer_toggle": "BYTE",
     "telekinesis_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "gravity_manip_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true }
   },

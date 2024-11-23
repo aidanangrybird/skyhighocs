@@ -24,7 +24,6 @@ function initRobot(hero, uuid, name) {
   //Add keybinds for system test, boot rockets and arm rockets
   //Arm rockets keybind will inhibit the arm cannons
   hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Change Clothes", 1);
-  hero.addKeyBindFunc("SHIMMER_TOGGLE", shimmerToggle, "Toggle Shimmer", 1);
   hero.addKeyBind("ENERGY_PROJECTION", "Charged Arm Cannons", 2);
   hero.addKeyBind("DUAL_ARM_CANNONS", "Charged Arm Cannons", 2);
   hero.addKeyBind("DUAL_ARM_CANNON", "Charged Arm Cannons", 2);
@@ -64,9 +63,7 @@ function initRobot(hero, uuid, name) {
   hero.setKeyBindEnabled((entity, keyBind) => {
     switch (keyBind) {
       case "CYCLE_CLOTHES":
-        return entity.getUUID() == uuid && !entity.isSneaking();
-      case "SHIMMER_TOGGLE":
-        return entity.getUUID() == uuid && entity.isSneaking();
+        return entity.getUUID() == uuid;
       case "AIM":
         if (entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") != 3 && entity.getData("skyhighheroes:dyn/arm_cannon_timer") == 1) {
           return true;
@@ -91,12 +88,6 @@ function initRobot(hero, uuid, name) {
   });
   hero.setTickHandler((entity, manager) => {
     manager.setData(entity, "fiskheroes:disguise", name);
-    if (entity.getWornLeggings().getEnchantmentLevel(35) == -1 && entity.getWornBoots().getEnchantmentLevel(35) == -1) {
-      manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 1);
-    };
-    if (entity.getWornLeggings().getEnchantmentLevel(35) == 0 && entity.getWornBoots().getEnchantmentLevel(35) == 0) {
-      manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 0);
-    };
     var x = entity.posX();
     var y = entity.posY();
     var z = entity.posZ();
@@ -135,19 +126,3 @@ function cannonType(player, manager) {
   };
   return true;
 };*/
-
-function shimmerToggle(player, manager) {
-  manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", player.getData("skyhighheroes:dyn/shimmer_toggle") + 1);
-  if (player.getData("skyhighheroes:dyn/shimmer_toggle") == 1) {
-    player.getWornLeggings().nbt().getTagList("ench");
-    player.getWornBoots().nbt().getTagList("ench");
-    manager.setTagList(player.getWornLeggings().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
-    manager.setTagList(player.getWornBoots().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
-  };
-  if (player.getData("skyhighheroes:dyn/shimmer_toggle") > 1) {
-    manager.removeTag(player.getWornLeggings().nbt(), "ench");
-    manager.removeTag(player.getWornBoots().nbt(), "ench");
-    manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", 0);
-  };
-  return true;
-};
