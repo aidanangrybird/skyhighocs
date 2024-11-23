@@ -10,7 +10,14 @@ var transerScanner = implement("skyhighheroes:external/transer_scanner");
 var transerWaypoints = implement("skyhighheroes:external/transer_waypoint");
 var solarFlame = implement("skyhighocs:external/solar_flame");
 var solar = implement("skyhighocs:external/solar");
-var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, transerWaypoints, solarFlame, solar], "solarFlame");
+var transerOS = transerSystem.initTranser([transerMessaging,
+  transerGroupMessaging,
+  transerBrotherBand,
+  transerContacts,
+  transerScanner,
+  transerWaypoints,
+  solarFlame,
+  solar], "solarFlame", "pegasus");
 function init(hero) {
   hero.setAliases("solar_flame");
   hero.setName("\u00A74Solar Flame");

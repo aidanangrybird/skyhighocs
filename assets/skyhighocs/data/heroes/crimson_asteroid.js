@@ -10,7 +10,14 @@ var transerScanner = implement("skyhighheroes:external/transer_scanner");
 var transerWaypoints = implement("skyhighheroes:external/transer_waypoint");
 var crimsonAsteroid = implement("skyhighocs:external/crimson_asteroid");
 var crimson = implement("skyhighocs:external/crimson");
-var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, transerWaypoints, crimsonAsteroid, crimson], "crimsonAsteroid");
+var transerOS = transerSystem.initTranser([transerMessaging,
+  transerGroupMessaging,
+  transerBrotherBand,
+  transerContacts,
+  transerScanner,
+  transerWaypoints,
+  crimsonAsteroid,
+  crimson], "crimsonAsteroid", "dragon");
 function init(hero) {
   hero.setAliases("crimson_asteroid");
   hero.setName("\u00A74Crimson Asteroid");

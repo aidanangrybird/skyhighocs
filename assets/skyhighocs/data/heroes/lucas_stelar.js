@@ -9,7 +9,13 @@ var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
 var transerWaypoints = implement("skyhighheroes:external/transer_waypoint");
 var stargazing = implement("skyhighocs:external/stargazing");
-var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, transerWaypoints, stargazing], "lucasStelar");
+var transerOS = transerSystem.initTranser([transerMessaging,
+  transerGroupMessaging,
+  transerBrotherBand,
+  transerContacts,
+  transerScanner,
+  transerWaypoints,
+  stargazing], "lucasStelar", "dragon");
 function init(hero) {
   hero.setAliases("lucas_stelar");
   hero.setName("Lucas Stelar");

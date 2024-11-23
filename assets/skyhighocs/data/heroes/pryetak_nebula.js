@@ -10,7 +10,14 @@ var transerScanner = implement("skyhighheroes:external/transer_scanner");
 var transerWaypoints = implement("skyhighheroes:external/transer_waypoint");
 var pryetakNebula = implement("skyhighocs:external/pryetak_nebula");
 var pryetak = implement("skyhighocs:external/pryetak");
-var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, transerWaypoints, pryetakNebula, pryetak], "pryetakNebula");
+var transerOS = transerSystem.initTranser([transerMessaging,
+  transerGroupMessaging,
+  transerBrotherBand,
+  transerContacts,
+  transerScanner,
+  transerWaypoints,
+  pryetakNebula,
+  pryetak], "pryetakNebula", "leo");
 function init(hero) {
   hero.setAliases("pryetak_nebula");
   hero.setName("\u00A72Pryetak Nebula");
