@@ -77,12 +77,6 @@ function init(hero) {
   hero.setTickHandler((entity, manager) => {
     transerOS.transerHandler(entity, manager);
     transerOS.emWaveHandler(entity, manager);
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
-      manager.setData(entity, "fiskheroes:disguise", null);
-    };
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-      manager.setData(entity, "fiskheroes:disguise", "Crimson Asteroid");
-    };
     var x = entity.posX();
     var y = entity.posY();
     var z = entity.posZ();
