@@ -17,16 +17,14 @@ loadTextures({
   "sword_wave_changing_lights": "skyhighocs:chase/pryetak_nebula_sword_wave_changing_lights.tx.json",
   "sword_sides": "skyhighocs:chase/pryetak_nebula_sword_sides.tx.json",
   "sword_front": "skyhighocs:chase/pryetak_nebula_sword_front.tx.json",
-  "galaxys_weight_sides": "skyhighocs:chase/pryetak_nebula_galaxys_weight_sides.tx.json",
-  "galaxys_weight_front": "skyhighocs:chase/pryetak_nebula_galaxys_weight_front.tx.json",
-  "galaxys_weight_front_lights": "skyhighocs:chase/pryetak_nebula_galaxys_weight_front_lights.tx.json",
+  "nebula_blast_sides": "skyhighocs:chase/pryetak_nebula_nebula_blast_sides.tx.json",
+  "nebula_blast_front": "skyhighocs:chase/pryetak_nebula_nebula_blast_front.tx.json",
+  "nebula_blast_front_lights": "skyhighocs:chase/pryetak_nebula_nebula_blast_front_lights.tx.json",
   "nebula_burst_sides": "skyhighocs:chase/pryetak_nebula_nebula_burst_sides.tx.json",
   "nebula_burst_front": "skyhighocs:chase/pryetak_nebula_nebula_burst_front.tx.json",
   "nebula_burst_front_lights": "skyhighocs:chase/pryetak_nebula_nebula_burst_front_lights.tx.json",
-  "voids_grasp_sides": "skyhighocs:chase/pryetak_nebula_voids_grasp_sides.tx.json",
-  "voids_grasp_sides_lights": "skyhighocs:chase/pryetak_nebula_voids_grasp_sides_lights.tx.json",
-  "voids_grasp_front": "skyhighocs:chase/pryetak_nebula_voids_grasp_front.tx.json",
-  "voids_grasp_front_lights": "skyhighocs:chase/pryetak_nebula_voids_grasp_front_lights.tx.json",
+  "ice_bomb_sides": "skyhighocs:chase/pryetak_nebula_ice_bomb_sides.tx.json",
+  "ice_bomb_front": "skyhighocs:chase/pryetak_nebula_ice_bomb_front.tx.json",
   "predation_sides_wave_changing_lights": "skyhighocs:chase/pryetak_nebula_predation_sides_wave_changing_lights.tx.json",
   "predation_front_wave_changing_lights": "skyhighocs:chase/pryetak_nebula_predation_front_wave_changing_lights.tx.json",
   "head_right": "skyhighocs:chase/pryetak_right.tx.json",
@@ -74,15 +72,12 @@ function getColor() {
 
 function getID() {
   return "4da600b8-582a-4fc3-ac2e-ada03d3e478c";
-  //return "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
 };
 
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
-  stelar.addAnimationWithData(renderer, "stelar.VOIDS_GRASP_AIM", "skyhighheroes:stelar_aim", "skyhighocs:dyn/telekinesis_timer")
-  .priority = 10;
-  stelar.addAnimationWithData(renderer, "stelar.GALAXYS_WEIGHT_AIM", "skyhighheroes:stelar_aim", "skyhighocs:dyn/gravity_manip_timer")
+  stelar.addAnimationWithData(renderer, "stelar.NEBULA_BLAST_AIM", "skyhighheroes:stelar_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
   stelar.addAnimationWithData(renderer, "stelar.NEBULA_BURST_AIM", "skyhighheroes:stelar_aim", "fiskheroes:beam_charge")
   .priority = 10;
@@ -98,12 +93,9 @@ function initEffects(renderer) {
   stelar.bindBeam(renderer, "fiskheroes:charged_beam", "fiskheroes:charged_beam", "rightArm", 0xAA00FF, [
       { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-1.0, 9.0, -0.5], "size": [3.0, 3.0] }
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  renderer.bindProperty("fiskheroes:gravity_manipulation").color.set(0x44FF00);
-  stuff.bindCloud(renderer, "fiskheroes:telekinesis", "skyhighocs:pryetak_nebula_voids_grasp");
-  var chain = stuff.bindCloud(renderer, "fiskheroes:telekinesis_chain", "skyhighocs:pryetak_nebula_voids_grasp");
-  chain.anchor.set("rightArm");
-  chain.setOffset(-0.5, 10.0, 0.0);
-  chain.setFirstPerson(-4.75, 4.0, -8.5);
+  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", 0x44FF00, [
+      { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-1.0, 9.0, -0.5], "size": [2.0, 2.0] }
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   stuff.bindFlightTrail(renderer, "skyhighocs:pryetak_nebula_flight");
   //Battle card predation wave changing
   //Right
@@ -136,68 +128,68 @@ function initEffects(renderer) {
   predationFrontWaveChanging.anchor.set("rightArm");
   predationFrontWaveChanging.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
   predationFrontWaveChanging.large = true;
-  //Void's Grasp
+  //Nebula Blast
   //Right
-  voidsGraspRight = renderer.createEffect("fiskheroes:shield");
-  voidsGraspRight.texture.set("voids_grasp_sides", "voids_grasp_sides_lights");
-  voidsGraspRight.anchor.set("rightArm");
-  voidsGraspRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
-  voidsGraspRight.large = true;
+  nebulaBlastRight = renderer.createEffect("fiskheroes:shield");
+  nebulaBlastRight.texture.set("nebula_blast_sides");
+  nebulaBlastRight.anchor.set("rightArm");
+  nebulaBlastRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
+  nebulaBlastRight.large = true;
   //Left
-  voidsGraspLeft = renderer.createEffect("fiskheroes:shield");
-  voidsGraspLeft.texture.set("voids_grasp_sides", "voids_grasp_sides_lights");
-  voidsGraspLeft.anchor.set("rightArm");
-  voidsGraspLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
-  voidsGraspLeft.large = true;
+  nebulaBlastLeft = renderer.createEffect("fiskheroes:shield");
+  nebulaBlastLeft.texture.set("nebula_blast_sides");
+  nebulaBlastLeft.anchor.set("rightArm");
+  nebulaBlastLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
+  nebulaBlastLeft.large = true;
   //Top
-  voidsGraspTop = renderer.createEffect("fiskheroes:shield");
-  voidsGraspTop.texture.set("voids_grasp_sides", "voids_grasp_sides_lights");
-  voidsGraspTop.anchor.set("rightArm");
-  voidsGraspTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
-  voidsGraspTop.large = true;
+  nebulaBlastTop = renderer.createEffect("fiskheroes:shield");
+  nebulaBlastTop.texture.set("nebula_blast_sides");
+  nebulaBlastTop.anchor.set("rightArm");
+  nebulaBlastTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
+  nebulaBlastTop.large = true;
   //Bottom
-  voidsGraspBottom = renderer.createEffect("fiskheroes:shield");
-  voidsGraspBottom.texture.set("voids_grasp_sides", "voids_grasp_sides_lights");
-  voidsGraspBottom.anchor.set("rightArm");
-  voidsGraspBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
-  voidsGraspBottom.large = true;
+  nebulaBlastBottom = renderer.createEffect("fiskheroes:shield");
+  nebulaBlastBottom.texture.set("nebula_blast_sides");
+  nebulaBlastBottom.anchor.set("rightArm");
+  nebulaBlastBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
+  nebulaBlastBottom.large = true;
   //Front
-  voidsGraspFront = renderer.createEffect("fiskheroes:shield");
-  voidsGraspFront.texture.set("voids_grasp_front", "voids_grasp_front_lights");
-  voidsGraspFront.anchor.set("rightArm");
-  voidsGraspFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
-  voidsGraspFront.large = true;
-  //Galaxy's Weight
+  nebulaBlastFront = renderer.createEffect("fiskheroes:shield");
+  nebulaBlastFront.texture.set("nebula_blast_front", "nebula_blast_front_lights");
+  nebulaBlastFront.anchor.set("rightArm");
+  nebulaBlastFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
+  nebulaBlastFront.large = true;
+  //Ice Bomb
   //Right
-  galaxysWeightRight = renderer.createEffect("fiskheroes:shield");
-  galaxysWeightRight.texture.set("galaxys_weight_sides");
-  galaxysWeightRight.anchor.set("rightArm");
-  galaxysWeightRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
-  galaxysWeightRight.large = true;
+  iceBombRight = renderer.createEffect("fiskheroes:shield");
+  iceBombRight.texture.set("ice_bomb_sides");
+  iceBombRight.anchor.set("rightArm");
+  iceBombRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
+  iceBombRight.large = true;
   //Left
-  galaxysWeightLeft = renderer.createEffect("fiskheroes:shield");
-  galaxysWeightLeft.texture.set("galaxys_weight_sides");
-  galaxysWeightLeft.anchor.set("rightArm");
-  galaxysWeightLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
-  galaxysWeightLeft.large = true;
+  iceBombLeft = renderer.createEffect("fiskheroes:shield");
+  iceBombLeft.texture.set("ice_bomb_sides");
+  iceBombLeft.anchor.set("rightArm");
+  iceBombLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
+  iceBombLeft.large = true;
   //Top
-  galaxysWeightTop = renderer.createEffect("fiskheroes:shield");
-  galaxysWeightTop.texture.set("galaxys_weight_sides");
-  galaxysWeightTop.anchor.set("rightArm");
-  galaxysWeightTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
-  galaxysWeightTop.large = true;
+  iceBombTop = renderer.createEffect("fiskheroes:shield");
+  iceBombTop.texture.set("ice_bomb_sides");
+  iceBombTop.anchor.set("rightArm");
+  iceBombTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
+  iceBombTop.large = true;
   //Bottom
-  galaxysWeightBottom = renderer.createEffect("fiskheroes:shield");
-  galaxysWeightBottom.texture.set("galaxys_weight_sides");
-  galaxysWeightBottom.anchor.set("rightArm");
-  galaxysWeightBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
-  galaxysWeightBottom.large = true;
+  iceBombBottom = renderer.createEffect("fiskheroes:shield");
+  iceBombBottom.texture.set("ice_bomb_sides");
+  iceBombBottom.anchor.set("rightArm");
+  iceBombBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
+  iceBombBottom.large = true;
   //Front
-  galaxysWeightFront = renderer.createEffect("fiskheroes:shield");
-  galaxysWeightFront.texture.set("galaxys_weight_front", "galaxys_weight_front_lights");
-  galaxysWeightFront.anchor.set("rightArm");
-  galaxysWeightFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
-  galaxysWeightFront.large = true;
+  iceBombFront = renderer.createEffect("fiskheroes:shield");
+  iceBombFront.texture.set("ice_bomb_front");
+  iceBombFront.anchor.set("rightArm");
+  iceBombFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
+  iceBombFront.large = true;
   //Nebula Burst
   //Right
   nebulaBurstRight = renderer.createEffect("fiskheroes:shield");
@@ -373,14 +365,14 @@ function render(entity, renderLayer, isFirstPersonArm) {
         headBottomWaveChange.render();
         headFrontWaveChange.render();
       };
-      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/galaxys_weight_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/voids_grasp_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/nebula_burst_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
+      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/nebula_blast_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/ice_bomb_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/nebula_burst_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
         headRight.render();
         headLeft.render();
         headTop.render();
         headBottom.render();
         headFront.render();
       };
-      if (((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/galaxys_weight_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/voids_grasp_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/nebula_burst_timer") < 1)) {
+      if (((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/nebula_blast_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/ice_bomb_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/nebula_burst_timer") < 1)) {
         headRightWaveChanging.render();
         headLeftWaveChanging.render();
         headTopWaveChanging.render();
@@ -407,19 +399,19 @@ function render(entity, renderLayer, isFirstPersonArm) {
         swordBlade.render();
       };
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/galaxys_weight_timer") > 0) {
-      galaxysWeightRight.render();
-      galaxysWeightLeft.render();
-      galaxysWeightTop.render();
-      galaxysWeightBottom.render();
-      galaxysWeightFront.render();
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/nebula_blast_timer") > 0) {
+      nebulaBlastRight.render();
+      nebulaBlastLeft.render();
+      nebulaBlastTop.render();
+      nebulaBlastBottom.render();
+      nebulaBlastFront.render();
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/voids_grasp_timer") > 0) {
-      voidsGraspRight.render();
-      voidsGraspLeft.render();
-      voidsGraspTop.render();
-      voidsGraspBottom.render();
-      voidsGraspFront.render();
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/ice_bomb_timer") > 0) {
+      iceBombRight.render();
+      iceBombLeft.render();
+      iceBombTop.render();
+      iceBombBottom.render();
+      iceBombFront.render();
     };
     if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/nebula_burst_timer") > 0) {
       nebulaBurstRight.render();
