@@ -19,9 +19,9 @@ loadTextures({
   "sword_wave_changing_lights": "skyhighocs:lucas/crimson_asteroid_sword_wave_changing_lights.tx.json",
   "sword_sides": "skyhighocs:lucas/crimson_asteroid_sword_sides.tx.json",
   "sword_front": "skyhighocs:lucas/crimson_asteroid_sword_front.tx.json",
-  "asteroid_pull_sides": "skyhighocs:lucas/crimson_asteroid_asteroid_pull_sides.tx.json",
-  "asteroid_pull_front": "skyhighocs:lucas/crimson_asteroid_asteroid_pull_front.tx.json",
-  "asteroid_pull_front_lights": "skyhighocs:lucas/crimson_asteroid_asteroid_pull_front_lights.tx.json",
+  "asteroid_strike_sides": "skyhighocs:lucas/crimson_asteroid_asteroid_strike_sides.tx.json",
+  "asteroid_strike_front": "skyhighocs:lucas/crimson_asteroid_asteroid_strike_front.tx.json",
+  "asteroid_strike_front_lights": "skyhighocs:lucas/crimson_asteroid_asteroid_strike_front_lights.tx.json",
   "asteroid_blast_sides": "skyhighocs:lucas/crimson_asteroid_asteroid_blast_sides.tx.json",
   "asteroid_blast_front": "skyhighocs:lucas/crimson_asteroid_asteroid_blast_front.tx.json",
   "asteroid_blast_front_lights": "skyhighocs:lucas/crimson_asteroid_asteroid_blast_front_lights.tx.json",
@@ -79,8 +79,6 @@ function init(renderer) {
   initEffects(renderer);
   stelar.addAnimationWithData(renderer, "stelar.ASTEROID_BLAST_AIM", "skyhighheroes:stelar_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
-  stelar.addAnimationWithData(renderer, "stelar.ASTEROID_PULL_AIM", "skyhighheroes:stelar_aim", "skyhighocs:dyn/telekinesis_timer")
-  .priority = 10;
   renderer.setItemIcon("CHESTPLATE", "dragon_transer");
 };
 
@@ -93,8 +91,8 @@ function initEffects(renderer) {
   stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:crimson_asteroid_asteroid_blast", "rightArm", 0xFF0000, [
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [4.0, 4.0] }
   ]);
-  stuff.bindCloud(renderer, "fiskheroes:telekinesis", "skyhighocs:crimson_asteroid_asteroid_pull");
-  var chain = stuff.bindCloud(renderer, "fiskheroes:telekinesis_chain", "skyhighocs:crimson_asteroid_asteroid_pull");
+  stuff.bindCloud(renderer, "fiskheroes:telekinesis", "skyhighocs:crimson_asteroid_asteroid_strike");
+  var chain = stuff.bindCloud(renderer, "fiskheroes:telekinesis_chain", "skyhighocs:crimson_asteroid_asteroid_strike");
   chain.anchor.set("rightArm");
   chain.setOffset(-0.5, 10.0, 0.0);
   chain.setFirstPerson(-4.75, 4.0, -8.5);
@@ -192,37 +190,37 @@ function initEffects(renderer) {
   asteroidBlastFront.anchor.set("rightArm");
   asteroidBlastFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
   asteroidBlastFront.large = true;
-  //Asteroid Pull
+  //Asteroid Strike
   //Right
-  asteroidPullRight = renderer.createEffect("fiskheroes:shield");
-  asteroidPullRight.texture.set("asteroid_pull_sides");
-  asteroidPullRight.anchor.set("rightArm");
-  asteroidPullRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
-  asteroidPullRight.large = true;
+  asteroidStrikeRight = renderer.createEffect("fiskheroes:shield");
+  asteroidStrikeRight.texture.set("asteroid_strike_sides");
+  asteroidStrikeRight.anchor.set("rightArm");
+  asteroidStrikeRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
+  asteroidStrikeRight.large = true;
   //Left
-  asteroidPullLeft = renderer.createEffect("fiskheroes:shield");
-  asteroidPullLeft.texture.set("asteroid_pull_sides");
-  asteroidPullLeft.anchor.set("rightArm");
-  asteroidPullLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
-  asteroidPullLeft.large = true;
+  asteroidStrikeLeft = renderer.createEffect("fiskheroes:shield");
+  asteroidStrikeLeft.texture.set("asteroid_strike_sides");
+  asteroidStrikeLeft.anchor.set("rightArm");
+  asteroidStrikeLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
+  asteroidStrikeLeft.large = true;
   //Top
-  asteroidPullTop = renderer.createEffect("fiskheroes:shield");
-  asteroidPullTop.texture.set("asteroid_pull_sides");
-  asteroidPullTop.anchor.set("rightArm");
-  asteroidPullTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
-  asteroidPullTop.large = true;
+  asteroidStrikeTop = renderer.createEffect("fiskheroes:shield");
+  asteroidStrikeTop.texture.set("asteroid_strike_sides");
+  asteroidStrikeTop.anchor.set("rightArm");
+  asteroidStrikeTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
+  asteroidStrikeTop.large = true;
   //Bottom
-  asteroidPullBottom = renderer.createEffect("fiskheroes:shield");
-  asteroidPullBottom.texture.set("asteroid_pull_sides");
-  asteroidPullBottom.anchor.set("rightArm");
-  asteroidPullBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
-  asteroidPullBottom.large = true;
+  asteroidStrikeBottom = renderer.createEffect("fiskheroes:shield");
+  asteroidStrikeBottom.texture.set("asteroid_strike_sides");
+  asteroidStrikeBottom.anchor.set("rightArm");
+  asteroidStrikeBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
+  asteroidStrikeBottom.large = true;
   //Front
-  asteroidPullFront = renderer.createEffect("fiskheroes:shield");
-  asteroidPullFront.texture.set("asteroid_pull_front", "asteroid_pull_front_lights");
-  asteroidPullFront.anchor.set("rightArm");
-  asteroidPullFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
-  asteroidPullFront.large = true;
+  asteroidStrikeFront = renderer.createEffect("fiskheroes:shield");
+  asteroidStrikeFront.texture.set("asteroid_strike_front", "asteroid_strike_front_lights");
+  asteroidStrikeFront.anchor.set("rightArm");
+  asteroidStrikeFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
+  asteroidStrikeFront.large = true;
   //Sword
   swordMain = renderer.createEffect("fiskheroes:shield");
   swordMain.texture.set("sword");
@@ -367,14 +365,14 @@ function render(entity, renderLayer, isFirstPersonArm) {
         headBottomWaveChange.render();
         headFrontWaveChange.render();
       };
-      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_crash_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_pull_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_blast_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
+      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_crash_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_strike_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_blast_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
         headRight.render();
         headLeft.render();
         headTop.render();
         headBottom.render();
         headFront.render();
       }
-      if (((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_crash_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_pull_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_blast_timer") < 1)) {
+      if (((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_crash_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_strike_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_blast_timer") < 1)) {
         headRightWaveChanging.render();
         headLeftWaveChanging.render();
         headTopWaveChanging.render();
@@ -408,12 +406,12 @@ function render(entity, renderLayer, isFirstPersonArm) {
       asteroidCrashBottom.render();
       asteroidCrashFront.render();
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/asteroid_pull_timer") > 0) {
-      asteroidPullRight.render();
-      asteroidPullLeft.render();
-      asteroidPullTop.render();
-      asteroidPullBottom.render();
-      asteroidPullFront.render();
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/asteroid_strike_timer") > 0) {
+      asteroidStrikeRight.render();
+      asteroidStrikeLeft.render();
+      asteroidStrikeTop.render();
+      asteroidStrikeBottom.render();
+      asteroidStrikeFront.render();
     };
     if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/asteroid_blast_timer") > 0) {
       asteroidBlastRight.render();
