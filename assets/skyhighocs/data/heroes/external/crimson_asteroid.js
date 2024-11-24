@@ -324,7 +324,6 @@ function init(transer) {
       if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
         manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 0);
       };
-      manager.incrementData(entity, "skyhighheroes:dyn/telekinesis_timer", 10, 10, entity.getData("fiskheroes:telekinesis"));
       var item_holding = (!entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0);
       manager.incrementData(entity, "skyhighheroes:dyn/item_holding_timer", 10, item_holding);
       var equipment = entity.getWornChestplate().nbt().getTagList("Equipment");

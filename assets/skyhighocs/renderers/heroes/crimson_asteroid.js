@@ -91,11 +91,6 @@ function initEffects(renderer) {
   stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:crimson_asteroid_asteroid_blast", "rightArm", 0xFF0000, [
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [4.0, 4.0] }
   ]);
-  stuff.bindCloud(renderer, "fiskheroes:telekinesis", "skyhighocs:crimson_asteroid_asteroid_strike");
-  var chain = stuff.bindCloud(renderer, "fiskheroes:telekinesis_chain", "skyhighocs:crimson_asteroid_asteroid_strike");
-  chain.anchor.set("rightArm");
-  chain.setOffset(-0.5, 10.0, 0.0);
-  chain.setFirstPerson(-4.75, 4.0, -8.5);
   stuff.bindFlightTrail(renderer, "skyhighocs:crimson_asteroid_flight");
   //Battle card predation wave changing
   //Right

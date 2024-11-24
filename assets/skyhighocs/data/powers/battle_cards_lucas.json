@@ -137,13 +137,6 @@
       "radius": 0.5,
       "soundEvents": {
       }
-    },
-    "fiskheroes:transformation|telekinesis": {
-      "transformation": {
-        "toggleData": "fiskheroes:telekinesis",
-        "timerData": "skyhighocs:dyn/telekinesis_timer",
-        "time": 10
-      }
     }
   }
 }

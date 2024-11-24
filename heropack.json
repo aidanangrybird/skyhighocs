@@ -38,9 +38,7 @@
     "asteroid_strike": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "asteroid_strike_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "asteroid_blast": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "asteroid_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "telekinesis_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "gravity_manip_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true }
+    "asteroid_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true }
   },
   "damageTypes": {
     "GAMMA": "Gamma",
