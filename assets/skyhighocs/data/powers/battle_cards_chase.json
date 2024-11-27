@@ -103,7 +103,7 @@
         }
       },
       "cooldownTime": 20,
-      "radius": 32.0
+      "radius": 3.0
     },
     "fiskheroes:transformation|nebula_burst": {
       "transformation": {
