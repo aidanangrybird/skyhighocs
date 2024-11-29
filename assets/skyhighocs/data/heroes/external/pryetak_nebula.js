@@ -252,7 +252,7 @@ function init(transer) {
     isModifierEnabled: function (entity, modifier) {
       var uuid = "4da600b8-582a-4fc3-ac2e-ada03d3e478c";
       var result = false;
-      if (modifier.name() == "fiskheroes:damage_immunity") {
+      if (modifier.name() == "fiskheroes:damage_immunity") {/* 
         var invis = ["explosion", "magic", "shuriken", "sharp", "bullet", "blunt", "saitama"];
         var normal = ["fire","cactus", "cold", "energy", "electricity", "sound", "thorns", "radiation",
           "water", "hulk", "holy", "hellfire", "adamantium", "mineral", "shockwave", "atlantean_steel",
@@ -264,7 +264,8 @@ function init(transer) {
         };
         if (invis.indexOf(modifier.id()) > -1) {
           result = entity.getData("fiskheroes:invisible");
-        };
+        }; */
+        result = entity.getData("fiskheroes:invisible");
       };
       if (modifier.name() == "fiskheroes:shield_throwing") {
         result = true;
