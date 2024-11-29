@@ -6,15 +6,14 @@ function init(transer) {
     selfProfile: function (hero) {
       hero.addDamageProfile("SELF", {
         "types": {
-          "WAVE_COLD": 1.0,
-          "WAVE_ICE": 1.0
+          "ELEMENT_AQUA": 1.0
         }
       });
     },
     otherProfile: function (hero) {
       hero.addDamageProfile("OTHER", {
         "types": {
-          "WAVE_ENERGY": 1.0
+          "ELEMENT_NONE": 1.0
         }
       });
     },

@@ -67,21 +67,13 @@
     "OMEGA": "Omega Beams",
     "BLUE_KRYPTONITE": "Blue Kryptonite",
     "SOUND_BLAST": "Sound",
-    "WAVE_BLUNT": "Blunt (Wave)",
-    "WAVE_BULLET": "Bullet (Wave)",
-    "WAVE_COLD": "Cold (Wave)",
-    "WAVE_ICE": "Ice (Wave)",
-    "WAVE_ELECTRICITY": "Electricity (Wave)",
-    "WAVE_ENERGY": "Energy (Wave)",
-    "WAVE_EXPLOSION": "Explosion (Wave)",
-    "WAVE_FIRE": "Fire (Wave)",
-    "WAVE_SHARP": "Sharp (Wave)",
-    "WAVE_SHURIKEN": "Shuriken (Wave)",
-    "WAVE_SOUND": "Sound (Wave)",
-    "WAVE_WATER": "Water (Wave)",
-    "WAVE_SHOCKWAVE": "Shockwave (Wave)",
-    "WAVE_LIGHT": "Light (Wave)",
-    "WAVE_WIND": "Wind (Wave)"
+    "NONE_ELEMENT": "None Element",
+    "ELEC_ELEMENT": "Electricity Element",
+    "FIRE_ELEMENT": "Fire Element",
+    "AQUA_ELEMENT": "Water Element",
+    "WOOD_ELEMENT": "Wood Element",
+    "SWORD_ELEMENT": "Sword Element",
+    "WIND_ELEMENT": "Wind Element"
   },
   "alts" : {
     "skyhighocs:crimson_asteroid": {

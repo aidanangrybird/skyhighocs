@@ -69,13 +69,12 @@
       "damageProfile": {
         "damage": 15.0,
         "types": {
-          "WAVE_ENERGY": 1.0,
-          "WAVE_COLD": 1.0
+          "ELEMENT_AQUA": 1.0
         },
         "properties": {
-          "COOK_ENTITY": true,
+          "COOK_ENTITY": false,
           "HIT_COOLDOWN": 5,
-          "HEAT_TRANSFER": 80
+          "HEAT_TRANSFER": 0
         }
       },
       "range": 64.0,
@@ -95,8 +94,7 @@
       "damageProfile": {
         "damage": 15.0,
         "types": {
-          "WAVE_ICE": 1.0,
-          "WAVE_COLD": 1.0
+          "ELEMENT_AQUA": 1.0
         },
         "properties": {
           "HIT_COOLDOWN": 5
@@ -117,14 +115,12 @@
       "damageProfile": {
         "damage": 15.0,
         "types": {
-          "WAVE_ENERGY": 1.0,
-          "WAVE_EXPLOSION": 1.0,
-          "WAVE_COLD": 1.0
+          "ELEMENT_AQUA": 1.0
         },
         "properties": {
-          "COOK_ENTITY": true,
+          "COOK_ENTITY": false,
           "HIT_COOLDOWN": 5,
-          "HEAT_TRANSFER": 80
+          "HEAT_TRANSFER": 0
         }
       },
       "chargeTime": 10,

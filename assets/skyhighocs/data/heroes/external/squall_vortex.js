@@ -123,15 +123,15 @@ function init(transer) {
     initDamageProfiles: function (hero) {
       hero.addDamageProfile("SWORD", {
         "types": {
-          "WAVE_SHARP": 1.0,
-          "WAVE_WIND": 1.0,
-          "WAVE_ELECTRICITY": 1.0
+          "ELEMENT_SWORD": 1.0,
+          "ELEMENT_WIND": 1.0,
+          "ELEMENT_ELEC": 1.0
         }
       });
       hero.addDamageProfile("MAIN", {
         "types": {
-          "WAVE_BLUNT": 1.0,
-          "WAVE_WIND": 1.0
+          "ELEMENT_NONE": 1.0,
+          "ELEMENT_WIND": 1.0
         }
       });
     },
