@@ -26,7 +26,6 @@ function initRobot(hero, uuid, name) {
   hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Change Clothes", 1);
   hero.addKeyBind("ENERGY_PROJECTION", "Charged Arm Cannons", 2);
   hero.addKeyBind("DUAL_ARM_CANNONS", "Charged Arm Cannons", 2);
-  hero.addKeyBind("DUAL_ARM_CANNON", "Charged Arm Cannons", 2);
   hero.addKeyBind("SUPER_SPEED", "Super Speed", 3);
   hero.addKeyBind("AIM", "Aim Arm Cannon", 4);
   hero.addKeyBind("ARM_CANNON", "Aim Arm Cannon", 4);
@@ -62,26 +61,14 @@ function initRobot(hero, uuid, name) {
   });
   hero.setKeyBindEnabled((entity, keyBind) => {
     switch (keyBind) {
-      case "CYCLE_CLOTHES":
-        return entity.getUUID() == uuid;
+      case "ARM_CANNON":
+        return entity.getUUID() == uuid && entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/astro_clothes") != 3;
       case "AIM":
-        if (entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") != 3 && entity.getData("skyhighheroes:dyn/arm_cannon_timer") == 1) {
-          return true;
-        };
-        if (entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
-          return true;
-        };
+        return entity.getUUID() == uuid && entity.getHeldItem().isEmpty() && (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) ? true : (entity.getData("skyhighheroes:dyn/arm_cannon_timer") == 1);
       case "ENERGY_PROJECTION":
-        if (entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") != 3 && entity.getData("skyhighheroes:dyn/dual_arm_cannon_timer") == 1) {
-          return true;
-        };
-        if (entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
-          return true;
-        };
+        return entity.getUUID() == uuid && entity.getHeldItem().isEmpty() && (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) ? true : (entity.getData("skyhighheroes:dyn/dual_arm_cannon_timer") == 1);
       case "DUAL_ARM_CANNONS":
-        return entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") != 3;
-      case "DUAL_ARM_CANNON":
-        return entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") == 3;
+        return entity.getUUID() == uuid && entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/astro_clothes") != 3;
       default:
         return entity.getUUID() == uuid;
     };
