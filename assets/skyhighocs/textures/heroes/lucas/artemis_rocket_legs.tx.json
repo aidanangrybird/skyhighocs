@@ -1,17 +1,17 @@
 {
   "texture": {
-    "in": "skyhighocs:chase/astro/chase_tenma_<CLOTHING><FLYING>",
+    "in": "skyhighocs:lucas/artemis_<CLOTHING><FLYING>",
     "transform": [
       {
         "operation": "STITCH",
-        "supply": "skyhighheroes:astro_boy_cannon_arms"
+        "supply": "skyhighheroes:astro_boy_rocket_legs"
       },
       {
         "operation": "ADD",
-        "supply": "skyhighheroes:tenma_cannons"
+        "supply": "skyhighheroes:tenma_rockets"
       }
     ],
-    "out": "skyhighocs:generated/chase_tenma_<CLOTHING><FLYING>_cannon_arms"
+    "out": "skyhighocs:generated/artemis_<CLOTHING><FLYING>_rocket_legs"
   },
   "getters": {
     "CLOTHING": {

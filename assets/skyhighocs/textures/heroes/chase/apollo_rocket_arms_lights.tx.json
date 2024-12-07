@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighocs:lucas/astro/lucas_tenma_arms_lights",
+    "in": "skyhighocs:chase/apollo_arms_lights",
     "transform": [
       {
         "operation": "STITCH",
@@ -11,7 +11,7 @@
         "supply": "skyhighheroes:tenma_rockets_xor"
       }
     ],
-    "out": "skyhighocs:generated/lucas_tenma_rocket_arms_lights"
+    "out": "skyhighocs:generated/apollo_rocket_arms_lights"
   },
   "isDynamic": true
 }

@@ -1,17 +1,17 @@
 {
   "texture": {
-    "in": "skyhighocs:chase/astro/chase_tenma_boots_lights",
+    "in": "skyhighocs:lucas/artemis_arms_lights",
     "transform": [
       {
         "operation": "STITCH",
-        "supply": "skyhighheroes:astro_boy_rocket_legs"
+        "supply": "skyhighheroes:astro_boy_rocket_arms"
       },
       {
         "operation": "XOR",
         "supply": "skyhighheroes:tenma_rockets_xor"
       }
     ],
-    "out": "skyhighocs:generated/chase_tenma_rocket_legs_lights"
+    "out": "skyhighocs:generated/artemis_rocket_arms_lights"
   },
   "isDynamic": true
 }

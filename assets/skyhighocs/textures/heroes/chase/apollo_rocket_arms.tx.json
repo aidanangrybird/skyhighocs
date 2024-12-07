@@ -1,17 +1,17 @@
 {
   "texture": {
-    "in": "skyhighocs:ace/astro/ace_tenma_<CLOTHING><FLYING>",
+    "in": "skyhighocs:chase/apollo_<CLOTHING><FLYING>",
     "transform": [
       {
         "operation": "STITCH",
-        "supply": "skyhighheroes:astro_boy_cannon_arms"
+        "supply": "skyhighheroes:astro_boy_rocket_arms"
       },
       {
         "operation": "ADD",
-        "supply": "skyhighheroes:tenma_cannons"
+        "supply": "skyhighheroes:tenma_rockets"
       }
     ],
-    "out": "skyhighocs:generated/ace_tenma_<CLOTHING><FLYING>_cannon_arms"
+    "out": "skyhighocs:generated/apollo_<CLOTHING><FLYING>_rocket_arms"
   },
   "getters": {
     "CLOTHING": {

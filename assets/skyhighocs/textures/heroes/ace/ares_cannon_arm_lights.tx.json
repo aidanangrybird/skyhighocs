@@ -1,13 +1,13 @@
 {
   "texture": {
-    "in": "skyhighocs:lucas/astro/lucas_tenma_cannon_lights",
+    "in": "skyhighocs:ace/ares_cannon_lights",
     "transform": [
       {
         "operation": "STITCH",
         "supply": "skyhighheroes:astro_boy_cannon_arms_lights"
       }
     ],
-    "out": "skyhighocs:generated/lucas_tenma_cannon_arms_lights"
+    "out": "skyhighocs:generated/ares_cannon_arms_lights"
   },
   "isDynamic": true
 }

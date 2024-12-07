@@ -1,13 +1,13 @@
 {
   "texture": {
-    "in": "skyhighocs:chase/astro/chase_tenma_cannon_lights",
+    "in": "skyhighocs:chase/apollo_cannon_lights",
     "transform": [
       {
         "operation": "STITCH",
         "supply": "skyhighheroes:astro_boy_cannon_arms_lights"
       }
     ],
-    "out": "skyhighocs:generated/chase_tenma_cannon_arms_lights"
+    "out": "skyhighocs:generated/apollo_cannon_arms_lights"
   },
   "isDynamic": true
 }

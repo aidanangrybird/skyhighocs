@@ -1,17 +1,17 @@
 {
   "texture": {
-    "in": "skyhighocs:ace/astro/ace_tenma_arms_lights",
+    "in": "skyhighocs:chase/apollo_boots_lights",
     "transform": [
       {
         "operation": "STITCH",
-        "supply": "skyhighheroes:astro_boy_rocket_arms"
+        "supply": "skyhighheroes:astro_boy_rocket_legs"
       },
       {
         "operation": "XOR",
         "supply": "skyhighheroes:tenma_rockets_xor"
       }
     ],
-    "out": "skyhighocs:generated/ace_tenma_rocket_arms_lights"
+    "out": "skyhighocs:generated/apollo_rocket_legs_lights"
   },
   "isDynamic": true
 }

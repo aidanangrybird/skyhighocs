@@ -1,5 +1,18 @@
 {
-  "texture": "skyhighocs:chase/astro/chase_tenma_<CLOTHING><FLYING>",
+  "texture": {
+    "in": "skyhighocs:ace/ares_<CLOTHING><FLYING>",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighheroes:astro_boy_cannon_arms"
+      },
+      {
+        "operation": "ADD",
+        "supply": "skyhighheroes:tenma_cannons"
+      }
+    ],
+    "out": "skyhighocs:generated/ares_<CLOTHING><FLYING>_cannon_arms"
+  },
   "getters": {
     "CLOTHING": {
       "key": "entity.getData('skyhighheroes:dyn/astro_clothes') == 0 ? 'base' : entity.getData('skyhighheroes:dyn/astro_clothes') == 1 ? 'long' : entity.getData('skyhighheroes:dyn/astro_clothes') == 2 ? 'short' : 'normal'",

@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighocs:ace/astro/ace_tenma_boots_lights",
+    "in": "skyhighocs:ace/ares_boots_lights",
     "transform": [
       {
         "operation": "STITCH",
@@ -11,7 +11,7 @@
         "supply": "skyhighheroes:tenma_rockets_xor"
       }
     ],
-    "out": "skyhighocs:generated/ace_tenma_rocket_legs_lights"
+    "out": "skyhighocs:generated/ares_rocket_legs_lights"
   },
   "isDynamic": true
 }

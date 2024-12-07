@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighocs:lucas/astro/lucas_tenma_<CLOTHING><FLYING>",
+    "in": "skyhighocs:chase/apollo_<CLOTHING><FLYING>",
     "transform": [
       {
         "operation": "STITCH",
@@ -11,7 +11,7 @@
         "supply": "skyhighheroes:tenma_cannons"
       }
     ],
-    "out": "skyhighocs:generated/lucas_tenma_<CLOTHING><FLYING>_cannon_arms"
+    "out": "skyhighocs:generated/apollo_<CLOTHING><FLYING>_cannon_arms"
   },
   "getters": {
     "CLOTHING": {

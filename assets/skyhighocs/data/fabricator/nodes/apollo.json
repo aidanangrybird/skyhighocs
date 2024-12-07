@@ -1,5 +1,5 @@
 {
-  "suit": "skyhighocs:lucas_tenma",
+  "suit": "skyhighocs:apollo",
   "requirements": [
     "skyhighheroes:robot",
     "skyhighocs:base"
@@ -8,13 +8,13 @@
     "exist": {
       "trigger": "fiskheroes:tick",
       "description": {
-        "translate": "Exist as pezzo134"
+        "translate": "Exist as C_sp"
       },
       "condition": {
         "variables": {
           "player": "PLAYER_TICKING"
           },
-        "check": "player.getUUID() == 'c4bc5db6-3cf6-44fe-8427-304a7b211bc4'"
+        "check": "player.getUUID() == '4da600b8-582a-4fc3-ac2e-ada03d3e478c'"
       }
     }
   }
