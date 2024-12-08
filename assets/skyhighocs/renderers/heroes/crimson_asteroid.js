@@ -12,8 +12,8 @@ loadTextures({
   "helmet": "skyhighocs:lucas/crimson_asteroid_helmet.tx.json",
   "helmet_lights": "skyhighocs:lucas/crimson_asteroid_helmet_lights.tx.json",
   "helmet_wave_changing_lights": "skyhighocs:lucas/crimson_asteroid_helmet_wave_changing_lights.tx.json",
-  "predation_sides_wave_changing_lights": "skyhighocs:lucas/crimson_asteroid_predation_sides_wave_changing_lights.tx.json",
-  "predation_front_wave_changing_lights": "skyhighocs:lucas/crimson_asteroid_predation_front_wave_changing_lights.tx.json",
+  "predation_wave_changing_sides_lights": "skyhighocs:lucas/crimson_asteroid_predation_wave_changing_sides_lights.tx.json",
+  "predation_wave_changing_front_lights": "skyhighocs:lucas/crimson_asteroid_predation_wave_changing_front_lights.tx.json",
   "sword_blade": "skyhighocs:lucas/crimson_asteroid_sword_blade.tx.json",
   "sword": "skyhighocs:lucas/crimson_asteroid_sword.tx.json",
   "sword_wave_changing_lights": "skyhighocs:lucas/crimson_asteroid_sword_wave_changing_lights.tx.json",
@@ -28,28 +28,28 @@ loadTextures({
   "asteroid_crash_sides": "skyhighocs:lucas/crimson_asteroid_asteroid_crash_sides.tx.json",
   "asteroid_crash_front": "skyhighocs:lucas/crimson_asteroid_asteroid_crash_front.tx.json",
   "head_right": "skyhighocs:lucas/crimson_right.tx.json",
-  "head_right_wave_change": "skyhighocs:lucas/crimson_right_wave_change.tx.json",
-  "head_right_wave_change_lights": "skyhighocs:lucas/crimson_right_wave_change_lights.tx.json",
+  "head_wave_change_right": "skyhighocs:lucas/crimson_wave_change_right.tx.json",
+  "head_wave_change_right_lights": "skyhighocs:lucas/crimson_wave_change_right_lights.tx.json",
   "head_right_lights": "skyhighocs:lucas/crimson_right_lights.tx.json",
-  "head_right_wave_changing_lights": "skyhighocs:lucas/crimson_right_wave_changing_lights.tx.json",
+  "head_wave_changing_right_lights": "skyhighocs:lucas/crimson_wave_changing_right_lights.tx.json",
   "head_left": "skyhighocs:lucas/crimson_left.tx.json",
-  "head_left_wave_change": "skyhighocs:lucas/crimson_left_wave_change.tx.json",
+  "head_wave_change_left": "skyhighocs:lucas/crimson_wave_change_left.tx.json",
   "head_left_lights": "skyhighocs:lucas/crimson_left_lights.tx.json",
-  "head_left_wave_change_lights": "skyhighocs:lucas/crimson_left_wave_change_lights.tx.json",
-  "head_left_wave_changing_lights": "skyhighocs:lucas/crimson_left_wave_changing_lights.tx.json",
+  "head_wave_change_left_lights": "skyhighocs:lucas/crimson_wave_change_left_lights.tx.json",
+  "head_wave_changing_left_lights": "skyhighocs:lucas/crimson_wave_changing_left_lights.tx.json",
   "head_top": "skyhighocs:lucas/crimson_top.tx.json",
-  "head_top_wave_change": "skyhighocs:lucas/crimson_top_wave_change.tx.json",
+  "head_wave_change_top": "skyhighocs:lucas/crimson_wave_change_top.tx.json",
   "head_top_lights": "skyhighocs:lucas/crimson_top_lights.tx.json",
-  "head_top_wave_change_lights": "skyhighocs:lucas/crimson_top_wave_change_lights.tx.json",
-  "head_top_wave_changing_lights": "skyhighocs:lucas/crimson_top_wave_changing_lights.tx.json",
+  "head_wave_change_top_lights": "skyhighocs:lucas/crimson_wave_change_top_lights.tx.json",
+  "head_wave_changing_top_lights": "skyhighocs:lucas/crimson_wave_changing_top_lights.tx.json",
   "head_bottom": "skyhighocs:lucas/crimson_bottom.tx.json",
-  "head_bottom_wave_change": "skyhighocs:lucas/crimson_bottom_wave_change.tx.json",
+  "head_wave_change_bottom": "skyhighocs:lucas/crimson_wave_change_bottom.tx.json",
   "head_bottom_lights": "skyhighocs:lucas/crimson_bottom_lights.tx.json",
-  "head_bottom_wave_change_lights": "skyhighocs:lucas/crimson_bottom_wave_change_lights.tx.json",
-  "head_bottom_wave_changing_lights": "skyhighocs:lucas/crimson_bottom_wave_changing_lights.tx.json",
+  "head_wave_change_bottom_lights": "skyhighocs:lucas/crimson_wave_change_bottom_lights.tx.json",
+  "head_wave_changing_bottom_lights": "skyhighocs:lucas/crimson_wave_changing_bottom_lights.tx.json",
   "head_front": "skyhighocs:lucas/crimson_front.tx.json",
-  "head_front_wave_change": "skyhighocs:lucas/crimson_front_wave_change.tx.json",
-  "head_front_wave_changing_lights": "skyhighocs:lucas/crimson_front_wave_changing_lights.tx.json",
+  "head_wave_change_front": "skyhighocs:lucas/crimson_wave_change_front.tx.json",
+  "head_wave_changing_front_lights": "skyhighocs:lucas/crimson_wave_changing_front_lights.tx.json",
   "transer": "skyhighocs:lucas/lucas_stelar_transer.tx.json",
   "transer_wave_change": "skyhighocs:lucas/lucas_stelar_transer_wave_change.tx.json",
   "visualizer_lights": "skyhighocs:lucas/lucas_stelar_visualizer_lights.tx.json",
@@ -93,129 +93,13 @@ function initEffects(renderer) {
   ]);
   stuff.bindFlightTrail(renderer, "skyhighocs:crimson_asteroid_flight");
   //Battle card predation wave changing
-  //Right
-  predationRightWaveChanging = renderer.createEffect("fiskheroes:shield");
-  predationRightWaveChanging.texture.set(null, "predation_sides_wave_changing_lights");
-  predationRightWaveChanging.anchor.set("rightArm");
-  predationRightWaveChanging.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
-  predationRightWaveChanging.large = true;
-  //Left
-  predationLeftWaveChanging = renderer.createEffect("fiskheroes:shield");
-  predationLeftWaveChanging.texture.set(null, "predation_sides_wave_changing_lights");
-  predationLeftWaveChanging.anchor.set("rightArm");
-  predationLeftWaveChanging.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
-  predationLeftWaveChanging.large = true;
-  //Top
-  predationTopWaveChanging = renderer.createEffect("fiskheroes:shield");
-  predationTopWaveChanging.texture.set(null, "predation_sides_wave_changing_lights");
-  predationTopWaveChanging.anchor.set("rightArm");
-  predationTopWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
-  predationTopWaveChanging.large = true;
-  //Bottom
-  predationBottomWaveChanging = renderer.createEffect("fiskheroes:shield");
-  predationBottomWaveChanging.texture.set(null, "predation_sides_wave_changing_lights");
-  predationBottomWaveChanging.anchor.set("rightArm");
-  predationBottomWaveChanging.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
-  predationBottomWaveChanging.large = true;
-  //Front
-  predationFrontWaveChanging = renderer.createEffect("fiskheroes:shield");
-  predationFrontWaveChanging.texture.set(null, "predation_front_wave_changing_lights");
-  predationFrontWaveChanging.anchor.set("rightArm");
-  predationFrontWaveChanging.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
-  predationFrontWaveChanging.large = true;
+  predation = stelar.initHandThing(renderer, "predation_wave_changing", 0, 2);
   //Asteroid Crash
-  //Right
-  asteroidCrashRight = renderer.createEffect("fiskheroes:shield");
-  asteroidCrashRight.texture.set("asteroid_crash_sides");
-  asteroidCrashRight.anchor.set("rightArm");
-  asteroidCrashRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
-  asteroidCrashRight.large = true;
-  //Left
-  asteroidCrashLeft = renderer.createEffect("fiskheroes:shield");
-  asteroidCrashLeft.texture.set("asteroid_crash_sides");
-  asteroidCrashLeft.anchor.set("rightArm");
-  asteroidCrashLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
-  asteroidCrashLeft.large = true;
-  //Top
-  asteroidCrashTop = renderer.createEffect("fiskheroes:shield");
-  asteroidCrashTop.texture.set("asteroid_crash_sides");
-  asteroidCrashTop.anchor.set("rightArm");
-  asteroidCrashTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
-  asteroidCrashTop.large = true;
-  //Bottom
-  asteroidCrashBottom = renderer.createEffect("fiskheroes:shield");
-  asteroidCrashBottom.texture.set("asteroid_crash_sides");
-  asteroidCrashBottom.anchor.set("rightArm");
-  asteroidCrashBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
-  asteroidCrashBottom.large = true;
-  //Front
-  asteroidCrashFront = renderer.createEffect("fiskheroes:shield");
-  asteroidCrashFront.texture.set("asteroid_crash_front");
-  asteroidCrashFront.anchor.set("rightArm");
-  asteroidCrashFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
-  asteroidCrashFront.large = true;
+  asteroidCrash = stelar.initHandThing(renderer, "asteroid_crash", 2, 0);
   //Asteroid Blast
-  //Right
-  asteroidBlastRight = renderer.createEffect("fiskheroes:shield");
-  asteroidBlastRight.texture.set("asteroid_blast_sides");
-  asteroidBlastRight.anchor.set("rightArm");
-  asteroidBlastRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
-  asteroidBlastRight.large = true;
-  //Left
-  asteroidBlastLeft = renderer.createEffect("fiskheroes:shield");
-  asteroidBlastLeft.texture.set("asteroid_blast_sides");
-  asteroidBlastLeft.anchor.set("rightArm");
-  asteroidBlastLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
-  asteroidBlastLeft.large = true;
-  //Top
-  asteroidBlastTop = renderer.createEffect("fiskheroes:shield");
-  asteroidBlastTop.texture.set("asteroid_blast_sides");
-  asteroidBlastTop.anchor.set("rightArm");
-  asteroidBlastTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
-  asteroidBlastTop.large = true;
-  //Bottom
-  asteroidBlastBottom = renderer.createEffect("fiskheroes:shield");
-  asteroidBlastBottom.texture.set("asteroid_blast_sides");
-  asteroidBlastBottom.anchor.set("rightArm");
-  asteroidBlastBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
-  asteroidBlastBottom.large = true;
-  //Front
-  asteroidBlastFront = renderer.createEffect("fiskheroes:shield");
-  asteroidBlastFront.texture.set("asteroid_blast_front", "asteroid_blast_front_lights");
-  asteroidBlastFront.anchor.set("rightArm");
-  asteroidBlastFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
-  asteroidBlastFront.large = true;
+  asteroidBlast = stelar.initHandThing(renderer, "asteroid_blast", 2, 3);
   //Asteroid Strike
-  //Right
-  asteroidStrikeRight = renderer.createEffect("fiskheroes:shield");
-  asteroidStrikeRight.texture.set("asteroid_strike_sides");
-  asteroidStrikeRight.anchor.set("rightArm");
-  asteroidStrikeRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
-  asteroidStrikeRight.large = true;
-  //Left
-  asteroidStrikeLeft = renderer.createEffect("fiskheroes:shield");
-  asteroidStrikeLeft.texture.set("asteroid_strike_sides");
-  asteroidStrikeLeft.anchor.set("rightArm");
-  asteroidStrikeLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
-  asteroidStrikeLeft.large = true;
-  //Top
-  asteroidStrikeTop = renderer.createEffect("fiskheroes:shield");
-  asteroidStrikeTop.texture.set("asteroid_strike_sides");
-  asteroidStrikeTop.anchor.set("rightArm");
-  asteroidStrikeTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
-  asteroidStrikeTop.large = true;
-  //Bottom
-  asteroidStrikeBottom = renderer.createEffect("fiskheroes:shield");
-  asteroidStrikeBottom.texture.set("asteroid_strike_sides");
-  asteroidStrikeBottom.anchor.set("rightArm");
-  asteroidStrikeBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
-  asteroidStrikeBottom.large = true;
-  //Front
-  asteroidStrikeFront = renderer.createEffect("fiskheroes:shield");
-  asteroidStrikeFront.texture.set("asteroid_strike_front", "asteroid_strike_front_lights");
-  asteroidStrikeFront.anchor.set("rightArm");
-  asteroidStrikeFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
-  asteroidStrikeFront.large = true;
+  asteroidStrike = stelar.initHandThing(renderer, "asteroid_strike", 2, 3);
   //Sword
   swordMain = renderer.createEffect("fiskheroes:shield");
   swordMain.texture.set("sword");
@@ -232,117 +116,11 @@ function initEffects(renderer) {
   swordWaveChanging.anchor.set("rightArm");
   swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
   swordWaveChanging.large = true;
-  //Right
-  swordRight = renderer.createEffect("fiskheroes:shield");
-  swordRight.texture.set("sword_sides");
-  swordRight.anchor.set("rightArm");
-  swordRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
-  swordRight.large = true;
-  //Left
-  swordLeft = renderer.createEffect("fiskheroes:shield");
-  swordLeft.texture.set("sword_sides");
-  swordLeft.anchor.set("rightArm");
-  swordLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
-  swordLeft.large = true;
-  //Top
-  swordTop = renderer.createEffect("fiskheroes:shield");
-  swordTop.texture.set("sword_sides");
-  swordTop.anchor.set("rightArm");
-  swordTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
-  swordTop.large = true;
-  //Bottom
-  swordBottom = renderer.createEffect("fiskheroes:shield");
-  swordBottom.texture.set("sword_sides");
-  swordBottom.anchor.set("rightArm");
-  swordBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
-  swordBottom.large = true;
-  //Front
-  swordFront = renderer.createEffect("fiskheroes:shield");
-  swordFront.texture.set("sword_front");
-  swordFront.anchor.set("rightArm");
-  swordFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
-  swordFront.large = true;
+  sword = stelar.initHandThing(renderer, "sword", 2, 0);
   //Head
-  //Right
-  headRight = renderer.createEffect("fiskheroes:shield");
-  headRight.texture.set("head_right", "head_right_lights");
-  headRight.anchor.set("rightArm");
-  headRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, 3.0);
-  headRight.large = true;
-  headRightWaveChange = renderer.createEffect("fiskheroes:shield");
-  headRightWaveChange.texture.set("head_right_wave_change", "head_right_wave_change_lights");
-  headRightWaveChange.anchor.set("rightArm");
-  headRightWaveChange.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, 3.0);
-  headRightWaveChange.large = true;
-  headRightWaveChanging = renderer.createEffect("fiskheroes:shield");
-  headRightWaveChanging.texture.set(null, "head_right_wave_changing_lights");
-  headRightWaveChanging.anchor.set("rightArm");
-  headRightWaveChanging.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, 3.0);
-  headRightWaveChanging.large = true;
-  //Left
-  headLeft = renderer.createEffect("fiskheroes:shield");
-  headLeft.texture.set("head_left", "head_left_lights");
-  headLeft.anchor.set("rightArm");
-  headLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, -3.0);
-  headLeft.large = true;
-  headLeftWaveChange = renderer.createEffect("fiskheroes:shield");
-  headLeftWaveChange.texture.set("head_left_wave_change", "head_left_wave_change_lights");
-  headLeftWaveChange.anchor.set("rightArm");
-  headLeftWaveChange.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, -3.0);
-  headLeftWaveChange.large = true;
-  headLeftWaveChanging = renderer.createEffect("fiskheroes:shield");
-  headLeftWaveChanging.texture.set(null, "head_left_wave_changing_lights");
-  headLeftWaveChanging.anchor.set("rightArm");
-  headLeftWaveChanging.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, -3.0);
-  headLeftWaveChanging.large = true;
-  //Top
-  headTop = renderer.createEffect("fiskheroes:shield");
-  headTop.texture.set("head_top", "head_top_lights");
-  headTop.anchor.set("rightArm");
-  headTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.5, 0.0);
-  headTop.large = true;
-  headTopWaveChange = renderer.createEffect("fiskheroes:shield");
-  headTopWaveChange.texture.set("head_top_wave_change", "head_top_wave_change_lights");
-  headTopWaveChange.anchor.set("rightArm");
-  headTopWaveChange.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.5, 0.0);
-  headTopWaveChange.large = true;
-  headTopWaveChanging = renderer.createEffect("fiskheroes:shield");
-  headTopWaveChanging.texture.set(null, "head_top_wave_changing_lights");
-  headTopWaveChanging.anchor.set("rightArm");
-  headTopWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.5, 0.0);
-  headTopWaveChanging.large = true;
-  //Bottom
-  headBottom = renderer.createEffect("fiskheroes:shield");
-  headBottom.texture.set("head_bottom", "head_bottom_lights");
-  headBottom.anchor.set("rightArm");
-  headBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.5, 0.0);
-  headBottom.large = true;
-  headBottomWaveChange = renderer.createEffect("fiskheroes:shield");
-  headBottomWaveChange.texture.set("head_bottom_wave_change", "head_bottom_wave_change_lights");
-  headBottomWaveChange.anchor.set("rightArm");
-  headBottomWaveChange.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.5, 0.0);
-  headBottomWaveChange.large = true;
-  headBottomWaveChanging = renderer.createEffect("fiskheroes:shield");
-  headBottomWaveChanging.texture.set(null, "head_bottom_wave_changing_lights");
-  headBottomWaveChanging.anchor.set("rightArm");
-  headBottomWaveChanging.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.5, 0.0);
-  headBottomWaveChanging.large = true;
-  //Front
-  headFront = renderer.createEffect("fiskheroes:shield");
-  headFront.texture.set("head_front", null);
-  headFront.anchor.set("rightArm");
-  headFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 13.5, 0.0);
-  headFront.large = true;
-  headFrontWaveChange = renderer.createEffect("fiskheroes:shield");
-  headFrontWaveChange.texture.set("head_front_wave_change", null);
-  headFrontWaveChange.anchor.set("rightArm");
-  headFrontWaveChange.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 13.5, 0.0);
-  headFrontWaveChange.large = true;
-  headFrontWaveChanging = renderer.createEffect("fiskheroes:shield");
-  headFrontWaveChanging.texture.set(null, "head_front_wave_changing_lights");
-  headFrontWaveChanging.anchor.set("rightArm");
-  headFrontWaveChanging.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 13.5, 0.0);
-  headFrontWaveChanging.large = true;
+  head = stelar.initHandThing(renderer, "head", 1, 4, 3);
+  headWaveChange = stelar.initHandThing(renderer, "head_wave_change", 1, 4, 3);
+  headWaveChanging = stelar.initHandThing(renderer, "head_wave_changing", 0, 1, 3);
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
@@ -354,66 +132,34 @@ function render(entity, renderLayer, isFirstPersonArm) {
     };
     if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || (entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) {
-        headRightWaveChange.render();
-        headLeftWaveChange.render();
-        headTopWaveChange.render();
-        headBottomWaveChange.render();
-        headFrontWaveChange.render();
+        headWaveChange.render();
       };
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_crash_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_strike_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_blast_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
-        headRight.render();
-        headLeft.render();
-        headTop.render();
-        headBottom.render();
-        headFront.render();
+        head.render();
       }
       if (((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_crash_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_strike_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/asteroid_blast_timer") < 1)) {
-        headRightWaveChanging.render();
-        headLeftWaveChanging.render();
-        headTopWaveChanging.render();
-        headBottomWaveChanging.render();
-        headFrontWaveChanging.render();
+        headWaveChanging.render();
       }
     };
     if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-      predationRightWaveChanging.render();
-      predationLeftWaveChanging.render();
-      predationTopWaveChanging.render();
-      predationBottomWaveChanging.render();
-      predationFrontWaveChanging.render();
+      predation.render();
     };
     if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") > 0) {
       swordWaveChanging.render();
       swordMain.render();
-      swordRight.render();
-      swordLeft.render();
-      swordTop.render();
-      swordBottom.render();
-      swordFront.render();
+      sword.render();
       if (entity.getData("skyhighheroes:dyn/sword") && entity.getHeldItem().isEmpty()) {
         swordBlade.render();
       };
     };
     if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/asteroid_crash_timer") > 0) {
-      asteroidCrashRight.render();
-      asteroidCrashLeft.render();
-      asteroidCrashTop.render();
-      asteroidCrashBottom.render();
-      asteroidCrashFront.render();
+      asteroidCrash.render();
     };
     if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/asteroid_strike_timer") > 0) {
-      asteroidStrikeRight.render();
-      asteroidStrikeLeft.render();
-      asteroidStrikeTop.render();
-      asteroidStrikeBottom.render();
-      asteroidStrikeFront.render();
+      asteroidStrike.render();
     };
     if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/asteroid_blast_timer") > 0) {
-      asteroidBlastRight.render();
-      asteroidBlastLeft.render();
-      asteroidBlastTop.render();
-      asteroidBlastBottom.render();
-      asteroidBlastFront.render();
+      asteroidBlast.render();
     };
   };
 };
