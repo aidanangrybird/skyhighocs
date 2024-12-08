@@ -1,13 +1,13 @@
 {
   "texture": {
-    "in": "skyhighocs:aidan/squall_vortex_helmet_lights",
+    "in": "skyhighocs:aidan/squall_vortex_mask",
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighocs:xor/squall_vortex_helmet_wave_change_<TIMER>"
+        "supply": "skyhighocs:xor/mask_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighocs:generated/squall_vortex_helmet_lights_<TIMER>"
+    "out": "skyhighocs:generated/squall_vortex_mask_<TIMER>"
   },
   "getters": {
     "TIMER": {

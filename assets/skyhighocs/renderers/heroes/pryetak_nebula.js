@@ -10,8 +10,10 @@ loadTextures({
   "lights_wave_change": "skyhighocs:chase/pryetak_nebula_wave_change_lights.tx.json",
   "wave_changing_lights": "skyhighocs:chase/pryetak_nebula_wave_changing_lights.tx.json",
   "helmet": "skyhighocs:chase/pryetak_nebula_helmet.tx.json",
-  "helmet_lights": "skyhighocs:chase/pryetak_nebula_helmet_lights.tx.json",
   "helmet_wave_changing_lights": "skyhighocs:chase/pryetak_nebula_helmet_wave_changing_lights.tx.json",
+  "mask": "skyhighocs:chase/pryetak_nebula_mask.tx.json",
+  "mask_lights": "skyhighocs:chase/pryetak_nebula_mask_lights.tx.json",
+  "mask_wave_changing_lights": "skyhighocs:chase/pryetak_nebula_mask_wave_changing_lights.tx.json",
   "sword_blade": "skyhighocs:chase/pryetak_nebula_sword_blade.tx.json",
   "sword": "skyhighocs:chase/pryetak_nebula_sword.tx.json",
   "sword_wave_changing_lights": "skyhighocs:chase/pryetak_nebula_sword_wave_changing_lights.tx.json",
@@ -74,6 +76,10 @@ function getID() {
   return "4da600b8-582a-4fc3-ac2e-ada03d3e478c";
 };
 
+var date = new Date();
+var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
+var santaHat;
+
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
@@ -86,10 +92,23 @@ function init(renderer) {
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
+  if (parent.isChristmasSeason) {
+    var santa_hat_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
+    santa_hat_model.texture.set("santa_hat");
+    santaHat = renderer.createEffect("fiskheroes:model").setModel(santa_hat_model);
+    santaHat.anchor.set("head");
+    santaHat.setScale(1.05);
+    santaHat.setOffset(0.0, -5.25, 1.25);
+    santaHat.setRotation(-45.0, 0.0, 0.0);
+  };
   helmetWaveChangingLights = renderer.createEffect("fiskheroes:overlay");
   helmetWaveChangingLights.texture.set(null, "helmet_wave_changing_lights");
   helmet = renderer.createEffect("fiskheroes:overlay");
-  helmet.texture.set("helmet", "helmet_lights");
+  helmet.texture.set("helmet");
+  maskWaveChangingLights = renderer.createEffect("fiskheroes:overlay");
+  maskWaveChangingLights.texture.set(null, "mask_wave_changing_lights");
+  mask = renderer.createEffect("fiskheroes:overlay");
+  mask.texture.set("mask", "mask_lights");
   stelar.bindBeam(renderer, "fiskheroes:charged_beam", "fiskheroes:charged_beam", "rightArm", 0xAA00FF, [
       { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-1.0, 9.0, -0.5], "size": [3.0, 3.0] }
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
@@ -131,9 +150,14 @@ function initEffects(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
   if (renderLayer == "CHESTPLATE") {
+    if (parent.isChristmasSeason) {
+      santaHat.render();
+    };
     if ((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("fiskheroes:mask_open_timer2") > 0) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
       helmetWaveChangingLights.render();
       helmet.render();
+      maskWaveChangingLights.render();
+      mask.render();
     };
     if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || (entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) {

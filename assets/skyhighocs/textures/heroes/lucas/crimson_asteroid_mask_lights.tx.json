@@ -1,13 +1,13 @@
 {
   "texture": {
-    "in": "skyhighocs:lucas/crimson_asteroid_helmet_lights",
+    "in": "skyhighocs:lucas/crimson_asteroid_mask_lights",
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighocs:xor/crimson_asteroid_helmet_wave_change_<TIMER>"
+        "supply": "skyhighocs:xor/mask_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighocs:generated/crimson_asteroid_helmet_lights_<TIMER>"
+    "out": "skyhighocs:generated/crimson_asteroid_mask_lights_<TIMER>"
   },
   "getters": {
     "TIMER": {

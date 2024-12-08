@@ -1,13 +1,13 @@
 {
   "texture": {
-    "in": "skyhighocs:chase/pryetak_nebula_helmet_lights",
+    "in": "skyhighocs:ace/solar_flame_mask_lights",
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighocs:xor/pryetak_nebula_helmet_wave_change_<TIMER>"
+        "supply": "skyhighocs:xor/mask_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighocs:generated/pryetak_nebula_helmet_lights_<TIMER>"
+    "out": "skyhighocs:generated/solar_flame_mask_lights_<TIMER>"
   },
   "getters": {
     "TIMER": {

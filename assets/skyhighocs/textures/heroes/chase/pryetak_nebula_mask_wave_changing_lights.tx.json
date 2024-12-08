@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighocs:chase/pryetak_nebula_mask_wave_changing_lights",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighocs:xor/mask_wave_changing_lights_<TIMER>"
+      }
+    ],
+    "out": "skyhighocs:generated/pryetak_nebula_mask_wave_changing_lights_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.min(Math.max(Math.ceil(((entity.getData('fiskheroes:mask_open') ? 1 : -1) * 18 * entity.getInterpolatedData('fiskheroes:mask_open_timer2') + (entity.getData('fiskheroes:mask_open') ? 0 : 18))), 0), 18) | 0",
+      "values": {
+        "min": 0,
+        "max": 18
+      }
+    }
+  },
+  "isDynamic": true
+}

@@ -10,8 +10,10 @@ loadTextures({
   "lights_wave_change": "skyhighocs:lucas/crimson_asteroid_wave_change_lights.tx.json",
   "wave_changing_lights": "skyhighocs:lucas/crimson_asteroid_wave_changing_lights.tx.json",
   "helmet": "skyhighocs:lucas/crimson_asteroid_helmet.tx.json",
-  "helmet_lights": "skyhighocs:lucas/crimson_asteroid_helmet_lights.tx.json",
   "helmet_wave_changing_lights": "skyhighocs:lucas/crimson_asteroid_helmet_wave_changing_lights.tx.json",
+  "mask": "skyhighocs:lucas/crimson_asteroid_mask.tx.json",
+  "mask_lights": "skyhighocs:lucas/crimson_asteroid_mask_lights.tx.json",
+  "mask_wave_changing_lights": "skyhighocs:lucas/crimson_asteroid_mask_wave_changing_lights.tx.json",
   "predation_wave_changing_sides_lights": "skyhighocs:lucas/crimson_asteroid_predation_wave_changing_sides_lights.tx.json",
   "predation_wave_changing_front_lights": "skyhighocs:lucas/crimson_asteroid_predation_wave_changing_front_lights.tx.json",
   "sword_blade": "skyhighocs:lucas/crimson_asteroid_sword_blade.tx.json",
@@ -74,6 +76,10 @@ function getID() {
   return "c4bc5db6-3cf6-44fe-8427-304a7b211bc4";
 };
 
+var date = new Date();
+var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
+var santaHat;
+
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
@@ -84,10 +90,23 @@ function init(renderer) {
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
+  if (parent.isChristmasSeason) {
+    var santa_hat_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
+    santa_hat_model.texture.set("santa_hat");
+    santaHat = renderer.createEffect("fiskheroes:model").setModel(santa_hat_model);
+    santaHat.anchor.set("head");
+    santaHat.setScale(1.05);
+    santaHat.setOffset(0.0, -5.25, 1.25);
+    santaHat.setRotation(-45.0, 0.0, 0.0);
+  };
   helmetWaveChangingLights = renderer.createEffect("fiskheroes:overlay");
   helmetWaveChangingLights.texture.set(null, "helmet_wave_changing_lights");
   helmet = renderer.createEffect("fiskheroes:overlay");
-  helmet.texture.set("helmet", "helmet_lights");
+  helmet.texture.set("helmet");
+  maskWaveChangingLights = renderer.createEffect("fiskheroes:overlay");
+  maskWaveChangingLights.texture.set(null, "mask_wave_changing_lights");
+  mask = renderer.createEffect("fiskheroes:overlay");
+  mask.texture.set("mask", "mask_lights");
   stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:crimson_asteroid_asteroid_blast", "rightArm", 0xFF0000, [
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [4.0, 4.0] }
   ]);
@@ -126,9 +145,14 @@ function initEffects(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
   if (renderLayer == "CHESTPLATE") {
+    if (parent.isChristmasSeason) {
+      santaHat.render();
+    };
     if ((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("fiskheroes:mask_open_timer2") > 0) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
       helmetWaveChangingLights.render();
       helmet.render();
+      maskWaveChangingLights.render();
+      mask.render();
     };
     if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || (entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) {
