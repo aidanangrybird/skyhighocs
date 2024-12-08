@@ -1,6 +1,11 @@
 loadTextures({
   "null": "skyhighocs:null",
+  "santa_hat": "skyhighheroes:santa_hat",
 });
+
+var date = new Date();
+var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
+var santaHat;
 
 function init(renderer) {
   renderer.setTexture((entity, renderLayer) => {
@@ -49,6 +54,15 @@ function initEffects(renderer) {/*
   waveChange.texture.set("base", "lights");
   waveChangeLights = renderer.createEffect("fiskheroes:overlay");
   waveChangeLights.texture.set(null, "wave_changing_lights"); */
+  if (isChristmasSeason) {
+    var santa_hat_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
+    santa_hat_model.texture.set("santa_hat");
+    santaHat = renderer.createEffect("fiskheroes:model").setModel(santa_hat_model);
+    santaHat.anchor.set("head");
+    santaHat.setScale(1.05);
+    santaHat.setOffset(0.0, -5.25, 1.25);
+    santaHat.setRotation(-45.0, 0.0, 0.0);
+  };
   ears = renderer.createEffect("fiskheroes:ears");
   ears.anchor.set("head");
   ears.angle = 0;
@@ -72,6 +86,9 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
+  if (isChristmasSeason) {
+    santaHat.render();
+  };
   var color = getColor(entity);
   var callingTimer = entity.getInterpolatedData("skyhighheroes:dyn/calling_timer");/* 
   normal.opacity = -1*timerAnimate2(callingTimer, 0.35, 0.25, 0.05, 0.1)+1;
