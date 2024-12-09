@@ -107,6 +107,15 @@ function initAnimations(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
   if (isChristmasSeason) {
     if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
+      if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {
+        santaHat.setOffset(0.0, -5.25, 1.25);
+        santaHat.setRotation(-45.0, 0.0, 0.0);
+        santaHat.setScale(1.05);
+      } else {
+        santaHat.setOffset(0.0, -6.5, 0);
+        santaHat.setRotation(0.0, 0.0, 0.0);
+        santaHat.setScale(1.08);
+      };
       santaHat.render();
     };
     if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 || (entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
