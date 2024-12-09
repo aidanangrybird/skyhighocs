@@ -40,7 +40,7 @@ function init(transer) {
         return true;
       }, "EM Wave Change!", 5);
       hero.addKeyBindFunc("SYNCHRONIZE_WAVES", (player, manager) => {
-        if (player.getUUID() == "a3d071d4-c912-41e1-a6b2-c0de99ea4a84") {
+        if (player.getUUID() == "e51532a1-19fc-4d4f-9da0-f952c4645891") {
           if (PackLoader.getSide() == "CLIENT") {
             PackLoader.printChat("<Damien Stelar> EM Wave Change! \u00A75Damien Stelar\u00A7r, On-Air!");
           };
@@ -81,7 +81,7 @@ function init(transer) {
     },
     isKeyBindEnabled: function (entity, keyBind) {
       var result = false;
-      var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
+      var uuid = "e51532a1-19fc-4d4f-9da0-f952c4645891";
       if (keyBind == "PREDATION") {
         result = (entity.getData("skyhighheroes:dyn/battle_card") > 0 || entity.getData("skyhighocs:dyn/achlys_timer") < 1) && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
       };
@@ -115,7 +115,7 @@ function init(transer) {
       return result;
     },
     isModifierEnabled: function (entity, modifier) {
-      var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
+      var uuid = "e51532a1-19fc-4d4f-9da0-f952c4645891";
       var result = false;
       if (modifier.name() == "fiskheroes:transformation") {
         if (modifier.id() == "predation" || modifier.id() == "achlys") {
