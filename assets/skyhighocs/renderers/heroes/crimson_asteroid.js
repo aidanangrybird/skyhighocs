@@ -9,8 +9,6 @@ loadTextures({
   "base_wave_change": "skyhighocs:lucas/crimson_asteroid_wave_change.tx.json",
   "lights_wave_change": "skyhighocs:lucas/crimson_asteroid_wave_change_lights.tx.json",
   "wave_changing_lights": "skyhighocs:lucas/crimson_asteroid_wave_changing_lights.tx.json",
-  "helmet": "skyhighocs:lucas/crimson_asteroid_helmet.tx.json",
-  "helmet_wave_changing_lights": "skyhighocs:lucas/crimson_asteroid_helmet_wave_changing_lights.tx.json",
   "mask": "skyhighocs:lucas/crimson_asteroid_mask.tx.json",
   "mask_lights": "skyhighocs:lucas/crimson_asteroid_mask_lights.tx.json",
   "mask_wave_changing_lights": "skyhighocs:lucas/crimson_asteroid_mask_wave_changing_lights.tx.json",
@@ -89,10 +87,6 @@ function init(renderer) {
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  helmetWaveChangingLights = renderer.createEffect("fiskheroes:overlay");
-  helmetWaveChangingLights.texture.set(null, "helmet_wave_changing_lights");
-  helmet = renderer.createEffect("fiskheroes:overlay");
-  helmet.texture.set("helmet");
   maskWaveChangingLights = renderer.createEffect("fiskheroes:overlay");
   maskWaveChangingLights.texture.set(null, "mask_wave_changing_lights");
   mask = renderer.createEffect("fiskheroes:overlay");
@@ -136,10 +130,6 @@ function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
   if (renderLayer == "CHESTPLATE") {
     if ((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("fiskheroes:mask_open_timer2") > 0) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
-      if (!parent.isChristmasSeason) {
-        helmetWaveChangingLights.render();
-        helmet.render();
-      };
       maskWaveChangingLights.render();
       mask.render();
     };
