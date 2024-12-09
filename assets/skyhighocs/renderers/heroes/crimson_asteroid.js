@@ -76,8 +76,6 @@ function getID() {
   return "c4bc5db6-3cf6-44fe-8427-304a7b211bc4";
 };
 
-var date = new Date();
-var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
 var santaHat;
 
 function init(renderer) {

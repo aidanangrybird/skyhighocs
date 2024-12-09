@@ -22,7 +22,7 @@
           "player": "PLAYER_HURT",
           "damage": "DAMAGE_SOURCE"
         },
-        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_WIND') && damage.hasDamageType('ELEMENT_AQUA') && damage.hasDamageType('ELEMENT_ELEC') && player.world().isRaining() && player.world().isThundering() && (entity.world().getLocation(entity.pos()).biome().startsWith('Plains') || entity.world().getLocation(entity.pos()).biome().startsWith('Sunflower Plains')) && player.getWornChestplate().suitType() == 'skyhighocs:aidan_stelar'"
+        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_WIND') && damage.hasDamageType('ELEMENT_AQUA') && damage.hasDamageType('ELEMENT_ELEC') && player.world().isRaining() && player.world().isThundering() && (player.world().getLocation(player.pos()).biome().startsWith('Plains') || player.world().getLocation(player.pos()).biome().startsWith('Sunflower Plains')) && player.getWornChestplate().suitType() == 'skyhighocs:aidan_stelar'"
       }
     }
   }

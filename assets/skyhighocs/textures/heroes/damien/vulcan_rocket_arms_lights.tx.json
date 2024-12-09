@@ -1,0 +1,17 @@
+{
+  "texture": {
+    "in": "skyhighocs:damien/vulcan_arms_lights",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighheroes:astro_boy_rocket_arms"
+      },
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:tenma_rockets_xor"
+      }
+    ],
+    "out": "skyhighocs:generated/vulcan_rocket_arms_lights"
+  },
+  "isDynamic": true
+}

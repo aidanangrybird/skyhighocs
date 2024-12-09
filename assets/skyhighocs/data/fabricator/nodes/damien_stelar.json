@@ -1,0 +1,22 @@
+{
+  "suit": "skyhighocs:damien_stelar",
+  "requirements": [
+    "skyhighheroes:transers",
+    "fiskheroes:tier1",
+    "skyhighocs:base"
+  ],
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as Damien_"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == 'e51532a1-19fc-4d4f-9da0-f952c4645891'"
+      }
+    }
+  }
+}

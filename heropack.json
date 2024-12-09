@@ -15,6 +15,8 @@
     "solar": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "crimson_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "crimson": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "achlys_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "achlys": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "lightning": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "lightning_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "derecho": { "type": "BOOLEAN", "resetWithoutSuit": true },
@@ -38,7 +40,13 @@
     "asteroid_strike": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "asteroid_strike_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "asteroid_blast": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "asteroid_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true }
+    "asteroid_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "abyssal_shroud": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "abyssal_shroud_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "unleashed_darkness": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "unleashed_darkness_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "shadow_blast": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "shadow_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true }
   },
   "damageTypes": {
     "GAMMA": "Gamma",
@@ -76,6 +84,11 @@
     "WIND_ELEMENT": "Wind Element"
   },
   "alts" : {
+    "skyhighocs:abyssal_shadow": {
+      "$DEFAULT": {
+        "maskToggleTicks": 10
+      }
+    },
     "skyhighocs:crimson_asteroid": {
       "$DEFAULT": {
         "maskToggleTicks": 10

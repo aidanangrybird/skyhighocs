@@ -22,7 +22,7 @@
           "player": "PLAYER_HURT",
           "damage": "DAMAGE_SOURCE"
         },
-        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_FIRE') && damage.hasDamageType('ELEMENT_AQUA') && !player.world().isRaining() && !player.world().isThundering() && player.posY() >= 105 && player.world().getLocation(entity.pos()).biome().startsWith('Extreme') && player.getWornChestplate().suitType() == 'skyhighocs:lucas_stelar'"
+        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_FIRE') && damage.hasDamageType('ELEMENT_AQUA') && !player.world().isRaining() && !player.world().isThundering() && player.posY() >= 105 && player.world().getLocation(player.pos()).biome().startsWith('Extreme') && player.getWornChestplate().suitType() == 'skyhighocs:lucas_stelar'"
       }
     }
   }

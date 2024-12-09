@@ -76,8 +76,6 @@ function getID() {
   return "4da600b8-582a-4fc3-ac2e-ada03d3e478c";
 };
 
-var date = new Date();
-var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
 var santaHat;
 
 function init(renderer) {
@@ -109,10 +107,10 @@ function initEffects(renderer) {
   maskWaveChangingLights.texture.set(null, "mask_wave_changing_lights");
   mask = renderer.createEffect("fiskheroes:overlay");
   mask.texture.set("mask", "mask_lights");
-  stelar.bindBeam(renderer, "fiskheroes:charged_beam", "fiskheroes:charged_beam", "rightArm", 0xAA00FF, [
+  stelar.bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:pryetak_nebula_nebula_burst", "rightArm", 0xAA00FF, [
       { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-1.0, 9.0, -0.5], "size": [3.0, 3.0] }
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", 0x44FF00, [
+  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:pryetak_nebula_nebula_blast", "rightArm", 0x44FF00, [
       { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-1.0, 9.0, -0.5], "size": [2.0, 2.0] }
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   stuff.bindFlightTrail(renderer, "skyhighocs:pryetak_nebula_flight");

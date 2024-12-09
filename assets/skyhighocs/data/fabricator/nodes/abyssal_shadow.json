@@ -1,0 +1,29 @@
+{
+  "suit": "skyhighocs:abyssal_shadow",
+  "display": {
+    "description": {
+      "translate": "EM Wave Change! Damien Stelar, On-Air!"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:wave_change",
+    "skyhighheroes:transers",
+    "fiskheroes:tier10",
+    "skyhighocs:damien_stelar"
+  ],
+  "criteria": {
+    "chance": {
+      "trigger": "fiskheroes:player_hurt",
+      "description": {
+        "translate": "The void"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_HURT",
+          "damage": "DAMAGE_SOURCE"
+        },
+        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_NONE') && !player.world().isRaining() && !player.world().isThundering() && player.world().getLocation(player.pos()).biome() == 'Cold Taiga' && player.getWornChestplate().suitType() == 'skyhighocs:damien_stelar'"
+      }
+    }
+  }
+}
