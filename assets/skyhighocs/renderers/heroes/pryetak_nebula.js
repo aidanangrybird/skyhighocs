@@ -65,7 +65,8 @@ loadTextures({
   "scythe": "skyhighocs:chase/pryetak_nebula_scythe",
   "scythe_lights": "skyhighocs:chase/pryetak_nebula_scythe_lights",
   "rifle": "skyhighocs:chase/pryetak_nebula_rifle",
-  "rifle_lights": "skyhighocs:chase/pryetak_nebula_rifle_lights"
+  "rifle_lights": "skyhighocs:chase/pryetak_nebula_rifle_lights",
+  "santa_hat_em": "skyhighocs:chase/pryetak_nebula_santa_hat"
 });
 
 function getColor() {
@@ -90,15 +91,6 @@ function init(renderer) {
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  if (parent.isChristmasSeason) {
-    var santa_hat_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
-    santa_hat_model.texture.set("santa_hat");
-    santaHat = renderer.createEffect("fiskheroes:model").setModel(santa_hat_model);
-    santaHat.anchor.set("head");
-    santaHat.setScale(1.05);
-    santaHat.setOffset(0.0, -5.25, 1.25);
-    santaHat.setRotation(-45.0, 0.0, 0.0);
-  };
   helmetWaveChangingLights = renderer.createEffect("fiskheroes:overlay");
   helmetWaveChangingLights.texture.set(null, "helmet_wave_changing_lights");
   helmet = renderer.createEffect("fiskheroes:overlay");
@@ -148,9 +140,6 @@ function initEffects(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
   if (renderLayer == "CHESTPLATE") {
-    if (parent.isChristmasSeason) {
-      santaHat.render();
-    };
     if ((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("fiskheroes:mask_open_timer2") > 0) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
       if (!parent.isChristmasSeason) {
         helmetWaveChangingLights.render();

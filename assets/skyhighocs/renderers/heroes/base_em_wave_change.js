@@ -6,6 +6,8 @@ loadTextures({
   "santa_hat": "skyhighheroes:santa_hat",
 });
 
+var santaHat;
+var santaHatEM;
 var date = new Date();
 var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
 
@@ -65,6 +67,22 @@ function init(renderer) {
 };
 
 function initEffects(renderer) {
+  if (isChristmasSeason) {
+    var santa_hat_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
+    santa_hat_model.texture.set("santa_hat");
+    santaHat = renderer.createEffect("fiskheroes:model").setModel(santa_hat_model);
+    santaHat.anchor.set("head");
+    santaHat.setScale(1.05);
+    santaHat.setOffset(0.0, -5.25, 1.25);
+    santaHat.setRotation(-45.0, 0.0, 0.0);
+    var santa_hat_em_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
+    santa_hat_em_model.texture.set("santa_hat_em");
+    santaHatEM = renderer.createEffect("fiskheroes:model").setModel(santa_hat_em_model);
+    santaHatEM.anchor.set("head");
+    santaHatEM.setScale(1.05);
+    santaHatEM.setOffset(0.0, -5.25, 1.25);
+    santaHatEM.setRotation(-45.0, 0.0, 0.0);
+  };
   stelar.initNV(renderer);
   stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
   stelar.initForceField(renderer, getColor());
@@ -87,7 +105,14 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  //omega_xis.render(entity, renderLayer);
+  if (isChristmasSeason) {
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
+      santaHat.render();
+    };
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 || (entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
+      santaHatEM.render();
+    };
+  };
   ears.render();
   if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
     wave_change_lights.render();

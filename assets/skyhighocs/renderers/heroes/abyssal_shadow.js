@@ -63,7 +63,8 @@ loadTextures({
   "scythe": "skyhighocs:damien/abyssal_shadow_scythe",
   "scythe_lights": "skyhighocs:damien/abyssal_shadow_scythe_lights",
   "rifle": "skyhighocs:damien/abyssal_shadow_rifle",
-  "rifle_lights": "skyhighocs:damien/abyssal_shadow_rifle_lights"
+  "rifle_lights": "skyhighocs:damien/abyssal_shadow_rifle_lights",
+  "santa_hat_em": "skyhighocs:damien/abyssal_shadow_santa_hat"
 });
 
 function getColor() {
@@ -88,15 +89,6 @@ function init(renderer) {
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  if (parent.isChristmasSeason) {
-    var santa_hat_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
-    santa_hat_model.texture.set("santa_hat");
-    santaHat = renderer.createEffect("fiskheroes:model").setModel(santa_hat_model);
-    santaHat.anchor.set("head");
-    santaHat.setScale(1.05);
-    santaHat.setOffset(0.0, -5.25, 1.25);
-    santaHat.setRotation(-45.0, 0.0, 0.0);
-  };
   maskWaveChangingLights = renderer.createEffect("fiskheroes:overlay");
   maskWaveChangingLights.texture.set(null, "mask_wave_changing_lights");
   mask = renderer.createEffect("fiskheroes:overlay");
@@ -142,9 +134,6 @@ function initEffects(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
   if (renderLayer == "CHESTPLATE") {
-    if (parent.isChristmasSeason) {
-      santaHat.render();
-    };
     if ((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("fiskheroes:mask_open_timer2") > 0) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
       maskWaveChangingLights.render();
       mask.render();

@@ -1,4 +1,4 @@
-extend("skyhighocs:base_tenma");
+extend("skyhighocs:base_astro");
 
 var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
@@ -16,6 +16,7 @@ loadTextures({
   "boots": "skyhighocs:chase/apollo_boots",
   "shorts": "skyhighocs:chase/apollo_shorts",
   "cannon_lights": "skyhighocs:chase/apollo_cannon_lights",
+  "santa_hat": "skyhighocs:chase/apollo_santa_hat"
 });
 
 function initEffects(renderer) {

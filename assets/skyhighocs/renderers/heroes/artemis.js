@@ -1,4 +1,4 @@
-extend("skyhighocs:base_tenma");
+extend("skyhighocs:base_astro");
 
 var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
