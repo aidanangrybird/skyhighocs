@@ -23,7 +23,7 @@ function init(transer) {
       if (entity.getUUID() == "a3d071d4-c912-41e1-a6b2-c0de99ea4a84" && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && entity.world().isRaining() && entity.world().isThundering() && (entity.world().getLocation(entity.pos()).biome().startsWith("Plains") || entity.world().getLocation(entity.pos()).biome().startsWith("Sunflower Plains"))) {
         var value = Math.random();
         manager.setDataWithNotify(entity, "skyhighheroes:dyn/calling_value", value);
-        if (entity.getData("skyhighheroes:dyn/calling_value") < 0.1) {
+        if (entity.getData("skyhighheroes:dyn/calling_value") < 0.05) {
           manager.setDataWithNotify(entity, "skyhighheroes:dyn/calling", true);
         };
       };

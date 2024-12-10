@@ -22,7 +22,7 @@
           "player": "PLAYER_HURT",
           "damage": "DAMAGE_SOURCE"
         },
-        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_AQUA') && !player.world().isRaining() && !player.world().isThundering() && player.world().getLocation(player.pos()).biome().startsWith('Cold Taiga Hills') && player.getWornChestplate().suitType() == 'skyhighocs:chase_stelar'"
+        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_AQUA') && player.world().getLocation(player.pos()).biome().startsWith('Cold Taiga Hills') && player.getWornChestplate().suitType() == 'skyhighocs:chase_stelar'"
       }
     }
   }

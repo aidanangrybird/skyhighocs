@@ -22,7 +22,7 @@
           "player": "PLAYER_HURT",
           "damage": "DAMAGE_SOURCE"
         },
-        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_FIRE') && !player.world().isRaining() && !player.world().isThundering() && player.world().getLocation(player.pos()).biome().startsWith('Desert') && player.getWornChestplate().suitType() == 'skyhighocs:ace_stelar'"
+        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_FIRE') && player.world().getLocation(player.pos()).biome().startsWith('Desert') && player.getWornChestplate().suitType() == 'skyhighocs:ace_stelar'"
       }
     }
   }

@@ -14,7 +14,7 @@
       "condition": {
         "variables": {
           "player": "PLAYER_TICKING"
-          },
+        },
         "check": "player.getUUID() == 'e51532a1-19fc-4d4f-9da0-f952c4645891'"
       }
     }

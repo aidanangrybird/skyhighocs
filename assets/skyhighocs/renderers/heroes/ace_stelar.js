@@ -7,6 +7,7 @@ loadTextures({
   "transer_default_lights": "skyhighocs:ace/ace_stelar_transer_lights",
   "base": "skyhighocs:ace/solar_flame_base",
   "lights": "skyhighocs:ace/solar_flame_lights",
+  "santa_hat_em": "skyhighocs:ace/solar_flame_santa_hat"
 });
 
 function getColor() {

@@ -7,7 +7,7 @@ loadTextures({
   "transer_default_lights": "skyhighocs:aidan/aidan_stelar_transer_lights",
   "base": "skyhighocs:aidan/squall_vortex_base",
   "lights": "skyhighocs:aidan/squall_vortex_lights",
-  "wave_changing_lights": "skyhighocs:aidan/squall_vortex_wave_changing_lights",
+  "santa_hat_em": "skyhighocs:aidan/squall_vortex_santa_hat"
 });
 
 function getColor() {

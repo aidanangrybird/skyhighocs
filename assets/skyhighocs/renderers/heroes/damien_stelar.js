@@ -7,7 +7,7 @@ loadTextures({
   "transer_default_lights": "skyhighocs:damien/damien_stelar_transer_lights",
   "base": "skyhighocs:damien/abyssal_shadow_base",
   "lights": "skyhighocs:damien/abyssal_shadow_lights",
-  "wave_changing_lights": "skyhighocs:damien/abyssal_shadow_wave_changing_lights",
+  "santa_hat_em": "skyhighocs:damien/abyssal_shadow_santa_hat"
 });
 
 function getColor() {

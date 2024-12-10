@@ -18,10 +18,10 @@ function init(transer) {
       });
     },
     waveCalling: function (entity, manager) {
-      if (entity.getUUID() == "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0" && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && !entity.world().isRaining() && !entity.world().isThundering() && entity.world().getLocation(entity.pos()).biome().startsWith("Desert")) {
+      if (entity.getUUID() == "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0" && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && !entity.world().isRaining() && !entity.world().isThundering() && entity.world().isDaytime() && entity.world().getLocation(entity.pos()).biome().startsWith("Desert")) {
         var value = Math.random();
         manager.setDataWithNotify(entity, "skyhighheroes:dyn/calling_value", value);
-        if (entity.getData("skyhighheroes:dyn/calling_value") < 0.1) {
+        if (entity.getData("skyhighheroes:dyn/calling_value") < 0.05) {
           manager.setDataWithNotify(entity, "skyhighheroes:dyn/calling", true);
         };
         if (entity.getData("skyhighheroes:dyn/calling_timer") == 1) {
