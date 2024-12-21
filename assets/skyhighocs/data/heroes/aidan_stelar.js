@@ -2,20 +2,20 @@ var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
 var transerSystem = implement("skyhighheroes:external/transer_system");
-var transerMessaging = implement("skyhighheroes:external/transer_messaging");
-var transerGroupMessaging = implement("skyhighheroes:external/transer_group_messaging");
+var messaging = implement("skyhighheroes:external/messaging");
+var groupMessaging = implement("skyhighheroes:external/group_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
-var transerContacts = implement("skyhighheroes:external/transer_contacts");
-var transerScanner = implement("skyhighheroes:external/transer_scanner");
-var transerWaypoints = implement("skyhighheroes:external/transer_waypoint");
+var contacts = implement("skyhighheroes:external/contacts");
+var scanner = implement("skyhighheroes:external/scanner");
+var waypoints = implement("skyhighheroes:external/waypoint");
 var stormChasing = implement("skyhighocs:external/storm_chasing");
 var environment = implement("skyhighocs:external/environment");
-var transerOS = transerSystem.initTranser([transerMessaging,
-  transerGroupMessaging,
+var transerOS = transerSystem.initTranser([messaging,
+  groupMessaging,
   transerBrotherBand,
-  transerContacts,
-  transerScanner,
-  transerWaypoints,
+  contacts,
+  scanner,
+  waypoints,
   stormChasing,
   environment], "aidanStelar", "pegasus");
 function init(hero) {
@@ -72,7 +72,7 @@ function init(hero) {
     return transerOS.isKeyBindEnabled(entity, keyBind);
   });
   hero.setTickHandler((entity, manager) => {
-    transerOS.transerHandler(entity, manager);
+    transerOS.systemHandler(entity, manager);
     transerOS.waveHandler(entity, hero);
     bodyTemp.change(entity, manager, stelar.tempProfiles(), "skyhighheroes:dyn/body_temperature", 400.0, "skyhighheroes:dyn/stelar_clothes");
   });

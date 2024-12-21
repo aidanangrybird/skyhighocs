@@ -2,20 +2,20 @@ var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "e51532a1-19fc-4d4f-9da0-f952c4645891";
 var transerSystem = implement("skyhighheroes:external/transer_system");
-var transerMessaging = implement("skyhighheroes:external/transer_messaging");
-var transerGroupMessaging = implement("skyhighheroes:external/transer_group_messaging");
+var messaging = implement("skyhighheroes:external/messaging");
+var groupMessaging = implement("skyhighheroes:external/group_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
-var transerContacts = implement("skyhighheroes:external/transer_contacts");
-var transerScanner = implement("skyhighheroes:external/transer_scanner");
-var transerWaypoints = implement("skyhighheroes:external/transer_waypoint");
+var contacts = implement("skyhighheroes:external/contacts");
+var scanner = implement("skyhighheroes:external/scanner");
+var waypoints = implement("skyhighheroes:external/waypoint");
 var abyssalShadow = implement("skyhighocs:external/abyssal_shadow");
 var achlys = implement("skyhighocs:external/achlys");
-var transerOS = transerSystem.initTranser([transerMessaging,
-  transerGroupMessaging,
+var transerOS = transerSystem.initTranser([messaging,
+  groupMessaging,
   transerBrotherBand,
-  transerContacts,
-  transerScanner,
-  transerWaypoints,
+  contacts,
+  scanner,
+  waypoints,
   abyssalShadow,
   achlys], "abyssalShadow", "dragon");
 function init(hero) {
@@ -75,7 +75,7 @@ function init(hero) {
   });
   hero.setDamageProfile(entity => transerOS.getDamageProfile(entity));
   hero.setTickHandler((entity, manager) => {
-    transerOS.transerHandler(entity, manager);
+    transerOS.systemHandler(entity, manager);
     transerOS.emWaveHandler(entity, manager);
     var x = entity.posX();
     var y = entity.posY();

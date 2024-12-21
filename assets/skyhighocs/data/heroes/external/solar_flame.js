@@ -1,8 +1,8 @@
 /**
  * You put all of the required functions in here
- * @param transer - Required
+ * @param system - Required
  **/
-function init(transer) {
+function initModule(system) {
   function toolSwitchEnchant(player, manager) {
     //Silk Touch
     if (player.getData("skyhighheroes:dyn/tool_enchant") == 0) {
@@ -357,7 +357,7 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 1) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.35) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Barrier<n> battle card!");
+            system.systemMessage(entity, "<n>Inserted <nh>Barrier<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/solar", false);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
@@ -366,7 +366,7 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 2) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.35) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Sword<n> battle card!");
+            system.systemMessage(entity, "<n>Inserted <nh>Sword<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/solar", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
@@ -376,7 +376,7 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 3) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.35) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Solar Flare<n> battle card!");
+            system.systemMessage(entity, "<n>Inserted <nh>Solar Flare<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/solar", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
@@ -384,7 +384,7 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 4) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.35) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Solar Wind<n> battle card!");
+            system.systemMessage(entity, "<n>Inserted <nh>Solar Wind<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/solar", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
@@ -392,7 +392,7 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 5) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.35) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Solar Blast<n> battle card!");
+            system.systemMessage(entity, "<n>Inserted <nh>Solar Blast<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/solar", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);

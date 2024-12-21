@@ -1,4 +1,4 @@
-function init(transer) {
+function initModule(system) {
   return {
     name: "Suffering in the desert",
     type: 7,

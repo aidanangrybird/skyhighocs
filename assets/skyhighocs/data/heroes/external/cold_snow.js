@@ -1,4 +1,4 @@
-function init(transer) {
+function initModule(system) {
   return {
     name: "Death by snow",
     type: 7,

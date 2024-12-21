@@ -1,4 +1,4 @@
-function init(transer) {
+function initModule(system) {
   return {
     name: "The Void",
     type: 7,
