@@ -4,18 +4,16 @@ var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
-  "base": "skyhighocs:ace/ares.tx.json",
-  "rocket_legs": "skyhighocs:ace/ares_rocket_legs.tx.json",
-  "rocket_arms_lights": "skyhighocs:ace/ares_rocket_arms_lights.tx.json",
-  "rocket_legs_lights": "skyhighocs:ace/ares_rocket_legs_lights.tx.json",
-  "cannon_arm": "skyhighocs:ace/ares_cannon_arm.tx.json",
-  "cannon_arm_lights": "skyhighocs:ace/ares_cannon_arm_lights.tx.json",
-  "eyes": "skyhighocs:ace/ares_eyes",
-  "boots_lights": "skyhighocs:ace/ares_boots_lights",
-  "arms_lights": "skyhighocs:ace/ares_arms_lights",
+  "full": "skyhighocs:ace/ares_full_base",
+  "full_lights": "skyhighocs:ace/ares_full_lights",
+  "head": "skyhighocs:ace/ares_head.tx.json",
+  "body": "skyhighocs:ace/ares_body.tx.json",
+  "left_arm": "skyhighocs:ace/ares_left_arm.tx.json",
+  "right_arm": "skyhighocs:ace/ares_right_arm.tx.json",
+  "left_leg": "skyhighocs:ace/ares_left_leg.tx.json",
+  "right_leg": "skyhighocs:ace/ares_right_leg.tx.json",
   "boots": "skyhighocs:ace/ares_boots",
   "shorts": "skyhighocs:ace/ares_shorts",
-  "cannon_lights": "skyhighocs:ace/ares_cannon_lights",
   "santa_hat": "skyhighocs:ace/ares_santa_hat"
 });
 

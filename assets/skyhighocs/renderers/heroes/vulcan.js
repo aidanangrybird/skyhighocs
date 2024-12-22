@@ -4,18 +4,16 @@ var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
-  "base": "skyhighocs:damien/vulcan.tx.json",
-  "rocket_legs": "skyhighocs:damien/vulcan_rocket_legs.tx.json",
-  "rocket_arms_lights": "skyhighocs:damien/vulcan_rocket_arms_lights.tx.json",
-  "rocket_legs_lights": "skyhighocs:damien/vulcan_rocket_legs_lights.tx.json",
-  "cannon_arm": "skyhighocs:damien/vulcan_cannon_arm.tx.json",
-  "cannon_arm_lights": "skyhighocs:damien/vulcan_cannon_arm_lights.tx.json",
-  "eyes": "skyhighocs:damien/vulcan_eyes",
-  "boots_lights": "skyhighocs:damien/vulcan_boots_lights",
-  "arms_lights": "skyhighocs:damien/vulcan_arms_lights",
+  "full": "skyhighocs:damien/vulcan_full_base",
+  "full_lights": "skyhighocs:damien/vulcan_full_lights",
+  "head": "skyhighocs:damien/vulcan_head.tx.json",
+  "body": "skyhighocs:damien/vulcan_body.tx.json",
+  "left_arm": "skyhighocs:damien/vulcan_left_arm.tx.json",
+  "right_arm": "skyhighocs:damien/vulcan_right_arm.tx.json",
+  "left_leg": "skyhighocs:damien/vulcan_left_leg.tx.json",
+  "right_leg": "skyhighocs:damien/vulcan_right_leg.tx.json",
   "boots": "skyhighocs:damien/vulcan_boots",
   "shorts": "skyhighocs:damien/vulcan_shorts",
-  "cannon_lights": "skyhighocs:damien/vulcan_cannon_lights",
   "santa_hat": "skyhighocs:damien/vulcan_santa_hat"
 });
 

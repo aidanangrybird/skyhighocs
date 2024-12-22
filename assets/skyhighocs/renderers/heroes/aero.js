@@ -4,18 +4,16 @@ var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
-  "base": "skyhighocs:aidan/aero.tx.json",
-  "rocket_legs": "skyhighocs:aidan/aero_rocket_legs.tx.json",
-  "rocket_arms_lights": "skyhighocs:aidan/aero_rocket_arms_lights.tx.json",
-  "rocket_legs_lights": "skyhighocs:aidan/aero_rocket_legs_lights.tx.json",
-  "cannon_arm": "skyhighocs:aidan/aero_cannon_arm.tx.json",
-  "cannon_arm_lights": "skyhighocs:aidan/aero_cannon_arm_lights.tx.json",
-  "eyes": "skyhighocs:aidan/aero_eyes",
-  "boots_lights": "skyhighocs:aidan/aero_boots_lights",
-  "arms_lights": "skyhighocs:aidan/aero_arms_lights",
+  "full": "skyhighocs:aidan/aero_full_base",
+  "full_lights": "skyhighocs:aidan/aero_full_lights",
+  "head": "skyhighocs:aidan/aero_head.tx.json",
+  "body": "skyhighocs:aidan/aero_body.tx.json",
+  "left_arm": "skyhighocs:aidan/aero_left_arm.tx.json",
+  "right_arm": "skyhighocs:aidan/aero_right_arm.tx.json",
+  "left_leg": "skyhighocs:aidan/aero_left_leg.tx.json",
+  "right_leg": "skyhighocs:aidan/aero_right_leg.tx.json",
   "boots": "skyhighocs:aidan/aero_boots",
   "shorts": "skyhighocs:aidan/aero_shorts",
-  "cannon_lights": "skyhighocs:aidan/aero_cannon_lights",
   "santa_hat": "skyhighocs:aidan/aero_santa_hat"
 });
 
