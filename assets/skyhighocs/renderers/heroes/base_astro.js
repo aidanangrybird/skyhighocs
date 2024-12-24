@@ -8,6 +8,10 @@ var santaHatNormal;
 var metal_heat;
 var head_model;
 var head_hair_model;
+var head_eye_left_model;
+var head_eye_right_model;
+var head_eye_left_glow_model;
+var head_eye_right_glow_model;
 var body_model;
 var left_arm_model;
 var right_arm_model;
@@ -113,6 +117,50 @@ function initEffects(renderer) {
   head_hair_model = renderer.createEffect("fiskheroes:model").setModel(head_hair);
   head_hair_model.anchor.set("head");
   head_hair_model.setScale(1.05);
+  var head_eye_left = renderer.createResource("MODEL", "skyhighheroes:AstroBoyHead");
+  head_eye_left.texture.set("eye_left");
+  head_eye_left.bindAnimation("skyhighheroes:astro_head").setData((entity, data) => {
+    data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/head_top_front_open_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/head_top_back_open_timer"));
+    data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_front_open_timer"));
+    data.load(8, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_back_open_timer"));
+  });
+  head_eye_left_model = renderer.createEffect("fiskheroes:model").setModel(head_eye_left);
+  head_eye_left_model.anchor.set("head");
+  head_eye_left_model.setScale(0.999999999);
+  var head_eye_right = renderer.createResource("MODEL", "skyhighheroes:AstroBoyHead");
+  head_eye_right.texture.set("eye_right");
+  head_eye_right.bindAnimation("skyhighheroes:astro_head").setData((entity, data) => {
+    data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/head_top_front_open_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/head_top_back_open_timer"));
+    data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_front_open_timer"));
+    data.load(8, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_back_open_timer"));
+  });
+  head_eye_right_model = renderer.createEffect("fiskheroes:model").setModel(head_eye_right);
+  head_eye_right_model.anchor.set("head");
+  head_eye_right_model.setScale(0.999999999);
+  var head_eye_left_glow = renderer.createResource("MODEL", "skyhighheroes:AstroBoyHead");
+  head_eye_left_glow.texture.set(null, "eye_left");
+  head_eye_left_glow.bindAnimation("skyhighheroes:astro_head").setData((entity, data) => {
+    data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/head_top_front_open_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/head_top_back_open_timer"));
+    data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_front_open_timer"));
+    data.load(8, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_back_open_timer"));
+  });
+  head_eye_left_glow_model = renderer.createEffect("fiskheroes:model").setModel(head_eye_left_glow);
+  head_eye_left_glow_model.anchor.set("head");
+  head_eye_left_glow_model.setScale(0.999999999);
+  var head_eye_right_glow = renderer.createResource("MODEL", "skyhighheroes:AstroBoyHead");
+  head_eye_right_glow.texture.set(null, "eye_right");
+  head_eye_right_glow.bindAnimation("skyhighheroes:astro_head").setData((entity, data) => {
+    data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/head_top_front_open_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/head_top_back_open_timer"));
+    data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_front_open_timer"));
+    data.load(8, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_back_open_timer"));
+  });
+  head_eye_right_glow_model = renderer.createEffect("fiskheroes:model").setModel(head_eye_right_glow);
+  head_eye_right_glow_model.anchor.set("head");
+  head_eye_right_glow_model.setScale(0.999999999);
   var body = renderer.createResource("MODEL", "skyhighheroes:AstroBoyBody");
   body.texture.set("full", "full_lights");
   body.bindAnimation("skyhighheroes:astro_body").setData((entity, data) => {
@@ -223,6 +271,16 @@ function render(entity, renderLayer, isFirstPersonArm) {
       } else {
         santaHatNormal.render();
       };
+    };
+    if (entity.getData("skyhighheroes:dyn/astro_eye_left_glow")) {
+      head_eye_left_glow_model.render();
+    } else {
+      head_eye_left_model.render();
+    };
+    if (entity.getData("skyhighheroes:dyn/astro_eye_right_glow")) {
+      head_eye_right_glow_model.render();
+    } else {
+      head_eye_right_model.render();
     };
     head_model.render();
     head_hair_model.render();

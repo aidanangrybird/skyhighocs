@@ -6,6 +6,8 @@ var stuff = implement("skyhighheroes:external/stuff");
 loadTextures({
   "full": "skyhighocs:lucas/artemis_full_base",
   "full_lights": "skyhighocs:lucas/artemis_full_lights",
+  "eye_left": "skyhighocs:lucas/artemis_eye_left.tx.json",
+  "eye_right": "skyhighocs:lucas/artemis_eye_right.tx.json",
   "head": "skyhighocs:lucas/artemis_head.tx.json",
   "body": "skyhighocs:lucas/artemis_body.tx.json",
   "left_arm": "skyhighocs:lucas/artemis_left_arm.tx.json",

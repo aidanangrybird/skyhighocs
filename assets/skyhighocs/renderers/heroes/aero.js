@@ -6,6 +6,8 @@ var stuff = implement("skyhighheroes:external/stuff");
 loadTextures({
   "full": "skyhighocs:aidan/aero_full_base",
   "full_lights": "skyhighocs:aidan/aero_full_lights",
+  "eye_left": "skyhighocs:aidan/aero_eye_left.tx.json",
+  "eye_right": "skyhighocs:aidan/aero_eye_right.tx.json",
   "head": "skyhighocs:aidan/aero_head.tx.json",
   "body": "skyhighocs:aidan/aero_body.tx.json",
   "left_arm": "skyhighocs:aidan/aero_left_arm.tx.json",

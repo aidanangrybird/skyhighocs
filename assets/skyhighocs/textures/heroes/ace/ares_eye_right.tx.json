@@ -1,0 +1,10 @@
+{
+  "texture": "skyhighocs:ace/ares_eye_right_<TYPE>",
+  "getters": {
+    "TYPE": {
+      "key": "entity.getData('skyhighocs:dyn/astro_eye_right') == 1 ? 'normal' : 'human'",
+      "values": ["human", "normal"]
+    }
+  },
+  "isDynamic": true
+}

@@ -11,6 +11,7 @@ var buttMachineGuns = implement("skyhighheroes:external/astro_butt_machine_guns"
 var flight = implement("skyhighheroes:external/astro_flight");
 var opener = implement("skyhighheroes:external/astro_opener");
 var closer = implement("skyhighheroes:external/astro_closer");
+var eyes = implement("skyhighocs:external/astro_eyes");
 var astrOS = system.initRobot([messaging,
   groupMessaging,
   contacts,
@@ -22,10 +23,11 @@ var astrOS = system.initRobot([messaging,
   buttMachineGuns,
   flight,
   opener,
-  closer
+  closer,
+  eyes
 ], "Apollo", "2");
 function init(hero) {
-  hero.setAliases("apollo");;
+  hero.setAliases("apollo");
   hero.setName("Apollo");
   hero.setTier(8);
   hero.setLeggings("Shorts");

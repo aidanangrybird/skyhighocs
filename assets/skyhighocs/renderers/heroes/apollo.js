@@ -6,6 +6,8 @@ var stuff = implement("skyhighheroes:external/stuff");
 loadTextures({
   "full": "skyhighocs:chase/apollo_full_base",
   "full_lights": "skyhighocs:chase/apollo_full_lights",
+  "eye_left": "skyhighocs:chase/apollo_eye_left.tx.json",
+  "eye_right": "skyhighocs:chase/apollo_eye_right.tx.json",
   "head": "skyhighocs:chase/apollo_head.tx.json",
   "body": "skyhighocs:chase/apollo_body.tx.json",
   "left_arm": "skyhighocs:chase/apollo_left_arm.tx.json",

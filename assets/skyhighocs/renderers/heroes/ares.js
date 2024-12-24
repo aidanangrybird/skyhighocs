@@ -6,6 +6,8 @@ var stuff = implement("skyhighheroes:external/stuff");
 loadTextures({
   "full": "skyhighocs:ace/ares_full_base",
   "full_lights": "skyhighocs:ace/ares_full_lights",
+  "eye_left": "skyhighocs:ace/ares_eye_left.tx.json",
+  "eye_right": "skyhighocs:ace/ares_eye_right.tx.json",
   "head": "skyhighocs:ace/ares_head.tx.json",
   "body": "skyhighocs:ace/ares_body.tx.json",
   "left_arm": "skyhighocs:ace/ares_left_arm.tx.json",

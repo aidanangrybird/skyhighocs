@@ -46,7 +46,12 @@
     "unleashed_darkness": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "unleashed_darkness_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "shadow_blast": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "shadow_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true }
+    "shadow_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+
+    "astro_eye_left": { "type": "BYTE", "resetWithoutSuit": false },
+    "astro_eye_right": { "type": "BYTE", "resetWithoutSuit": false },
+    "astro_eye_left_glow": { "type": "BOOLEAN", "resetWithoutSuit": false },
+    "astro_eye_right_glow": { "type": "BOOLEAN", "resetWithoutSuit": false }
   },
   "damageTypes": {
     "GAMMA": "Gamma",

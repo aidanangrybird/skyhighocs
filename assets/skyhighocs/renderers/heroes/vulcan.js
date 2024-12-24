@@ -6,6 +6,8 @@ var stuff = implement("skyhighheroes:external/stuff");
 loadTextures({
   "full": "skyhighocs:damien/vulcan_full_base",
   "full_lights": "skyhighocs:damien/vulcan_full_lights",
+  "eye_left": "skyhighocs:damien/vulcan_eye_left.tx.json",
+  "eye_right": "skyhighocs:damien/vulcan_eye_right.tx.json",
   "head": "skyhighocs:damien/vulcan_head.tx.json",
   "body": "skyhighocs:damien/vulcan_body.tx.json",
   "left_arm": "skyhighocs:damien/vulcan_left_arm.tx.json",

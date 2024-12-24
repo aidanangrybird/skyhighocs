@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:xor/astro_right_leg_<OPENINGS>"
       }
     ],
-    "out": "skyhighocs:generated/aidan_right_leg_<CLOTHING>_<OPENINGS>"
+    "out": "skyhighocs:generated/aero_right_leg_<CLOTHING>_<OPENINGS>"
   },
   "getters": {
     "CLOTHING": {

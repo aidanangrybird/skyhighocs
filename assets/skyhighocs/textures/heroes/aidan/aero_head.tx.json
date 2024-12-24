@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:xor/astro_head_<OPENINGS>"
       }
     ],
-    "out": "skyhighocs:generated/aidan_head_<CLOTHING>_<OPENINGS>"
+    "out": "skyhighocs:generated/aero_head_<CLOTHING>_<OPENINGS>"
   },
   "getters": {
     "CLOTHING": {
