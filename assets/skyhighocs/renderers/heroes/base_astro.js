@@ -5,6 +5,7 @@ var date = new Date();
 var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
 var santaHat;
 var santaHatNormal;
+var blank_model;
 var metal_heat;
 var head_model;
 var head_hair_model;
@@ -21,6 +22,7 @@ var right_leg_model;
 loadTextures({
   "null": "skyhighheroes:null",
   "santa_hat_normal": "skyhighheroes:santa_hat",
+  "blank": "skyhighheroes:astro_blank"
 });
 
 function init(renderer) {
@@ -57,6 +59,11 @@ function init(renderer) {
 };
 
 function initEffects(renderer) {
+  var blank = renderer.createResource("MODEL", "skyhighheroes:BlankThing");
+  blank.texture.set("blank");
+  blank_model = renderer.createEffect("fiskheroes:model").setModel(blank);
+  blank_model.anchor.set("head");
+  blank_model.setScale(100.0);
   if (isChristmasSeason) {
     var santa_hat_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
     santa_hat_model.texture.set("santa_hat_normal");
@@ -272,15 +279,30 @@ function render(entity, renderLayer, isFirstPersonArm) {
         santaHatNormal.render();
       };
     };
-    if (entity.getData("skyhighheroes:dyn/astro_eye_left_glow")) {
-      head_eye_left_glow_model.render();
-    } else {
+    head_eye_left_model.opacity = 1.0;
+    head_eye_left_glow_model.opacity = 1.0;
+    head_eye_right_model.opacity = 1.0;
+    head_eye_right_glow_model.opacity = 1.0;
+    if (entity.getInterpolatedData("skyhighheroes:dyn/power_timer") < 1) {
+      head_eye_left_model.opacity = 1-entity.getInterpolatedData("skyhighheroes:dyn/power_timer");
       head_eye_left_model.render();
-    };
-    if (entity.getData("skyhighheroes:dyn/astro_eye_right_glow")) {
+      head_eye_left_glow_model.opacity = entity.getInterpolatedData("skyhighheroes:dyn/power_timer");
+      head_eye_left_glow_model.render();
+      head_eye_right_model.opacity = 1-entity.getInterpolatedData("skyhighheroes:dyn/power_timer");
+      head_eye_right_model.render();
+      head_eye_right_glow_model.opacity = entity.getInterpolatedData("skyhighheroes:dyn/power_timer");
       head_eye_right_glow_model.render();
     } else {
-      head_eye_right_model.render();
+      if (entity.getData("skyhighocs:dyn/astro_eye_left_glow")) {
+        head_eye_left_glow_model.render();
+      } else {
+        head_eye_left_model.render();
+      };
+      if (entity.getData("skyhighocs:dyn/astro_eye_right_glow")) {
+        head_eye_right_glow_model.render();
+      } else {
+        head_eye_right_model.render();
+      };
     };
     head_model.render();
     head_hair_model.render();
@@ -296,6 +318,13 @@ function render(entity, renderLayer, isFirstPersonArm) {
     clothing_right_arm.render();
     clothing_left_leg.render();
     clothing_right_leg.render();
+  };
+  if (isFirstPersonArm) {
+    blank_model.setOffset(0.0, 0.0, 0.0);
+    blank_model.setScale(1000.0);
+    blank_model.opacity = 1-entity.getInterpolatedData("skyhighheroes:dyn/power_timer") + (astro.isModuleDisabled(entity, "eyes") ? 1 : 0);
+    blank_model.anchor.ignoreAnchor(true);
+    blank_model.render();
   };
   metal_heat.opacity = entity.getInterpolatedData("fiskheroes:metal_heat");
   metal_heat.render();

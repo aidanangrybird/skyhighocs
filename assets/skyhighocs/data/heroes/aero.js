@@ -44,6 +44,7 @@ function init(hero) {
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
   astrOS.keyBinds(hero);
+  astrOS.profiles(hero);
   astrOS.addPowers(hero);
   hero.addKeyBindFunc("CYCLE_CLOTHES", (player, manager) => {
     manager.setData(player, "skyhighheroes:dyn/astro_clothes", player.getData("skyhighheroes:dyn/astro_clothes") + 1);
@@ -89,10 +90,10 @@ function init(hero) {
   });
   hero.setKeyBindEnabled((entity, keyBind) => {
     if (keyBind == "SHAPE_SHIFT") {
-      return entity.isSneaking();
+      return !entity.isSneaking();
     };
     if (keyBind == "CYCLE_CLOTHES") {
-      return !entity.isSneaking();
+      return true;
     };
     return astrOS.isKeyBindEnabled(entity, keyBind);
   });
