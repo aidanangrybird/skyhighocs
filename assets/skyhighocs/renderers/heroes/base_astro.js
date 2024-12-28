@@ -318,13 +318,13 @@ function render(entity, renderLayer, isFirstPersonArm) {
     clothing_right_arm.render();
     clothing_left_leg.render();
     clothing_right_leg.render();
-  };
-  if (isFirstPersonArm) {
-    blank_model.setOffset(0.0, 0.0, 0.0);
-    blank_model.setScale(1000.0);
-    blank_model.opacity = 1-entity.getInterpolatedData("skyhighheroes:dyn/power_timer") + (astro.isModuleDisabled(entity, "eyes") ? 1 : 0);
-    blank_model.anchor.ignoreAnchor(true);
-    blank_model.render();
+    if (isFirstPersonArm) {
+      blank_model.setOffset(0.0, 0.0, 0.0);
+      blank_model.setScale(1000.0);
+      blank_model.opacity = 1-entity.getInterpolatedData("skyhighheroes:dyn/power_timer") + (astro.isModuleDisabled(entity, "eyes") ? 1 : 0);
+      blank_model.anchor.ignoreAnchor(true);
+      blank_model.render();
+    };
   };
   metal_heat.opacity = entity.getInterpolatedData("fiskheroes:metal_heat");
   metal_heat.render();
