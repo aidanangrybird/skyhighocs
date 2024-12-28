@@ -32,6 +32,8 @@ function getID() {
 
 function init(renderer) {
   parent.init(renderer);
+  renderer.setItemIcon("LEGGINGS", "apollo_shorts");
+  renderer.setItemIcon("BOOTS", "apollo_boots");
   initEffects(renderer);
   initAnimations(renderer);
 };

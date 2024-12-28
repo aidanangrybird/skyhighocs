@@ -49,8 +49,6 @@ function init(renderer) {
       return "null";
     };
   });
-  renderer.setItemIcon("LEGGINGS", "%s_shorts");
-  renderer.setItemIcon("BOOTS", "%s_boots");
   renderer.showModel("LEGGINGS", "head", "headwear", "body", "rightArm", "leftArm", "rightLeg", "leftLeg");
   renderer.showModel("BOOTS", "rightLeg", "leftLeg");
   renderer.fixHatLayer("LEGGINGS");
@@ -236,8 +234,6 @@ function initEffects(renderer) {
   right_leg_model.setScale(0.999999999);
 
   astro.initNV(renderer);
-  rockets = astro.initNormalBoosters(renderer);
-  astro.initBeams(renderer, 0xFFFFFF);
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
   metal_heat.includeEffects(head_model, head_hair_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model);
   renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
@@ -259,7 +255,7 @@ function initEffects(renderer) {
 
   astro.initNV(renderer, getID());
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
-  metal_heat.includeEffects(head_model, head_hair_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model);
+  metal_heat.includeEffects(head_model, head_hair_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model, head_eye_right_model, head_eye_right_glow_model, head_eye_left_model, head_eye_left_glow_model);
   renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
     return 0.999999;
   }).setCondition(entity => (entity.isWearingFullSuit() || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));

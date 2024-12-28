@@ -89,6 +89,21 @@
     "WIND_ELEMENT": "Wind Element"
   },
   "alts" : {
+    "skyhighocs:aero": {
+      "metal": "Metal Skin"
+    },
+    "skyhighocs:apollo": {
+      "metal": "Metal Skin"
+    },
+    "skyhighocs:ares": {
+      "metal": "Metal Skin"
+    },
+    "skyhighocs:artemis": {
+      "metal": "Metal Skin"
+    },
+    "skyhighocs:vulcan": {
+      "metal": "Metal Skin"
+    },
     "skyhighocs:abyssal_shadow": {
       "$DEFAULT": {
         "maskToggleTicks": 10
