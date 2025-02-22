@@ -253,12 +253,24 @@ function initEffects(renderer) {
   clothing_right_leg = renderer.createEffect("fiskheroes:overlay");
   clothing_right_leg.texture.set("right_leg");
 
-  astro.initNV(renderer, getID());
+  //astro.initNV(renderer, getID());
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
   metal_heat.includeEffects(head_model, head_hair_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model, head_eye_right_model, head_eye_right_glow_model, head_eye_left_model, head_eye_left_glow_model);
   renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
     return 0.999999;
   }).setCondition(entity => (entity.isWearingFullSuit() || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));
+  
+  var nv_self = renderer.bindProperty("fiskheroes:night_vision");
+  nv_self.fogStrength = 0.0;
+  nv_self.firstPersonOnly = false;
+  nv_self.factor = 1.0;
+  var nv = renderer.bindProperty("fiskheroes:night_vision");
+  nv.fogStrength = 0.0;
+  nv.firstPersonOnly = false;
+  nv.setCondition(entity => {
+    nv.factor = entity.getInterpolatedData("skyhighheroes:dyn/night_vision_timer");
+    return entity.getInterpolatedData("skyhighheroes:dyn/night_vision");
+  });
 };
 
 function initAnimations(renderer) {

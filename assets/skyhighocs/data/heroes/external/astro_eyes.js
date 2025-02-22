@@ -40,17 +40,13 @@ function initModule(system) {
                 break;
             };
             break;
-          case "normal":
+          case "nv":
             switch (arguments[2]) {
-              case "left":
-                manager.setData(entity, "skyhighocs:dyn/astro_eye_left", 1);
+              case "on":
+                manager.setData(entity, "skyhighheroes:dyn/night_vision", true);
                 break;
-              case "right":
-                manager.setData(entity, "skyhighocs:dyn/astro_eye_right", 1);
-                break;
-              case "*":
-                manager.setData(entity, "skyhighocs:dyn/astro_eye_left", 1);
-                manager.setData(entity, "skyhighocs:dyn/astro_eye_right", 1);
+              case "off":
+                manager.setData(entity, "skyhighheroes:dyn/night_vision", false);
                 break;
             };
             break;
