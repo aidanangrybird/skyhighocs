@@ -233,5 +233,11 @@ function initModule(system) {
         system.systemMessage(entity, "<e>Unknown <eh>comms<e> command! Try <eh>!cns help<e> for a list of commands!");
       };
     },
+    whenDisabled: function (entity, manager) {
+      manager.setData(entity, "skyhighocs:dyn/cannon_left_arm", false);
+      manager.setData(entity, "skyhighocs:dyn/cannon_right_arm", false);
+      manager.setData(entity, "skyhighocs:dyn/cannon_body", false);
+      manager.setData(entity, "skyhighocs:dyn/cannon_eyes", false);
+    }
   };
 };
