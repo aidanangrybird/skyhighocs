@@ -92,11 +92,60 @@ function initModule(system) {
       };
       return result;
     },
+    initDamageProfiles: function (hero) {
+      hero.addDamageProfile("SHIELD", {
+        "types": {
+          "BLUNT": 1.0
+        }
+      });
+    },
+    getDamageProfiles: function (entity) {
+      var result = null;
+      if (entity.getData("skyhighocs:dyn/shield_left_arm") == 1 || entity.getData("skyhighocs:dyn/wave_changing_timer") == 1) {
+        result = "SWORD";
+      };
+      if (entity.getHeldItem().name() == "fiskheroes:katana" && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1) {
+        result = "SWORD";
+      };
+      return (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1) ? "MAIN" : result;
+    },
+    initAttributeProfiles: function (hero) {
+      hero.addAttributeProfile("SHIELD_LEFT_ARM", function (profile) {
+        profile.inheritDefaults();
+        profile.addAttribute("SPRINT_SPEED", 0.5, 1);
+        profile.addAttribute("KNOCKBACK", 5.0, 0);
+        profile.addAttribute("PUNCH_DAMAGE", 9.5, 0);
+      });
+      hero.addAttributeProfile("SHIELD_RIGHT_ARM", function (profile) {
+        profile.inheritDefaults();
+        profile.addAttribute("SPRINT_SPEED", 0.5, 1);
+        profile.addAttribute("KNOCKBACK", 5.0, 0);
+        profile.addAttribute("PUNCH_DAMAGE", 9.5, 0);
+      });
+      hero.addAttributeProfile("SHIELD_BOTH_ARMS", function (profile) {
+        profile.inheritDefaults();
+        profile.addAttribute("SPRINT_SPEED", 0.5, 1);
+        profile.addAttribute("KNOCKBACK", 5.0, 0);
+        profile.addAttribute("PUNCH_DAMAGE", 14.5, 0);
+      });
+    },
+    getAttributeProfiles: function (entity) {
+      if (entity.getData("skyhighocs:dyn/shield_left_arm_timer") == 1) {
+        return "SHIELD_LEFT_ARM";
+      };
+      if (entity.getData("skyhighocs:dyn/shield_right_arm_timer") == 1) {
+        return "SHIELD_RIGHT_ARM";
+      };
+      if (entity.getData("skyhighocs:dyn/shield_left_arm_timer") == 1 && entity.getData("skyhighocs:dyn/shield_right_arm_timer") == 1) {
+        return "SHIELD_BOTH_ARMS";
+      };
+      if (entity.getData("skyhighocs:dyn/shield_left_arm_timer") < 1 && entity.getData("skyhighocs:dyn/shield_right_arm_timer") < 1) {
+        return null;
+      };
+    },
     whenDisabled: function (entity, manager) {
       manager.setData(entity, "skyhighocs:dyn/shield_left_arm", false);
-      manager.setData(entity, "skyhighocs:dyn/shield_left_arm_stealth", false);
       manager.setData(entity, "skyhighocs:dyn/shield_right_arm", false);
-      manager.setData(entity, "skyhighocs:dyn/shield_right_arm_stealth", false);
     }
   };
 };

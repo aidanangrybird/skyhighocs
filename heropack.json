@@ -104,7 +104,9 @@
     "shield_left_arm_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "shield_left_arm": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "shield_right_arm_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "shield_right_arm": { "type": "BOOLEAN", "resetWithoutSuit": true }
+    "shield_right_arm": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "disguised_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "disguised": { "type": "BOOLEAN", "resetWithoutSuit": true }
   },
   "damageTypes": {
     "GAMMA": "Gamma",

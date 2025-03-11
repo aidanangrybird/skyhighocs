@@ -29,8 +29,8 @@ var months = [
   "December"
 ];
 
-function asssignID(entity, manager, cyberName) {
-  manager.setString(entity.getWornHelmet().nbt(), "cyberID", cyberName);
+function asssignID(entity, manager, cyberName, color) {
+  manager.setString(entity.getWornHelmet().nbt(), "cyberID", cyberName+"-"+color);
   if (!entity.getWornHelmet().nbt().hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
       var computerID = Math.random().toFixed(8).toString().substring(2);
@@ -249,17 +249,26 @@ function logMessage(message) {
 function initSystem(moduleList, name, normalName, color) {
   var cyberInstance = this;
   //Type 10 - commands (can have data management)
+  /** @var type10Specs - Type 16 Specs */
   var type10Specs = ["command", "commandHandler", "helpMessage"];
   //Type 11 - messaging only
+  /** @var type11Specs - Type 16 Specs */
   var type11Specs = ["messageHandler", "chatModeInfo", "chatInfo", "modeID"];
   //Type 12 - commands messaging and data management
+  /** @var type12Specs - Type 16 Specs */
   var type12Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage", "modeID"];
   //Type 13 - commands (can have data management) with disabled thing
+  /** @var type13Specs - Type 16 Specs */
   var type13Specs = ["command", "commandHandler", "helpMessage", "powers", "whenDisabled"];
   //Type 14 - cyber module
+  /** @var type14Specs - Type 16 Specs */
   var type14Specs = ["command", "commandHandler", "helpMessage", "isModifierEnabled", "isModifierDisabled", "powers", "whenDisabled"];
   //Type 15 - cyber module
+  /** @var type15Specs - Type 16 Specs */
   var type15Specs = ["command", "commandHandler", "helpMessage", "keyBinds", "isKeyBindEnabled", "isKeyBindDisabled", "isModifierEnabled", "isModifierDisabled", "powers", "whenDisabled"];
+  //Type 16 - cyber module
+  /** @var type16Specs - Type 16 Specs */
+  var type16Specs = ["command", "commandHandler", "helpMessage", "isModifierEnabled", "isModifierDisabled", "initAttributeProfiles", "initDamageProfiles", "getAttributeProfiles", "getDamageProfiles", "powers", "whenDisabled"];
   /** @var modules - Array of modules */
   var modules = [];
   /** @var moduleNames - Module names */
@@ -272,10 +281,14 @@ function initSystem(moduleList, name, normalName, color) {
   var messagingIndexes = [];
   /** @var chatModes - Chat modes */
   var chatModes = [];
-  /** @var modifierIndexes - Indexes of power modules */
+  /** @var modifierIndexes - Indexes of modifier capable modules */
   var modifierIndexes = [];
-  /** @var keyBindIndexes - Indexes of power modules */
+  /** @var keyBindIndexes - Indexes of keybind capable modules */
   var keyBindIndexes = [];
+  /** @var attributeProfileIndexes - Indexes of attribute profile capable modules */
+  var attributeProfileIndexes = [];
+  /** @var damageProfileIndexes - Indexes of damage profile capable modules */
+  var damageProfileIndexes = [];
   /** @var powerArray - Array of powers to add */
   var powerArray = ["skyhighocs:cyber_system", "skyhighocs:cyber_body"];
   /** @var disguisedName - disguised name */
@@ -435,6 +448,35 @@ function initSystem(moduleList, name, normalName, color) {
             };
             hasError = false;
             break;
+          case 16:
+            type16Specs.forEach(spec => {
+              if (!moduleInit.hasOwnProperty(spec)) {
+                errors.push(spec);
+                hasError = true;
+              };
+            });
+            if (hasError) {
+              logMessage("Module \"" + moduleInit.name + "\" cannot be initialized!");
+              errors.forEach(error => {
+                logMessage("Module is missing the \"" + error + "\" specification!");
+              });
+              errors = [];
+            } else {
+              modules.push(moduleInit);
+              moduleNames.push(moduleInit.name);
+              commands.push(moduleInit.command);
+              commandIndexes.push(modules.length-1);
+              var modulePowers = moduleInit.powers;
+              modulePowers.forEach(power => {
+                powerArray.push(power);
+              });
+              attributeProfileIndexes.push(modules.length-1);
+              damageProfileIndexes.push(modules.length-1);
+              modifierIndexes.push(modules.length-1);
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+            };
+            hasError = false;
+            break;
           default:
             logMessage("Module at position " + moduleList.indexOf(module) + " does not have valid type value!");
         };
@@ -483,7 +525,7 @@ function initSystem(moduleList, name, normalName, color) {
         modulesMessage = modulesMessage + ((isModuleDisabled(entity, moduleName))?"<n>, <eh>":"<n>, <nh>") + moduleName;
       };
     });
-    systemMessage(entity, "<n>astrOS");
+    systemMessage(entity, "<n>cyberOS");
     systemMessage(entity, modulesMessage);
     systemMessage(entity, "<n>computerID: <nh>" + entity.getWornHelmet().nbt().getString("computerID"));
   };
@@ -544,7 +586,86 @@ function initSystem(moduleList, name, normalName, color) {
         };
       });
     },
-    profiles: function (hero) {
+    /**
+     * Attribute profile stuff
+     * @param {JSEntity} entity - Required
+     * @returns attribute profile
+     **/
+    getAttributeProfile: function (entity) {
+      var result = null;
+      if (entity.getData("skyhighheroes:dyn/power_timer") < 1) {
+        result = "SHUT_DOWN";
+      };
+      if (attributeProfileIndexes.length == 1) {
+        if (isModuleDisabled(entity, modules[attributeProfileIndexes[0]].name)) {
+          result = modules[attributeProfileIndexes[0]].getAttributeProfile(entity);
+        };
+      };
+      if (attributeProfileIndexes.length == 2) {
+        if (isModuleDisabled(entity, modules[attributeProfileIndexes[0]].name)) {
+          result = modules[attributeProfileIndexes[0]].getAttributeProfile(entity);
+        };
+        if (isModuleDisabled(entity, modules[attributeProfileIndexes[1]].name)) {
+          result = modules[attributeProfileIndexes[1]].getAttributeProfile(entity);
+        };
+      };
+      if (attributeProfileIndexes.length == 3) {
+        if (isModuleDisabled(entity, modules[attributeProfileIndexes[0]].name)) {
+          result = modules[attributeProfileIndexes[0]].getAttributeProfile(entity);
+        };
+        if (isModuleDisabled(entity, modules[attributeProfileIndexes[1]].name)) {
+          result = modules[attributeProfileIndexes[1]].getAttributeProfile(entity);
+        };
+        if (isModuleDisabled(entity, modules[attributeProfileIndexes[2]].name)) {
+          result = modules[attributeProfileIndexes[2]].getAttributeProfile(entity);
+        };
+      };
+      return result;
+    },
+    /**
+     * Damage profile stuff
+     * @param {JSEntity} entity - Required
+     * @returns damage profile
+     **/
+    getDamageProfile: function (entity) {
+      var result = null;
+      if (entity.getData("skyhighheroes:dyn/power_timer") < 1) {
+        result = null;
+      };
+      if (damageProfileIndexes.length == 1) {
+        if (isModuleDisabled(entity, modules[damageProfileIndexes[0]].name)) {
+          result = modules[damageProfileIndexes[0]].getDamageProfile(entity);
+        };
+      };
+      if (damageProfileIndexes.length == 2) {
+        if (isModuleDisabled(entity, modules[damageProfileIndexes[0]].name)) {
+          result = modules[damageProfileIndexes[0]].getDamageProfile(entity);
+        };
+        if (isModuleDisabled(entity, modules[damageProfileIndexes[1]].name)) {
+          result = modules[damageProfileIndexes[1]].getDamageProfile(entity);
+        };
+      };
+      if (damageProfileIndexes.length == 3) {
+        if (isModuleDisabled(entity, modules[damageProfileIndexes[0]].name)) {
+          result = modules[damageProfileIndexes[0]].getDamageProfile(entity);
+        };
+        if (isModuleDisabled(entity, modules[damageProfileIndexes[1]].name)) {
+          result = modules[damageProfileIndexes[1]].getDamageProfile(entity);
+        };
+        if (isModuleDisabled(entity, modules[damageProfileIndexes[2]].name)) {
+          result = modules[damageProfileIndexes[2]].getDamageProfile(entity);
+        };
+      };
+      return result;
+    },
+    initProfiles: function (hero) {
+      hero.addAttribute("SPRINT_SPEED", 0.2, 1);
+      hero.addAttribute("STEP_HEIGHT", 0.5, 0);
+      hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
+      hero.addAttribute("PUNCH_DAMAGE", 5.0, 0);
+      hero.addAttribute("KNOCKBACK", 2.5, 0);
+      hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
+      hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
       hero.addAttributeProfile("SHUT_DOWN", function (profile) {
         profile.addAttribute("BASE_SPEED", -1.0, 1);
         profile.addAttribute("SPRINT_SPEED", -1.0, 1);
@@ -554,8 +675,11 @@ function initSystem(moduleList, name, normalName, color) {
         profile.addAttribute("KNOCKBACK", -1.0, 1);
         profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
       });
-      hero.setAttributeProfile(entity => {
-        return entity.getData("skyhighheroes:dyn/power_timer") == 1 ? null : "SHUT_DOWN";
+      damageProfileIndexes.forEach(index => {
+        modules[index].initDamageProfiles(hero);
+      });
+      attributeProfileIndexes.forEach(index => {
+        modules[index].initAttributeProfiles(hero);
       });
     },
     /**
@@ -644,9 +768,14 @@ function initSystem(moduleList, name, normalName, color) {
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
-        if (!(entity.getData("fiskheroes:disguise") == cyberName)) {
-          manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-          manager.setData(entity, "fiskheroes:disguise", cyberName);
+        if (!(entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == disguisedName)) {
+          if (entity.getData("skyhighocs:dyn/disguised_timer") == 1) {
+            manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+            manager.setData(entity, "fiskheroes:disguise", disguisedName);
+          } else {
+            manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+            manager.setData(entity, "fiskheroes:disguise", cyberName);
+          };
           manager.setData(entity, "fiskheroes:shape_shifting_to", null);
           manager.setData(entity, "fiskheroes:shape_shifting_from", null);
           manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
@@ -715,11 +844,11 @@ function initSystem(moduleList, name, normalName, color) {
           };
         };
       };
-      if (typeof human === "string" && entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
-        manager.setData(entity, "fiskheroes:disguise", human);
+      if (typeof disguisedName === "string" && entity.getData("skyhighocs:dyn/disguised_timer") < 1) {
+        manager.setData(entity, "fiskheroes:disguise", disguisedName);
       };
-      if (typeof waveChange === "string" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-        manager.setData(entity, "fiskheroes:disguise", waveChange);
+      if (typeof cyberName === "string" && entity.getData("skyhighheroes:dyn/disguised_timer") == 1) {
+        manager.setData(entity, "fiskheroes:disguise", cyberName);
       };
       var x = entity.posX();
       var y = entity.posY();

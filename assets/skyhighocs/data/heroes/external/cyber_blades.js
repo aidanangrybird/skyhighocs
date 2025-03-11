@@ -92,6 +92,54 @@ function initModule(system) {
       };
       return result;
     },
+    initDamageProfiles: function (hero) {
+      hero.addDamageProfile("BLADE", {
+        "types": {
+          "SHARP": 1.0
+        }
+      });
+    },
+    getDamageProfiles: function (entity) {
+      var result = null;
+      if (entity.getData("skyhighocs:dyn/blade_left_arm_timer") == 1 || entity.getData("skyhighocs:dyn/blade_right_arm_timer") == 1) {
+        result = "BLADE";
+      };
+      return result;
+    },
+    initAttributeProfiles: function (hero) {
+      hero.addAttributeProfile("BLADE_LEFT_ARM", function (profile) {
+        profile.inheritDefaults();
+        profile.addAttribute("SPRINT_SPEED", 0.5, 1);
+        profile.addAttribute("KNOCKBACK", 5.0, 0);
+        profile.addAttribute("PUNCH_DAMAGE", 9.5, 0);
+      });
+      hero.addAttributeProfile("BLADE_RIGHT_ARM", function (profile) {
+        profile.inheritDefaults();
+        profile.addAttribute("SPRINT_SPEED", 0.5, 1);
+        profile.addAttribute("KNOCKBACK", 5.0, 0);
+        profile.addAttribute("PUNCH_DAMAGE", 9.5, 0);
+      });
+      hero.addAttributeProfile("BLADE_BOTH_ARMS", function (profile) {
+        profile.inheritDefaults();
+        profile.addAttribute("SPRINT_SPEED", 0.5, 1);
+        profile.addAttribute("KNOCKBACK", 5.0, 0);
+        profile.addAttribute("PUNCH_DAMAGE", 14.5, 0);
+      });
+    },
+    getAttributeProfiles: function (entity) {
+      if (entity.getData("skyhighocs:dyn/blade_left_arm_timer") == 1) {
+        return "BLADE_LEFT_ARM";
+      };
+      if (entity.getData("skyhighocs:dyn/blade_right_arm_timer") == 1) {
+        return "BLADE_RIGHT_ARM";
+      };
+      if (entity.getData("skyhighocs:dyn/blade_left_arm_timer") == 1 && entity.getData("skyhighocs:dyn/blade_right_arm_timer") == 1) {
+        return "BLADE_BOTH_ARMS";
+      };
+      if (entity.getData("skyhighocs:dyn/blade_left_arm_timer") < 1 && entity.getData("skyhighocs:dyn/blade_right_arm_timer") < 1) {
+        return null;
+      };
+    },
     whenDisabled: function (entity, manager) {
       manager.setData(entity, "skyhighocs:dyn/blade_left_arm", false);
       manager.setData(entity, "skyhighocs:dyn/blade_left_arm_stealth", false);
