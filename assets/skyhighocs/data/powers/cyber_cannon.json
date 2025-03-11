@@ -1,0 +1,92 @@
+{
+  "name": "Cannon System",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:energy_projection": {
+      "damageProfile": {
+        "damage": 2.5,
+        "types": {
+          "ENERGY": 1.0,
+          "FIRE": 0.5
+        },
+        "properties": {
+          "HEAT_TRANSFER": 80
+        }
+      },
+      "range": 32.0,
+      "radius": 0.1,
+      "soundEvents": {
+        "SHOOT": "fiskheroes:cosmic_beam"
+      }
+    },
+    "fiskheroes:heat_vision": {
+      "damageProfile": {
+        "damage": 2.5,
+        "types": {
+          "FIRE": 1.0
+        },
+        "properties": {
+          "COOK_ENTITY": true,
+          "HEAT_TRANSFER": 140
+        }
+      },
+      "range": 32.0,
+      "radius": 0.1,
+      "soundEvents": {
+        "SHOOT": "fiskheroes:cosmic_beam"
+      }
+    },
+    "fiskheroes:charged_beam": {
+      "damageProfile": {
+        "damage": 10.0,
+        "types": {
+          "ENERGY": 1.0,
+          "BULLET": 1.0,
+          "FIRE": 0.25
+        },
+        "properties": {
+          "COOK_ENTITY": true,
+          "HEAT_TRANSFER": 20
+        }
+      },
+      "chargeTime": 20,
+      "duration": 120,
+      "cooldownTime": 20,
+      "range": 32.0,
+      "radius": 0.6,
+      "soundEvents": {
+        "SHOOT": "fiskheroes:mk85_beam_start",
+        "SHOOT_STOP": "fiskheroes:mk85_beam_stop",
+        "BEAM_AMBIENT": "fiskheroes:mk85_beam_loop",
+        "CHARGE": "fiskheroes:mk85_beam_charge"
+      }
+    },
+    "fiskheroes:transformation|cannon_arms": {
+      "key": "ARM_CANNONS",
+        "transformation": {
+          "toggleData": "skyhighocs:dyn/cannon_arms",
+          "timerData": "skyhighocs:dyn/cannon_arms_timer",
+          "time": 60
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|cannon_body": {
+      "key": "BODY_CANNONS",
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/cannon_body",
+        "timerData": "skyhighocs:dyn/cannon_body_timer",
+        "time": 60
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|cannon_eyes": {
+      "key": "EYE_CANNONS",
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/cannon_eyes",
+        "timerData": "skyhighocs:dyn/cannon_eyes_timer",
+        "time": 60
+      },
+      "isToggle": true
+    }
+  }
+}

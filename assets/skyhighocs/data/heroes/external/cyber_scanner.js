@@ -142,7 +142,7 @@ function initModule(system) {
   };
   return {
     name: "scanner",
-    type: 1,
+    type: 10,
     command: "sc",
     helpMessage: "<n>!sc <nh>-<n> Scanner",
     disabledMessage: "<e>Module <eh>scanner<e> is disabled!",

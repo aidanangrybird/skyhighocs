@@ -1,0 +1,186 @@
+{
+  "name": "Rocket System",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:controlled_flight|rockets_TFF": {
+      "speed": 0.1,
+      "boostSpeed": 0.2,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:controlled_flight|rockets_FTF": {
+      "speed": 0.1,
+      "boostSpeed": 0.2,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:controlled_flight|rockets_FFT": {
+      "speed": 0.1,
+      "boostSpeed": 0.2,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:controlled_flight|rockets_FTT": {
+      "speed": 0.1,
+      "boostSpeed": 0.4,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:controlled_flight|rockets_TFT": {
+      "speed": 0.1,
+      "boostSpeed": 0.4,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:controlled_flight|rockets_TTF": {
+      "speed": 0.1,
+      "boostSpeed": 0.4,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:controlled_flight|rockets_TTT": {
+      "speed": 0.1,
+      "boostSpeed": 0.6,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:teleportation": {
+      "canReachMoon": true,
+      "range": 1024.0,
+      "soundEvents": {
+        "TELEPORT": []
+      }
+    },
+    "fiskheroes:transformation|rockets_body": {
+        "transformation": {
+          "toggleData": "skyhighocs:dyn/rockets_body",
+          "timerData": "skyhighocs:dyn/rockets_body_timer",
+          "time": 60
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_arms_booster": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/rocket_arms_booster",
+        "timerData": "skyhighocs:dyn/rocket_arms_booster_timer",
+        "time": 60
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_legs_bottom": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/rocket_legs_bottom",
+        "timerData": "skyhighocs:dyn/rocket_legs_bottom_timer",
+        "time": 60
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_legs_booster": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/rocket_legs_booster",
+        "timerData": "skyhighocs:dyn/rocket_legs_booster_timer",
+        "time": 60
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_legs": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/rocket_legs",
+        "timerData": "skyhighocs:dyn/rocket_legs_timer",
+        "time": 60
+      },
+      "isToggle": true
+    }
+  }
+}

@@ -10,7 +10,7 @@ function initModule(system) {
    * @returns If sender is in receiver's contacts
    **/
   function hasContact(sender, receiver) {
-    var contacts = receiver.getWornChestplate().nbt().getStringList("contacts");
+    var contacts = receiver.getWornHelmet().nbt().getStringList("contacts");
     var contactsList = system.getStringArray(contacts);
     var result = false;
     contactsList.forEach(entry => {
@@ -34,15 +34,15 @@ function initModule(system) {
   return {
     name: "messaging",
     modeID: "normal",
-    type: 2,
+    type: 12,
     chatModeInfo: "<n>You are now in <nh>normal<n> mode!",
     messageHandler: function (entity) {
       var message = entity.getData("skyhighheroes:dyn/entry");
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var foundPlayer = null;
-      if (entity.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
+      if (entity.getWornHelmet().nbt().getStringList("contacts").tagCount() > 0) {
         var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
-        var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(activeChat);
+        var reciever = entity.getWornHelmet().nbt().getStringList("contacts").getString(activeChat);
         entities.forEach(player => {
           if (player.is("PLAYER") && player.getName() == reciever) {
             foundPlayer = player;
@@ -54,16 +54,16 @@ function initModule(system) {
       if (foundPlayer != null) {
         if (system.hasComputer(foundPlayer)) {
           if (hasContact(entity, foundPlayer)) {
-            playerMessage(foundPlayer, (entity.getData("skyhighocs:dyn/disguised")) ? system.disguisedName : system.name, message);
-            playerMessage(entity, (entity.getData("skyhighocs:dyn/disguised")) ? system.disguisedName : system.name, message);
+            playerMessage(foundPlayer, (entity.getData("skyhighocs:dyn/disguised")) ? system.disguisedName : system.cyberName, message);
+            playerMessage(entity, (entity.getData("skyhighocs:dyn/disguised")) ? system.disguisedName : system.cyberName, message);
           };
         };
       };
     },
     chatInfo: function (player, manager, chat) {
-      if (player.getWornChestplate().nbt().hasKey("contacts")) {
-        if (player.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
-          var contactsList = system.getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
+      if (player.getWornHelmet().nbt().hasKey("contacts")) {
+        if (player.getWornHelmet().nbt().getStringList("contacts").tagCount() > 0) {
+          var contactsList = system.getStringArray(player.getWornHelmet().nbt().getStringList("contacts"));
           if (typeof chat === "string") {
             var chatIndex = contactsList.indexOf(chat);
             if (chatIndex > -1) {

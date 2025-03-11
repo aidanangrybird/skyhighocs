@@ -11,13 +11,13 @@ function initModule(system) {
     manager.appendString(members, player.getName());
     manager.setString(group, "groupName", groupName);
     manager.setTagList(group, "members", members);
-    if (!entity.getWornChestplate().nbt().hasKey("groups")) {
+    if (!entity.getWornHelmet().nbt().hasKey("groups")) {
       var groups = manager.newTagList();
       manager.appendTag(groups, group);
-      manager.setTagList(entity.getWornChestplate().nbt(), "groups", groups);
+      manager.setTagList(entity.getWornHelmet().nbt(), "groups", groups);
       system.systemMessage(entity, "<s>Group created with name: <sh>" + groupName + "<s>!");
     } else {
-      var groups = entity.getWornChestplate().nbt().getTagList("groups");
+      var groups = entity.getWornHelmet().nbt().getTagList("groups");
       var groupIndex = system.getGroupArray(entity).indexOf(groupName);
       if (groupIndex > -1) {
         system.systemMessage(entity, "<e>Duplicate group name <eh>" + groupName + "<e>!");
@@ -45,7 +45,7 @@ function initModule(system) {
    * @param {string} groupName - Name of group
    **/
   function removeGroup(player, manager, groupName) {
-    var groups = player.getWornChestplate().nbt().getTagList("groups");
+    var groups = player.getWornHelmet().nbt().getTagList("groups");
     var groupIndex = system.getGroupArray(player).indexOf(groupName);
     if (groupIndex < 0) {
       system.systemMessage(player, "<e>Unable to find group with name <eh>" + groupName + "<e> to remove!");
@@ -62,13 +62,13 @@ function initModule(system) {
    * @param {string} username - Username to add to group
    **/
   function addGroupMember(player, manager, groupName, username) {
-    var groups = player.getWornChestplate().nbt().getTagList("groups");
+    var groups = player.getWornHelmet().nbt().getTagList("groups");
     var groupIndex = system.getGroupArray(player).indexOf(groupName);
     var members = groups.getCompoundTag(groupIndex).getStringList("members");
     var memberIndex = system.getStringArray(members).indexOf(username);
-    var contacts = player.getWornChestplate().nbt().getTagList("contacts");
+    var contacts = player.getWornHelmet().nbt().getTagList("contacts");
     var contactIndex = system.getStringArray(contacts).indexOf(username);
-    if (!player.getWornChestplate().nbt().hasKey("groups")) {
+    if (!player.getWornHelmet().nbt().hasKey("groups")) {
       system.systemMessage(player, "<e>You have not set up any groups yet!");
     } else if (groupIndex < 0) {
       system.systemMessage(player, "<e>Group <eh>" + groupName + "<e> does not exist!");
@@ -89,11 +89,11 @@ function initModule(system) {
    * @param {string} username - Username to add to group
    **/
   function removeGroupMember(player, manager, groupName, username) {
-    var groups = player.getWornChestplate().nbt().getTagList("groups");
+    var groups = player.getWornHelmet().nbt().getTagList("groups");
     var groupIndex = system.getGroupArray(player).indexOf(groupName);
     var members = groups.getCompoundTag(groupIndex).getStringList("members");
     var memberIndex = system.getStringArray(members).indexOf(username);
-    if (!player.getWornChestplate().nbt().hasKey("groups")) {
+    if (!player.getWornHelmet().nbt().hasKey("groups")) {
       system.systemMessage(player, "<e>You have not set up any groups yet!");
     } else if (groupIndex < 0) {
       system.systemMessage(player, "<e>Group <eh>" + groupName + "<e> does not exist!");
@@ -110,10 +110,10 @@ function initModule(system) {
    * @param {integer} groupName - Name of group to add member to
    **/
   function listGroupMembers(player, groupName) {
-    var groups = player.getWornChestplate().nbt().getTagList("groups");
+    var groups = player.getWornHelmet().nbt().getTagList("groups");
     var groupIndex = system.getGroupArray(player).indexOf(groupName);
     var members = system.getStringArray(groups.getCompoundTag(groupIndex).getStringList("members"));
-    if (!player.getWornChestplate().nbt().hasKey("groups")) {
+    if (!player.getWornHelmet().nbt().hasKey("groups")) {
       system.systemMessage(player, "<e>You do not have any groups!");
     } else if (groupIndex < 0) {
       system.systemMessage(player, "<e>Group <eh>" + groupName + "<e> does not exist!");
@@ -133,7 +133,7 @@ function initModule(system) {
    **/
   function hasGroup(sender, receiver, groupName) {
     var result = false;
-    var nbt = receiver.getWornChestplate().nbt();
+    var nbt = receiver.getWornHelmet().nbt();
     if (nbt.hasKey("groups")) {
       var groupIndex = system.getGroupArray(receiver).indexOf(groupName);
       if (groupIndex > -1) {
@@ -160,7 +160,7 @@ function initModule(system) {
   };
   return {
     name: "groupMessaging",
-    type: 3,
+    type: 13,
     command: "g",
     modeID: "group",
     helpMessage: "<n>!g <nh>-<n> Groups",
@@ -170,8 +170,8 @@ function initModule(system) {
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var foundPlayers = [];
       var groupName = "";
-      if (entity.getWornChestplate().nbt().getTagList("groups").tagCount() > 0) {
-        var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
+      if (entity.getWornHelmet().nbt().getTagList("groups").tagCount() > 0) {
+        var group = entity.getWornHelmet().nbt().getTagList("groups").getCompoundTag(activeChat);
         groupName = group.getString("groupName");
         var members = system.getStringArray(group.getStringList("members"));
         var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 60);
@@ -187,7 +187,7 @@ function initModule(system) {
         foundPlayers.forEach(player => {
           if (system.hasComputer(player)) {
             if (hasGroup(entity, player, groupName)) {
-              groupMessage(player, groupName, (entity.getData("skyhighocs:dyn/disguised")) ? system.disguisedName : system.name, message);
+              groupMessage(player, groupName, (entity.getData("skyhighocs:dyn/disguised")) ? system.disguisedName : system.cyberName, message);
             };
           };
         });
@@ -235,8 +235,8 @@ function initModule(system) {
       };
     },
     chatInfo: function (player, manager, chat) {
-      if (player.getWornChestplate().nbt().hasKey("groups")) {
-        if (player.getWornChestplate().nbt().getTagList("groups").tagCount() > 0) {
+      if (player.getWornHelmet().nbt().hasKey("groups")) {
+        if (player.getWornHelmet().nbt().getTagList("groups").tagCount() > 0) {
           var groupList = system.getGroupArray(player);
           if (typeof chat === "string") {
             var chatIndex = groupList.indexOf(chat);

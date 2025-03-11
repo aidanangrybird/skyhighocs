@@ -30,11 +30,11 @@ var months = [
 ];
 
 function asssignID(entity, manager, cyberName) {
-  manager.setString(entity.getWornLeggings().nbt(), "cyberID", cyberName);
-  if (!entity.getWornLeggings().nbt().hasKey("computerID")) {
+  manager.setString(entity.getWornHelmet().nbt(), "cyberID", cyberName);
+  if (!entity.getWornHelmet().nbt().hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
       var computerID = Math.random().toFixed(8).toString().substring(2);
-      manager.setString(entity.getWornLeggings().nbt(), "computerID", computerID);
+      manager.setString(entity.getWornHelmet().nbt(), "computerID", computerID);
     };
   };
 };
@@ -45,7 +45,7 @@ function asssignID(entity, manager, cyberName) {
  * @returns If the entity is cyber
  **/
 function isCyber(entity) {
-  return entity.getWornLeggings().nbt().hasKey("cyberID");
+  return entity.getWornHelmet().nbt().hasKey("cyberID");
 };
 
 /**
@@ -54,7 +54,7 @@ function isCyber(entity) {
  * @returns The Cyber ID
  **/
 function getID(entity) {
-  return entity.getWornLeggings().nbt().getString("cyberID");
+  return entity.getWornHelmet().nbt().getString("cyberID");
 };
 
 /**
@@ -97,7 +97,7 @@ function getStringArray(nbtList) {
  * @returns Array of group names
  **/
 function getGroupArray(entity) {
-  var groupList = entity.getWornLeggings().nbt().getTagList("groups");
+  var groupList = entity.getWornHelmet().nbt().getTagList("groups");
   var count = groupList.tagCount();
   var result = [];
   for (i=0;i<count;i++) {
@@ -111,7 +111,7 @@ function getGroupArray(entity) {
  * @returns Array of group names and member counts
  **/
 function getGroupArrayMembers(entity) {
-  var groupList = entity.getWornLeggings().nbt().getTagList("groups");
+  var groupList = entity.getWornHelmet().nbt().getTagList("groups");
   var count = groupList.tagCount();
   var result = [];
   for (i=0;i<count;i++) {
@@ -132,19 +132,23 @@ function getGroupArrayMembers(entity) {
  * @param {string} moduleName - Module name to disable
  **/
 function disableModule(player, manager, moduleList, moduleName) {
-  if (moduleList.indexOf(moduleName) > -1) {
-    if (!player.getWornLeggings().nbt().hasKey("disabledModules")) {
+  var moduleIndex = moduleList.indexOf(moduleName);
+  if (moduleIndex > -1) {
+    if (!player.getWornHelmet().nbt().hasKey("disabledModules")) {
       var disabledModules = manager.newTagList();
       manager.appendString(disabledModules, moduleName);
-      manager.setTagList(player.getWornLeggings().nbt(), "disabledModules", disabledModules);
+      manager.setTagList(player.getWornHelmet().nbt(), "disabledModules", disabledModules);
       systemMessage(player, "<s>Module <sh>" + moduleName + "<s> disabled!");
     } else {
-      var disabledModules = player.getWornLeggings().nbt().getStringList("disabledModules");
+      var disabledModules = player.getWornHelmet().nbt().getStringList("disabledModules");
       var disabledModulesIndex = getStringArray(disabledModules).indexOf(moduleName);
       if (disabledModulesIndex > -1) {
         systemMessage(player, "<e>You have already disabled module <eh>" + moduleName + "<e>!");
       } else {
         systemMessage(player, "<s>Module <sh>" + moduleName + "<s> disabled!");
+        if (modules[moduleIndex].hasOwnProperty(whenDisable)) {
+          modules[moduleIndex].whenDisable(player, manager);
+        };
         manager.appendString(disabledModules, moduleName);
       };
     };
@@ -161,10 +165,10 @@ function disableModule(player, manager, moduleList, moduleName) {
  **/
 function enableModule(player, manager, moduleList, moduleName) {
   if (moduleList.indexOf(moduleName) > -1) {
-    if (!player.getWornLeggings().nbt().hasKey("disabledModules")) {
+    if (!player.getWornHelmet().nbt().hasKey("disabledModules")) {
       systemMessage(player, "<e>You have no disabled modules to enable!");
     } else {
-      var disabledModules = player.getWornLeggings().nbt().getStringList("disabledModules");
+      var disabledModules = player.getWornHelmet().nbt().getStringList("disabledModules");
       if (disabledModules.tagCount() == 0) {
         systemMessage(player, "<e>You have no disabled modules to enable!");
       } else {
@@ -242,24 +246,24 @@ function logMessage(message) {
  * @param {string} cyberName - Required, you'll be happy that is a thing or else debugging is painful
  * @param {string} satellite - Required, or other cybers will not recognize this cyber as a cyber
  **/
-function initcyber(moduleList, cyberName, color) {
+function initSystem(moduleList, name, normalName, color) {
   var cyberInstance = this;
-  //Type 11 - commands (can have data management)
-  var type11Specs = ["command", "commandHandler", "helpMessage"];
-  //Type 12 - messaging only
-  var type12Specs = ["messageHandler", "chatModeInfo", "chatInfo", "modeID"];
-  //Type 13 - commands messaging and data management
-  var type13Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage", "modeID"];
+  //Type 10 - commands (can have data management)
+  var type10Specs = ["command", "commandHandler", "helpMessage"];
+  //Type 11 - messaging only
+  var type11Specs = ["messageHandler", "chatModeInfo", "chatInfo", "modeID"];
+  //Type 12 - commands messaging and data management
+  var type12Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage", "modeID"];
+  //Type 13 - commands (can have data management) with disabled thing
+  var type13Specs = ["command", "commandHandler", "helpMessage", "powers", "whenDisabled"];
   //Type 14 - cyber module
-  var type14Specs = ["isModifierEnabled", "isModifierDisabled", "powers"];
+  var type14Specs = ["command", "commandHandler", "helpMessage", "isModifierEnabled", "isModifierDisabled", "powers", "whenDisabled"];
   //Type 15 - cyber module
-  var type15Specs = ["keyBinds", "isKeyBindEnabled", "isKeyBindDisabled", "isModifierEnabled", "isModifierDisabled", "powers"];
+  var type15Specs = ["command", "commandHandler", "helpMessage", "keyBinds", "isKeyBindEnabled", "isKeyBindDisabled", "isModifierEnabled", "isModifierDisabled", "powers", "whenDisabled"];
   /** @var modules - Array of modules */
   var modules = [];
   /** @var moduleNames - Module names */
   var moduleNames = [];
-  /** @var cyberModules - cyber module names */
-  var cyberModules = [];
   /** @var commands - Command prefixes */
   var commands = [];
   /** @var commandIndexes - Indexes of command handlers */
@@ -273,7 +277,11 @@ function initcyber(moduleList, cyberName, color) {
   /** @var keyBindIndexes - Indexes of power modules */
   var keyBindIndexes = [];
   /** @var powerArray - Array of powers to add */
-  var powerArray = ["skyhighheroes:astro_system", "skyhighheroes:astro_body"];
+  var powerArray = ["skyhighocs:cyber_system", "skyhighocs:cyber_body"];
+  /** @var disguisedName - disguised name */
+  var disguisedName = normalName;
+  /** @var cyberName - cyber name */
+  var cyberName = name;
   var hasError = false;
   var errors = [];
   logMessage("Attempting to initialize " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on cyber " + cyberName + "!");
@@ -282,8 +290,8 @@ function initcyber(moduleList, cyberName, color) {
       var moduleInit = module.initModule(cyberInstance);
       if (moduleInit.hasOwnProperty("type")) {
         switch (moduleInit.type) {
-          case 1:
-            type1Specs.forEach(spec => {
+          case 10:
+            type10Specs.forEach(spec => {
               if (!moduleInit.hasOwnProperty(spec)) {
                 errors.push(spec);
                 hasError = true;
@@ -304,8 +312,8 @@ function initcyber(moduleList, cyberName, color) {
             };
             hasError = false;
             break;
-          case 2:
-            type2Specs.forEach(spec => {
+          case 11:
+            type11Specs.forEach(spec => {
               if (!moduleInit.hasOwnProperty(spec)) {
                 errors.push(spec);
                 hasError = true;
@@ -326,8 +334,8 @@ function initcyber(moduleList, cyberName, color) {
             };
             hasError = false;
             break;
-          case 3:
-            type3Specs.forEach(spec => {
+          case 12:
+            type12Specs.forEach(spec => {
               if (!moduleInit.hasOwnProperty(spec)) {
                 errors.push(spec);
                 hasError = true;
@@ -350,8 +358,8 @@ function initcyber(moduleList, cyberName, color) {
             };
             hasError = false;
             break;
-          case 5:
-            type5Specs.forEach(spec => {
+          case 13:
+            type13Specs.forEach(spec => {
               if (!moduleInit.hasOwnProperty(spec)) {
                 errors.push(spec);
                 hasError = true;
@@ -366,7 +374,30 @@ function initcyber(moduleList, cyberName, color) {
             } else {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
-              cyberModules.push(moduleInit.name);
+              commands.push(moduleInit.command);
+              commandIndexes.push(modules.length-1);
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+            };
+            hasError = false;
+            break;
+          case 14:
+            type14Specs.forEach(spec => {
+              if (!moduleInit.hasOwnProperty(spec)) {
+                errors.push(spec);
+                hasError = true;
+              };
+            });
+            if (hasError) {
+              logMessage("Module \"" + moduleInit.name + "\" cannot be initialized!");
+              errors.forEach(error => {
+                logMessage("Module is missing the \"" + error + "\" specification!");
+              });
+              errors = [];
+            } else {
+              modules.push(moduleInit);
+              moduleNames.push(moduleInit.name);
+              commands.push(moduleInit.command);
+              commandIndexes.push(modules.length-1);
               var modulePowers = moduleInit.powers;
               modulePowers.forEach(power => {
                 powerArray.push(power);
@@ -376,8 +407,8 @@ function initcyber(moduleList, cyberName, color) {
             };
             hasError = false;
             break;
-          case 6:
-            type6Specs.forEach(spec => {
+          case 15:
+            type15Specs.forEach(spec => {
               if (!moduleInit.hasOwnProperty(spec)) {
                 errors.push(spec);
                 hasError = true;
@@ -392,7 +423,8 @@ function initcyber(moduleList, cyberName, color) {
             } else {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
-              cyberModules.push(moduleInit.name);
+              commands.push(moduleInit.command);
+              commandIndexes.push(modules.length-1);
               var modulePowers = moduleInit.powers;
               modulePowers.forEach(power => {
                 powerArray.push(power);
@@ -453,7 +485,7 @@ function initcyber(moduleList, cyberName, color) {
     });
     systemMessage(entity, "<n>astrOS");
     systemMessage(entity, modulesMessage);
-    systemMessage(entity, "<n>computerID: <nh>" + entity.getWornLeggings().nbt().getString("computerID"));
+    systemMessage(entity, "<n>computerID: <nh>" + entity.getWornHelmet().nbt().getString("computerID"));
   };
   function status(entity) {
     var date = new Date();
@@ -653,6 +685,7 @@ function initcyber(moduleList, cyberName, color) {
                 break;
               case "disable":
                 disableModule(entity, manager, moduleNames, args[1]);
+                whenDisable(entity, manager, moduleNames, args[1]);
                 break;
               case "enable":
                 enableModule(entity, manager, moduleNames, args[1]);
@@ -682,7 +715,12 @@ function initcyber(moduleList, cyberName, color) {
           };
         };
       };
-      manager.setData(entity, "fiskheroes:disguise", cyberName);
+      if (typeof human === "string" && entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
+        manager.setData(entity, "fiskheroes:disguise", human);
+      };
+      if (typeof waveChange === "string" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+        manager.setData(entity, "fiskheroes:disguise", waveChange);
+      };
       var x = entity.posX();
       var y = entity.posY();
       var z = entity.posZ();
