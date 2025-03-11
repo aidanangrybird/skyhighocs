@@ -1,0 +1,79 @@
+{
+  "name": "Shield System",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:shield|shield_left_arm": {
+      "shield": {
+        "health": 300.0,
+        "regeneration": 25.0,
+        "recoveryDelay": 200
+      },
+      "coverage": {
+        "yawRadius": 100.0,
+        "pitchRadius": 160.0,
+        "yawOffset": -40.0,
+        "pitchOffset": 0.0
+      },
+      "knockback": 0.0,
+      "isToggle": false,
+      "soundEvents": {
+        "BLOCK_START": "skyhighheroes:forcefield",
+        "DEFLECT": "skyhighheroes:forcefield_deflect"
+      }
+    },
+    "fiskheroes:shield|shield_right_arm": {
+      "shield": {
+        "health": 300.0,
+        "regeneration": 25.0,
+        "recoveryDelay": 200
+      },
+      "coverage": {
+        "yawRadius": 100.0,
+        "pitchRadius": 160.0,
+        "yawOffset": 40.0,
+        "pitchOffset": 0.0
+      },
+      "knockback": 0.0,
+      "isToggle": false,
+      "soundEvents": {
+        "BLOCK_START": "skyhighheroes:forcefield",
+        "DEFLECT": "skyhighheroes:forcefield_deflect"
+      }
+    },
+    "fiskheroes:shield|shield_both_arms": {
+      "shield": {
+        "health": 300.0,
+        "regeneration": 25.0,
+        "recoveryDelay": 200
+      },
+      "coverage": {
+        "yawRadius": 220.0,
+        "pitchRadius": 160.0,
+        "yawOffset": 0.0,
+        "pitchOffset": 0.0
+      },
+      "knockback": 0.0,
+      "isToggle": false,
+      "soundEvents": {
+        "BLOCK_START": "skyhighheroes:forcefield",
+        "DEFLECT": "skyhighheroes:forcefield_deflect"
+      }
+    },
+    "fiskheroes:transformation|shield_left_arm": {
+        "transformation": {
+          "toggleData": "skyhighocs:dyn/shield_left_arm",
+          "timerData": "skyhighocs:dyn/shield_left_arm_timer",
+          "time": 60
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|shield_right_arm": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/shield_right_arm",
+        "timerData": "skyhighocs:dyn/shield_right_arm_timer",
+        "time": 60
+      },
+      "isToggle": true
+    }
+  }
+}
