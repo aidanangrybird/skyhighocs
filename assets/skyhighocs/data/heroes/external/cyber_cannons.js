@@ -3,7 +3,9 @@
  * @param system - Required
  **/
 function initModule(system) {
-  //All of the required functions and stuff go here
+  // Charged Beam = 0
+  // Heat Vision = 1
+  // Energy Projection = 2
   return {
     name: "cannonSystem",
     type: 15,
@@ -12,41 +14,70 @@ function initModule(system) {
     helpMessage: "<n>!cns <nh>-<n> Communications",
     disabledMessage: "<e>Module <eh>communicationsSystem<e> is disabled!",
     keyBinds: function (hero) {
-      hero.addKeyBind("HEAT_VISION", "Heat Vision", 2);
-      hero.addKeyBind("EYE_CANNONS", "Eye Cannons", 2);
+      hero.addKeyBindFunc("CANNON_SWITCH", (player, manager) => {
+        manager.setData(player, "skyhighocs:dyn/cannon_type", player.getData("skyhighocs:dyn/cannon_type") + 1);
+        if (player.getData("skyhighocs:dyn/cannon_type") > 3) {
+          manager.setData(player, "skyhighocs:dyn/cannon_type", 0);
+        };
+        return true;
+      }, "Switch beam type", 3);
+      hero.addKeyBind("CANNONS", "Cannons", 3);
       hero.addKeyBind("CHARGED_BEAM", "Charged Beam", 3);
+      hero.addKeyBind("HEAT_VISION", "Heat Vision", 3);
+      hero.addKeyBind("ENERGY_PROJECTION", "Energy Projection", 3);
+      hero.addKeyBind("EYE_CANNONS", "Eye Cannons", 3);
       hero.addKeyBind("BODY_CANNONS", "Body Cannons", 3);
-      hero.addKeyBind("ENERGY_PROJECTION", "Energy Projection", 4);
-      hero.addKeyBind("LEFT_ARM_CANNON", "Arm Cannons", 4);
-      hero.addKeyBind("RIGHT_ARM_CANNON", "Arm Cannons", 4);
+      hero.addKeyBind("LEFT_ARM_CANNON", "Left Arm Cannon", 3);
+      hero.addKeyBind("RIGHT_ARM_CANNON", "Right Arm Cannon", 3);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
-      if (keyBind == "HEAT_VISION") {
-        result = entity.getData("skyhighocs:dyn/cannon_eye_timer") == 1;
+      var nbt = entity.getWornHelmet().nbt();
+      var eyes = (nbt.getByte("cannonsEyes") == entity.getData("skyhighocs:dyn/cannon_type"));
+      var body = (nbt.getByte("cannonsBody") == entity.getData("skyhighocs:dyn/cannon_type"));
+      var arms = (nbt.getByte("cannonsArms") == entity.getData("skyhighocs:dyn/cannon_type"));
+      var eyesOn = (nbt.getByte("cannonsEyes") == entity.getData("skyhighocs:dyn/cannon_type")) && (entity.getData("skyhighocs:dyn/cannon_eye_timer") == 1);
+      var bodyOn = (nbt.getByte("cannonsBody") == entity.getData("skyhighocs:dyn/cannon_type")) && (entity.getData("skyhighocs:dyn/cannon_body_timer") == 1);
+      var armsOn = (nbt.getByte("cannonsArms") == entity.getData("skyhighocs:dyn/cannon_type")) && (entity.getData("skyhighocs:dyn/cannon_left_arm_timer") == 1 && entity.getData("skyhighocs:dyn/cannon_right_arm_timer") == 1);
+      if (keyBind == "CANNON_SWITCH") {
+        result = entity.isSneaking();
       };
-      if (keyBind == "EYE_CANNONS") {
-        result = true;
-      };
-      if (keyBind == "CHARGED_BEAM") {
-        result = entity.getData("skyhighocs:dyn/cannon_body_timer") == 1;
-      };
-      if (keyBind == "BODY_CANNONS") {
-        result = true;
-      };
-      if (keyBind == "ENERGY_PROJECTION") {
-        result = entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/cannon_left_arm_timer") == 1 && entity.getData("skyhighocs:dyn/cannon_right_arm_timer") == 1;
-      };
-      if (keyBind == "LEFT_ARM_CANNON") {
-        result = true;
-      };
-      if (keyBind == "RIGHT_ARM_CANNON") {
-        result = true;
+      if (!entity.isSneaking()) {
+        if (keyBind == "CANNONS") {
+          result = true;
+        };
+        if (keyBind == "HEAT_VISION") {
+          result = eyesOn || bodyOn || armsOn;
+        };
+        if (keyBind == "CHARGED_BEAM") {
+          result = eyesOn || bodyOn || armsOn;
+        };
+        if (keyBind == "ENERGY_PROJECTION") {
+          result = eyesOn || bodyOn || armsOn;
+        };
+        if (keyBind == "EYE_CANNONS") {
+          result = eyes;
+        };
+        if (keyBind == "BODY_CANNONS") {
+          result = body;
+        };
+        if (keyBind == "LEFT_ARM_CANNON") {
+          result = arms;
+        };
+        if (keyBind == "RIGHT_ARM_CANNON") {
+          result = arms;
+        };
       };
       return result;
     },
     isKeyBindDisabled: function (entity, keyBind) {
       result = false;
+      if (keyBind == "CANNON_SWITCH") {
+        result = false;
+      };
+      if (keyBind == "CANNONS") {
+        result = false;
+      };
       if (keyBind == "HEAT_VISION") {
         result = false;
       };
@@ -72,14 +103,24 @@ function initModule(system) {
     },
     isModifierEnabled: function (entity, modifier) {
       result = false;
+      var nbt = entity.getWornHelmet().nbt();
+      var eyes = (nbt.getByte("cannonsEyes") == entity.getData("skyhighocs:dyn/cannon_type")) ? "T" : "F";
+      var body = (nbt.getByte("cannonsBody") == entity.getData("skyhighocs:dyn/cannon_type")) ? "T" : "F";
+      var arms = (nbt.getByte("cannonsArms") == entity.getData("skyhighocs:dyn/cannon_type")) ? "T" : "F";
       if (modifier.name() == "fiskheroes:heat_vision") {
-        result = true;
+        if (modifier.id() == "cannons_" + eyes + body + arms) {
+          result = true;
+        };
       };
       if (modifier.name() == "fiskheroes:charged_beam") {
-        result = true;
+        if (modifier.id() == "cannons_" + eyes + body + arms) {
+          result = true;
+        };
       };
       if (modifier.name() == "fiskheroes:energy_projection") {
-        result = true;
+        if (modifier.id() == "cannons_" + eyes + body + arms) {
+          result = true;
+        };
       };
       if (modifier.name() == "fiskheroes:transformation") {
         result = true;
@@ -104,23 +145,27 @@ function initModule(system) {
     },
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 4) {
+        var nbt = entity.getWornHelmet().nbt();
         switch (arguments[1]) {
           case "eyes":
             switch (arguments[2]) {
               case "charged":
+                manager.setByte(nbt, "cannonsEyes", 0);
                 systemMessage(entity, "<n>Will set eyes to charged beam!");
                 break;
               case "heat":
+                manager.setByte(nbt, "cannonsEyes", 1);
                 systemMessage(entity, "<n>Will set eyes to heat vision!");
                 break;
-              case "enproj":
+              case "engproj":
+                manager.setByte(nbt, "cannonsEyes", 2);
                 systemMessage(entity, "<n>Will set eyes to energy projection!");
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Eye cannons commands:");
                 system.systemMessage(entity, "<n>!cns eyes charged <nh>-<n> Sets eye cannons to charged beam!");
                 system.systemMessage(entity, "<n>!cns eyes heat <nh>-<n> Sets eye cannons to heat vision!");
-                system.systemMessage(entity, "<n>!cns eyes enproj <nh>-<n> Sets eye cannons to energy projection!");
+                system.systemMessage(entity, "<n>!cns eyes engproj <nh>-<n> Sets eye cannons to energy projection!");
                 system.systemMessage(entity, "<n>!cns eyes help <nh>-<n> Shows eye cannons commands");
                 system.systemMessage(entity, "<n>!cns help <nh>-<n> Shows cannons commands");
                 break;
@@ -129,19 +174,22 @@ function initModule(system) {
           case "arms":
             switch (arguments[2]) {
               case "charged":
+                manager.setByte(nbt, "cannonsArms", 0);
                 systemMessage(entity, "<n>Will set arms to charged beam!");
                 break;
               case "heat":
+                manager.setByte(nbt, "cannonsArms", 1);
                 systemMessage(entity, "<n>Will set arms to heat vision!");
                 break;
-              case "enproj":
+              case "engproj":
+                manager.setByte(nbt, "cannonsArms", 2);
                 systemMessage(entity, "<n>Will set arms to energy projection!");
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Arm cannons commands:");
                 system.systemMessage(entity, "<n>!cns arms charged <nh>-<n> Sets arm cannons to charged beam!");
                 system.systemMessage(entity, "<n>!cns arms heat <nh>-<n> Sets arm cannons to heat vision!");
-                system.systemMessage(entity, "<n>!cns arms enproj <nh>-<n> Sets arm cannons to energy projection!");
+                system.systemMessage(entity, "<n>!cns arms engproj <nh>-<n> Sets arm cannons to energy projection!");
                 system.systemMessage(entity, "<n>!cns arms help <nh>-<n> Shows arm cannons commands");
                 system.systemMessage(entity, "<n>!cns help <nh>-<n> Shows cannons commands");
                 break;
@@ -150,19 +198,22 @@ function initModule(system) {
           case "body":
             switch (arguments[2]) {
               case "charged":
+                manager.setByte(nbt, "cannonsBody", 0);
                 systemMessage(entity, "<n>Will set body to charged beam!");
                 break;
               case "heat":
+                manager.setByte(nbt, "cannonsBody", 1);
                 systemMessage(entity, "<n>Will set body to heat vision!");
                 break;
-              case "enproj":
+              case "engproj":
+                manager.setByte(nbt, "cannonsBody", 2);
                 systemMessage(entity, "<n>Will set body to energy projection!");
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Body cannons commands:");
                 system.systemMessage(entity, "<n>!cns body charged <nh>-<n> Sets body cannons to charged beam!");
                 system.systemMessage(entity, "<n>!cns body heat <nh>-<n> Sets body cannons to heat vision!");
-                system.systemMessage(entity, "<n>!cns body enproj <nh>-<n> Sets body cannons to energy projection!");
+                system.systemMessage(entity, "<n>!cns body engproj <nh>-<n> Sets body cannons to energy projection!");
                 system.systemMessage(entity, "<n>!cns body help <nh>-<n> Shows body cannons commands");
                 system.systemMessage(entity, "<n>!cns help <nh>-<n> Shows cannons commands");
                 break;
@@ -181,38 +232,6 @@ function initModule(system) {
       } else {
         system.systemMessage(entity, "<e>Unknown <eh>comms<e> command! Try <eh>!cns help<e> for a list of commands!");
       };
-    },
-    isModifierEnabled: function (entity, modifier) {
-      result = false;
-      if (modifier.name() == "fiskheroes:heat_vision") {
-        result = true;
-      };
-      if (modifier.name() == "fiskheroes:energy_projection") {
-        result = true;
-      };
-      if (modifier.name() == "fiskheroes:charged_beam") {
-        result = true;
-      };
-      if (modifier.name() == "fiskheroes:transformation") {
-        result = true;
-      };
-      return result;
-    },
-    isModifierDisabled: function (entity, modifier) {
-      result = false;
-      if (modifier.name() == "fiskheroes:heat_vision") {
-        result = false;
-      };
-      if (modifier.name() == "fiskheroes:energy_projection") {
-        result = false;
-      };
-      if (modifier.name() == "fiskheroes:charged_beam") {
-        result = false;
-      };
-      if (modifier.name() == "fiskheroes:transformation") {
-        result = true;
-      };
-      return result;
     },
   };
 };

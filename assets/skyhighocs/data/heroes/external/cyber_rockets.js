@@ -13,25 +13,32 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>rocketSystem<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 4) {
+        var nbt = entity.getWornHelmet().nbt();
         switch(arguments[1]) {
           case "on":
             switch (arguments[2]) {
               case "aux":
+                manager.setBoolean(nbt, "rocketsAux", true);
                 manager.setData(entity, "skyhighocs:dyn/rocket_left_arm_booster", true);
                 manager.setData(entity, "skyhighocs:dyn/rocket_right_arm_booster", true);
                 manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_booster", true);
                 manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_booster", true);
                 break;
               case "body":
+                manager.setBoolean(nbt, "rocketsBody", true);
                 manager.setData(entity, "skyhighocs:dyn/rockets_body", true);
                 break;
               case "legs":
+                manager.setBoolean(nbt, "rocketsLegs", true);
                 manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_main", true);
                 manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_main", true);
                 manager.setData(entity, "skyhighocs:dyn/rocket_left_leg", true);
                 manager.setData(entity, "skyhighocs:dyn/rocket_right_leg", true);
                 break;
               case "*":
+                manager.setBoolean(nbt, "rocketsAux", true);
+                manager.setBoolean(nbt, "rocketsBody", true);
+                manager.setBoolean(nbt, "rocketsLegs", true);
                 manager.setData(entity, "skyhighocs:dyn/rocket_left_arm_booster", true);
                 manager.setData(entity, "skyhighocs:dyn/rocket_right_arm_booster", true);
                 manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_main", true);
@@ -56,21 +63,27 @@ function initModule(system) {
           case "off":
             switch (arguments[2]) {
               case "aux":
+                manager.setBoolean(nbt, "rocketsAux", false);
                 manager.setData(entity, "skyhighocs:dyn/rocket_left_arm_booster", false);
                 manager.setData(entity, "skyhighocs:dyn/rocket_right_arm_booster", false);
                 manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_booster", false);
                 manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_booster", false);
                 break;
               case "body":
+                manager.setBoolean(nbt, "rocketsBody", false);
                 manager.setData(entity, "skyhighocs:dyn/rockets_body", false);
                 break;
               case "legs":
+                manager.setBoolean(nbt, "rocketLegs", false);
                 manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_main", false);
                 manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_main", false);
                 manager.setData(entity, "skyhighocs:dyn/rocket_left_leg", false);
                 manager.setData(entity, "skyhighocs:dyn/rocket_right_leg", false);
                 break;
               case "*":
+                manager.setBoolean(nbt, "rocketsAux", false);
+                manager.setBoolean(nbt, "rocketsBody", false);
+                manager.setBoolean(nbt, "rocketsLegs", false);
                 manager.setData(entity, "skyhighocs:dyn/rocket_left_arm_booster", false);
                 manager.setData(entity, "skyhighocs:dyn/rocket_right_arm_booster", false);
                 manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_main", false);
@@ -108,9 +121,10 @@ function initModule(system) {
     },
     isModifierEnabled: function (entity, modifier) {
       result = false;
-      var aux = (entity.getData("skyhighocs:dyn/rocket_left_arm_booster") && entity.getData("skyhighocs:dyn/rocket_right_arm_booster") && entity.getData("skyhighocs:dyn/rocket_left_leg_booster") && entity.getData("skyhighocs:dyn/rocket_right_leg_booster")) ? "T" : "F";
-      var body = (entity.getData("skyhighocs:dyn/rockets_body")) ? "T" : "F";
-      var legs = (entity.getData("skyhighocs:dyn/rocket_left_leg_main") && entity.getData("skyhighocs:dyn/rocket_right_leg_main") && entity.getData("skyhighocs:dyn/rocket_left_leg") && entity.getData("skyhighocs:dyn/rocket_right_leg")) ? "T" : "F";
+      var nbt = entity.getWornHelmet().nbt();
+      var aux = (nbt.getBoolean("rocketsAux")) ? "T" : "F";
+      var body = (nbt.getBoolean("rocketsBody")) ? "T" : "F";
+      var legs = (nbt.getBoolean("rocketsLegs")) ? "T" : "F";
       if (modifier.name() == "fiskheroes:controlled_flight") {
         if (modifier.id() == "rocket_" + aux + body + legs) {
           result = true;

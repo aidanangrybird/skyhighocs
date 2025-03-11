@@ -74,9 +74,6 @@ function initModule(system) {
     },
     isModifierEnabled: function (entity, modifier) {
       result = false;
-      if (modifier.name() == "fiskheroes:blade") {
-        result = true;
-      };
       if (modifier.name() == "fiskheroes:transformation") {
         result = true;
       };
@@ -84,9 +81,6 @@ function initModule(system) {
     },
     isModifierDisabled: function (entity, modifier) {
       result = false;
-      if (modifier.name() == "fiskheroes:blade") {
-        result = false;
-      };
       if (modifier.name() == "fiskheroes:transformation") {
         result = true;
       };
