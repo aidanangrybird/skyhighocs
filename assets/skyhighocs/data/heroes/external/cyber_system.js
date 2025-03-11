@@ -248,6 +248,7 @@ function logMessage(message) {
  **/
 function initSystem(moduleList, name, normalName, color) {
   var cyberInstance = this;
+  primaryPiece = 1;
   //Type 10 - commands (can have data management)
   /** @var type10Specs - Type 16 Specs */
   var type10Specs = ["command", "commandHandler", "helpMessage"];
@@ -766,6 +767,7 @@ function initSystem(moduleList, name, normalName, color) {
         asssignID(entity, manager, cyberName, color);
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
+        manager.setData(entity, "skyhighheroes:dyn/primary_piece", primaryPiece);
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
         if (!(entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == disguisedName)) {
