@@ -26,14 +26,14 @@ function initModule(system) {
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Communications activate commands:");
-                system.systemMessage(entity, "<n>!comms on aux <nh>-<n> Activates satellite");
-                system.systemMessage(entity, "<n>!comms on body <nh>-<n> Activates antenna");
-                system.systemMessage(entity, "<n>!comms on legs <nh>-<n> Activates satellite rain mode");
+                system.systemMessage(entity, "<n>!comms on sat <nh>-<n> Activates satellite");
+                system.systemMessage(entity, "<n>!comms on ant <nh>-<n> Activates antenna");
+                system.systemMessage(entity, "<n>!comms on satRain <nh>-<n> Activates satellite rain mode");
                 system.systemMessage(entity, "<n>!comms help <nh>-<n> Shows communicationsSystem commands");
                 break;
             };
             break;
-          case "on":
+          case "off":
             switch (arguments[2]) {
               case "sat":
                 manager.setData(entity, "skyhighheroes:dyn/comms_satellite", false);
@@ -46,9 +46,9 @@ function initModule(system) {
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Communications deactivate commands:");
-                system.systemMessage(entity, "<n>!comms on aux <nh>-<n> Deactivate satellite");
-                system.systemMessage(entity, "<n>!comms on body <nh>-<n> Deactivate antenna");
-                system.systemMessage(entity, "<n>!comms on legs <nh>-<n> Deactivate satellite rain mode");
+                system.systemMessage(entity, "<n>!comms off sat <nh>-<n> Deactivate satellite");
+                system.systemMessage(entity, "<n>!comms off ant <nh>-<n> Deactivate antenna");
+                system.systemMessage(entity, "<n>!comms off satRain <nh>-<n> Deactivate satellite rain mode");
                 system.systemMessage(entity, "<n>!comms help <nh>-<n> Shows communicationsSystem commands");
                 break;
             };

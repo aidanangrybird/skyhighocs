@@ -17,7 +17,8 @@ function initModule(system) {
       hero.addKeyBind("CHARGED_BEAM", "Charged Beam", 3);
       hero.addKeyBind("BODY_CANNONS", "Body Cannons", 3);
       hero.addKeyBind("ENERGY_PROJECTION", "Energy Projection", 4);
-      hero.addKeyBind("ARM_CANNONS", "Arm Cannons", 4);
+      hero.addKeyBind("LEFT_ARM_CANNON", "Arm Cannons", 4);
+      hero.addKeyBind("RIGHT_ARM_CANNON", "Arm Cannons", 4);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
@@ -34,9 +35,12 @@ function initModule(system) {
         result = true;
       };
       if (keyBind == "ENERGY_PROJECTION") {
-        result = entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/cannon_arms_timer") == 1;
+        result = entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/cannon_left_arm_timer") == 1 && entity.getData("skyhighocs:dyn/cannon_right_arm_timer") == 1;
       };
-      if (keyBind == "ARM_CANNONS") {
+      if (keyBind == "LEFT_ARM_CANNON") {
+        result = true;
+      };
+      if (keyBind == "RIGHT_ARM_CANNON") {
         result = true;
       };
       return result;
@@ -58,7 +62,10 @@ function initModule(system) {
       if (keyBind == "ENERGY_PROJECTION") {
         result = false;
       };
-      if (keyBind == "ARM_CANNONS") {
+      if (keyBind == "LEFT_ARM_CANNON") {
+        result = false;
+      };
+      if (keyBind == "RIGHT_ARM_CANNON") {
         result = false;
       };
       return result;
@@ -98,43 +105,66 @@ function initModule(system) {
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 4) {
         switch (arguments[1]) {
-          case "on":
+          case "eyes":
             switch (arguments[2]) {
-              case "sat":
-                manager.setData(entity, "skyhighheroes:dyn/comms_satellite", true);
+              case "charged":
+                systemMessage(entity, "<n>Will set eyes to charged beam!");
                 break;
-              case "ant":
-                manager.setData(entity, "skyhighheroes:dyn/comms_antenna", true);
+              case "heat":
+                systemMessage(entity, "<n>Will set eyes to heat vision!");
                 break;
-              case "satRain":
-                manager.setData(entity, "skyhighheroes:dyn/comms_satellite_rain_mode", true);
+              case "enproj":
+                systemMessage(entity, "<n>Will set eyes to energy projection!");
                 break;
               case "help":
-                system.systemMessage(entity, "<n>Communications activate commands:");
-                system.systemMessage(entity, "<n>!cns on aux <nh>-<n> Activates satellite");
-                system.systemMessage(entity, "<n>!cns on body <nh>-<n> Activates antenna");
-                system.systemMessage(entity, "<n>!cns on legs <nh>-<n> Activates satellite rain mode");
-                system.systemMessage(entity, "<n>!cns help <nh>-<n> Shows communicationsSystem commands");
+                system.systemMessage(entity, "<n>Eye cannons commands:");
+                system.systemMessage(entity, "<n>!cns eyes charged <nh>-<n> Sets eye cannons to charged beam!");
+                system.systemMessage(entity, "<n>!cns eyes heat <nh>-<n> Sets eye cannons to heat vision!");
+                system.systemMessage(entity, "<n>!cns eyes enproj <nh>-<n> Sets eye cannons to energy projection!");
+                system.systemMessage(entity, "<n>!cns eyes help <nh>-<n> Shows eye cannons commands");
+                system.systemMessage(entity, "<n>!cns help <nh>-<n> Shows cannons commands");
                 break;
             };
             break;
-          case "on":
+          case "arms":
             switch (arguments[2]) {
-              case "sat":
-                manager.setData(entity, "skyhighheroes:dyn/comms_satellite", false);
+              case "charged":
+                systemMessage(entity, "<n>Will set arms to charged beam!");
                 break;
-              case "ant":
-                manager.setData(entity, "skyhighheroes:dyn/comms_antenna", false);
+              case "heat":
+                systemMessage(entity, "<n>Will set arms to heat vision!");
                 break;
-              case "satRain":
-                manager.setData(entity, "skyhighheroes:dyn/comms_satellite_rain_mode", false);
+              case "enproj":
+                systemMessage(entity, "<n>Will set arms to energy projection!");
                 break;
               case "help":
-                system.systemMessage(entity, "<n>Communications deactivate commands:");
-                system.systemMessage(entity, "<n>!cns on aux <nh>-<n> Deactivate satellite");
-                system.systemMessage(entity, "<n>!cns on body <nh>-<n> Deactivate antenna");
-                system.systemMessage(entity, "<n>!cns on legs <nh>-<n> Deactivate satellite rain mode");
-                system.systemMessage(entity, "<n>!cns help <nh>-<n> Shows communicationsSystem commands");
+                system.systemMessage(entity, "<n>Arm cannons commands:");
+                system.systemMessage(entity, "<n>!cns arms charged <nh>-<n> Sets arm cannons to charged beam!");
+                system.systemMessage(entity, "<n>!cns arms heat <nh>-<n> Sets arm cannons to heat vision!");
+                system.systemMessage(entity, "<n>!cns arms enproj <nh>-<n> Sets arm cannons to energy projection!");
+                system.systemMessage(entity, "<n>!cns arms help <nh>-<n> Shows arm cannons commands");
+                system.systemMessage(entity, "<n>!cns help <nh>-<n> Shows cannons commands");
+                break;
+            };
+            break;
+          case "body":
+            switch (arguments[2]) {
+              case "charged":
+                systemMessage(entity, "<n>Will set body to charged beam!");
+                break;
+              case "heat":
+                systemMessage(entity, "<n>Will set body to heat vision!");
+                break;
+              case "enproj":
+                systemMessage(entity, "<n>Will set body to energy projection!");
+                break;
+              case "help":
+                system.systemMessage(entity, "<n>Body cannons commands:");
+                system.systemMessage(entity, "<n>!cns body charged <nh>-<n> Sets body cannons to charged beam!");
+                system.systemMessage(entity, "<n>!cns body heat <nh>-<n> Sets body cannons to heat vision!");
+                system.systemMessage(entity, "<n>!cns body enproj <nh>-<n> Sets body cannons to energy projection!");
+                system.systemMessage(entity, "<n>!cns body help <nh>-<n> Shows body cannons commands");
+                system.systemMessage(entity, "<n>!cns help <nh>-<n> Shows cannons commands");
                 break;
             };
             break;

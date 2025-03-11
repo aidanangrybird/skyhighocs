@@ -61,11 +61,20 @@
         "CHARGE": "fiskheroes:mk85_beam_charge"
       }
     },
-    "fiskheroes:transformation|cannon_arms": {
-      "key": "ARM_CANNONS",
+    "fiskheroes:transformation|cannon_left_arm": {
+      "key": "LEFT_ARM_CANNON",
         "transformation": {
-          "toggleData": "skyhighocs:dyn/cannon_arms",
-          "timerData": "skyhighocs:dyn/cannon_arms_timer",
+          "toggleData": "skyhighocs:dyn/cannon_left_arm",
+          "timerData": "skyhighocs:dyn/cannon_left_arm_timer",
+          "time": 60
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|cannon_right_arm": {
+      "key": "RIGHT_ARM_CANNON",
+        "transformation": {
+          "toggleData": "skyhighocs:dyn/cannon_right_arm",
+          "timerData": "skyhighocs:dyn/cannon_right_arm_timer",
           "time": 60
         },
         "isToggle": true

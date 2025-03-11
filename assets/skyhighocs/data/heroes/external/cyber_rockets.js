@@ -17,30 +17,30 @@ function initModule(system) {
           case "on":
             switch (arguments[2]) {
               case "aux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_booster", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_booster", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_booster", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_booster", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_arm_booster", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_arm_booster", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_booster", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_booster", true);
                 break;
               case "body":
-                manager.setData(entity, "skyhighheroes:dyn/rockets_body", true);
+                manager.setData(entity, "skyhighocs:dyn/rockets_body", true);
                 break;
               case "legs":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_main", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_main", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_leg", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_leg", true);
                 break;
               case "*":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_booster", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_booster", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_booster", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_booster", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg", true);
-                manager.setData(entity, "skyhighheroes:dyn/rockets_body", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_arm_booster", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_arm_booster", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_main", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_main", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_booster", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_booster", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_leg", true);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_leg", true);
+                manager.setData(entity, "skyhighocs:dyn/rockets_body", true);
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Rocket activate commands:");
@@ -56,30 +56,30 @@ function initModule(system) {
           case "off":
             switch (arguments[2]) {
               case "aux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_booster", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_booster", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_booster", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_booster", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_arm_booster", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_arm_booster", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_booster", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_booster", false);
                 break;
               case "body":
-                manager.setData(entity, "skyhighheroes:dyn/rockets_body", false);
+                manager.setData(entity, "skyhighocs:dyn/rockets_body", false);
                 break;
               case "legs":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_main", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_main", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_leg", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_leg", false);
                 break;
               case "*":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_booster", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_booster", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_booster", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_booster", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg", false);
-                manager.setData(entity, "skyhighheroes:dyn/rockets_body", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_arm_booster", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_arm_booster", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_main", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_main", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_booster", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_booster", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_left_leg", false);
+                manager.setData(entity, "skyhighocs:dyn/rocket_right_leg", false);
+                manager.setData(entity, "skyhighocs:dyn/rockets_body", false);
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Rocket deactivate commands:");
@@ -112,7 +112,7 @@ function initModule(system) {
       var body = (entity.getData("skyhighocs:dyn/rockets_body")) ? "T" : "F";
       var legs = (entity.getData("skyhighocs:dyn/rocket_left_leg_main") && entity.getData("skyhighocs:dyn/rocket_right_leg_main") && entity.getData("skyhighocs:dyn/rocket_left_leg") && entity.getData("skyhighocs:dyn/rocket_right_leg")) ? "T" : "F";
       if (modifier.name() == "fiskheroes:controlled_flight") {
-        if (modifier.id() == "rocket" + aux + body + legs) {
+        if (modifier.id() == "rocket_" + aux + body + legs) {
           result = true;
         };
       };
@@ -132,15 +132,15 @@ function initModule(system) {
       return result;
     },
     whenDisabled: function (entity, manager) {
-      manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_booster", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_booster", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_booster", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_booster", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg", false);
-      manager.setData(entity, "skyhighheroes:dyn/rockets_body", false);
+      manager.setData(entity, "skyhighocs:dyn/rocket_left_arm_booster", false);
+      manager.setData(entity, "skyhighocs:dyn/rocket_right_arm_booster", false);
+      manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_main", false);
+      manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_main", false);
+      manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_booster", false);
+      manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_booster", false);
+      manager.setData(entity, "skyhighocs:dyn/rocket_left_leg", false);
+      manager.setData(entity, "skyhighocs:dyn/rocket_right_leg", false);
+      manager.setData(entity, "skyhighocs:dyn/rockets_body", false);
     }
   };
 };
