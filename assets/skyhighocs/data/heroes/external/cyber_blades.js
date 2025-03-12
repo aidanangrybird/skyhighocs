@@ -8,8 +8,8 @@ function initModule(system) {
     name: "bladeSystem",
     type: 14,
     powers: ["skyhighocs:cyber_blades"],
-    command: "blds",
-    helpMessage: "<n>!blds <nh>-<n> Blades",
+    command: "blades",
+    helpMessage: "<n>!blades <nh>-<n> Blades",
     disabledMessage: "<e>Module <eh>bladeSystem<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 5) {
@@ -28,11 +28,11 @@ function initModule(system) {
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Blade activate commands:");
-                system.systemMessage(entity, "<n>!blds on * <nh>-<n> Activates both blades");
-                system.systemMessage(entity, "<n>!blds on left <nh>-<n> Activates left blade");
-                system.systemMessage(entity, "<n>!blds on right <nh>-<n> Activates right blade");
-                system.systemMessage(entity, "<n>!blds on help <nh>-<n> Shows Blade activate commands");
-                system.systemMessage(entity, "<n>!blds help <nh>-<n> Shows Blades commands");
+                system.systemMessage(entity, "<n>!blades on * <nh>-<n> Activates both blades");
+                system.systemMessage(entity, "<n>!blades on left <nh>-<n> Activates left blade");
+                system.systemMessage(entity, "<n>!blades on right <nh>-<n> Activates right blade");
+                system.systemMessage(entity, "<n>!blades on help <nh>-<n> Shows Blade activate commands");
+                system.systemMessage(entity, "<n>!blades help <nh>-<n> Shows Blades commands");
                 break;
             };
             break;
@@ -50,26 +50,26 @@ function initModule(system) {
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Blade deactivate commands:");
-                system.systemMessage(entity, "<n>!blds on * <nh>-<n> Deactivates both blades");
-                system.systemMessage(entity, "<n>!blds on left <nh>-<n> Deactivates left blade");
-                system.systemMessage(entity, "<n>!blds on right <nh>-<n> Deactivates right blade");
-                system.systemMessage(entity, "<n>!blds on help <nh>-<n> Shows Blade deactivate commands");
-                system.systemMessage(entity, "<n>!blds help <nh>-<n> Shows Blades commands");
+                system.systemMessage(entity, "<n>!blades on * <nh>-<n> Deactivates both blades");
+                system.systemMessage(entity, "<n>!blades on left <nh>-<n> Deactivates left blade");
+                system.systemMessage(entity, "<n>!blades on right <nh>-<n> Deactivates right blade");
+                system.systemMessage(entity, "<n>!blades on help <nh>-<n> Shows Blade deactivate commands");
+                system.systemMessage(entity, "<n>!blades help <nh>-<n> Shows Blades commands");
                 break;
             };
             break;
           case "help":
             system.systemMessage(entity, "<n>Blades commands:");
-            system.systemMessage(entity, "<n>!blds on help <nh>-<n> Shows Blade activate commands");
-            system.systemMessage(entity, "<n>!blds off help <nh>-<n> Shows Blade deactivate commands");
-            system.systemMessage(entity, "<n>!blds help <nh>-<n> Shows blades commands");
+            system.systemMessage(entity, "<n>!blades on help <nh>-<n> Shows Blade activate commands");
+            system.systemMessage(entity, "<n>!blades off help <nh>-<n> Shows Blade deactivate commands");
+            system.systemMessage(entity, "<n>!blades help <nh>-<n> Shows blades commands");
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blds help<e> for a list of commands!");
+            system.systemMessage(entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blades help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blds help<e> for a list of commands!");
+        system.systemMessage(entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blades help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {

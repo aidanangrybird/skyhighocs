@@ -10,9 +10,9 @@ function initModule(system) {
     name: "cannonSystem",
     type: 13,
     powers: ["skyhighocs:cyber_cannons"],
-    command: "cns",
-    helpMessage: "<n>!cns <nh>-<n> Communications",
-    disabledMessage: "<e>Module <eh>communicationsSystem<e> is disabled!",
+    command: "cannons",
+    helpMessage: "<n>!cannons <nh>-<n> Cannons",
+    disabledMessage: "<e>Module <eh>cannonSystem<e> is disabled!",
     keyBinds: function (hero) {
       hero.addKeyBindFunc("CANNON_SWITCH", (player, manager) => {
         manager.setData(player, "skyhighocs:dyn/cannon_type", player.getData("skyhighocs:dyn/cannon_type") + 1);
@@ -163,11 +163,11 @@ function initModule(system) {
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Eye cannons commands:");
-                system.systemMessage(entity, "<n>!cns eyes charged <nh>-<n> Sets eye cannons to charged beam!");
-                system.systemMessage(entity, "<n>!cns eyes heat <nh>-<n> Sets eye cannons to heat vision!");
-                system.systemMessage(entity, "<n>!cns eyes engproj <nh>-<n> Sets eye cannons to energy projection!");
-                system.systemMessage(entity, "<n>!cns eyes help <nh>-<n> Shows eye cannons commands");
-                system.systemMessage(entity, "<n>!cns help <nh>-<n> Shows cannons commands");
+                system.systemMessage(entity, "<n>!cannons eyes charged <nh>-<n> Sets eye cannons to charged beam!");
+                system.systemMessage(entity, "<n>!cannons eyes heat <nh>-<n> Sets eye cannons to heat vision!");
+                system.systemMessage(entity, "<n>!cannons eyes engproj <nh>-<n> Sets eye cannons to energy projection!");
+                system.systemMessage(entity, "<n>!cannons eyes help <nh>-<n> Shows eye cannons commands");
+                system.systemMessage(entity, "<n>!cannons help <nh>-<n> Shows cannons commands");
                 break;
             };
             break;
@@ -187,11 +187,11 @@ function initModule(system) {
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Arm cannons commands:");
-                system.systemMessage(entity, "<n>!cns arms charged <nh>-<n> Sets arm cannons to charged beam!");
-                system.systemMessage(entity, "<n>!cns arms heat <nh>-<n> Sets arm cannons to heat vision!");
-                system.systemMessage(entity, "<n>!cns arms engproj <nh>-<n> Sets arm cannons to energy projection!");
-                system.systemMessage(entity, "<n>!cns arms help <nh>-<n> Shows arm cannons commands");
-                system.systemMessage(entity, "<n>!cns help <nh>-<n> Shows cannons commands");
+                system.systemMessage(entity, "<n>!cannons arms charged <nh>-<n> Sets arm cannons to charged beam!");
+                system.systemMessage(entity, "<n>!cannons arms heat <nh>-<n> Sets arm cannons to heat vision!");
+                system.systemMessage(entity, "<n>!cannons arms engproj <nh>-<n> Sets arm cannons to energy projection!");
+                system.systemMessage(entity, "<n>!cannons arms help <nh>-<n> Shows arm cannons commands");
+                system.systemMessage(entity, "<n>!cannons help <nh>-<n> Shows cannons commands");
                 break;
             };
             break;
@@ -211,26 +211,26 @@ function initModule(system) {
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Body cannons commands:");
-                system.systemMessage(entity, "<n>!cns body charged <nh>-<n> Sets body cannons to charged beam!");
-                system.systemMessage(entity, "<n>!cns body heat <nh>-<n> Sets body cannons to heat vision!");
-                system.systemMessage(entity, "<n>!cns body engproj <nh>-<n> Sets body cannons to energy projection!");
-                system.systemMessage(entity, "<n>!cns body help <nh>-<n> Shows body cannons commands");
-                system.systemMessage(entity, "<n>!cns help <nh>-<n> Shows cannons commands");
+                system.systemMessage(entity, "<n>!cannons body charged <nh>-<n> Sets body cannons to charged beam!");
+                system.systemMessage(entity, "<n>!cannons body heat <nh>-<n> Sets body cannons to heat vision!");
+                system.systemMessage(entity, "<n>!cannons body engproj <nh>-<n> Sets body cannons to energy projection!");
+                system.systemMessage(entity, "<n>!cannons body help <nh>-<n> Shows body cannons commands");
+                system.systemMessage(entity, "<n>!cannons help <nh>-<n> Shows cannons commands");
                 break;
             };
             break;
           case "help":
             system.systemMessage(entity, "<n>Scanner commands:");
-            system.systemMessage(entity, "<n>!cns on help <nh>-<n> Shows Communications activate commands");
-            system.systemMessage(entity, "<n>!cns off help <nh>-<n> Shows Communications deactivate commands");
-            system.systemMessage(entity, "<n>!cns help <nh>-<n> Shows communicationsSystem commands");
+            system.systemMessage(entity, "<n>!cannons on help <nh>-<n> Shows Communications activate commands");
+            system.systemMessage(entity, "<n>!cannons off help <nh>-<n> Shows Communications deactivate commands");
+            system.systemMessage(entity, "<n>!cannons help <nh>-<n> Shows communicationsSystem commands");
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>comms<e> command! Try <eh>!cns help<e> for a list of commands!");
+            system.systemMessage(entity, "<e>Unknown <eh>comms<e> command! Try <eh>!cannons help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>comms<e> command! Try <eh>!cns help<e> for a list of commands!");
+        system.systemMessage(entity, "<e>Unknown <eh>comms<e> command! Try <eh>!cannons help<e> for a list of commands!");
       };
     },
     whenDisabled: function (entity, manager) {

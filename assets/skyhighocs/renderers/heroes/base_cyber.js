@@ -37,9 +37,9 @@ function initEffects(renderer) {
   head.bindAnimation("skyhighocs:cyber_head").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eyes_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/mouth_timer"));
-    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/comms_antenna_timer"));
-    data.load(3, entity.getInterpolatedData("skyhighocs:dyn/comms_satellite_timer"));
-    data.load(4, entity.getInterpolatedData("skyhighocs:dyn/comms_satellite_rain_mode_timer"));
+    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer"));
+    data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
+    data.load(4, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer"));
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/ports_timer"));
   });
   head_model = renderer.createEffect("fiskheroes:model").setModel(head);
@@ -50,9 +50,9 @@ function initEffects(renderer) {
   head_hair.bindAnimation("skyhighocs:cyber_head").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eyes_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/mouth_timer"));
-    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/comms_antenna_timer"));
-    data.load(3, entity.getInterpolatedData("skyhighocs:dyn/comms_satellite_timer"));
-    data.load(4, entity.getInterpolatedData("skyhighocs:dyn/comms_satellite_rain_mode_timer"));
+    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer"));
+    data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
+    data.load(4, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer"));
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/ports_timer"));
   });
   head_hair_model = renderer.createEffect("fiskheroes:model").setModel(head_hair);

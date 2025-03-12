@@ -1,0 +1,14 @@
+{
+  "name": "Disguise System",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:transformation|disguised": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/disguised",
+        "timerData": "skyhighocs:dyn/disguised_timer",
+        "time": 60
+      },
+      "isToggle": true
+    }
+  }
+}

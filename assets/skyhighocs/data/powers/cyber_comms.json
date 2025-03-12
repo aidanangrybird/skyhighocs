@@ -2,26 +2,26 @@
   "name": "Communications System",
   "value": 1,
   "modifiers": {
-    "fiskheroes:transformation|comms_satellite": {
-        "transformation": {
-          "toggleData": "skyhighocs:dyn/comms_satellite",
-          "timerData": "skyhighocs:dyn/comms_satellite_timer",
-          "time": 60
-        },
-        "isToggle": true
-    },
-    "fiskheroes:transformation|comms_antenna": {
+    "fiskheroes:transformation|satellite": {
       "transformation": {
-        "toggleData": "skyhighocs:dyn/comms_antenna",
-        "timerData": "skyhighocs:dyn/comms_antenna_timer",
+        "toggleData": "skyhighocs:dyn/satellite",
+        "timerData": "skyhighocs:dyn/satellite_timer",
         "time": 60
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|comms_satellite_rain_mode": {
+    "fiskheroes:transformation|antenna": {
       "transformation": {
-        "toggleData": "skyhighocs:dyn/comms_satellite_rain_mode",
-        "timerData": "skyhighocs:dyn/comms_satellite_rain_mode_timer",
+        "toggleData": "skyhighocs:dyn/antenna",
+        "timerData": "skyhighocs:dyn/antenna_timer",
+        "time": 60
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|satellite_rain_mode": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/satellite_rain_mode",
+        "timerData": "skyhighocs:dyn/satellite_rain_mode_timer",
         "time": 60
       },
       "isToggle": true

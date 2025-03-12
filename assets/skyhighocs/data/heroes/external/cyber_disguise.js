@@ -5,49 +5,32 @@
 function initModule(system) {
   return {
     name: "disguiseSystem",
-    type: 11,
-    command: "comms",
-    powers: ["skyhighocs:cyber_comms"],
-    helpMessage: "<n>!comms <nh>-<n> Communications",
-    disabledMessage: "<e>Module <eh>communicationsSystem<e> is disabled!",
+    type: 12,
+    command: "disguise",
+    powers: ["skyhighocs:cyber_disguise"],
+    helpMessage: "<n>!disguise <nh>-<n> Disguise",
+    disabledMessage: "<e>Module <eh>disguiseSystem<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 3) {
         switch (arguments[1]) {
           case "on":
-            manager.setData(entity, "skyhighocs:dyn/comms_antenna", true);
+            manager.setData(entity, "skyhighocs:dyn/disguised", true);
             break;
           case "off":
-            switch (arguments[2]) {
-              case "sat":
-                manager.setData(entity, "skyhighocs:dyn/comms_satellite", false);
-                break;
-              case "ant":
-                manager.setData(entity, "skyhighocs:dyn/comms_antenna", false);
-                break;
-              case "satRain":
-                manager.setData(entity, "skyhighocs:dyn/comms_satellite_rain_mode", false);
-                break;
-              case "help":
-                system.systemMessage(entity, "<n>Communications deactivate commands:");
-                system.systemMessage(entity, "<n>!comms off sat <nh>-<n> Deactivate satellite");
-                system.systemMessage(entity, "<n>!comms off ant <nh>-<n> Deactivate antenna");
-                system.systemMessage(entity, "<n>!comms off satRain <nh>-<n> Deactivate satellite rain mode");
-                system.systemMessage(entity, "<n>!comms help <nh>-<n> Shows communicationsSystem commands");
-                break;
-            };
+            manager.setData(entity, "skyhighocs:dyn/disguised", false);
             break;
           case "help":
             system.systemMessage(entity, "<n>Scanner commands:");
-            system.systemMessage(entity, "<n>!comms on help <nh>-<n> Shows Communications activate commands");
-            system.systemMessage(entity, "<n>!comms off help <nh>-<n> Shows Communications deactivate commands");
-            system.systemMessage(entity, "<n>!comms help <nh>-<n> Shows communicationsSystem commands");
+            system.systemMessage(entity, "<n>!disguise on <nh>-<n> Turns on disguise");
+            system.systemMessage(entity, "<n>!disguise off <nh>-<n> Turns off disguise");
+            system.systemMessage(entity, "<n>!disguise help <nh>-<n> Shows disguiseSystem commands");
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>comms<e> command! Try <eh>!comms help<e> for a list of commands!");
+            system.systemMessage(entity, "<e>Unknown <eh>disguise<e> command! Try <eh>!disguise help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>comms<e> command! Try <eh>!comms help<e> for a list of commands!");
+        system.systemMessage(entity, "<e>Unknown <eh>disguise<e> command! Try <eh>!disguise help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {
@@ -65,9 +48,7 @@ function initModule(system) {
       return result;
     },
     whenDisabled: function (entity, manager) {
-      manager.setData(entity, "skyhighocs:dyn/comms_satellite", false);
-      manager.setData(entity, "skyhighocs:dyn/comms_antenna", false);
-      manager.setData(entity, "skyhighocs:dyn/comms_satellite_rain_mode", false);
+      manager.setData(entity, "skyhighocs:dyn/disguised", false);
     }
   };
 };

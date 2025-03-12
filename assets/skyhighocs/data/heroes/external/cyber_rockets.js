@@ -8,8 +8,8 @@ function initModule(system) {
     name: "rocketSystem",
     type: 12,
     powers: ["skyhighocs:cyber_rockets"],
-    command: "rkts",
-    helpMessage: "<n>!rkts <nh>-<n> Rockets",
+    command: "rockets",
+    helpMessage: "<n>!rockets <nh>-<n> Rockets",
     disabledMessage: "<e>Module <eh>rocketSystem<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 4) {
@@ -51,12 +51,12 @@ function initModule(system) {
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Rocket activate commands:");
-                system.systemMessage(entity, "<n>!rkts on * <nh>-<n> Activates every rocket set");
-                system.systemMessage(entity, "<n>!rkts on aux <nh>-<n> Activates aux rockets");
-                system.systemMessage(entity, "<n>!rkts on body <nh>-<n> Activates body rockets");
-                system.systemMessage(entity, "<n>!rkts on legs <nh>-<n> Activates leg rockets");
-                system.systemMessage(entity, "<n>!rkts on help <nh>-<n> Shows Rocket activate commands");
-                system.systemMessage(entity, "<n>!rkts help <nh>-<n> Shows Rockets commands");
+                system.systemMessage(entity, "<n>!rockets on * <nh>-<n> Activates every rocket set");
+                system.systemMessage(entity, "<n>!rockets on aux <nh>-<n> Activates aux rockets");
+                system.systemMessage(entity, "<n>!rockets on body <nh>-<n> Activates body rockets");
+                system.systemMessage(entity, "<n>!rockets on legs <nh>-<n> Activates leg rockets");
+                system.systemMessage(entity, "<n>!rockets on help <nh>-<n> Shows Rocket activate commands");
+                system.systemMessage(entity, "<n>!rockets help <nh>-<n> Shows Rockets commands");
                 break;
             };
             break;
@@ -96,27 +96,27 @@ function initModule(system) {
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Rocket deactivate commands:");
-                system.systemMessage(entity, "<n>!rkts off * <nh>-<n> Deactivates every rocket set");
-                system.systemMessage(entity, "<n>!rkts off aux <nh>-<n> Deactivates aux rockets");
-                system.systemMessage(entity, "<n>!rkts off body <nh>-<n> Deactivates body rockets");
-                system.systemMessage(entity, "<n>!rkts off legs <nh>-<n> Deactivates leg rockets");
-                system.systemMessage(entity, "<n>!rkts off help <nh>-<n> Shows Rocket deactivate commands");
-                system.systemMessage(entity, "<n>!rkts help <nh>-<n> Shows Rockets commands");
+                system.systemMessage(entity, "<n>!rockets off * <nh>-<n> Deactivates every rocket set");
+                system.systemMessage(entity, "<n>!rockets off aux <nh>-<n> Deactivates aux rockets");
+                system.systemMessage(entity, "<n>!rockets off body <nh>-<n> Deactivates body rockets");
+                system.systemMessage(entity, "<n>!rockets off legs <nh>-<n> Deactivates leg rockets");
+                system.systemMessage(entity, "<n>!rockets off help <nh>-<n> Shows Rocket deactivate commands");
+                system.systemMessage(entity, "<n>!rockets help <nh>-<n> Shows Rockets commands");
                 break;
               };
               break;
             case "help":
             system.systemMessage(entity, "<n>Rockets commands:");
-            system.systemMessage(entity, "<n>!rkts on help <nh>-<n> Shows Rocket activate commands");
-            system.systemMessage(entity, "<n>!rkts off help <nh>-<n> Shows Rocket deactivate commands");
-            system.systemMessage(entity, "<n>!rkts help <nh>-<n> Shows rockets commands");
+            system.systemMessage(entity, "<n>!rockets on help <nh>-<n> Shows Rocket activate commands");
+            system.systemMessage(entity, "<n>!rockets off help <nh>-<n> Shows Rocket deactivate commands");
+            system.systemMessage(entity, "<n>!rockets help <nh>-<n> Shows rockets commands");
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>rockets<e> command! Try <eh>!rkts help<e> for a list of commands!");
+            system.systemMessage(entity, "<e>Unknown <eh>rockets<e> command! Try <eh>!rockets help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>rockets<e> command! Try <eh>!rkts help<e> for a list of commands!");
+        system.systemMessage(entity, "<e>Unknown <eh>rockets<e> command! Try <eh>!rockets help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {
@@ -126,8 +126,8 @@ function initModule(system) {
       var body = (nbt.getBoolean("rocketsBody")) ? "T" : "F";
       var legs = (nbt.getBoolean("rocketsLegs")) ? "T" : "F";
       if (modifier.name() == "fiskheroes:controlled_flight") {
-        if (modifier.id() == "rocket_" + aux + body + legs) {
-          result = true;
+        if (modifier.id() == "rockets_" + aux + body + legs) {
+          result = aux || body || legs;
         };
       };
       if (modifier.name() == "fiskheroes:transformation") {

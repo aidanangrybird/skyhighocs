@@ -8,8 +8,8 @@ function initModule(system) {
     name: "shieldSystem",
     type: 14,
     powers: ["skyhighocs:cyber_shields"],
-    command: "shlds",
-    helpMessage: "<n>!shlds <nh>-<n> Shields",
+    command: "shields",
+    helpMessage: "<n>!shields <nh>-<n> Shields",
     disabledMessage: "<e>Module <eh>shieldSystem<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 5) {
@@ -28,11 +28,11 @@ function initModule(system) {
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Shield activate commands:");
-                system.systemMessage(entity, "<n>!shlds on * <nh>-<n> Activates both shields");
-                system.systemMessage(entity, "<n>!shlds on left <nh>-<n> Activates left shield");
-                system.systemMessage(entity, "<n>!shlds on right <nh>-<n> Activates right shield");
-                system.systemMessage(entity, "<n>!shlds on help <nh>-<n> Shows Shield activate commands");
-                system.systemMessage(entity, "<n>!shlds help <nh>-<n> Shows Shields commands");
+                system.systemMessage(entity, "<n>!shields on * <nh>-<n> Activates both shields");
+                system.systemMessage(entity, "<n>!shields on left <nh>-<n> Activates left shield");
+                system.systemMessage(entity, "<n>!shields on right <nh>-<n> Activates right shield");
+                system.systemMessage(entity, "<n>!shields on help <nh>-<n> Shows Shield activate commands");
+                system.systemMessage(entity, "<n>!shields help <nh>-<n> Shows Shields commands");
                 break;
             };
             break;
@@ -50,26 +50,26 @@ function initModule(system) {
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Shield deactivate commands:");
-                system.systemMessage(entity, "<n>!shlds on * <nh>-<n> Deactivates both shields");
-                system.systemMessage(entity, "<n>!shlds on left <nh>-<n> Deactivates left shield");
-                system.systemMessage(entity, "<n>!shlds on right <nh>-<n> Deactivates right shield");
-                system.systemMessage(entity, "<n>!shlds on help <nh>-<n> Shows Shield deactivate commands");
-                system.systemMessage(entity, "<n>!shlds help <nh>-<n> Shows Shields commands");
+                system.systemMessage(entity, "<n>!shields on * <nh>-<n> Deactivates both shields");
+                system.systemMessage(entity, "<n>!shields on left <nh>-<n> Deactivates left shield");
+                system.systemMessage(entity, "<n>!shields on right <nh>-<n> Deactivates right shield");
+                system.systemMessage(entity, "<n>!shields on help <nh>-<n> Shows Shield deactivate commands");
+                system.systemMessage(entity, "<n>!shields help <nh>-<n> Shows Shields commands");
                 break;
             };
             break;
           case "help":
             system.systemMessage(entity, "<n>Shields commands:");
-            system.systemMessage(entity, "<n>!shlds on help <nh>-<n> Shows Shield activate commands");
-            system.systemMessage(entity, "<n>!shlds off help <nh>-<n> Shows Shield deactivate commands");
-            system.systemMessage(entity, "<n>!shlds help <nh>-<n> Shows shields commands");
+            system.systemMessage(entity, "<n>!shields on help <nh>-<n> Shows Shield activate commands");
+            system.systemMessage(entity, "<n>!shields off help <nh>-<n> Shows Shield deactivate commands");
+            system.systemMessage(entity, "<n>!shields help <nh>-<n> Shows shields commands");
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shlds help<e> for a list of commands!");
+            system.systemMessage(entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shields help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shlds help<e> for a list of commands!");
+        system.systemMessage(entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shields help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {
@@ -101,13 +101,10 @@ function initModule(system) {
     },
     getDamageProfiles: function (entity) {
       var result = null;
-      if (entity.getData("skyhighocs:dyn/shield_left_arm") == 1 || entity.getData("skyhighocs:dyn/wave_changing_timer") == 1) {
-        result = "SWORD";
+      if (entity.getData("skyhighocs:dyn/shield_left_arm_timer") == 1 || entity.getData("skyhighocs:dyn/shield_right_arm_timer") == 1) {
+        result = "SHIELD";
       };
-      if (entity.getHeldItem().name() == "fiskheroes:katana" && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1) {
-        result = "SWORD";
-      };
-      return (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1) ? "MAIN" : result;
+      return result;
     },
     initAttributeProfiles: function (hero) {
       hero.addAttributeProfile("SHIELD_LEFT_ARM", function (profile) {

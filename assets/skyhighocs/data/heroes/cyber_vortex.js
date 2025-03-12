@@ -79,7 +79,7 @@ function init(hero) {
   });
   hero.setKeyBindEnabled((entity, keyBind) => {
     if (keyBind == "SHAPE_SHIFT") {
-      return !entity.isSneaking();
+      return true;
     };
     return cyberOS.isKeyBindEnabled(entity, keyBind);
   });

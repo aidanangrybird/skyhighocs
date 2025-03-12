@@ -673,7 +673,7 @@ function initSystem(moduleList, name, normalName, color) {
       hero.addAttribute("KNOCKBACK", 2.5, 0);
       hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
       hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
-      hero.addAttributeProfile("SHUT_DOWN", function (profile) {
+      /* hero.addAttributeProfile("SHUT_DOWN", function (profile) {
         profile.addAttribute("BASE_SPEED", -1.0, 1);
         profile.addAttribute("SPRINT_SPEED", -1.0, 1);
         profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
@@ -681,7 +681,7 @@ function initSystem(moduleList, name, normalName, color) {
         profile.addAttribute("STEP_HEIGHT", -1.0, 1);
         profile.addAttribute("KNOCKBACK", -1.0, 1);
         profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
-      });
+      }); */
       damageProfileIndexes.forEach(index => {
         modules[index].initDamageProfiles(hero);
       });
@@ -827,6 +827,8 @@ function initSystem(moduleList, name, normalName, color) {
               case "enable":
                 enableModule(entity, manager, moduleNames, args[1]);
                 break;
+              case "cv":
+                systemMessage(entity, entity.getDataOrDefault("skyhighocs:dyn/"+args[1], -1))
               case "chatMode":
                 switchChatModes(entity, manager, args[1]);
                 break;
@@ -852,11 +854,11 @@ function initSystem(moduleList, name, normalName, color) {
           };
         };
       };
-      if (typeof disguisedName === "string" && entity.getData("skyhighocs:dyn/disguised_timer") < 1) {
-        manager.setData(entity, "fiskheroes:disguise", disguisedName);
-      };
-      if (typeof cyberName === "string" && entity.getData("skyhighocs:dyn/disguised_timer") == 1) {
+      if (typeof cyberName === "string" && entity.getData("skyhighocs:dyn/disguised_timer") < 1) {
         manager.setData(entity, "fiskheroes:disguise", cyberName);
+      };
+      if (typeof disguisedName === "string" && entity.getData("skyhighocs:dyn/disguised_timer") == 1) {
+        manager.setData(entity, "fiskheroes:disguise", disguisedName);
       };
       var x = entity.posX();
       var y = entity.posY();

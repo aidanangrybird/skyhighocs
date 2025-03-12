@@ -1,8 +1,8 @@
 {eye_beams} = curve({data_0})
 {mouth} = curve({data_1})
-{antenna} = curve({data_2})(1-{rain_mode}{satellite_dish})
-{satellite_dish} = curve({data_3})
-{rain_mode} = curve({data_4})
+{satellite_dish} = curve({data_2})
+{rain_mode} = curve({data_3})
+{antenna} = curve({data_4})(1-{rain_mode}{satellite_dish})
 {ports} = curve({data_5})
 
 ;eyes

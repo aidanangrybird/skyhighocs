@@ -3,20 +3,20 @@
   "value": 1,
   "modifiers": {
     "fiskheroes:transformation|blade_left_arm": {
-        "transformation": {
-          "toggleData": "skyhighocs:dyn/blade_left_arm",
-          "timerData": "skyhighocs:dyn/blade_left_arm_timer",
-          "time": 60
-        },
-        "isToggle": true
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/blade_left_arm",
+        "timerData": "skyhighocs:dyn/blade_left_arm_timer",
+        "time": 60
+      },
+      "isToggle": true
     },
     "fiskheroes:transformation|blade_right_arm": {
-        "transformation": {
-          "toggleData": "skyhighocs:dyn/blade_right_arm",
-          "timerData": "skyhighocs:dyn/blade_right_arm_timer",
-          "time": 60
-        },
-        "isToggle": true
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/blade_right_arm",
+        "timerData": "skyhighocs:dyn/blade_right_arm_timer",
+        "time": 60
+      },
+      "isToggle": true
     },
     "fiskheroes:transformation|blade_left_arm_stealth": {
       "transformation": {
