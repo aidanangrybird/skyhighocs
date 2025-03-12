@@ -6,7 +6,7 @@ function initModule(system) {
   //All of the required functions and stuff go here
   return {
     name: "rocketSystem",
-    type: 14,
+    type: 12,
     powers: ["skyhighocs:cyber_rockets"],
     command: "rkts",
     helpMessage: "<n>!rkts <nh>-<n> Rockets",

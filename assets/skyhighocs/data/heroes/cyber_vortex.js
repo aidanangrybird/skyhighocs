@@ -1,12 +1,14 @@
-var system = implement("skyhighocs:external/astro_system");
-var messaging = implement("skyhighocs:external/cyber_messaging");
-var groupMessaging = implement("skyhighocs:external/cyber_group_messaging");
-var contacts = implement("skyhighocs:external/cyber_contacts");
-var scanner = implement("skyhighocs:external/cyber_scanner");
-var waypoints = implement("skyhighocs:external/cyber_waypoint");
+var system = implement("skyhighocs:external/cyber_system");
+var messaging = implement("skyhighheroes:external/messaging");
+var groupMessaging = implement("skyhighheroes:external/group_messaging");
+var contacts = implement("skyhighheroes:external/contacts");
+var scanner = implement("skyhighheroes:external/scanner");
+var waypoints = implement("skyhighheroes:external/waypoint");
 var comms = implement("skyhighocs:external/cyber_comms");
 var cannons = implement("skyhighocs:external/cyber_cannons");
 var rockets = implement("skyhighocs:external/cyber_rockets");
+var blades = implement("skyhighocs:external/cyber_blades");
+var shields = implement("skyhighocs:external/cyber_shields");
 var cyberOS = system.initSystem([messaging,
   groupMessaging,
   contacts,
@@ -14,13 +16,15 @@ var cyberOS = system.initSystem([messaging,
   waypoints,
   comms,
   cannons,
-  flight
+  rockets,
+  blades,
+  shields
 ], "Cyber Vortex", "aidanangrybird", "6");
 function init(hero) {
   hero.setAliases("cyber_vortex");
   hero.setName("Cyber Vortex");
   hero.setTier(10);
-  hero.setLeggings("Brain");
+  hero.setHelmet("Brain");
   hero.setVersion("OC");
 
   hero.addAttribute("SPRINT_SPEED", 0.5, 1);
@@ -33,7 +37,7 @@ function init(hero) {
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
   cyberOS.keyBinds(hero);
-  cyberOS.profiles(hero);
+  cyberOS.initProfiles(hero);
   cyberOS.addPowers(hero);
   
   hero.setHasProperty((entity, property) => {
@@ -65,6 +69,9 @@ function init(hero) {
     if (modifier.name() == "fiskheroes:damage_immunity") {
       return true;
     };
+    if (modifier.name() == "fiskheroes:transformation") {
+      return true;
+    };
     if (modifier.name() == "fiskheroes:metal_skin") {
       return entity.getData("fiskheroes:metal_heat") < 1.0;
     };
@@ -75,6 +82,12 @@ function init(hero) {
       return !entity.isSneaking();
     };
     return cyberOS.isKeyBindEnabled(entity, keyBind);
+  });
+  hero.setDamageProfile((entity) => {
+    return cyberOS.getDamageProfile(entity);
+  });
+  hero.setAttributeProfile((entity) => {
+    return cyberOS.getAttributeProfile(entity);
   });
   hero.setTickHandler((entity, manager) => {
     cyberOS.systemHandler(entity, manager);

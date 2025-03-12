@@ -1,0 +1,16 @@
+{
+  "name": "cyberOS",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:transformation|power": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/powered",
+        "timerData": "skyhighocs:dyn/power_timer",
+        "time": 60
+      },
+      "isToggle": true
+    },
+    "fiskheroes:shape_shifting": {
+    }
+  }
+}

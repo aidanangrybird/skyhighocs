@@ -1,5 +1,5 @@
-var astro = implement("skyhighocs:external/astro");
-var stuff = implement("skyhighocs:external/stuff");
+var cyber = implement("skyhighocs:external/cyber");
+var stuff = implement("skyhighheroes:external/stuff");
 
 var blank_model;
 var metal_heat;
@@ -44,9 +44,9 @@ function initEffects(renderer) {
   });
   head_model = renderer.createEffect("fiskheroes:model").setModel(head);
   head_model.anchor.set("head");
-  head_model.setScale(0.999999999);
+  head_model.setScale(1.0);
   var head_hair = renderer.createResource("MODEL", "skyhighocs:CyberHeadL2");
-  head_hair.texture.set("head_hair");
+  head_hair.texture.set("head_hair", "head_hair_lights");
   head_hair.bindAnimation("skyhighocs:cyber_head").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eyes_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/mouth_timer"));
@@ -58,18 +58,18 @@ function initEffects(renderer) {
   head_hair_model = renderer.createEffect("fiskheroes:model").setModel(head_hair);
   head_hair_model.anchor.set("head");
   head_hair_model.setScale(1.05);
-  var body = renderer.createResource("MODEL", "skyhighheroes:CyberBody");
+  var body = renderer.createResource("MODEL", "skyhighocs:CyberBody");
   body.texture.set("body", "body_lights");
-  body.bindAnimation("skyhighheroes:astro_body").setData((entity, data) => {
+  body.bindAnimation("skyhighocs:cyber_body").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/rockets_body_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_body_timer"));
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/wings_timer"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/furnace_timer"));
-    data.load(4, entity.getInterpolatedData("skyhighocs:dyn/external_arm_timer"));
+    data.load(4, entity.getInterpolatedData("skyhighocs:dyn/external_arms_timer"));
   });
   body_model = renderer.createEffect("fiskheroes:model").setModel(body);
   body_model.anchor.set("body");
-  body_model.setScale(0.999999999);
+  body_model.setScale(1.0);
   var left_arm = renderer.createResource("MODEL", "skyhighocs:CyberLeftArm");
   left_arm.texture.set("left_arm", "left_arm_lights");
   left_arm.bindAnimation("skyhighocs:cyber_left_arm").setData((entity, data) => {
@@ -82,7 +82,7 @@ function initEffects(renderer) {
   left_arm_model = renderer.createEffect("fiskheroes:model").setModel(left_arm);
   left_arm_model.anchor.set("leftArm");
   left_arm_model.setOffset(-1.0, -2.0, 0.0);
-  left_arm_model.setScale(0.999999999);
+  left_arm_model.setScale(1.0);
   var right_arm = renderer.createResource("MODEL", "skyhighocs:CyberRightArm");
   right_arm.texture.set("right_arm", "right_arm_lights");
   right_arm.bindAnimation("skyhighocs:cyber_right_arm").setData((entity, data) => {
@@ -95,7 +95,7 @@ function initEffects(renderer) {
   right_arm_model = renderer.createEffect("fiskheroes:model").setModel(right_arm);
   right_arm_model.anchor.set("rightArm");
   right_arm_model.setOffset(1.0, -2.0, 0.0);
-  right_arm_model.setScale(0.999999999);
+  right_arm_model.setScale(1.0);
   var left_leg = renderer.createResource("MODEL", "skyhighocs:CyberLeftLeg");
   left_leg.texture.set("left_leg", "left_leg_lights");
   left_leg.bindAnimation("skyhighocs:cyber_left_leg").setData((entity, data) => {
@@ -105,7 +105,7 @@ function initEffects(renderer) {
   });
   left_leg_model = renderer.createEffect("fiskheroes:model").setModel(left_leg);
   left_leg_model.anchor.set("leftLeg");
-  left_leg_model.setScale(0.999999999);
+  left_leg_model.setScale(1.0);
   var right_leg = renderer.createResource("MODEL", "skyhighocs:CyberRightLeg");
   right_leg.texture.set("right_leg", "right_leg_lights");
   right_leg.bindAnimation("skyhighocs:cyber_right_leg").setData((entity, data) => {
@@ -115,7 +115,7 @@ function initEffects(renderer) {
   });
   right_leg_model = renderer.createEffect("fiskheroes:model").setModel(right_leg);
   right_leg_model.anchor.set("rightLeg");
-  right_leg_model.setScale(0.999999999);
+  right_leg_model.setScale(1.0);
 
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
   metal_heat.includeEffects(head_model, head_hair_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model);
@@ -150,8 +150,8 @@ function initEffects(renderer) {
 };
 
 function initAnimations(renderer) {
-  stuff.initHoloFlightAnim(renderer, "astro.HOLOGRAM_FLIGHT", "skyhighheroes:astro_holo_flight");
-  astro.initAstroAnimations(renderer);
+  stuff.initHoloFlightAnim(renderer, "cyber.HOLOGRAM_FLIGHT", "skyhighheroes:astro_holo_flight");
+  cyber.initCyberAnimations(renderer);
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {

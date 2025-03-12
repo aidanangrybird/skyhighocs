@@ -1,11 +1,12 @@
 extend("skyhighocs:base_cyber");
 
-var astro = implement("skyhighheroes:external/astro");
+var cyber = implement("skyhighocs:external/cyber");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
   "head_lights": "skyhighocs:aidan/cyber_vortex_head_lights",
   "head_hair": "skyhighocs:aidan/cyber_vortex_head_hair",
+  "head_hair_lights": "skyhighocs:aidan/cyber_vortex_head_hair_lights",
   "body_lights": "skyhighocs:aidan/cyber_vortex_body_lights",
   "left_arm_lights": "skyhighocs:aidan/cyber_vortex_left_arm_lights",
   "right_arm_lights": "skyhighocs:aidan/cyber_vortex_right_arm_lights",
@@ -15,8 +16,8 @@ loadTextures({
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  //rockets = astro.initCustomBoosters(renderer, 0xFF8900);
-  //astro.initBeams(renderer, 0xFF8900);
+  //rockets = cyber.initCustomBoosters(renderer, 0xFF8900);
+  //cyber.initBeams(renderer, 0xFF8900);
   //stuff.bindSpeedTrail(renderer, "skyhighocs:cyber_vortex_speed");
 };
 

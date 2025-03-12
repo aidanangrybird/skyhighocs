@@ -435,8 +435,7 @@
           "toggleData": "skyhighocs:dyn/cannon_left_arm",
           "timerData": "skyhighocs:dyn/cannon_left_arm_timer",
           "time": 60
-        },
-        "isToggle": true
+        }
     },
     "fiskheroes:transformation|cannon_right_arm": {
       "key": "RIGHT_ARM_CANNON",
@@ -444,8 +443,7 @@
           "toggleData": "skyhighocs:dyn/cannon_right_arm",
           "timerData": "skyhighocs:dyn/cannon_right_arm_timer",
           "time": 60
-        },
-        "isToggle": true
+        }
     },
     "fiskheroes:transformation|cannon_body": {
       "key": "BODY_CANNONS",
@@ -453,8 +451,7 @@
         "toggleData": "skyhighocs:dyn/cannon_body",
         "timerData": "skyhighocs:dyn/cannon_body_timer",
         "time": 60
-      },
-      "isToggle": true
+      }
     },
     "fiskheroes:transformation|cannon_eyes": {
       "key": "EYE_CANNONS",
@@ -462,8 +459,7 @@
         "toggleData": "skyhighocs:dyn/cannon_eyes",
         "timerData": "skyhighocs:dyn/cannon_eyes_timer",
         "time": 60
-      },
-      "isToggle": true
+      }
     }
   }
 }

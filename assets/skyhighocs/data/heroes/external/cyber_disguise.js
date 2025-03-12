@@ -4,51 +4,28 @@
  **/
 function initModule(system) {
   return {
-    name: "communicationsSystem",
+    name: "disguiseSystem",
     type: 11,
     command: "comms",
     powers: ["skyhighocs:cyber_comms"],
     helpMessage: "<n>!comms <nh>-<n> Communications",
     disabledMessage: "<e>Module <eh>communicationsSystem<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
+      if (arguments.length > 1 && arguments.length < 3) {
         switch (arguments[1]) {
           case "on":
-            switch (arguments[2]) {
-              case "sat":
-                manager.setData(entity, "skyhighocs:dyn/comms_satellite", true);
-                system.systemMessage(entity, "<n>Activating satellite!");
-                break;
-              case "ant":
-                manager.setData(entity, "skyhighocs:dyn/comms_antenna", true);
-                system.systemMessage(entity, "<n>Activating antenna!");
-                break;
-              case "satRain":
-                manager.setData(entity, "skyhighocs:dyn/comms_satellite_rain_mode", true);
-                system.systemMessage(entity, "<n>Activating satellite rain mode!");
-                break;
-              case "help":
-                system.systemMessage(entity, "<n>Communications activate commands:");
-                system.systemMessage(entity, "<n>!comms on sat <nh>-<n> Activates satellite");
-                system.systemMessage(entity, "<n>!comms on ant <nh>-<n> Activates antenna");
-                system.systemMessage(entity, "<n>!comms on satRain <nh>-<n> Activates satellite rain mode");
-                system.systemMessage(entity, "<n>!comms help <nh>-<n> Shows communicationsSystem commands");
-                break;
-            };
+            manager.setData(entity, "skyhighocs:dyn/comms_antenna", true);
             break;
           case "off":
             switch (arguments[2]) {
               case "sat":
                 manager.setData(entity, "skyhighocs:dyn/comms_satellite", false);
-                system.systemMessage(entity, "<n>Deactivating satellite!");
                 break;
               case "ant":
                 manager.setData(entity, "skyhighocs:dyn/comms_antenna", false);
-                system.systemMessage(entity, "<n>Deactivating satellite!");
                 break;
               case "satRain":
                 manager.setData(entity, "skyhighocs:dyn/comms_satellite_rain_mode", false);
-                system.systemMessage(entity, "<n>Deactivating satellite rain mode!");
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Communications deactivate commands:");

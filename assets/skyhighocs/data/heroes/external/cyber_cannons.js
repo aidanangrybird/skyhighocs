@@ -8,7 +8,7 @@ function initModule(system) {
   // Energy Projection = 2
   return {
     name: "cannonSystem",
-    type: 15,
+    type: 13,
     powers: ["skyhighocs:cyber_cannons"],
     command: "cns",
     helpMessage: "<n>!cns <nh>-<n> Communications",
@@ -36,7 +36,7 @@ function initModule(system) {
       var eyes = (nbt.getByte("cannonsEyes") == entity.getData("skyhighocs:dyn/cannon_type"));
       var body = (nbt.getByte("cannonsBody") == entity.getData("skyhighocs:dyn/cannon_type"));
       var arms = (nbt.getByte("cannonsArms") == entity.getData("skyhighocs:dyn/cannon_type"));
-      var eyesOn = (nbt.getByte("cannonsEyes") == entity.getData("skyhighocs:dyn/cannon_type")) && (entity.getData("skyhighocs:dyn/cannon_eye_timer") == 1);
+      var eyesOn = (nbt.getByte("cannonsEyes") == entity.getData("skyhighocs:dyn/cannon_type")) && (entity.getData("skyhighocs:dyn/cannon_eyes_timer") == 1);
       var bodyOn = (nbt.getByte("cannonsBody") == entity.getData("skyhighocs:dyn/cannon_type")) && (entity.getData("skyhighocs:dyn/cannon_body_timer") == 1);
       var armsOn = (nbt.getByte("cannonsArms") == entity.getData("skyhighocs:dyn/cannon_type")) && (entity.getData("skyhighocs:dyn/cannon_left_arm_timer") == 1 && entity.getData("skyhighocs:dyn/cannon_right_arm_timer") == 1);
       if (keyBind == "CANNON_SWITCH") {
@@ -151,15 +151,15 @@ function initModule(system) {
             switch (arguments[2]) {
               case "charged":
                 manager.setByte(nbt, "cannonsEyes", 0);
-                systemMessage(entity, "<n>Will set eyes to charged beam!");
+                system.systemMessage(entity, "<n>Will set eyes to charged beam!");
                 break;
               case "heat":
                 manager.setByte(nbt, "cannonsEyes", 1);
-                systemMessage(entity, "<n>Will set eyes to heat vision!");
+                system.systemMessage(entity, "<n>Will set eyes to heat vision!");
                 break;
               case "engproj":
                 manager.setByte(nbt, "cannonsEyes", 2);
-                systemMessage(entity, "<n>Will set eyes to energy projection!");
+                system.systemMessage(entity, "<n>Will set eyes to energy projection!");
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Eye cannons commands:");
@@ -175,15 +175,15 @@ function initModule(system) {
             switch (arguments[2]) {
               case "charged":
                 manager.setByte(nbt, "cannonsArms", 0);
-                systemMessage(entity, "<n>Will set arms to charged beam!");
+                system.systemMessage(entity, "<n>Will set arms to charged beam!");
                 break;
               case "heat":
                 manager.setByte(nbt, "cannonsArms", 1);
-                systemMessage(entity, "<n>Will set arms to heat vision!");
+                system.systemMessage(entity, "<n>Will set arms to heat vision!");
                 break;
               case "engproj":
                 manager.setByte(nbt, "cannonsArms", 2);
-                systemMessage(entity, "<n>Will set arms to energy projection!");
+                system.systemMessage(entity, "<n>Will set arms to energy projection!");
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Arm cannons commands:");

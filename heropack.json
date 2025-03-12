@@ -53,6 +53,9 @@
     "astro_eye_left_glow": { "type": "BOOLEAN", "resetWithoutSuit": false },
     "astro_eye_right_glow": { "type": "BOOLEAN", "resetWithoutSuit": false },
 
+    "cannon_type": "BYTE",
+    "powered": { "type": "BOOLEAN", "resetOnDeath": false, "resetWithoutSuit": false },
+    "power_timer": { "type": "FLOAT_INTERP", "resetOnDeath": false, "resetWithoutSuit": false },
     "cannon_left_arm_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "cannon_left_arm": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "cannon_right_arm_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
@@ -81,6 +84,8 @@
     "rocket_right_leg": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "comms_satellite_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "comms_satellite": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "comms_satellite_rain_mode_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "comms_satellite_rain_mode": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "comms_antenna_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "comms_antenna": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "wings_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },

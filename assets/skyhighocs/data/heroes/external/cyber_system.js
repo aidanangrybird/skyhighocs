@@ -249,31 +249,33 @@ function logMessage(message) {
 function initSystem(moduleList, name, normalName, color) {
   var cyberInstance = this;
   primaryPiece = 1;
-  //Type 10 - commands (can have data management)
-  /** @var type10Specs - Type 16 Specs */
-  var type10Specs = ["command", "commandHandler", "helpMessage"];
-  //Type 11 - messaging only
-  /** @var type11Specs - Type 16 Specs */
-  var type11Specs = ["messageHandler", "chatModeInfo", "chatInfo", "modeID"];
-  //Type 12 - commands messaging and data management
-  /** @var type12Specs - Type 16 Specs */
-  var type12Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage", "modeID"];
-  //Type 13 - commands (can have data management) with disabled thing
-  /** @var type13Specs - Type 16 Specs */
-  var type13Specs = ["command", "commandHandler", "helpMessage", "powers", "whenDisabled"];
+  //Type 1 - commands (can have data management)
+  /** @var type1Specs - Type 1 Specs */
+  var type1Specs = ["command", "commandHandler", "helpMessage"];
+  //Type 2 - messaging only
+  /** @var type2Specs - Type 2 Specs */
+  var type2Specs = ["messageHandler", "chatModeInfo", "chatInfo", "modeID"];
+  //Type 3 - commands messaging and data management
+  /** @var type3Specs - Type 3 Specs */
+  var type3Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage", "modeID"];
+  //Type 11 - commands (can have data management) with disabled thing
+  /** @var type11Specs - Type 11 Specs */
+  var type11Specs = ["command", "commandHandler", "helpMessage", "powers", "whenDisabled"];
+  //Type 12 - cyber module
+  /** @var type12Specs - Type 12 Specs */
+  var type12Specs = ["command", "commandHandler", "helpMessage", "isModifierEnabled", "isModifierDisabled", "powers", "whenDisabled"];
+  //Type 13 - cyber module
+  /** @var type13Specs - Type 13 Specs */
+  var type13Specs = ["command", "commandHandler", "helpMessage", "keyBinds", "isKeyBindEnabled", "isKeyBindDisabled", "isModifierEnabled", "isModifierDisabled", "powers", "whenDisabled"];
   //Type 14 - cyber module
-  /** @var type14Specs - Type 16 Specs */
-  var type14Specs = ["command", "commandHandler", "helpMessage", "isModifierEnabled", "isModifierDisabled", "powers", "whenDisabled"];
-  //Type 15 - cyber module
-  /** @var type15Specs - Type 16 Specs */
-  var type15Specs = ["command", "commandHandler", "helpMessage", "keyBinds", "isKeyBindEnabled", "isKeyBindDisabled", "isModifierEnabled", "isModifierDisabled", "powers", "whenDisabled"];
-  //Type 16 - cyber module
-  /** @var type16Specs - Type 16 Specs */
-  var type16Specs = ["command", "commandHandler", "helpMessage", "isModifierEnabled", "isModifierDisabled", "initAttributeProfiles", "initDamageProfiles", "getAttributeProfiles", "getDamageProfiles", "powers", "whenDisabled"];
+  /** @var type14Specs - Type 14 Specs */
+  var type14Specs = ["command", "commandHandler", "helpMessage", "isModifierEnabled", "isModifierDisabled", "initAttributeProfiles", "initDamageProfiles", "getAttributeProfiles", "getDamageProfiles", "powers", "whenDisabled"];
   /** @var modules - Array of modules */
   var modules = [];
   /** @var moduleNames - Module names */
   var moduleNames = [];
+  /** @var cyberModules - Cyber module names */
+  var cyberModules = [];
   /** @var commands - Command prefixes */
   var commands = [];
   /** @var commandIndexes - Indexes of command handlers */
@@ -304,8 +306,8 @@ function initSystem(moduleList, name, normalName, color) {
       var moduleInit = module.initModule(cyberInstance);
       if (moduleInit.hasOwnProperty("type")) {
         switch (moduleInit.type) {
-          case 10:
-            type10Specs.forEach(spec => {
+          case 1:
+            type1Specs.forEach(spec => {
               if (!moduleInit.hasOwnProperty(spec)) {
                 errors.push(spec);
                 hasError = true;
@@ -326,8 +328,8 @@ function initSystem(moduleList, name, normalName, color) {
             };
             hasError = false;
             break;
-          case 11:
-            type11Specs.forEach(spec => {
+          case 2:
+            type2Specs.forEach(spec => {
               if (!moduleInit.hasOwnProperty(spec)) {
                 errors.push(spec);
                 hasError = true;
@@ -344,6 +346,53 @@ function initSystem(moduleList, name, normalName, color) {
               moduleNames.push(moduleInit.name);
               chatModes.push(moduleInit.modeID);
               messagingIndexes.push(modules.length-1);
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+            };
+            hasError = false;
+            break;
+          case 3:
+            type3Specs.forEach(spec => {
+              if (!moduleInit.hasOwnProperty(spec)) {
+                errors.push(spec);
+                hasError = true;
+              };
+            });
+            if (hasError) {
+              logMessage("Module \"" + moduleInit.name + "\" cannot be initialized!");
+              errors.forEach(error => {
+                logMessage("Module is missing the \"" + error + "\" specification!");
+              });
+              errors = [];
+            } else {
+              modules.push(moduleInit);
+              moduleNames.push(moduleInit.name);
+              commands.push(moduleInit.command);
+              chatModes.push(moduleInit.modeID);
+              commandIndexes.push(modules.length-1);
+              messagingIndexes.push(modules.length-1);
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+            };
+            hasError = false;
+            break;
+          case 11:
+            type11Specs.forEach(spec => {
+              if (!moduleInit.hasOwnProperty(spec)) {
+                errors.push(spec);
+                hasError = true;
+              };
+            });
+            if (hasError) {
+              logMessage("Module \"" + moduleInit.name + "\" cannot be initialized!");
+              errors.forEach(error => {
+                logMessage("Module is missing the \"" + error + "\" specification!");
+              });
+              errors = [];
+            } else {
+              modules.push(moduleInit);
+              moduleNames.push(moduleInit.name);
+              commands.push(moduleInit.command);
+              commandIndexes.push(modules.length-1);
+              cyberModules.push(moduleInit.name);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
             };
             hasError = false;
@@ -365,9 +414,13 @@ function initSystem(moduleList, name, normalName, color) {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
               commands.push(moduleInit.command);
-              chatModes.push(moduleInit.modeID);
               commandIndexes.push(modules.length-1);
-              messagingIndexes.push(modules.length-1);
+              cyberModules.push(moduleInit.name);
+              var modulePowers = moduleInit.powers;
+              modulePowers.forEach(power => {
+                powerArray.push(power);
+              });
+              modifierIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
             };
             hasError = false;
@@ -390,6 +443,13 @@ function initSystem(moduleList, name, normalName, color) {
               moduleNames.push(moduleInit.name);
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
+              cyberModules.push(moduleInit.name);
+              var modulePowers = moduleInit.powers;
+              modulePowers.forEach(power => {
+                powerArray.push(power);
+              });
+              keyBindIndexes.push(modules.length-1);
+              modifierIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
             };
             hasError = false;
@@ -412,61 +472,7 @@ function initSystem(moduleList, name, normalName, color) {
               moduleNames.push(moduleInit.name);
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
-              var modulePowers = moduleInit.powers;
-              modulePowers.forEach(power => {
-                powerArray.push(power);
-              });
-              modifierIndexes.push(modules.length-1);
-              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
-            };
-            hasError = false;
-            break;
-          case 15:
-            type15Specs.forEach(spec => {
-              if (!moduleInit.hasOwnProperty(spec)) {
-                errors.push(spec);
-                hasError = true;
-              };
-            });
-            if (hasError) {
-              logMessage("Module \"" + moduleInit.name + "\" cannot be initialized!");
-              errors.forEach(error => {
-                logMessage("Module is missing the \"" + error + "\" specification!");
-              });
-              errors = [];
-            } else {
-              modules.push(moduleInit);
-              moduleNames.push(moduleInit.name);
-              commands.push(moduleInit.command);
-              commandIndexes.push(modules.length-1);
-              var modulePowers = moduleInit.powers;
-              modulePowers.forEach(power => {
-                powerArray.push(power);
-              });
-              keyBindIndexes.push(modules.length-1);
-              modifierIndexes.push(modules.length-1);
-              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
-            };
-            hasError = false;
-            break;
-          case 16:
-            type16Specs.forEach(spec => {
-              if (!moduleInit.hasOwnProperty(spec)) {
-                errors.push(spec);
-                hasError = true;
-              };
-            });
-            if (hasError) {
-              logMessage("Module \"" + moduleInit.name + "\" cannot be initialized!");
-              errors.forEach(error => {
-                logMessage("Module is missing the \"" + error + "\" specification!");
-              });
-              errors = [];
-            } else {
-              modules.push(moduleInit);
-              moduleNames.push(moduleInit.name);
-              commands.push(moduleInit.command);
-              commandIndexes.push(modules.length-1);
+              cyberModules.push(moduleInit.name);
               var modulePowers = moduleInit.powers;
               modulePowers.forEach(power => {
                 powerArray.push(power);
@@ -594,7 +600,7 @@ function initSystem(moduleList, name, normalName, color) {
      **/
     getAttributeProfile: function (entity) {
       var result = null;
-      if (entity.getData("skyhighheroes:dyn/power_timer") < 1) {
+      if (entity.getData("skyhighocs:dyn/power_timer") < 1) {
         result = "SHUT_DOWN";
       };
       if (attributeProfileIndexes.length == 1) {
@@ -630,7 +636,7 @@ function initSystem(moduleList, name, normalName, color) {
      **/
     getDamageProfile: function (entity) {
       var result = null;
-      if (entity.getData("skyhighheroes:dyn/power_timer") < 1) {
+      if (entity.getData("skyhighocs:dyn/power_timer") < 1) {
         result = null;
       };
       if (damageProfileIndexes.length == 1) {
@@ -689,7 +695,7 @@ function initSystem(moduleList, name, normalName, color) {
      * @param {string} keyBind - Required
      **/
     isKeyBindEnabled: function (entity, keyBind) {
-      if (entity.getData("skyhighheroes:dyn/power_timer") < 1) {
+      if (entity.getData("skyhighocs:dyn/power_timer") < 1) {
         return false;
       };
       if (keyBindIndexes.length == 1) {
@@ -726,7 +732,7 @@ function initSystem(moduleList, name, normalName, color) {
      * @param {string} modifier - Required
      **/
     isModifierEnabled: function (entity, modifier) {
-      if (entity.getData("skyhighheroes:dyn/power_timer") < 1) {
+      if (entity.getData("skyhighocs:dyn/power_timer") < 1) {
         return false;
       };
       if (modifierIndexes.length == 1) {
@@ -793,18 +799,18 @@ function initSystem(moduleList, name, normalName, color) {
                 status(entity);
                 break;
               case "powerOff":
-                manager.setData(entity, "skyhighheroes:dyn/powered", false);
+                manager.setData(entity, "skyhighocs:dyn/powered", false);
                 systemMessage(entity, "<n>Powering down!");
                 break;
               case "powerOn":
-                manager.setData(entity, "skyhighheroes:dyn/powered", true);
+                manager.setData(entity, "skyhighocs:dyn/powered", true);
                 systemMessage(entity, "<n>Powering on!");
                 break;
               case "help":
                 systemMessage(entity, "<n>Available commands:");
                 commandIndexes.forEach(index => {
                   var module = modules[index];
-                  if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighheroes:dyn/power_timer") == 1) {
+                  if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighocs:dyn/power_timer") == 1) {
                     systemMessage(entity, module.helpMessage);
                   };
                 });
@@ -829,7 +835,7 @@ function initSystem(moduleList, name, normalName, color) {
                 break;
               default:
                 var index = commands.indexOf(args[0]);
-                if (index > -1 && entity.getData("skyhighheroes:dyn/power_timer") == 1) {
+                if (index > -1 && entity.getData("skyhighocs:dyn/power_timer") == 1) {
                   var module = modules[commandIndexes[index]];
                   if (!isModuleDisabled(entity, module.name)) {
                     module.commandHandler(entity, manager, args);
@@ -849,7 +855,7 @@ function initSystem(moduleList, name, normalName, color) {
       if (typeof disguisedName === "string" && entity.getData("skyhighocs:dyn/disguised_timer") < 1) {
         manager.setData(entity, "fiskheroes:disguise", disguisedName);
       };
-      if (typeof cyberName === "string" && entity.getData("skyhighheroes:dyn/disguised_timer") == 1) {
+      if (typeof cyberName === "string" && entity.getData("skyhighocs:dyn/disguised_timer") == 1) {
         manager.setData(entity, "fiskheroes:disguise", cyberName);
       };
       var x = entity.posX();
@@ -872,13 +878,13 @@ function initSystem(moduleList, name, normalName, color) {
       manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
       var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
       manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
-      if (PackLoader.getSide() == "SERVER" && entity.getData("skyhighheroes:dyn/power_timer") < 1 && entity.getData("skyhighheroes:dyn/power_timer") > 0) {
+      if (PackLoader.getSide() == "SERVER" && entity.getData("skyhighocs:dyn/power_timer") < 1 && entity.getData("skyhighocs:dyn/power_timer") > 0) {
         var moduleTotal = cyberModules.length;
-        var moduleTime = (200/moduleTotal).toFixed(0);
-        var currentTime = Math.ceil(entity.getData("skyhighheroes:dyn/power_timer")*200);
+        var moduleTime = (60/moduleTotal).toFixed(0);
+        var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/power_timer")*60);
         if (currentTime % moduleTime == 0) {
           var moduleName = cyberModules[(currentTime/moduleTime)-1];
-          var message = !entity.getData("skyhighheroes:dyn/powered") ? "<n>Shutting down <nh>" + moduleName + "<n>!" : "<n>Starting up <nh>" + moduleName + "<n>!";
+          var message = !entity.getData("skyhighocs:dyn/powered") ? "<n>Shutting down <nh>" + moduleName + "<n>!" : "<n>Starting up <nh>" + moduleName + "<n>!";
           systemMessage(entity, message);
         };
       };
