@@ -199,15 +199,15 @@ function initModule(system) {
             switch (arguments[2]) {
               case "charged":
                 manager.setByte(nbt, "cannonsBody", 0);
-                systemMessage(entity, "<n>Will set body to charged beam!");
+                system.systemMessage(entity, "<n>Will set body to charged beam!");
                 break;
               case "heat":
                 manager.setByte(nbt, "cannonsBody", 1);
-                systemMessage(entity, "<n>Will set body to heat vision!");
+                system.systemMessage(entity, "<n>Will set body to heat vision!");
                 break;
               case "engproj":
                 manager.setByte(nbt, "cannonsBody", 2);
-                systemMessage(entity, "<n>Will set body to energy projection!");
+                system.systemMessage(entity, "<n>Will set body to energy projection!");
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Body cannons commands:");

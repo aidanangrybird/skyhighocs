@@ -1,4 +1,4 @@
-{eye_cannons} = curve({data_0})
+{eye_beams} = curve({data_0})
 {mouth} = curve({data_1})
 {antenna} = curve({data_2})(1-{rain_mode}{satellite_dish})
 {satellite_dish} = curve({data_3})
@@ -6,19 +6,19 @@
 {ports} = curve({data_5})
 
 ;eyes
-{part0_eye_cannons} = if({eye_cannons} != 1, animate2({eye_cannons}, 1.0, 0.0, 0.15, 0.0), 1)
-{part1_eye_cannons} = if({eye_cannons} != 1, animate2({eye_cannons}, 1.0, 0.2, 0.2, 0.0), 1)
-{part2_eye_cannons} = if({eye_cannons} != 1, animate2({eye_cannons}, 1.0, 0.6, 0.4, 0.0), 1)
-{head_left_eye_upper_cover_posZ} += 0.03{part0_eye_cannons}
-{head_left_eye_lower_cover_posZ} += 0.03{part0_eye_cannons}
-{head_left_eye_upper_cover_posY} -= 1{part1_eye_cannons}
-{head_left_eye_lower_cover_posY} += 1{part1_eye_cannons}
-{head_left_eye_posZ} -= 3{part2_eye_cannons}
-{head_right_eye_upper_cover_posZ} += 0.03{part0_eye_cannons}
-{head_right_eye_lower_cover_posZ} += 0.03{part0_eye_cannons}
-{head_right_eye_upper_cover_posY} -= 1{part1_eye_cannons}
-{head_right_eye_lower_cover_posY} += 1{part1_eye_cannons}
-{head_right_eye_posZ} -= 2.75{part2_eye_cannons}
+{part0_eye_beams} = if({eye_beams} != 1, animate2({eye_beams}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_eye_beams} = if({eye_beams} != 1, animate2({eye_beams}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_eye_beams} = if({eye_beams} != 1, animate2({eye_beams}, 1.0, 0.6, 0.4, 0.0), 1)
+{head_left_eye_upper_cover_posZ} += 0.03{part0_eye_beams}
+{head_left_eye_lower_cover_posZ} += 0.03{part0_eye_beams}
+{head_left_eye_upper_cover_posY} -= 1{part1_eye_beams}
+{head_left_eye_lower_cover_posY} += 1{part1_eye_beams}
+{head_left_eye_posZ} -= 3{part2_eye_beams}
+{head_right_eye_upper_cover_posZ} += 0.03{part0_eye_beams}
+{head_right_eye_lower_cover_posZ} += 0.03{part0_eye_beams}
+{head_right_eye_upper_cover_posY} -= 1{part1_eye_beams}
+{head_right_eye_lower_cover_posY} += 1{part1_eye_beams}
+{head_right_eye_posZ} -= 2.75{part2_eye_beams}
 
 ;mouth
 {part0_mouth} = if({mouth} != 1, animate2({mouth}, 1.0, 0.0, 0.15, 0.0), 1)

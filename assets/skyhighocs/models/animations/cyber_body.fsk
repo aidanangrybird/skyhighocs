@@ -1,8 +1,10 @@
-{rockets} = curve({data_0})
-{cannon} = curve({data_1})
-{wings} = curve({data_2})
-{furnace} = curve({data_3})
-{ext_arm} = curve({data_4})
+{flight} = curve({data_0})
+{boost} = curve({data_1}){flight}
+{rockets} = curve({data_2})
+{beam} = curve({data_3})
+{wings} = curve({data_4})
+{furnace} = curve({data_5})
+{ext_arm} = curve({data_6})
 
 
 ;body
@@ -29,24 +31,24 @@
 {body_rocket_right_posZ} += 0.25{part4_rockets}
 
 
-{part1_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.0, 0.15, 0.0), 1)
-{part2_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.2, 0.2, 0.0), 1)
-{part3_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.6, 0.4, 0.0), 1)
-{body_left_cannon_upper_cover_posZ} += 0.03{part1_cannon}
-{body_left_cannon_upper_cover_posY} -= 1{part2_cannon}
-{body_left_cannon_upper_cover_posX} += 1{part2_cannon}
-{body_left_cannon_lower_cover_posZ} += 0.03{part1_cannon}
-{body_left_cannon_lower_cover_posY} += 2{part2_cannon}
-{body_cannon_left_posZ} -= 4.25{part3_cannon}
-{body_cannon_left_base_posZ} -= 1.5{part3_cannon}
-{body_right_cannon_upper_cover_posZ} += 0.03{part1_cannon}
-{body_right_cannon_upper_cover_posY} -= 1{part2_cannon}
-{body_right_cannon_upper_cover_posX} -= 1{part2_cannon}
-{body_right_cannon_lower_cover_posZ} += 0.03{part1_cannon}
-{body_right_cannon_lower_cover_posY} += 2{part2_cannon}
-;{body_right_cannon_lower_cover_posX} -= 0.5{part2_cannon}
-{body_cannon_right_posZ} -= 4.25{part3_cannon}
-{body_cannon_right_base_posZ} -= 1.5{part3_cannon}
+{part1_beam} = if({beam} != 1, animate2({beam}, 1.0, 0.0, 0.15, 0.0), 1)
+{part2_beam} = if({beam} != 1, animate2({beam}, 1.0, 0.2, 0.2, 0.0), 1)
+{part3_beam} = if({beam} != 1, animate2({beam}, 1.0, 0.6, 0.4, 0.0), 1)
+{body_left_cannon_upper_cover_posZ} += 0.03{part1_beam}
+{body_left_cannon_upper_cover_posY} -= 1{part2_beam}
+{body_left_cannon_upper_cover_posX} += 1{part2_beam}
+{body_left_cannon_lower_cover_posZ} += 0.03{part1_beam}
+{body_left_cannon_lower_cover_posY} += 2{part2_beam}
+{body_cannon_left_posZ} -= 4.25{part3_beam}
+{body_cannon_left_base_posZ} -= 1.5{part3_beam}
+{body_right_cannon_upper_cover_posZ} += 0.03{part1_beam}
+{body_right_cannon_upper_cover_posY} -= 1{part2_beam}
+{body_right_cannon_upper_cover_posX} -= 1{part2_beam}
+{body_right_cannon_lower_cover_posZ} += 0.03{part1_beam}
+{body_right_cannon_lower_cover_posY} += 2{part2_beam}
+;{body_right_cannon_lower_cover_posX} -= 0.5{part2_beam}
+{body_cannon_right_posZ} -= 4.25{part3_beam}
+{body_cannon_right_base_posZ} -= 1.5{part3_beam}
 
 
 ;furnace

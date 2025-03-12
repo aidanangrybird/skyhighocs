@@ -10,8 +10,8 @@
 {part2_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.6, 0.4, 0.0), 1)
 {right_arm_inner_cannon_cover_posY} -= 0.03{part0_cannon}
 {right_arm_outer_cannon_cover_posY} -= 0.03{part0_cannon}
-{right_arm_inner_cannon_cover_posX} -= 1{part1_cannon}
-{right_arm_outer_cannon_cover_posX} += 1{part1_cannon}
+{right_arm_inner_cannon_cover_posX} += 1{part1_cannon}
+{right_arm_outer_cannon_cover_posX} -= 1{part1_cannon}
 {right_arm_cannon_posY} += 3{part2_cannon}
 
 ;rocket

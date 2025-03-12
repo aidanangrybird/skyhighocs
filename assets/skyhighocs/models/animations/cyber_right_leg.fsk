@@ -1,6 +1,8 @@
-{main_rocket} = curve({data_0})
-{side_rockets} = curve({data_1})
-{booster_rocket} = curve({data_2})
+{flight} = curve({data_0})
+{boost} = curve({data_1}){flight}
+{main_rocket} = curve({data_2})
+{side_rockets} = curve({data_3})
+{booster_rocket} = curve({data_4})
 
 ;main rocket
 {part1_main_rocket} = if({main_rocket} != 1, animate2({main_rocket}, 1.0, 0.0, 0.1, 0.0), 1)
