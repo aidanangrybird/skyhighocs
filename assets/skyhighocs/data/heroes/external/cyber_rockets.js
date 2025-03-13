@@ -127,7 +127,7 @@ function initModule(system) {
       var legs = (nbt.getBoolean("rocketsLegs")) ? "T" : "F";
       if (modifier.name() == "fiskheroes:controlled_flight") {
         if (modifier.id() == "rockets_" + aux + body + legs) {
-          result = aux || body || legs;
+          result = nbt.getBoolean("rocketsAux") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs");
         };
       };
       if (modifier.name() == "fiskheroes:transformation") {

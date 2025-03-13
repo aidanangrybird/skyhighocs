@@ -20,7 +20,7 @@ function initModule(system) {
             manager.setData(entity, "skyhighocs:dyn/disguised", false);
             break;
           case "help":
-            system.systemMessage(entity, "<n>Scanner commands:");
+            system.systemMessage(entity, "<n>Disguise commands:");
             system.systemMessage(entity, "<n>!disguise on <nh>-<n> Turns on disguise");
             system.systemMessage(entity, "<n>!disguise off <nh>-<n> Turns off disguise");
             system.systemMessage(entity, "<n>!disguise help <nh>-<n> Shows disguiseSystem commands");

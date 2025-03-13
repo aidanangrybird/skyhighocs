@@ -1,0 +1,14 @@
+{
+  "name": "External Arms System",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:transformation|external_arms": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/external_arms",
+        "timerData": "skyhighocs:dyn/external_arms_timer",
+        "time": 60
+      },
+      "isToggle": true
+    }
+  }
+}

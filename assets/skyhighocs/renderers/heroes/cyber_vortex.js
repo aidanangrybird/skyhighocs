@@ -12,6 +12,18 @@ loadTextures({
   "right_arm_lights": "skyhighocs:aidan/cyber_vortex_right_arm_lights",
   "left_leg_lights": "skyhighocs:aidan/cyber_vortex_left_leg_lights",
   "right_leg_lights": "skyhighocs:aidan/cyber_vortex_right_leg_lights",
+  "head_disguise_layer1": "skyhighocs:aidan/cyber_vortex_disguise_head_layer1.tx.json",
+  "head_disguise_layer2": "skyhighocs:aidan/cyber_vortex_disguise_head_layer2.tx.json",
+  "body_disguise_layer1": "skyhighocs:aidan/cyber_vortex_disguise_body_layer1.tx.json",
+  "body_disguise_layer2": "skyhighocs:aidan/cyber_vortex_disguise_body_layer2.tx.json",
+  "left_arm_disguise_layer1": "skyhighocs:aidan/cyber_vortex_disguise_left_arm_layer1.tx.json",
+  "left_arm_disguise_layer2": "skyhighocs:aidan/cyber_vortex_disguise_left_arm_layer2.tx.json",
+  "right_arm_disguise_layer1": "skyhighocs:aidan/cyber_vortex_disguise_right_arm_layer1.tx.json",
+  "right_arm_disguise_layer2": "skyhighocs:aidan/cyber_vortex_disguise_right_arm_layer2.tx.json",
+  "left_leg_disguise_layer1": "skyhighocs:aidan/cyber_vortex_disguise_left_leg_layer1.tx.json",
+  "left_leg_disguise_layer2": "skyhighocs:aidan/cyber_vortex_disguise_left_leg_layer2.tx.json",
+  "right_leg_disguise_layer1": "skyhighocs:aidan/cyber_vortex_disguise_right_leg_layer1.tx.json",
+  "right_leg_disguise_layer2": "skyhighocs:aidan/cyber_vortex_disguise_right_leg_layer2.tx.json",
 });
 
 function initEffects(renderer) {

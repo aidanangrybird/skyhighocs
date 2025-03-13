@@ -9,6 +9,12 @@ var cannons = implement("skyhighocs:external/cyber_cannons");
 var rockets = implement("skyhighocs:external/cyber_rockets");
 var blades = implement("skyhighocs:external/cyber_blades");
 var shields = implement("skyhighocs:external/cyber_shields");
+var disguise = implement("skyhighocs:external/cyber_disguise");
+var wings = implement("skyhighocs:external/cyber_wings");
+var furnace = implement("skyhighocs:external/cyber_furnace");
+var externalArms = implement("skyhighocs:external/cyber_external_arms");
+var ports = implement("skyhighocs:external/cyber_ports");
+var mouth = implement("skyhighocs:external/cyber_mouth");
 var cyberOS = system.initSystem([messaging,
   groupMessaging,
   contacts,
@@ -18,7 +24,9 @@ var cyberOS = system.initSystem([messaging,
   cannons,
   rockets,
   blades,
-  shields
+  shields,
+  disguise,
+  wings,
 ], "Cyber Vortex", "aidanangrybird", "6");
 function init(hero) {
   hero.setAliases("cyber_vortex");

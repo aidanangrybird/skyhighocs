@@ -1,0 +1,14 @@
+{
+  "name": "Mouth System",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:transformation|mouth": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/mouth",
+        "timerData": "skyhighocs:dyn/mouth_timer",
+        "time": 60
+      },
+      "isToggle": true
+    }
+  }
+}

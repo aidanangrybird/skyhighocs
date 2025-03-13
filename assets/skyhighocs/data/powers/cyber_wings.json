@@ -1,0 +1,14 @@
+{
+  "name": "Wings System",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:transformation|wings": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/wings",
+        "timerData": "skyhighocs:dyn/wings_timer",
+        "time": 60
+      },
+      "isToggle": true
+    }
+  }
+}

@@ -673,7 +673,7 @@ function initSystem(moduleList, name, normalName, color) {
       hero.addAttribute("KNOCKBACK", 2.5, 0);
       hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
       hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
-      /* hero.addAttributeProfile("SHUT_DOWN", function (profile) {
+      hero.addAttributeProfile("SHUT_DOWN", function (profile) {
         profile.addAttribute("BASE_SPEED", -1.0, 1);
         profile.addAttribute("SPRINT_SPEED", -1.0, 1);
         profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
@@ -681,7 +681,7 @@ function initSystem(moduleList, name, normalName, color) {
         profile.addAttribute("STEP_HEIGHT", -1.0, 1);
         profile.addAttribute("KNOCKBACK", -1.0, 1);
         profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
-      }); */
+      });
       damageProfileIndexes.forEach(index => {
         modules[index].initDamageProfiles(hero);
       });

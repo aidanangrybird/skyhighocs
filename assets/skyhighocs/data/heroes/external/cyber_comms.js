@@ -62,7 +62,7 @@ function initModule(system) {
             };
             break;
           case "help":
-            system.systemMessage(entity, "<n>Scanner commands:");
+            system.systemMessage(entity, "<n>Communications commands:");
             system.systemMessage(entity, "<n>!comms on help <nh>-<n> Shows Communications activate commands");
             system.systemMessage(entity, "<n>!comms off help <nh>-<n> Shows Communications deactivate commands");
             system.systemMessage(entity, "<n>!comms help <nh>-<n> Shows communicationsSystem commands");
