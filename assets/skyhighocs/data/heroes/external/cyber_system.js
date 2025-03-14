@@ -146,8 +146,8 @@ function disableModule(player, manager, moduleList, moduleName) {
         systemMessage(player, "<e>You have already disabled module <eh>" + moduleName + "<e>!");
       } else {
         systemMessage(player, "<s>Module <sh>" + moduleName + "<s> disabled!");
-        if (modules[moduleIndex].hasOwnProperty(whenDisable)) {
-          modules[moduleIndex].whenDisable(player, manager);
+        if (moduleList[moduleIndex].hasOwnProperty("whenDisabled")) {
+          moduleList[moduleIndex].whenDisabled(player, manager);
         };
         manager.appendString(disabledModules, moduleName);
       };
@@ -499,22 +499,7 @@ function initSystem(moduleList, name, normalName, color) {
       logMessage("Module at position " + moduleList.indexOf(module) + " cannot be initialized!");
     };
   });
-  logMessage("Successfully initialized " + modules.length + " out of " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on cyber " + cyberName + "!");
-  function cycleChatModes(player, manager) {
-    manager.setData(player, "skyhighheroes:dyn/chat_mode", player.getData("skyhighheroes:dyn/chat_mode") + 1);
-    if (player.getData("skyhighheroes:dyn/chat_mode") > (messagingIndexes.length-1)) {
-      manager.setData(player, "skyhighheroes:dyn/chat_mode", 0);
-    };
-    var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
-    systemMessage(player, modules[messagingIndexes[chatMode]].chatModeInfo);
-    modules[messagingIndexes[chatMode]].chatInfo(player, manager);
-    return true;
-  };
-  function cycleChats(player, manager) {
-    var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
-    modules[messagingIndexes[chatMode]].chatInfo(player, manager);
-    return true;
-  };
+  logMessage("Successfully initialized " + modules.length + " out of " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on " + cyberName + "!");
   function switchChatModes(player, manager, mode) {
     var modeIndex = chatModes.indexOf(mode);
     if (modeIndex > -1) {
@@ -899,7 +884,6 @@ function initSystem(moduleList, name, normalName, color) {
                 break;
               case "disable":
                 disableModule(entity, manager, moduleNames, args[1]);
-                whenDisable(entity, manager, moduleNames, args[1]);
                 break;
               case "enable":
                 enableModule(entity, manager, moduleNames, args[1]);
