@@ -6,7 +6,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/powered",
         "timerData": "skyhighocs:dyn/power_timer",
-        "time": 60
+        "time": 80
       },
       "isToggle": true
     },
