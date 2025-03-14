@@ -131,31 +131,7 @@ function getGroupArrayMembers(entity) {
  * @param {Array} moduleList - List of available module names
  * @param {string} moduleName - Module name to disable
  **/
-function disableModule(player, manager, moduleList, moduleName) {
-  var moduleIndex = moduleList.indexOf(moduleName);
-  if (moduleIndex > -1) {
-    if (!player.getWornHelmet().nbt().hasKey("disabledModules")) {
-      var disabledModules = manager.newTagList();
-      manager.appendString(disabledModules, moduleName);
-      manager.setTagList(player.getWornHelmet().nbt(), "disabledModules", disabledModules);
-      systemMessage(player, "<s>Module <sh>" + moduleName + "<s> disabled!");
-    } else {
-      var disabledModules = player.getWornHelmet().nbt().getStringList("disabledModules");
-      var disabledModulesIndex = getStringArray(disabledModules).indexOf(moduleName);
-      if (disabledModulesIndex > -1) {
-        systemMessage(player, "<e>You have already disabled module <eh>" + moduleName + "<e>!");
-      } else {
-        systemMessage(player, "<s>Module <sh>" + moduleName + "<s> disabled!");
-        if (moduleList[moduleIndex].hasOwnProperty("whenDisabled")) {
-          moduleList[moduleIndex].whenDisabled(player, manager);
-        };
-        manager.appendString(disabledModules, moduleName);
-      };
-    };
-  } else {
-    systemMessage(player, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
-  };
-};
+
 /**
  * Enables module
  * @param {JSPlayer} player - Player cutting BrotherBand
@@ -163,28 +139,7 @@ function disableModule(player, manager, moduleList, moduleName) {
  * @param {Array} moduleList - List of available module names
  * @param {integer} moduleName - Username of player cutting BrotherBand with
  **/
-function enableModule(player, manager, moduleList, moduleName) {
-  if (moduleList.indexOf(moduleName) > -1) {
-    if (!player.getWornHelmet().nbt().hasKey("disabledModules")) {
-      systemMessage(player, "<e>You have no disabled modules to enable!");
-    } else {
-      var disabledModules = player.getWornHelmet().nbt().getStringList("disabledModules");
-      if (disabledModules.tagCount() == 0) {
-        systemMessage(player, "<e>You have no disabled modules to enable!");
-      } else {
-        var index = getStringArray(disabledModules).indexOf(moduleName);
-        if (index < 0) {
-          systemMessage(player, "<e>Module <eh>" + moduleName + "<e> is already enabled!");
-        } else {
-          systemMessage(player, "<s>Successfully enabled <sh>" + moduleName + "<s> module!");
-          manager.removeTag(disabledModules, index);
-        };
-      };
-    };
-  } else {
-    systemMessage(player, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
-  };
-};
+
 /**
  * Checks if a module is disabled
  * @param {JSEntity} entity - Player getting checked
@@ -543,6 +498,53 @@ function initSystem(moduleList, name, normalName, color) {
     systemMessage(entity, "<n>Biome: <nh>" + entity.world().getLocation(entity.pos()).biome());
     systemMessage(entity, "<n>Do <nh>!help<n> for available commands!");
   };
+  function enableModule(player, manager, moduleName) {
+    if (moduleNames.indexOf(moduleName) > -1) {
+      if (!player.getWornHelmet().nbt().hasKey("disabledModules")) {
+        systemMessage(player, "<e>You have no disabled modules to enable!");
+      } else {
+        var disabledModules = player.getWornHelmet().nbt().getStringList("disabledModules");
+        if (disabledModules.tagCount() == 0) {
+          systemMessage(player, "<e>You have no disabled modules to enable!");
+        } else {
+          var index = getStringArray(disabledModules).indexOf(moduleName);
+          if (index < 0) {
+            systemMessage(player, "<e>Module <eh>" + moduleName + "<e> is already enabled!");
+          } else {
+            systemMessage(player, "<s>Successfully enabled <sh>" + moduleName + "<s> module!");
+            manager.removeTag(disabledModules, index);
+          };
+        };
+      };
+    } else {
+      systemMessage(player, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
+    };
+  };
+  function disableModule(player, manager, moduleName) {
+    var moduleIndex = moduleNames.indexOf(moduleName);
+    if (moduleIndex > -1) {
+      if (!player.getWornHelmet().nbt().hasKey("disabledModules")) {
+        var disabledModules = manager.newTagList();
+        manager.appendString(disabledModules, moduleName);
+        manager.setTagList(player.getWornHelmet().nbt(), "disabledModules", disabledModules);
+        systemMessage(player, "<s>Module <sh>" + moduleName + "<s> disabled!");
+      } else {
+        var disabledModules = player.getWornHelmet().nbt().getStringList("disabledModules");
+        var disabledModulesIndex = getStringArray(disabledModules).indexOf(moduleName);
+        if (disabledModulesIndex > -1) {
+          systemMessage(player, "<e>You have already disabled module <eh>" + moduleName + "<e>!");
+        } else {
+          systemMessage(player, "<s>Module <sh>" + moduleName + "<s> disabled!");
+          manager.appendString(disabledModules, moduleName);
+          if (modules[moduleIndex].hasOwnProperty("whenDisabled")) {
+            modules[moduleIndex].whenDisabled(player, manager);
+          };
+        };
+      };
+    } else {
+      systemMessage(player, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
+    };
+  };
   return {
     /**
      * Power stuff (I hate that I had to do it this way)
@@ -883,10 +885,10 @@ function initSystem(moduleList, name, normalName, color) {
                 systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
                 break;
               case "disable":
-                disableModule(entity, manager, moduleNames, args[1]);
+                disableModule(entity, manager, args[1]);
                 break;
               case "enable":
-                enableModule(entity, manager, moduleNames, args[1]);
+                enableModule(entity, manager, args[1]);
                 break;
               case "cv":
                 systemMessage(entity, entity.getDataOrDefault("skyhighocs:dyn/"+args[1], -1))
