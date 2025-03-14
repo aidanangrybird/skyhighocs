@@ -18,13 +18,16 @@ function initModule(system) {
             switch (arguments[2]) {
               case "left":
                 manager.setData(entity, "skyhighocs:dyn/shield_left_arm", true);
+                manager.setData(entity, "fiskheroes:shield", true);
                 break;
               case "right":
                 manager.setData(entity, "skyhighocs:dyn/shield_right_arm", true);
+                manager.setData(entity, "fiskheroes:shield", true);
                 break;
               case "*":
                 manager.setData(entity, "skyhighocs:dyn/shield_left_arm", true);
                 manager.setData(entity, "skyhighocs:dyn/shield_right_arm", true);
+                manager.setData(entity, "fiskheroes:shield", true);
                 break;
               case "help":
                 system.systemMessage(entity, "<n>Shield activate commands:");
@@ -91,10 +94,12 @@ function initModule(system) {
         }
       });
     },
-    getDamageProfiles: function (entity) {
+    getDamageProfile: function (entity) {
       var result = null;
-      if (entity.getData("skyhighocs:dyn/shield_left_arm_timer") == 1 || entity.getData("skyhighocs:dyn/shield_right_arm_timer") == 1) {
-        result = "SHIELD";
+      if (!system.isModuleDisabled(entity, this.name)) {
+        if (entity.getData("skyhighocs:dyn/shield_left_arm_timer") == 1 || entity.getData("skyhighocs:dyn/shield_right_arm_timer") == 1) {
+          result = "SHIELD";
+        };
       };
       return result;
     },
@@ -118,19 +123,20 @@ function initModule(system) {
         profile.addAttribute("PUNCH_DAMAGE", 14.5, 0);
       });
     },
-    getAttributeProfiles: function (entity) {
-      if (entity.getData("skyhighocs:dyn/shield_left_arm_timer") == 1) {
-        return "SHIELD_LEFT_ARM";
+    getAttributeProfile: function (entity) {
+      var result = null;
+      if (!system.isModuleDisabled(entity, this.name)) {
+        if (entity.getData("skyhighocs:dyn/shield_left_arm_timer") == 1) {
+          result = "SHIELD_LEFT_ARM";
+        };
+        if (entity.getData("skyhighocs:dyn/shield_right_arm_timer") == 1) {
+          result = "SHIELD_RIGHT_ARM";
+        };
+        if (entity.getData("skyhighocs:dyn/shield_left_arm_timer") == 1 && entity.getData("skyhighocs:dyn/shield_right_arm_timer") == 1) {
+          result = "SHIELD_BOTH_ARMS";
+        };
       };
-      if (entity.getData("skyhighocs:dyn/shield_right_arm_timer") == 1) {
-        return "SHIELD_RIGHT_ARM";
-      };
-      if (entity.getData("skyhighocs:dyn/shield_left_arm_timer") == 1 && entity.getData("skyhighocs:dyn/shield_right_arm_timer") == 1) {
-        return "SHIELD_BOTH_ARMS";
-      };
-      if (entity.getData("skyhighocs:dyn/shield_left_arm_timer") < 1 && entity.getData("skyhighocs:dyn/shield_right_arm_timer") < 1) {
-        return null;
-      };
+      return result;
     },
     whenDisabled: function (entity, manager) {
       manager.setData(entity, "skyhighocs:dyn/shield_left_arm", false);

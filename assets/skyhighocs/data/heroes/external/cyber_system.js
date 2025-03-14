@@ -269,7 +269,7 @@ function initSystem(moduleList, name, normalName, color) {
   var type13Specs = ["command", "commandHandler", "helpMessage", "keyBinds", "isKeyBindEnabled", "isModifierEnabled", "powers", "whenDisabled"];
   //Type 14 - cyber module
   /** @var type14Specs - Type 14 Specs */
-  var type14Specs = ["command", "commandHandler", "helpMessage", "isModifierEnabled", "initAttributeProfiles", "initDamageProfiles", "getAttributeProfiles", "getDamageProfiles", "powers", "whenDisabled"];
+  var type14Specs = ["command", "commandHandler", "helpMessage", "isModifierEnabled", "initAttributeProfiles", "initDamageProfiles", "getAttributeProfile", "getDamageProfile", "powers", "whenDisabled"];
   /** @var modules - Array of modules */
   var modules = [];
   /** @var moduleNames - Module names */
@@ -624,26 +624,26 @@ function initSystem(moduleList, name, normalName, color) {
         result = "SHUT_DOWN";
       };
       if (attributeProfileIndexes.length == 1) {
-        if (isModuleDisabled(entity, modules[attributeProfileIndexes[0]].name)) {
+        if (typeof modules[attributeProfileIndexes[0]].getAttributeProfile(entity) === "string") {
           result = modules[attributeProfileIndexes[0]].getAttributeProfile(entity);
         };
       };
       if (attributeProfileIndexes.length == 2) {
-        if (isModuleDisabled(entity, modules[attributeProfileIndexes[0]].name)) {
+        if (typeof modules[attributeProfileIndexes[0]].getAttributeProfile(entity) === "string") {
           result = modules[attributeProfileIndexes[0]].getAttributeProfile(entity);
         };
-        if (isModuleDisabled(entity, modules[attributeProfileIndexes[1]].name)) {
+        if (typeof modules[attributeProfileIndexes[1]].getAttributeProfile(entity) === "string") {
           result = modules[attributeProfileIndexes[1]].getAttributeProfile(entity);
         };
       };
-      if (attributeProfileIndexes.length == 3) {
-        if (isModuleDisabled(entity, modules[attributeProfileIndexes[0]].name)) {
+      if (attributeProfileIndexes.length >= 3) {
+        if (typeof modules[attributeProfileIndexes[0]].getAttributeProfile(entity) === "string") {
           result = modules[attributeProfileIndexes[0]].getAttributeProfile(entity);
         };
-        if (isModuleDisabled(entity, modules[attributeProfileIndexes[1]].name)) {
+        if (typeof modules[attributeProfileIndexes[1]].getAttributeProfile(entity) === "string") {
           result = modules[attributeProfileIndexes[1]].getAttributeProfile(entity);
         };
-        if (isModuleDisabled(entity, modules[attributeProfileIndexes[2]].name)) {
+        if (typeof modules[attributeProfileIndexes[2]].getAttributeProfile(entity) === "string") {
           result = modules[attributeProfileIndexes[2]].getAttributeProfile(entity);
         };
       };
@@ -660,26 +660,26 @@ function initSystem(moduleList, name, normalName, color) {
         result = null;
       };
       if (damageProfileIndexes.length == 1) {
-        if (isModuleDisabled(entity, modules[damageProfileIndexes[0]].name)) {
+        if (typeof modules[damageProfileIndexes[0]].getDamageProfile(entity) === "string") {
           result = modules[damageProfileIndexes[0]].getDamageProfile(entity);
         };
       };
       if (damageProfileIndexes.length == 2) {
-        if (isModuleDisabled(entity, modules[damageProfileIndexes[0]].name)) {
+        if (typeof modules[damageProfileIndexes[0]].getDamageProfile(entity) === "string") {
           result = modules[damageProfileIndexes[0]].getDamageProfile(entity);
         };
-        if (isModuleDisabled(entity, modules[damageProfileIndexes[1]].name)) {
+        if (typeof modules[damageProfileIndexes[1]].getDamageProfile(entity) === "string") {
           result = modules[damageProfileIndexes[1]].getDamageProfile(entity);
         };
       };
-      if (damageProfileIndexes.length == 3) {
-        if (isModuleDisabled(entity, modules[damageProfileIndexes[0]].name)) {
+      if (damageProfileIndexes.length >= 3) {
+        if (typeof modules[damageProfileIndexes[0]].getDamageProfile(entity) === "string") {
           result = modules[damageProfileIndexes[0]].getDamageProfile(entity);
         };
-        if (isModuleDisabled(entity, modules[damageProfileIndexes[1]].name)) {
+        if (typeof modules[damageProfileIndexes[1]].getDamageProfile(entity) === "string") {
           result = modules[damageProfileIndexes[1]].getDamageProfile(entity);
         };
-        if (isModuleDisabled(entity, modules[damageProfileIndexes[2]].name)) {
+        if (typeof modules[damageProfileIndexes[2]].getDamageProfile(entity) === "string") {
           result = modules[damageProfileIndexes[2]].getDamageProfile(entity);
         };
       };

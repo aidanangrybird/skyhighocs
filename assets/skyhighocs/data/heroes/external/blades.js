@@ -88,10 +88,12 @@ function initModule(system) {
         }
       });
     },
-    getDamageProfiles: function (entity) {
+    getDamageProfile: function (entity) {
       var result = null;
-      if (entity.getData("skyhighocs:dyn/blade_left_arm_timer") == 1 || entity.getData("skyhighocs:dyn/blade_right_arm_timer") == 1) {
-        result = "BLADE";
+      if (!system.isModuleDisabled(entity, this.name)) {
+        if (entity.getData("skyhighocs:dyn/blade_left_arm_timer") == 1 || entity.getData("skyhighocs:dyn/blade_right_arm_timer") == 1) {
+          result = "BLADE";
+        };
       };
       return result;
     },
@@ -115,19 +117,20 @@ function initModule(system) {
         profile.addAttribute("PUNCH_DAMAGE", 14.5, 0);
       });
     },
-    getAttributeProfiles: function (entity) {
-      if (entity.getData("skyhighocs:dyn/blade_left_arm_timer") == 1) {
-        return "BLADE_LEFT_ARM";
+    getAttributeProfile: function (entity) {
+      var result = null;
+      if (!system.isModuleDisabled(entity, this.name)) {
+        if (entity.getData("skyhighocs:dyn/blade_left_arm_timer") == 1) {
+          result = "BLADE_LEFT_ARM";
+        };
+        if (entity.getData("skyhighocs:dyn/blade_right_arm_timer") == 1) {
+          result = "BLADE_RIGHT_ARM";
+        };
+        if (entity.getData("skyhighocs:dyn/blade_left_arm_timer") == 1 && entity.getData("skyhighocs:dyn/blade_right_arm_timer") == 1) {
+          result = "BLADE_BOTH_ARMS";
+        };
       };
-      if (entity.getData("skyhighocs:dyn/blade_right_arm_timer") == 1) {
-        return "BLADE_RIGHT_ARM";
-      };
-      if (entity.getData("skyhighocs:dyn/blade_left_arm_timer") == 1 && entity.getData("skyhighocs:dyn/blade_right_arm_timer") == 1) {
-        return "BLADE_BOTH_ARMS";
-      };
-      if (entity.getData("skyhighocs:dyn/blade_left_arm_timer") < 1 && entity.getData("skyhighocs:dyn/blade_right_arm_timer") < 1) {
-        return null;
-      };
+      return result;
     },
     whenDisabled: function (entity, manager) {
       manager.setData(entity, "skyhighocs:dyn/blade_left_arm", false);
