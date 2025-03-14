@@ -354,6 +354,10 @@ function initSystem(moduleList, name, normalName, color) {
               commandIndexes.push(modules.length-1);
               cyberModules.push(moduleInit.name);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+              if (module.hasOwnProperty("tickHandler")) {
+                tickHandlerIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
+              };
             };
             hasError = false;
             break;
@@ -382,6 +386,10 @@ function initSystem(moduleList, name, normalName, color) {
               });
               modifierIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+              if (module.hasOwnProperty("tickHandler")) {
+                tickHandlerIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
+              };
             };
             hasError = false;
             break;
@@ -411,6 +419,10 @@ function initSystem(moduleList, name, normalName, color) {
               keyBindIndexes.push(modules.length-1);
               modifierIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+              if (module.hasOwnProperty("tickHandler")) {
+                tickHandlerIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
+              };
             };
             hasError = false;
             break;
@@ -441,6 +453,10 @@ function initSystem(moduleList, name, normalName, color) {
               damageProfileIndexes.push(modules.length-1);
               modifierIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+              if (module.hasOwnProperty("tickHandler")) {
+                tickHandlerIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
+              };
             };
             hasError = false;
             break;
@@ -923,6 +939,12 @@ function initSystem(moduleList, name, normalName, color) {
       if (typeof disguisedName === "string" && entity.getData("skyhighocs:dyn/disguised_timer") == 1) {
         manager.setData(entity, "fiskheroes:disguise", disguisedName);
       };
+      tickHandlerIndexes.forEach(index => {
+        var module = modules[index];
+        if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
+          module.tickHandler(entity, manager);
+        };
+      });
       var x = entity.posX();
       var y = entity.posY();
       var z = entity.posZ();
