@@ -7,12 +7,12 @@ function initModule(system) {
   // Heat Vision = 1
   // Energy Projection = 2
   return {
-    name: "cannonSystem",
+    name: "cannons",
     type: 13,
     powers: ["skyhighocs:cannons"],
     command: "cannons",
     helpMessage: "<n>!cannons <nh>-<n> Cannons",
-    disabledMessage: "<e>Module <eh>cannonSystem<e> is disabled!",
+    disabledMessage: "<e>Module <eh>cannons<e> is disabled!",
     keyBinds: function (hero) {
       hero.addKeyBindFunc("CANNON_SWITCH", (player, manager) => {
         manager.setData(player, "skyhighocs:dyn/cannon_type", player.getData("skyhighocs:dyn/cannon_type") + 1);
@@ -177,10 +177,11 @@ function initModule(system) {
             };
             break;
           case "help":
-            system.systemMessage(entity, "<n>Scanner commands:");
-            system.systemMessage(entity, "<n>!cannons on help <nh>-<n> Shows Communications activate commands");
-            system.systemMessage(entity, "<n>!cannons off help <nh>-<n> Shows Communications deactivate commands");
-            system.systemMessage(entity, "<n>!cannons help <nh>-<n> Shows communicationsSystem commands");
+            system.systemMessage(entity, "<n>Cannons commands:");
+            system.systemMessage(entity, "<n>!cannons eyes help <nh>-<n> Shows cannon eye commands");
+            system.systemMessage(entity, "<n>!cannons arms help <nh>-<n> Shows cannon arm commands");
+            system.systemMessage(entity, "<n>!cannons body help <nh>-<n> Shows cannon body commands");
+            system.systemMessage(entity, "<n>!cannons help <nh>-<n> Shows cannons commands");
             break;
           default:
             system.systemMessage(entity, "<e>Unknown <eh>comms<e> command! Try <eh>!cannons help<e> for a list of commands!");

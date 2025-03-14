@@ -5,7 +5,7 @@
 function initModule(system) {
   //All of the required functions and stuff go here
   return {
-    name: "bladeSystem",
+    name: "blades",
     type: 14,
     powers: ["skyhighocs:blades"],
     command: "blades",

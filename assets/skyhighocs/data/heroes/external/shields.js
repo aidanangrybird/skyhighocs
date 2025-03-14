@@ -5,12 +5,12 @@
 function initModule(system) {
   //All of the required functions and stuff go here
   return {
-    name: "shieldSystem",
+    name: "shields",
     type: 14,
     powers: ["skyhighocs:shields"],
     command: "shields",
     helpMessage: "<n>!shields <nh>-<n> Shields",
-    disabledMessage: "<e>Module <eh>shieldSystem<e> is disabled!",
+    disabledMessage: "<e>Module <eh>shields<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 5) {
         switch(arguments[1]) {
