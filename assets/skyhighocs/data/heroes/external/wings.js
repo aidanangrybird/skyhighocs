@@ -36,9 +36,9 @@ function initModule(system) {
     isModifierEnabled: function (entity, modifier) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
-        if (modifier.name() == "fiskheroes:transformation") {
-          result = true;
-        };
+      };
+      if (modifier.name() == "fiskheroes:transformation") {
+        result = true;
       };
       return result;
     },

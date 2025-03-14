@@ -36,14 +36,14 @@ function initModule(system) {
     isModifierEnabled: function (entity, modifier) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
-        if (modifier.name() == "fiskheroes:transformation") {
-          result = true;
-        };
+      };
+      if (modifier.name() == "fiskheroes:transformation") {
+        result = true;
       };
       return result;
     },
     whenDisabled: function (entity, manager) {
-      manager.setData(entity, "skyhighocs:dyn/portsd", false);
+      manager.setData(entity, "skyhighocs:dyn/ports", false);
     }
   };
 };

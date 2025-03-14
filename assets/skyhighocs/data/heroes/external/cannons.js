@@ -94,9 +94,9 @@ function initModule(system) {
             result = true;
           };
         };
-        if (modifier.name() == "fiskheroes:transformation") {
-          result = true;
-        };
+      };
+      if (modifier.name() == "fiskheroes:transformation") {
+        result = true;
       };
       return result;
     },

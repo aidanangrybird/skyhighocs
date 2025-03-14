@@ -131,9 +131,9 @@ function initModule(system) {
             result = nbt.getBoolean("rocketsAux") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs");
           };
         };
-        if (modifier.name() == "fiskheroes:transformation") {
-          result = true;
-        };
+      };
+      if (modifier.name() == "fiskheroes:transformation") {
+        result = true;
       };
       return result;
     },
