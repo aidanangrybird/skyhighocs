@@ -1,4 +1,5 @@
 var cyber = implement("skyhighocs:external/cyber");
+var cyber_boosters = implement("skyhighocs:external/cyber_boosters");
 var stuff = implement("skyhighheroes:external/stuff");
 
 var blank_model;
@@ -10,6 +11,12 @@ var left_arm_model;
 var right_arm_model;
 var left_leg_model;
 var right_leg_model;
+
+var body_boosters;
+var left_arm_boosters;
+var right_arm_boosters;
+var left_leg_boosters;
+var right_leg_boosters;
 
 var head_disguise_layer1_model;
 var head_disguise_layer2_model;
@@ -85,6 +92,7 @@ function initEffects(renderer) {
   body_model = renderer.createEffect("fiskheroes:model").setModel(body);
   body_model.anchor.set("body");
   body_model.setScale(1.0);
+  body_boosters = cyber_boosters.initBodyBoosters(renderer, body, getColor());
   var left_arm = renderer.createResource("MODEL", "skyhighocs:CyberLeftArm");
   left_arm.texture.set("left_arm", "left_arm_lights");
   left_arm.bindAnimation("skyhighocs:cyber_left_arm").setData((entity, data) => {
@@ -97,6 +105,7 @@ function initEffects(renderer) {
   left_arm_model = renderer.createEffect("fiskheroes:model").setModel(left_arm);
   left_arm_model.anchor.set("leftArm");
   left_arm_model.setScale(1.0);
+  left_arm_boosters = cyber_boosters.initLeftArmBoosters(renderer, left_arm, getColor());
   var right_arm = renderer.createResource("MODEL", "skyhighocs:CyberRightArm");
   right_arm.texture.set("right_arm", "right_arm_lights");
   right_arm.bindAnimation("skyhighocs:cyber_right_arm").setData((entity, data) => {
@@ -109,6 +118,7 @@ function initEffects(renderer) {
   right_arm_model = renderer.createEffect("fiskheroes:model").setModel(right_arm);
   right_arm_model.anchor.set("rightArm");
   right_arm_model.setScale(1.0);
+  right_arm_boosters = cyber_boosters.initRightArmBoosters(renderer, right_arm, getColor());
   var left_leg = renderer.createResource("MODEL", "skyhighocs:CyberLeftLeg");
   left_leg.texture.set("left_leg", "left_leg_lights");
   left_leg.bindAnimation("skyhighocs:cyber_left_leg").setData((entity, data) => {
@@ -119,6 +129,7 @@ function initEffects(renderer) {
   left_leg_model = renderer.createEffect("fiskheroes:model").setModel(left_leg);
   left_leg_model.anchor.set("leftLeg");
   left_leg_model.setScale(1.0);
+  left_leg_boosters = cyber_boosters.initLeftLegBoosters(renderer, left_leg, getColor());
   var right_leg = renderer.createResource("MODEL", "skyhighocs:CyberRightLeg");
   right_leg.texture.set("right_leg", "right_leg_lights");
   right_leg.bindAnimation("skyhighocs:cyber_right_leg").setData((entity, data) => {
@@ -129,6 +140,7 @@ function initEffects(renderer) {
   right_leg_model = renderer.createEffect("fiskheroes:model").setModel(right_leg);
   right_leg_model.anchor.set("rightLeg");
   right_leg_model.setScale(1.0);
+  right_leg_boosters = cyber_boosters.initRightLegBoosters(renderer, right_leg, getColor());
 
   //Disguise
   var head_disguise_layer1 = renderer.createResource("MODEL", "skyhighocs:CyberHeadL2");
@@ -381,9 +393,19 @@ function render(entity, renderLayer, isFirstPersonArm) {
 
     };
   };
+
+  body_boosters.render(entity, renderLayer, isFirstPersonArm);
+  left_arm_boosters.render(entity, renderLayer, isFirstPersonArm);
+  right_arm_boosters.render(entity, renderLayer, isFirstPersonArm);
+  left_leg_boosters.render(entity, renderLayer, isFirstPersonArm);
+  right_leg_boosters.render(entity, renderLayer, isFirstPersonArm);
+  
   metal_heat.opacity = entity.getInterpolatedData("fiskheroes:metal_heat");
   metal_heat.render();
 };
 function getID() {
+  return "";
+};
+function getColor() {
   return "";
 };

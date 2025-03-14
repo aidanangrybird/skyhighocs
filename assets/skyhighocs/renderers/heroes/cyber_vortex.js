@@ -28,7 +28,6 @@ loadTextures({
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  //rockets = cyber.initCustomBoosters(renderer, 0xFF8900);
   //cyber.initBeams(renderer, 0xFF8900);
   //stuff.bindSpeedTrail(renderer, "skyhighocs:cyber_vortex_speed");
 };
@@ -37,6 +36,10 @@ function getID() {
   return "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
 };
 
+function getColor() {
+  return 0xFF8900;
+}
+
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
@@ -44,6 +47,5 @@ function init(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  //rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
   parent.render(entity, renderLayer, isFirstPersonArm);
 };
