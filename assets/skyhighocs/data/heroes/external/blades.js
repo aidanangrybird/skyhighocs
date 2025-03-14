@@ -7,7 +7,7 @@ function initModule(system) {
   return {
     name: "bladeSystem",
     type: 14,
-    powers: ["skyhighocs:cyber_blades"],
+    powers: ["skyhighocs:blades"],
     command: "blades",
     helpMessage: "<n>!blades <nh>-<n> Blades",
     disabledMessage: "<e>Module <eh>bladeSystem<e> is disabled!",

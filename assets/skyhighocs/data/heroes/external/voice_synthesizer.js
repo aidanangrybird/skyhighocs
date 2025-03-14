@@ -4,33 +4,33 @@
  **/
 function initModule(system) {
   return {
-    name: "mouthSystem",
+    name: "voiceSynthesizer",
     type: 12,
-    command: "mouth",
-    powers: ["skyhighocs:cyber_mouth"],
-    helpMessage: "<n>!mouth <nh>-<n> Mouth",
-    disabledMessage: "<e>Module <eh>mouthSystem<e> is disabled!",
+    command: "vs",
+    powers: ["skyhighocs:voice_synthesizer"],
+    helpMessage: "<n>!vs <nh>-<n> Voice Synthesizer",
+    disabledMessage: "<e>Module <eh>voiceSynthesizer<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 3) {
         switch (arguments[1]) {
-          case "on":
+          case "show":
             manager.setData(entity, "skyhighocs:dyn/mouth", true);
             break;
           case "off":
             manager.setData(entity, "skyhighocs:dyn/mouth", false);
             break;
           case "help":
-            system.systemMessage(entity, "<n>Mouth commands:");
-            system.systemMessage(entity, "<n>!mouth on <nh>-<n> Turns on mouth");
-            system.systemMessage(entity, "<n>!mouth off <nh>-<n> Turns off mouth");
-            system.systemMessage(entity, "<n>!mouth help <nh>-<n> Shows mouthSystem commands");
+            system.systemMessage(entity, "<n>Voice Synthesizer commands:");
+            system.systemMessage(entity, "<n>!vs show <nh>-<n> Shows mouth");
+            system.systemMessage(entity, "<n>!vs hide <nh>-<n> Hides mouth");
+            system.systemMessage(entity, "<n>!vs help <nh>-<n> Shows voiceSynthesizer commands");
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>mouth<e> command! Try <eh>!mouth help<e> for a list of commands!");
+            system.systemMessage(entity, "<e>Unknown <eh>voiceSynthesizer<e> command! Try <eh>!vs help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>mouth<e> command! Try <eh>!mouth help<e> for a list of commands!");
+        system.systemMessage(entity, "<e>Unknown <eh>voiceSynthesizer<e> command! Try <eh>!vs help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {
@@ -48,7 +48,7 @@ function initModule(system) {
       return result;
     },
     whenDisabled: function (entity, manager) {
-      manager.setData(entity, "skyhighocs:dyn/mouthd", false);
+      manager.setData(entity, "skyhighocs:dyn/mouth", false);
     }
   };
 };

@@ -4,12 +4,12 @@
  **/
 function initModule(system) {
   return {
-    name: "wingsSystem",
+    name: "wings",
     type: 12,
     command: "wings",
-    powers: ["skyhighocs:cyber_wings"],
+    powers: ["skyhighocs:wings"],
     helpMessage: "<n>!wings <nh>-<n> Wings",
-    disabledMessage: "<e>Module <eh>wingsSystem<e> is disabled!",
+    disabledMessage: "<e>Module <eh>wings<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 3) {
         switch (arguments[1]) {
@@ -21,9 +21,9 @@ function initModule(system) {
             break;
           case "help":
             system.systemMessage(entity, "<n>Wings commands:");
-            system.systemMessage(entity, "<n>!wings on <nh>-<n> Turns on wings");
-            system.systemMessage(entity, "<n>!wings off <nh>-<n> Turns off wings");
-            system.systemMessage(entity, "<n>!wings help <nh>-<n> Shows wingsSystem commands");
+            system.systemMessage(entity, "<n>!wings on <nh>-<n> Deployes wings");
+            system.systemMessage(entity, "<n>!wings off <nh>-<n> Retracts wings");
+            system.systemMessage(entity, "<n>!wings help <nh>-<n> Shows wings commands");
             break;
           default:
             system.systemMessage(entity, "<e>Unknown <eh>wings<e> command! Try <eh>!wings help<e> for a list of commands!");

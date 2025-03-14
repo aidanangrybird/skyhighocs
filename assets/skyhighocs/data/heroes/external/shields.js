@@ -7,7 +7,7 @@ function initModule(system) {
   return {
     name: "shieldSystem",
     type: 14,
-    powers: ["skyhighocs:cyber_shields"],
+    powers: ["skyhighocs:shields"],
     command: "shields",
     helpMessage: "<n>!shields <nh>-<n> Shields",
     disabledMessage: "<e>Module <eh>shieldSystem<e> is disabled!",

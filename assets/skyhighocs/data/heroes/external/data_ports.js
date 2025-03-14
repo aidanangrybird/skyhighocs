@@ -4,26 +4,26 @@
  **/
 function initModule(system) {
   return {
-    name: "portsSystem",
+    name: "dataPorts",
     type: 12,
     command: "ports",
-    powers: ["skyhighocs:cyber_ports"],
+    powers: ["skyhighocs:data_ports"],
     helpMessage: "<n>!ports <nh>-<n> Ports",
-    disabledMessage: "<e>Module <eh>portsSystem<e> is disabled!",
+    disabledMessage: "<e>Module <eh>dataPorts<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 3) {
         switch (arguments[1]) {
-          case "on":
+          case "show":
             manager.setData(entity, "skyhighocs:dyn/ports", true);
             break;
-          case "off":
+          case "hides":
             manager.setData(entity, "skyhighocs:dyn/ports", false);
             break;
           case "help":
             system.systemMessage(entity, "<n>Ports commands:");
-            system.systemMessage(entity, "<n>!ports on <nh>-<n> Turns on ports");
-            system.systemMessage(entity, "<n>!ports off <nh>-<n> Turns off ports");
-            system.systemMessage(entity, "<n>!ports help <nh>-<n> Shows portsSystem commands");
+            system.systemMessage(entity, "<n>!ports on <nh>-<n> Exposes data ports");
+            system.systemMessage(entity, "<n>!ports off <nh>-<n> Hides data ports");
+            system.systemMessage(entity, "<n>!ports help <nh>-<n> Shows dataPorts commands");
             break;
           default:
             system.systemMessage(entity, "<e>Unknown <eh>ports<e> command! Try <eh>!ports help<e> for a list of commands!");
@@ -35,15 +35,10 @@ function initModule(system) {
     },
     isModifierEnabled: function (entity, modifier) {
       result = false;
-      if (modifier.name() == "fiskheroes:transformation") {
-        result = true;
-      };
-      return result;
-    },
-    isModifierDisabled: function (entity, modifier) {
-      result = false;
-      if (modifier.name() == "fiskheroes:transformation") {
-        result = true;
+      if (system.isModuleDisabled(entity, this.name)) {
+        if (modifier.name() == "fiskheroes:transformation") {
+          result = true;
+        };
       };
       return result;
     },

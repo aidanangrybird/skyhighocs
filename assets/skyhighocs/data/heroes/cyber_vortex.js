@@ -4,29 +4,33 @@ var groupMessaging = implement("skyhighheroes:external/group_messaging");
 var contacts = implement("skyhighheroes:external/contacts");
 var scanner = implement("skyhighheroes:external/scanner");
 var waypoints = implement("skyhighheroes:external/waypoint");
-var comms = implement("skyhighocs:external/cyber_comms");
-var cannons = implement("skyhighocs:external/cyber_cannons");
-var rockets = implement("skyhighocs:external/cyber_rockets");
-var blades = implement("skyhighocs:external/cyber_blades");
-var shields = implement("skyhighocs:external/cyber_shields");
-var disguise = implement("skyhighocs:external/cyber_disguise");
-var wings = implement("skyhighocs:external/cyber_wings");
-var furnace = implement("skyhighocs:external/cyber_furnace");
-var externalArms = implement("skyhighocs:external/cyber_external_arms");
-var ports = implement("skyhighocs:external/cyber_ports");
-var mouth = implement("skyhighocs:external/cyber_mouth");
+var communications = implement("skyhighocs:external/communications");
+var cannons = implement("skyhighocs:external/cannons");
+var rockets = implement("skyhighocs:external/rockets");
+var blades = implement("skyhighocs:external/blades");
+var shields = implement("skyhighocs:external/shields");
+var thermopticManipulation = implement("skyhighocs:external/thermoptic_manipulation");
+var wings = implement("skyhighocs:external/wings");
+var furnace = implement("skyhighocs:external/furnace");
+var externalArms = implement("skyhighocs:external/external_arms");
+var dataPorts = implement("skyhighocs:external/data_ports");
+var voiceSynthesizer = implement("skyhighocs:external/voice_synthesizer");
 var cyberOS = system.initSystem([messaging,
   groupMessaging,
   contacts,
   scanner,
   waypoints,
-  comms,
+  communications,
   cannons,
   rockets,
   blades,
   shields,
-  disguise,
+  thermopticManipulation,
   wings,
+  furnace,
+  externalArms,
+  dataPorts,
+  voiceSynthesizer,
 ], "Cyber Vortex", "aidanangrybird", "6");
 function init(hero) {
   hero.setAliases("cyber_vortex");

@@ -4,12 +4,12 @@
  **/
 function initModule(system) {
   return {
-    name: "communicationsSystem",
+    name: "communications",
     type: 12,
     command: "comms",
-    powers: ["skyhighocs:cyber_comms"],
+    powers: ["skyhighocs:communications"],
     helpMessage: "<n>!comms <nh>-<n> Communications",
-    disabledMessage: "<e>Module <eh>communicationsSystem<e> is disabled!",
+    disabledMessage: "<e>Module <eh>communications<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 4) {
         switch (arguments[1]) {
@@ -34,7 +34,7 @@ function initModule(system) {
                 system.systemMessage(entity, "<n>!comms on sat <nh>-<n> Activates satellite");
                 system.systemMessage(entity, "<n>!comms on ant <nh>-<n> Activates antenna");
                 system.systemMessage(entity, "<n>!comms on satRain <nh>-<n> Activates satellite rain mode");
-                system.systemMessage(entity, "<n>!comms help <nh>-<n> Shows communicationsSystem commands");
+                system.systemMessage(entity, "<n>!comms help <nh>-<n> Shows communications commands");
                 break;
             };
             break;
@@ -57,7 +57,7 @@ function initModule(system) {
                 system.systemMessage(entity, "<n>!comms off sat <nh>-<n> Deactivate satellite");
                 system.systemMessage(entity, "<n>!comms off ant <nh>-<n> Deactivate antenna");
                 system.systemMessage(entity, "<n>!comms off satRain <nh>-<n> Deactivate satellite rain mode");
-                system.systemMessage(entity, "<n>!comms help <nh>-<n> Shows communicationsSystem commands");
+                system.systemMessage(entity, "<n>!comms help <nh>-<n> Shows communications commands");
                 break;
             };
             break;
@@ -65,7 +65,7 @@ function initModule(system) {
             system.systemMessage(entity, "<n>Communications commands:");
             system.systemMessage(entity, "<n>!comms on help <nh>-<n> Shows Communications activate commands");
             system.systemMessage(entity, "<n>!comms off help <nh>-<n> Shows Communications deactivate commands");
-            system.systemMessage(entity, "<n>!comms help <nh>-<n> Shows communicationsSystem commands");
+            system.systemMessage(entity, "<n>!comms help <nh>-<n> Shows communications commands");
             break;
           default:
             system.systemMessage(entity, "<e>Unknown <eh>comms<e> command! Try <eh>!comms help<e> for a list of commands!");
@@ -77,15 +77,10 @@ function initModule(system) {
     },
     isModifierEnabled: function (entity, modifier) {
       result = false;
-      if (modifier.name() == "fiskheroes:transformation") {
-        result = true;
-      };
-      return result;
-    },
-    isModifierDisabled: function (entity, modifier) {
-      result = false;
-      if (modifier.name() == "fiskheroes:transformation") {
-        result = true;
+      if (!system.isModuleDisabled(entity, this.name)) {
+        if (modifier.name() == "fiskheroes:transformation") {
+          result = true;
+        };
       };
       return result;
     },

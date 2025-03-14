@@ -5,12 +5,12 @@
 function initModule(system) {
   //All of the required functions and stuff go here
   return {
-    name: "rocketSystem",
+    name: "rockets",
     type: 12,
-    powers: ["skyhighocs:cyber_rockets"],
+    powers: ["skyhighocs:rockets"],
     command: "rockets",
     helpMessage: "<n>!rockets <nh>-<n> Rockets",
-    disabledMessage: "<e>Module <eh>rocketSystem<e> is disabled!",
+    disabledMessage: "<e>Module <eh>rockets<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 4) {
         var nbt = entity.getWornHelmet().nbt();
@@ -121,27 +121,19 @@ function initModule(system) {
     },
     isModifierEnabled: function (entity, modifier) {
       result = false;
-      var nbt = entity.getWornHelmet().nbt();
-      var aux = (nbt.getBoolean("rocketsAux")) ? "T" : "F";
-      var body = (nbt.getBoolean("rocketsBody")) ? "T" : "F";
-      var legs = (nbt.getBoolean("rocketsLegs")) ? "T" : "F";
-      if (modifier.name() == "fiskheroes:controlled_flight") {
-        if (modifier.id() == "rockets_" + aux + body + legs) {
-          result = nbt.getBoolean("rocketsAux") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs");
+      if (!system.isModuleDisabled(entity, this.name)) {
+        var nbt = entity.getWornHelmet().nbt();
+        var aux = (nbt.getBoolean("rocketsAux")) ? "T" : "F";
+        var body = (nbt.getBoolean("rocketsBody")) ? "T" : "F";
+        var legs = (nbt.getBoolean("rocketsLegs")) ? "T" : "F";
+        if (modifier.name() == "fiskheroes:controlled_flight") {
+          if (modifier.id() == "rockets_" + aux + body + legs) {
+            result = nbt.getBoolean("rocketsAux") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs");
+          };
         };
-      };
-      if (modifier.name() == "fiskheroes:transformation") {
-        result = true;
-      };
-      return result;
-    },
-    isModifierDisabled: function (entity, modifier) {
-      result = false;
-      if (modifier.name() == "fiskheroes:controlled_flight") {
-        result = false;
-      };
-      if (modifier.name() == "fiskheroes:transformation") {
-        result = true;
+        if (modifier.name() == "fiskheroes:transformation") {
+          result = true;
+        };
       };
       return result;
     },

@@ -72,14 +72,6 @@
     "fiskheroes:projectile_immunity": {
     },
     "fiskheroes:metal_skin": {
-    },
-    "fiskheroes:transformation|power": {
-      "transformation": {
-        "toggleData": "skyhighheroes:dyn/powered",
-        "timerData": "skyhighheroes:dyn/power_timer",
-        "time": 200
-      },
-      "isToggle": true
     }
   }
 }

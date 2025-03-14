@@ -1,5 +1,5 @@
 {
-  "name": "Furnace System",
+  "name": "Furnace",
   "value": 1,
   "modifiers": {
     "fiskheroes:transformation|furnace": {

@@ -1,5 +1,5 @@
 {
-  "name": "External Arms System",
+  "name": "External Arms",
   "value": 1,
   "modifiers": {
     "fiskheroes:transformation|external_arms": {

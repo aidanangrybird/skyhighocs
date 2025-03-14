@@ -1,5 +1,5 @@
 {
-  "name": "Cannon System",
+  "name": "Cannons",
   "value": 1,
   "modifiers": {
     "fiskheroes:energy_projection|cannons_TFF": {

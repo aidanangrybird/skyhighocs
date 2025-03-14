@@ -4,12 +4,12 @@
  **/
 function initModule(system) {
   return {
-    name: "furnaceSystem",
+    name: "furnace",
     type: 12,
     command: "furnace",
-    powers: ["skyhighocs:cyber_furnace"],
+    powers: ["skyhighocs:furnace"],
     helpMessage: "<n>!furnace <nh>-<n> Furnace",
-    disabledMessage: "<e>Module <eh>furnaceSystem<e> is disabled!",
+    disabledMessage: "<e>Module <eh>furnace<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 3) {
         switch (arguments[1]) {
@@ -23,7 +23,7 @@ function initModule(system) {
             system.systemMessage(entity, "<n>Furnace commands:");
             system.systemMessage(entity, "<n>!furnace on <nh>-<n> Turns on furnace");
             system.systemMessage(entity, "<n>!furnace off <nh>-<n> Turns off furnace");
-            system.systemMessage(entity, "<n>!furnace help <nh>-<n> Shows furnaceSystem commands");
+            system.systemMessage(entity, "<n>!furnace help <nh>-<n> Shows furnace commands");
             break;
           default:
             system.systemMessage(entity, "<e>Unknown <eh>furnace<e> command! Try <eh>!furnace help<e> for a list of commands!");

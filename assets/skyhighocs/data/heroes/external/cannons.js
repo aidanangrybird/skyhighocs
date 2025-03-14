@@ -9,7 +9,7 @@ function initModule(system) {
   return {
     name: "cannonSystem",
     type: 13,
-    powers: ["skyhighocs:cyber_cannons"],
+    powers: ["skyhighocs:cannons"],
     command: "cannons",
     helpMessage: "<n>!cannons <nh>-<n> Cannons",
     disabledMessage: "<e>Module <eh>cannonSystem<e> is disabled!",
