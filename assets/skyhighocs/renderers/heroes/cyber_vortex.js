@@ -39,7 +39,6 @@ function getID() {
 
 function init(renderer) {
   parent.init(renderer);
-  renderer.setItemIcon("HELMET", "null");
   initEffects(renderer);
   initAnimations(renderer);
 };

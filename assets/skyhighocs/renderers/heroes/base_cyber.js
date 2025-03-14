@@ -40,6 +40,7 @@ function init(renderer) {
   });
   renderer.showModel("HELMET", "head", "headwear", "body", "rightArm", "leftArm", "rightLeg", "leftLeg");
   renderer.fixHatLayer("HELMET");
+  renderer.setItemIcon("HELMET", "cyberbrain");
   initEffects(renderer);
   initAnimations(renderer);
 };
@@ -69,8 +70,9 @@ function initEffects(renderer) {
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/ports_timer"));
   });
   head_hair_model = renderer.createEffect("fiskheroes:model").setModel(head_hair);
+  head_hair_model.setOffset(0.0, 0.25, 0.0);
   head_hair_model.anchor.set("head");
-  head_hair_model.setScale(1.05);
+  head_hair_model.setScale(1.075);
   var body = renderer.createResource("MODEL", "skyhighocs:CyberBody");
   body.texture.set("body", "body_lights");
   body.bindAnimation("skyhighocs:cyber_body").setData((entity, data) => {
@@ -94,7 +96,6 @@ function initEffects(renderer) {
   });
   left_arm_model = renderer.createEffect("fiskheroes:model").setModel(left_arm);
   left_arm_model.anchor.set("leftArm");
-  left_arm_model.setOffset(-1.0, -2.0, 0.0);
   left_arm_model.setScale(1.0);
   var right_arm = renderer.createResource("MODEL", "skyhighocs:CyberRightArm");
   right_arm.texture.set("right_arm", "right_arm_lights");
@@ -107,7 +108,6 @@ function initEffects(renderer) {
   });
   right_arm_model = renderer.createEffect("fiskheroes:model").setModel(right_arm);
   right_arm_model.anchor.set("rightArm");
-  right_arm_model.setOffset(1.0, -2.0, 0.0);
   right_arm_model.setScale(1.0);
   var left_leg = renderer.createResource("MODEL", "skyhighocs:CyberLeftLeg");
   left_leg.texture.set("left_leg", "left_leg_lights");
@@ -192,7 +192,6 @@ function initEffects(renderer) {
   });
   left_arm_disguise_layer1_model = renderer.createEffect("fiskheroes:model").setModel(left_arm_disguise_layer1);
   left_arm_disguise_layer1_model.anchor.set("leftArm");
-  left_arm_disguise_layer1_model.setOffset(-1.0, -2.0, 0.0);
   left_arm_disguise_layer1_model.setScale(1.0);
   var left_arm_disguise_layer2 = renderer.createResource("MODEL", "skyhighocs:CyberLeftArmL2");
   left_arm_disguise_layer2.texture.set("left_arm_disguise_layer2");
@@ -205,7 +204,6 @@ function initEffects(renderer) {
   });
   left_arm_disguise_layer2_model = renderer.createEffect("fiskheroes:model").setModel(left_arm_disguise_layer2);
   left_arm_disguise_layer2_model.anchor.set("leftArm");
-  left_arm_disguise_layer2_model.setOffset(-1.0, -2.0, 0.0);
   left_arm_disguise_layer2_model.setScale(1.1);
   var right_arm_disguise_layer1 = renderer.createResource("MODEL", "skyhighocs:CyberRightArmL2");
   right_arm_disguise_layer1.texture.set("right_arm_disguise_layer1");
@@ -218,7 +216,6 @@ function initEffects(renderer) {
   });
   right_arm_disguise_layer1_model = renderer.createEffect("fiskheroes:model").setModel(right_arm_disguise_layer1);
   right_arm_disguise_layer1_model.anchor.set("rightArm");
-  right_arm_disguise_layer1_model.setOffset(1.0, -2.0, 0.0);
   right_arm_disguise_layer1_model.setScale(1.0);
   var right_arm_disguise_layer2 = renderer.createResource("MODEL", "skyhighocs:CyberRightArmL2");
   right_arm_disguise_layer2.texture.set("right_arm_disguise_layer2");
@@ -231,7 +228,6 @@ function initEffects(renderer) {
   });
   right_arm_disguise_layer2_model = renderer.createEffect("fiskheroes:model").setModel(right_arm_disguise_layer2);
   right_arm_disguise_layer2_model.anchor.set("rightArm");
-  right_arm_disguise_layer2_model.setOffset(1.0, -2.0, 0.0);
   right_arm_disguise_layer2_model.setScale(1.1);
   var left_leg_disguise_layer1 = renderer.createResource("MODEL", "skyhighocs:CyberLeftLegL2");
   left_leg_disguise_layer1.texture.set("left_leg_disguise_layer1");
@@ -317,15 +313,16 @@ function render(entity, renderLayer, isFirstPersonArm) {
       head_model.setOffset(0.0, 0.0, 0.0);
       head_model.setScale(1.0);
       head_model.render();
+      head_hair_model.setOffset(0.0, 0.25, 0.0);
       head_hair_model.setScale(1.075);
       head_hair_model.render();
       head_model.setOffset(0.0, 0.0, 0.0);
       body_model.setScale(1.0);
       body_model.render();
-      left_arm_model.setOffset(-1.0, -2.0, 0.0);
+      left_arm_model.setOffset(0.0, 0.0, 0.0);
       left_arm_model.setScale(1.0);
       left_arm_model.render();
-      right_arm_model.setOffset(1.0, -2.0, 0.0);
+      right_arm_model.setOffset(0.0, 0.0, 0.0);
       right_arm_model.setScale(1.0);
       right_arm_model.render();
       left_leg_model.setOffset(0.0, 0.0, 0.0);
@@ -342,10 +339,10 @@ function render(entity, renderLayer, isFirstPersonArm) {
       body_model.setOffset(0.0, 0.05, 0.0);
       body_model.setScale(0.99);
       body_model.render();
-      left_arm_model.setOffset(-1.0, -1.95, 0.0);
+      left_arm_model.setOffset(0.0, 0.05, 0.0);
       left_arm_model.setScale(0.99);
       left_arm_model.render();
-      right_arm_model.setOffset(1.0, -1.95, 0.0);
+      right_arm_model.setOffset(0.0, 0.05, 0.0);
       right_arm_model.setScale(0.99);
       right_arm_model.render();
       left_leg_model.setOffset(0.0, 0.05, 0.0);

@@ -622,7 +622,7 @@ function initSystem(moduleList, name, normalName, color) {
      **/
     getAttributeProfile: function (entity) {
       var result = null;
-      if (entity.getData("skyhighocs:dyn/power_timer") < 1) {
+      if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
         result = "SHUT_DOWN";
       };
       if (attributeProfileIndexes.length == 1) {
@@ -658,7 +658,7 @@ function initSystem(moduleList, name, normalName, color) {
      **/
     getDamageProfile: function (entity) {
       var result = null;
-      if (entity.getData("skyhighocs:dyn/power_timer") < 1) {
+      if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
         result = null;
       };
       if (damageProfileIndexes.length == 1) {
@@ -717,7 +717,7 @@ function initSystem(moduleList, name, normalName, color) {
      * @param {string} keyBind - Required
      **/
     isKeyBindEnabled: function (entity, keyBind) {
-      if (entity.getData("skyhighocs:dyn/power_timer") < 1) {
+      if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
         return false;
       };
       if (keyBindIndexes.length == 1) {
@@ -775,7 +775,7 @@ function initSystem(moduleList, name, normalName, color) {
      * @param {string} modifier - Required
      **/
     isModifierEnabled: function (entity, modifier) {
-      if (entity.getData("skyhighocs:dyn/power_timer") < 1) {
+      if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
         return false;
       };
       if (modifierIndexes.length == 1) {
@@ -863,18 +863,18 @@ function initSystem(moduleList, name, normalName, color) {
                 status(entity);
                 break;
               case "powerOff":
-                manager.setData(entity, "skyhighocs:dyn/powered", false);
+                manager.setData(entity, "skyhighocs:dyn/powered_down", true);
                 systemMessage(entity, "<n>Powering down!");
                 break;
               case "powerOn":
-                manager.setData(entity, "skyhighocs:dyn/powered", true);
+                manager.setData(entity, "skyhighocs:dyn/powered_down", false);
                 systemMessage(entity, "<n>Powering on!");
                 break;
               case "help":
                 systemMessage(entity, "<n>Available commands:");
                 commandIndexes.forEach(index => {
                   var module = modules[index];
-                  if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighocs:dyn/power_timer") == 1) {
+                  if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
                     systemMessage(entity, module.helpMessage);
                   };
                 });
@@ -900,7 +900,7 @@ function initSystem(moduleList, name, normalName, color) {
                 break;
               default:
                 var index = commands.indexOf(args[0]);
-                if (index > -1 && entity.getData("skyhighocs:dyn/power_timer") == 1) {
+                if (index > -1 && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
                   var module = modules[commandIndexes[index]];
                   if (!isModuleDisabled(entity, module.name)) {
                     module.commandHandler(entity, manager, args);
@@ -943,13 +943,13 @@ function initSystem(moduleList, name, normalName, color) {
       manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
       var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
       manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
-      if (PackLoader.getSide() == "SERVER" && entity.getData("skyhighocs:dyn/power_timer") < 1 && entity.getData("skyhighocs:dyn/power_timer") > 0) {
+      if (PackLoader.getSide() == "SERVER" && entity.getData("skyhighocs:dyn/powering_down_timer") < 1 && entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
         var moduleTotal = cyberModules.length;
         var moduleTime = (80/moduleTotal).toFixed(0);
-        var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/power_timer")*80);
+        var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/powering_down_timer")*80);
         if (currentTime % moduleTime == 0) {
           var moduleName = cyberModules[(currentTime/moduleTime)-1];
-          var message = !entity.getData("skyhighocs:dyn/powered") ? "<n>Shutting down <nh>" + moduleName + "<n>!" : "<n>Starting up <nh>" + moduleName + "<n>!";
+          var message = entity.getData("skyhighocs:dyn/powered_down") ? "<n>Shutting down <nh>" + moduleName + "<n>!" : "<n>Starting up <nh>" + moduleName + "<n>!";
           systemMessage(entity, message);
         };
       };

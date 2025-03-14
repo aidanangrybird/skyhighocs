@@ -4,8 +4,8 @@
   "modifiers": {
     "fiskheroes:transformation|power": {
       "transformation": {
-        "toggleData": "skyhighocs:dyn/powered",
-        "timerData": "skyhighocs:dyn/power_timer",
+        "toggleData": "skyhighocs:dyn/powered_down",
+        "timerData": "skyhighocs:dyn/powering_down_timer",
         "time": 80
       },
       "isToggle": true

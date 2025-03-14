@@ -120,12 +120,12 @@ function initCyberAnimations(renderer) {
     .priority = -8;
   addAnimationWithData(renderer, "cyber.ROLL", "skyhighheroes:flight/astro_barrel_roll", "fiskheroes:barrel_roll_timer")
   addHoverAnimation(renderer, "cyber.HOVER", "skyhighheroes:astro_hover");
-  addAnimationWithData(renderer, "cyber.POWER", "skyhighheroes:astro_power_state", "skyhighocs:dyn/power_timer")
-    .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighocs:dyn/power_timer") < 1))
+  addAnimationWithData(renderer, "cyber.POWER", "skyhighocs:cyber_powering_down", "skyhighocs:dyn/powering_down_timer")
+    .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighocs:dyn/powering_down_timer") > 0))
     .priority = -10;
   addAnimation(renderer, "cyber.POWERED_DOWN", "skyhighheroes:astro_powered_down")
     .setData((entity, data) => data.load(1.0))
-    .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighocs:dyn/power_timer") == 0))
+    .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighocs:dyn/powering_down_timer") == 1))
     .priority = -10;
 };
 
