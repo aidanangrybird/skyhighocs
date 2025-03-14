@@ -32,114 +32,71 @@ function initModule(system) {
     },
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
-      var nbt = entity.getWornHelmet().nbt();
-      var eyes = (nbt.getByte("cannonsEyes") == entity.getData("skyhighocs:dyn/cannon_type"));
-      var body = (nbt.getByte("cannonsBody") == entity.getData("skyhighocs:dyn/cannon_type"));
-      var arms = (nbt.getByte("cannonsArms") == entity.getData("skyhighocs:dyn/cannon_type"));
-      var eyesOn = (nbt.getByte("cannonsEyes") == entity.getData("skyhighocs:dyn/cannon_type")) && (entity.getData("skyhighocs:dyn/cannon_eyes_timer") == 1);
-      var bodyOn = (nbt.getByte("cannonsBody") == entity.getData("skyhighocs:dyn/cannon_type")) && (entity.getData("skyhighocs:dyn/cannon_body_timer") == 1);
-      var armsOn = (nbt.getByte("cannonsArms") == entity.getData("skyhighocs:dyn/cannon_type")) && (entity.getData("skyhighocs:dyn/cannon_left_arm_timer") == 1 && entity.getData("skyhighocs:dyn/cannon_right_arm_timer") == 1);
-      if (keyBind == "CANNON_SWITCH") {
-        result = entity.isSneaking();
-      };
-      if (!entity.isSneaking()) {
-        if (keyBind == "CANNONS") {
-          result = true;
+      if (!system.isModuleDisabled(entity, this.name)) {
+        var nbt = entity.getWornHelmet().nbt();
+        var eyes = (nbt.getByte("cannonsEyes") == entity.getData("skyhighocs:dyn/cannon_type"));
+        var body = (nbt.getByte("cannonsBody") == entity.getData("skyhighocs:dyn/cannon_type"));
+        var arms = (nbt.getByte("cannonsArms") == entity.getData("skyhighocs:dyn/cannon_type"));
+        var eyesOn = (nbt.getByte("cannonsEyes") == entity.getData("skyhighocs:dyn/cannon_type")) && (entity.getData("skyhighocs:dyn/cannon_eyes_timer") == 1);
+        var bodyOn = (nbt.getByte("cannonsBody") == entity.getData("skyhighocs:dyn/cannon_type")) && (entity.getData("skyhighocs:dyn/cannon_body_timer") == 1);
+        var armsOn = (nbt.getByte("cannonsArms") == entity.getData("skyhighocs:dyn/cannon_type")) && (entity.getData("skyhighocs:dyn/cannon_left_arm_timer") == 1 && entity.getData("skyhighocs:dyn/cannon_right_arm_timer") == 1);
+        if (keyBind == "CANNON_SWITCH") {
+          result = entity.isSneaking();
         };
-        if (keyBind == "HEAT_VISION") {
-          result = eyesOn || bodyOn || armsOn;
+        if (!entity.isSneaking()) {
+          if (keyBind == "CANNONS") {
+            result = true;
+          };
+          if (keyBind == "HEAT_VISION") {
+            result = eyesOn || bodyOn || armsOn;
+          };
+          if (keyBind == "CHARGED_BEAM") {
+            result = eyesOn || bodyOn || armsOn;
+          };
+          if (keyBind == "ENERGY_PROJECTION") {
+            result = eyesOn || bodyOn || armsOn;
+          };
+          if (keyBind == "EYE_CANNONS") {
+            result = eyes;
+          };
+          if (keyBind == "BODY_CANNONS") {
+            result = body;
+          };
+          if (keyBind == "LEFT_ARM_CANNON") {
+            result = arms;
+          };
+          if (keyBind == "RIGHT_ARM_CANNON") {
+            result = arms;
+          };
         };
-        if (keyBind == "CHARGED_BEAM") {
-          result = eyesOn || bodyOn || armsOn;
-        };
-        if (keyBind == "ENERGY_PROJECTION") {
-          result = eyesOn || bodyOn || armsOn;
-        };
-        if (keyBind == "EYE_CANNONS") {
-          result = eyes;
-        };
-        if (keyBind == "BODY_CANNONS") {
-          result = body;
-        };
-        if (keyBind == "LEFT_ARM_CANNON") {
-          result = arms;
-        };
-        if (keyBind == "RIGHT_ARM_CANNON") {
-          result = arms;
-        };
-      };
-      return result;
-    },
-    isKeyBindDisabled: function (entity, keyBind) {
-      result = false;
-      if (keyBind == "CANNON_SWITCH") {
-        result = false;
-      };
-      if (keyBind == "CANNONS") {
-        result = false;
-      };
-      if (keyBind == "HEAT_VISION") {
-        result = false;
-      };
-      if (keyBind == "EYE_CANNONS") {
-        result = false;
-      };
-      if (keyBind == "CHARGED_BEAM") {
-        result = false;
-      };
-      if (keyBind == "BODY_CANNONS") {
-        result = false;
-      };
-      if (keyBind == "ENERGY_PROJECTION") {
-        result = false;
-      };
-      if (keyBind == "LEFT_ARM_CANNON") {
-        result = false;
-      };
-      if (keyBind == "RIGHT_ARM_CANNON") {
-        result = false;
       };
       return result;
     },
     isModifierEnabled: function (entity, modifier) {
       result = false;
-      var nbt = entity.getWornHelmet().nbt();
-      var eyes = (nbt.getByte("cannonsEyes") == entity.getData("skyhighocs:dyn/cannon_type")) ? "T" : "F";
-      var body = (nbt.getByte("cannonsBody") == entity.getData("skyhighocs:dyn/cannon_type")) ? "T" : "F";
-      var arms = (nbt.getByte("cannonsArms") == entity.getData("skyhighocs:dyn/cannon_type")) ? "T" : "F";
-      if (modifier.name() == "fiskheroes:heat_vision") {
-        if (modifier.id() == "cannons_" + eyes + body + arms) {
+      if (!system.isModuleDisabled(entity, this.name)) {
+        var nbt = entity.getWornHelmet().nbt();
+        var eyes = (nbt.getByte("cannonsEyes") == entity.getData("skyhighocs:dyn/cannon_type")) ? "T" : "F";
+        var body = (nbt.getByte("cannonsBody") == entity.getData("skyhighocs:dyn/cannon_type")) ? "T" : "F";
+        var arms = (nbt.getByte("cannonsArms") == entity.getData("skyhighocs:dyn/cannon_type")) ? "T" : "F";
+        if (modifier.name() == "fiskheroes:heat_vision") {
+          if (modifier.id() == "cannons_" + eyes + body + arms) {
+            result = true;
+          };
+        };
+        if (modifier.name() == "fiskheroes:charged_beam") {
+          if (modifier.id() == "cannons_" + eyes + body + arms) {
+            result = true;
+          };
+        };
+        if (modifier.name() == "fiskheroes:energy_projection") {
+          if (modifier.id() == "cannons_" + eyes + body + arms) {
+            result = true;
+          };
+        };
+        if (modifier.name() == "fiskheroes:transformation") {
           result = true;
         };
-      };
-      if (modifier.name() == "fiskheroes:charged_beam") {
-        if (modifier.id() == "cannons_" + eyes + body + arms) {
-          result = true;
-        };
-      };
-      if (modifier.name() == "fiskheroes:energy_projection") {
-        if (modifier.id() == "cannons_" + eyes + body + arms) {
-          result = true;
-        };
-      };
-      if (modifier.name() == "fiskheroes:transformation") {
-        result = true;
-      };
-      return result;
-    },
-    isModifierDisabled: function (entity, modifier) {
-      result = false;
-      if (modifier.name() == "fiskheroes:heat_vision") {
-        result = false;
-      };
-      if (modifier.name() == "fiskheroes:charged_beam") {
-        result = false;
-      };
-      if (modifier.name() == "fiskheroes:energy_projection") {
-        result = false;
-      };
-      if (modifier.name() == "fiskheroes:transformation") {
-        result = true;
       };
       return result;
     },

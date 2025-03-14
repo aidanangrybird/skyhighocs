@@ -74,21 +74,13 @@ function initModule(system) {
     },
     isModifierEnabled: function (entity, modifier) {
       result = false;
-      if (modifier.name() == "fiskheroes:shield") {
-        result = true;
-      };
-      if (modifier.name() == "fiskheroes:transformation") {
-        result = true;
-      };
-      return result;
-    },
-    isModifierDisabled: function (entity, modifier) {
-      result = false;
-      if (modifier.name() == "fiskheroes:shield") {
-        result = false;
-      };
-      if (modifier.name() == "fiskheroes:transformation") {
-        result = true;
+      if (!system.isModuleDisabled(entity, this.name)) {
+        if (modifier.name() == "fiskheroes:shield") {
+          result = true;
+        };
+        if (modifier.name() == "fiskheroes:transformation") {
+          result = true;
+        };
       };
       return result;
     },
