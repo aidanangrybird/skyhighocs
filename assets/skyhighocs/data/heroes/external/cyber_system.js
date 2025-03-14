@@ -257,7 +257,7 @@ function initSystem(moduleList, name, normalName, color) {
   var cyberName = name;
   var hasError = false;
   var errors = [];
-  logMessage("Attempting to initialize " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on cyber " + cyberName + "!");
+  logMessage("Attempting to initialize " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on cybernetic body " + cyberName + "!");
   moduleList.forEach(module => {
     if (module.hasOwnProperty("initModule")) {
       var moduleInit = module.initModule(cyberInstance);
@@ -282,7 +282,7 @@ function initSystem(moduleList, name, normalName, color) {
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
               normalModules.push(moduleInit.name);
-              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
             };
             hasError = false;
             break;
@@ -305,7 +305,7 @@ function initSystem(moduleList, name, normalName, color) {
               chatModes.push(moduleInit.modeID);
               messagingIndexes.push(modules.length-1);
               normalModules.push(moduleInit.name);
-              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
             };
             hasError = false;
             break;
@@ -330,7 +330,7 @@ function initSystem(moduleList, name, normalName, color) {
               commandIndexes.push(modules.length-1);
               messagingIndexes.push(modules.length-1);
               normalModules.push(moduleInit.name);
-              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
             };
             hasError = false;
             break;
@@ -353,7 +353,7 @@ function initSystem(moduleList, name, normalName, color) {
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
               cyberModules.push(moduleInit.name);
-              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
               if (module.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
@@ -385,7 +385,7 @@ function initSystem(moduleList, name, normalName, color) {
                 powerArray.push(power);
               });
               modifierIndexes.push(modules.length-1);
-              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
               if (module.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
@@ -418,7 +418,7 @@ function initSystem(moduleList, name, normalName, color) {
               });
               keyBindIndexes.push(modules.length-1);
               modifierIndexes.push(modules.length-1);
-              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
               if (module.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
@@ -452,7 +452,7 @@ function initSystem(moduleList, name, normalName, color) {
               attributeProfileIndexes.push(modules.length-1);
               damageProfileIndexes.push(modules.length-1);
               modifierIndexes.push(modules.length-1);
-              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cyber " + cyberName + "!");
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
               if (module.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
