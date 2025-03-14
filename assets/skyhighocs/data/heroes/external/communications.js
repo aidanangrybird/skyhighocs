@@ -18,8 +18,6 @@ function initModule(system) {
               case "sat":
                 manager.setData(entity, "skyhighocs:dyn/satellite", true);
                 system.systemMessage(entity, "<n>Activating satellite!");
-                system.systemMessage(entity, entity.getData("skyhighocs:dyn/satellite"));
-                system.systemMessage(entity, entity.getData("skyhighocs:dyn/satellite_timer"));
                 break;
               case "ant":
                 manager.setData(entity, "skyhighocs:dyn/antenna", true);
