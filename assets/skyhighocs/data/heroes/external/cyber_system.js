@@ -249,6 +249,8 @@ function initSystem(moduleList, name, normalName, color) {
   var attributeProfileIndexes = [];
   /** @var damageProfileIndexes - Indexes of damage profile capable modules */
   var damageProfileIndexes = [];
+  /** @var tickHandlerIndexes - Indexes of tick handler capable modules */
+  var tickHandlerIndexes = [];
   /** @var powerArray - Array of powers to add */
   var powerArray = [];
   /** @var disguisedName - disguised name */
@@ -354,7 +356,7 @@ function initSystem(moduleList, name, normalName, color) {
               commandIndexes.push(modules.length-1);
               cyberModules.push(moduleInit.name);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
-              if (module.hasOwnProperty("tickHandler")) {
+              if (moduleInit.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
               };
@@ -386,7 +388,7 @@ function initSystem(moduleList, name, normalName, color) {
               });
               modifierIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
-              if (module.hasOwnProperty("tickHandler")) {
+              if (moduleInit.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
               };
@@ -419,7 +421,7 @@ function initSystem(moduleList, name, normalName, color) {
               keyBindIndexes.push(modules.length-1);
               modifierIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
-              if (module.hasOwnProperty("tickHandler")) {
+              if (moduleInit.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
               };
@@ -453,7 +455,7 @@ function initSystem(moduleList, name, normalName, color) {
               damageProfileIndexes.push(modules.length-1);
               modifierIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
-              if (module.hasOwnProperty("tickHandler")) {
+              if (moduleInit.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
               };
