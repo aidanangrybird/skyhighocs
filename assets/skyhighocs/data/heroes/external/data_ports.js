@@ -16,7 +16,7 @@ function initModule(system) {
           case "show":
             manager.setData(entity, "skyhighocs:dyn/ports", true);
             break;
-          case "hides":
+          case "hide":
             manager.setData(entity, "skyhighocs:dyn/ports", false);
             break;
           case "help":

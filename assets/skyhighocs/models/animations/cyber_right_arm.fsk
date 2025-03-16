@@ -1,8 +1,8 @@
-{cannon} = curve({data_0})
-{rocket} = curve({data_1})
-{blade} = curve({data_2})
-{shield} = curve({data_3})
-{blade_stealth} = curve({data_4})
+{cannon} = curve(clamp({data_0}, 0, 1))
+{rocket} = curve(clamp({data_1}, 0, 1))
+{blade} = curve(clamp({data_2}, 0, 1))
+{shield} = curve(clamp({data_3}, 0, 1))
+{blade_stealth} = curve(clamp({data_4}, 0, 1))
 
 ;cannon
 {part0_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.0, 0.15, 0.0), 1)

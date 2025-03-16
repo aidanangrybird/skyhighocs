@@ -1,0 +1,13 @@
+{wings} = curve(clamp({data_0}, 0, 1))
+
+;wings
+{part0_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.4, 0.2, 0.0), 1)
+{part3_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.5, 0.2, 0.0), 1)
+{part4_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.7, 0.1, 0.0), 1)
+{part5_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.8, 0.1, 0.0), 1)
+{part6_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.9, 0.1, 0.0), 1)
+
+{leftArm_rotZ} -= 80'{part2_wings}
+{rightArm_rotZ} += 80'{part2_wings}

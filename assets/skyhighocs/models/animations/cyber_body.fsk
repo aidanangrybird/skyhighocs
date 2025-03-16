@@ -1,8 +1,8 @@
-{rockets} = curve({data_0})
-{beam} = curve({data_1})
-{wings} = curve({data_2})
-{furnace} = curve({data_3})
-{ext_arm} = curve({data_4})
+{rockets} = curve(clamp({data_0}, 0, 1))
+{beam} = curve(clamp({data_1}, 0, 1))
+{wings} = curve(clamp({data_2}, 0, 1))
+{furnace} = curve(clamp({data_3}, 0, 1))
+{ext_arm} = curve(clamp({data_4}, 0, 1))
 
 
 ;body
@@ -44,7 +44,6 @@
 {body_right_cannon_upper_cover_posX} -= 1{part2_beam}
 {body_right_cannon_lower_cover_posZ} += 0.03{part1_beam}
 {body_right_cannon_lower_cover_posY} += 2{part2_beam}
-;{body_right_cannon_lower_cover_posX} -= 0.5{part2_beam}
 {body_cannon_right_posZ} -= 4.25{part3_beam}
 {body_cannon_right_base_posZ} -= 1.5{part3_beam}
 
@@ -72,9 +71,8 @@
 {body_left_wing_cover_back_posX} -= 0.03{part0_wings}
 {body_left_wing_cover_front_posZ} -= 0.75{part1_wings}
 {body_left_wing_cover_back_posZ} += 0.75{part1_wings}
-{body_wing_left_base_posY} += 2{part4_wings}
-{body_wing_left_base_posX} += 0.5{part2_wings} + {part4_wings}
-{body_wing_left_base_rotZ} -= 90'{part3_wings}
+{body_wing_left_base_posX} += 3.25{part3_wings}
+{body_wing_left_base_rotZ} -= 90'{part2_wings}
 {body_wing_left_1_posX} -= {part6_wings}
 {body_wing_left_1_posY} += {part6_wings}
 {body_wing_left_2_posX} -= {part5_wings}
@@ -85,9 +83,8 @@
 {body_right_wing_cover_back_posX} += 0.03{part0_wings}
 {body_right_wing_cover_front_posZ} -= 0.75{part1_wings}
 {body_right_wing_cover_back_posZ} += 0.75{part1_wings}
-{body_wing_right_base_posY} += 2{part4_wings}
-{body_wing_right_base_posX} -= 0.5{part2_wings} + {part4_wings}
-{body_wing_right_base_rotZ} += 90'{part3_wings}
+{body_wing_right_base_posX} -= 3.25{part3_wings}
+{body_wing_right_base_rotZ} += 90'{part2_wings}
 {body_wing_right_1_posX} += {part6_wings}
 {body_wing_right_1_posY} += {part6_wings}
 {body_wing_right_2_posX} += {part5_wings}

@@ -146,7 +146,7 @@
         "transformation": {
           "toggleData": "skyhighocs:dyn/rockets_body",
           "timerData": "skyhighocs:dyn/rockets_body_timer",
-          "time": 60
+          "time": 20
         },
         "isToggle": true
     },
@@ -154,7 +154,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/rocket_left_arm_booster",
         "timerData": "skyhighocs:dyn/rocket_left_arm_booster_timer",
-        "time": 60
+        "time": 20
       },
       "isToggle": true
     },
@@ -162,7 +162,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/rocket_right_arm_booster",
         "timerData": "skyhighocs:dyn/rocket_right_arm_booster_timer",
-        "time": 60
+        "time": 20
       },
       "isToggle": true
     },
@@ -170,7 +170,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/rocket_left_leg_main",
         "timerData": "skyhighocs:dyn/rocket_left_leg_main_timer",
-        "time": 60
+        "time": 20
       },
       "isToggle": true
     },
@@ -178,7 +178,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/rocket_right_leg_main",
         "timerData": "skyhighocs:dyn/rocket_right_leg_main_timer",
-        "time": 60
+        "time": 20
       },
       "isToggle": true
     },
@@ -186,7 +186,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/rocket_left_leg_booster",
         "timerData": "skyhighocs:dyn/rocket_left_leg_booster_timer",
-        "time": 60
+        "time": 20
       },
       "isToggle": true
     },
@@ -194,7 +194,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/rocket_right_leg_booster",
         "timerData": "skyhighocs:dyn/rocket_right_leg_booster_timer",
-        "time": 60
+        "time": 20
       },
       "isToggle": true
     },
@@ -202,7 +202,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/rocket_left_leg",
         "timerData": "skyhighocs:dyn/rocket_left_leg_timer",
-        "time": 60
+        "time": 20
       },
       "isToggle": true
     },
@@ -210,7 +210,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/rocket_right_leg",
         "timerData": "skyhighocs:dyn/rocket_right_leg_timer",
-        "time": 60
+        "time": 20
       },
       "isToggle": true
     }

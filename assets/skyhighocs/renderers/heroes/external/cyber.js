@@ -103,6 +103,17 @@ function addHoverAnimation(renderer, name, value, dataLoader) {
 
 //Astro Animations
 function initCyberAnimations(renderer) {
+  addAnimation(renderer, "cyber.LEFT_ARM_BLADE", "skyhighocs:cyber_left_arm_blade").setData((entity, data) => {
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_timer"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_stealth_timer"));
+  });
+  addAnimation(renderer, "cyber.RIGHT_ARM_BLADE", "skyhighocs:cyber_right_arm_blade").setData((entity, data) => {
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_timer"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_stealth_timer"));
+  });
+  addAnimationWithData(renderer, "cyber.LEFT_LEG_ROCKETS", "skyhighocs:cyber_left_leg_rockets", "skyhighocs:dyn/rocket_left_leg_timer");
+  addAnimationWithData(renderer, "cyber.RIGHT_LEG_ROCKETS", "skyhighocs:cyber_right_leg_rockets", "skyhighocs:dyn/rocket_right_leg_timer");
+  addAnimationWithData(renderer, "cyber.WINGS", "skyhighocs:cyber_wings", "skyhighocs:dyn/wings_timer");
   //Aiming
   addAnimationWithData(renderer, "cyber.AIMING", "skyhighheroes:astro_aim", "fiskheroes:aiming_timer")
     .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
@@ -134,29 +145,4 @@ function initNV(renderer, uuid) {
   nv.fogStrength = 0.0;
   nv.factor = 1.0;
   nv.setCondition(entity => entity.getUUID() == uuid);
-};
-
-//Init
-//Beams
-function initBeams(renderer, color) {
-  renderer.bindProperty("fiskheroes:energy_bolt").color.set(color);
-  bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", color, [
-    { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
-  ]);
-  bindBeam(renderer, "fiskheroes:charged_beam", "fiskheroes:charged_beam", "body", color, [
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", color, [
-    { "firstPerson": [-4.5, 3.75, -5.0], "offset": [-0.5, 4.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") != 3);
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", color, [
-    { "firstPerson": [4.5, 3.75, -5.0], "offset": [0.5, 4.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") != 3);
-
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", color, [
-    { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3);
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", color, [
-    { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3);
 };

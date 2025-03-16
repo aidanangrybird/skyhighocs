@@ -13,12 +13,12 @@ function initLeftLegBoosters(renderer, model, color) {
   
   //Main
   var boosterMain = renderer.createEffect("fiskheroes:booster");
-  boosterMain.setIcon(icon).setOffset(0.0, 2.0, 0.0).setSize(2.0, 2.0);
+  boosterMain.setIcon(icon).setOffset(0.0, 2.0, 0.0).setSize(1.5, 1.5);
   boosterMain.anchor.set("leftLeg", mainRocketOffset);
   boosterMain.mirror = false;
   //Edge
   var shapeMainEdge = renderer.createResource("SHAPE", null);
-  var lineMainEdge = shapeMainEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.0, 2.0] });
+  var lineMainEdge = shapeMainEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.5, 1.5] });
   var bloomMainEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMainEdge).setOffset(0.0, 2.0, 0.0);
   bloomMainEdge.anchor.set("leftLeg", mainRocketOffset);
   bloomMainEdge.color.set(color);
@@ -26,7 +26,7 @@ function initLeftLegBoosters(renderer, model, color) {
   bloomMainEdge.setScale(16.0);
   //Middle
   var shapeMainMiddle = renderer.createResource("SHAPE", null);
-  var lineMainMiddle = shapeMainMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.5, 1.5] });
+  var lineMainMiddle = shapeMainMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.75, 0.75] });
   var bloomMainMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMainMiddle).setOffset(0.0, 2.0, 0.0);
   bloomMainMiddle.anchor.set("leftLeg", mainRocketOffset);
   bloomMainMiddle.color.set(color);
@@ -34,7 +34,7 @@ function initLeftLegBoosters(renderer, model, color) {
   bloomMainMiddle.setScale(16.0);
   //Center
   var shapeMainCenter = renderer.createResource("SHAPE", null);
-  var lineMainCenter = shapeMainCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.75, 0.75] });
+  var lineMainCenter = shapeMainCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.375, 0.375] });
   var bloomMainCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMainCenter).setOffset(0.0, 2.0, 0.0);
   bloomMainCenter.anchor.set("leftLeg", mainRocketOffset);
   bloomMainCenter.color.set(color);
@@ -43,29 +43,29 @@ function initLeftLegBoosters(renderer, model, color) {
 
   //Outer
   var boosterOuter = renderer.createEffect("fiskheroes:booster");
-  boosterOuter.setIcon(icon).setOffset(0.0, 3.0, 1.0).setSize(4.0, 2.0);
+  boosterOuter.setIcon(icon).setOffset(0.0, 3.0, -2.0).setSize(2.5, 1.5);
   boosterOuter.anchor.set("leftLeg", outerRocketOffset);
   boosterOuter.mirror = false;
   //Edge
   var shapeOuterEdge = renderer.createResource("SHAPE", null);
-  var lineOuterEdge = shapeOuterEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [4.0, 2.0] });
-  var bloomOuterEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeOuterEdge).setOffset(0.0, 3.0, 1.0);
+  var lineOuterEdge = shapeOuterEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.5, 1.5] });
+  var bloomOuterEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeOuterEdge).setOffset(0.0, 3.0, -2.0);
   bloomOuterEdge.anchor.set("leftLeg", outerRocketOffset);
   bloomOuterEdge.color.set(color);
   bloomOuterEdge.mirror = false;
   bloomOuterEdge.setScale(16.0);
   //Middle
   var shapeOuterMiddle = renderer.createResource("SHAPE", null);
-  var lineOuterMiddle = shapeOuterMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.0, 1.0] });
-  var bloomOuterMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeOuterMiddle).setOffset(0.0, 3.0, 1.0);
+  var lineOuterMiddle = shapeOuterMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.25, 0.75] });
+  var bloomOuterMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeOuterMiddle).setOffset(0.0, 3.0, -2.0);
   bloomOuterMiddle.anchor.set("leftLeg", outerRocketOffset);
   bloomOuterMiddle.color.set(color);
   bloomOuterMiddle.mirror = false;
   bloomOuterMiddle.setScale(16.0);
   //Center
   var shapeOuterCenter = renderer.createResource("SHAPE", null);
-  var lineOuterCenter = shapeOuterCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.0, 0.5] });
-  var bloomOuterCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeOuterCenter).setOffset(0.0, 3.0, 1.0);
+  var lineOuterCenter = shapeOuterCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.625, 0.375] });
+  var bloomOuterCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeOuterCenter).setOffset(0.0, 3.0, -2.0);
   bloomOuterCenter.anchor.set("leftLeg", outerRocketOffset);
   bloomOuterCenter.color.set(color);
   bloomOuterCenter.mirror = false;
@@ -73,29 +73,29 @@ function initLeftLegBoosters(renderer, model, color) {
 
   //Inner
   var boosterInner = renderer.createEffect("fiskheroes:booster");
-  boosterInner.setIcon(icon).setOffset(0.0, 3.0, 1.0).setSize(4.0, 2.0);
+  boosterInner.setIcon(icon).setOffset(0.0, 3.0, -2.0).setSize(2.5, 1.5);
   boosterInner.anchor.set("leftLeg", innerRocketOffset);
   boosterInner.mirror = false;
   //Edge
   var shapeInnerEdge = renderer.createResource("SHAPE", null);
-  var lineInnerEdge = shapeInnerEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [4.0, 2.0] });
-  var bloomInnerEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeInnerEdge).setOffset(0.0, 3.0, 1.0);
+  var lineInnerEdge = shapeInnerEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.5, 1.5] });
+  var bloomInnerEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeInnerEdge).setOffset(0.0, 3.0, -2.0);
   bloomInnerEdge.anchor.set("leftLeg", innerRocketOffset);
   bloomInnerEdge.color.set(color);
   bloomInnerEdge.mirror = false;
   bloomInnerEdge.setScale(16.0);
   //Middle
   var shapeInnerMiddle = renderer.createResource("SHAPE", null);
-  var lineInnerMiddle = shapeInnerMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.0, 1.0] });
-  var bloomInnerMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeInnerMiddle).setOffset(0.0, 3.0, 1.0);
+  var lineInnerMiddle = shapeInnerMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.25, 0.75] });
+  var bloomInnerMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeInnerMiddle).setOffset(0.0, 3.0, -2.0);
   bloomInnerMiddle.anchor.set("leftLeg", innerRocketOffset);
   bloomInnerMiddle.color.set(color);
   bloomInnerMiddle.mirror = false;
   bloomInnerMiddle.setScale(16.0);
   //Center
   var shapeInnerCenter = renderer.createResource("SHAPE", null);
-  var lineInnerCenter = shapeInnerCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.0, 0.5] });
-  var bloomInnerCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeInnerCenter).setOffset(0.0, 3.0, 1.0);
+  var lineInnerCenter = shapeInnerCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.625, 0.375] });
+  var bloomInnerCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeInnerCenter).setOffset(0.0, 3.0, -2.0);
   bloomInnerCenter.anchor.set("leftLeg", innerRocketOffset);
   bloomInnerCenter.color.set(color);
   bloomInnerCenter.mirror = false;
@@ -103,29 +103,29 @@ function initLeftLegBoosters(renderer, model, color) {
 
   //Back
   var boosterBack = renderer.createEffect("fiskheroes:booster");
-  boosterBack.setIcon(icon).setOffset(0.0, 3.0, 1.0).setSize(4.0, 2.0);
+  boosterBack.setIcon(icon).setOffset(0.0, 3.0, -2.0).setSize(2.5, 1.5);
   boosterBack.anchor.set("leftLeg", backRocketOffset);
   boosterBack.mirror = false;
   //Edge
   var shapeBackEdge = renderer.createResource("SHAPE", null);
-  var lineBackEdge = shapeBackEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [4.0, 2.0] });
-  var bloomBackEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBackEdge).setOffset(0.0, 3.0, 1.0);
+  var lineBackEdge = shapeBackEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.5, 1.5] });
+  var bloomBackEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBackEdge).setOffset(0.0, 3.0, -2.0);
   bloomBackEdge.anchor.set("leftLeg", backRocketOffset);
   bloomBackEdge.color.set(color);
   bloomBackEdge.mirror = false;
   bloomBackEdge.setScale(16.0);
   //Middle
   var shapeBackMiddle = renderer.createResource("SHAPE", null);
-  var lineBackMiddle = shapeBackMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.0, 1.0] });
-  var bloomBackMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBackMiddle).setOffset(0.0, 3.0, 1.0);
+  var lineBackMiddle = shapeBackMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.25, 0.75] });
+  var bloomBackMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBackMiddle).setOffset(0.0, 3.0, -2.0);
   bloomBackMiddle.anchor.set("leftLeg", backRocketOffset);
   bloomBackMiddle.color.set(color);
   bloomBackMiddle.mirror = false;
   bloomBackMiddle.setScale(16.0);
   //Center
   var shapeBackCenter = renderer.createResource("SHAPE", null);
-  var lineBackCenter = shapeBackCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.0, 0.5] });
-  var bloomBackCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBackCenter).setOffset(0.0, 3.0, 1.0);
+  var lineBackCenter = shapeBackCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.625, 0.375] });
+  var bloomBackCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBackCenter).setOffset(0.0, 3.0, -2.0);
   bloomBackCenter.anchor.set("leftLeg", backRocketOffset);
   bloomBackCenter.color.set(color);
   bloomBackCenter.mirror = false;
@@ -133,29 +133,29 @@ function initLeftLegBoosters(renderer, model, color) {
 
   //Front
   var boosterFront = renderer.createEffect("fiskheroes:booster");
-  boosterFront.setIcon(icon).setOffset(0.0, 3.0, 1.0).setSize(4.0, 2.0);
+  boosterFront.setIcon(icon).setOffset(0.0, 3.0, -2.0).setSize(2.5, 1.5);
   boosterFront.anchor.set("leftLeg", frontRocketOffset);
   boosterFront.mirror = false;
   //Edge
   var shapeFrontEdge = renderer.createResource("SHAPE", null);
-  var lineFrontEdge = shapeFrontEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [4.0, 2.0] });
-  var bloomFrontEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeFrontEdge).setOffset(0.0, 3.0, 1.0);
+  var lineFrontEdge = shapeFrontEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.5, 1.5] });
+  var bloomFrontEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeFrontEdge).setOffset(0.0, 3.0, -2.0);
   bloomFrontEdge.anchor.set("leftLeg", frontRocketOffset);
   bloomFrontEdge.color.set(color);
   bloomFrontEdge.mirror = false;
   bloomFrontEdge.setScale(16.0);
   //Middle
   var shapeFrontMiddle = renderer.createResource("SHAPE", null);
-  var lineFrontMiddle = shapeFrontMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.0, 1.0] });
-  var bloomFrontMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeFrontMiddle).setOffset(0.0, 3.0, 1.0);
+  var lineFrontMiddle = shapeFrontMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.25, 0.75] });
+  var bloomFrontMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeFrontMiddle).setOffset(0.0, 3.0, -2.0);
   bloomFrontMiddle.anchor.set("leftLeg", frontRocketOffset);
   bloomFrontMiddle.color.set(color);
   bloomFrontMiddle.mirror = false;
   bloomFrontMiddle.setScale(16.0);
   //Center
   var shapeFrontCenter = renderer.createResource("SHAPE", null);
-  var lineFrontCenter = shapeFrontCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.0, 0.5] });
-  var bloomFrontCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeFrontCenter).setOffset(0.0, 3.0, 1.0);
+  var lineFrontCenter = shapeFrontCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.625, 0.375] });
+  var bloomFrontCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeFrontCenter).setOffset(0.0, 3.0, -2.0);
   bloomFrontCenter.anchor.set("leftLeg", frontRocketOffset);
   bloomFrontCenter.color.set(color);
   bloomFrontCenter.mirror = false;
@@ -163,29 +163,29 @@ function initLeftLegBoosters(renderer, model, color) {
 
   //Booster
   var boosterBooster = renderer.createEffect("fiskheroes:booster");
-  boosterBooster.setIcon(icon).setOffset(0.0, 0.0, 0.0).setSize(2.0, 2.0);
+  boosterBooster.setIcon(icon).setOffset(0.0, 3.0, -1.0).setSize(1.5, 1.5);
   boosterBooster.anchor.set("leftLeg", boosterRocketOffset);
   boosterBooster.mirror = false;
   //Edge
   var shapeBoosterEdge = renderer.createResource("SHAPE", null);
-  var lineBoosterEdge = shapeBoosterEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.0, 2.0] });
-  var bloomBoosterEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterEdge).setOffset(0.0, 0.0, 0.0);
+  var lineBoosterEdge = shapeBoosterEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.5, 1.5] });
+  var bloomBoosterEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterEdge).setOffset(0.0, 3.0, -1.0);
   bloomBoosterEdge.anchor.set("leftLeg", boosterRocketOffset);
   bloomBoosterEdge.color.set(color);
   bloomBoosterEdge.mirror = false;
   bloomBoosterEdge.setScale(16.0);
   //Middle
   var shapeBoosterMiddle = renderer.createResource("SHAPE", null);
-  var lineBoosterMiddle = shapeBoosterMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.0, 1.0] });
-  var bloomBoosterMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterMiddle).setOffset(0.0, 0.0, 0.0);
+  var lineBoosterMiddle = shapeBoosterMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.75, 0.75] });
+  var bloomBoosterMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterMiddle).setOffset(0.0, 3.0, -1.0);
   bloomBoosterMiddle.anchor.set("leftLeg", boosterRocketOffset);
   bloomBoosterMiddle.color.set(color);
   bloomBoosterMiddle.mirror = false;
   bloomBoosterMiddle.setScale(16.0);
   //Center
   var shapeBoosterCenter = renderer.createResource("SHAPE", null);
-  var lineBoosterCenter = shapeBoosterCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.5, 0.5] });
-  var bloomBoosterCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterCenter).setOffset(0.0, 0.0, 0.0);
+  var lineBoosterCenter = shapeBoosterCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.375, 0.375] });
+  var bloomBoosterCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterCenter).setOffset(0.0, 3.0, -1.0);
   bloomBoosterCenter.anchor.set("leftLeg", boosterRocketOffset);
   bloomBoosterCenter.color.set(color);
   bloomBoosterCenter.mirror = false;
@@ -219,7 +219,7 @@ function initLeftLegBoosters(renderer, model, color) {
     render: (entity, renderLayer, isFirstPersonArm) => {
       //Main
       //Equations
-      var data_0 = entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_main_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
+      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_main_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
       var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
       var flight = data_0;
@@ -233,11 +233,10 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterMain.progress = boost;
       boosterMain.speedScale = 0.5 * boost;
       boosterMain.flutter = 1 + boost;
-      boosterMain.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
       lineMainEdge.end.y = ((1 + f * boosterMain.flutter / 4) * 1.5 * 1.5 / 8);
-      lineMainMiddle.end.y = ((1 + f * boosterMain.flutter / 4) * 1.25 * 1.25 / 8);
-      lineMainCenter.end.y = ((1 + f * boosterMain.flutter / 4) * 1 * 1 / 8);
+      lineMainMiddle.end.y = ((1 + f * boosterMain.flutter / 4) * 0.75 * 0.75 / 8);
+      lineMainCenter.end.y = ((1 + f * boosterMain.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomMainEdge.progress = bloomMainEdge.opacity = flight;
       //Middle
@@ -261,11 +260,10 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterOuter.progress = boost;
       boosterOuter.speedScale = 0.5 * boost;
       boosterOuter.flutter = 1 + boost;
-      boosterOuter.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineOuterEdge.end.y = ((1 + f * boosterOuter.flutter / 4) * 1.5 * 1.5 / 8);
-      lineOuterMiddle.end.y = ((1 + f * boosterOuter.flutter / 4) * 1.25 * 1.25 / 8);
-      lineOuterCenter.end.y = ((1 + f * boosterOuter.flutter / 4) * 1 * 1 / 8);
+      lineOuterEdge.end.y = ((1 + f * boosterOuter.flutter / 4) * 2.5 * 1.5 / 8);
+      lineOuterMiddle.end.y = ((1 + f * boosterOuter.flutter / 4) * 1.25 * 0.75 / 8);
+      lineOuterCenter.end.y = ((1 + f * boosterOuter.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomOuterEdge.progress = bloomOuterEdge.opacity = flight;
       //Middle
@@ -278,11 +276,10 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterInner.progress = boost;
       boosterInner.speedScale = 0.5 * boost;
       boosterInner.flutter = 1 + boost;
-      boosterInner.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineInnerEdge.end.y = ((1 + f * boosterInner.flutter / 4) * 1.5 * 1.5 / 8);
-      lineInnerMiddle.end.y = ((1 + f * boosterInner.flutter / 4) * 1.25 * 1.25 / 8);
-      lineInnerCenter.end.y = ((1 + f * boosterInner.flutter / 4) * 1 * 1 / 8);
+      lineInnerEdge.end.y = ((1 + f * boosterInner.flutter / 4) * 2.5 * 1.5 / 8);
+      lineInnerMiddle.end.y = ((1 + f * boosterInner.flutter / 4) * 1.25 * 0.75 / 8);
+      lineInnerCenter.end.y = ((1 + f * boosterInner.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomInnerEdge.progress = bloomInnerEdge.opacity = flight;
       //Middle
@@ -295,11 +292,10 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterFront.progress = boost;
       boosterFront.speedScale = 0.5 * boost;
       boosterFront.flutter = 1 + boost;
-      boosterFront.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineFrontEdge.end.y = ((1 + f * boosterFront.flutter / 4) * 1.5 * 1.5 / 8);
-      lineFrontMiddle.end.y = ((1 + f * boosterFront.flutter / 4) * 1.25 * 1.25 / 8);
-      lineFrontCenter.end.y = ((1 + f * boosterFront.flutter / 4) * 1 * 1 / 8);
+      lineFrontEdge.end.y = ((1 + f * boosterFront.flutter / 4) * 2.5 * 1.5 / 8);
+      lineFrontMiddle.end.y = ((1 + f * boosterFront.flutter / 4) * 1.25 * 0.75 / 8);
+      lineFrontCenter.end.y = ((1 + f * boosterFront.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomFrontEdge.progress = bloomFrontEdge.opacity = flight;
       //Middle
@@ -312,11 +308,10 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterBack.progress = boost;
       boosterBack.speedScale = 0.5 * boost;
       boosterBack.flutter = 1 + boost;
-      boosterBack.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineBackEdge.end.y = ((1 + f * boosterBack.flutter / 4) * 1.5 * 1.5 / 8);
-      lineBackMiddle.end.y = ((1 + f * boosterBack.flutter / 4) * 1.25 * 1.25 / 8);
-      lineBackCenter.end.y = ((1 + f * boosterBack.flutter / 4) * 1 * 1 / 8);
+      lineBackEdge.end.y = ((1 + f * boosterBack.flutter / 4) * 2.5 * 1.5 / 8);
+      lineBackMiddle.end.y = ((1 + f * boosterBack.flutter / 4) * 1.25 * 0.75 / 8);
+      lineBackCenter.end.y = ((1 + f * boosterBack.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomBackEdge.progress = bloomBackEdge.opacity = flight;
       //Middle
@@ -340,7 +335,6 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterBooster.progress = boost;
       boosterBooster.speedScale = 0.5 * boost;
       boosterBooster.flutter = 1 + boost;
-      boosterBooster.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
       lineBoosterEdge.end.y = ((1 + f * boosterBooster.flutter / 4) * 1.5 * 1.5 / 8);
       lineBoosterMiddle.end.y = ((1 + f * boosterBooster.flutter / 4) * 1.25 * 1.25 / 8);
@@ -404,12 +398,12 @@ function initRightLegBoosters(renderer, model, color) {
   
   //Main
   var boosterMain = renderer.createEffect("fiskheroes:booster");
-  boosterMain.setIcon(icon).setOffset(0.0, 0.0, 0.0).setSize(2.0, 2.0);
+  boosterMain.setIcon(icon).setOffset(0.0, 2.0, 0.0).setSize(1.5, 1.5);
   boosterMain.anchor.set("rightLeg", mainRocketOffset);
   boosterMain.mirror = false;
   //Edge
   var shapeMainEdge = renderer.createResource("SHAPE", null);
-  var lineMainEdge = shapeMainEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.0, 2.0] });
+  var lineMainEdge = shapeMainEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.5, 1.5] });
   var bloomMainEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMainEdge).setOffset(0.0, 2.0, 0.0);
   bloomMainEdge.anchor.set("rightLeg", mainRocketOffset);
   bloomMainEdge.color.set(color);
@@ -417,7 +411,7 @@ function initRightLegBoosters(renderer, model, color) {
   bloomMainEdge.setScale(16.0);
   //Middle
   var shapeMainMiddle = renderer.createResource("SHAPE", null);
-  var lineMainMiddle = shapeMainMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.5, 1.5] });
+  var lineMainMiddle = shapeMainMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.75, 0.75] });
   var bloomMainMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMainMiddle).setOffset(0.0, 2.0, 0.0);
   bloomMainMiddle.anchor.set("rightLeg", mainRocketOffset);
   bloomMainMiddle.color.set(color);
@@ -425,7 +419,7 @@ function initRightLegBoosters(renderer, model, color) {
   bloomMainMiddle.setScale(16.0);
   //Center
   var shapeMainCenter = renderer.createResource("SHAPE", null);
-  var lineMainCenter = shapeMainCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.75, 0.75] });
+  var lineMainCenter = shapeMainCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.375, 0.375] });
   var bloomMainCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMainCenter).setOffset(0.0, 2.0, 0.0);
   bloomMainCenter.anchor.set("rightLeg", mainRocketOffset);
   bloomMainCenter.color.set(color);
@@ -434,29 +428,29 @@ function initRightLegBoosters(renderer, model, color) {
 
   //Outer
   var boosterOuter = renderer.createEffect("fiskheroes:booster");
-  boosterOuter.setIcon(icon).setOffset(0.0, 3.0, 1.0).setSize(4.0, 2.0);
+  boosterOuter.setIcon(icon).setOffset(0.0, 3.0, -2.0).setSize(2.5, 1.5);
   boosterOuter.anchor.set("rightLeg", outerRocketOffset);
   boosterOuter.mirror = false;
   //Edge
   var shapeOuterEdge = renderer.createResource("SHAPE", null);
-  var lineOuterEdge = shapeOuterEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [4.0, 2.0] });
-  var bloomOuterEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeOuterEdge).setOffset(0.0, 3.0, 1.0);
+  var lineOuterEdge = shapeOuterEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.5, 1.5] });
+  var bloomOuterEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeOuterEdge).setOffset(0.0, 3.0, -2.0);
   bloomOuterEdge.anchor.set("rightLeg", outerRocketOffset);
   bloomOuterEdge.color.set(color);
   bloomOuterEdge.mirror = false;
   bloomOuterEdge.setScale(16.0);
   //Middle
   var shapeOuterMiddle = renderer.createResource("SHAPE", null);
-  var lineOuterMiddle = shapeOuterMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.0, 1.0] });
-  var bloomOuterMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeOuterMiddle).setOffset(0.0, 3.0, 1.0);
+  var lineOuterMiddle = shapeOuterMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.25, 0.75] });
+  var bloomOuterMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeOuterMiddle).setOffset(0.0, 3.0, -2.0);
   bloomOuterMiddle.anchor.set("rightLeg", outerRocketOffset);
   bloomOuterMiddle.color.set(color);
   bloomOuterMiddle.mirror = false;
   bloomOuterMiddle.setScale(16.0);
   //Center
   var shapeOuterCenter = renderer.createResource("SHAPE", null);
-  var lineOuterCenter = shapeOuterCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.0, 0.5] });
-  var bloomOuterCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeOuterCenter).setOffset(0.0, 3.0, 1.0);
+  var lineOuterCenter = shapeOuterCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.625, 0.375] });
+  var bloomOuterCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeOuterCenter).setOffset(0.0, 3.0, -2.0);
   bloomOuterCenter.anchor.set("rightLeg", outerRocketOffset);
   bloomOuterCenter.color.set(color);
   bloomOuterCenter.mirror = false;
@@ -464,29 +458,29 @@ function initRightLegBoosters(renderer, model, color) {
 
   //Inner
   var boosterInner = renderer.createEffect("fiskheroes:booster");
-  boosterInner.setIcon(icon).setOffset(0.0, 3.0, 1.0).setSize(4.0, 2.0);
+  boosterInner.setIcon(icon).setOffset(0.0, 3.0, -2.0).setSize(2.5, 1.5);
   boosterInner.anchor.set("rightLeg", innerRocketOffset);
   boosterInner.mirror = false;
   //Edge
   var shapeInnerEdge = renderer.createResource("SHAPE", null);
-  var lineInnerEdge = shapeInnerEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [4.0, 2.0] });
-  var bloomInnerEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeInnerEdge).setOffset(0.0, 3.0, 1.0);
+  var lineInnerEdge = shapeInnerEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.5, 1.5] });
+  var bloomInnerEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeInnerEdge).setOffset(0.0, 3.0, -2.0);
   bloomInnerEdge.anchor.set("rightLeg", innerRocketOffset);
   bloomInnerEdge.color.set(color);
   bloomInnerEdge.mirror = false;
   bloomInnerEdge.setScale(16.0);
   //Middle
   var shapeInnerMiddle = renderer.createResource("SHAPE", null);
-  var lineInnerMiddle = shapeInnerMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.0, 1.0] });
-  var bloomInnerMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeInnerMiddle).setOffset(0.0, 3.0, 1.0);
+  var lineInnerMiddle = shapeInnerMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.25, 0.75] });
+  var bloomInnerMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeInnerMiddle).setOffset(0.0, 3.0, -2.0);
   bloomInnerMiddle.anchor.set("rightLeg", innerRocketOffset);
   bloomInnerMiddle.color.set(color);
   bloomInnerMiddle.mirror = false;
   bloomInnerMiddle.setScale(16.0);
   //Center
   var shapeInnerCenter = renderer.createResource("SHAPE", null);
-  var lineInnerCenter = shapeInnerCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.0, 0.5] });
-  var bloomInnerCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeInnerCenter).setOffset(0.0, 3.0, 1.0);
+  var lineInnerCenter = shapeInnerCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.625, 0.375] });
+  var bloomInnerCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeInnerCenter).setOffset(0.0, 3.0, -2.0);
   bloomInnerCenter.anchor.set("rightLeg", innerRocketOffset);
   bloomInnerCenter.color.set(color);
   bloomInnerCenter.mirror = false;
@@ -494,29 +488,29 @@ function initRightLegBoosters(renderer, model, color) {
 
   //Back
   var boosterBack = renderer.createEffect("fiskheroes:booster");
-  boosterBack.setIcon(icon).setOffset(0.0, 3.0, 1.0).setSize(4.0, 2.0);
+  boosterBack.setIcon(icon).setOffset(0.0, 3.0, -2.0).setSize(2.5, 1.5);
   boosterBack.anchor.set("rightLeg", backRocketOffset);
   boosterBack.mirror = false;
   //Edge
   var shapeBackEdge = renderer.createResource("SHAPE", null);
-  var lineBackEdge = shapeBackEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [4.0, 2.0] });
-  var bloomBackEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBackEdge).setOffset(0.0, 3.0, 1.0);
+  var lineBackEdge = shapeBackEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.5, 1.5] });
+  var bloomBackEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBackEdge).setOffset(0.0, 3.0, -2.0);
   bloomBackEdge.anchor.set("rightLeg", backRocketOffset);
   bloomBackEdge.color.set(color);
   bloomBackEdge.mirror = false;
   bloomBackEdge.setScale(16.0);
   //Middle
   var shapeBackMiddle = renderer.createResource("SHAPE", null);
-  var lineBackMiddle = shapeBackMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.0, 1.0] });
-  var bloomBackMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBackMiddle).setOffset(0.0, 3.0, 1.0);
+  var lineBackMiddle = shapeBackMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.25, 0.75] });
+  var bloomBackMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBackMiddle).setOffset(0.0, 3.0, -2.0);
   bloomBackMiddle.anchor.set("rightLeg", backRocketOffset);
   bloomBackMiddle.color.set(color);
   bloomBackMiddle.mirror = false;
   bloomBackMiddle.setScale(16.0);
   //Center
   var shapeBackCenter = renderer.createResource("SHAPE", null);
-  var lineBackCenter = shapeBackCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.0, 0.5] });
-  var bloomBackCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBackCenter).setOffset(0.0, 3.0, 1.0);
+  var lineBackCenter = shapeBackCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.625, 0.375] });
+  var bloomBackCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBackCenter).setOffset(0.0, 3.0, -2.0);
   bloomBackCenter.anchor.set("rightLeg", backRocketOffset);
   bloomBackCenter.color.set(color);
   bloomBackCenter.mirror = false;
@@ -524,29 +518,29 @@ function initRightLegBoosters(renderer, model, color) {
 
   //Front
   var boosterFront = renderer.createEffect("fiskheroes:booster");
-  boosterFront.setIcon(icon).setOffset(0.0, 3.0, 1.0).setSize(4.0, 2.0);
+  boosterFront.setIcon(icon).setOffset(0.0, 3.0, -2.0).setSize(2.5, 1.5);
   boosterFront.anchor.set("rightLeg", frontRocketOffset);
   boosterFront.mirror = false;
   //Edge
   var shapeFrontEdge = renderer.createResource("SHAPE", null);
-  var lineFrontEdge = shapeFrontEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [4.0, 2.0] });
-  var bloomFrontEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeFrontEdge).setOffset(0.0, 3.0, 1.0);
+  var lineFrontEdge = shapeFrontEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.5, 1.5] });
+  var bloomFrontEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeFrontEdge).setOffset(0.0, 3.0, -2.0);
   bloomFrontEdge.anchor.set("rightLeg", frontRocketOffset);
   bloomFrontEdge.color.set(color);
   bloomFrontEdge.mirror = false;
   bloomFrontEdge.setScale(16.0);
   //Middle
   var shapeFrontMiddle = renderer.createResource("SHAPE", null);
-  var lineFrontMiddle = shapeFrontMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.0, 1.0] });
-  var bloomFrontMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeFrontMiddle).setOffset(0.0, 3.0, 1.0);
+  var lineFrontMiddle = shapeFrontMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.25, 0.75] });
+  var bloomFrontMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeFrontMiddle).setOffset(0.0, 3.0, -2.0);
   bloomFrontMiddle.anchor.set("rightLeg", frontRocketOffset);
   bloomFrontMiddle.color.set(color);
   bloomFrontMiddle.mirror = false;
   bloomFrontMiddle.setScale(16.0);
   //Center
   var shapeFrontCenter = renderer.createResource("SHAPE", null);
-  var lineFrontCenter = shapeFrontCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.0, 0.5] });
-  var bloomFrontCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeFrontCenter).setOffset(0.0, 3.0, 1.0);
+  var lineFrontCenter = shapeFrontCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.625, 0.375] });
+  var bloomFrontCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeFrontCenter).setOffset(0.0, 3.0, -2.0);
   bloomFrontCenter.anchor.set("rightLeg", frontRocketOffset);
   bloomFrontCenter.color.set(color);
   bloomFrontCenter.mirror = false;
@@ -554,29 +548,29 @@ function initRightLegBoosters(renderer, model, color) {
 
   //Booster
   var boosterBooster = renderer.createEffect("fiskheroes:booster");
-  boosterBooster.setIcon(icon).setOffset(0.0, 0.0, 0.0).setSize(2.0, 2.0);
+  boosterBooster.setIcon(icon).setOffset(0.0, 3.0, -1.0).setSize(1.5, 1.5);
   boosterBooster.anchor.set("rightLeg", boosterRocketOffset);
   boosterBooster.mirror = false;
   //Edge
   var shapeBoosterEdge = renderer.createResource("SHAPE", null);
-  var lineBoosterEdge = shapeBoosterEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.0, 2.0] });
-  var bloomBoosterEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterEdge).setOffset(0.0, 0.0, 0.0);
+  var lineBoosterEdge = shapeBoosterEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.5, 1.5] });
+  var bloomBoosterEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterEdge).setOffset(0.0, 3.0, -1.0);
   bloomBoosterEdge.anchor.set("rightLeg", boosterRocketOffset);
   bloomBoosterEdge.color.set(color);
   bloomBoosterEdge.mirror = false;
   bloomBoosterEdge.setScale(16.0);
   //Middle
   var shapeBoosterMiddle = renderer.createResource("SHAPE", null);
-  var lineBoosterMiddle = shapeBoosterMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.0, 1.0] });
-  var bloomBoosterMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterMiddle).setOffset(0.0, 0.0, 0.0);
+  var lineBoosterMiddle = shapeBoosterMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.75, 0.75] });
+  var bloomBoosterMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterMiddle).setOffset(0.0, 3.0, -1.0);
   bloomBoosterMiddle.anchor.set("rightLeg", boosterRocketOffset);
   bloomBoosterMiddle.color.set(color);
   bloomBoosterMiddle.mirror = false;
   bloomBoosterMiddle.setScale(16.0);
   //Center
   var shapeBoosterCenter = renderer.createResource("SHAPE", null);
-  var lineBoosterCenter = shapeBoosterCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.5, 0.5] });
-  var bloomBoosterCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterCenter).setOffset(0.0, 0.0, 0.0);
+  var lineBoosterCenter = shapeBoosterCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.375, 0.375] });
+  var bloomBoosterCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterCenter).setOffset(0.0, 3.0, -1.0);
   bloomBoosterCenter.anchor.set("rightLeg", boosterRocketOffset);
   bloomBoosterCenter.color.set(color);
   bloomBoosterCenter.mirror = false;
@@ -624,11 +618,10 @@ function initRightLegBoosters(renderer, model, color) {
       boosterMain.progress = boost;
       boosterMain.speedScale = 0.5 * boost;
       boosterMain.flutter = 1 + boost;
-      boosterMain.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
       lineMainEdge.end.y = ((1 + f * boosterMain.flutter / 4) * 1.5 * 1.5 / 8);
-      lineMainMiddle.end.y = ((1 + f * boosterMain.flutter / 4) * 1.25 * 1.25 / 8);
-      lineMainCenter.end.y = ((1 + f * boosterMain.flutter / 4) * 1 * 1 / 8);
+      lineMainMiddle.end.y = ((1 + f * boosterMain.flutter / 4) * 0.75 * 0.75 / 8);
+      lineMainCenter.end.y = ((1 + f * boosterMain.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomMainEdge.progress = bloomMainEdge.opacity = flight;
       //Middle
@@ -652,11 +645,10 @@ function initRightLegBoosters(renderer, model, color) {
       boosterOuter.progress = boost;
       boosterOuter.speedScale = 0.5 * boost;
       boosterOuter.flutter = 1 + boost;
-      boosterOuter.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineOuterEdge.end.y = ((1 + f * boosterOuter.flutter / 4) * 1.5 * 1.5 / 8);
-      lineOuterMiddle.end.y = ((1 + f * boosterOuter.flutter / 4) * 1.25 * 1.25 / 8);
-      lineOuterCenter.end.y = ((1 + f * boosterOuter.flutter / 4) * 1 * 1 / 8);
+      lineOuterEdge.end.y = ((1 + f * boosterOuter.flutter / 4) * 2.5 * 1.5 / 8);
+      lineOuterMiddle.end.y = ((1 + f * boosterOuter.flutter / 4) * 1.25 * 0.75 / 8);
+      lineOuterCenter.end.y = ((1 + f * boosterOuter.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomOuterEdge.progress = bloomOuterEdge.opacity = flight;
       //Middle
@@ -669,11 +661,10 @@ function initRightLegBoosters(renderer, model, color) {
       boosterInner.progress = boost;
       boosterInner.speedScale = 0.5 * boost;
       boosterInner.flutter = 1 + boost;
-      boosterInner.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineInnerEdge.end.y = ((1 + f * boosterInner.flutter / 4) * 1.5 * 1.5 / 8);
-      lineInnerMiddle.end.y = ((1 + f * boosterInner.flutter / 4) * 1.25 * 1.25 / 8);
-      lineInnerCenter.end.y = ((1 + f * boosterInner.flutter / 4) * 1 * 1 / 8);
+      lineInnerEdge.end.y = ((1 + f * boosterInner.flutter / 4) * 2.5 * 1.5 / 8);
+      lineInnerMiddle.end.y = ((1 + f * boosterInner.flutter / 4) * 1.25 * 0.75 / 8);
+      lineInnerCenter.end.y = ((1 + f * boosterInner.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomInnerEdge.progress = bloomInnerEdge.opacity = flight;
       //Middle
@@ -686,11 +677,10 @@ function initRightLegBoosters(renderer, model, color) {
       boosterFront.progress = boost;
       boosterFront.speedScale = 0.5 * boost;
       boosterFront.flutter = 1 + boost;
-      boosterFront.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineFrontEdge.end.y = ((1 + f * boosterFront.flutter / 4) * 1.5 * 1.5 / 8);
-      lineFrontMiddle.end.y = ((1 + f * boosterFront.flutter / 4) * 1.25 * 1.25 / 8);
-      lineFrontCenter.end.y = ((1 + f * boosterFront.flutter / 4) * 1 * 1 / 8);
+      lineFrontEdge.end.y = ((1 + f * boosterFront.flutter / 4) * 2.5 * 1.5 / 8);
+      lineFrontMiddle.end.y = ((1 + f * boosterFront.flutter / 4) * 1.25 * 0.75 / 8);
+      lineFrontCenter.end.y = ((1 + f * boosterFront.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomFrontEdge.progress = bloomFrontEdge.opacity = flight;
       //Middle
@@ -703,11 +693,10 @@ function initRightLegBoosters(renderer, model, color) {
       boosterBack.progress = boost;
       boosterBack.speedScale = 0.5 * boost;
       boosterBack.flutter = 1 + boost;
-      boosterBack.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineBackEdge.end.y = ((1 + f * boosterBack.flutter / 4) * 1.5 * 1.5 / 8);
-      lineBackMiddle.end.y = ((1 + f * boosterBack.flutter / 4) * 1.25 * 1.25 / 8);
-      lineBackCenter.end.y = ((1 + f * boosterBack.flutter / 4) * 1 * 1 / 8);
+      lineBackEdge.end.y = ((1 + f * boosterBack.flutter / 4) * 2.5 * 1.5 / 8);
+      lineBackMiddle.end.y = ((1 + f * boosterBack.flutter / 4) * 1.25 * 0.75 / 8);
+      lineBackCenter.end.y = ((1 + f * boosterBack.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomBackEdge.progress = bloomBackEdge.opacity = flight;
       //Middle
@@ -731,11 +720,10 @@ function initRightLegBoosters(renderer, model, color) {
       boosterBooster.progress = boost;
       boosterBooster.speedScale = 0.5 * boost;
       boosterBooster.flutter = 1 + boost;
-      boosterBooster.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
       lineBoosterEdge.end.y = ((1 + f * boosterBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineBoosterMiddle.end.y = ((1 + f * boosterBooster.flutter / 4) * 1.25 * 1.25 / 8);
-      lineBoosterCenter.end.y = ((1 + f * boosterBooster.flutter / 4) * 1 * 1 / 8);
+      lineBoosterMiddle.end.y = ((1 + f * boosterBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      lineBoosterCenter.end.y = ((1 + f * boosterBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomBoosterEdge.progress = bloomBoosterEdge.opacity = flight;
       //Middle
@@ -791,29 +779,29 @@ function initBodyBoosters(renderer, model, color) {
 
   //Left
   var boosterLeft = renderer.createEffect("fiskheroes:booster");
-  boosterLeft.setIcon(icon).setOffset(0.0, 3.0, 0.0).setSize(4.0, 2.0);
+  boosterLeft.setIcon(icon).setOffset(0.0, 3.0, -1.0).setSize(2.5, 1.5);
   boosterLeft.anchor.set("body", leftRocketOffset);
   boosterLeft.mirror = false;
   //Edge
   var shapeLeftEdge = renderer.createResource("SHAPE", null);
-  var lineLeftEdge = shapeLeftEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [3.0, 2.0] });
-  var bloomLeftEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLeftEdge).setOffset(0.0, 3.0, 0.0);
+  var lineLeftEdge = shapeLeftEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.5, 1.5] });
+  var bloomLeftEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLeftEdge).setOffset(0.0, 3.0, -1.0);
   bloomLeftEdge.anchor.set("body", leftRocketOffset);
   bloomLeftEdge.color.set(color);
   bloomLeftEdge.mirror = false;
   bloomLeftEdge.setScale(16.0);
   //Middle
   var shapeLeftMiddle = renderer.createResource("SHAPE", null);
-  var lineLeftMiddle = shapeLeftMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.5, 1.0] });
-  var bloomLeftMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLeftMiddle).setOffset(0.0, 3.0, 0.0);
+  var lineLeftMiddle = shapeLeftMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.25, 0.75] });
+  var bloomLeftMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLeftMiddle).setOffset(0.0, 3.0, -1.0);
   bloomLeftMiddle.anchor.set("body", leftRocketOffset);
   bloomLeftMiddle.color.set(color);
   bloomLeftMiddle.mirror = false;
   bloomLeftMiddle.setScale(16.0);
   //Center
   var shapeLeftCenter = renderer.createResource("SHAPE", null);
-  var lineLeftCenter = shapeLeftCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.75, 0.5] });
-  var bloomLeftCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLeftCenter).setOffset(0.0, 3.0, 0.0);
+  var lineLeftCenter = shapeLeftCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.625, 0.375] });
+  var bloomLeftCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLeftCenter).setOffset(0.0, 3.0, -1.0);
   bloomLeftCenter.anchor.set("body", leftRocketOffset);
   bloomLeftCenter.color.set(color);
   bloomLeftCenter.mirror = false;
@@ -821,29 +809,29 @@ function initBodyBoosters(renderer, model, color) {
 
   //Right
   var boosterRight = renderer.createEffect("fiskheroes:booster");
-  boosterRight.setIcon(icon).setOffset(0.0, 3.0, 0.0).setSize(4.0, 2.0);
+  boosterRight.setIcon(icon).setOffset(0.0, 3.0, -1.0).setSize(2.5, 1.5);
   boosterRight.anchor.set("body", rightRocketOffset);
   boosterRight.mirror = false;
   //Edge
   var shapeRightEdge = renderer.createResource("SHAPE", null);
-  var lineRightEdge = shapeRightEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [3.0, 2.0] });
-  var bloomRightEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeRightEdge).setOffset(0.0, 3.0, 0.0);
+  var lineRightEdge = shapeRightEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.5, 1.5] });
+  var bloomRightEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeRightEdge).setOffset(0.0, 3.0, -1.0);
   bloomRightEdge.anchor.set("body", rightRocketOffset);
   bloomRightEdge.color.set(color);
   bloomRightEdge.mirror = false;
   bloomRightEdge.setScale(16.0);
   //Middle
   var shapeRightMiddle = renderer.createResource("SHAPE", null);
-  var lineRightMiddle = shapeRightMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.5, 1.0] });
-  var bloomRightMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeRightMiddle).setOffset(0.0, 3.0, 0.0);
+  var lineRightMiddle = shapeRightMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.25, 0.75] });
+  var bloomRightMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeRightMiddle).setOffset(0.0, 3.0, -1.0);
   bloomRightMiddle.anchor.set("body", rightRocketOffset);
   bloomRightMiddle.color.set(color);
   bloomRightMiddle.mirror = false;
   bloomRightMiddle.setScale(16.0);
   //Center
   var shapeRightCenter = renderer.createResource("SHAPE", null);
-  var lineRightCenter = shapeRightCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.75, 0.5] });
-  var bloomRightCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeRightCenter).setOffset(0.0, 3.0, 0.0);
+  var lineRightCenter = shapeRightCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.625, 0.375] });
+  var bloomRightCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeRightCenter).setOffset(0.0, 3.0, -1.0);
   bloomRightCenter.anchor.set("body", rightRocketOffset);
   bloomRightCenter.color.set(color);
   bloomRightCenter.mirror = false;
@@ -860,7 +848,7 @@ function initBodyBoosters(renderer, model, color) {
     bloomRightCenter: bloomRightCenter,
     render: (entity, renderLayer, isFirstPersonArm) => {
       //Equations
-      var data_0 = entity.getInterpolatedData("skyhighocs:dyn/rockets_body_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
+      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighocs:dyn/rockets_body_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
       var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
       var flight = data_0;
@@ -874,11 +862,10 @@ function initBodyBoosters(renderer, model, color) {
       boosterLeft.progress = boost;
       boosterLeft.speedScale = 0.5 * boost;
       boosterLeft.flutter = 1 + boost;
-      boosterLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineLeftEdge.end.y = ((1 + f * boosterLeft.flutter / 4) * 1.5 * 1.5 / 8);
-      lineLeftMiddle.end.y = ((1 + f * boosterLeft.flutter / 4) * 1.25 * 1.25 / 8);
-      lineLeftCenter.end.y = ((1 + f * boosterLeft.flutter / 4) * 1 * 1 / 8);
+      lineLeftEdge.end.y = ((1 + f * boosterLeft.flutter / 4) * 2.5 * 1.5 / 8);
+      lineLeftMiddle.end.y = ((1 + f * boosterLeft.flutter / 4) * 1.25 * 0.75 / 8);
+      lineLeftCenter.end.y = ((1 + f * boosterLeft.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomLeftEdge.progress = bloomLeftEdge.opacity = flight;
       //Middle
@@ -891,11 +878,10 @@ function initBodyBoosters(renderer, model, color) {
       boosterRight.progress = boost;
       boosterRight.speedScale = 0.5 * boost;
       boosterRight.flutter = 1 + boost;
-      boosterRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineRightEdge.end.y = ((1 + f * boosterRight.flutter / 4) * 1.5 * 1.5 / 8);
-      lineRightMiddle.end.y = ((1 + f * boosterRight.flutter / 4) * 1.25 * 1.25 / 8);
-      lineRightCenter.end.y = ((1 + f * boosterRight.flutter / 4) * 1 * 1 / 8);
+      lineRightEdge.end.y = ((1 + f * boosterRight.flutter / 4) * 2.5 * 1.5 / 8);
+      lineRightMiddle.end.y = ((1 + f * boosterRight.flutter / 4) * 1.25 * 0.75 / 8);
+      lineRightCenter.end.y = ((1 + f * boosterRight.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomRightEdge.progress = bloomRightEdge.opacity = flight;
       //Middle
@@ -930,29 +916,29 @@ function initLeftArmBoosters(renderer, model, color) {
   
   //Booster
   var boosterBooster = renderer.createEffect("fiskheroes:booster");
-  boosterBooster.setIcon(icon).setOffset(0.0, 0.0, 0.0).setSize(2.0, 2.0);
+  boosterBooster.setIcon(icon).setOffset(-1.0, 3.0, 0.0).setSize(1.5, 1.5);
   boosterBooster.anchor.set("leftArm", boosterRocketOffset);
   boosterBooster.mirror = false;
   //Edge
   var shapeBoosterEdge = renderer.createResource("SHAPE", null);
-  var lineBoosterEdge = shapeBoosterEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.0, 2.0] });
-  var bloomBoosterEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterEdge).setOffset(0.0, 0.0, 0.0);
+  var lineBoosterEdge = shapeBoosterEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.5, 1.5] });
+  var bloomBoosterEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterEdge).setOffset(-1.0, 3.0, 0.0);
   bloomBoosterEdge.anchor.set("leftArm", boosterRocketOffset);
   bloomBoosterEdge.color.set(color);
   bloomBoosterEdge.mirror = false;
   bloomBoosterEdge.setScale(16.0);
   //Middle
   var shapeBoosterMiddle = renderer.createResource("SHAPE", null);
-  var lineBoosterMiddle = shapeBoosterMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.0, 1.0] });
-  var bloomBoosterMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterMiddle).setOffset(0.0, 0.0, 0.0);
+  var lineBoosterMiddle = shapeBoosterMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.75, 0.75] });
+  var bloomBoosterMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterMiddle).setOffset(-1.0, 3.0, 0.0);
   bloomBoosterMiddle.anchor.set("leftArm", boosterRocketOffset);
   bloomBoosterMiddle.color.set(color);
   bloomBoosterMiddle.mirror = false;
   bloomBoosterMiddle.setScale(16.0);
   //Center
   var shapeBoosterCenter = renderer.createResource("SHAPE", null);
-  var lineBoosterCenter = shapeBoosterCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.5, 0.5] });
-  var bloomBoosterCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterCenter).setOffset(0.0, 0.0, 0.0);
+  var lineBoosterCenter = shapeBoosterCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.375, 0.375] });
+  var bloomBoosterCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterCenter).setOffset(-1.0, 3.0, 0.0);
   bloomBoosterCenter.anchor.set("leftArm", boosterRocketOffset);
   bloomBoosterCenter.color.set(color);
   bloomBoosterCenter.mirror = false;
@@ -979,11 +965,10 @@ function initLeftArmBoosters(renderer, model, color) {
       boosterBooster.progress = boost;
       boosterBooster.speedScale = 0.5 * boost;
       boosterBooster.flutter = 1 + boost;
-      boosterBooster.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
       lineBoosterEdge.end.y = ((1 + f * boosterBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineBoosterMiddle.end.y = ((1 + f * boosterBooster.flutter / 4) * 1.25 * 1.25 / 8);
-      lineBoosterCenter.end.y = ((1 + f * boosterBooster.flutter / 4) * 1 * 1 / 8);
+      lineBoosterMiddle.end.y = ((1 + f * boosterBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      lineBoosterCenter.end.y = ((1 + f * boosterBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomBoosterEdge.progress = bloomBoosterEdge.opacity = flight;
       //Middle
@@ -1013,29 +998,29 @@ function initRightArmBoosters(renderer, model, color) {
   
   //Booster
   var boosterBooster = renderer.createEffect("fiskheroes:booster");
-  boosterBooster.setIcon(icon).setOffset(0.0, 0.0, 0.0).setSize(2.0, 2.0);
+  boosterBooster.setIcon(icon).setOffset(-1.0, 3.0, 0.0).setSize(1.5, 1.5);
   boosterBooster.anchor.set("rightArm", boosterRocketOffset);
   boosterBooster.mirror = false;
   //Edge
   var shapeBoosterEdge = renderer.createResource("SHAPE", null);
-  var lineBoosterEdge = shapeBoosterEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [2.0, 2.0] });
-  var bloomBoosterEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterEdge).setOffset(0.0, 0.0, 0.0);
+  var lineBoosterEdge = shapeBoosterEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.5, 1.5] });
+  var bloomBoosterEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterEdge).setOffset(-1.0, 3.0, 0.0);
   bloomBoosterEdge.anchor.set("rightArm", boosterRocketOffset);
   bloomBoosterEdge.color.set(color);
   bloomBoosterEdge.mirror = false;
   bloomBoosterEdge.setScale(16.0);
   //Middle
   var shapeBoosterMiddle = renderer.createResource("SHAPE", null);
-  var lineBoosterMiddle = shapeBoosterMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.0, 1.0] });
-  var bloomBoosterMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterMiddle).setOffset(0.0, 0.0, 0.0);
+  var lineBoosterMiddle = shapeBoosterMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.75, 0.75] });
+  var bloomBoosterMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterMiddle).setOffset(-1.0, 3.0, 0.0);
   bloomBoosterMiddle.anchor.set("rightArm", boosterRocketOffset);
   bloomBoosterMiddle.color.set(color);
   bloomBoosterMiddle.mirror = false;
   bloomBoosterMiddle.setScale(16.0);
   //Center
   var shapeBoosterCenter = renderer.createResource("SHAPE", null);
-  var lineBoosterCenter = shapeBoosterCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.5, 0.5] });
-  var bloomBoosterCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterCenter).setOffset(0.0, 0.0, 0.0);
+  var lineBoosterCenter = shapeBoosterCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.375, 0.375] });
+  var bloomBoosterCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeBoosterCenter).setOffset(-1.0, 3.0, 0.0);
   bloomBoosterCenter.anchor.set("rightArm", boosterRocketOffset);
   bloomBoosterCenter.color.set(color);
   bloomBoosterCenter.mirror = false;
@@ -1062,11 +1047,10 @@ function initRightArmBoosters(renderer, model, color) {
       boosterBooster.progress = boost;
       boosterBooster.speedScale = 0.5 * boost;
       boosterBooster.flutter = 1 + boost;
-      boosterBooster.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
       lineBoosterEdge.end.y = ((1 + f * boosterBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineBoosterMiddle.end.y = ((1 + f * boosterBooster.flutter / 4) * 1.25 * 1.25 / 8);
-      lineBoosterCenter.end.y = ((1 + f * boosterBooster.flutter / 4) * 1 * 1 / 8);
+      lineBoosterMiddle.end.y = ((1 + f * boosterBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      lineBoosterCenter.end.y = ((1 + f * boosterBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomBoosterEdge.progress = bloomBoosterEdge.opacity = flight;
       //Middle

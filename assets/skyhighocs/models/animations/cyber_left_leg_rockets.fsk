@@ -1,0 +1,10 @@
+{side_rockets} = curve(clamp({data_0}, 0, 1))
+
+;side rockets
+{part0_side_rockets} = if({side_rockets} != 1, animate2({side_rockets}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_side_rockets} = if({side_rockets} != 1, animate2({side_rockets}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_side_rockets} = if({side_rockets} != 1, animate2({side_rockets}, 1.0, 0.4, 0.2, 0.0), 1)
+{part3_side_rockets} = if({side_rockets} != 1, animate2({side_rockets}, 1.0, 0.5, 0.4, 0.0), 1)
+{part4_side_rockets} = if({side_rockets} != 1, animate2({side_rockets}, 1.0, 0.9, 0.1, 0.0), 1)
+
+{leftLeg_rotZ} -= 10'{part3_side_rockets} + 5'{part4_side_rockets}

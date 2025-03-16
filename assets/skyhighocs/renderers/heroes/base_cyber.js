@@ -1,5 +1,6 @@
 var cyber = implement("skyhighocs:external/cyber");
 var cyber_boosters = implement("skyhighocs:external/cyber_boosters");
+var cyber_beams = implement("skyhighocs:external/cyber_beams");
 var stuff = implement("skyhighheroes:external/stuff");
 
 var blank_model;
@@ -308,6 +309,11 @@ function initEffects(renderer) {
     return 0.999999;
   }).setCondition(entity => (entity.isWearingFullSuit() || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));
   
+  cyber_beams.initLeftArmBeams(renderer, getColor());
+  cyber_beams.initRightArmBeams(renderer, getColor());
+  cyber_beams.initHeadBeams(renderer, getColor());
+  cyber_beams.initBodyBeams(renderer, getColor());
+
   var nv_self = renderer.bindProperty("fiskheroes:night_vision");
   nv_self.fogStrength = 0.0;
   nv_self.firstPersonOnly = true;

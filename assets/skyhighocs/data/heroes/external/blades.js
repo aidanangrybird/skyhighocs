@@ -13,6 +13,7 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>bladeSystem<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 5) {
+        //Make this more like how I redid the rockets module
         switch(arguments[1]) {
           case "on":
             switch (arguments[2]) {

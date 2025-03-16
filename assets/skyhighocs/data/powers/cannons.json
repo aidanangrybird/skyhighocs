@@ -2,7 +2,7 @@
   "name": "Cannons",
   "value": 1,
   "modifiers": {
-    "fiskheroes:energy_projection|cannons_TFF": {
+    "fiskheroes:energy_projection|cannons_engproj_TFF": {
       "damageProfile": {
         "damage": 1.5,
         "types": {
@@ -20,7 +20,7 @@
         "SHOOT": "fiskheroes:cosmic_beam"
       }
     },
-    "fiskheroes:energy_projection|cannons_FTF": {
+    "fiskheroes:energy_projection|cannons_engproj_FTF": {
       "damageProfile": {
         "damage": 1.5,
         "types": {
@@ -38,7 +38,7 @@
         "SHOOT": "fiskheroes:cosmic_beam"
       }
     },
-    "fiskheroes:energy_projection|cannons_FFT": {
+    "fiskheroes:energy_projection|cannons_engproj_FFT": {
       "damageProfile": {
         "damage": 1.5,
         "types": {
@@ -56,7 +56,7 @@
         "SHOOT": "fiskheroes:cosmic_beam"
       }
     },
-    "fiskheroes:energy_projection|cannons_FTT": {
+    "fiskheroes:energy_projection|cannons_engproj_FTT": {
       "damageProfile": {
         "damage": 3.0,
         "types": {
@@ -74,7 +74,7 @@
         "SHOOT": "fiskheroes:cosmic_beam"
       }
     },
-    "fiskheroes:energy_projection|cannons_TFT": {
+    "fiskheroes:energy_projection|cannons_engproj_TFT": {
       "damageProfile": {
         "damage": 3.0,
         "types": {
@@ -92,7 +92,7 @@
         "SHOOT": "fiskheroes:cosmic_beam"
       }
     },
-    "fiskheroes:energy_projection|cannons_TTF": {
+    "fiskheroes:energy_projection|cannons_engproj_TTF": {
       "damageProfile": {
         "damage": 3.0,
         "types": {
@@ -110,7 +110,7 @@
         "SHOOT": "fiskheroes:cosmic_beam"
       }
     },
-    "fiskheroes:energy_projection|cannons_TTT": {
+    "fiskheroes:energy_projection|cannons_engproj_TTT": {
       "damageProfile": {
         "damage": 4.5,
         "types": {
@@ -128,7 +128,7 @@
         "SHOOT": "fiskheroes:cosmic_beam"
       }
     },
-    "fiskheroes:heat_vision|cannons_TFF": {
+    "fiskheroes:heat_vision|cannons_heat_TFF": {
       "damageProfile": {
         "damage": 1.5,
         "types": {
@@ -146,7 +146,7 @@
         "BEAM_AMBIENT": "fiskheroes:heat_vision"
       }
     },
-    "fiskheroes:heat_vision|cannons_FTF": {
+    "fiskheroes:heat_vision|cannons_heat_FTF": {
       "damageProfile": {
         "damage": 1.5,
         "types": {
@@ -164,7 +164,7 @@
         "BEAM_AMBIENT": "fiskheroes:heat_vision"
       }
     },
-    "fiskheroes:heat_vision|cannons_FFT": {
+    "fiskheroes:heat_vision|cannons_heat_FFT": {
       "damageProfile": {
         "damage": 1.5,
         "types": {
@@ -182,7 +182,7 @@
         "BEAM_AMBIENT": "fiskheroes:heat_vision"
       }
     },
-    "fiskheroes:heat_vision|cannons_FTT": {
+    "fiskheroes:heat_vision|cannons_heat_FTT": {
       "damageProfile": {
         "damage": 3.0,
         "types": {
@@ -200,7 +200,7 @@
         "BEAM_AMBIENT": "fiskheroes:heat_vision"
       }
     },
-    "fiskheroes:heat_vision|cannons_TFT": {
+    "fiskheroes:heat_vision|cannons_heat_TFT": {
       "damageProfile": {
         "damage": 3.0,
         "types": {
@@ -218,7 +218,7 @@
         "BEAM_AMBIENT": "fiskheroes:heat_vision"
       }
     },
-    "fiskheroes:heat_vision|cannons_TTF": {
+    "fiskheroes:heat_vision|cannons_heat_TTF": {
       "damageProfile": {
         "damage": 3.0,
         "types": {
@@ -236,7 +236,7 @@
         "BEAM_AMBIENT": "fiskheroes:heat_vision"
       }
     },
-    "fiskheroes:heat_vision|cannons_TTT": {
+    "fiskheroes:heat_vision|cannons_heat_TTT": {
       "damageProfile": {
         "damage": 4.5,
         "types": {
@@ -254,7 +254,7 @@
         "BEAM_AMBIENT": "fiskheroes:heat_vision"
       }
     },
-    "fiskheroes:charged_beam|cannons_TFF": {
+    "fiskheroes:charged_beam|cannons_charged_TFF": {
       "damageProfile": {
         "damage": 5.0,
         "types": {
@@ -279,7 +279,7 @@
         "CHARGE": "fiskheroes:mk85_beam_charge"
       }
     },
-    "fiskheroes:charged_beam|cannons_FTF": {
+    "fiskheroes:charged_beam|cannons_charged_FTF": {
       "damageProfile": {
         "damage": 5.0,
         "types": {
@@ -304,7 +304,7 @@
         "CHARGE": "fiskheroes:mk85_beam_charge"
       }
     },
-    "fiskheroes:charged_beam|cannons_FFT": {
+    "fiskheroes:charged_beam|cannons_charged_FFT": {
       "damageProfile": {
         "damage": 5.0,
         "types": {
@@ -329,7 +329,7 @@
         "CHARGE": "fiskheroes:mk85_beam_charge"
       }
     },
-    "fiskheroes:charged_beam|cannons_FTT": {
+    "fiskheroes:charged_beam|cannons_charged_FTT": {
       "damageProfile": {
         "damage": 5.0,
         "types": {
@@ -354,7 +354,7 @@
         "CHARGE": "fiskheroes:mk85_beam_charge"
       }
     },
-    "fiskheroes:charged_beam|cannons_TFT": {
+    "fiskheroes:charged_beam|cannons_charged_TFT": {
       "damageProfile": {
         "damage": 5.0,
         "types": {
@@ -379,7 +379,7 @@
         "CHARGE": "fiskheroes:mk85_beam_charge"
       }
     },
-    "fiskheroes:charged_beam|cannons_TTF": {
+    "fiskheroes:charged_beam|cannons_charged_TTF": {
       "damageProfile": {
         "damage": 10.0,
         "types": {
@@ -404,7 +404,7 @@
         "CHARGE": "fiskheroes:mk85_beam_charge"
       }
     },
-    "fiskheroes:charged_beam|cannons_TTT": {
+    "fiskheroes:charged_beam|cannons_charged_TTT": {
       "damageProfile": {
         "damage": 15.0,
         "types": {
@@ -465,5 +465,22 @@
       },
       "isToggle": false
     }
-  }
+  },
+  "hud": [
+    {
+      "type": "CIRCLE",
+      "color": "fiskheroes:charged_beam",
+      "data": "fiskheroes:beam_charge"
+    },
+    {
+      "type": "CIRCLE",
+      "color": "fiskheroes:heat_vision",
+      "data": "fiskheroes:heat_vision_timer"
+    },
+    {
+      "type": "CIRCLE",
+      "color": "fiskheroes:energy_projection",
+      "data": "fiskheroes:energy_projection_timer"
+    }
+  ]
 }

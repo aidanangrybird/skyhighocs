@@ -16,7 +16,7 @@ function initModule(system) {
           case "show":
             manager.setData(entity, "skyhighocs:dyn/mouth", true);
             break;
-          case "off":
+          case "hide":
             manager.setData(entity, "skyhighocs:dyn/mouth", false);
             break;
           case "help":
