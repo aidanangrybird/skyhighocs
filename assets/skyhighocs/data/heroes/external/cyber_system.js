@@ -224,7 +224,7 @@ function initSystem(moduleList, name, normalName, color) {
   var type13Specs = ["command", "commandHandler", "helpMessage", "keyBinds", "isKeyBindEnabled", "isModifierEnabled", "powers", "whenDisabled"];
   //Type 14 - cyber module
   /** @var type14Specs - Type 14 Specs */
-  var type14Specs = ["command", "commandHandler", "helpMessage", "isModifierEnabled", "initAttributeProfiles", "initDamageProfiles", "getAttributeProfile", "getDamageProfile", "powers", "whenDisabled"];
+  var type14Specs = ["command", "commandHandler", "helpMessage", "keyBinds", "isKeyBindEnabled", "isModifierEnabled", "initAttributeProfiles", "initDamageProfiles", "getAttributeProfile", "getDamageProfile", "powers", "whenDisabled"];
   /** @var modules - Array of modules */
   var modules = [];
   /** @var moduleNames - Module names */
@@ -453,6 +453,7 @@ function initSystem(moduleList, name, normalName, color) {
               });
               attributeProfileIndexes.push(modules.length-1);
               damageProfileIndexes.push(modules.length-1);
+              keyBindIndexes.push(modules.length-1);
               modifierIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
               if (moduleInit.hasOwnProperty("tickHandler")) {

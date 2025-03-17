@@ -6,9 +6,42 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/wings",
         "timerData": "skyhighocs:dyn/wings_timer",
+        "time": 20
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|wings_deploy": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/wings_deployed",
+        "timerData": "skyhighocs:dyn/wings_deploy_timer",
         "time": 60
       },
       "isToggle": true
+    },
+    "fiskheroes:gliding": {
+      "gliding": {
+        "speed": 1.3,
+        "lift": 1.5,
+        "gravity": 1.25,
+        "stall": 1.0
+      },
+      "isPowered": false,
+      "isControlled": false,
+      "canJumpActivate": false,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": false
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": false
+        }
+      },
+      "knockback": 0.75,
+      "soundEvents": {
+        "ENABLE": "fiskheroes:gliding"
+      }
     }
   }
 }

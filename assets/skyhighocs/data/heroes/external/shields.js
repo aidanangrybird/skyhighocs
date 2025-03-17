@@ -11,61 +11,117 @@ function initModule(system) {
     command: "shields",
     helpMessage: "<n>!shields <nh>-<n> Shields",
     disabledMessage: "<e>Module <eh>shields<e> is disabled!",
+    keyBinds: function (hero) {
+      hero.addKeyBind("SHIELDS", "Shields (None armed)", 2);
+      hero.addKeyBind("SHIELD", "Shields", 2);
+    },
+    isKeyBindEnabled: function (entity, keyBind) {
+      result = false;
+      if (!system.isModuleDisabled(entity, this.name)) {
+        var nbt = entity.getWornHelmet().nbt();
+        var left = nbt.getBoolean("shieldsLeft");
+        var right = nbt.getBoolean("shieldsRight");
+        if (keyBind == "SHIELDS") {
+          result = (!left && !right);
+        };
+        if (keyBind == "SHIELD") {
+          result = (left || right);
+        };
+      };
+      return result;
+    },
     commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 5) {
-        switch(arguments[1]) {
-          case "on":
+      if (arguments.length > 1 && arguments.length < 4) {
+        var nbt = entity.getWornHelmet().nbt();
+        switch (arguments[1]) {
+          case "arm":
             switch (arguments[2]) {
               case "left":
-                manager.setData(entity, "skyhighocs:dyn/shield_left_arm", true);
-                manager.setData(entity, "fiskheroes:shield", true);
+                manager.setBoolean(nbt, "shieldsLeft", true);
+                system.systemMessage(entity, "<s>Armed <sh>left arm<s> shield!");
                 break;
               case "right":
-                manager.setData(entity, "skyhighocs:dyn/shield_right_arm", true);
-                manager.setData(entity, "fiskheroes:shield", true);
+                manager.setBoolean(nbt, "shieldsRight", true);
+                system.systemMessage(entity, "<s>Armed <sh>right arm<s> shield!");
                 break;
               case "*":
-                manager.setData(entity, "skyhighocs:dyn/shield_left_arm", true);
-                manager.setData(entity, "skyhighocs:dyn/shield_right_arm", true);
-                manager.setData(entity, "fiskheroes:shield", true);
-                break;
-              case "help":
-                system.systemMessage(entity, "<n>Shield activate commands:");
-                system.systemMessage(entity, "<n>!shields on * <nh>-<n> Activates both shields");
-                system.systemMessage(entity, "<n>!shields on left <nh>-<n> Activates left shield");
-                system.systemMessage(entity, "<n>!shields on right <nh>-<n> Activates right shield");
-                system.systemMessage(entity, "<n>!shields on help <nh>-<n> Shows Shield activate commands");
-                system.systemMessage(entity, "<n>!shields help <nh>-<n> Shows Shields commands");
+                manager.setBoolean(nbt, "shieldsLeft", true);
+                manager.setBoolean(nbt, "shieldsRight", true);
+                system.systemMessage(entity, "<s>Armed <sh>all<s> shields!");
                 break;
             };
             break;
-          case "off":
+          case "disarm":
             switch (arguments[2]) {
               case "left":
-                manager.setData(entity, "skyhighocs:dyn/shield_left_arm", false);
+                manager.setBoolean(nbt, "shieldsLeft", false);
+                system.systemMessage(entity, "<s>Disarmed <sh>left arm<s> shield!");
                 break;
               case "right":
-                manager.setData(entity, "skyhighocs:dyn/shield_right_arm", false);
+                manager.setBoolean(nbt, "shieldsRight", false);
+                system.systemMessage(entity, "<s>Disarmed <sh>right arm<s> shield!");
                 break;
               case "*":
-                manager.setData(entity, "skyhighocs:dyn/shield_left_arm", false);
-                manager.setData(entity, "skyhighocs:dyn/shield_right_arm", false);
+                manager.setBoolean(nbt, "shieldsLeft", false);
+                manager.setBoolean(nbt, "shieldsRight", false);
+                system.systemMessage(entity, "<s>Disarmed <sh>all<s> shields!");
                 break;
-              case "help":
-                system.systemMessage(entity, "<n>Shield deactivate commands:");
-                system.systemMessage(entity, "<n>!shields on * <nh>-<n> Deactivates both shields");
-                system.systemMessage(entity, "<n>!shields on left <nh>-<n> Deactivates left shield");
-                system.systemMessage(entity, "<n>!shields on right <nh>-<n> Deactivates right shield");
-                system.systemMessage(entity, "<n>!shields on help <nh>-<n> Shows Shield deactivate commands");
-                system.systemMessage(entity, "<n>!shields help <nh>-<n> Shows Shields commands");
+            };
+            break;
+          case "deploy":
+            switch (arguments[2]) {
+              case "left":
+                manager.setData(entity, "skyhighocs:dyn/shield_left_arm_deployed", true);
+                system.systemMessage(entity, "<s>Deployed <sh>left arm<s> shield!");
+                break;
+              case "right":
+                manager.setData(entity, "skyhighocs:dyn/shield_right_arm_deployed", true);
+                system.systemMessage(entity, "<s>Deployed <sh>right arm<s> shield!");
+                break;
+              case "*":
+                manager.setData(entity, "skyhighocs:dyn/shield_left_arm_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/shield_right_arm_deployed", true);
+                system.systemMessage(entity, "<s>Deployed <sh>all<s> shields!");
+                break;
+            };
+            break;
+          case "retract":
+            switch (arguments[2]) {
+              case "left":
+                if (!nbt.getBoolean("shieldsLeft") && entity.getData("fiskheroes:shield_timer") > 0) {
+                  manager.setData(entity, "skyhighocs:dyn/shield_left_arm_deployed", false);
+                  system.systemMessage(entity, "<s>Retracted <sh>left arm<s> shield!");
+                } else {
+                  system.systemMessage(entity, "<e>Unable to retract armed <eh>left arm<e> shield!");
+                };
+                break;
+              case "right":
+                if (!nbt.getBoolean("shieldsRight") && entity.getData("fiskheroes:shield_timer") > 0) {
+                  manager.setData(entity, "skyhighocs:dyn/shield_right_arm_deployed", false);
+                  system.systemMessage(entity, "<s>Retracted <sh>right arm<s> shield!");
+                } else {
+                  system.systemMessage(entity, "<e>Unable to retract armed <eh>right arm<e> shield!");
+                };
+                break;
+              case "*":
+                manager.setData(entity, "skyhighocs:dyn/shield_left_arm_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/shield_right_arm_deployed", false);
+                system.systemMessage(entity, "<s>Retracted <sh>all<s> shields!");
                 break;
             };
             break;
           case "help":
             system.systemMessage(entity, "<n>Shields commands:");
-            system.systemMessage(entity, "<n>!shields on help <nh>-<n> Shows Shield activate commands");
-            system.systemMessage(entity, "<n>!shields off help <nh>-<n> Shows Shield deactivate commands");
+            system.systemMessage(entity, "<n>!shields arm <left|right|*> <nh>-<n> Arms shields");
+            system.systemMessage(entity, "<n>!shields disarm <left|right|*> <nh>-<n> Disarms shields");
+            system.systemMessage(entity, "<n>!shields deploy <left|right|*> <nh>-<n> Deploys shields");
+            system.systemMessage(entity, "<n>!shields retract <left|right|*> <nh>-<n> Retracts disarmed shields");
             system.systemMessage(entity, "<n>!shields help <nh>-<n> Shows shields commands");
+            break;
+          case "status":
+            system.systemMessage(entity, "<n>Shields status:");
+            system.systemMessage(entity, "<n>Left: <nh>" + (nbt.getBoolean("shieldsLeft") ? "ARMED" : "DISARMED"));
+            system.systemMessage(entity, "<n>Right: <nh>" + (nbt.getBoolean("shieldsRight") ? "ARMED" : "DISARMED"));
             break;
           default:
             system.systemMessage(entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shields help<e> for a list of commands!");
@@ -77,8 +133,11 @@ function initModule(system) {
     },
     isModifierEnabled: function (entity, modifier) {
       result = false;
-      if (!system.isModuleDisabled(entity, this.name)) {
-        if (modifier.name() == "fiskheroes:shield") {
+      var nbt = entity.getWornHelmet().nbt();
+      var left = (nbt.getBoolean("shieldsLeft")) ? "T" : "F";
+      var right = (nbt.getBoolean("shieldsRight")) ? "T" : "F";
+      if (modifier.name() == "fiskheroes:shield") {
+        if (modifier.id() == "shields_" + left + right) {
           result = true;
         };
       };
@@ -106,33 +165,45 @@ function initModule(system) {
     initAttributeProfiles: function (hero) {
       hero.addAttributeProfile("SHIELD_LEFT_ARM", function (profile) {
         profile.inheritDefaults();
-        profile.addAttribute("SPRINT_SPEED", 0.5, 1);
-        profile.addAttribute("KNOCKBACK", 5.0, 0);
-        profile.addAttribute("PUNCH_DAMAGE", 9.5, 0);
+        profile.addAttribute("BASE_SPEED", -0.75, 1);
+        profile.addAttribute("SPRINT_SPEED", 0.0, 0);
+        profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+        profile.addAttribute("JUMP_HEIGHT", -1.0, 1);
+        profile.addAttribute("STEP_HEIGHT", -1.0, 1);
+        profile.addAttribute("KNOCKBACK", 0.0, 0);
+        profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
       });
       hero.addAttributeProfile("SHIELD_RIGHT_ARM", function (profile) {
         profile.inheritDefaults();
-        profile.addAttribute("SPRINT_SPEED", 0.5, 1);
-        profile.addAttribute("KNOCKBACK", 5.0, 0);
-        profile.addAttribute("PUNCH_DAMAGE", 9.5, 0);
+        profile.addAttribute("BASE_SPEED", -0.75, 1);
+        profile.addAttribute("SPRINT_SPEED", 0.0, 0);
+        profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+        profile.addAttribute("JUMP_HEIGHT", -1.0, 1);
+        profile.addAttribute("STEP_HEIGHT", -1.0, 1);
+        profile.addAttribute("KNOCKBACK", 0.0, 0);
+        profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
       });
       hero.addAttributeProfile("SHIELD_BOTH_ARMS", function (profile) {
         profile.inheritDefaults();
-        profile.addAttribute("SPRINT_SPEED", 0.5, 1);
-        profile.addAttribute("KNOCKBACK", 5.0, 0);
-        profile.addAttribute("PUNCH_DAMAGE", 14.5, 0);
+        profile.addAttribute("BASE_SPEED", -0.75, 1);
+        profile.addAttribute("SPRINT_SPEED", 0.0, 0);
+        profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+        profile.addAttribute("JUMP_HEIGHT", -1.0, 1);
+        profile.addAttribute("STEP_HEIGHT", -1.0, 1);
+        profile.addAttribute("KNOCKBACK", 0.0, 0);
+        profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
       });
     },
     getAttributeProfile: function (entity) {
       var result = null;
       if (!system.isModuleDisabled(entity, this.name)) {
-        if (entity.getData("skyhighocs:dyn/shield_left_arm_timer") == 1) {
+        if (entity.getData("fiskheroes:shield_blocking_timer") > 0 && entity.getData("skyhighocs:dyn/shield_left_arm_timer") == 1) {
           result = "SHIELD_LEFT_ARM";
         };
-        if (entity.getData("skyhighocs:dyn/shield_right_arm_timer") == 1) {
+        if (entity.getData("fiskheroes:shield_blocking_timer") > 0 && entity.getData("skyhighocs:dyn/shield_right_arm_timer") == 1) {
           result = "SHIELD_RIGHT_ARM";
         };
-        if (entity.getData("skyhighocs:dyn/shield_left_arm_timer") == 1 && entity.getData("skyhighocs:dyn/shield_right_arm_timer") == 1) {
+        if (entity.getData("fiskheroes:shield_blocking_timer") > 0 && entity.getData("skyhighocs:dyn/shield_left_arm_timer") == 1 && entity.getData("skyhighocs:dyn/shield_right_arm_timer") == 1) {
           result = "SHIELD_BOTH_ARMS";
         };
       };
@@ -141,6 +212,17 @@ function initModule(system) {
     whenDisabled: function (entity, manager) {
       manager.setData(entity, "skyhighocs:dyn/shield_left_arm", false);
       manager.setData(entity, "skyhighocs:dyn/shield_right_arm", false);
+      manager.setData(entity, "skyhighocs:dyn/shield_left_arm_deployed", false);
+      manager.setData(entity, "skyhighocs:dyn/shield_right_arm_deployed", false);
+    },
+    tickHandler: function (entity, manager) {
+      var nbt = entity.getWornHelmet().nbt();
+      var left = nbt.getBoolean("shieldsLeft") && entity.getData("fiskheroes:shield");
+      var right = nbt.getBoolean("shieldsRight") && entity.getData("fiskheroes:shield");
+      if (entity.getData("fiskheroes:shield_timer") > 0) {
+        manager.setData(entity, "skyhighocs:dyn/shield_left_arm", left);
+        manager.setData(entity, "skyhighocs:dyn/shield_right_arm", right);
+      };
     }
   };
 };

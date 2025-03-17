@@ -2,259 +2,7 @@
   "name": "Cannons",
   "value": 1,
   "modifiers": {
-    "fiskheroes:energy_projection|cannons_engproj_TFF": {
-      "damageProfile": {
-        "damage": 1.5,
-        "types": {
-          "ENERGY": 1.0,
-          "FIRE": 0.5
-        },
-        "properties": {
-          "HEAT_TRANSFER": 80
-        }
-      },
-      "range": 32.0,
-      "radius": 0.1,
-      "canDoGriefing": true,
-      "soundEvents": {
-        "SHOOT": "fiskheroes:cosmic_beam"
-      }
-    },
-    "fiskheroes:energy_projection|cannons_engproj_FTF": {
-      "damageProfile": {
-        "damage": 1.5,
-        "types": {
-          "ENERGY": 1.0,
-          "FIRE": 0.5
-        },
-        "properties": {
-          "HEAT_TRANSFER": 80
-        }
-      },
-      "range": 32.0,
-      "radius": 0.1,
-      "canDoGriefing": true,
-      "soundEvents": {
-        "SHOOT": "fiskheroes:cosmic_beam"
-      }
-    },
-    "fiskheroes:energy_projection|cannons_engproj_FFT": {
-      "damageProfile": {
-        "damage": 1.5,
-        "types": {
-          "ENERGY": 1.0,
-          "FIRE": 0.5
-        },
-        "properties": {
-          "HEAT_TRANSFER": 80
-        }
-      },
-      "range": 32.0,
-      "radius": 0.1,
-      "canDoGriefing": true,
-      "soundEvents": {
-        "SHOOT": "fiskheroes:cosmic_beam"
-      }
-    },
-    "fiskheroes:energy_projection|cannons_engproj_FTT": {
-      "damageProfile": {
-        "damage": 3.0,
-        "types": {
-          "ENERGY": 1.0,
-          "FIRE": 0.5
-        },
-        "properties": {
-          "HEAT_TRANSFER": 80
-        }
-      },
-      "range": 32.0,
-      "radius": 0.1,
-      "canDoGriefing": true,
-      "soundEvents": {
-        "SHOOT": "fiskheroes:cosmic_beam"
-      }
-    },
-    "fiskheroes:energy_projection|cannons_engproj_TFT": {
-      "damageProfile": {
-        "damage": 3.0,
-        "types": {
-          "ENERGY": 1.0,
-          "FIRE": 0.5
-        },
-        "properties": {
-          "HEAT_TRANSFER": 80
-        }
-      },
-      "range": 32.0,
-      "radius": 0.1,
-      "canDoGriefing": true,
-      "soundEvents": {
-        "SHOOT": "fiskheroes:cosmic_beam"
-      }
-    },
-    "fiskheroes:energy_projection|cannons_engproj_TTF": {
-      "damageProfile": {
-        "damage": 3.0,
-        "types": {
-          "ENERGY": 1.0,
-          "FIRE": 0.5
-        },
-        "properties": {
-          "HEAT_TRANSFER": 80
-        }
-      },
-      "range": 32.0,
-      "radius": 0.1,
-      "canDoGriefing": true,
-      "soundEvents": {
-        "SHOOT": "fiskheroes:cosmic_beam"
-      }
-    },
-    "fiskheroes:energy_projection|cannons_engproj_TTT": {
-      "damageProfile": {
-        "damage": 4.5,
-        "types": {
-          "ENERGY": 1.0,
-          "FIRE": 0.5
-        },
-        "properties": {
-          "HEAT_TRANSFER": 80
-        }
-      },
-      "range": 32.0,
-      "radius": 0.1,
-      "canDoGriefing": true,
-      "soundEvents": {
-        "SHOOT": "fiskheroes:cosmic_beam"
-      }
-    },
-    "fiskheroes:heat_vision|cannons_heat_TFF": {
-      "damageProfile": {
-        "damage": 1.5,
-        "types": {
-          "FIRE": 1.0
-        },
-        "properties": {
-          "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 140
-        }
-      },
-      "range": 32.0,
-      "radius": 0.1,
-      "canDoGriefing": true,
-      "soundEvents": {
-        "BEAM_AMBIENT": "fiskheroes:heat_vision"
-      }
-    },
-    "fiskheroes:heat_vision|cannons_heat_FTF": {
-      "damageProfile": {
-        "damage": 1.5,
-        "types": {
-          "FIRE": 1.0
-        },
-        "properties": {
-          "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 140
-        }
-      },
-      "range": 32.0,
-      "radius": 0.1,
-      "canDoGriefing": true,
-      "soundEvents": {
-        "BEAM_AMBIENT": "fiskheroes:heat_vision"
-      }
-    },
-    "fiskheroes:heat_vision|cannons_heat_FFT": {
-      "damageProfile": {
-        "damage": 1.5,
-        "types": {
-          "FIRE": 1.0
-        },
-        "properties": {
-          "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 140
-        }
-      },
-      "range": 32.0,
-      "radius": 0.1,
-      "canDoGriefing": true,
-      "soundEvents": {
-        "BEAM_AMBIENT": "fiskheroes:heat_vision"
-      }
-    },
-    "fiskheroes:heat_vision|cannons_heat_FTT": {
-      "damageProfile": {
-        "damage": 3.0,
-        "types": {
-          "FIRE": 1.0
-        },
-        "properties": {
-          "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 140
-        }
-      },
-      "range": 32.0,
-      "radius": 0.1,
-      "canDoGriefing": true,
-      "soundEvents": {
-        "BEAM_AMBIENT": "fiskheroes:heat_vision"
-      }
-    },
-    "fiskheroes:heat_vision|cannons_heat_TFT": {
-      "damageProfile": {
-        "damage": 3.0,
-        "types": {
-          "FIRE": 1.0
-        },
-        "properties": {
-          "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 140
-        }
-      },
-      "range": 32.0,
-      "radius": 0.1,
-      "canDoGriefing": true,
-      "soundEvents": {
-        "BEAM_AMBIENT": "fiskheroes:heat_vision"
-      }
-    },
-    "fiskheroes:heat_vision|cannons_heat_TTF": {
-      "damageProfile": {
-        "damage": 3.0,
-        "types": {
-          "FIRE": 1.0
-        },
-        "properties": {
-          "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 140
-        }
-      },
-      "range": 32.0,
-      "radius": 0.1,
-      "canDoGriefing": true,
-      "soundEvents": {
-        "BEAM_AMBIENT": "fiskheroes:heat_vision"
-      }
-    },
-    "fiskheroes:heat_vision|cannons_heat_TTT": {
-      "damageProfile": {
-        "damage": 4.5,
-        "types": {
-          "FIRE": 1.0
-        },
-        "properties": {
-          "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 140
-        }
-      },
-      "range": 32.0,
-      "radius": 0.1,
-      "canDoGriefing": true,
-      "soundEvents": {
-        "BEAM_AMBIENT": "fiskheroes:heat_vision"
-      }
-    },
-    "fiskheroes:charged_beam|cannons_charged_TFF": {
+    "fiskheroes:charged_beam|cannons_TFF": {
       "damageProfile": {
         "damage": 5.0,
         "types": {
@@ -263,11 +11,11 @@
         },
         "properties": {
           "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 20
+          "HEAT_TRANSFER": 360
         }
       },
       "chargeTime": 20,
-      "duration": 120,
+      "duration": 3600,
       "cooldownTime": 20,
       "range": 32.0,
       "radius": 0.6,
@@ -279,7 +27,7 @@
         "CHARGE": "fiskheroes:mk85_beam_charge"
       }
     },
-    "fiskheroes:charged_beam|cannons_charged_FTF": {
+    "fiskheroes:charged_beam|cannons_FTF": {
       "damageProfile": {
         "damage": 5.0,
         "types": {
@@ -288,11 +36,11 @@
         },
         "properties": {
           "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 20
+          "HEAT_TRANSFER": 360
         }
       },
       "chargeTime": 20,
-      "duration": 120,
+      "duration": 3600,
       "cooldownTime": 20,
       "range": 32.0,
       "radius": 0.6,
@@ -304,7 +52,7 @@
         "CHARGE": "fiskheroes:mk85_beam_charge"
       }
     },
-    "fiskheroes:charged_beam|cannons_charged_FFT": {
+    "fiskheroes:charged_beam|cannons_FFT": {
       "damageProfile": {
         "damage": 5.0,
         "types": {
@@ -313,11 +61,11 @@
         },
         "properties": {
           "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 20
+          "HEAT_TRANSFER": 360
         }
       },
       "chargeTime": 20,
-      "duration": 120,
+      "duration": 3600,
       "cooldownTime": 20,
       "range": 32.0,
       "radius": 0.6,
@@ -329,7 +77,7 @@
         "CHARGE": "fiskheroes:mk85_beam_charge"
       }
     },
-    "fiskheroes:charged_beam|cannons_charged_FTT": {
+    "fiskheroes:charged_beam|cannons_FTT": {
       "damageProfile": {
         "damage": 5.0,
         "types": {
@@ -338,11 +86,11 @@
         },
         "properties": {
           "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 20
+          "HEAT_TRANSFER": 360
         }
       },
       "chargeTime": 20,
-      "duration": 120,
+      "duration": 3600,
       "cooldownTime": 20,
       "range": 32.0,
       "radius": 0.6,
@@ -354,7 +102,7 @@
         "CHARGE": "fiskheroes:mk85_beam_charge"
       }
     },
-    "fiskheroes:charged_beam|cannons_charged_TFT": {
+    "fiskheroes:charged_beam|cannons_TFT": {
       "damageProfile": {
         "damage": 5.0,
         "types": {
@@ -363,11 +111,11 @@
         },
         "properties": {
           "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 20
+          "HEAT_TRANSFER": 360
         }
       },
       "chargeTime": 20,
-      "duration": 120,
+      "duration": 3600,
       "cooldownTime": 20,
       "range": 32.0,
       "radius": 0.6,
@@ -379,7 +127,7 @@
         "CHARGE": "fiskheroes:mk85_beam_charge"
       }
     },
-    "fiskheroes:charged_beam|cannons_charged_TTF": {
+    "fiskheroes:charged_beam|cannons_TTF": {
       "damageProfile": {
         "damage": 10.0,
         "types": {
@@ -388,11 +136,11 @@
         },
         "properties": {
           "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 20
+          "HEAT_TRANSFER": 360
         }
       },
       "chargeTime": 20,
-      "duration": 120,
+      "duration": 3600,
       "cooldownTime": 20,
       "range": 32.0,
       "radius": 0.6,
@@ -404,7 +152,7 @@
         "CHARGE": "fiskheroes:mk85_beam_charge"
       }
     },
-    "fiskheroes:charged_beam|cannons_charged_TTT": {
+    "fiskheroes:charged_beam|cannons_TTT": {
       "damageProfile": {
         "damage": 15.0,
         "types": {
@@ -413,11 +161,11 @@
         },
         "properties": {
           "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 20
+          "HEAT_TRANSFER": 360
         }
       },
       "chargeTime": 20,
-      "duration": 120,
+      "duration": 3600,
       "cooldownTime": 20,
       "range": 32.0,
       "radius": 0.6,
@@ -430,40 +178,68 @@
       }
     },
     "fiskheroes:transformation|cannon_left_arm": {
-      "key": "LEFT_ARM_CANNON",
         "transformation": {
           "toggleData": "skyhighocs:dyn/cannon_left_arm",
           "timerData": "skyhighocs:dyn/cannon_left_arm_timer",
-          "time": 60
+          "time": 20
         },
-        "isToggle": false
+        "isToggle": true
     },
     "fiskheroes:transformation|cannon_right_arm": {
-      "key": "RIGHT_ARM_CANNON",
         "transformation": {
           "toggleData": "skyhighocs:dyn/cannon_right_arm",
           "timerData": "skyhighocs:dyn/cannon_right_arm_timer",
-          "time": 60
+          "time": 20
         },
-        "isToggle": false
+        "isToggle": true
     },
     "fiskheroes:transformation|cannon_body": {
-      "key": "BODY_CANNONS",
       "transformation": {
         "toggleData": "skyhighocs:dyn/cannon_body",
         "timerData": "skyhighocs:dyn/cannon_body_timer",
-        "time": 60
+        "time": 20
       },
-      "isToggle": false
+      "isToggle": true
     },
     "fiskheroes:transformation|cannon_eyes": {
-      "key": "EYE_CANNONS",
       "transformation": {
         "toggleData": "skyhighocs:dyn/cannon_eyes",
         "timerData": "skyhighocs:dyn/cannon_eyes_timer",
+        "time": 20
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|cannon_left_arm_deployed": {
+        "transformation": {
+          "toggleData": "skyhighocs:dyn/cannon_left_arm_deployed",
+          "timerData": "skyhighocs:dyn/cannon_left_arm_deploy_timer",
+          "time": 60
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|cannon_right_arm_deployed": {
+        "transformation": {
+          "toggleData": "skyhighocs:dyn/cannon_right_arm_deployed",
+          "timerData": "skyhighocs:dyn/cannon_right_arm_deploy_timer",
+          "time": 60
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|cannon_body_deployed": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/cannon_body_deployed",
+        "timerData": "skyhighocs:dyn/cannon_body_deploy_timer",
         "time": 60
       },
-      "isToggle": false
+      "isToggle": true
+    },
+    "fiskheroes:transformation|cannon_eyes_deployed": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/cannon_eyes_deployed",
+        "timerData": "skyhighocs:dyn/cannon_eyes_deploy_timer",
+        "time": 60
+      },
+      "isToggle": true
     }
   },
   "hud": [

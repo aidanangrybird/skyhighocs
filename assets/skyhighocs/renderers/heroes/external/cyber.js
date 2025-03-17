@@ -101,40 +101,44 @@ function addHoverAnimation(renderer, name, value, dataLoader) {
   return anim;
 };
 
-//Astro Animations
+//Cyber Animations
 function initCyberAnimations(renderer) {
   addAnimation(renderer, "cyber.LEFT_ARM_BLADE", "skyhighocs:cyber_left_arm_blade").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_timer"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_timer") + entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_deploy_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_stealth_timer"));
   });
   addAnimation(renderer, "cyber.RIGHT_ARM_BLADE", "skyhighocs:cyber_right_arm_blade").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_timer"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_timer") + entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_deploy_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_stealth_timer"));
   });
-  addAnimationWithData(renderer, "cyber.LEFT_LEG_ROCKETS", "skyhighocs:cyber_left_leg_rockets", "skyhighocs:dyn/rocket_left_leg_timer");
-  addAnimationWithData(renderer, "cyber.RIGHT_LEG_ROCKETS", "skyhighocs:cyber_right_leg_rockets", "skyhighocs:dyn/rocket_right_leg_timer");
-  addAnimationWithData(renderer, "cyber.WINGS", "skyhighocs:cyber_wings", "skyhighocs:dyn/wings_timer");
-  //Aiming
-  addAnimationWithData(renderer, "cyber.AIMING", "skyhighheroes:astro_aim", "fiskheroes:aiming_timer")
-    .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
-    .priority = 5;
-  //Dual Cannons
-  addAnimationWithData(renderer, "cyber.DUAL_CANNONS", "skyhighheroes:astro_dual_aim", "fiskheroes:energy_projection_timer")
-    .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
-    .priority = 5;
+  addAnimation(renderer, "cyber.LEFT_LEG_ROCKETS", "skyhighocs:cyber_left_leg_rockets").setData((entity, data) => {
+    data.load(entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer") + entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_deploy_timer"));
+  });
+  addAnimation(renderer, "cyber.RIGHT_LEG_ROCKETS", "skyhighocs:cyber_right_leg_rockets").setData((entity, data) => {
+    data.load(entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer") + entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_deploy_timer"));
+  });
+  addAnimation(renderer, "cyber.WINGS", "skyhighocs:cyber_wings").setData((entity, data) => {
+    data.load(entity.getInterpolatedData("skyhighocs:dyn/wings_timer") + entity.getInterpolatedData("skyhighocs:dyn/wings_deploy_timer"));
+  });
+  addAnimation(renderer, "cyber.LEFT_ARM_AIM", "skyhighocs:cyber_left_arm_aim").setData((entity, data) => {
+    data.load(entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_timer"));
+  });
+  addAnimation(renderer, "cyber.RIGHT_ARM_AIM", "skyhighocs:cyber_right_arm_aim").setData((entity, data) => {
+    data.load(entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_timer"));
+  });
   //Flight
-  addFlightAnimationWithLanding(renderer, "cyber.FLIGHT", "skyhighheroes:flight/astro_flight.anim.json");
+  addFlightAnimationWithLanding(renderer, "cyber.FLIGHT", "skyhighocs:cyber_flight.anim.json");
   //Landing
-  addAnimationWithData(renderer, "cyber.LAND", "skyhighheroes:astro_landing", "skyhighheroes:dyn/superhero_landing_timer")
+  addAnimationWithData(renderer, "cyber.LAND", "skyhighocs:cyber_landing", "skyhighheroes:dyn/superhero_landing_timer")
     .priority = -8;
-  addAnimationWithData(renderer, "cyber.LAND_BOOST", "skyhighheroes:astro_boosting_landing", "skyhighheroes:dyn/superhero_boosting_landing_timer")
+  addAnimationWithData(renderer, "cyber.LAND_BOOST", "skyhighocs:cyber_boosting_landing", "skyhighheroes:dyn/superhero_boosting_landing_timer")
     .priority = -8;
-  addAnimationWithData(renderer, "cyber.ROLL", "skyhighheroes:flight/astro_barrel_roll", "fiskheroes:barrel_roll_timer")
-  addHoverAnimation(renderer, "cyber.HOVER", "skyhighheroes:astro_hover");
+  addAnimationWithData(renderer, "cyber.ROLL", "skyhighocs:cyber_barrel_roll", "fiskheroes:barrel_roll_timer")
+  addHoverAnimation(renderer, "cyber.HOVER", "skyhighocs:cyber_hover");
   addAnimationWithData(renderer, "cyber.POWER", "skyhighocs:cyber_powering_down", "skyhighocs:dyn/powering_down_timer")
     .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighocs:dyn/powering_down_timer") > 0))
     .priority = -10;
-  addAnimation(renderer, "cyber.POWERED_DOWN", "skyhighheroes:astro_powered_down")
+  addAnimation(renderer, "cyber.POWERED_DOWN", "skyhighocs:cyber_powering_down")
     .setData((entity, data) => data.load(1.0))
     .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighocs:dyn/powering_down_timer") == 1))
     .priority = -10;

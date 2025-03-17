@@ -2,11 +2,14 @@
   "name": "Blades",
   "value": 1,
   "modifiers": {
+    "fiskheroes:blade": {
+      "isToggle": true
+    },
     "fiskheroes:transformation|blade_left_arm": {
       "transformation": {
         "toggleData": "skyhighocs:dyn/blade_left_arm",
         "timerData": "skyhighocs:dyn/blade_left_arm_timer",
-        "time": 60
+        "time": 20
       },
       "isToggle": true
     },
@@ -14,6 +17,22 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/blade_right_arm",
         "timerData": "skyhighocs:dyn/blade_right_arm_timer",
+        "time": 20
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|blade_left_arm_deployed": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/blade_left_arm_deployed",
+        "timerData": "skyhighocs:dyn/blade_left_arm_deploy_timer",
+        "time": 60
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|blade_right_arm_deployed": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/blade_right_arm_deployed",
+        "timerData": "skyhighocs:dyn/blade_right_arm_deploy_timer",
         "time": 60
       },
       "isToggle": true
@@ -22,7 +41,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/blade_left_arm_stealth",
         "timerData": "skyhighocs:dyn/blade_left_arm_stealth_timer",
-        "time": 60
+        "time": 10
       },
       "isToggle": true
     },
@@ -30,7 +49,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/blade_right_arm_stealth",
         "timerData": "skyhighocs:dyn/blade_right_arm_stealth_timer",
-        "time": 60
+        "time": 10
       },
       "isToggle": true
     }

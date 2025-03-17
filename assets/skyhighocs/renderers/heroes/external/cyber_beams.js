@@ -25,25 +25,13 @@ function initLeftArmBeams(renderer, color) {
   var position = [{ "firstPerson": [4.5, 3.75, -11.4], "offset": [0.5, 12.9, 0.0], "size": [2.0, 2.0] }];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:cannons_charged_beam", "leftArm", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getInteger("cannonsArms") == 0);
-  var heatVision = bindBeam(renderer, "fiskheroes:heat_vision", "skyhighocs:cannons_heat_vision", "leftArm", color, position);
-  heatVision.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_heat_vision"));
-  heatVision.setCondition(entity => entity.getWornHelmet().nbt().getInteger("cannonsArms") == 1);
-  var energyProjection = bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:cannons_energy_projection", "leftArm", color, position);
-  energyProjection.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
-  energyProjection.setCondition(entity => entity.getWornHelmet().nbt().getInteger("cannonsArms") == 2);
+  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms"));
 };
 function initRightArmBeams(renderer, color) {
   var position = [{ "firstPerson": [-4.5, 3.75, -11.4], "offset": [-0.5, 12.9, 0.0], "size": [2.0, 2.0] }];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:cannons_charged_beam", "rightArm", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getInteger("cannonsArms") == 0);
-  var heatVision = bindBeam(renderer, "fiskheroes:heat_vision", "skyhighocs:cannons_heat_vision", "rightArm", color, position);
-  heatVision.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_heat_vision"));
-  heatVision.setCondition(entity => entity.getWornHelmet().nbt().getInteger("cannonsArms") == 1);
-  var energyProjection = bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:cannons_energy_projection", "rightArm", color, position);
-  energyProjection.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
-  energyProjection.setCondition(entity => entity.getWornHelmet().nbt().getInteger("cannonsArms") == 2);
+  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms"));
 };
 
 function initHeadBeams(renderer, color) {
@@ -53,13 +41,7 @@ function initHeadBeams(renderer, color) {
   ];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:cannons_charged_beam", "head", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getInteger("cannonsEyes") == 0);
-  var heatVision = bindBeam(renderer, "fiskheroes:heat_vision", "skyhighocs:cannons_heat_vision", "head", color, position);
-  heatVision.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_heat_vision"));
-  heatVision.setCondition(entity => entity.getWornHelmet().nbt().getInteger("cannonsEyes") == 1);
-  var energyProjection = bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:cannons_energy_projection", "head", color, position);
-  energyProjection.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
-  energyProjection.setCondition(entity => entity.getWornHelmet().nbt().getInteger("cannonsEyes") == 2);
+  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsEyes"));
 };
 
 function initBodyBeams(renderer, color) {
@@ -69,11 +51,5 @@ function initBodyBeams(renderer, color) {
   ];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:cannons_charged_beam", "body", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getInteger("cannonsBody") == 0);
-  var heatVision = bindBeam(renderer, "fiskheroes:heat_vision", "skyhighocs:cannons_heat_vision", "body", color, position);
-  heatVision.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_heat_vision"));
-  heatVision.setCondition(entity => entity.getWornHelmet().nbt().getInteger("cannonsBody") == 1);
-  var energyProjection = bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:cannons_energy_projection", "body", color, position);
-  energyProjection.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
-  energyProjection.setCondition(entity => entity.getWornHelmet().nbt().getInteger("cannonsBody") == 2);
+  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsBody"));
 };
