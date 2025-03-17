@@ -28,8 +28,6 @@ loadTextures({
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  //cyber.initBeams(renderer, 0xFF8900);
-  //stuff.bindSpeedTrail(renderer, "skyhighocs:cyber_vortex_speed");
 };
 
 function getID() {

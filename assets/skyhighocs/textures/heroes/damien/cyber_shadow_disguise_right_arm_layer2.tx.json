@@ -1,0 +1,12 @@
+{
+  "texture": {
+    "in": "skyhighocs:damien/cyber_shadow_disguise",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighocs:cyber_right_arm_layer2"
+      }
+    ],
+    "out": "skyhighocs:generated/cyber_shadow_disguise_right_arm_layer2"
+  }
+}
