@@ -1,0 +1,12 @@
+{
+  "texture": {
+    "in": "skyhighocs:ace/cyber_flame_disguise",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighocs:cyber_left_arm_layer2"
+      }
+    ],
+    "out": "skyhighocs:generated/cyber_flame_disguise_left_arm_layer2"
+  }
+}
