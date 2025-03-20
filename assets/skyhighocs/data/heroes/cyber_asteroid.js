@@ -36,7 +36,7 @@ function init(hero) {
   hero.setAliases("cyber_asteroid");
   hero.setName("Cyber Asteroid");
   hero.setTier(10);
-  hero.setHelmet("Brain");
+  hero.setHelmet("Cybernetic Brain");
   hero.setVersion("OC");
 
   cyberOS.keyBinds(hero);
@@ -70,6 +70,9 @@ function init(hero) {
       return true;
     };
     if (modifier.name() == "fiskheroes:damage_immunity") {
+      return true;
+    };
+    if (modifier.name() == "fiskheroes:projectile_immunity") {
       return true;
     };
     if (modifier.name() == "fiskheroes:transformation") {

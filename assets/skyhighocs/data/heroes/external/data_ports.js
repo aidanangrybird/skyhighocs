@@ -13,16 +13,18 @@ function initModule(system) {
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 3) {
         switch (arguments[1]) {
-          case "show":
+          case "deploy":
             manager.setData(entity, "skyhighocs:dyn/ports", true);
+            system.systemMessage(entity, "<n>Exposing data ports!");
             break;
-          case "hide":
+          case "retract":
             manager.setData(entity, "skyhighocs:dyn/ports", false);
+            system.systemMessage(entity, "<n>Retracting data ports!");
             break;
           case "help":
             system.systemMessage(entity, "<n>Ports commands:");
-            system.systemMessage(entity, "<n>!ports on <nh>-<n> Exposes data ports");
-            system.systemMessage(entity, "<n>!ports off <nh>-<n> Hides data ports");
+            system.systemMessage(entity, "<n>!ports deploy <nh>-<n> Exposes data ports");
+            system.systemMessage(entity, "<n>!ports retract <nh>-<n> Hides data ports");
             system.systemMessage(entity, "<n>!ports help <nh>-<n> Shows dataPorts commands");
             break;
           default:

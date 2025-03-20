@@ -38,20 +38,26 @@ function initModule(system) {
         switch (arguments[1]) {
           case "arm":
             manager.setBoolean(nbt, "mouth", true);
+            system.systemMessage(entity, "<n>Armed mouth!");
             break;
           case "disarm":
             manager.setBoolean(nbt, "mouth", false);
+            system.systemMessage(entity, "<n>Disarmed mouth!");
             break;
-          case "show":
+          case "deploy":
             manager.setData(entity, "skyhighocs:dyn/mouth_deployed", true);
+            system.systemMessage(entity, "<n>Deployed mouth!");
             break;
-          case "hide":
+          case "retract":
             manager.setData(entity, "skyhighocs:dyn/mouth_deployed", false);
+            system.systemMessage(entity, "<n>Retracted mouth!");
             break;
           case "help":
             system.systemMessage(entity, "<n>Voice Synthesizer commands:");
-            system.systemMessage(entity, "<n>!vs show <nh>-<n> Shows mouth");
-            system.systemMessage(entity, "<n>!vs hide <nh>-<n> Hides mouth");
+            system.systemMessage(entity, "<n>!vs deploy <nh>-<n> Shows mouth");
+            system.systemMessage(entity, "<n>!vs arm <nh>-<n> Arms mouth");
+            system.systemMessage(entity, "<n>!vs disarm <nh>-<n> Disarms mouth");
+            system.systemMessage(entity, "<n>!vs retract <nh>-<n> Hides mouth");
             system.systemMessage(entity, "<n>!vs help <nh>-<n> Shows voiceSynthesizer commands");
             break;
           default:

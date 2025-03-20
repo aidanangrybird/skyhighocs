@@ -17,11 +17,11 @@ function initModule(system) {
             switch (arguments[2]) {
               case "disguise":
                 manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise", true);
-                system.systemMessage(entity, "<n>Enabled <nh>disguise<n!");
+                system.systemMessage(entity, "<n>Enabled <nh>disguise<n>!");
                 break;
               case "camo":
                 manager.setData(entity, "skyhighocs:dyn/thermoptic_camouflage", true);
-                system.systemMessage(entity, "Enabled camo<n>!");
+                system.systemMessage(entity, "<n>Enabled <nh>camo<n>!");
                 break;
             };
             break;
@@ -29,26 +29,26 @@ function initModule(system) {
             switch (arguments[2]) {
               case "disguise":
                 manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise", false);
-                system.systemMessage(entity, "Disabled disguise<n>!");
+                system.systemMessage(entity, "<n>Disabled <nh>disguise<n>!");
                 break;
               case "camo":
                 manager.setData(entity, "skyhighocs:dyn/thermoptic_camouflage", false);
-                system.systemMessage(entity, "Disabled camo<n>!");
+                system.systemMessage(entity, "<n>Disabled <nh>camo<n>!");
                 break;
             };
             break;
           case "help":
             system.systemMessage(entity, "<n>Thermoptics commands:");
-            system.systemMessage(entity, "<n>!disguise on <nh>-<n> Turns on disguise");
-            system.systemMessage(entity, "<n>!disguise off <nh>-<n> Turns off disguise");
-            system.systemMessage(entity, "<n>!disguise help <nh>-<n> Shows thermoptics commands");
+            system.systemMessage(entity, "<n>!thermo enable <disguise|camo> <nh>-<n> Enables function");
+            system.systemMessage(entity, "<n>!thermo disable <disguise|camo> <nh>-<n> Disables function");
+            system.systemMessage(entity, "<n>!thermo help <nh>-<n> Shows thermoptics commands");
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>disguise<e> command! Try <eh>!disguise help<e> for a list of commands!");
+            system.systemMessage(entity, "<e>Unknown <eh>disguise<e> command! Try <eh>!thermo help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>disguise<e> command! Try <eh>!disguise help<e> for a list of commands!");
+        system.systemMessage(entity, "<e>Unknown <eh>disguise<e> command! Try <eh>!thermo help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {

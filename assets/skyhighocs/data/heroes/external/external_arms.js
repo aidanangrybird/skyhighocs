@@ -28,8 +28,8 @@ function initModule(system) {
             break;
           case "help":
             system.systemMessage(entity, "<n>External Arms commands:");
-            system.systemMessage(entity, "<n>!extarms on <nh>-<n> Turns on external arms");
-            system.systemMessage(entity, "<n>!extarms off <nh>-<n> Turns off external arms");
+            system.systemMessage(entity, "<n>!extarms on <nh>-<n> Deploys external arms");
+            system.systemMessage(entity, "<n>!extarms off <nh>-<n> Retracts external arms");
             system.systemMessage(entity, "<n>!extarms help <nh>-<n> Shows externalArms commands");
             break;
           default:

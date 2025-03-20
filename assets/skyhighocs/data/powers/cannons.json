@@ -17,7 +17,7 @@
       "chargeTime": 20,
       "duration": 3600,
       "cooldownTime": 20,
-      "range": 32.0,
+      "range": 64.0,
       "radius": 0.6,
       "canDoGriefing": true,
       "soundEvents": {
@@ -42,7 +42,7 @@
       "chargeTime": 20,
       "duration": 3600,
       "cooldownTime": 20,
-      "range": 32.0,
+      "range": 64.0,
       "radius": 0.6,
       "canDoGriefing": true,
       "soundEvents": {
@@ -67,7 +67,7 @@
       "chargeTime": 20,
       "duration": 3600,
       "cooldownTime": 20,
-      "range": 32.0,
+      "range": 64.0,
       "radius": 0.6,
       "canDoGriefing": true,
       "soundEvents": {
@@ -79,7 +79,7 @@
     },
     "fiskheroes:charged_beam|cannons_FTT": {
       "damageProfile": {
-        "damage": 5.0,
+        "damage": 10.0,
         "types": {
           "ENERGY": 1.0,
           "FIRE": 0.25
@@ -92,7 +92,7 @@
       "chargeTime": 20,
       "duration": 3600,
       "cooldownTime": 20,
-      "range": 32.0,
+      "range": 64.0,
       "radius": 0.6,
       "canDoGriefing": true,
       "soundEvents": {
@@ -104,7 +104,7 @@
     },
     "fiskheroes:charged_beam|cannons_TFT": {
       "damageProfile": {
-        "damage": 5.0,
+        "damage": 10.0,
         "types": {
           "ENERGY": 1.0,
           "FIRE": 0.25
@@ -117,7 +117,7 @@
       "chargeTime": 20,
       "duration": 3600,
       "cooldownTime": 20,
-      "range": 32.0,
+      "range": 64.0,
       "radius": 0.6,
       "canDoGriefing": true,
       "soundEvents": {
@@ -142,7 +142,7 @@
       "chargeTime": 20,
       "duration": 3600,
       "cooldownTime": 20,
-      "range": 32.0,
+      "range": 64.0,
       "radius": 0.6,
       "canDoGriefing": true,
       "soundEvents": {
@@ -167,7 +167,7 @@
       "chargeTime": 20,
       "duration": 3600,
       "cooldownTime": 20,
-      "range": 32.0,
+      "range": 64.0,
       "radius": 0.6,
       "canDoGriefing": true,
       "soundEvents": {

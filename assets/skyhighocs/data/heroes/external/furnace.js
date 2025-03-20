@@ -13,16 +13,17 @@ function initModule(system) {
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 3) {
         switch (arguments[1]) {
-          case "on":
+          //Eventually add smelt argument so it smelts what is in the hand and requires it to be deployed first
+          case "deploy":
             manager.setData(entity, "skyhighocs:dyn/furnace", true);
             break;
-          case "off":
+          case "retract":
             manager.setData(entity, "skyhighocs:dyn/furnace", false);
             break;
           case "help":
             system.systemMessage(entity, "<n>Furnace commands:");
-            system.systemMessage(entity, "<n>!furnace on <nh>-<n> Turns on furnace");
-            system.systemMessage(entity, "<n>!furnace off <nh>-<n> Turns off furnace");
+            system.systemMessage(entity, "<n>!furnace deploy <nh>-<n> Retracts furnace");
+            system.systemMessage(entity, "<n>!furnace retract <nh>-<n> Deploys furnace");
             system.systemMessage(entity, "<n>!furnace help <nh>-<n> Shows furnace commands");
             break;
           default:

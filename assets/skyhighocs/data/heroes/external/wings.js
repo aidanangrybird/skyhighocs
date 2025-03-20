@@ -27,7 +27,7 @@ function initModule(system) {
             system.systemMessage(entity, "<s>Deployed <sh>wings<s>!");
             break;
           case "retract":
-            if (!nbt.getBoolean("wings")) {
+            if (!nbt.getBoolean("wings") && entity.getData("fiskheroes:gliding")) {
               manager.setData(entity, "skyhighocs:dyn/wings_deployed", false);
               system.systemMessage(entity, "<s>Retracted <sh>wings<s>!");
             } else {

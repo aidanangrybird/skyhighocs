@@ -43,7 +43,7 @@ function initHeadBeams(renderer, color) {
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsEyes"));
   var scream = bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:scream", "head", color, [
-    { "firstPerson": [0.0, 2.5, -3.2], "offset": [0.0, -1.5, -4.9], "size": [2.0, 1.0] }
+    { "firstPerson": [0.0, 2.5, -3.2], "offset": [0.0, -1.5, -4.9], "size": [10.0, 10.0] }
   ]);
   scream.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("mouth"));
 };
