@@ -6,21 +6,39 @@ function initModule(system) {
   return {
     name: "thermoptics",
     type: 12,
-    command: "disguise",
+    command: "thermo",
     powers: ["skyhighocs:thermoptic_manipulation"],
-    helpMessage: "<n>!disguise <nh>-<n> Disguise",
+    helpMessage: "<n>!thermo <nh>-<n> Thermoptics",
     disabledMessage: "<e>Module <eh>thermoptics<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 3) {
+      if (arguments.length > 1 && arguments.length < 4) {
         switch (arguments[1]) {
-          case "on":
-            manager.setData(entity, "skyhighocs:dyn/disguised", true);
+          case "enable":
+            switch (arguments[2]) {
+              case "disguise":
+                manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise", true);
+                system.systemMessage(entity, "<n>Enabled <nh>disguise<n!");
+                break;
+              case "camo":
+                manager.setData(entity, "skyhighocs:dyn/thermoptic_camouflage", true);
+                system.systemMessage(entity, "Enabled camo<n>!");
+                break;
+            };
             break;
-          case "off":
-            manager.setData(entity, "skyhighocs:dyn/disguised", false);
+          case "disable":
+            switch (arguments[2]) {
+              case "disguise":
+                manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise", false);
+                system.systemMessage(entity, "Disabled disguise<n>!");
+                break;
+              case "camo":
+                manager.setData(entity, "skyhighocs:dyn/thermoptic_camouflage", false);
+                system.systemMessage(entity, "Disabled camo<n>!");
+                break;
+            };
             break;
           case "help":
-            system.systemMessage(entity, "<n>Disguise commands:");
+            system.systemMessage(entity, "<n>Thermoptics commands:");
             system.systemMessage(entity, "<n>!disguise on <nh>-<n> Turns on disguise");
             system.systemMessage(entity, "<n>!disguise off <nh>-<n> Turns off disguise");
             system.systemMessage(entity, "<n>!disguise help <nh>-<n> Shows thermoptics commands");
@@ -36,6 +54,9 @@ function initModule(system) {
     isModifierEnabled: function (entity, modifier) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
+        if (modifier.name() == "fiskheroes:invisiblity") {
+          result = true;
+        };
       };
       if (modifier.name() == "fiskheroes:transformation") {
         result = true;
@@ -43,7 +64,13 @@ function initModule(system) {
       return result;
     },
     whenDisabled: function (entity, manager) {
-      manager.setData(entity, "skyhighocs:dyn/disguised", false);
+      manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise", false);
+    },
+    tickHandler: function (entity, manager) {
+      var invis = entity.getData("skyhighocs:dyn/thermoptic_camouflage_timer") == 1;
+      if (entity.getData("skyhighocs:dyn/thermoptic_camouflage_timer") > 0) {
+        manager.setData(entity, "fiskheroes:invisible", invis);
+      };
     }
   };
 };

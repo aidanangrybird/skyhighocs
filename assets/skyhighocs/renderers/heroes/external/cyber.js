@@ -150,3 +150,28 @@ function initNV(renderer, uuid) {
   nv.factor = 1.0;
   nv.setCondition(entity => entity.getUUID() == uuid);
 };
+
+function initTentacles(renderer, model) {
+  var tentacleBase = model.getCubeOffset("body_ext_arm_left");
+  var arm = renderer.createResource("MODEL", "skyhighocs:CyberArm");
+  arm.texture.set("arm", "arm_lights");
+  var claw = renderer.createResource("MODEL", "skyhighocs:CyberClaw");
+  claw.texture.set("claw", "claw_lights");
+  claw.bindAnimation("fiskheroes:ock_claw").setData((entity, data) => {
+      var t = entity.as("TENTACLE");
+      data.load(0, 1 - Math.min(t.getCaster().getInterpolatedData("fiskheroes:tentacle_extend_timer") * 2, 1));
+      data.load(1, t.getIndex());
+      data.load(2, t.getGrabTimer());
+      data.load(3, t.getStrikeTimer());
+  });
+
+  var tentacles = renderer.bindProperty("fiskheroes:tentacles").setTentacles([
+      { "offset": [2.0, -7.5, -4.65], "direction": [2.0, 15.0, -25.0] },
+      { "offset": [-2.0, -7.5, -4.65], "direction": [-2.0, 15.0, -25.0] }
+  ]);
+  tentacles.anchor.set("body", tentacleBase);
+  tentacles.setSegmentModel(arm);
+  tentacles.setHeadModel(claw);
+  tentacles.segmentLength = 1.8;
+  tentacles.segments = 16;
+};

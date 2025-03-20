@@ -96,7 +96,7 @@ function initModule(system) {
           case "retract":
             switch (arguments[2]) {
               case "aux":
-                if (!nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flight_timer") > 0) {
+                if (!(nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flight_timer") > 0)) {
                   manager.setData(entity, "skyhighocs:dyn/rocket_left_arm_booster_deployed", false);
                   manager.setData(entity, "skyhighocs:dyn/rocket_right_arm_booster_deployed", false);
                   manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_booster_deployed", false);
@@ -107,7 +107,7 @@ function initModule(system) {
                 };
                 break;
               case "body":
-                if (!nbt.getBoolean("rocketsBody") && entity.getData("fiskheroes:flight_timer") > 0) {
+                if (!(nbt.getBoolean("rocketsBody") && entity.getData("fiskheroes:flight_timer") > 0)) {
                   manager.setData(entity, "skyhighocs:dyn/rockets_body_deployed", false);
                   system.systemMessage(entity, "<s>Retracted <sh>body<s> unarmed rockets!");
                 } else {
@@ -115,7 +115,7 @@ function initModule(system) {
                 };
                 break;
               case "legs":
-                if (!nbt.getBoolean("rocketsLegs") && entity.getData("fiskheroes:flight_timer") > 0) {
+                if (!(nbt.getBoolean("rocketsLegs") && entity.getData("fiskheroes:flight_timer") > 0)) {
                   manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_main_deployed", false);
                   manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_main_deployed", false);
                   manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_deployed", false);
@@ -126,7 +126,7 @@ function initModule(system) {
                 };
                 break;
               case "*":
-                if (!nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flight_timer") > 0) {
+                if (!(nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flight_timer") > 0)) {
                   manager.setData(entity, "skyhighocs:dyn/rocket_left_arm_booster_deployed", false);
                   manager.setData(entity, "skyhighocs:dyn/rocket_right_arm_booster_deployed", false);
                   manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_booster_deployed", false);
@@ -134,7 +134,7 @@ function initModule(system) {
                 } else {
                   system.systemMessage(entity, "<e>Unable to retract armed <eh>aux<e> rockets!");
                 };
-                if (!nbt.getBoolean("rocketsLegs") && entity.getData("fiskheroes:flight_timer") > 0) {
+                if (!(nbt.getBoolean("rocketsLegs") && entity.getData("fiskheroes:flight_timer") > 0)) {
                   manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_main_deployed", false);
                   manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_main_deployed", false);
                   manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_deployed", false);
@@ -142,7 +142,7 @@ function initModule(system) {
                 } else {
                   system.systemMessage(entity, "<e>Unable to retract armed <eh>leg<e> rockets!");
                 };
-                if (!nbt.getBoolean("rocketsBody") && entity.getData("fiskheroes:flight_timer") > 0) {
+                if (!(nbt.getBoolean("rocketsBody") && entity.getData("fiskheroes:flight_timer") > 0)) {
                   manager.setData(entity, "skyhighocs:dyn/rockets_body_deployed", false);
                 } else {
                   system.systemMessage(entity, "<e>Unable to retract armed <eh>body<e> rockets!");

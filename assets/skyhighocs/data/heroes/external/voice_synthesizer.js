@@ -5,19 +5,48 @@
 function initModule(system) {
   return {
     name: "voiceSynthesizer",
-    type: 12,
+    type: 13,
     command: "vs",
     powers: ["skyhighocs:voice_synthesizer"],
     helpMessage: "<n>!vs <nh>-<n> Voice Synthesizer",
     disabledMessage: "<e>Module <eh>voiceSynthesizer<e> is disabled!",
+    keyBinds: function (hero) {
+      hero.addKeyBind("MOUTH", "Scream (Not armed)", 3);
+      hero.addKeyBind("SCREAM", "Scream", 3);
+      hero.addKeyBind("ENERGY_PROJECTION", "Scream", 3);
+    },
+    isKeyBindEnabled: function (entity, keyBind) {
+      result = false;
+      if (!system.isModuleDisabled(entity, this.name)) {
+        var nbt = entity.getWornHelmet().nbt();
+        var mouth = nbt.getBoolean("mouth");
+        if (keyBind == "MOUTH" && entity.getData("fiskheroes:tentacles") == null) {
+          result = !mouth;
+        };
+        if (keyBind == "ENERGY_PROJECTION" && (entity.getData("skyhighocs:dyn/mouth_timer") == 1) && entity.getData("fiskheroes:tentacles") == null) {
+          result = mouth;
+        };
+        if (keyBind == "SCREAM" && entity.getData("fiskheroes:tentacles") == null) {
+          result = mouth;
+        };
+      };
+      return result;
+    },
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 3) {
+        var nbt = entity.getWornHelmet().nbt();
         switch (arguments[1]) {
+          case "arm":
+            manager.setBoolean(nbt, "mouth", true);
+            break;
+          case "disarm":
+            manager.setBoolean(nbt, "mouth", false);
+            break;
           case "show":
-            manager.setData(entity, "skyhighocs:dyn/mouth", true);
+            manager.setData(entity, "skyhighocs:dyn/mouth_deployed", true);
             break;
           case "hide":
-            manager.setData(entity, "skyhighocs:dyn/mouth", false);
+            manager.setData(entity, "skyhighocs:dyn/mouth_deployed", false);
             break;
           case "help":
             system.systemMessage(entity, "<n>Voice Synthesizer commands:");
@@ -36,6 +65,9 @@ function initModule(system) {
     isModifierEnabled: function (entity, modifier) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
+        if (modifier.name() == "fiskheroes:energy_projection") {
+          result = true;
+        };
       };
       if (modifier.name() == "fiskheroes:transformation") {
         result = true;

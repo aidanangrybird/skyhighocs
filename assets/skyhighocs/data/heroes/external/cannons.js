@@ -24,10 +24,10 @@ function initModule(system) {
         var eyes = nbt.getBoolean("cannonsEyes");
         var body = nbt.getBoolean("cannonsBody");
         var arms = nbt.getBoolean("cannonsArms");
-        if (keyBind == "CANNONS") {
+        if (keyBind == "CANNONS" && entity.getData("fiskheroes:tentacles") == null) {
           result = (!eyes && !body && !arms);
         };
-        if (keyBind == "CHARGED_BEAM") {
+        if (keyBind == "CHARGED_BEAM" && entity.getData("fiskheroes:tentacles") == null) {
           result = (eyes || body || arms);
         };
       };
@@ -130,7 +130,7 @@ function initModule(system) {
                 system.systemMessage(entity, "<s>Retracted <sh>eyes<s> cannons!");
                 break;
               case "body":
-                manager.setData(entity, "skyhighocs:dyn/cannons_body_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/cannon_body_deployed", false);
                 system.systemMessage(entity, "<s>Retracted <sh>body<s> cannons!");
                 break;
               case "arms":
@@ -140,7 +140,7 @@ function initModule(system) {
                 break;
               case "*":
                 manager.setData(entity, "skyhighocs:dyn/cannon_eyes_deployed", false);
-                manager.setData(entity, "skyhighocs:dyn/cannons_body_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/cannon_body_deployed", false);
                 manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_deployed", false);
                 manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_deployed", false);
                 system.systemMessage(entity, "<s>Retracted <sh>all<s> cannons!");
@@ -177,7 +177,7 @@ function initModule(system) {
       manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_deployed", false);
       manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_deployed", false);
       manager.setData(entity, "skyhighocs:dyn/cannon_eyes_deployed", false);
-      manager.setData(entity, "skyhighocs:dyn/cannons_body_deployed", false);
+      manager.setData(entity, "skyhighocs:dyn/cannon_body_deployed", false);
     },
     tickHandler: function (entity, manager) {
       var nbt = entity.getWornHelmet().nbt();

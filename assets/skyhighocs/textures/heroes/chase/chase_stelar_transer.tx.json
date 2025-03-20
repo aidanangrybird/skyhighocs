@@ -9,5 +9,6 @@
       "key": "entity.getData('skyhighheroes:dyn/visualizer_toggle') ? 'down' : 'up'",
       "values": ["up", "down"]
     }
-  }
+  },
+  "isDynamic": true
 }

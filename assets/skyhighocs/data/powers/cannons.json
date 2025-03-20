@@ -247,16 +247,6 @@
       "type": "CIRCLE",
       "color": "fiskheroes:charged_beam",
       "data": "fiskheroes:beam_charge"
-    },
-    {
-      "type": "CIRCLE",
-      "color": "fiskheroes:heat_vision",
-      "data": "fiskheroes:heat_vision_timer"
-    },
-    {
-      "type": "CIRCLE",
-      "color": "fiskheroes:energy_projection",
-      "data": "fiskheroes:energy_projection_timer"
     }
   ]
 }

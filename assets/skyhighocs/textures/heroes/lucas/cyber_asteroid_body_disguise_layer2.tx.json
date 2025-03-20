@@ -1,0 +1,30 @@
+{
+  "texture": {
+    "in": "skyhighocs:lucas/cyber_asteroid_disguise",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighocs:xor/cyber_thermoptic<SWITCH>_<TIMER>"
+      },
+      {
+        "operation": "STITCH",
+        "supply": "skyhighocs:cyber_body_layer2"
+      }
+    ],
+    "out": "skyhighocs:generated/cyber_asteroid_disguise_body_layer2<SWITCH>_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.ceil(47 * (entity.getInterpolatedData('skyhighocs:dyn/thermoptic_camouflage_timer') > 0 ? entity.getInterpolatedData('skyhighocs:dyn/thermoptic_camouflage_timer') : entity.getInterpolatedData('skyhighocs:dyn/thermoptic_disguise_timer'))) | 0",
+      "values": {
+        "min": 0,
+        "max": 47
+      }
+    },
+    "SWITCH": {
+      "key": "entity.getInterpolatedData('skyhighocs:dyn/thermoptic_camouflage_timer') > 0 ? '_base' : ''",
+      "values": ["", "_base"]
+    }
+  },
+  "isDynamic": true
+}

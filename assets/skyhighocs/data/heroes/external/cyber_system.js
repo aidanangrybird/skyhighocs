@@ -860,7 +860,7 @@ function initSystem(moduleList, name, normalName, color) {
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
         if (!(entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == disguisedName)) {
-          if (entity.getData("skyhighocs:dyn/disguised_timer") == 1) {
+          if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
             manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
             manager.setData(entity, "fiskheroes:disguise", disguisedName);
           } else {
@@ -936,10 +936,10 @@ function initSystem(moduleList, name, normalName, color) {
           };
         };
       };
-      if (typeof cyberName === "string" && entity.getData("skyhighocs:dyn/disguised_timer") < 1) {
+      if (typeof cyberName === "string" && entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") < 1) {
         manager.setData(entity, "fiskheroes:disguise", cyberName);
       };
-      if (typeof disguisedName === "string" && entity.getData("skyhighocs:dyn/disguised_timer") == 1) {
+      if (typeof disguisedName === "string" && entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
         manager.setData(entity, "fiskheroes:disguise", disguisedName);
       };
       tickHandlerIndexes.forEach(index => {

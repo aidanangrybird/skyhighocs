@@ -12,8 +12,8 @@ function initModule(system) {
     helpMessage: "<n>!shields <nh>-<n> Shields",
     disabledMessage: "<e>Module <eh>shields<e> is disabled!",
     keyBinds: function (hero) {
-      hero.addKeyBind("SHIELDS", "Shields (None armed)", 2);
-      hero.addKeyBind("SHIELD", "Shields", 2);
+      hero.addKeyBind("SHIELDS", "Shields (None armed)", 1);
+      hero.addKeyBind("SHIELD", "Shields", 1);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
@@ -21,10 +21,10 @@ function initModule(system) {
         var nbt = entity.getWornHelmet().nbt();
         var left = nbt.getBoolean("shieldsLeft");
         var right = nbt.getBoolean("shieldsRight");
-        if (keyBind == "SHIELDS") {
+        if (keyBind == "SHIELDS" && entity.isSneaking() && entity.getData("fiskheroes:tentacles") == null) {
           result = (!left && !right);
         };
-        if (keyBind == "SHIELD") {
+        if (keyBind == "SHIELD" && entity.isSneaking() && entity.getData("fiskheroes:tentacles") == null) {
           result = (left || right);
         };
       };

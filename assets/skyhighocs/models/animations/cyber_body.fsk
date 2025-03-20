@@ -56,40 +56,51 @@
 {body_left_furnace_cover_posX} += 2{part2_furnace}
 {body_right_furnace_cover_posZ} += 0.03{part1_furnace}
 {body_right_furnace_cover_posX} -= 2{part2_furnace}
-{body_furnace_posZ} -= 2.75{part3_furnace}
+{body_furnace_posZ} -= 3.1{part3_furnace}
 
 ;wings
 {part0_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.0, 0.15, 0.0), 1)
 {part1_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.2, 0.2, 0.0), 1)
-{part2_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.4, 0.2, 0.0), 1)
+{part2_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.4, 0.1, 0.0), 1)
 {part3_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.5, 0.2, 0.0), 1)
-{part4_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.7, 0.1, 0.0), 1)
-{part5_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.8, 0.1, 0.0), 1)
-{part6_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.9, 0.1, 0.0), 1)
+{part4_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.7, 0.15, 0.0), 1)
+{part5_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.85, 0.05, 0.0), 1)
+{part6_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.9, 0.05, 0.0), 1)
+{part7_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.95, 0.05, 0.0), 1)
 ;left wing
-{body_left_wing_cover_front_posX} -= 0.03{part0_wings}
-{body_left_wing_cover_back_posX} -= 0.03{part0_wings}
-{body_left_wing_cover_front_posZ} -= 0.75{part1_wings}
-{body_left_wing_cover_back_posZ} += 0.75{part1_wings}
-{body_wing_left_base_posX} += 3.25{part3_wings}
-{body_wing_left_base_rotZ} -= 90'{part2_wings}
-{body_wing_left_1_posX} -= {part6_wings}
-{body_wing_left_1_posY} += {part6_wings}
-{body_wing_left_2_posX} -= {part5_wings}
-{body_wing_left_3_posX} -= {part4_wings}
-{body_wing_left_ext_posY} += 3{part6_wings}
+{body_left_wing_cover_front_posX} -= 0.03{part0_wings} - 0.03{part6_wings}
+{body_left_wing_cover_back_posX} -= 0.03{part0_wings} - 0.03{part6_wings}
+{body_left_wing_cover_front_posZ} -= 1{part1_wings} - 1{part5_wings}
+{body_left_wing_cover_back_posZ} += 1{part1_wings} - 1{part5_wings}
+{body_wing_left_inner_base_posX} += 4.1{part3_wings}
+{body_wing_left_inner_base_posY} += 1{part3_wings}
+{body_wing_left_inner_base_rotZ} -= 90'{part2_wings}
+{body_wing_left_outer_base_posX} += 1{part4_wings}
+{body_wing_left_outer_base_posY} += 10{part3_wings}
+{body_wing_left_1_posX} -= {part7_wings}
+{body_wing_left_2_posX} -= {part6_wings}
+{body_wing_left_3_posX} -= {part5_wings}
+{body_wing_left_ext_1_posX} -= {part7_wings}
+{body_wing_left_ext_2_posX} -= {part6_wings}
+{body_wing_left_ext_3_posX} -= {part5_wings}
+{body_wing_left_ext_posY} += 3{part7_wings}
 ;right wing
-{body_right_wing_cover_front_posX} += 0.03{part0_wings}
-{body_right_wing_cover_back_posX} += 0.03{part0_wings}
-{body_right_wing_cover_front_posZ} -= 0.75{part1_wings}
-{body_right_wing_cover_back_posZ} += 0.75{part1_wings}
-{body_wing_right_base_posX} -= 3.25{part3_wings}
-{body_wing_right_base_rotZ} += 90'{part2_wings}
-{body_wing_right_1_posX} += {part6_wings}
-{body_wing_right_1_posY} += {part6_wings}
-{body_wing_right_2_posX} += {part5_wings}
-{body_wing_right_3_posX} += {part4_wings}
-{body_wing_right_ext_posY} += 3{part6_wings}
+{body_right_wing_cover_front_posX} += 0.03{part0_wings} - 0.03{part6_wings}
+{body_right_wing_cover_back_posX} += 0.03{part0_wings} - 0.03{part6_wings}
+{body_right_wing_cover_front_posZ} -= 1{part1_wings} - 1{part5_wings}
+{body_right_wing_cover_back_posZ} += 1{part1_wings} - 1{part5_wings}
+{body_wing_right_inner_base_posX} -= 4.1{part3_wings}
+{body_wing_right_inner_base_posY} += 1{part3_wings}
+{body_wing_right_inner_base_rotZ} += 90'{part2_wings}
+{body_wing_right_outer_base_posX} -= 1{part4_wings}
+{body_wing_right_outer_base_posY} += 10{part3_wings}
+{body_wing_right_1_posX} += {part7_wings}
+{body_wing_right_2_posX} += {part6_wings}
+{body_wing_right_3_posX} += {part5_wings}
+{body_wing_right_ext_1_posX} += {part7_wings}
+{body_wing_right_ext_2_posX} += {part6_wings}
+{body_wing_right_ext_3_posX} += {part5_wings}
+{body_wing_right_ext_posY} += 3{part7_wings}
 
 ;ext arms
 {part1_ext_arm} = if({ext_arm} != 1, animate2({ext_arm}, 1.0, 0.0, 0.15, 0.0), 1)

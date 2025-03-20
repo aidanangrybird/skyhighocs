@@ -21,10 +21,10 @@ function initModule(system) {
         var nbt = entity.getWornHelmet().nbt();
         var left = nbt.getBoolean("bladesLeft");
         var right = nbt.getBoolean("bladesRight");
-        if (keyBind == "BLADES") {
+        if (keyBind == "BLADES" && !entity.isSneaking() && entity.getData("fiskheroes:tentacles") == null) {
           result = (!left && !right);
         };
-        if (keyBind == "BLADE") {
+        if (keyBind == "BLADE" && !entity.isSneaking() && entity.getData("fiskheroes:tentacles") == null) {
           result = (left || right);
         };
       };

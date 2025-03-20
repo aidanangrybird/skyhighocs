@@ -31,7 +31,7 @@ var cyberOS = system.initSystem([messaging,
   externalArms,
   dataPorts,
   voiceSynthesizer,
-], "Cyber Nebula", "C_sp", "6");
+], "Cyber Nebula", "C_sp", "2");
 function init(hero) {
   hero.setAliases("cyber_nebula");
   hero.setName("Cyber Nebula");

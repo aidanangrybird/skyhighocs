@@ -1,0 +1,30 @@
+{
+  "texture": {
+    "in": "skyhighocs:damien/cyber_shadow_base",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighocs:xor/cyber_thermoptic_base_<TIMER>"
+      },
+      {
+        "operation": "STITCH",
+        "supply": "skyhighocs:cyber_right_arm_base"
+      },
+      {
+        "operation": "ADD",
+        "supply": "skyhighocs:cyber_right_arm_base"
+      }
+    ],
+    "out": "skyhighocs:generated/cyber_shadow_right_arm_base_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.ceil(47*Math.min(Math.max((entity.getInterpolatedData('skyhighocs:dyn/thermoptic_disguise_timer') + entity.getInterpolatedData('skyhighocs:dyn/thermoptic_camouflage_timer')), 0), 1)) | 0",
+      "values": {
+        "min": 0,
+        "max": 47
+      }
+    }
+  },
+  "isDynamic": true
+}
