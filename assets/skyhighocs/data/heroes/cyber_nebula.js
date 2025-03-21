@@ -1,6 +1,7 @@
-var system = implement("skyhighocs:external/cyber_system");
+var cybernetics = implement("skyhighocs:external/cybernetics");
 var messaging = implement("skyhighheroes:external/messaging");
 var groupMessaging = implement("skyhighheroes:external/group_messaging");
+var groups = implement("skyhighheroes:external/groups");
 var contacts = implement("skyhighheroes:external/contacts");
 var scanner = implement("skyhighheroes:external/scanner");
 var waypoints = implement("skyhighheroes:external/waypoint");
@@ -14,9 +15,12 @@ var wings = implement("skyhighocs:external/wings");
 var furnace = implement("skyhighocs:external/furnace");
 var externalArms = implement("skyhighocs:external/external_arms");
 var dataPorts = implement("skyhighocs:external/data_ports");
+var suitDatastore = implement("skyhighocs:external/suit_datastore");
 var voiceSynthesizer = implement("skyhighocs:external/voice_synthesizer");
-var cyberOS = system.initSystem([messaging,
+var cyberOS = cybernetics.initSystem([
+  messaging,
   groupMessaging,
+  groups,
   contacts,
   scanner,
   waypoints,
@@ -30,6 +34,7 @@ var cyberOS = system.initSystem([messaging,
   furnace,
   externalArms,
   dataPorts,
+  suitDatastore,
   voiceSynthesizer,
 ], "Cyber Nebula", "C_sp", "2");
 function init(hero) {

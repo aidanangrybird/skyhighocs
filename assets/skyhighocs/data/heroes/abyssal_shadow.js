@@ -1,23 +1,27 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "e51532a1-19fc-4d4f-9da0-f952c4645891";
-var transerSystem = implement("skyhighheroes:external/transer_system");
+var transer = implement("skyhighheroes:external/transer_system");
 var messaging = implement("skyhighheroes:external/messaging");
 var groupMessaging = implement("skyhighheroes:external/group_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
+var groups = implement("skyhighheroes:external/groups");
 var contacts = implement("skyhighheroes:external/contacts");
 var scanner = implement("skyhighheroes:external/scanner");
 var waypoints = implement("skyhighheroes:external/waypoint");
 var abyssalShadow = implement("skyhighocs:external/abyssal_shadow");
 var achlys = implement("skyhighocs:external/achlys");
-var transerOS = transerSystem.initTranser([messaging,
+var transerOS = transer.initSystem([
+  messaging,
   groupMessaging,
   transerBrotherBand,
+  groups,
   contacts,
   scanner,
   waypoints,
   abyssalShadow,
-  achlys], "abyssalShadow", "dragon");
+  achlys
+], "abyssalShadow", "dragon");
 function init(hero) {
   hero.setAliases("abyssal_shadow");
   hero.setName("\u00A75Abyssal Shadow");

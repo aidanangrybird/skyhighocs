@@ -1,21 +1,25 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0";
-var transerSystem = implement("skyhighheroes:external/transer_system");
+var transer = implement("skyhighheroes:external/transer_system");
 var messaging = implement("skyhighheroes:external/messaging");
 var groupMessaging = implement("skyhighheroes:external/group_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
+var groups = implement("skyhighheroes:external/groups");
 var contacts = implement("skyhighheroes:external/contacts");
 var scanner = implement("skyhighheroes:external/scanner");
 var waypoints = implement("skyhighheroes:external/waypoint");
 var desertSuffering = implement("skyhighocs:external/desert_suffering");
-var transerOS = transerSystem.initTranser([messaging,
+var transerOS = transer.initSystem([
+  messaging,
   groupMessaging,
   transerBrotherBand,
+  groups,
   contacts,
   scanner,
   waypoints,
-  desertSuffering], "aceStelar", "pegasus");
+  desertSuffering
+], "aceStelar", "pegasus");
 function init(hero) {
   hero.setAliases("ace_stelar");
   hero.setName("Ace Stelar");

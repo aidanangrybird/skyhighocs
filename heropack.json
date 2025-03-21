@@ -126,6 +126,8 @@
     
     "ports_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "ports": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "ports_deploy_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "ports_deployed": { "type": "BOOLEAN", "resetWithoutSuit": true },
     
     "blade_left_arm_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "blade_left_arm": { "type": "BOOLEAN", "resetWithoutSuit": true },

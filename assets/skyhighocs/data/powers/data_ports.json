@@ -6,6 +6,14 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/ports",
         "timerData": "skyhighocs:dyn/ports_timer",
+        "time": 20
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|ports_deploy": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/ports",
+        "timerData": "skyhighocs:dyn/ports_timer",
         "time": 60
       },
       "isToggle": true

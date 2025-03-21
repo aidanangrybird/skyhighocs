@@ -1,23 +1,27 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "c4bc5db6-3cf6-44fe-8427-304a7b211bc4";
-var transerSystem = implement("skyhighheroes:external/transer_system");
+var transer = implement("skyhighheroes:external/transer_system");
 var messaging = implement("skyhighheroes:external/messaging");
 var groupMessaging = implement("skyhighheroes:external/group_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
+var groups = implement("skyhighheroes:external/groups");
 var contacts = implement("skyhighheroes:external/contacts");
 var scanner = implement("skyhighheroes:external/scanner");
 var waypoints = implement("skyhighheroes:external/waypoint");
 var crimsonAsteroid = implement("skyhighocs:external/crimson_asteroid");
 var crimson = implement("skyhighocs:external/crimson");
-var transerOS = transerSystem.initTranser([messaging,
+var transerOS = transer.initSystem([
+  messaging,
   groupMessaging,
   transerBrotherBand,
+  groups,
   contacts,
   scanner,
   waypoints,
   crimsonAsteroid,
-  crimson], "crimsonAsteroid", "dragon");
+  crimson
+], "crimsonAsteroid", "dragon");
 function init(hero) {
   hero.setAliases("crimson_asteroid");
   hero.setName("\u00A74Crimson Asteroid");

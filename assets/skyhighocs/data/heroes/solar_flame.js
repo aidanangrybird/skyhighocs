@@ -1,23 +1,27 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0";
-var transerSystem = implement("skyhighheroes:external/transer_system");
+var transer = implement("skyhighheroes:external/transer_system");
 var messaging = implement("skyhighheroes:external/messaging");
 var groupMessaging = implement("skyhighheroes:external/group_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
+var groups = implement("skyhighheroes:external/groups");
 var contacts = implement("skyhighheroes:external/contacts");
 var scanner = implement("skyhighheroes:external/scanner");
 var waypoints = implement("skyhighheroes:external/waypoint");
 var solarFlame = implement("skyhighocs:external/solar_flame");
 var solar = implement("skyhighocs:external/solar");
-var transerOS = transerSystem.initTranser([messaging,
+var transerOS = transer.initSystem([
+  messaging,
   groupMessaging,
   transerBrotherBand,
+  groups,
   contacts,
   scanner,
   waypoints,
   solarFlame,
-  solar], "solarFlame", "pegasus");
+  solar
+], "solarFlame", "pegasus");
 function init(hero) {
   hero.setAliases("solar_flame");
   hero.setName("\u00A74Solar Flame");

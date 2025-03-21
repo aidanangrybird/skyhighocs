@@ -203,7 +203,6 @@ function logMessage(message) {
  **/
 function initSystem(moduleList, name, normalName, color) {
   var cyberInstance = this;
-  primaryPiece = 1;
   //Type 1 - commands (can have data management)
   /** @var type1Specs - Type 1 Specs */
   var type1Specs = ["command", "commandHandler", "helpMessage"];
@@ -229,8 +228,8 @@ function initSystem(moduleList, name, normalName, color) {
   var modules = [];
   /** @var moduleNames - Module names */
   var moduleNames = [];
-  /** @var cyberModules - Cyber module names */
-  var cyberModules = [];
+  /** @var cyberneticModules - Cyber module names */
+  var cyberneticModules = [];
   /** @var normalModules - Normal module names */
   var normalModules = [];
   /** @var commands - Command prefixes */
@@ -354,7 +353,7 @@ function initSystem(moduleList, name, normalName, color) {
               moduleNames.push(moduleInit.name);
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
-              cyberModules.push(moduleInit.name);
+              cyberneticModules.push(moduleInit.name);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
               if (moduleInit.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
@@ -381,7 +380,7 @@ function initSystem(moduleList, name, normalName, color) {
               moduleNames.push(moduleInit.name);
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
-              cyberModules.push(moduleInit.name);
+              cyberneticModules.push(moduleInit.name);
               var modulePowers = moduleInit.powers;
               modulePowers.forEach(power => {
                 powerArray.push(power);
@@ -413,7 +412,7 @@ function initSystem(moduleList, name, normalName, color) {
               moduleNames.push(moduleInit.name);
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
-              cyberModules.push(moduleInit.name);
+              cyberneticModules.push(moduleInit.name);
               var modulePowers = moduleInit.powers;
               modulePowers.forEach(power => {
                 powerArray.push(power);
@@ -446,7 +445,7 @@ function initSystem(moduleList, name, normalName, color) {
               moduleNames.push(moduleInit.name);
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
-              cyberModules.push(moduleInit.name);
+              cyberneticModules.push(moduleInit.name);
               var modulePowers = moduleInit.powers;
               modulePowers.forEach(power => {
                 powerArray.push(power);
@@ -496,17 +495,17 @@ function initSystem(moduleList, name, normalName, color) {
         normalModulesMessage = normalModulesMessage + ((isModuleDisabled(entity, moduleName))?"<n>, <eh>":"<n>, <nh>") + moduleName;
       };
     });
-    var cyberModulesMessage = (cyberModules.length > 1) ? "<n>Loaded " + cyberModules.length + " cyber systems: " : "<n>Loaded " + cyberModules.length + " cyber system: ";
-    cyberModules.forEach(moduleName => {
-      if (cyberModules.indexOf(moduleName) == 0) {
-        cyberModulesMessage = cyberModulesMessage + ((isModuleDisabled(entity, moduleName))?"<eh>":"<nh>") + moduleName;
+    var cyberneticModulesMessage = (cyberneticModules.length > 1) ? "<n>Loaded " + cyberneticModules.length + " cyber systems: " : "<n>Loaded " + cyberneticModules.length + " cyber system: ";
+    cyberneticModules.forEach(moduleName => {
+      if (cyberneticModules.indexOf(moduleName) == 0) {
+        cyberneticModulesMessage = cyberneticModulesMessage + ((isModuleDisabled(entity, moduleName))?"<eh>":"<nh>") + moduleName;
       } else {
-        cyberModulesMessage = cyberModulesMessage + ((isModuleDisabled(entity, moduleName))?"<n>, <eh>":"<n>, <nh>") + moduleName;
+        cyberneticModulesMessage = cyberneticModulesMessage + ((isModuleDisabled(entity, moduleName))?"<n>, <eh>":"<n>, <nh>") + moduleName;
       };
     });
     systemMessage(entity, "<n>cyberOS");
     systemMessage(entity, normalModulesMessage);
-    systemMessage(entity, cyberModulesMessage);
+    systemMessage(entity, cyberneticModulesMessage);
     systemMessage(entity, "<n>computerID: <nh>" + entity.getWornHelmet().nbt().getString("computerID"));
   };
   function status(entity) {
@@ -856,7 +855,6 @@ function initSystem(moduleList, name, normalName, color) {
         asssignID(entity, manager, cyberName, color);
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
-        manager.setData(entity, "skyhighheroes:dyn/primary_piece", primaryPiece);
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
         if (!(entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == disguisedName)) {
@@ -969,11 +967,11 @@ function initSystem(moduleList, name, normalName, color) {
       var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
       manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
       if (PackLoader.getSide() == "SERVER" && entity.getData("skyhighocs:dyn/powering_down_timer") < 1 && entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
-        var moduleTotal = cyberModules.length;
+        var moduleTotal = cyberneticModules.length;
         var moduleTime = (80/moduleTotal).toFixed(0);
         var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/powering_down_timer")*80);
         if (currentTime % moduleTime == 0) {
-          var moduleName = cyberModules[(currentTime/moduleTime)-1];
+          var moduleName = cyberneticModules[(currentTime/moduleTime)-1];
           var message = entity.getData("skyhighocs:dyn/powered_down") ? "<n>Shutting down <nh>" + moduleName + "<n>!" : "<n>Starting up <nh>" + moduleName + "<n>!";
           systemMessage(entity, message);
         };
