@@ -3,8 +3,8 @@
   "value": 1,
   "modifiers": {
     "fiskheroes:controlled_flight|rockets_TFF": {
-      "speed": 0.1,
-      "boostSpeed": 0.2,
+      "speed": 0.05,
+      "boostSpeed": 0.1,
       "canBoost": true,
       "canRoll": true,
       "collision": {
@@ -42,7 +42,7 @@
     },
     "fiskheroes:controlled_flight|rockets_FFT": {
       "speed": 0.1,
-      "boostSpeed": 0.2,
+      "boostSpeed": 0.25,
       "canBoost": true,
       "canRoll": true,
       "collision": {
@@ -61,7 +61,7 @@
     },
     "fiskheroes:controlled_flight|rockets_FTT": {
       "speed": 0.1,
-      "boostSpeed": 0.4,
+      "boostSpeed": 0.45,
       "canBoost": true,
       "canRoll": true,
       "collision": {
@@ -80,7 +80,7 @@
     },
     "fiskheroes:controlled_flight|rockets_TFT": {
       "speed": 0.1,
-      "boostSpeed": 0.4,
+      "boostSpeed": 0.35,
       "canBoost": true,
       "canRoll": true,
       "collision": {
@@ -99,7 +99,7 @@
     },
     "fiskheroes:controlled_flight|rockets_TTF": {
       "speed": 0.1,
-      "boostSpeed": 0.4,
+      "boostSpeed": 0.3,
       "canBoost": true,
       "canRoll": true,
       "collision": {
@@ -118,7 +118,7 @@
     },
     "fiskheroes:controlled_flight|rockets_TTT": {
       "speed": 0.1,
-      "boostSpeed": 0.6,
+      "boostSpeed": 0.55,
       "canBoost": true,
       "canRoll": true,
       "collision": {

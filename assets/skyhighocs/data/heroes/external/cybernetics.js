@@ -495,7 +495,7 @@ function initSystem(moduleList, name, normalName, color) {
         normalModulesMessage = normalModulesMessage + ((isModuleDisabled(entity, moduleName))?"<n>, <eh>":"<n>, <nh>") + moduleName;
       };
     });
-    var cyberneticModulesMessage = (cyberneticModules.length > 1) ? "<n>Loaded " + cyberneticModules.length + " cyber systems: " : "<n>Loaded " + cyberneticModules.length + " cyber system: ";
+    var cyberneticModulesMessage = (cyberneticModules.length > 1) ? "<n>Loaded " + cyberneticModules.length + " cybernetic systems: " : "<n>Loaded " + cyberneticModules.length + " cyber system: ";
     cyberneticModules.forEach(moduleName => {
       if (cyberneticModules.indexOf(moduleName) == 0) {
         cyberneticModulesMessage = cyberneticModulesMessage + ((isModuleDisabled(entity, moduleName))?"<eh>":"<nh>") + moduleName;
