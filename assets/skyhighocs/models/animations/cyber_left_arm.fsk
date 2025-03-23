@@ -35,6 +35,8 @@
 {part2_blade} = if({blade} != 1, animate2({blade}, 1.0, 0.4, 0.2, 0.0), 1)
 {part3_blade} = if({blade} != 1, animate2({blade}, 1.0, 0.6, 0.2, 0.0), 1)
 {part4_blade} = if({blade} != 1, animate2({blade}, 1.0, 0.8, 0.2, 0.0), 1)
+{part1_blade_stealth} = if({blade_stealth} != 1, animate2({blade_stealth}, 1.0, 0.0, 0.4, 0.0), 1)
+{part2_blade_stealth} = if({blade_stealth} != 1, animate2({blade_stealth}, 1.0, 0.6, 0.4, 0.0), 1)
 {part3_blade_sides} = if({blade} != 1, animate2({blade}, 1.0, 0.5, 0.05, 0.0), 1)
 {part4_blade_sides} = if({blade} != 1, animate2({blade}, 1.0, 0.55, 0.05, 0.0), 1)
 {part5_blade_sides} = if({blade} != 1, animate2({blade}, 1.0, 0.6, 0.05, 0.0), 1)
@@ -51,10 +53,10 @@
 {left_arm_back_blade_cover_posX} += 0.03{part0_blade}
 {left_arm_front_blade_cover_posZ} -= 1{part1_blade}
 {left_arm_back_blade_cover_posZ} += 1{part1_blade}
-{left_arm_blade_arm_posY} += 3{part2_blade} - {part3_blade} - 3{blade_stealth}{part4_blade}
+{left_arm_blade_arm_posY} += 3{part2_blade} - {part3_blade} - 2.5{part1_blade_stealth}{part4_blade} + 1.25{part2_blade_stealth}{part4_blade}
 {left_arm_blade_arm_rotZ} += 65'{part2_blade} - 70'{part3_blade}
 {left_arm_blade_base_rotZ} -= 65'{part2_blade} - 70'{part3_blade}
-{left_arm_blade_arm_posX} -= 2{part2_blade} - 1.25{blade_stealth}{part4_blade}
+{left_arm_blade_arm_posX} -= 2{part2_blade} - 0.9{part1_blade_stealth}{part4_blade} - 0.4{part2_blade_stealth}{part4_blade}
 ;front
 {left_arm_blade_front_edge_upper_2_posX} -= 2{part3_blade_sides} - 2{part4_blade_sides}
 {left_arm_blade_front_edge_lower_2_posX} -= 2{part3_blade_sides} - 2{part4_blade_sides}
