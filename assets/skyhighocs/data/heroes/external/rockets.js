@@ -157,14 +157,17 @@ function initModule(system) {
             system.systemMessage(entity, "<n>!rockets disarm <aux|body|legs|*> <nh>-<n> Disarms set of rockets");
             system.systemMessage(entity, "<n>!rockets deploy <aux|body|legs|*> <nh>-<n> Deploys set of rockets");
             system.systemMessage(entity, "<n>!rockets retract <aux|body|legs|*> <nh>-<n> Retracts set of rockets");
-            system.systemMessage(entity, "<n>!rockets status <nh>-<n> Shows armed status of rockets");
+            system.systemMessage(entity, "<n>!rockets status <nh>-<n> Shows status of rockets");
             system.systemMessage(entity, "<n>!rockets help <nh>-<n> Shows rockets commands");
             break;
           case "status":
+            var aux = (entity.getData("skyhighocs:dyn/rocket_left_arm_booster_deploy_timer") > 0) && (entity.getData("skyhighocs:dyn/rocket_right_arm_booster_deploy_timer") > 0) && (entity.getData("skyhighocs:dyn/rocket_left_leg_booster_deploy_timer") > 0) && (entity.getData("skyhighocs:dyn/rocket_right_leg_booster_deploy_timer") > 0);
+            var body = (entity.getData("skyhighocs:dyn/rockets_body_deploy_timer") > 0);
+            var legs = (entity.getData("skyhighocs:dyn/rocket_left_leg_main_deploy_timer") > 0) && (entity.getData("skyhighocs:dyn/rocket_right_leg_main_deploy_timer") > 0) && (entity.getData("skyhighocs:dyn/rocket_left_leg_deploy_timer") > 0) && (entity.getData("skyhighocs:dyn/rocket_right_leg_deploy_timer") > 0);
             system.systemMessage(entity, "<n>Rockets status:");
-            system.systemMessage(entity, "<n>Aux: <nh>" + (nbt.getBoolean("rocketsAux") ? "ARMED" : "DISARMED"));
-            system.systemMessage(entity, "<n>Body: <nh>" + (nbt.getBoolean("rocketsBody") ? "ARMED" : "DISARMED"));
-            system.systemMessage(entity, "<n>Legs: <nh>" + (nbt.getBoolean("rocketsLegs") ? "ARMED" : "DISARMED"));
+            system.systemMessage(entity, "<n>Aux: <nh>" + (nbt.getBoolean("rocketsAux") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((aux) || (entity.getData("skyhighocs:dyn/rockets_aux_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.systemMessage(entity, "<n>Body: <nh>" + (nbt.getBoolean("rocketsBody") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((body) || (entity.getData("skyhighocs:dyn/rockets_body_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.systemMessage(entity, "<n>Legs: <nh>" + (nbt.getBoolean("rocketsLegs") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((legs) || (entity.getData("skyhighocs:dyn/rockets_legs_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             break;
           default:
             system.systemMessage(entity, "<e>Unknown <eh>rockets<e> command! Try <eh>!rockets help<e> for a list of commands!");

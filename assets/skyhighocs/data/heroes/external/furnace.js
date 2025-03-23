@@ -22,10 +22,13 @@ function initModule(system) {
             break;
           case "help":
             system.systemMessage(entity, "<n>Furnace commands:");
-            system.systemMessage(entity, "<n>!furnace deploy <nh>-<n> Retracts furnace");
-            system.systemMessage(entity, "<n>!furnace retract <nh>-<n> Deploys furnace");
+            system.systemMessage(entity, "<n>!furnace deploy <nh>-<n> Deploys furnace");
+            system.systemMessage(entity, "<n>!furnace retract <nh>-<n> Retracts furnace");
             system.systemMessage(entity, "<n>!furnace help <nh>-<n> Shows furnace commands");
             break;
+          case "status":
+            system.systemMessage(entity, "<n>Furnace status:");
+            system.systemMessage(entity, "<n>Main: <nh>" + ((entity.getData("skyhighocs:dyn/furnace_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
           default:
             system.systemMessage(entity, "<e>Unknown <eh>furnace<e> command! Try <eh>!furnace help<e> for a list of commands!");
             break;

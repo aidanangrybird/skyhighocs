@@ -142,13 +142,17 @@ function initModule(system) {
             system.systemMessage(entity, "<n>!blades disarm <left|right|*> <nh>-<n> Disarms blades");
             system.systemMessage(entity, "<n>!blades deploy <left|right|*> <nh>-<n> Deploys blades");
             system.systemMessage(entity, "<n>!blades retract <left|right|*> <nh>-<n> Retracts disarmed blades");
-            system.systemMessage(entity, "<n>!blades retract <left|right|*> <nh>-<n> Retracts disarmed blades");
+            system.systemMessage(entity, "<n>!blades stealthOn <left|right|*> <nh>-<n> Enables stealth mode for blades");
+            system.systemMessage(entity, "<n>!blades stealthOff <left|right|*> <nh>-<n> Disables stealth mode for blades");
+            system.systemMessage(entity, "<n>!blades status <nh>-<n> Shows status of blades");
             system.systemMessage(entity, "<n>!blades help <nh>-<n> Shows blades commands");
             break;
           case "status":
             system.systemMessage(entity, "<n>Blades status:");
-            system.systemMessage(entity, "<n>Left: <nh>" + (nbt.getBoolean("bladesLeft") ? "ARMED" : "DISARMED"));
-            system.systemMessage(entity, "<n>Right: <nh>" + (nbt.getBoolean("bladesRight") ? "ARMED" : "DISARMED"));
+            system.systemMessage(entity, "<n>Left: <nh>" + (nbt.getBoolean("bladesLeft") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/blade_left_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/blade_left_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.systemMessage(entity, "<n>Left stealth mode: <nh>" + ((entity.getData("skyhighocs:dyn/blade_left_arm_stealth_timer") > 0) ? "ENGAGED" : "DISENGAGED"));
+            system.systemMessage(entity, "<n>Right: <nh>" + (nbt.getBoolean("bladesRight") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/blade_right_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/blade_right_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.systemMessage(entity, "<n>Right stealth mode: <nh>" + ((entity.getData("skyhighocs:dyn/blade_right_arm_stealth_timer") > 0) ? "ENGAGED" : "DISENGAGED"));
             break;
           default:
             system.systemMessage(entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blades help<e> for a list of commands!");

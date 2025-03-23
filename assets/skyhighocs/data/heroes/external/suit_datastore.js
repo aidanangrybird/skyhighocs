@@ -19,7 +19,7 @@ function initModule(system) {
     var suitsRemoved = 0;
     var suitDatastore = entity.getWornHelmet().nbt().getStringList("suitDatastore");
     suitsToRemove.forEach(entry => {
-      if ((entry < (suitDatastoreArray.length-1)) && (entry > -1)) {
+      if ((entry < suitDatastoreArray.length) && (entry > -1)) {
         var currentSuit = suitDatastoreArray[entry];
         system.systemMessage(entity, "<n>Removeing suit \"<nh>" + currentSuit + "<n>\"!");
         if (suitDatastoreArray.indexOf(currentSuit) > -1) {

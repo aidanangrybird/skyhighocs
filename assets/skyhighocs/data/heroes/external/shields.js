@@ -116,12 +116,13 @@ function initModule(system) {
             system.systemMessage(entity, "<n>!shields disarm <left|right|*> <nh>-<n> Disarms shields");
             system.systemMessage(entity, "<n>!shields deploy <left|right|*> <nh>-<n> Deploys shields");
             system.systemMessage(entity, "<n>!shields retract <left|right|*> <nh>-<n> Retracts disarmed shields");
+            system.systemMessage(entity, "<n>!shields status <nh>-<n> Shows status of shields");
             system.systemMessage(entity, "<n>!shields help <nh>-<n> Shows shields commands");
             break;
           case "status":
             system.systemMessage(entity, "<n>Shields status:");
-            system.systemMessage(entity, "<n>Left: <nh>" + (nbt.getBoolean("shieldsLeft") ? "ARMED" : "DISARMED"));
-            system.systemMessage(entity, "<n>Right: <nh>" + (nbt.getBoolean("shieldsRight") ? "ARMED" : "DISARMED"));
+            system.systemMessage(entity, "<n>Left: <nh>" + (nbt.getBoolean("shieldsLeft") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/shield_left_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/shield_left_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.systemMessage(entity, "<n>Right: <nh>" + (nbt.getBoolean("shieldsRight") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/shield_right_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/shield_right_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             break;
           default:
             system.systemMessage(entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shields help<e> for a list of commands!");

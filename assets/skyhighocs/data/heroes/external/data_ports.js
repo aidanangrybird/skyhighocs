@@ -44,13 +44,13 @@ function initModule(system) {
     var suitsDownloaded = 0;
     var suitDatastore = entity.getWornHelmet().nbt().getStringList("suitDatastore");
     suitsToDownload.forEach(entry => {
-      if ((entry < 9) && (entry > -1)) {
+      if ((entry < 10) && (entry > -1)) {
         var currentSuit = dataDriveSuitsArray[entry];
         system.systemMessage(entity, "<n>Downloading suit \"<nh>" + currentSuit + "<n>\"!");
         if (suitDatastoreArray.indexOf(currentSuit) == -1) {
           suitDatastoreArray.push(currentSuit);
           manager.appendString(suitDatastore, currentSuit);
-          system.systemMessage(entity, "<s>Successfully downloaded suit \"<sh>" + currentSuit + "<s>\"!");
+          system.systemMessage(entity, "<s>Successfully downloaded suit \"<sh>" + currentSuit + "<s>\" to " + system.getModelID(entity) + "!");
           suitsDownloaded = suitsDownloaded + 1;
         } else {
           system.systemMessage(entity, "<e>Failed to download suit \"<eh>" + currentSuit + "<e>\"!");
@@ -76,10 +76,10 @@ function initModule(system) {
     var suitsUploaded = 0;
     var dataDriveSuits = entity.getHeldItem().nbt().getStringList("Suits");
     suitsToUpload.forEach(entry => {
-      if ((entry < (suitDatastoreArray.length-1)) && (entry > -1)) {
+      if ((entry < suitDatastoreArray.length) && (entry > -1)) {
         var currentSuit = suitDatastoreArray[entry];
         system.systemMessage(entity, "<n>Uploading suit \"<nh>" + currentSuit + "<n>\"!");
-        if ((dataDriveSuitsArray.indexOf(currentSuit) == -1) && (dataDriveSuitsArray.length < 11)) {
+        if ((dataDriveSuitsArray.indexOf(currentSuit) == -1) && (dataDriveSuitsArray.length < 9)) {
           dataDriveSuitsArray.push(currentSuit);
           manager.appendString(dataDriveSuits, currentSuit);
           system.systemMessage(entity, "<s>Successfully uploaded suit \"<sh>" + currentSuit + "<s>\"!");
@@ -134,10 +134,20 @@ function initModule(system) {
             manager.setData(entity, "skyhighocs:dyn/ports_deployed", false);
             system.systemMessage(entity, "<n>Retracting data ports!");
             break;
+          case "status":
+            system.systemMessage(entity, "<n>Ports status:");
+            system.systemMessage(entity, "<n>Main: <nh>" + ((entity.getData("skyhighocs:dyn/ports_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/ports_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            break;
           case "help":
             system.systemMessage(entity, "<n>Ports commands:");
             system.systemMessage(entity, "<n>!ports deploy <nh>-<n> Exposes data ports");
             system.systemMessage(entity, "<n>!ports retract <nh>-<n> Hides data ports");
+            system.systemMessage(entity, "<n>!ports list <nh>-<n> Lists suits on plugged in data drive");
+            system.systemMessage(entity, "<n>!ports insert <nh>-<n> Plugs in data drive");
+            system.systemMessage(entity, "<n>!ports unplug <nh>-<n> Unplugs data drive");
+            system.systemMessage(entity, "<n>!ports download <suits> <nh>-<n> Downloads suits (comma seperated indexes) from data drive");
+            system.systemMessage(entity, "<n>!ports upload <suits> <nh>-<n> Uploads suits (comma seperated indexes) to data drive");
+            system.systemMessage(entity, "<n>!ports status <nh>-<n> Shows status of data ports");
             system.systemMessage(entity, "<n>!ports help <nh>-<n> Shows dataPorts commands");
             break;
           default:

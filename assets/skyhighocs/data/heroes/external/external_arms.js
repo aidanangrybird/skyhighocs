@@ -28,10 +28,14 @@ function initModule(system) {
             break;
           case "help":
             system.systemMessage(entity, "<n>External Arms commands:");
-            system.systemMessage(entity, "<n>!extarms on <nh>-<n> Deploys external arms");
-            system.systemMessage(entity, "<n>!extarms off <nh>-<n> Retracts external arms");
+            system.systemMessage(entity, "<n>!extarms deploy <nh>-<n> Deploys external arms");
+            system.systemMessage(entity, "<n>!extarms retract <nh>-<n> Retracts external arms");
+            system.systemMessage(entity, "<n>!extarms status <nh>-<n> Shows status of blades");
             system.systemMessage(entity, "<n>!extarms help <nh>-<n> Shows externalArms commands");
             break;
+          case "status":
+            system.systemMessage(entity, "<n>External arms status:");
+            system.systemMessage(entity, "<n>Main: <nh>" + ((entity.getData("skyhighocs:dyn/external_arms_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/external_arms_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
           default:
             system.systemMessage(entity, "<e>Unknown <eh>extarms<e> command! Try <eh>!extarms help<e> for a list of commands!");
             break;
@@ -78,8 +82,14 @@ function initModule(system) {
       manager.setData(entity, "skyhighocs:dyn/external_arms_deployed", false);
     },
     tickHandler: function (entity, manager) {
-      var tentacles = entity.getData("skyhighocs:dyn/external_arms_timer") == 1;
-      manager.setData(entity, "fiskheroes:tentacles_retracting", !tentacles);
+      if (entity.getData("skyhighocs:dyn/external_arms")) {
+        var tentacles = entity.getData("skyhighocs:dyn/external_arms_timer") == 1;
+        manager.setData(entity, "fiskheroes:tentacles_retracting", !tentacles);
+      };
+      if (entity.getData("fiskheroes:tentacles_retracting")) {
+        var tentacles = entity.getData("tentacle_extend_timer") == 0;
+        manager.setData(entity, "skyhighocs:dyn/external_arms", tentacles);
+      };
     }
   };
 };

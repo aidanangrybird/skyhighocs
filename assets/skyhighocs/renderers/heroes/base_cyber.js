@@ -293,12 +293,6 @@ function initEffects(renderer) {
   right_leg_disguise_layer2_model.anchor.set("rightLeg");
   right_leg_disguise_layer2_model.setOffset(0.0, -0.25, 0.0);
   right_leg_disguise_layer2_model.setScale(1.05);
-
-  metal_heat = renderer.createEffect("fiskheroes:metal_heat");
-  metal_heat.includeEffects(head_model, head_hair_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model);
-  renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
-    return 0.999999;
-  }).setCondition(entity => (entity.isWearingFullSuit() || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));
   
   var head_camouflage = renderer.createResource("MODEL", "skyhighocs:CyberHead");
   head_camouflage.texture.set("head_camouflage");
@@ -389,17 +383,18 @@ function initEffects(renderer) {
   metal_heat.includeEffects(head_model, head_hair_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model);
   renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
     return 0.999999;
-  }).setCondition(entity => (entity.isWearingFullSuit() || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));
+  }).setCondition(entity => ((entity.isWearingFullSuit() && entity.getUUID() == getID()) || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));
   
   cyber_beams.initLeftArmBeams(renderer, getColor());
   cyber_beams.initRightArmBeams(renderer, getColor());
   cyber_beams.initHeadBeams(renderer, getColor());
   cyber_beams.initBodyBeams(renderer, getColor());
 
-  var nv_self = renderer.bindProperty("fiskheroes:night_vision");
-  nv_self.fogStrength = 0.0;
-  nv_self.firstPersonOnly = true;
-  nv_self.factor = 1.0;
+  var nv = renderer.bindProperty("fiskheroes:night_vision");
+  nv.fogStrength = 0.0;
+  nv.firstPersonOnly = false;
+  nv.factor = 1.0;
+  nv.setCondition(entity => (entity.isWearingFullSuit() && entity.getUUID() == getID()));
 };
 
 function initAnimations(renderer) {
@@ -408,7 +403,7 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  if (entity.isWearingFullSuit()) {
+  if (entity.isWearingFullSuit() && entity.getUUID() == getID()) {
     head_model.render();
     head_hair_model.render();
     body_model.render(); 
@@ -439,16 +434,16 @@ function render(entity, renderLayer, isFirstPersonArm) {
       right_leg_disguise_layer1_model.render();
       right_leg_disguise_layer2_model.render();
     };
-  };
 
-  body_boosters.render(entity, renderLayer, isFirstPersonArm);
-  left_arm_boosters.render(entity, renderLayer, isFirstPersonArm);
-  right_arm_boosters.render(entity, renderLayer, isFirstPersonArm);
-  left_leg_boosters.render(entity, renderLayer, isFirstPersonArm);
-  right_leg_boosters.render(entity, renderLayer, isFirstPersonArm);
-  
-  metal_heat.opacity = entity.getInterpolatedData("fiskheroes:metal_heat");
-  metal_heat.render();
+    body_boosters.render(entity, renderLayer, isFirstPersonArm);
+    left_arm_boosters.render(entity, renderLayer, isFirstPersonArm);
+    right_arm_boosters.render(entity, renderLayer, isFirstPersonArm);
+    left_leg_boosters.render(entity, renderLayer, isFirstPersonArm);
+    right_leg_boosters.render(entity, renderLayer, isFirstPersonArm);
+    
+    metal_heat.opacity = entity.getInterpolatedData("fiskheroes:metal_heat");
+    metal_heat.render();
+  };
 };
 function getID() {
   return "";

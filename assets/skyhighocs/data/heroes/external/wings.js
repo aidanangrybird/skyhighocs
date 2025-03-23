@@ -40,11 +40,11 @@ function initModule(system) {
             system.systemMessage(entity, "<n>!wings disarm <nh>-<n> Disarms wings");
             system.systemMessage(entity, "<n>!wings deploy <nh>-<n> Deploys wings");
             system.systemMessage(entity, "<n>!wings retract <nh>-<n> Retracts wings");
-            system.systemMessage(entity, "<n>!wings status <nh>-<n> Shows armed status of wings");
+            system.systemMessage(entity, "<n>!wings status <nh>-<n> Shows status of wings");
             system.systemMessage(entity, "<n>!wings help <nh>-<n> Shows wings commands");
             break;
           case "status":
-            system.systemMessage(entity, "<n>Wings status: <nh>" + (nbt.getBoolean("wings") ? "ARMED" : "DISARMED"));
+            system.systemMessage(entity, "<n>Wings status: <nh>" + (nbt.getBoolean("wings") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/wings_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/wings_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             break;
           default:
             system.systemMessage(entity, "<e>Unknown <eh>wings<e> command! Try <eh>!wings help<e> for a list of commands!");

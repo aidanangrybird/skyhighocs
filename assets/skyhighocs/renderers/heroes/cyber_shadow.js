@@ -46,7 +46,7 @@ function initEffects(renderer) {
 };
 
 function getID() {
-  return "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
+  return "e51532a1-19fc-4d4f-9da0-f952c4645891";
 };
 
 function getColor() {

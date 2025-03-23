@@ -132,6 +132,9 @@ function initCyberAnimations(renderer) {
   addAnimation(renderer, "cyber.RIGHT_ARM_SHIELD", "skyhighocs:cyber_right_arm_shield").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/shield_right_arm_timer") * entity.getInterpolatedData("fiskheroes:shield_blocking_timer") * (1 - entity.getInterpolatedData("fiskheroes:beam_charge")));
   });
+  addAnimation(renderer, "cyber.DRIVE", "skyhighocs:cyber_drive").setData((entity, data) => {
+    data.load(entity.getInterpolatedData("skyhighocs:dyn/ports_timer"));
+  });
   //Flight
   addFlightAnimationWithLanding(renderer, "cyber.FLIGHT", "skyhighocs:cyber_flight.anim.json");
   //Landing

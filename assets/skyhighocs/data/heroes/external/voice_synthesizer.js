@@ -52,12 +52,17 @@ function initModule(system) {
             manager.setData(entity, "skyhighocs:dyn/mouth_deployed", false);
             system.systemMessage(entity, "<n>Retracted mouth!");
             break;
+          case "status":
+            system.systemMessage(entity, "<n>Voice Synthesizer status:");
+            system.systemMessage(entity, "<n>Mouth: <nh>" + (nbt.getBoolean("mouth") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/mouth_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/mouth_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            break;
           case "help":
             system.systemMessage(entity, "<n>Voice Synthesizer commands:");
-            system.systemMessage(entity, "<n>!vs deploy <nh>-<n> Shows mouth");
             system.systemMessage(entity, "<n>!vs arm <nh>-<n> Arms mouth");
             system.systemMessage(entity, "<n>!vs disarm <nh>-<n> Disarms mouth");
+            system.systemMessage(entity, "<n>!vs deploy <nh>-<n> Shows mouth");
             system.systemMessage(entity, "<n>!vs retract <nh>-<n> Hides mouth");
+            system.systemMessage(entity, "<n>!vs status <nh>-<n> Shows status of voice synthesizer");
             system.systemMessage(entity, "<n>!vs help <nh>-<n> Shows voiceSynthesizer commands");
             break;
           default:

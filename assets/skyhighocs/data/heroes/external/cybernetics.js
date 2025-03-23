@@ -29,8 +29,10 @@ var months = [
   "December"
 ];
 
-function asssignID(entity, manager, cyberName, color) {
-  manager.setString(entity.getWornHelmet().nbt(), "cyberID", cyberName+"-"+color);
+function asssignID(entity, manager, cyberName, cyberShortName, color) {
+  manager.setString(entity.getWornHelmet().nbt(), "modelID", cyberShortName+"-"+color);
+  manager.setString(entity.getWornHelmet().nbt(), "cyberName", cyberName);
+  manager.setBoolean(entity.getWornHelmet().nbt(), "Unbreakable", true);
   if (!entity.getWornHelmet().nbt().hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
       var computerID = Math.random().toFixed(8).toString().substring(2);
@@ -40,12 +42,12 @@ function asssignID(entity, manager, cyberName, color) {
 };
 
 /**
- * Checks if an entity is cyber
+ * Checks if an entity is cybernetic
  * @param {JSEntity} entity - Entity getting checked
- * @returns If the entity is cyber
+ * @returns If the entity is cybernetic
  **/
-function isCyber(entity) {
-  return entity.getWornHelmet().nbt().hasKey("cyberID");
+function hasCyberneticBody(entity) {
+  return entity.getWornHelmet().nbt().hasKey("modelID") && entity.getWornHelmet().nbt().getString("cyberName");
 };
 
 /**
@@ -53,8 +55,16 @@ function isCyber(entity) {
  * @param {JSEntity} entity - Entity getting checked
  * @returns The Cyber ID
  **/
-function getID(entity) {
-  return entity.getWornHelmet().nbt().getString("cyberID");
+function getModelID(entity) {
+  return entity.getWornHelmet().nbt().getString("modelID");
+};
+/**
+ * Gets the Cyber name
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns The Cyber ID
+ **/
+function getName(entity) {
+  return entity.getWornHelmet().nbt().getString("cyberName");
 };
 
 /**
@@ -125,22 +135,6 @@ function getGroupArrayMembers(entity) {
   return result;
 };
 /**
- * Disables a module
- * @param {JSEntity} entity - Required
- * @param {JSDataManager} manager - Required
- * @param {Array} moduleList - List of available module names
- * @param {string} moduleName - Module name to disable
- **/
-
-/**
- * Enables module
- * @param {JSPlayer} player - Player cutting BrotherBand
- * @param {JSDataManager} manager - Required
- * @param {Array} moduleList - List of available module names
- * @param {integer} moduleName - Username of player cutting BrotherBand with
- **/
-
-/**
  * Checks if a module is disabled
  * @param {JSEntity} entity - Player getting checked
  * @param {string} moduleName - Module being checked if disabled
@@ -183,7 +177,7 @@ function chatMessage(player, message) {
  * @param {string} message - Message content
  **/
 function systemMessage(player, message) {
-  var id = getID(player);
+  var id = getModelID(player);
   var color = id.split("-")[1];
   chatMessage(player, formatSystem("\u00A7" + color + "SYSTEM<r>> " + message));
 };
@@ -198,10 +192,12 @@ function logMessage(message) {
 /**
  * Initializes cyber system
  * @param {object} moduleList - cyber system modules
- * @param {string} cyberName - Required, you'll be happy that is a thing or else debugging is painful
- * @param {string} satellite - Required, or other cybers will not recognize this cyber as a cyber
+ * @param {string} name - Name of the cybernetic being
+ * @param {string} shortName - Shortened name of cybernetic being
+ * @param {string} normalName - Disguised name of cybernetic being
+ * @param {string} color - Color to set system thing to
  **/
-function initSystem(moduleList, name, normalName, color) {
+function initSystem(moduleList, name, shortName, normalName, color, uuid) {
   var cyberInstance = this;
   //Type 1 - commands (can have data management)
   /** @var type1Specs - Type 1 Specs */
@@ -254,6 +250,8 @@ function initSystem(moduleList, name, normalName, color) {
   var powerArray = [];
   /** @var disguisedName - disguised name */
   var disguisedName = normalName;
+  /** @var cyberShortName - short cyber name */
+  var cyberShortName = shortName;
   /** @var cyberName - cyber name */
   var cyberName = name;
   var hasError = false;
@@ -507,6 +505,7 @@ function initSystem(moduleList, name, normalName, color) {
     systemMessage(entity, normalModulesMessage);
     systemMessage(entity, cyberneticModulesMessage);
     systemMessage(entity, "<n>computerID: <nh>" + entity.getWornHelmet().nbt().getString("computerID"));
+    systemMessage(entity, "<n>Model: <nh>" + entity.getWornHelmet().nbt().getString("modelID"));
   };
   function status(entity) {
     var date = new Date();
@@ -640,7 +639,7 @@ function initSystem(moduleList, name, normalName, color) {
      **/
     getAttributeProfile: function (entity) {
       var result = null;
-      if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
+      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != uuid)) {
         result = "SHUT_DOWN";
       };
       if (attributeProfileIndexes.length == 1) {
@@ -676,7 +675,7 @@ function initSystem(moduleList, name, normalName, color) {
      **/
     getDamageProfile: function (entity) {
       var result = null;
-      if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
+      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != uuid)) {
         result = null;
       };
       if (damageProfileIndexes.length == 1) {
@@ -735,7 +734,7 @@ function initSystem(moduleList, name, normalName, color) {
      * @param {string} keyBind - Required
      **/
     isKeyBindEnabled: function (entity, keyBind) {
-      if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
+      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != uuid)) {
         return false;
       };
       if (keyBindIndexes.length == 1) {
@@ -793,7 +792,7 @@ function initSystem(moduleList, name, normalName, color) {
      * @param {string} modifier - Required
      **/
     isModifierEnabled: function (entity, modifier) {
-      if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
+      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != uuid)) {
         return false;
       };
       if (modifierIndexes.length == 1) {
@@ -851,8 +850,9 @@ function initSystem(moduleList, name, normalName, color) {
      * @param {JSDataManager} manager - Required
      **/
     systemHandler: (entity, manager) => {
-      if (!entity.getData("skyhighheroes:dyn/system_init")) {
-        asssignID(entity, manager, cyberName, color);
+      if ((!entity.getData("skyhighheroes:dyn/system_init")) && (entity.getUUID() == uuid)) {
+        asssignID(entity, manager, cyberName, cyberShortName, color);
+        systemMessage(entity, "<n>Hello model <nh>" + entity.getWornHelmet().nbt().getString("modelID") + "<n> AKA <nh>" + entity.getWornHelmet().nbt().getString("cyberName") + "<n>!");
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
       };
@@ -930,7 +930,7 @@ function initSystem(moduleList, name, normalName, color) {
                 break;
             }
           } else {
-            modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity);
+            modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity, name, 32);
           };
         };
       };

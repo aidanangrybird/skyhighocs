@@ -56,6 +56,8 @@
     "powered_down": { "type": "BOOLEAN", "resetOnDeath": false, "resetWithoutSuit": false },
     "powering_down_timer": { "type": "FLOAT_INTERP", "resetOnDeath": false, "resetWithoutSuit": false },
 
+    "suit_data_buffer": { "type": "STRING", "resetOnDeath": false, "resetWithoutSuit": false },
+
     "cannon_left_arm_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "cannon_left_arm": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "cannon_right_arm_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },

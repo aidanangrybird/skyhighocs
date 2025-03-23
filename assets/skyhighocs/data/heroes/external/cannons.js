@@ -157,9 +157,9 @@ function initModule(system) {
             break;
           case "status":
             system.systemMessage(entity, "<n>Cannons status:");
-            system.systemMessage(entity, "<n>Eyes: <nh>" + (nbt.getBoolean("cannonsEyes") ? "ARMED" : "DISARMED"));
-            system.systemMessage(entity, "<n>Body: <nh>" + (nbt.getBoolean("cannonsBody") ? "ARMED" : "DISARMED"));
-            system.systemMessage(entity, "<n>Arms: <nh>" + (nbt.getBoolean("cannonsArms") ? "ARMED" : "DISARMED"));
+            system.systemMessage(entity, "<n>Eyes: <nh>" + (nbt.getBoolean("cannonsEyes") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/cannon_eyes_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/cannon_eyes_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.systemMessage(entity, "<n>Body: <nh>" + (nbt.getBoolean("cannonsBody") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/cannon_body_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/cannon_body_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.systemMessage(entity, "<n>Arms: <nh>" + (nbt.getBoolean("cannonsArms") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/blade_left_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/blade_left_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             break;
           default:
             system.systemMessage(entity, "<e>Unknown <eh>cannons<e> command! Try <eh>!cannons help<e> for a list of commands!");
