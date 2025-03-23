@@ -102,52 +102,52 @@ function addHoverAnimation(renderer, name, value, dataLoader) {
 };
 
 //Cyber Animations
-function initCyberAnimations(renderer) {
-  addAnimation(renderer, "cyber.LEFT_ARM_BLADE", "skyhighocs:cyber_left_arm_blade").setData((entity, data) => {
+function initCyberneticAnimations(renderer) {
+  addAnimation(renderer, "cybernetic.LEFT_ARM_BLADE", "skyhighocs:cybernetic_left_arm_blade").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_timer") + entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_deploy_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_stealth_timer"));
   });
-  addAnimation(renderer, "cyber.RIGHT_ARM_BLADE", "skyhighocs:cyber_right_arm_blade").setData((entity, data) => {
+  addAnimation(renderer, "cybernetic.RIGHT_ARM_BLADE", "skyhighocs:cybernetic_right_arm_blade").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_timer") + entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_deploy_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_stealth_timer"));
   });
-  addAnimation(renderer, "cyber.LEFT_LEG_ROCKETS", "skyhighocs:cyber_left_leg_rockets").setData((entity, data) => {
+  addAnimation(renderer, "cybernetic.LEFT_LEG_ROCKETS", "skyhighocs:cybernetic_left_leg_rockets").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer") + entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_deploy_timer"));
   });
-  addAnimation(renderer, "cyber.RIGHT_LEG_ROCKETS", "skyhighocs:cyber_right_leg_rockets").setData((entity, data) => {
+  addAnimation(renderer, "cybernetic.RIGHT_LEG_ROCKETS", "skyhighocs:cybernetic_right_leg_rockets").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer") + entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_deploy_timer"));
   });
-  addAnimation(renderer, "cyber.WINGS", "skyhighocs:cyber_wings").setData((entity, data) => {
+  addAnimation(renderer, "cybernetic.WINGS", "skyhighocs:cybernetic_wings").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/wings_timer") + entity.getInterpolatedData("skyhighocs:dyn/wings_deploy_timer"));
   });
-  addAnimation(renderer, "cyber.LEFT_ARM_AIM", "skyhighocs:cyber_left_arm_aim").setData((entity, data) => {
+  addAnimation(renderer, "cybernetic.LEFT_ARM_AIM", "skyhighocs:cybernetic_left_arm_aim").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_timer"));
   });
-  addAnimation(renderer, "cyber.RIGHT_ARM_AIM", "skyhighocs:cyber_right_arm_aim").setData((entity, data) => {
+  addAnimation(renderer, "cybernetic.RIGHT_ARM_AIM", "skyhighocs:cybernetic_right_arm_aim").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_timer"));
   });
-  addAnimation(renderer, "cyber.LEFT_ARM_SHIELD", "skyhighocs:cyber_left_arm_shield").setData((entity, data) => {
+  addAnimation(renderer, "cybernetic.LEFT_ARM_SHIELD", "skyhighocs:cybernetic_left_arm_shield").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/shield_left_arm_timer") * entity.getInterpolatedData("fiskheroes:shield_blocking_timer") * (1 - entity.getInterpolatedData("fiskheroes:beam_charge")));
   });
-  addAnimation(renderer, "cyber.RIGHT_ARM_SHIELD", "skyhighocs:cyber_right_arm_shield").setData((entity, data) => {
+  addAnimation(renderer, "cybernetic.RIGHT_ARM_SHIELD", "skyhighocs:cybernetic_right_arm_shield").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/shield_right_arm_timer") * entity.getInterpolatedData("fiskheroes:shield_blocking_timer") * (1 - entity.getInterpolatedData("fiskheroes:beam_charge")));
   });
-  addAnimation(renderer, "cyber.DRIVE", "skyhighocs:cyber_drive").setData((entity, data) => {
+  addAnimation(renderer, "cybernetic.DRIVE", "skyhighocs:cybernetic_drive").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/ports_timer"));
   });
   //Flight
-  addFlightAnimationWithLanding(renderer, "cyber.FLIGHT", "skyhighocs:cyber_flight.anim.json");
+  addFlightAnimationWithLanding(renderer, "cybernetic.FLIGHT", "skyhighocs:cybernetic_flight.anim.json");
   //Landing
-  addAnimationWithData(renderer, "cyber.LAND", "skyhighocs:cyber_landing", "skyhighheroes:dyn/superhero_landing_timer")
+  addAnimationWithData(renderer, "cybernetic.LAND", "skyhighocs:cybernetic_landing", "skyhighheroes:dyn/superhero_landing_timer")
     .priority = -8;
-  addAnimationWithData(renderer, "cyber.LAND_BOOST", "skyhighocs:cyber_boosting_landing", "skyhighheroes:dyn/superhero_boosting_landing_timer")
+  addAnimationWithData(renderer, "cybernetic.LAND_BOOST", "skyhighocs:cybernetic_boosting_landing", "skyhighheroes:dyn/superhero_boosting_landing_timer")
     .priority = -8;
-  addAnimationWithData(renderer, "cyber.ROLL", "skyhighocs:cyber_barrel_roll", "fiskheroes:barrel_roll_timer")
-  addHoverAnimation(renderer, "cyber.HOVER", "skyhighocs:cyber_hover");
-  addAnimationWithData(renderer, "cyber.POWER", "skyhighocs:cyber_powering_down", "skyhighocs:dyn/powering_down_timer")
+  addAnimationWithData(renderer, "cybernetic.ROLL", "skyhighocs:cybernetic_barrel_roll", "fiskheroes:barrel_roll_timer")
+  addHoverAnimation(renderer, "cybernetic.HOVER", "skyhighocs:cybernetic_hover");
+  addAnimationWithData(renderer, "cybernetic.POWER", "skyhighocs:cybernetic_powering_down", "skyhighocs:dyn/powering_down_timer")
     .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighocs:dyn/powering_down_timer") > 0))
     .priority = -10;
-  addAnimation(renderer, "cyber.POWERED_DOWN", "skyhighocs:cyber_powering_down")
+  addAnimation(renderer, "cybernetic.POWERED_DOWN", "skyhighocs:cybernetic_powering_down")
     .setData((entity, data) => data.load(1.0))
     .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighocs:dyn/powering_down_timer") == 1))
     .priority = -10;
@@ -162,9 +162,9 @@ function initNV(renderer, uuid) {
 
 function initTentacles(renderer, model) {
   var tentacleBase = model.getCubeOffset("body_ext_arm_left");
-  var arm = renderer.createResource("MODEL", "skyhighocs:CyberArm");
+  var arm = renderer.createResource("MODEL", "skyhighocs:CyberneticArm");
   arm.texture.set("arm", "arm_lights");
-  var claw = renderer.createResource("MODEL", "skyhighocs:CyberClaw");
+  var claw = renderer.createResource("MODEL", "skyhighocs:CyberneticClaw");
   claw.texture.set("claw", "claw_lights");
   claw.bindAnimation("fiskheroes:ock_claw").setData((entity, data) => {
       var t = entity.as("TENTACLE");

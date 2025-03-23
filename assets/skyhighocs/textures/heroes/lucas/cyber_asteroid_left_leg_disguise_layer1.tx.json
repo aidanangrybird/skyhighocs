@@ -4,11 +4,11 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighocs:xor/cyber_thermoptic<SWITCH>_<TIMER>"
+        "supply": "skyhighocs:xor/cybernetic_thermoptic<SWITCH>_<TIMER>"
       },
       {
         "operation": "STITCH",
-        "supply": "skyhighocs:cyber_left_leg_layer1"
+        "supply": "skyhighocs:cybernetic_left_leg_layer1"
       }
     ],
     "out": "skyhighocs:generated/cyber_asteroid_disguise_left_leg_layer1<SWITCH>_<TIMER>"

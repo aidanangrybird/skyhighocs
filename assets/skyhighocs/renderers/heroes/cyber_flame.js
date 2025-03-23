@@ -1,8 +1,5 @@
 extend("skyhighocs:base_cyber");
 
-var cyber = implement("skyhighocs:external/cyber");
-var stuff = implement("skyhighheroes:external/stuff");
-
 loadTextures({
   "head": "skyhighocs:ace/cyber_flame_head_base.tx.json",
   "head_hair": "skyhighocs:ace/cyber_flame_head_hair_base.tx.json",

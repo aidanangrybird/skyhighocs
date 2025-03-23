@@ -29,8 +29,9 @@ var months = [
   "December"
 ];
 
-function asssignID(entity, manager, cyberName, cyberShortName, color) {
+function assignID(entity, manager, cyberName, cyberShortName, color) {
   manager.setString(entity.getWornHelmet().nbt(), "modelID", cyberShortName+"-"+color);
+  //manager.setString(entity.getWornHelmet().nbt(), "lore", cyberShortName+"-"+color);
   manager.setString(entity.getWornHelmet().nbt(), "cyberName", cyberName);
   manager.setBoolean(entity.getWornHelmet().nbt(), "Unbreakable", true);
   if (!entity.getWornHelmet().nbt().hasKey("computerID")) {
@@ -501,7 +502,7 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
         cyberneticModulesMessage = cyberneticModulesMessage + ((isModuleDisabled(entity, moduleName))?"<n>, <eh>":"<n>, <nh>") + moduleName;
       };
     });
-    systemMessage(entity, "<n>cyberOS");
+    systemMessage(entity, "<n>cyberneticOS");
     systemMessage(entity, normalModulesMessage);
     systemMessage(entity, cyberneticModulesMessage);
     systemMessage(entity, "<n>computerID: <nh>" + entity.getWornHelmet().nbt().getString("computerID"));
@@ -851,7 +852,7 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
      **/
     systemHandler: (entity, manager) => {
       if ((!entity.getData("skyhighheroes:dyn/system_init")) && (entity.getUUID() == uuid)) {
-        asssignID(entity, manager, cyberName, cyberShortName, color);
+        assignID(entity, manager, cyberName, cyberShortName, color);
         systemMessage(entity, "<n>Hello model <nh>" + entity.getWornHelmet().nbt().getString("modelID") + "<n> AKA <nh>" + entity.getWornHelmet().nbt().getString("cyberName") + "<n>!");
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);

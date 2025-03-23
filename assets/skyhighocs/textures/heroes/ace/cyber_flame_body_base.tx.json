@@ -4,15 +4,15 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighocs:xor/cyber_thermoptic_base_<TIMER>"
+        "supply": "skyhighocs:xor/cybernetic_thermoptic_base_<TIMER>"
       },
       {
         "operation": "STITCH",
-        "supply": "skyhighocs:cyber_body_base"
+        "supply": "skyhighocs:cybernetic_body_base"
       },
       {
         "operation": "ADD",
-        "supply": "skyhighocs:cyber_body_base"
+        "supply": "skyhighocs:cybernetic_body_base"
       }
     ],
     "out": "skyhighocs:generated/cyber_flame_body_base_<TIMER>"
