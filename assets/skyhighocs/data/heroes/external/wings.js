@@ -11,7 +11,7 @@ function initModule(system) {
     helpMessage: "<n>!wings <nh>-<n> Wings",
     disabledMessage: "<e>Module <eh>wings<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 3) {
+      if (arguments.length > 1 && arguments.length < 4) {
         var nbt = entity.getWornHelmet().nbt();
         switch(arguments[1]) {
           case "arm":
@@ -78,6 +78,12 @@ function initModule(system) {
       var wings = nbt.getBoolean("wings") && entity.getData("fiskheroes:gliding");
       if (entity.getData("fiskheroes:gliding_timer") > 0) {
         manager.setData(entity, "skyhighocs:dyn/wings", wings);
+      };
+    },
+    fightOrFlight: function (entity, manager) {
+      if (!entity.getWornHelmet().nbt().getBoolean("wings")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "wings", true);
+        system.systemMessage(entity, "<n>Damage detected! Automatically armed <nh>wings<n>!");
       };
     }
   };

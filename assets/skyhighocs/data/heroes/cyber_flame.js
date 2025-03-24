@@ -42,7 +42,7 @@ var cyberOS = cybernetics.initSystem([
 ], "Cyber Flame", "CF", "FieryAceOfSpades", "4", uuid);
 function init(hero) {
   hero.setAliases("cyber_flame");
-  hero.setName("Cyber Flame");
+  hero.setName("Cyber Flame/Model CF-4 Cybernetic Body");
   hero.setTier(10);
   hero.setHelmet("Cybernetic Brain");
   hero.setVersion("OC");

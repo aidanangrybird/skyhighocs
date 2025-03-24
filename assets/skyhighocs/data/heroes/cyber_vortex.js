@@ -42,7 +42,7 @@ var cyberOS = cybernetics.initSystem([
 ], "Cyber Vortex", "CV", "aidanangrybird", "6", uuid);
 function init(hero) {
   hero.setAliases("cyber_vortex");
-  hero.setName("Cyber Vortex");
+  hero.setName("Cyber Vortex/Model CV-6 Cybernetic Body");
   hero.setTier(10);
   hero.setHelmet("Cybernetic Brain");
   hero.setVersion("OC");

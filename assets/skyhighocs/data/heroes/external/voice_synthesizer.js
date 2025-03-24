@@ -87,6 +87,12 @@ function initModule(system) {
     },
     whenDisabled: function (entity, manager) {
       manager.setData(entity, "skyhighocs:dyn/mouth", false);
+    },
+    fightOrFlight: function (entity, manager) {
+      if (!entity.getWornHelmet().nbt().getBoolean("mouth")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "mouth", true);
+        system.systemMessage(entity, "<n>Damage detected! Automatically armed <nh>mouth<n>!");
+      };
     }
   };
 };

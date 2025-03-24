@@ -25,7 +25,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/blade_left_arm_deployed",
         "timerData": "skyhighocs:dyn/blade_left_arm_deploy_timer",
-        "time": 60
+        "time": 20
       },
       "isToggle": true
     },
@@ -33,7 +33,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/blade_right_arm_deployed",
         "timerData": "skyhighocs:dyn/blade_right_arm_deploy_timer",
-        "time": 60
+        "time": 20
       },
       "isToggle": true
     },

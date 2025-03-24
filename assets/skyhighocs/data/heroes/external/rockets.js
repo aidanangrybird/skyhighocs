@@ -15,6 +15,22 @@ function initModule(system) {
       if (arguments.length > 1 && arguments.length < 4) {
         var nbt = entity.getWornHelmet().nbt();
         switch(arguments[1]) {
+          case "enable":
+            switch (arguments[2]) {
+              case "onFall":
+                manager.setBoolean(nbt, "rocketsOnFall", true);
+                system.systemMessage(entity, "<s>Enable <sh>onFall<s>!");
+                break;
+            };
+            break;
+          case "onFall":
+            switch (arguments[2]) {
+              case "onFall":
+                manager.setBoolean(nbt, "rocketsOnFall", true);
+                system.systemMessage(entity, "<s>Disable <sh>onFall<s>!");
+                break;
+            };
+            break;
           case "arm":
             switch (arguments[2]) {
               case "aux":
@@ -40,22 +56,49 @@ function initModule(system) {
           case "disarm":
             switch (arguments[2]) {
               case "aux":
-                manager.setBoolean(nbt, "rocketsAux", false);
-                system.systemMessage(entity, "<s>Disarmed <sh>aux<s> rockets!");
+                if (!(nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flight_timer") > 0)) {
+                  manager.setBoolean(nbt, "rocketsAux", false);
+                  system.systemMessage(entity, "<s>Disarmed <sh>aux<s> rockets!");
+                } else {
+                  system.systemMessage(entity, "<e>Unable to disarm active <eh>aux<e> rockets!");
+                };
                 break;
               case "body":
-                manager.setBoolean(nbt, "rocketsBody", false);
-                system.systemMessage(entity, "<s>Disarmed <sh>body<s> rockets!");
+                if (!(nbt.getBoolean("rocketsBody") && entity.getData("fiskheroes:flight_timer") > 0)) {
+                  manager.setBoolean(nbt, "rocketsBody", false);
+                  system.systemMessage(entity, "<s>Disarmed <sh>body<s> rockets!");
+                } else {
+                  system.systemMessage(entity, "<e>Unable to disarm active <eh>body<e> rockets!");
+                };
                 break;
               case "legs":
-                manager.setBoolean(nbt, "rocketsLegs", false);
-                system.systemMessage(entity, "<s>Disarmed <sh>leg<s> rockets!");
+                if (!(nbt.getBoolean("rocketsLegs") && entity.getData("fiskheroes:flight_timer") > 0)) {
+                  manager.setBoolean(nbt, "rocketsLegs", false);
+                  system.systemMessage(entity, "<s>Disarmed <sh>leg<s> rockets!");
+                } else {
+                  system.systemMessage(entity, "<e>Unable to disarm active <eh>leg<e> rockets!");
+                };
                 break;
               case "*":
-                manager.setBoolean(nbt, "rocketsAux", false);
-                manager.setBoolean(nbt, "rocketsBody", false);
-                manager.setBoolean(nbt, "rocketsLegs", false);
-                system.systemMessage(entity, "<s>Disarmed <sh>all<s> rockets!");
+                if (!(nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flight_timer") > 0)) {
+                  manager.setBoolean(nbt, "rocketsAux", false);
+                  system.systemMessage(entity, "<s>Disarmed <sh>aux<s> rockets!");
+                } else {
+                  system.systemMessage(entity, "<e>Unable to disarm active <eh>aux<e> rockets!");
+                };
+                if (!(nbt.getBoolean("rocketsBody") && entity.getData("fiskheroes:flight_timer") > 0)) {
+                  manager.setBoolean(nbt, "rocketsBody", false);
+                  system.systemMessage(entity, "<s>Disarmed <sh>body<s> rockets!");
+                } else {
+                  system.systemMessage(entity, "<e>Unable to disarm active <eh>body<e> rockets!");
+                };
+                if (!(nbt.getBoolean("rocketsLegs") && entity.getData("fiskheroes:flight_timer") > 0)) {
+                  manager.setBoolean(nbt, "rocketsLegs", false);
+                  system.systemMessage(entity, "<s>Disarmed <sh>leg<s> rockets!");
+                } else {
+                  system.systemMessage(entity, "<e>Unable to disarm active <eh>leg<e> rockets!");
+                };
+                system.systemMessage(entity, "<s>Disarmed <sh>all<s> inactive rockets!");
                 break;
             };
             break;
@@ -109,7 +152,7 @@ function initModule(system) {
               case "body":
                 if (!(nbt.getBoolean("rocketsBody") && entity.getData("fiskheroes:flight_timer") > 0)) {
                   manager.setData(entity, "skyhighocs:dyn/rockets_body_deployed", false);
-                  system.systemMessage(entity, "<s>Retracted <sh>body<s> unarmed rockets!");
+                  system.systemMessage(entity, "<s>Retracted <sh>body<s> rockets!");
                 } else {
                   system.systemMessage(entity, "<e>Unable to retract armed <eh>body<e> rockets!");
                 };
@@ -120,7 +163,7 @@ function initModule(system) {
                   manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_main_deployed", false);
                   manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_deployed", false);
                   manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_deployed", false);
-                  system.systemMessage(entity, "<s>Retracted <sh>leg<s> disarmed rockets!");
+                  system.systemMessage(entity, "<s>Retracted <sh>leg<s> rockets!");
                 } else {
                   system.systemMessage(entity, "<e>Unable to retract armed <eh>leg<e> rockets!");
                 };
@@ -215,6 +258,10 @@ function initModule(system) {
     },
     tickHandler: function (entity, manager) {
       var nbt = entity.getWornHelmet().nbt();
+      if (!entity.isSneaking() && !entity.getData("fiskheroes:flying") && nbt.getBoolean("rocketsOnFall") && entity.world().isUnobstructed(entity.pos(), entity.pos().add(0, -5, 0)) && entity.motionY() < -0.75) {
+        system.systemMessage(entity, "<n>Auto activated rockets!");
+        manager.setData(entity, "fiskheroes:flying", true);
+      };
       var aux = nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flying");
       var body = nbt.getBoolean("rocketsBody") && entity.getData("fiskheroes:flying");
       var legs = nbt.getBoolean("rocketsLegs") && entity.getData("fiskheroes:flying");
@@ -222,6 +269,14 @@ function initModule(system) {
         manager.setData(entity, "skyhighocs:dyn/rockets_aux", aux);
         manager.setData(entity, "skyhighocs:dyn/rockets_legs", legs);
         manager.setData(entity, "skyhighocs:dyn/rockets_body", body);
+      };
+    },
+    fightOrFlight: function (entity, manager) {
+      if (!entity.getWornHelmet().nbt().getBoolean("rocketsAux") || !entity.getWornHelmet().nbt().getBoolean("rocketsBody") || !entity.getWornHelmet().nbt().getBoolean("rocketsLegs")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsAux", true);
+        manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsBody", true);
+        manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsLegs", true);
+        system.systemMessage(entity, "<n>Damage detected! Automatically armed <nh>rockets<n>!");
       };
     }
   };

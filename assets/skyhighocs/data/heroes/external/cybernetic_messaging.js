@@ -14,7 +14,7 @@ function initModule(system) {
    **/
   function cyberMessage(player, sender, message) {
     if (PackLoader.getSide() == "SERVER") {
-      player.as("PLAYER").addChatMessage("<e>|<eh>Cyber<e>|" + sender + "> " + message);
+      player.as("PLAYER").addChatMessage("|Cyber| " + sender + "> " + message);
     };
   };
   return {
@@ -37,7 +37,7 @@ function initModule(system) {
       };
       var entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
       entities.forEach(player => {
-        if (player.is("PLAYER")) {
+        if (player.is("PLAYER") && (player.getUUID() != entity.getUUID())) {
           if (system.hasCyberneticBody(player) && (uuids.indexOf(player.getUUID()) > -1)) {
             foundPlayers.push(player);
           };
@@ -55,11 +55,13 @@ function initModule(system) {
             cyberMessage(player, newName, message);
           };
         });
-        cyberMessage(entity, newName, message);
+      } else {
+        system.systemMessage(entity, "<n>No other cybers in range!")
       };
+      cyberMessage(entity, newName, message);
     },
     chatInfo: function (player, manager, chat) {
-      system.systemMessage(player, "You are in cyber messaging mode!");
+      system.systemMessage(player, "<n>You are in <nh>cyber messaging <n>mode!");
     },
   };
 };

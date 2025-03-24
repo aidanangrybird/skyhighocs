@@ -224,6 +224,13 @@ function initModule(system) {
         manager.setData(entity, "skyhighocs:dyn/shield_left_arm", left);
         manager.setData(entity, "skyhighocs:dyn/shield_right_arm", right);
       };
+    },
+    fightOrFlight: function (entity, manager) {
+      if (!entity.getWornHelmet().nbt().getBoolean("shieldsLeft") || !entity.getWornHelmet().nbt().getBoolean("shieldsRight")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "shieldsLeft", true);
+        manager.setBoolean(entity.getWornHelmet().nbt(), "shieldsRight", true);
+        system.systemMessage(entity, "<n>Damage detected! Automatically armed <nh>shields<n>!");
+      };
     }
   };
 };

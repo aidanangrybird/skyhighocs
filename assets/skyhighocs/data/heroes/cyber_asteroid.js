@@ -42,7 +42,7 @@ var cyberOS = cybernetics.initSystem([
 ], "Cyber Asteroid", "CA", "pezzo134", "4", uuid);
 function init(hero) {
   hero.setAliases("cyber_asteroid");
-  hero.setName("Cyber Asteroid");
+  hero.setName("Cyber Asteroid/Model CA-4 Cybernetic Body");
   hero.setTier(10);
   hero.setHelmet("Cybernetic Brain");
   hero.setVersion("OC");

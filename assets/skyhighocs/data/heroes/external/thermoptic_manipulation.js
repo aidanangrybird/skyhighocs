@@ -12,6 +12,7 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>thermoptics<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 4) {
+        var nbt = entity.getWornHelmet().nbt();
         switch (arguments[1]) {
           case "enable":
             switch (arguments[2]) {
@@ -22,6 +23,14 @@ function initModule(system) {
               case "camo":
                 manager.setData(entity, "skyhighocs:dyn/thermoptic_camouflage", true);
                 system.systemMessage(entity, "<n>Enabled <nh>camo<n>!");
+                break;
+              case "autoDisguise":
+                manager.setBoolean(nbt, "autoDisguise", true);
+                system.systemMessage(entity, "<n>Enabled <nh>auto disguise<n>!");
+                break;
+              case "autoCamo":
+                manager.setBoolean(nbt, "autoCamouflage", true);
+                system.systemMessage(entity, "<n>Enabled <nh>auto camouflage<n>!");
                 break;
             };
             break;
@@ -35,7 +44,22 @@ function initModule(system) {
                 manager.setData(entity, "skyhighocs:dyn/thermoptic_camouflage", false);
                 system.systemMessage(entity, "<n>Disabled <nh>camo<n>!");
                 break;
+              case "autoDisguise":
+                manager.setBoolean(nbt, "autoDisguise", false);
+                system.systemMessage(entity, "<n>Disabled <nh>auto disguise<n>!");
+                break;
+              case "autoCamo":
+                manager.setBoolean(nbt, "autoCamouflage", false);
+                system.systemMessage(entity, "<n>Disabled <nh>auto camouflage<n>!");
+                break;
             };
+            break;
+          case "status":
+            system.systemMessage(entity, "<n>Thermoptics status:");
+            system.systemMessage(entity, "<n>Camouflage: <nh>" + ((entity.getData("skyhighocs:dyn/thermoptic_camouflage_timer") > 0) ? "ENABLED" : "DISABLED"));
+            system.systemMessage(entity, "<n>Disguise: <nh>" + ((entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") > 0) ? "ENABLED" : "DISABLED"));
+            system.systemMessage(entity, "<n>Auto Disguise: <nh>" + (nbt.getBoolean("autoDisguise") ? "ARMED" : "DISARMED"));
+            system.systemMessage(entity, "<n>Auto Camouflage: <nh>" + (nbt.getBoolean("autoCamouflage") ? "ARMED" : "DISARMED"));
             break;
           case "help":
             system.systemMessage(entity, "<n>Thermoptics commands:");
@@ -70,6 +94,17 @@ function initModule(system) {
       var invis = entity.getData("skyhighocs:dyn/thermoptic_camouflage_timer") == 1;
       if (entity.getData("skyhighocs:dyn/thermoptic_camouflage_timer") > 0) {
         manager.setData(entity, "fiskheroes:invisible", invis);
+      };
+    },
+    onInitSystem: function (entity, manager) {
+      var nbt = entity.getWornHelmet().nbt();
+      var autoDisguise = nbt.getBoolean("autoDisguise");
+      if (autoDisguise) {
+        manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise", true);
+      };
+      var autoCamouflage = nbt.getBoolean("autoCamouflage");
+      if (autoCamouflage) {
+        manager.setData(entity, "skyhighocs:dyn/thermoptic_camouflage", true);
       };
     }
   };

@@ -8,9 +8,6 @@
     "fiskheroes:regeneration": {
       "factor": 5
     },
-    "fiskheroes:healing_factor": {
-        "delay": 20
-    },
     "fiskheroes:water_breathing": {
     },
     "fiskheroes:fire_immunity": {

@@ -42,7 +42,7 @@ var cyberOS = cybernetics.initSystem([
 ], "Cyber Shadow", "CS", "Dam1en_", "5", uuid);
 function init(hero) {
   hero.setAliases("cyber_shadow");
-  hero.setName("Cyber Shadow");
+  hero.setName("Cyber Shadow/Model CS-5 Cybernetic Body");
   hero.setTier(10);
   hero.setHelmet("Cybernetic Brain");
   hero.setVersion("OC");

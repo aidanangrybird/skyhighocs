@@ -26,7 +26,7 @@ function initModule(system) {
   **/
   function getStatus(tx, rx) {
     var otherName = system.getModelID(tx);
-    system.systemMessage(rx, "<nh>" + otherName + "<n> | <nh>" + ((tx.getHealth()/20)*100) + "%<n> | <nh>" + ((tx.as("PLAYER").getFoodLevel()/20)*100) + "%<n>");
+    system.systemMessage(rx, "<nh>" + otherName + "<n> | <nh>" + ((tx.getHealth()/tx.getMaxHealth())*100) + "%<n> | <nh>" + ((tx.as("PLAYER").getFoodLevel()/20)*100) + "%<n>");
   };
   /**
   * Receives suits
@@ -115,7 +115,7 @@ function initModule(system) {
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 4) {
         switch (arguments[1]) {
-          case "cyberPos":
+          case "pos":
             var range = 32;
             var foundPlayers = [];
             var newRange = (range*1);
@@ -152,9 +152,11 @@ function initModule(system) {
                   getPos(player, entity);
                 };
               });
+            } else {
+              system.systemMessage(entity, "<n>No other cybers in range!")
             };
             break;
-          case "cyberStatus":
+          case "stats":
             var range = 32;
             var foundPlayers = [];
             var newRange = (range*1);
@@ -174,10 +176,10 @@ function initModule(system) {
                 };
               };
             });
+            var name = system.getModelID(entity);
+            system.systemMessage(entity, "<nh>Name<n> | <nh>Health<n> | <nh>Hunger<n>");
+            system.systemMessage(entity, "<nh>" + name + "<n> | <nh>" + ((entity.getHealth()/entity.getMaxHealth())*100) + "%<n> | <nh>" + ((entity.as("PLAYER").getFoodLevel()/20)*100) + "%<n>");
             if (foundPlayers.length > 0) {
-              var name = system.getModelID(entity);
-              system.systemMessage(entity, "<nh>Name<n> | <nh>Health<n> | <nh>Hunger<n>");
-              system.systemMessage(entity, "<nh>" + name + "<n> | <nh>" + ((entity.getHealth()/20)*100) + "%<n> | <nh>" + ((entity.as("PLAYER").getFoodLevel()/20)*100) + "%<n>");
               //entity = tx
               //player = rx
               foundPlayers.forEach(player => {
@@ -191,6 +193,8 @@ function initModule(system) {
                   getStatus(player, entity);
                 };
               });
+            } else {
+              system.systemMessage(entity, "<n>No other cybers in range!")
             };
             break;
           case "tx":
@@ -228,6 +232,8 @@ function initModule(system) {
                   receiveSuits(entity, player, manager);
                 };
               });
+            } else {
+              system.systemMessage(entity, "<n>No other cybers in range!")
             };
             break;
           case "rx":
@@ -264,6 +270,8 @@ function initModule(system) {
                   receiveSuits(entity, player, manager);
                 };
               });
+            } else {
+              system.systemMessage(entity, "<n>No other cybers in range!")
             };
             break;
           case "deploy":
@@ -310,8 +318,8 @@ function initModule(system) {
             system.systemMessage(entity, "<n>!comms retract <sat|ant|satRain> <nh>-<n> Retracts comms type");
             system.systemMessage(entity, "<n>!comms tx <suits> <nh>-<n> Transmits suits (comma seperated indexes) to other Cybers");
             system.systemMessage(entity, "<n>!comms rx <nh>-<n> Receives suits from other Cybers");
-            system.systemMessage(entity, "<n>!comms cyberPos <nh>-<n> Gets position of other Cybers");
-            system.systemMessage(entity, "<n>!comms cyberStatus <nh>-<n> Gets status of other Cybers");
+            system.systemMessage(entity, "<n>!comms pos <nh>-<n> Gets position of other Cybers");
+            system.systemMessage(entity, "<n>!comms stats <nh>-<n> Gets stats of other Cybers");
             system.systemMessage(entity, "<n>!comms status <nh>-<n> Status of comms");
             system.systemMessage(entity, "<n>!comms help <nh>-<n> Shows communications commands");
             break;

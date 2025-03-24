@@ -1,11 +1,11 @@
 {x} = min({vel}, 1){data_1}{d1}{d} / 2.5
-{rightArm_rotX} += 5'{data_1} + {x}
-{rightArm_rotZ} += 10'{data_1}
-{leftArm_rotX} += 5'{data_1} - {x}
-{leftArm_rotZ} -= 10'{data_1}
-{rightLeg_rotX} += 5'{data_1} + 0.2{x}
-{leftLeg_rotX} += 5'{data_1} - 0.2{x}
-{head_rotX} @ {data_1} -> -70'
+;{rightArm_rotX} += {x}
+;{rightArm_rotZ} += 2'{data_1}
+;{leftArm_rotX} -= {x}
+;{leftArm_rotZ} -= 2'{data_1}
+;{rightLeg_rotX} += 0.2{x}
+;{leftLeg_rotX} -= 0.2{x}
+{head_rotX} @ {data_1} -> -50'
 
 {d} *= {data_1} / 1'
 {x} = min({vel} / 2, 1) / 2

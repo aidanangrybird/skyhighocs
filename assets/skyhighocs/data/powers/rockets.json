@@ -19,6 +19,8 @@
       },
       "knockback": 1.0,
       "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
       }
     },
     "fiskheroes:controlled_flight|rockets_FTF": {
@@ -38,6 +40,8 @@
       },
       "knockback": 1.0,
       "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
       }
     },
     "fiskheroes:controlled_flight|rockets_FFT": {
@@ -57,6 +61,8 @@
       },
       "knockback": 1.0,
       "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
       }
     },
     "fiskheroes:controlled_flight|rockets_FTT": {
@@ -76,6 +82,8 @@
       },
       "knockback": 1.0,
       "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
       }
     },
     "fiskheroes:controlled_flight|rockets_TFT": {
@@ -95,6 +103,8 @@
       },
       "knockback": 1.0,
       "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
       }
     },
     "fiskheroes:controlled_flight|rockets_TTF": {
@@ -114,6 +124,8 @@
       },
       "knockback": 1.0,
       "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
       }
     },
     "fiskheroes:controlled_flight|rockets_TTT": {
@@ -133,6 +145,8 @@
       },
       "knockback": 1.0,
       "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
       }
     },
     "fiskheroes:teleportation": {

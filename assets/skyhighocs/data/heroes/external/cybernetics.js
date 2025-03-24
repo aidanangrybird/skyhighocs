@@ -31,7 +31,6 @@ var months = [
 
 function assignID(entity, manager, cyberName, cyberShortName, color) {
   manager.setString(entity.getWornHelmet().nbt(), "modelID", cyberShortName+"-"+color);
-  //manager.setString(entity.getWornHelmet().nbt(), "lore", cyberShortName+"-"+color);
   manager.setString(entity.getWornHelmet().nbt(), "cyberName", cyberName);
   manager.setBoolean(entity.getWornHelmet().nbt(), "Unbreakable", true);
   if (!entity.getWornHelmet().nbt().hasKey("computerID")) {
@@ -247,6 +246,10 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
   var damageProfileIndexes = [];
   /** @var tickHandlerIndexes - Indexes of tick handler capable modules */
   var tickHandlerIndexes = [];
+  /** @var onInitSystemIndexes - Indexes of tick handler capable modules */
+  var onInitSystemIndexes = [];
+  /** @var fightOrFlightIndexes - Indexes of fight or flight capable modules */
+  var fightOrFlightIndexes = [];
   /** @var powerArray - Array of powers to add */
   var powerArray = [];
   /** @var disguisedName - disguised name */
@@ -255,6 +258,8 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
   var cyberShortName = shortName;
   /** @var cyberName - cyber name */
   var cyberName = name;
+  /** @var playerUUID - UUID */
+  var playerUUID = uuid;
   var hasError = false;
   var errors = [];
   logMessage("Attempting to initialize " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on cybernetic body " + cyberName + "!");
@@ -358,6 +363,14 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
                 tickHandlerIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
               };
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
+              if (moduleInit.hasOwnProperty("fightOrFlight")) {
+                fightOrFlightIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"fightOrFlight\"!");
+              };
             };
             hasError = false;
             break;
@@ -389,6 +402,14 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
               if (moduleInit.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
+              };
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
+              if (moduleInit.hasOwnProperty("fightOrFlight")) {
+                fightOrFlightIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"fightOrFlight\"!");
               };
             };
             hasError = false;
@@ -422,6 +443,14 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
               if (moduleInit.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
+              };
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
+              if (moduleInit.hasOwnProperty("fightOrFlight")) {
+                fightOrFlightIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"fightOrFlight\"!");
               };
             };
             hasError = false;
@@ -457,6 +486,14 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
               if (moduleInit.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"tickHandler\"!");
+              };
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
+              if (moduleInit.hasOwnProperty("fightOrFlight")) {
+                fightOrFlightIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"fightOrFlight\"!");
               };
             };
             hasError = false;
@@ -507,6 +544,8 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
     systemMessage(entity, cyberneticModulesMessage);
     systemMessage(entity, "<n>computerID: <nh>" + entity.getWornHelmet().nbt().getString("computerID"));
     systemMessage(entity, "<n>Model: <nh>" + entity.getWornHelmet().nbt().getString("modelID"));
+    systemMessage(entity, "<n>Fight or Flight duration: <nh>" + entity.getWornHelmet().nbt().getShort("durationFightOrFlight"));
+    systemMessage(entity, "<n>Fight or Flight min health: <nh>" + entity.getWornHelmet().nbt().getShort("minHealthFightOrFlight"));
   };
   function status(entity) {
     var date = new Date();
@@ -515,6 +554,22 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
     systemMessage(entity, "<n>Current location: <nh>" + entity.posX().toFixed(0) + "<n>, <nh>" + entity.posY().toFixed(0) + "<n>, <nh>" + entity.posZ().toFixed(0));
     systemMessage(entity, "<n>Biome: <nh>" + entity.world().getLocation(entity.pos()).biome());
     systemMessage(entity, "<n>Do <nh>!help<n> for available commands!");
+  };
+  function silentEnableModule(player, manager, moduleName) {
+    if (moduleNames.indexOf(moduleName) > -1) {
+      if (!player.getWornHelmet().nbt().hasKey("disabledModules")) {
+      } else {
+        var disabledModules = player.getWornHelmet().nbt().getStringList("disabledModules");
+        if (disabledModules.tagCount() == 0) {
+        } else {
+          var index = getStringArray(disabledModules).indexOf(moduleName);
+          if (index < 0) {
+          } else {
+            manager.removeTag(disabledModules, index);
+          };
+        };
+      };
+    };
   };
   function enableModule(player, manager, moduleName) {
     if (moduleNames.indexOf(moduleName) > -1) {
@@ -640,7 +695,7 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
      **/
     getAttributeProfile: function (entity) {
       var result = null;
-      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != uuid)) {
+      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != playerUUID)) {
         result = "SHUT_DOWN";
       };
       if (attributeProfileIndexes.length == 1) {
@@ -676,7 +731,7 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
      **/
     getDamageProfile: function (entity) {
       var result = null;
-      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != uuid)) {
+      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != playerUUID)) {
         result = null;
       };
       if (damageProfileIndexes.length == 1) {
@@ -706,11 +761,15 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
       return result;
     },
     initProfiles: function (hero) {
-      hero.addAttribute("SPRINT_SPEED", 0.2, 1);
+      hero.addAttribute("SPRINT_SPEED", 0.25, 1);
       hero.addAttribute("STEP_HEIGHT", 0.5, 0);
-      hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
-      hero.addAttribute("PUNCH_DAMAGE", 5.0, 0);
-      hero.addAttribute("KNOCKBACK", 2.5, 0);
+      hero.addAttribute("JUMP_HEIGHT", 1.0, 0);
+      hero.addAttribute("PUNCH_DAMAGE", 1.0, 1);
+      hero.addAttribute("ARROW_DAMAGE", 1.0, 1);
+      hero.addAttribute("BOW_DRAWBACK", 0.99, 1);
+      hero.addAttribute("REACH_DISTANCE", 5.0, 0);
+      hero.addAttribute("KNOCKBACK", 1.0, 0);
+      hero.addAttribute("WEAPON_DAMAGE", 1.0, 1);
       hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
       hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
       hero.addAttributeProfile("SHUT_DOWN", function (profile) {
@@ -735,7 +794,7 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
      * @param {string} keyBind - Required
      **/
     isKeyBindEnabled: function (entity, keyBind) {
-      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != uuid)) {
+      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != playerUUID)) {
         return false;
       };
       if (keyBindIndexes.length == 1) {
@@ -793,7 +852,7 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
      * @param {string} modifier - Required
      **/
     isModifierEnabled: function (entity, modifier) {
-      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != uuid)) {
+      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != playerUUID)) {
         return false;
       };
       if (modifierIndexes.length == 1) {
@@ -851,11 +910,28 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
      * @param {JSDataManager} manager - Required
      **/
     systemHandler: (entity, manager) => {
-      if ((!entity.getData("skyhighheroes:dyn/system_init")) && (entity.getUUID() == uuid)) {
+      if ((!entity.getData("skyhighheroes:dyn/system_init")) && (entity.getUUID() == playerUUID)) {
+        onInitSystemIndexes.forEach(index => {
+          var module = modules[index];
+          module.onInitSystem(entity, manager);
+        });
+        if (!entity.getWornHelmet().nbt().hasKey("durationFightOrFlight")) {
+          manager.setShort(entity.getWornHelmet().nbt(), "durationFightOrFlight", 20);
+        };
+        if (!entity.getWornHelmet().nbt().hasKey("minHealthFightOrFlight")) {
+          manager.setShort(entity.getWornHelmet().nbt(), "minHealthFightOrFlight", 5);
+        };
         assignID(entity, manager, cyberName, cyberShortName, color);
-        systemMessage(entity, "<n>Hello model <nh>" + entity.getWornHelmet().nbt().getString("modelID") + "<n> AKA <nh>" + entity.getWornHelmet().nbt().getString("cyberName") + "<n>!");
+        systemMessage(entity, "<n>Hello <nh>" + entity.getWornHelmet().nbt().getString("modelID") + "<n> AKA <nh>" + entity.getWornHelmet().nbt().getString("cyberName") + "<n>!");
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
+      };
+      if ((Math.floor(entity.getHealth()) <= entity.getWornHelmet().nbt().getInteger("minHealthFightOrFlight")) && (entity.getData("fiskheroes:time_since_damaged") < entity.getWornHelmet().nbt().getShort("durationFightOrFlight"))) {
+        fightOrFlightIndexes.forEach(index => {
+          var module = modules[index];
+          silentEnableModule(entity, manager, module.name);
+          module.fightOrFlight(entity, manager);
+        });
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
         if (!(entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == disguisedName)) {
@@ -915,6 +991,14 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
                 break;
               case "msg":
                 switchChats(entity, manager, args[1]);
+                break;
+              case "fightOrFlightDur":
+                manager.setShort(entity.getWornHelmet().nbt(), "durationFightOrFlight", parseInt(args[1]));
+                systemMessage(entity, "<n>Fight or Flight duration set to <nh>" + args[1] + "<n>!");
+                break;
+              case "fightOrFlightMin":
+                manager.setInteger(entity.getWornHelmet().nbt(), "minHealthFightOrFlight", parseInt(args[1]));
+                systemMessage(entity, "<n>Fight or Flight min health set to <nh>" + args[1] + "<n>!");
                 break;
               default:
                 var index = commands.indexOf(args[0]);

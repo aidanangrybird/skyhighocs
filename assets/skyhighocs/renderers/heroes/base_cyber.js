@@ -403,7 +403,17 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  if (entity.isWearingFullSuit() && entity.getUUID() == getID()) {
+  if (entity.is("DISPLAY")) {
+    head_model.render();
+    head_hair_model.render();
+    body_model.render(); 
+    left_arm_model.render(); 
+    right_arm_model.render(); 
+    left_leg_model.render(); 
+    right_leg_model.render();
+  };
+  
+  if (entity.isWearingFullSuit() && (entity.getUUID() == getID()) && (entity.getInterpolatedData("skyhighocs:dyn/thermoptic_camouflage_timer") < 1)) {
     head_model.render();
     head_hair_model.render();
     body_model.render(); 

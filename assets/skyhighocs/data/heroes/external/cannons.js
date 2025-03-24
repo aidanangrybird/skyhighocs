@@ -150,7 +150,7 @@ function initModule(system) {
           case "help":
             system.systemMessage(entity, "<n>Cannons commands:");
             system.systemMessage(entity, "<n>!cannons arm <eyes|body|arms|*> <nh>-<n> Arms set of cannons");
-            system.systemMessage(entity, "<n>!cannons disarm <eyes|body|arms|*> <nh>-<n> Arms set of cannons");
+            system.systemMessage(entity, "<n>!cannons disarm <eyes|body|arms|*> <nh>-<n> Disarm set of cannons");
             system.systemMessage(entity, "<n>!cannons deploy <eyes|body|arms|*> <nh>-<n> Deploys cannons");
             system.systemMessage(entity, "<n>!cannons retract <eyes|body|arms|*> <nh>-<n> Retracts cannons");
             system.systemMessage(entity, "<n>!cannons help <nh>-<n> Shows cannons commands");
@@ -189,6 +189,14 @@ function initModule(system) {
         manager.setData(entity, "skyhighocs:dyn/cannon_right_arm", arms);
         manager.setData(entity, "skyhighocs:dyn/cannon_body", body);
         manager.setData(entity, "skyhighocs:dyn/cannon_eyes", eyes);
+      };
+    },
+    fightOrFlight: function (entity, manager) {
+      if (!entity.getWornHelmet().nbt().getBoolean("cannonsEyes") || !entity.getWornHelmet().nbt().getBoolean("cannonsBody") || !entity.getWornHelmet().nbt().getBoolean("cannonsArms")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsEyes", true);
+        manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsBody", true);
+        manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsArms", true);
+        system.systemMessage(entity, "<n>Damage detected! Automatically armed <nh>cannons<n>!");
       };
     }
   };

@@ -105,16 +105,16 @@ function initModule(system) {
           case "stealthOn":
             switch (arguments[2]) {
               case "left":
-                manager.setData(entity, "skyhighocs:dyn/blade_left_arm_stealth", true);
+                manager.setBoolean(nbt, "bladesLeftStealth", true);
                 system.systemMessage(entity, "<s>Enabled stealth mode on <sh>left arm<s> blade!");
                 break;
               case "right":
-                manager.setData(entity, "skyhighocs:dyn/blade_right_arm_stealth", true);
+                manager.setBoolean(nbt, "bladesRightStealth", true);
                 system.systemMessage(entity, "<s>Enabled stealth mode on <sh>right arm<s> blade!");
                 break;
               case "*":
-                manager.setData(entity, "skyhighocs:dyn/blade_left_arm_stealth", true);
-                manager.setData(entity, "skyhighocs:dyn/blade_right_arm_stealth", true);
+                manager.setBoolean(nbt, "bladesLeftStealth", true);
+                manager.setBoolean(nbt, "bladesRightStealth", true);
                 system.systemMessage(entity, "<s>Enabled stealth mode on <sh>all<s> blades!");
                 break;
             };
@@ -122,16 +122,16 @@ function initModule(system) {
           case "stealthOff":
             switch (arguments[2]) {
               case "left":
-                manager.setData(entity, "skyhighocs:dyn/blade_left_arm_stealth", false);
+                manager.setBoolean(nbt, "bladesLeftStealth", false);
                 system.systemMessage(entity, "<s>Disabled stealth mode on <sh>left arm<s> blade!");
                 break;
               case "right":
-                manager.setData(entity, "skyhighocs:dyn/blade_right_arm_stealth", false);
+                manager.setBoolean(nbt, "bladesRightStealth", false);
                 system.systemMessage(entity, "<s>Disabled stealth mode on <sh>right arm<s> blade!");
                 break;
               case "*":
-                manager.setData(entity, "skyhighocs:dyn/blade_left_arm_stealth", false);
-                manager.setData(entity, "skyhighocs:dyn/blade_right_arm_stealth", false);
+                manager.setBoolean(nbt, "bladesLeftStealth", false);
+                manager.setBoolean(nbt, "bladesRightStealth", false);
                 system.systemMessage(entity, "<s>Disabled stealth mode on <sh>all<s> blades!");
                 break;
             };
@@ -150,9 +150,9 @@ function initModule(system) {
           case "status":
             system.systemMessage(entity, "<n>Blades status:");
             system.systemMessage(entity, "<n>Left: <nh>" + (nbt.getBoolean("bladesLeft") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/blade_left_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/blade_left_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
-            system.systemMessage(entity, "<n>Left stealth mode: <nh>" + ((entity.getData("skyhighocs:dyn/blade_left_arm_stealth_timer") > 0) ? "ENGAGED" : "DISENGAGED"));
+            system.systemMessage(entity, "<n>Left stealth mode: <nh>" + (nbt.getBoolean("bladesLeftStealth") ? "ENGAGED" : "DISENGAGED"));
             system.systemMessage(entity, "<n>Right: <nh>" + (nbt.getBoolean("bladesRight") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/blade_right_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/blade_right_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
-            system.systemMessage(entity, "<n>Right stealth mode: <nh>" + ((entity.getData("skyhighocs:dyn/blade_right_arm_stealth_timer") > 0) ? "ENGAGED" : "DISENGAGED"));
+            system.systemMessage(entity, "<n>Right stealth mode: <nh>" + (nbt.getBoolean("bladesRightStealth") ? "ENGAGED" : "DISENGAGED"));
             break;
           default:
             system.systemMessage(entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blades help<e> for a list of commands!");
@@ -193,21 +193,21 @@ function initModule(system) {
     initAttributeProfiles: function (hero) {
       hero.addAttributeProfile("BLADE_LEFT_ARM", function (profile) {
         profile.inheritDefaults();
-        profile.addAttribute("SPRINT_SPEED", 0.5, 1);
+        profile.addAttribute("SPRINT_SPEED", 1.0, 1);
         profile.addAttribute("KNOCKBACK", 5.0, 0);
-        profile.addAttribute("PUNCH_DAMAGE", 9.5, 0);
+        profile.addAttribute("PUNCH_DAMAGE", 9.0, 0);
       });
       hero.addAttributeProfile("BLADE_RIGHT_ARM", function (profile) {
         profile.inheritDefaults();
-        profile.addAttribute("SPRINT_SPEED", 0.5, 1);
+        profile.addAttribute("SPRINT_SPEED", 1.0, 1);
         profile.addAttribute("KNOCKBACK", 5.0, 0);
-        profile.addAttribute("PUNCH_DAMAGE", 9.5, 0);
+        profile.addAttribute("PUNCH_DAMAGE", 9.0, 0);
       });
       hero.addAttributeProfile("BLADE_BOTH_ARMS", function (profile) {
         profile.inheritDefaults();
-        profile.addAttribute("SPRINT_SPEED", 0.5, 1);
+        profile.addAttribute("SPRINT_SPEED", 1.5, 1);
         profile.addAttribute("KNOCKBACK", 5.0, 0);
-        profile.addAttribute("PUNCH_DAMAGE", 14.5, 0);
+        profile.addAttribute("PUNCH_DAMAGE", 14.0, 0);
       });
     },
     getAttributeProfile: function (entity) {
@@ -241,6 +241,17 @@ function initModule(system) {
         manager.setData(entity, "skyhighocs:dyn/blade_left_arm", left);
         manager.setData(entity, "skyhighocs:dyn/blade_right_arm", right);
       };
+      var leftStealth = nbt.getBoolean("bladesLeftStealth");
+      var rightStealth = nbt.getBoolean("bladesRightStealth");
+      manager.setData(entity, "skyhighocs:dyn/blade_left_arm_stealth", leftStealth);
+      manager.setData(entity, "skyhighocs:dyn/blade_right_arm_stealth", rightStealth);
     },
+    fightOrFlight: function (entity, manager) {
+      if (!entity.getWornHelmet().nbt().getBoolean("bladesLeft") || !entity.getWornHelmet().nbt().getBoolean("bladesRight")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "bladesLeft", true);
+        manager.setBoolean(entity.getWornHelmet().nbt(), "bladesRight", true);
+        system.systemMessage(entity, "<n>Damage detected! Automatically armed <nh>blades<n>!");
+      };
+    }
   };
 };
