@@ -17,22 +17,18 @@ function initModule(system) {
         switch(arguments[1]) {
           case "enable":
             switch (arguments[2]) {
-              case "onFall":
-                manager.setBoolean(nbt, "rocketsOnFall", true);
-                system.systemMessage(entity, "<s>Enable <sh>onFall<s>!");
-                break;
             };
             break;
           case "onFall":
             switch (arguments[2]) {
-              case "onFall":
-                manager.setBoolean(nbt, "rocketsOnFall", true);
-                system.systemMessage(entity, "<s>Disable <sh>onFall<s>!");
-                break;
             };
             break;
           case "arm":
             switch (arguments[2]) {
+              case "onFall":
+                manager.setBoolean(nbt, "rocketsOnFall", true);
+                system.systemMessage(entity, "<s>Armed <sh>onFall<s> protection!");
+                break;
               case "aux":
                 manager.setBoolean(nbt, "rocketsAux", true);
                 system.systemMessage(entity, "<s>Armed <sh>aux<s> rockets!");
@@ -55,6 +51,10 @@ function initModule(system) {
             break;
           case "disarm":
             switch (arguments[2]) {
+              case "onFall":
+                manager.setBoolean(nbt, "rocketsOnFall", false);
+                system.systemMessage(entity, "<s>Disarmed <sh>onFall<s> protection!");
+                break;
               case "aux":
                 if (!(nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flight_timer") > 0)) {
                   manager.setBoolean(nbt, "rocketsAux", false);
@@ -196,8 +196,8 @@ function initModule(system) {
             break;
           case "help":
             system.systemMessage(entity, "<n>Rockets commands:");
-            system.systemMessage(entity, "<n>!rockets arm <aux|body|legs|*> <nh>-<n> Arms set of rockets");
-            system.systemMessage(entity, "<n>!rockets disarm <aux|body|legs|*> <nh>-<n> Disarms set of rockets");
+            system.systemMessage(entity, "<n>!rockets arm <onFall|aux|body|legs|*> <nh>-<n> Arms set of rockets or onFall protection");
+            system.systemMessage(entity, "<n>!rockets disarm <onFall|aux|body|legs|*> <nh>-<n> Disarms set of rockets or onFall protection");
             system.systemMessage(entity, "<n>!rockets deploy <aux|body|legs|*> <nh>-<n> Deploys set of rockets");
             system.systemMessage(entity, "<n>!rockets retract <aux|body|legs|*> <nh>-<n> Retracts set of rockets");
             system.systemMessage(entity, "<n>!rockets status <nh>-<n> Shows status of rockets");
