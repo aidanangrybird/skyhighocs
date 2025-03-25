@@ -43,7 +43,7 @@ var cyberOS = cybernetics.initSystem([
 function init(hero) {
   hero.setAliases("cyber_nebula");
   hero.setName("Cyber Nebula/Model CN-2 Cybernetic Body");
-  hero.setTier(10);
+  hero.setTier(9);
   hero.setHelmet("Cybernetic Brain");
   hero.setVersion("OC");
 
