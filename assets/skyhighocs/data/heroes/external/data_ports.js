@@ -1,3 +1,6 @@
+var foosh;
+
+
 /**
  * You put all of the required functions in here
  * @param system - Required

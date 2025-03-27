@@ -12,7 +12,10 @@ function initModule(system) {
     helpMessage: "<n>!shields <nh>-<n> Shields",
     disabledMessage: "<e>Module <eh>shields<e> is disabled!",
     keyBinds: function (hero) {
-      hero.addKeyBind("SHIELDS", "Shields (None armed)", 1);
+      hero.addKeyBind("SHIELDS", (player, manager) => {
+        system.systemMessage(player, "<e>At least one shield must be armed!");
+        return false;
+      }, "Shields (None armed)", 1);
       hero.addKeyBind("SHIELD", "Shields", 1);
     },
     isKeyBindEnabled: function (entity, keyBind) {
@@ -211,6 +214,9 @@ function initModule(system) {
       return result;
     },
     whenDisabled: function (entity, manager) {
+      var nbt = entity.getWornHelmet().nbt();
+      manager.setBoolean(nbt, "shieldsLeft", false);
+      manager.setBoolean(nbt, "shieldsRight", false);
       manager.setData(entity, "skyhighocs:dyn/shield_left_arm", false);
       manager.setData(entity, "skyhighocs:dyn/shield_right_arm", false);
       manager.setData(entity, "skyhighocs:dyn/shield_left_arm_deployed", false);
@@ -226,11 +232,9 @@ function initModule(system) {
       };
     },
     fightOrFlight: function (entity, manager) {
-      if (!entity.getWornHelmet().nbt().getBoolean("shieldsLeft") || !entity.getWornHelmet().nbt().getBoolean("shieldsRight")) {
-        manager.setBoolean(entity.getWornHelmet().nbt(), "shieldsLeft", true);
-        manager.setBoolean(entity.getWornHelmet().nbt(), "shieldsRight", true);
-        system.systemMessage(entity, "<n>Damage detected! Automatically armed <nh>shields<n>!");
-      };
+      manager.setBoolean(entity.getWornHelmet().nbt(), "shieldsLeft", true);
+      manager.setBoolean(entity.getWornHelmet().nbt(), "shieldsRight", true);
+      system.systemMessage(entity, "<n>Automatically armed <nh>shields<n>!");
     }
   };
 };

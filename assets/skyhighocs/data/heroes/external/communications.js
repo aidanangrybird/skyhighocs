@@ -344,6 +344,8 @@ function initModule(system) {
       manager.setData(entity, "skyhighocs:dyn/satellite", false);
       manager.setData(entity, "skyhighocs:dyn/antenna", false);
       manager.setData(entity, "skyhighocs:dyn/satellite_rain_mode", false);
+    },
+    tickHandler: function (entity, manager) {
     }
   };
 };

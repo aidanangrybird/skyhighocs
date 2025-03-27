@@ -12,7 +12,10 @@ function initModule(system) {
     helpMessage: "<n>!blades <nh>-<n> Blades",
     disabledMessage: "<e>Module <eh>bladeSystem<e> is disabled!",
     keyBinds: function (hero) {
-      hero.addKeyBind("BLADES", "Blades (None armed)", 1);
+      hero.addKeyBind("BLADES", (player, manager) => {
+        system.systemMessage(player, "<e>At least one blade must be armed!");
+        return false;
+      }, "Blades (None armed)", 1);
       hero.addKeyBind("BLADE", "Blades", 1);
     },
     isKeyBindEnabled: function (entity, keyBind) {
@@ -226,6 +229,11 @@ function initModule(system) {
       return result;
     },
     whenDisabled: function (entity, manager) {
+      var nbt = entity.getWornHelmet().nbt();
+      manager.setBoolean(nbt, "bladesLeft", false);
+      manager.setBoolean(nbt, "bladesRight", false);
+      manager.setBoolean(nbt, "bladesLeftStealth", false);
+      manager.setBoolean(nbt, "bladesRightStealth", false);
       manager.setData(entity, "skyhighocs:dyn/blade_left_arm", false);
       manager.setData(entity, "skyhighocs:dyn/blade_right_arm", false);
       manager.setData(entity, "skyhighocs:dyn/blade_left_arm_stealth", false);
@@ -247,11 +255,11 @@ function initModule(system) {
       manager.setData(entity, "skyhighocs:dyn/blade_right_arm_stealth", rightStealth);
     },
     fightOrFlight: function (entity, manager) {
-      if (!entity.getWornHelmet().nbt().getBoolean("bladesLeft") || !entity.getWornHelmet().nbt().getBoolean("bladesRight")) {
-        manager.setBoolean(entity.getWornHelmet().nbt(), "bladesLeft", true);
-        manager.setBoolean(entity.getWornHelmet().nbt(), "bladesRight", true);
-        system.systemMessage(entity, "<n>Damage detected! Automatically armed <nh>blades<n>!");
-      };
+      manager.setBoolean(entity.getWornHelmet().nbt(), "bladesLeft", true);
+      manager.setBoolean(entity.getWornHelmet().nbt(), "bladesRight", true);
+      system.systemMessage(entity, "<n>Automatically armed <nh>blades<n>!");
+      manager.setData(entity, "fiskheroes:blade", true);
+      manager.setData(entity, "fiskheroes:blade_timer", 1.0);
     }
   };
 };

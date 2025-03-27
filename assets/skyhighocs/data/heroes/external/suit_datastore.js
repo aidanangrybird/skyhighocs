@@ -65,7 +65,7 @@ function initModule(system) {
             break;
           case "help":
             system.systemMessage(entity, "<n>Suits Datastore commands:");
-            system.systemMessage(entity, "<n>!suit rem <nh><name><n> <nh>-<n> Deletes suit by index");
+            system.systemMessage(entity, "<n>!suit rem <nh><index><n> <nh>-<n> Deletes suit by index");
             system.systemMessage(entity, "<n>!suit list <nh>-<n> Lists stored suits");
             system.systemMessage(entity, "<n>!suit help <nh>-<n> Shows this list");
             break;

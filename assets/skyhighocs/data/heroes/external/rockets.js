@@ -272,12 +272,10 @@ function initModule(system) {
       };
     },
     fightOrFlight: function (entity, manager) {
-      if (!entity.getWornHelmet().nbt().getBoolean("rocketsAux") || !entity.getWornHelmet().nbt().getBoolean("rocketsBody") || !entity.getWornHelmet().nbt().getBoolean("rocketsLegs")) {
-        manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsAux", true);
-        manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsBody", true);
-        manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsLegs", true);
-        system.systemMessage(entity, "<n>Damage detected! Automatically armed <nh>rockets<n>!");
-      };
+      manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsAux", true);
+      manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsBody", true);
+      manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsLegs", true);
+      system.systemMessage(entity, "<n>Automatically armed <nh>rockets<n>!");
     }
   };
 };

@@ -1,6 +1,6 @@
 {x} = 30{hover}min(1.5{vel}, 1)
-out "rotate" ({x}clamp({strafe}, -2, 2), 0, 0, 1)
-out "rotate" (-{x}clamp({forward}, -2, 2), 1, 0, 0)
+out "rotate" (1.5{x}clamp({strafe}, -2, 2), 0, 0, 1)
+out "rotate" (-1.5{x}clamp({forward}, -2, 2), 1, 0, 0)
 
 {x} = {hover}min(2{vel}, 1)
 {strafe} *= {x}

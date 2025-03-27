@@ -14,7 +14,10 @@ function initModule(system) {
     helpMessage: "<n>!cannons <nh>-<n> Cannons",
     disabledMessage: "<e>Module <eh>cannons<e> is disabled!",
     keyBinds: function (hero) {
-      hero.addKeyBind("CANNONS", "Cannons (None armed)", 4);
+      hero.addKeyBind("CANNONS", (player, manager) => {
+        system.systemMessage(player, "<e>At least one cannon set must be armed!");
+        return false;
+      }, "Cannons (None armed)", 4);
       hero.addKeyBind("CHARGED_BEAM", "Cannons", 4);
     },
     isKeyBindEnabled: function (entity, keyBind) {
@@ -170,6 +173,10 @@ function initModule(system) {
       };
     },
     whenDisabled: function (entity, manager) {
+      var nbt = entity.getWornHelmet().nbt();
+      manager.setBoolean(nbt, "cannonsEyes", false);
+      manager.setBoolean(nbt, "cannonsBody", false);
+      manager.setBoolean(nbt, "cannonsArms", false);
       manager.setData(entity, "skyhighocs:dyn/cannon_left_arm", false);
       manager.setData(entity, "skyhighocs:dyn/cannon_right_arm", false);
       manager.setData(entity, "skyhighocs:dyn/cannon_body", false);
@@ -192,12 +199,10 @@ function initModule(system) {
       };
     },
     fightOrFlight: function (entity, manager) {
-      if (!entity.getWornHelmet().nbt().getBoolean("cannonsEyes") || !entity.getWornHelmet().nbt().getBoolean("cannonsBody") || !entity.getWornHelmet().nbt().getBoolean("cannonsArms")) {
-        manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsEyes", true);
-        manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsBody", true);
-        manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsArms", true);
-        system.systemMessage(entity, "<n>Damage detected! Automatically armed <nh>cannons<n>!");
-      };
+      manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsEyes", true);
+      manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsBody", true);
+      manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsArms", true);
+      system.systemMessage(entity, "<n>Automatically armed <nh>cannons<n>!");
     }
   };
 };

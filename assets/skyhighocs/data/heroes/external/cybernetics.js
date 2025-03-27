@@ -926,12 +926,21 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
       };
-      if ((Math.floor(entity.getHealth()) <= entity.getWornHelmet().nbt().getInteger("minHealthFightOrFlight")) && (entity.getData("fiskheroes:time_since_damaged") < entity.getWornHelmet().nbt().getShort("durationFightOrFlight"))) {
+      if ((Math.floor(entity.getHealth()) <= entity.getWornHelmet().nbt().getInteger("minHealthFightOrFlight")) && (entity.getData("fiskheroes:time_since_damaged") <= entity.getWornHelmet().nbt().getShort("durationFightOrFlight"))) {
+        if (!entity.getData("skyhighocs:dyn/fight_or_flight")) {
+          systemMessage(entity, "<n>FIGHT OR FLIGHT MODE ACTIVATED!");
+          manager.setData(entity, "skyhighocs:dyn/fight_or_flight", true);
+        };
         fightOrFlightIndexes.forEach(index => {
           var module = modules[index];
           silentEnableModule(entity, manager, module.name);
           module.fightOrFlight(entity, manager);
         });
+        if (entity.getData("fiskheroes:time_since_damaged") == entity.getWornHelmet().nbt().getShort("durationFightOrFlight")) {
+          systemMessage(entity, "<n>FIGHT OR FLIGHT MODE DEACTIVATED!");
+        }
+      } else {
+        manager.setData(entity, "skyhighocs:dyn/fight_or_flight", false);
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
         if (!(entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == disguisedName)) {
@@ -974,6 +983,8 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
                 });
                 systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
                 systemMessage(entity, "<n>!systemInfo <nh>-<n> Shows your system info");
+                systemMessage(entity, "<n>!fightOrFlightDur <number> <nh>-<n> Sets duration of fight or flight response");
+                systemMessage(entity, "<n>!fightOrFlightMin <number> <nh>-<n> Sets minimum health to activate fight or flight");
                 systemMessage(entity, "<n>!powerOn <nh>-<n> Powers you up");
                 systemMessage(entity, "<n>!powerOff <nh>-<n> Powers you down");
                 systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
@@ -984,8 +995,6 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
               case "enable":
                 enableModule(entity, manager, args[1]);
                 break;
-              case "cv":
-                systemMessage(entity, entity.getDataOrDefault("skyhighocs:dyn/"+args[1], -1))
               case "chatMode":
                 switchChatModes(entity, manager, args[1]);
                 break;

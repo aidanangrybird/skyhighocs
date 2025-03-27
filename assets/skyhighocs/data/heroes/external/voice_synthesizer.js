@@ -11,7 +11,10 @@ function initModule(system) {
     helpMessage: "<n>!vs <nh>-<n> Voice Synthesizer",
     disabledMessage: "<e>Module <eh>voiceSynthesizer<e> is disabled!",
     keyBinds: function (hero) {
-      hero.addKeyBind("MOUTH", "Scream (Not armed)", 3);
+      hero.addKeyBind("MOUTH", (player, manager) => {
+        system.systemMessage(player, "<e>Mouth must be armed!");
+        return false;
+      }, "Scream (Not armed)", 3);
       hero.addKeyBind("SCREAM", "Scream", 3);
       hero.addKeyBind("ENERGY_PROJECTION", "Scream", 3);
     },
@@ -86,13 +89,13 @@ function initModule(system) {
       return result;
     },
     whenDisabled: function (entity, manager) {
+      var nbt = entity.getWornHelmet().nbt();
+      manager.setBoolean(nbt, "mouth", false);
       manager.setData(entity, "skyhighocs:dyn/mouth", false);
     },
     fightOrFlight: function (entity, manager) {
-      if (!entity.getWornHelmet().nbt().getBoolean("mouth")) {
-        manager.setBoolean(entity.getWornHelmet().nbt(), "mouth", true);
-        system.systemMessage(entity, "<n>Damage detected! Automatically armed <nh>mouth<n>!");
-      };
+      manager.setBoolean(entity.getWornHelmet().nbt(), "mouth", true);
+      system.systemMessage(entity, "<n>Automatically armed <nh>mouth<n>!");
     }
   };
 };
