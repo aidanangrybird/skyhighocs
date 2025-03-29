@@ -1,23 +1,29 @@
-{eye_beams} = curve(clamp({data_0}, 0, 1))
-{mouth} = curve(clamp({data_1}, 0, 1))
-{satellite_dish} = curve(clamp({data_2}, 0, 1))
-{rain_mode} = curve(clamp({data_3}, 0, 1))
-{antenna} = curve(clamp({data_4}, 0, 1))(1-{rain_mode}{satellite_dish})
+{cannon_left} = curve(clamp({data_0}, 0, 1))
+{cannon_right} = curve(clamp({data_1}, 0, 1))
+{mouth} = curve(clamp({data_2}, 0, 1))
+{satellite_dish} = curve(clamp({data_3}, 0, 1))
+{rain_mode} = curve(clamp({data_4}, 0, 1))
+{antenna} = curve(clamp({data_5}, 0, 1))(1-{rain_mode}{satellite_dish})
 
 ;eyes
-{part0_eye_beams} = if({eye_beams} != 1, animate2({eye_beams}, 1.0, 0.0, 0.15, 0.0), 1)
-{part1_eye_beams} = if({eye_beams} != 1, animate2({eye_beams}, 1.0, 0.2, 0.2, 0.0), 1)
-{part2_eye_beams} = if({eye_beams} != 1, animate2({eye_beams}, 1.0, 0.6, 0.4, 0.0), 1)
-{head_left_eye_upper_cover_posZ} += 0.03{part0_eye_beams}
-{head_left_eye_lower_cover_posZ} += 0.03{part0_eye_beams}
-{head_left_eye_upper_cover_posY} -= 1{part1_eye_beams}
-{head_left_eye_lower_cover_posY} += 1{part1_eye_beams}
-{head_left_eye_posZ} -= 3{part2_eye_beams}
-{head_right_eye_upper_cover_posZ} += 0.03{part0_eye_beams}
-{head_right_eye_lower_cover_posZ} += 0.03{part0_eye_beams}
-{head_right_eye_upper_cover_posY} -= 1{part1_eye_beams}
-{head_right_eye_lower_cover_posY} += 1{part1_eye_beams}
-{head_right_eye_posZ} -= 3{part2_eye_beams}
+;left cannon
+{part0_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.6, 0.4, 0.0), 1)
+{head_left_eye_upper_cover_posZ} += 0.03{part0_cannon_left}
+{head_left_eye_lower_cover_posZ} += 0.03{part0_cannon_left}
+{head_left_eye_upper_cover_posY} -= 1{part1_cannon_left}
+{head_left_eye_lower_cover_posY} += 1{part1_cannon_left}
+{head_left_eye_posZ} -= 3{part2_cannon_left}
+;right cannon
+{part0_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.6, 0.4, 0.0), 1)
+{head_right_eye_upper_cover_posZ} += 0.03{part0_cannon_right}
+{head_right_eye_lower_cover_posZ} += 0.03{part0_cannon_right}
+{head_right_eye_upper_cover_posY} -= 1{part1_cannon_right}
+{head_right_eye_lower_cover_posY} += 1{part1_cannon_right}
+{head_right_eye_posZ} -= 3{part2_cannon_right}
 
 ;mouth
 {part0_mouth} = if({mouth} != 1, animate2({mouth}, 1.0, 0.0, 0.15, 0.0), 1)

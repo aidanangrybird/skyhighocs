@@ -14,7 +14,6 @@ var blades = implement("skyhighocs:external/blades");
 var shields = implement("skyhighocs:external/shields");
 var thermopticManipulation = implement("skyhighocs:external/thermoptic_manipulation");
 var wings = implement("skyhighocs:external/wings");
-var furnace = implement("skyhighocs:external/furnace");
 var externalArms = implement("skyhighocs:external/external_arms");
 var suitDatastore = implement("skyhighocs:external/suit_datastore");
 var voiceSynthesizer = implement("skyhighocs:external/voice_synthesizer");
@@ -33,7 +32,6 @@ var cyberOS = cybernetics.initSystem([
   shields,
   thermopticManipulation,
   wings,
-  furnace,
   externalArms,
   suitDatastore,
   voiceSynthesizer,

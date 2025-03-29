@@ -63,10 +63,18 @@
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|external_arms_deploy": {
+    "fiskheroes:transformation|external_arm_left_deploy": {
       "transformation": {
-        "toggleData": "skyhighocs:dyn/external_arms_deployed",
-        "timerData": "skyhighocs:dyn/external_arms_deploy_timer",
+        "toggleData": "skyhighocs:dyn/external_arm_left_deployed",
+        "timerData": "skyhighocs:dyn/external_arm_left_deploy_timer",
+        "time": 60
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|external_arm_right_deploy": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/external_arm_right_deployed",
+        "timerData": "skyhighocs:dyn/external_arm_right_deploy_timer",
         "time": 60
       },
       "isToggle": true

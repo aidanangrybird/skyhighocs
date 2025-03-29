@@ -33,12 +33,12 @@ function initModule(system) {
     };
     if (suitDrive != null) {
       var dataDriveSuits = system.getStringArray(suitDrive.getStringList("Suits"));
-      system.systemMessage(entity, "<nh>" + (dataDriveSuits.length == 1) ? ("<nh>" + dataDriveSuits.length + "<n> suit:") : ("<nh>" + dataDriveSuits.length + "<n> suits:"));
+      system.moduleMessage(this, entity, "<nh>" + (dataDriveSuits.length == 1) ? ("<nh>" + dataDriveSuits.length + "<n> suit:") : ("<nh>" + dataDriveSuits.length + "<n> suits:"));
       dataDriveSuits.forEach(entry => {
-        system.systemMessage(entity, "<nh>" + dataDriveSuits.indexOf(entry) + "<n>> <nh>" + entry);
+        system.moduleMessage(this, entity, "<nh>" + dataDriveSuits.indexOf(entry) + "<n>> <nh>" + entry);
       });
     } else {
-      system.systemMessage(entity, "<e>Suit drive not plugged in!");
+      system.moduleMessage(this, entity, "<e>Suit drive not plugged in!");
     };
   };
   /**
@@ -86,20 +86,20 @@ function initModule(system) {
       suitsToDownload.forEach(entry => {
         if ((entry < 10) && (entry > -1)) {
           var currentSuit = dataDriveSuitsArray[entry];
-          system.systemMessage(entity, "<n>Downloading suit \"<nh>" + currentSuit + "<n>\"!");
+          system.moduleMessage(this, entity, "<n>Downloading suit \"<nh>" + currentSuit + "<n>\"!");
           if (suitDatastoreArray.indexOf(currentSuit) == -1) {
             suitDatastoreArray.push(currentSuit);
             manager.appendString(suitDatastore, currentSuit);
-            system.systemMessage(entity, "<s>Successfully downloaded suit \"<sh>" + currentSuit + "<s>\" to " + system.getModelID(entity) + "!");
+            system.moduleMessage(this, entity, "<s>Successfully downloaded suit \"<sh>" + currentSuit + "<s>\" to " + system.getModelID(entity) + "!");
             suitsDownloaded = suitsDownloaded + 1;
           } else {
-            system.systemMessage(entity, "<e>Failed to download suit \"<eh>" + currentSuit + "<e>\"!");
+            system.moduleMessage(this, entity, "<e>Failed to download suit \"<eh>" + currentSuit + "<e>\"!");
           };
         };
       });
-      system.systemMessage(entity, "<nh>" + suitsDownloaded + "<n> " + ((suitsDownloaded == 1) ? "suit downloaded!" : "suits downloaded!"));
+      system.moduleMessage(this, entity, "<nh>" + suitsDownloaded + "<n> " + ((suitsDownloaded == 1) ? "suit downloaded!" : "suits downloaded!"));
     } else {
-      system.systemMessage(entity, "<e>Suit drive not plugged in!");
+      system.moduleMessage(this, entity, "<e>Suit drive not plugged in!");
     };
   };
   /**
@@ -140,20 +140,20 @@ function initModule(system) {
       suitsToUpload.forEach(entry => {
         if ((entry < suitDatastoreArray.length) && (entry > -1)) {
           var currentSuit = suitDatastoreArray[entry];
-          system.systemMessage(entity, "<n>Uploading suit \"<nh>" + currentSuit + "<n>\"!");
+          system.moduleMessage(this, entity, "<n>Uploading suit \"<nh>" + currentSuit + "<n>\"!");
           if ((dataDriveSuitsArray.indexOf(currentSuit) == -1) && (dataDriveSuitsArray.length < 9)) {
             dataDriveSuitsArray.push(currentSuit);
             manager.appendString(dataDriveSuits, currentSuit);
-            system.systemMessage(entity, "<s>Successfully uploaded suit \"<sh>" + currentSuit + "<s>\"!");
+            system.moduleMessage(this, entity, "<s>Successfully uploaded suit \"<sh>" + currentSuit + "<s>\"!");
             suitsUploaded = suitsUploaded + 1;
           } else {
-            system.systemMessage(entity, "<e>Failed to upload suit \"<eh>" + currentSuit + "<e>\"!");
+            system.moduleMessage(this, entity, "<e>Failed to upload suit \"<eh>" + currentSuit + "<e>\"!");
           };
         };
       });
-      system.systemMessage(entity, "<nh>" + suitsUploaded + (suitsUploaded == 1) ? "<n>suit uploaded!" : "<n>suits uploaded!");
+      system.moduleMessage(this, entity, "<nh>" + suitsUploaded + (suitsUploaded == 1) ? "<n>suit uploaded!" : "<n>suits uploaded!");
     } else {
-      system.systemMessage(entity, "<e>Suit drive not plugged in!");
+      system.moduleMessage(this, entity, "<e>Suit drive not plugged in!");
     };
   };
   /**
@@ -174,17 +174,17 @@ function initModule(system) {
     suitsToRemove.forEach(entry => {
       if ((entry < suitDatastoreArray.length) && (entry > -1)) {
         var currentSuit = suitDatastoreArray[entry];
-        system.systemMessage(entity, "<n>Removeing suit \"<nh>" + currentSuit + "<n>\"!");
+        system.moduleMessage(this, entity, "<n>Removeing suit \"<nh>" + currentSuit + "<n>\"!");
         if (suitDatastoreArray.indexOf(currentSuit) > -1) {
           manager.removeTag(suitDatastore, entry);
-          system.systemMessage(entity, "<s>Successfully removed suit \"<sh>" + currentSuit + "<s>\"!");
+          system.moduleMessage(this, entity, "<s>Successfully removed suit \"<sh>" + currentSuit + "<s>\"!");
           suitsRemoved = suitsRemoved + 1;
         } else {
-          system.systemMessage(entity, "<e>Failed to remove suit \"<eh>" + currentSuit + "<e>\"!");
+          system.moduleMessage(this, entity, "<e>Failed to remove suit \"<eh>" + currentSuit + "<e>\"!");
         };
       };
     });
-    system.systemMessage(entity, "<nh>" + suitsRemoved + (suitsRemoved == 1) ? "<n>suit removed!" : "<n>suits removed!");
+    system.moduleMessage(this, entity, "<nh>" + suitsRemoved + (suitsRemoved == 1) ? "<n>suit removed!" : "<n>suits removed!");
   };
   /**
   * Lists suits stored internally
@@ -197,13 +197,14 @@ function initModule(system) {
       manager.setTagList(entity.getWornHelmet().nbt(), "suitDatastore", newSuitsList);
     };
     var suitDatastoreArray = system.getStringArray(entity.getWornHelmet().nbt().getStringList("suitDatastore"));
-    system.systemMessage(entity, "<nh>" + ((suitDatastoreArray.length == 1) ? suitDatastoreArray.length + "<n> suit:" : suitDatastoreArray.length + "<n> suits:"));
+    system.moduleMessage(this, entity, "<nh>" + ((suitDatastoreArray.length == 1) ? suitDatastoreArray.length + "<n> suit:" : suitDatastoreArray.length + "<n> suits:"));
     suitDatastoreArray.forEach(entry => {
-      system.systemMessage(entity, "<nh>" + suitDatastoreArray.indexOf(entry) + "<n>> <nh>" + entry);
+      system.moduleMessage(this, entity, "<nh>" + suitDatastoreArray.indexOf(entry) + "<n>> <nh>" + entry);
     });
   };
   return {
     name: "suitDatastore",
+    moduleMessageName: "Suits",
     type: 1,
     command: "suits",
     helpMessage: "<n>!suits <nh>-<n> Suit Datastore",
@@ -226,20 +227,20 @@ function initModule(system) {
             listSuits(entity, manager);
             break;
           case "help":
-            system.systemMessage(entity, "<n>Suits Datastore commands:");
-            system.systemMessage(entity, "<n>!suits rem <nh><index><n> <nh>-<n> Deletes suit by index");
-            system.systemMessage(entity, "<n>!suits list <nh>-<n> Lists stored suits");
-            system.systemMessage(entity, "<n>!suits listDrive <nh>-<n> Lists suits on plugged in data drive");
-            system.systemMessage(entity, "<n>!suits download <suits> <nh>-<n> Downloads suits (comma seperated indexes) from inserted data drive");
-            system.systemMessage(entity, "<n>!suits upload <suits> <nh>-<n> Uploads suits (comma seperated indexes) to inserted data drive");
-            system.systemMessage(entity, "<n>!suits help <nh>-<n> Shows this list");
+            system.moduleMessage(this, entity, "<n>Suits Datastore commands:");
+            system.moduleMessage(this, entity, "<n>!suits rem <nh><index><n> <nh>-<n> Deletes suit by index");
+            system.moduleMessage(this, entity, "<n>!suits list <nh>-<n> Lists stored suits");
+            system.moduleMessage(this, entity, "<n>!suits listDrive <nh>-<n> Lists suits on plugged in data drive");
+            system.moduleMessage(this, entity, "<n>!suits download <suits> <nh>-<n> Downloads suits (comma seperated indexes) from inserted data drive");
+            system.moduleMessage(this, entity, "<n>!suits upload <suits> <nh>-<n> Uploads suits (comma seperated indexes) to inserted data drive");
+            system.moduleMessage(this, entity, "<n>!suits help <nh>-<n> Shows this list");
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>suitDatastore<e> command! Try <eh>!suits help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>suitDatastore<e> command! Try <eh>!suits help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>suitDatastore<e> command! Try <eh>!suits help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>suitDatastore<e> command! Try <eh>!suits help<e> for a list of commands!");
       };
     },
   };

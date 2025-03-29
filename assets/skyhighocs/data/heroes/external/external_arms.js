@@ -21,27 +21,31 @@ function initModule(system) {
       if (arguments.length > 1 && arguments.length < 3) {
         switch (arguments[1]) {
           case "deploy":
-            manager.setData(entity, "skyhighocs:dyn/external_arms_deployed", true);
+            manager.setData(entity, "skyhighocs:dyn/external_arm_left_deployed", true);
+            manager.setData(entity, "skyhighocs:dyn/external_arm_right_deployed", true);
             break;
           case "retract":
-            manager.setData(entity, "skyhighocs:dyn/external_arms_deployed", false);
+            manager.setData(entity, "skyhighocs:dyn/external_arm_left_deployed", false);
+            manager.setData(entity, "skyhighocs:dyn/external_arm_right_deployed", false);
             break;
           case "help":
-            system.systemMessage(entity, "<n>External Arms commands:");
-            system.systemMessage(entity, "<n>!extarms deploy <nh>-<n> Deploys external arms");
-            system.systemMessage(entity, "<n>!extarms retract <nh>-<n> Retracts external arms");
-            system.systemMessage(entity, "<n>!extarms status <nh>-<n> Shows status of blades");
-            system.systemMessage(entity, "<n>!extarms help <nh>-<n> Shows externalArms commands");
+            system.moduleMessage(this, entity, "<n>External Arms commands:");
+            system.moduleMessage(this, entity, "<n>!extarms deploy <nh>-<n> Deploys external arms");
+            system.moduleMessage(this, entity, "<n>!extarms retract <nh>-<n> Retracts external arms");
+            system.moduleMessage(this, entity, "<n>!extarms status <nh>-<n> Shows status of external arms");
+            system.moduleMessage(this, entity, "<n>!extarms help <nh>-<n> Shows externalArms commands");
             break;
           case "status":
-            system.systemMessage(entity, "<n>External arms status:");
-            system.systemMessage(entity, "<n>Main: <nh>" + ((entity.getData("skyhighocs:dyn/external_arms_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/external_arms_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            var extArms = (entity.getData("skyhighocs:dyn/external_arms_timer") > 0);
+            system.moduleMessage(this, entity, "<n>External Arms status:");
+            system.moduleMessage(this, entity, "<n>Left External Arm: <nh>" + ((entity.getData("skyhighocs:dyn/external_arm_left_deploy_timer") > 0) || extArms ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Right External Arm: <nh>" + ((entity.getData("skyhighocs:dyn/external_arm_right_deploy_timer") > 0) || extArms ? "DEPLOYED" : "RETRACTED"));
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>extarms<e> command! Try <eh>!extarms help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>extarms<e> command! Try <eh>!extarms help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>extarms<e> command! Try <eh>!extarms help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>extarms<e> command! Try <eh>!extarms help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {
@@ -79,7 +83,8 @@ function initModule(system) {
     },
     whenDisabled: function (entity, manager) {
       manager.setData(entity, "skyhighocs:dyn/external_arms", false);
-      manager.setData(entity, "skyhighocs:dyn/external_arms_deployed", false);
+      manager.setData(entity, "skyhighocs:dyn/external_arm_left_deployed", false);
+      manager.setData(entity, "skyhighocs:dyn/external_arm_right_deployed", false);
     },
     tickHandler: function (entity, manager) {
       if (entity.getData("skyhighocs:dyn/external_arms")) {

@@ -5,6 +5,7 @@
 function initModule(system) {
   return {
     name: "voiceSynthesizer",
+    moduleMessageName: "VoiceSynth",
     type: 13,
     command: "vs",
     powers: ["skyhighocs:voice_synthesizer"],
@@ -12,7 +13,7 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>voiceSynthesizer<e> is disabled!",
     keyBinds: function (hero) {
       hero.addKeyBindFunc("MOUTH", (player, manager) => {
-        system.systemMessage(player, "<e>Mouth must be armed!");
+        system.moduleMessage(this, player, "<e>Mouth must be armed!");
         return false;
       }, "Scream (Not armed)", 3);
       hero.addKeyBind("SCREAM", "Scream", 3);
@@ -41,39 +42,39 @@ function initModule(system) {
         switch (arguments[1]) {
           case "arm":
             manager.setBoolean(nbt, "mouth", true);
-            system.systemMessage(entity, "<n>Armed mouth!");
+            system.moduleMessage(this, entity, "<n>Armed mouth!");
             break;
           case "disarm":
             manager.setBoolean(nbt, "mouth", false);
-            system.systemMessage(entity, "<n>Disarmed mouth!");
+            system.moduleMessage(this, entity, "<n>Disarmed mouth!");
             break;
           case "deploy":
             manager.setData(entity, "skyhighocs:dyn/mouth_deployed", true);
-            system.systemMessage(entity, "<n>Deployed mouth!");
+            system.moduleMessage(this, entity, "<n>Deployed mouth!");
             break;
           case "retract":
             manager.setData(entity, "skyhighocs:dyn/mouth_deployed", false);
-            system.systemMessage(entity, "<n>Retracted mouth!");
+            system.moduleMessage(this, entity, "<n>Retracted mouth!");
             break;
           case "status":
-            system.systemMessage(entity, "<n>Voice Synthesizer status:");
-            system.systemMessage(entity, "<n>Mouth: <nh>" + (nbt.getBoolean("mouth") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/mouth_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/mouth_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Voice Synthesizer status:");
+            system.moduleMessage(this, entity, "<n>Mouth: <nh>" + (nbt.getBoolean("mouth") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/mouth_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/mouth_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             break;
           case "help":
-            system.systemMessage(entity, "<n>Voice Synthesizer commands:");
-            system.systemMessage(entity, "<n>!vs arm <nh>-<n> Arms mouth");
-            system.systemMessage(entity, "<n>!vs disarm <nh>-<n> Disarms mouth");
-            system.systemMessage(entity, "<n>!vs deploy <nh>-<n> Shows mouth");
-            system.systemMessage(entity, "<n>!vs retract <nh>-<n> Hides mouth");
-            system.systemMessage(entity, "<n>!vs status <nh>-<n> Shows status of voice synthesizer");
-            system.systemMessage(entity, "<n>!vs help <nh>-<n> Shows voiceSynthesizer commands");
+            system.moduleMessage(this, entity, "<n>Voice Synthesizer commands:");
+            system.moduleMessage(this, entity, "<n>!vs arm <nh>-<n> Arms mouth");
+            system.moduleMessage(this, entity, "<n>!vs disarm <nh>-<n> Disarms mouth");
+            system.moduleMessage(this, entity, "<n>!vs deploy <nh>-<n> Shows mouth");
+            system.moduleMessage(this, entity, "<n>!vs retract <nh>-<n> Hides mouth");
+            system.moduleMessage(this, entity, "<n>!vs status <nh>-<n> Shows status of voice synthesizer");
+            system.moduleMessage(this, entity, "<n>!vs help <nh>-<n> Shows voiceSynthesizer commands");
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>voiceSynthesizer<e> command! Try <eh>!vs help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>voiceSynthesizer<e> command! Try <eh>!vs help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>voiceSynthesizer<e> command! Try <eh>!vs help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>voiceSynthesizer<e> command! Try <eh>!vs help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {
@@ -95,7 +96,7 @@ function initModule(system) {
     },
     fightOrFlight: function (entity, manager) {
       manager.setBoolean(entity.getWornHelmet().nbt(), "mouth", true);
-      system.systemMessage(entity, "<n>Automatically armed <nh>mouth<n>!");
+      system.moduleMessage(this, entity, "<n>Automatically armed <nh>mouth<n>!");
     }
   };
 };

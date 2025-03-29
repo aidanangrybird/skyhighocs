@@ -6,6 +6,7 @@ function initModule(system) {
   //All of the required functions and stuff go here
   return {
     name: "blades",
+    moduleMessageName: "Blades",
     type: 14,
     powers: ["skyhighocs:blades"],
     command: "blades",
@@ -13,7 +14,7 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>bladeSystem<e> is disabled!",
     keyBinds: function (hero) {
       hero.addKeyBindFunc("BLADES", (player, manager) => {
-        system.systemMessage(player, "<e>At least one blade must be armed!");
+        system.moduleMessage(this, player, "<e>At least one blade must be armed!");
         return false;
       }, "Blades (None armed)", 1);
       hero.addKeyBind("BLADE", "Blades", 1);
@@ -41,16 +42,16 @@ function initModule(system) {
             switch (arguments[2]) {
               case "left":
                 manager.setBoolean(nbt, "bladesLeft", true);
-                system.systemMessage(entity, "<s>Armed <sh>left arm<s> blade!");
+                system.moduleMessage(this, entity, "<s>Armed <sh>left arm<s> blade!");
                 break;
               case "right":
                 manager.setBoolean(nbt, "bladesRight", true);
-                system.systemMessage(entity, "<s>Armed <sh>right arm<s> blade!");
+                system.moduleMessage(this, entity, "<s>Armed <sh>right arm<s> blade!");
                 break;
               case "*":
                 manager.setBoolean(nbt, "bladesLeft", true);
                 manager.setBoolean(nbt, "bladesRight", true);
-                system.systemMessage(entity, "<s>Armed <sh>all<s> blades!");
+                system.moduleMessage(this, entity, "<s>Armed <sh>all<s> blades!");
                 break;
             };
             break;
@@ -58,16 +59,16 @@ function initModule(system) {
             switch (arguments[2]) {
               case "left":
                 manager.setBoolean(nbt, "bladesLeft", false);
-                system.systemMessage(entity, "<s>Disarmed <sh>left arm<s> blade!");
+                system.moduleMessage(this, entity, "<s>Disarmed <sh>left arm<s> blade!");
                 break;
               case "right":
                 manager.setBoolean(nbt, "bladesRight", false);
-                system.systemMessage(entity, "<s>Disarmed <sh>right arm<s> blade!");
+                system.moduleMessage(this, entity, "<s>Disarmed <sh>right arm<s> blade!");
                 break;
               case "*":
                 manager.setBoolean(nbt, "bladesLeft", false);
                 manager.setBoolean(nbt, "bladesRight", false);
-                system.systemMessage(entity, "<s>Disarmed <sh>all<s> blades!");
+                system.moduleMessage(this, entity, "<s>Disarmed <sh>all<s> blades!");
                 break;
             };
             break;
@@ -75,16 +76,16 @@ function initModule(system) {
             switch (arguments[2]) {
               case "left":
                 manager.setData(entity, "skyhighocs:dyn/blade_left_arm_deployed", true);
-                system.systemMessage(entity, "<s>Deployed <sh>left arm<s> blade!");
+                system.moduleMessage(this, entity, "<s>Deployed <sh>left arm<s> blade!");
                 break;
               case "right":
                 manager.setData(entity, "skyhighocs:dyn/blade_right_arm_deployed", true);
-                system.systemMessage(entity, "<s>Deployed <sh>right arm<s> blade!");
+                system.moduleMessage(this, entity, "<s>Deployed <sh>right arm<s> blade!");
                 break;
               case "*":
                 manager.setData(entity, "skyhighocs:dyn/blade_left_arm_deployed", true);
                 manager.setData(entity, "skyhighocs:dyn/blade_right_arm_deployed", true);
-                system.systemMessage(entity, "<s>Deployed <sh>all<s> blades!");
+                system.moduleMessage(this, entity, "<s>Deployed <sh>all<s> blades!");
                 break;
             };
             break;
@@ -92,16 +93,16 @@ function initModule(system) {
             switch (arguments[2]) {
               case "left":
                 manager.setData(entity, "skyhighocs:dyn/blade_left_arm_deployed", false);
-                system.systemMessage(entity, "<s>Retracted <sh>left arm<s> blade!");
+                system.moduleMessage(this, entity, "<s>Retracted <sh>left arm<s> blade!");
                 break;
               case "right":
                 manager.setData(entity, "skyhighocs:dyn/blade_right_arm_deployed", false);
-                system.systemMessage(entity, "<s>Retracted <sh>right arm<s> blade!");
+                system.moduleMessage(this, entity, "<s>Retracted <sh>right arm<s> blade!");
                 break;
               case "*":
                 manager.setData(entity, "skyhighocs:dyn/blade_left_arm_deployed", false);
                 manager.setData(entity, "skyhighocs:dyn/blade_right_arm_deployed", false);
-                system.systemMessage(entity, "<s>Retracted <sh>all<s> blades!");
+                system.moduleMessage(this, entity, "<s>Retracted <sh>all<s> blades!");
                 break;
             };
             break;
@@ -109,16 +110,16 @@ function initModule(system) {
             switch (arguments[2]) {
               case "left":
                 manager.setBoolean(nbt, "bladesLeftStealth", true);
-                system.systemMessage(entity, "<s>Enabled stealth mode on <sh>left arm<s> blade!");
+                system.moduleMessage(this, entity, "<s>Enabled stealth mode on <sh>left arm<s> blade!");
                 break;
               case "right":
                 manager.setBoolean(nbt, "bladesRightStealth", true);
-                system.systemMessage(entity, "<s>Enabled stealth mode on <sh>right arm<s> blade!");
+                system.moduleMessage(this, entity, "<s>Enabled stealth mode on <sh>right arm<s> blade!");
                 break;
               case "*":
                 manager.setBoolean(nbt, "bladesLeftStealth", true);
                 manager.setBoolean(nbt, "bladesRightStealth", true);
-                system.systemMessage(entity, "<s>Enabled stealth mode on <sh>all<s> blades!");
+                system.moduleMessage(this, entity, "<s>Enabled stealth mode on <sh>all<s> blades!");
                 break;
             };
             break;
@@ -126,43 +127,43 @@ function initModule(system) {
             switch (arguments[2]) {
               case "left":
                 manager.setBoolean(nbt, "bladesLeftStealth", false);
-                system.systemMessage(entity, "<s>Disabled stealth mode on <sh>left arm<s> blade!");
+                system.moduleMessage(this, entity, "<s>Disabled stealth mode on <sh>left arm<s> blade!");
                 break;
               case "right":
                 manager.setBoolean(nbt, "bladesRightStealth", false);
-                system.systemMessage(entity, "<s>Disabled stealth mode on <sh>right arm<s> blade!");
+                system.moduleMessage(this, entity, "<s>Disabled stealth mode on <sh>right arm<s> blade!");
                 break;
               case "*":
                 manager.setBoolean(nbt, "bladesLeftStealth", false);
                 manager.setBoolean(nbt, "bladesRightStealth", false);
-                system.systemMessage(entity, "<s>Disabled stealth mode on <sh>all<s> blades!");
+                system.moduleMessage(this, entity, "<s>Disabled stealth mode on <sh>all<s> blades!");
                 break;
             };
             break;
           case "help":
-            system.systemMessage(entity, "<n>Blades commands:");
-            system.systemMessage(entity, "<n>!blades arm <left|right|*> <nh>-<n> Arms blades");
-            system.systemMessage(entity, "<n>!blades disarm <left|right|*> <nh>-<n> Disarms blades");
-            system.systemMessage(entity, "<n>!blades deploy <left|right|*> <nh>-<n> Deploys blades");
-            system.systemMessage(entity, "<n>!blades retract <left|right|*> <nh>-<n> Retracts disarmed blades");
-            system.systemMessage(entity, "<n>!blades stealthOn <left|right|*> <nh>-<n> Enables stealth mode for blades");
-            system.systemMessage(entity, "<n>!blades stealthOff <left|right|*> <nh>-<n> Disables stealth mode for blades");
-            system.systemMessage(entity, "<n>!blades status <nh>-<n> Shows status of blades");
-            system.systemMessage(entity, "<n>!blades help <nh>-<n> Shows blades commands");
+            system.moduleMessage(this, entity, "<n>Blades commands:");
+            system.moduleMessage(this, entity, "<n>!blades arm <left|right|*> <nh>-<n> Arms blades");
+            system.moduleMessage(this, entity, "<n>!blades disarm <left|right|*> <nh>-<n> Disarms blades");
+            system.moduleMessage(this, entity, "<n>!blades deploy <left|right|*> <nh>-<n> Deploys blades");
+            system.moduleMessage(this, entity, "<n>!blades retract <left|right|*> <nh>-<n> Retracts disarmed blades");
+            system.moduleMessage(this, entity, "<n>!blades stealthOn <left|right|*> <nh>-<n> Enables stealth mode for blades");
+            system.moduleMessage(this, entity, "<n>!blades stealthOff <left|right|*> <nh>-<n> Disables stealth mode for blades");
+            system.moduleMessage(this, entity, "<n>!blades status <nh>-<n> Shows status of blades");
+            system.moduleMessage(this, entity, "<n>!blades help <nh>-<n> Shows blades commands");
             break;
           case "status":
-            system.systemMessage(entity, "<n>Blades status:");
-            system.systemMessage(entity, "<n>Left: <nh>" + (nbt.getBoolean("bladesLeft") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/blade_left_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/blade_left_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
-            system.systemMessage(entity, "<n>Left stealth mode: <nh>" + (nbt.getBoolean("bladesLeftStealth") ? "ENGAGED" : "DISENGAGED"));
-            system.systemMessage(entity, "<n>Right: <nh>" + (nbt.getBoolean("bladesRight") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/blade_right_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/blade_right_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
-            system.systemMessage(entity, "<n>Right stealth mode: <nh>" + (nbt.getBoolean("bladesRightStealth") ? "ENGAGED" : "DISENGAGED"));
+            system.moduleMessage(this, entity, "<n>Blades status:");
+            system.moduleMessage(this, entity, "<n>Left: <nh>" + (nbt.getBoolean("bladesLeft") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/blade_left_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/blade_left_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Left stealth mode: <nh>" + (nbt.getBoolean("bladesLeftStealth") ? "ENGAGED" : "DISENGAGED"));
+            system.moduleMessage(this, entity, "<n>Right: <nh>" + (nbt.getBoolean("bladesRight") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/blade_right_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/blade_right_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Right stealth mode: <nh>" + (nbt.getBoolean("bladesRightStealth") ? "ENGAGED" : "DISENGAGED"));
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blades help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blades help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blades help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blades help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {
@@ -257,7 +258,7 @@ function initModule(system) {
     fightOrFlight: function (entity, manager) {
       manager.setBoolean(entity.getWornHelmet().nbt(), "bladesLeft", true);
       manager.setBoolean(entity.getWornHelmet().nbt(), "bladesRight", true);
-      system.systemMessage(entity, "<n>Automatically armed <nh>blades<n>!");
+      system.moduleMessage(this, entity, "<n>Automatically armed <nh>blades<n>!");
       manager.setData(entity, "fiskheroes:blade", true);
       manager.setData(entity, "fiskheroes:blade_timer", 1.0);
     }

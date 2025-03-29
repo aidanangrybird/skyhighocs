@@ -17,7 +17,7 @@ function initModule(system) {
   **/
   function getPos(tx, rx) {
     var otherName = system.getModelID(tx);
-    system.systemMessage(rx, "<nh>" + otherName + "<n> | <nh>" + tx.posX().toFixed(0) + "<n> | <nh>" + tx.posY().toFixed(0) + "<n> | <nh>" + tx.posZ().toFixed(0) + "<n> | <nh>" + tx.world().getLocation(tx.pos()).biome());
+    system.moduleMessage(this, rx, "<nh>" + otherName + "<n> | <nh>" + tx.posX().toFixed(0) + "<n> | <nh>" + tx.posY().toFixed(0) + "<n> | <nh>" + tx.posZ().toFixed(0) + "<n> | <nh>" + tx.world().getLocation(tx.pos()).biome());
   };
   /**
   * Gets status of other cybers
@@ -26,7 +26,7 @@ function initModule(system) {
   **/
   function getStatus(tx, rx) {
     var otherName = system.getModelID(tx);
-    system.systemMessage(rx, "<nh>" + otherName + "<n> | <nh>" + ((tx.getHealth()/tx.getMaxHealth())*100) + "%<n> | <nh>" + ((tx.as("PLAYER").getFoodLevel()/20)*100) + "%<n>");
+    system.moduleMessage(this, rx, "<nh>" + otherName + "<n> | <nh>" + ((tx.getHealth()/tx.getMaxHealth())*100) + "%<n> | <nh>" + ((tx.as("PLAYER").getFoodLevel()/20)*100) + "%<n>");
   };
   /**
   * Receives suits
@@ -53,21 +53,21 @@ function initModule(system) {
     suitsToReceive.forEach(entry => {
       if ((entry < txSuitDatastoreArray.length) && (entry > -1)) {
         var currentSuit = txSuitDatastoreArray[entry];
-        system.systemMessage(rx, "<n>Receiveing suit \"<nh>" + currentSuit + "<n>\" from <nh>" + txName + "<n>!");
-        system.systemMessage(tx, "<n>Transmitting suit \"<nh>" + currentSuit + "<n>\" to " + rxName + "!");
+        system.moduleMessage(this, rx, "<n>Receiveing suit \"<nh>" + currentSuit + "<n>\" from <nh>" + txName + "<n>!");
+        system.moduleMessage(this, tx, "<n>Transmitting suit \"<nh>" + currentSuit + "<n>\" to " + rxName + "!");
         if (rxSuitDatastoreArray.indexOf(currentSuit) == -1) {
           rxSuitDatastoreArray.push(currentSuit);
           manager.appendString(rxSuitDatastore, currentSuit);
-          system.systemMessage(rx, "<s>Successfully received suit \"<sh>" + currentSuit + "<s>\" from " + txName + "!");
-          system.systemMessage(tx, "<n>Successfully transmited suit \"<nh>" + currentSuit + "<n>\" to " + rxName + "!");
+          system.moduleMessage(this, rx, "<s>Successfully received suit \"<sh>" + currentSuit + "<s>\" from " + txName + "!");
+          system.moduleMessage(this, tx, "<n>Successfully transmited suit \"<nh>" + currentSuit + "<n>\" to " + rxName + "!");
           suitsReceived = suitsReceived + 1;
         } else {
-          system.systemMessage(rx, "<e>Failed to receive suit \"<eh>" + currentSuit + "<e>\" from " + txName + "!");
-          system.systemMessage(tx, "<n>Failed to transmit suit \"<nh>" + currentSuit + "<n>\" to " + rxName + "!");
+          system.moduleMessage(this, rx, "<e>Failed to receive suit \"<eh>" + currentSuit + "<e>\" from " + txName + "!");
+          system.moduleMessage(this, tx, "<n>Failed to transmit suit \"<nh>" + currentSuit + "<n>\" to " + rxName + "!");
         };
       };
     });
-    system.systemMessage(rx, "<nh>" + suitsReceived + "<n> " + ((suitsReceived == 1) ? "suit received!" : "suits received!"));
+    system.moduleMessage(this, rx, "<nh>" + suitsReceived + "<n> " + ((suitsReceived == 1) ? "suit received!" : "suits received!"));
   };
   /**
   * Transmits suits
@@ -92,21 +92,22 @@ function initModule(system) {
     var numSuitsTransmitted = 0;
     var suitsTransmited = "-1";
     suitsToTransmit.forEach(entry => {
-      system.systemMessage(entity, "<n>Transmiting suit entry \"<nh>" + entry + "<n>\"!");
+      system.moduleMessage(this, entity, "<n>Transmiting suit entry \"<nh>" + entry + "<n>\"!");
       if ((entry < (suitDatastoreArray.length-1)) && (entry > -1)) {
         var currentSuit = suitDatastoreArray[entry];
-        system.systemMessage(entity, "<s>Successfully transmited suit \"<sh>" + currentSuit + "<s>\"!");
+        system.moduleMessage(this, entity, "<s>Successfully transmited suit \"<sh>" + currentSuit + "<s>\"!");
         suitsTransmited = suitsTransmited + ("," + entry);
         numSuitsTransmitted = numSuitsTransmitted + 1;
       } else {
-        system.systemMessage(entity, "<e>Failed to transmit suit entry \"<eh>" + entry + "<e>\"!");
+        system.moduleMessage(this, entity, "<e>Failed to transmit suit entry \"<eh>" + entry + "<e>\"!");
       };
     });
     manager.setData(entity, "skyhighocs:dyn/suit_data_buffer", suitsTransmited);
-    system.systemMessage(entity, "<nh>" + numSuitsTransmitted + (numSuitsTransmitted == 1) ? "<n>suit transmited!" : "<n>suits transmited!");
+    system.moduleMessage(this, entity, "<nh>" + numSuitsTransmitted + (numSuitsTransmitted == 1) ? "<n>suit transmited!" : "<n>suits transmited!");
   };
   return {
     name: "communications",
+    moduleMessageName: "Comms",
     type: 12,
     command: "comms",
     powers: ["skyhighocs:communications"],
@@ -137,8 +138,8 @@ function initModule(system) {
             });
             if (foundPlayers.length > 0) {
               var name = system.getModelID(entity);
-              system.systemMessage(entity, "<nh>Name<n> | <nh>posX<n> | <nh>posY<n> | <nh>posZ<n> | <nh>Biome");
-              system.systemMessage(entity, "<nh>" + name + "<n> | <nh>" + entity.posX().toFixed(0) + "<n> | <nh>" + entity.posY().toFixed(0) + "<n> | <nh>" + entity.posZ().toFixed(0) + "<n> | <nh>" + entity.world().getLocation(entity.pos()).biome());
+              system.moduleMessage(this, entity, "<nh>Name<n> | <nh>posX<n> | <nh>posY<n> | <nh>posZ<n> | <nh>Biome");
+              system.moduleMessage(this, entity, "<nh>" + name + "<n> | <nh>" + entity.posX().toFixed(0) + "<n> | <nh>" + entity.posY().toFixed(0) + "<n> | <nh>" + entity.posZ().toFixed(0) + "<n> | <nh>" + entity.world().getLocation(entity.pos()).biome());
               //entity = tx
               //player = rx
               foundPlayers.forEach(player => {
@@ -153,7 +154,7 @@ function initModule(system) {
                 };
               });
             } else {
-              system.systemMessage(entity, "<n>No other cybers in range!")
+              system.moduleMessage(this, entity, "<n>No other cybers in range!")
             };
             break;
           case "stats":
@@ -177,8 +178,8 @@ function initModule(system) {
               };
             });
             var name = system.getModelID(entity);
-            system.systemMessage(entity, "<nh>Name<n> | <nh>Health<n> | <nh>Hunger<n>");
-            system.systemMessage(entity, "<nh>" + name + "<n> | <nh>" + ((entity.getHealth()/entity.getMaxHealth())*100) + "%<n> | <nh>" + ((entity.as("PLAYER").getFoodLevel()/20)*100) + "%<n>");
+            system.moduleMessage(this, entity, "<nh>Name<n> | <nh>Health<n> | <nh>Hunger<n>");
+            system.moduleMessage(this, entity, "<nh>" + name + "<n> | <nh>" + ((entity.getHealth()/entity.getMaxHealth())*100) + "%<n> | <nh>" + ((entity.as("PLAYER").getFoodLevel()/20)*100) + "%<n>");
             if (foundPlayers.length > 0) {
               //entity = tx
               //player = rx
@@ -194,7 +195,7 @@ function initModule(system) {
                 };
               });
             } else {
-              system.systemMessage(entity, "<n>No other cybers in range!")
+              system.moduleMessage(this, entity, "<n>No other cybers in range!")
             };
             break;
           case "tx":
@@ -233,7 +234,7 @@ function initModule(system) {
                 };
               });
             } else {
-              system.systemMessage(entity, "<n>No other cybers in range!")
+              system.moduleMessage(this, entity, "<n>No other cybers in range!")
             };
             break;
           case "rx":
@@ -271,22 +272,22 @@ function initModule(system) {
                 };
               });
             } else {
-              system.systemMessage(entity, "<n>No other cybers in range!")
+              system.moduleMessage(this, entity, "<n>No other cybers in range!")
             };
             break;
           case "deploy":
             switch (arguments[2]) {
               case "sat":
                 manager.setData(entity, "skyhighocs:dyn/satellite", true);
-                system.systemMessage(entity, "<n>Deploying satellite!");
+                system.moduleMessage(this, entity, "<n>Deploying satellite!");
                 break;
               case "ant":
                 manager.setData(entity, "skyhighocs:dyn/antenna", true);
-                system.systemMessage(entity, "<n>Deploying antenna!");
+                system.moduleMessage(this, entity, "<n>Deploying antenna!");
                 break;
               case "satRain":
                 manager.setData(entity, "skyhighocs:dyn/satellite_rain_mode", true);
-                system.systemMessage(entity, "<n>Activating satellite rain mode!");
+                system.moduleMessage(this, entity, "<n>Activating satellite rain mode!");
                 break;
             };
             break;
@@ -294,41 +295,41 @@ function initModule(system) {
             switch (arguments[2]) {
               case "sat":
                 manager.setData(entity, "skyhighocs:dyn/satellite", false);
-                system.systemMessage(entity, "<n>Retracting satellite!");
+                system.moduleMessage(this, entity, "<n>Retracting satellite!");
                 break;
               case "ant":
                 manager.setData(entity, "skyhighocs:dyn/antenna", false);
-                system.systemMessage(entity, "<n>Retracting antenna!");
+                system.moduleMessage(this, entity, "<n>Retracting antenna!");
                 break;
               case "satRain":
                 manager.setData(entity, "skyhighocs:dyn/satellite_rain_mode", false);
-                system.systemMessage(entity, "<n>Deactivating satellite rain mode!");
+                system.moduleMessage(this, entity, "<n>Deactivating satellite rain mode!");
                 break;
             };
             break;
           case "status":
-            system.systemMessage(entity, "<n>Comms status:");
-            system.systemMessage(entity, "<n>Antenna: <nh>" + ((entity.getData("skyhighocs:dyn/antenna_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
-            system.systemMessage(entity, "<n>Satellite: <nh>" + ((entity.getData("skyhighocs:dyn/satellite_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
-            system.systemMessage(entity, "<n>Satellite Rain Mode: <nh>" + ((entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Comms status:");
+            system.moduleMessage(this, entity, "<n>Antenna: <nh>" + ((entity.getData("skyhighocs:dyn/antenna_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Satellite: <nh>" + ((entity.getData("skyhighocs:dyn/satellite_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Satellite Rain Mode: <nh>" + ((entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             break;
           case "help":
-            system.systemMessage(entity, "<n>Communications commands:");
-            system.systemMessage(entity, "<n>!comms deploy <sat|ant|satRain> <nh>-<n> Deploys comms type");
-            system.systemMessage(entity, "<n>!comms retract <sat|ant|satRain> <nh>-<n> Retracts comms type");
-            system.systemMessage(entity, "<n>!comms tx <suits> <nh>-<n> Transmits suits (comma seperated indexes) to other Cybers");
-            system.systemMessage(entity, "<n>!comms rx <nh>-<n> Receives suits from other Cybers");
-            system.systemMessage(entity, "<n>!comms pos <nh>-<n> Gets position of other Cybers");
-            system.systemMessage(entity, "<n>!comms stats <nh>-<n> Gets stats of other Cybers");
-            system.systemMessage(entity, "<n>!comms status <nh>-<n> Status of comms");
-            system.systemMessage(entity, "<n>!comms help <nh>-<n> Shows communications commands");
+            system.moduleMessage(this, entity, "<n>Communications commands:");
+            system.moduleMessage(this, entity, "<n>!comms deploy <sat|ant|satRain> <nh>-<n> Deploys comms type");
+            system.moduleMessage(this, entity, "<n>!comms retract <sat|ant|satRain> <nh>-<n> Retracts comms type");
+            system.moduleMessage(this, entity, "<n>!comms tx <suits> <nh>-<n> Transmits suits (comma seperated indexes) to other Cybers");
+            system.moduleMessage(this, entity, "<n>!comms rx <nh>-<n> Receives suits from other Cybers");
+            system.moduleMessage(this, entity, "<n>!comms pos <nh>-<n> Gets position of other Cybers");
+            system.moduleMessage(this, entity, "<n>!comms stats <nh>-<n> Gets stats of other Cybers");
+            system.moduleMessage(this, entity, "<n>!comms status <nh>-<n> Status of comms");
+            system.moduleMessage(this, entity, "<n>!comms help <nh>-<n> Shows communications commands");
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>comms<e> command! Try <eh>!comms help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>comms<e> command! Try <eh>!comms help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>comms<e> command! Try <eh>!comms help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>comms<e> command! Try <eh>!comms help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {

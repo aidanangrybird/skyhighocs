@@ -182,11 +182,27 @@ function systemMessage(player, message) {
   chatMessage(player, formatSystem("\u00A7" + color + "SYSTEM<r>> " + message));
 };
 /**
- * Sends message in group format
- * @param {string} message - Entity recieving message
+ * Sends log message
+ * @param {string} message - Log message
  **/
 function logMessage(message) {
   PackLoader.print(message);
+};
+
+/**
+ * Sends log message
+ * @param {object} module - Reference 'this' module
+ * @param {JSEntity} entity - Entity recieving message
+ * @param {string} message - Message content
+ **/
+function moduleMessage(module, entity, message) {
+  var messageName = "SYSTEM";
+  if (module.hasOwnProperty("moduleMessageName")) {
+    messageName = module.moduleMessageName
+  };
+  var id = getModelID(entity);
+  var color = id.split("-")[1];
+  chatMessage(entity, formatSystem("\u00A7" + color + messageName + "<r>> " + message));
 };
 
 /**

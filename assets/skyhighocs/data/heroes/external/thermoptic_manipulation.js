@@ -5,6 +5,7 @@
 function initModule(system) {
   return {
     name: "thermoptics",
+    moduleMessageName: "Thermoptics",
     type: 12,
     command: "thermo",
     powers: ["skyhighocs:thermoptic_manipulation"],
@@ -18,19 +19,19 @@ function initModule(system) {
             switch (arguments[2]) {
               case "disguise":
                 manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise", true);
-                system.systemMessage(entity, "<n>Enabled <nh>disguise<n>!");
+                system.moduleMessage(this, entity, "<n>Enabled <nh>disguise<n>!");
                 break;
               case "camo":
                 manager.setData(entity, "skyhighocs:dyn/thermoptic_camouflage", true);
-                system.systemMessage(entity, "<n>Enabled <nh>camo<n>!");
+                system.moduleMessage(this, entity, "<n>Enabled <nh>camo<n>!");
                 break;
               case "autoDisguise":
                 manager.setBoolean(nbt, "autoDisguise", true);
-                system.systemMessage(entity, "<n>Enabled <nh>auto disguise<n>!");
+                system.moduleMessage(this, entity, "<n>Enabled <nh>auto disguise<n>!");
                 break;
               case "autoCamo":
                 manager.setBoolean(nbt, "autoCamouflage", true);
-                system.systemMessage(entity, "<n>Enabled <nh>auto camouflage<n>!");
+                system.moduleMessage(this, entity, "<n>Enabled <nh>auto camouflage<n>!");
                 break;
             };
             break;
@@ -38,41 +39,41 @@ function initModule(system) {
             switch (arguments[2]) {
               case "disguise":
                 manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise", false);
-                system.systemMessage(entity, "<n>Disabled <nh>disguise<n>!");
+                system.moduleMessage(this, entity, "<n>Disabled <nh>disguise<n>!");
                 break;
               case "camo":
                 manager.setData(entity, "skyhighocs:dyn/thermoptic_camouflage", false);
-                system.systemMessage(entity, "<n>Disabled <nh>camo<n>!");
+                system.moduleMessage(this, entity, "<n>Disabled <nh>camo<n>!");
                 break;
               case "autoDisguise":
                 manager.setBoolean(nbt, "autoDisguise", false);
-                system.systemMessage(entity, "<n>Disabled <nh>auto disguise<n>!");
+                system.moduleMessage(this, entity, "<n>Disabled <nh>auto disguise<n>!");
                 break;
               case "autoCamo":
                 manager.setBoolean(nbt, "autoCamouflage", false);
-                system.systemMessage(entity, "<n>Disabled <nh>auto camouflage<n>!");
+                system.moduleMessage(this, entity, "<n>Disabled <nh>auto camouflage<n>!");
                 break;
             };
             break;
           case "status":
-            system.systemMessage(entity, "<n>Thermoptics status:");
-            system.systemMessage(entity, "<n>Camouflage: <nh>" + ((entity.getData("skyhighocs:dyn/thermoptic_camouflage_timer") > 0) ? "ENABLED" : "DISABLED"));
-            system.systemMessage(entity, "<n>Disguise: <nh>" + ((entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") > 0) ? "ENABLED" : "DISABLED"));
-            system.systemMessage(entity, "<n>Auto Disguise: <nh>" + (nbt.getBoolean("autoDisguise") ? "ARMED" : "DISARMED"));
-            system.systemMessage(entity, "<n>Auto Camouflage: <nh>" + (nbt.getBoolean("autoCamouflage") ? "ARMED" : "DISARMED"));
+            system.moduleMessage(this, entity, "<n>Thermoptics status:");
+            system.moduleMessage(this, entity, "<n>Camouflage: <nh>" + ((entity.getData("skyhighocs:dyn/thermoptic_camouflage_timer") > 0) ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Disguise: <nh>" + ((entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") > 0) ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Auto Disguise: <nh>" + (nbt.getBoolean("autoDisguise") ? "ARMED" : "DISARMED"));
+            system.moduleMessage(this, entity, "<n>Auto Camouflage: <nh>" + (nbt.getBoolean("autoCamouflage") ? "ARMED" : "DISARMED"));
             break;
           case "help":
-            system.systemMessage(entity, "<n>Thermoptics commands:");
-            system.systemMessage(entity, "<n>!thermo enable <disguise|camo> <nh>-<n> Enables function");
-            system.systemMessage(entity, "<n>!thermo disable <disguise|camo> <nh>-<n> Disables function");
-            system.systemMessage(entity, "<n>!thermo help <nh>-<n> Shows thermoptics commands");
+            system.moduleMessage(this, entity, "<n>Thermoptics commands:");
+            system.moduleMessage(this, entity, "<n>!thermo enable <disguise|camo> <nh>-<n> Enables function");
+            system.moduleMessage(this, entity, "<n>!thermo disable <disguise|camo> <nh>-<n> Disables function");
+            system.moduleMessage(this, entity, "<n>!thermo help <nh>-<n> Shows thermoptics commands");
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>disguise<e> command! Try <eh>!thermo help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>disguise<e> command! Try <eh>!thermo help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>disguise<e> command! Try <eh>!thermo help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>disguise<e> command! Try <eh>!thermo help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {

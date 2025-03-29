@@ -104,27 +104,30 @@ function addHoverAnimation(renderer, name, value, dataLoader) {
 //Cyber Animations
 function initCyberneticAnimations(renderer) {
   addAnimation(renderer, "cybernetic.LEFT_ARM_BLADE", "skyhighocs:cybernetic_left_arm_blade").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_timer") + entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_deploy_timer"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_stealth_timer"));
   });
   addAnimation(renderer, "cybernetic.RIGHT_ARM_BLADE", "skyhighocs:cybernetic_right_arm_blade").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_timer") + entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_deploy_timer"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_stealth_timer"));
   });
   addAnimation(renderer, "cybernetic.LEFT_LEG_ROCKETS", "skyhighocs:cybernetic_left_leg_rockets").setData((entity, data) => {
-    data.load(entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer") + entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_deploy_timer"));
+    data.load(entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_sides_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
   });
   addAnimation(renderer, "cybernetic.RIGHT_LEG_ROCKETS", "skyhighocs:cybernetic_right_leg_rockets").setData((entity, data) => {
-    data.load(entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer") + entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_deploy_timer"));
+    data.load(entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_sides_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
   });
-  addAnimation(renderer, "cybernetic.WINGS", "skyhighocs:cybernetic_wings").setData((entity, data) => {
-    data.load(entity.getInterpolatedData("skyhighocs:dyn/wings_timer") + entity.getInterpolatedData("skyhighocs:dyn/wings_deploy_timer"));
+  addAnimation(renderer, "cybernetic.WING_LEFT", "skyhighocs:cybernetic_wing_left").setData((entity, data) => {
+    data.load(entity.getInterpolatedData("skyhighocs:dyn/wing_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/wings_timer"));
+  });
+  addAnimation(renderer, "cybernetic.WING_RIGHT", "skyhighocs:cybernetic_wing_right").setData((entity, data) => {
+    data.load( entity.getInterpolatedData("skyhighocs:dyn/wing_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/wings_timer"));
   });
   addAnimation(renderer, "cybernetic.LEFT_ARM_AIM", "skyhighocs:cybernetic_left_arm_aim").setData((entity, data) => {
-    data.load(entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_timer"));
+    data.load(entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer"));
   });
   addAnimation(renderer, "cybernetic.RIGHT_ARM_AIM", "skyhighocs:cybernetic_right_arm_aim").setData((entity, data) => {
-    data.load(entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_timer"));
+    data.load(entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer"));
   });
   addAnimation(renderer, "cybernetic.LEFT_ARM_SHIELD", "skyhighocs:cybernetic_left_arm_shield").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/shield_left_arm_timer") * entity.getInterpolatedData("fiskheroes:shield_blocking_timer") * (1 - entity.getInterpolatedData("fiskheroes:beam_charge")));

@@ -6,6 +6,7 @@ function initModule(system) {
   //All of the required functions and stuff go here
   return {
     name: "shields",
+    moduleMessageName: "Shields",
     type: 14,
     powers: ["skyhighocs:shields"],
     command: "shields",
@@ -13,7 +14,7 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>shields<e> is disabled!",
     keyBinds: function (hero) {
       hero.addKeyBindFunc("SHIELDS", (player, manager) => {
-        system.systemMessage(player, "<e>At least one shield must be armed!");
+        system.moduleMessage(this, player, "<e>At least one shield must be armed!");
         return false;
       }, "Shields (None armed)", 1);
       hero.addKeyBind("SHIELD", "Shields", 1);
@@ -41,16 +42,16 @@ function initModule(system) {
             switch (arguments[2]) {
               case "left":
                 manager.setBoolean(nbt, "shieldsLeft", true);
-                system.systemMessage(entity, "<s>Armed <sh>left arm<s> shield!");
+                system.moduleMessage(this, entity, "<s>Armed <sh>left arm<s> shield!");
                 break;
               case "right":
                 manager.setBoolean(nbt, "shieldsRight", true);
-                system.systemMessage(entity, "<s>Armed <sh>right arm<s> shield!");
+                system.moduleMessage(this, entity, "<s>Armed <sh>right arm<s> shield!");
                 break;
               case "*":
                 manager.setBoolean(nbt, "shieldsLeft", true);
                 manager.setBoolean(nbt, "shieldsRight", true);
-                system.systemMessage(entity, "<s>Armed <sh>all<s> shields!");
+                system.moduleMessage(this, entity, "<s>Armed <sh>all<s> shields!");
                 break;
             };
             break;
@@ -58,16 +59,16 @@ function initModule(system) {
             switch (arguments[2]) {
               case "left":
                 manager.setBoolean(nbt, "shieldsLeft", false);
-                system.systemMessage(entity, "<s>Disarmed <sh>left arm<s> shield!");
+                system.moduleMessage(this, entity, "<s>Disarmed <sh>left arm<s> shield!");
                 break;
               case "right":
                 manager.setBoolean(nbt, "shieldsRight", false);
-                system.systemMessage(entity, "<s>Disarmed <sh>right arm<s> shield!");
+                system.moduleMessage(this, entity, "<s>Disarmed <sh>right arm<s> shield!");
                 break;
               case "*":
                 manager.setBoolean(nbt, "shieldsLeft", false);
                 manager.setBoolean(nbt, "shieldsRight", false);
-                system.systemMessage(entity, "<s>Disarmed <sh>all<s> shields!");
+                system.moduleMessage(this, entity, "<s>Disarmed <sh>all<s> shields!");
                 break;
             };
             break;
@@ -75,16 +76,16 @@ function initModule(system) {
             switch (arguments[2]) {
               case "left":
                 manager.setData(entity, "skyhighocs:dyn/shield_left_arm_deployed", true);
-                system.systemMessage(entity, "<s>Deployed <sh>left arm<s> shield!");
+                system.moduleMessage(this, entity, "<s>Deployed <sh>left arm<s> shield!");
                 break;
               case "right":
                 manager.setData(entity, "skyhighocs:dyn/shield_right_arm_deployed", true);
-                system.systemMessage(entity, "<s>Deployed <sh>right arm<s> shield!");
+                system.moduleMessage(this, entity, "<s>Deployed <sh>right arm<s> shield!");
                 break;
               case "*":
                 manager.setData(entity, "skyhighocs:dyn/shield_left_arm_deployed", true);
                 manager.setData(entity, "skyhighocs:dyn/shield_right_arm_deployed", true);
-                system.systemMessage(entity, "<s>Deployed <sh>all<s> shields!");
+                system.moduleMessage(this, entity, "<s>Deployed <sh>all<s> shields!");
                 break;
             };
             break;
@@ -93,46 +94,46 @@ function initModule(system) {
               case "left":
                 if (!nbt.getBoolean("shieldsLeft") && entity.getData("fiskheroes:shield_timer") > 0) {
                   manager.setData(entity, "skyhighocs:dyn/shield_left_arm_deployed", false);
-                  system.systemMessage(entity, "<s>Retracted <sh>left arm<s> shield!");
+                  system.moduleMessage(this, entity, "<s>Retracted <sh>left arm<s> shield!");
                 } else {
-                  system.systemMessage(entity, "<e>Unable to retract armed <eh>left arm<e> shield!");
+                  system.moduleMessage(this, entity, "<e>Unable to retract armed <eh>left arm<e> shield!");
                 };
                 break;
               case "right":
                 if (!nbt.getBoolean("shieldsRight") && entity.getData("fiskheroes:shield_timer") > 0) {
                   manager.setData(entity, "skyhighocs:dyn/shield_right_arm_deployed", false);
-                  system.systemMessage(entity, "<s>Retracted <sh>right arm<s> shield!");
+                  system.moduleMessage(this, entity, "<s>Retracted <sh>right arm<s> shield!");
                 } else {
-                  system.systemMessage(entity, "<e>Unable to retract armed <eh>right arm<e> shield!");
+                  system.moduleMessage(this, entity, "<e>Unable to retract armed <eh>right arm<e> shield!");
                 };
                 break;
               case "*":
                 manager.setData(entity, "skyhighocs:dyn/shield_left_arm_deployed", false);
                 manager.setData(entity, "skyhighocs:dyn/shield_right_arm_deployed", false);
-                system.systemMessage(entity, "<s>Retracted <sh>all<s> shields!");
+                system.moduleMessage(this, entity, "<s>Retracted <sh>all<s> shields!");
                 break;
             };
             break;
           case "help":
-            system.systemMessage(entity, "<n>Shields commands:");
-            system.systemMessage(entity, "<n>!shields arm <left|right|*> <nh>-<n> Arms shields");
-            system.systemMessage(entity, "<n>!shields disarm <left|right|*> <nh>-<n> Disarms shields");
-            system.systemMessage(entity, "<n>!shields deploy <left|right|*> <nh>-<n> Deploys shields");
-            system.systemMessage(entity, "<n>!shields retract <left|right|*> <nh>-<n> Retracts disarmed shields");
-            system.systemMessage(entity, "<n>!shields status <nh>-<n> Shows status of shields");
-            system.systemMessage(entity, "<n>!shields help <nh>-<n> Shows shields commands");
+            system.moduleMessage(this, entity, "<n>Shields commands:");
+            system.moduleMessage(this, entity, "<n>!shields arm <left|right|*> <nh>-<n> Arms shields");
+            system.moduleMessage(this, entity, "<n>!shields disarm <left|right|*> <nh>-<n> Disarms shields");
+            system.moduleMessage(this, entity, "<n>!shields deploy <left|right|*> <nh>-<n> Deploys shields");
+            system.moduleMessage(this, entity, "<n>!shields retract <left|right|*> <nh>-<n> Retracts disarmed shields");
+            system.moduleMessage(this, entity, "<n>!shields status <nh>-<n> Shows status of shields");
+            system.moduleMessage(this, entity, "<n>!shields help <nh>-<n> Shows shields commands");
             break;
           case "status":
-            system.systemMessage(entity, "<n>Shields status:");
-            system.systemMessage(entity, "<n>Left: <nh>" + (nbt.getBoolean("shieldsLeft") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/shield_left_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/shield_left_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
-            system.systemMessage(entity, "<n>Right: <nh>" + (nbt.getBoolean("shieldsRight") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/shield_right_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/shield_right_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Shields status:");
+            system.moduleMessage(this, entity, "<n>Left: <nh>" + (nbt.getBoolean("shieldsLeft") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/shield_left_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/shield_left_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Right: <nh>" + (nbt.getBoolean("shieldsRight") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/shield_right_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/shield_right_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shields help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shields help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shields help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shields help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {
@@ -234,7 +235,7 @@ function initModule(system) {
     fightOrFlight: function (entity, manager) {
       manager.setBoolean(entity.getWornHelmet().nbt(), "shieldsLeft", true);
       manager.setBoolean(entity.getWornHelmet().nbt(), "shieldsRight", true);
-      system.systemMessage(entity, "<n>Automatically armed <nh>shields<n>!");
+      system.moduleMessage(this, entity, "<n>Automatically armed <nh>shields<n>!");
     }
   };
 };

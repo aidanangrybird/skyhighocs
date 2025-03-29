@@ -5,6 +5,7 @@
 function initModule(system) {
   return {
     name: "wings",
+    moduleMessageName: "Wings",
     type: 12,
     command: "wings",
     powers: ["skyhighocs:wings"],
@@ -16,42 +17,68 @@ function initModule(system) {
         switch(arguments[1]) {
           case "arm":
             manager.setBoolean(nbt, "wings", true);
-            system.systemMessage(entity, "<s>Armed <sh>wings<s>!");
+            system.moduleMessage(this, entity, "<s>Armed <sh>wings<s>!");
             break;
           case "disarm":
             manager.setBoolean(nbt, "wings", false);
-            system.systemMessage(entity, "<s>Disarmed <sh>wings<s>!");
+            system.moduleMessage(this, entity, "<s>Disarmed <sh>wings<s>!");
             break;
           case "deploy":
-            manager.setData(entity, "skyhighocs:dyn/wings_deployed", true);
-            system.systemMessage(entity, "<s>Deployed <sh>wings<s>!");
+            switch(arguments[2]) {
+              case "left":
+                manager.setData(entity, "skyhighocs:dyn/wing_left_deployed", true);
+                system.moduleMessage(this, entity, "<s>Deployed <sh>left<s> wing!");
+                break;
+              case "right":
+                manager.setData(entity, "skyhighocs:dyn/wing_right_deployed", true);
+                system.moduleMessage(this, entity, "<s>Deployed <sh>right<s> wing!");
+                break;
+              case "*":
+                manager.setData(entity, "skyhighocs:dyn/wing_left_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/wing_right_deployed", true);
+                system.moduleMessage(this, entity, "<s>Deployed <sh>wings<s>!");
+                break;
+              };
             break;
           case "retract":
-            if (!nbt.getBoolean("wings") && entity.getData("fiskheroes:gliding")) {
-              manager.setData(entity, "skyhighocs:dyn/wings_deployed", false);
-              system.systemMessage(entity, "<s>Retracted <sh>wings<s>!");
-            } else {
-              system.systemMessage(entity, "<e>Unable to retract armed <eh>wings<e>!");
-            };
+            switch(arguments[2]) {
+              case "left":
+                manager.setData(entity, "skyhighocs:dyn/wing_left_deployed", false);
+                system.moduleMessage(this, entity, "<s>Retracted <sh>left<s> wing!");
+                break;
+              case "right":
+                manager.setData(entity, "skyhighocs:dyn/wing_right_deployed", false);
+                system.moduleMessage(this, entity, "<s>Retracted <sh>right<s> wing!");
+                break;
+              case "*":
+                manager.setData(entity, "skyhighocs:dyn/wing_left_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/wing_right_deployed", true);
+                system.moduleMessage(this, entity, "<s>Retracted <sh>wings<s>!");
+                break;
+              };
             break;
           case "help":
-            system.systemMessage(entity, "<n>Wings commands:");
-            system.systemMessage(entity, "<n>!wings arm <nh>-<n> Arms wings");
-            system.systemMessage(entity, "<n>!wings disarm <nh>-<n> Disarms wings");
-            system.systemMessage(entity, "<n>!wings deploy <nh>-<n> Deploys wings");
-            system.systemMessage(entity, "<n>!wings retract <nh>-<n> Retracts wings");
-            system.systemMessage(entity, "<n>!wings status <nh>-<n> Shows status of wings");
-            system.systemMessage(entity, "<n>!wings help <nh>-<n> Shows wings commands");
+            system.moduleMessage(this, entity, "<n>Wings commands:");
+            system.moduleMessage(this, entity, "<n>!wings arm <nh>-<n> Arms wings");
+            system.moduleMessage(this, entity, "<n>!wings disarm <nh>-<n> Disarms wings");
+            system.moduleMessage(this, entity, "<n>!wings deploy <nh>-<n> Deploys wings");
+            system.moduleMessage(this, entity, "<n>!wings retract <nh>-<n> Retracts wings");
+            system.moduleMessage(this, entity, "<n>!wings status <nh>-<n> Shows status of wings");
+            system.moduleMessage(this, entity, "<n>!wings help <nh>-<n> Shows wings commands");
             break;
           case "status":
-            system.systemMessage(entity, "<n>Wings status: <nh>" + (nbt.getBoolean("wings") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/wings_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/wings_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            var wings = (entity.getData("skyhighocs:dyn/wings_timer") > 0);
+            system.moduleMessage(this, entity, "<n>Wings status:");
+            system.moduleMessage(this, entity, "<n>Wings: <nh>" + (nbt.getBoolean("wings") ? "ARMED" : "DISARMED"));
+            system.moduleMessage(this, entity, "<n>Left wing: <nh>" + ((entity.getData("skyhighocs:dyn/wing_left_deploy_timer") > 0) || wings ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Right wing: <nh>" + ((entity.getData("skyhighocs:dyn/wing_right_deploy_timer") > 0) || wings ? "DEPLOYED" : "RETRACTED"));
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>wings<e> command! Try <eh>!wings help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>wings<e> command! Try <eh>!wings help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>wings<e> command! Try <eh>!wings help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>wings<e> command! Try <eh>!wings help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {
@@ -71,7 +98,8 @@ function initModule(system) {
     whenDisabled: function (entity, manager) {
       var nbt = entity.getWornHelmet().nbt();
       manager.setBoolean(nbt, "wings", false);
-      manager.setData(entity, "skyhighocs:dyn/wings_deployed", false);
+      manager.setData(entity, "skyhighocs:dyn/wing_left_deployed", false);
+      manager.setData(entity, "skyhighocs:dyn/wing_right_deployed", false);
     },
     tickHandler: function (entity, manager) {
       var nbt = entity.getWornHelmet().nbt();
