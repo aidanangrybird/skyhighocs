@@ -14,7 +14,7 @@ function initModule(system) {
     helpMessage: "<n>!cannons <nh>-<n> Cannons",
     disabledMessage: "<e>Module <eh>cannons<e> is disabled!",
     keyBinds: function (hero) {
-      hero.addKeyBind("CANNONS", (player, manager) => {
+      hero.addKeyBindFunc("CANNONS", (player, manager) => {
         system.systemMessage(player, "<e>At least one cannon set must be armed!");
         return false;
       }, "Cannons (None armed)", 4);

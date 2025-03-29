@@ -11,7 +11,7 @@ function initModule(system) {
     helpMessage: "<n>!vs <nh>-<n> Voice Synthesizer",
     disabledMessage: "<e>Module <eh>voiceSynthesizer<e> is disabled!",
     keyBinds: function (hero) {
-      hero.addKeyBind("MOUTH", (player, manager) => {
+      hero.addKeyBindFunc("MOUTH", (player, manager) => {
         system.systemMessage(player, "<e>Mouth must be armed!");
         return false;
       }, "Scream (Not armed)", 3);

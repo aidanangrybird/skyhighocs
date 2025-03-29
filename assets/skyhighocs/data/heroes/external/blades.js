@@ -12,7 +12,7 @@ function initModule(system) {
     helpMessage: "<n>!blades <nh>-<n> Blades",
     disabledMessage: "<e>Module <eh>bladeSystem<e> is disabled!",
     keyBinds: function (hero) {
-      hero.addKeyBind("BLADES", (player, manager) => {
+      hero.addKeyBindFunc("BLADES", (player, manager) => {
         system.systemMessage(player, "<e>At least one blade must be armed!");
         return false;
       }, "Blades (None armed)", 1);

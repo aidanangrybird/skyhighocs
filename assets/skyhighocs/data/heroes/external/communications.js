@@ -298,7 +298,7 @@ function initModule(system) {
                 break;
               case "ant":
                 manager.setData(entity, "skyhighocs:dyn/antenna", false);
-                system.systemMessage(entity, "<n>Retracting satellite!");
+                system.systemMessage(entity, "<n>Retracting antenna!");
                 break;
               case "satRain":
                 manager.setData(entity, "skyhighocs:dyn/satellite_rain_mode", false);
