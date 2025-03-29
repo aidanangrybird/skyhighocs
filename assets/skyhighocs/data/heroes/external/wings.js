@@ -51,8 +51,8 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<s>Retracted <sh>right<s> wing!");
                 break;
               case "*":
-                manager.setData(entity, "skyhighocs:dyn/wing_left_deployed", true);
-                manager.setData(entity, "skyhighocs:dyn/wing_right_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/wing_left_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/wing_right_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>wings<s>!");
                 break;
               };
