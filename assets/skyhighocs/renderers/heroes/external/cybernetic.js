@@ -132,9 +132,6 @@ function initCyberneticAnimations(renderer) {
   addAnimation(renderer, "cybernetic.RIGHT_ARM_SHIELD", "skyhighocs:cybernetic_right_arm_shield").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/shield_right_arm_timer") * entity.getInterpolatedData("fiskheroes:shield_blocking_timer") * (1 - entity.getInterpolatedData("fiskheroes:beam_charge")));
   });
-  addAnimation(renderer, "cybernetic.DRIVE", "skyhighocs:cybernetic_drive").setData((entity, data) => {
-    data.load(entity.getInterpolatedData("skyhighocs:dyn/ports_timer"));
-  });
   addAnimation(renderer, "cybernetic.BASE", "skyhighocs:cybernetic_base").setData((entity, data) => {
     data.load(1.0);
   })

@@ -16,7 +16,6 @@ var thermopticManipulation = implement("skyhighocs:external/thermoptic_manipulat
 var wings = implement("skyhighocs:external/wings");
 var furnace = implement("skyhighocs:external/furnace");
 var externalArms = implement("skyhighocs:external/external_arms");
-var dataPorts = implement("skyhighocs:external/data_ports");
 var suitDatastore = implement("skyhighocs:external/suit_datastore");
 var voiceSynthesizer = implement("skyhighocs:external/voice_synthesizer");
 var cyberOS = cybernetics.initSystem([
@@ -36,7 +35,6 @@ var cyberOS = cybernetics.initSystem([
   wings,
   furnace,
   externalArms,
-  dataPorts,
   suitDatastore,
   voiceSynthesizer,
 ], "Cyber Vortex", "CV", "aidanangrybird", "6", uuid);
@@ -46,6 +44,8 @@ function init(hero) {
   hero.setTier(9);
   hero.setHelmet("Cybernetic Brain");
   hero.setVersion("OC");
+
+  hero.addPrimaryEquipment("fiskheroes:suit_data_drive@14{display:{Name:\u00A76Cyber Vortex's Data Drive}}", true, item => (item.damage() == 14 && item.displayName() == "\u00A76Cyber Vortex's Data Drive"));
 
   cyberOS.keyBinds(hero);
   cyberOS.initProfiles(hero);

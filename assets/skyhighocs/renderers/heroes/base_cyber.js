@@ -66,7 +66,6 @@ function initEffects(renderer) {
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer"));
-    data.load(5, entity.getInterpolatedData("skyhighocs:dyn/ports_timer"));
   });
   head_model = renderer.createEffect("fiskheroes:model").setModel(head);
   head_model.anchor.set("head");
@@ -79,7 +78,6 @@ function initEffects(renderer) {
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer"));
-    data.load(5, entity.getInterpolatedData("skyhighocs:dyn/ports_timer"));
   });
   head_hair_model = renderer.createEffect("fiskheroes:model").setModel(head_hair);
   head_hair_model.setOffset(0.0, 0.25, 0.0);
@@ -157,7 +155,6 @@ function initEffects(renderer) {
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer"));
-    data.load(5, entity.getInterpolatedData("skyhighocs:dyn/ports_timer"));
   });
   head_disguise_layer1_model = renderer.createEffect("fiskheroes:model").setModel(head_disguise_layer1);
   head_disguise_layer1_model.anchor.set("head");
@@ -170,7 +167,6 @@ function initEffects(renderer) {
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer"));
-    data.load(5, entity.getInterpolatedData("skyhighocs:dyn/ports_timer"));
   });
   head_disguise_layer2_model = renderer.createEffect("fiskheroes:model").setModel(head_disguise_layer2);
   head_disguise_layer2_model.anchor.set("head");
@@ -302,7 +298,6 @@ function initEffects(renderer) {
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer"));
-    data.load(5, entity.getInterpolatedData("skyhighocs:dyn/ports_timer"));
   });
   head_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(head_camouflage);
   head_camouflage_model.anchor.set("head");
@@ -315,7 +310,6 @@ function initEffects(renderer) {
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer"));
-    data.load(5, entity.getInterpolatedData("skyhighocs:dyn/ports_timer"));
   });
   head_hair_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(head_hair_camouflage);
   head_hair_camouflage_model.setOffset(0.0, 0.25, 0.0);
