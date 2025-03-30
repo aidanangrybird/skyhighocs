@@ -33,6 +33,14 @@ function initModule(system) {
                 manager.setBoolean(nbt, "autoCamouflage", true);
                 system.moduleMessage(this, entity, "<n>Enabled <nh>auto camouflage<n>!");
                 break;
+              case "disguiseOnStand":
+                manager.setBoolean(nbt, "disguiseOnStand", true);
+                system.moduleMessage(this, entity, "<n>Enabled <nh>disguise on stand<n>!");
+                break;
+              case "camoOnStand":
+                manager.setBoolean(nbt, "camoOnStand", true);
+                system.moduleMessage(this, entity, "<n>Enabled <nh>camouflage on stand<n>!");
+                break;
             };
             break;
           case "disable":
@@ -52,6 +60,14 @@ function initModule(system) {
               case "autoCamo":
                 manager.setBoolean(nbt, "autoCamouflage", false);
                 system.moduleMessage(this, entity, "<n>Disabled <nh>auto camouflage<n>!");
+                break;
+              case "disguiseOnStand":
+                manager.setBoolean(nbt, "disguiseOnStand", false);
+                system.moduleMessage(this, entity, "<n>Disabled <nh>disguise on stand<n>!");
+                break;
+              case "camoOnStand":
+                manager.setBoolean(nbt, "camoOnStand", false);
+                system.moduleMessage(this, entity, "<n>Disabled <nh>camouflage on stand<n>!");
                 break;
             };
             break;

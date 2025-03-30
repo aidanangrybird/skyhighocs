@@ -8,14 +8,14 @@
       },
       {
         "operation": "STITCH",
-        "supply": "skyhighocs:cybernetic_head_layer2"
+        "supply": "skyhighocs:cybernetic_head_hair"
       }
     ],
-    "out": "skyhighocs:generated/cyber_shadow_camouflage_head_hair_<TIMER>"
+    "out": "skyhighocs:generated/cyber_shadow_head_hair_camouflage_<TIMER>"
   },
   "getters": {
     "TIMER": {
-      "key": "Math.ceil(47 * entity.getInterpolatedData('skyhighocs:dyn/thermoptic_camouflage_timer')) | 0",
+      "key": "Math.ceil(47 * entity.getInterpolatedData('skyhighocs:dyn/thermoptic_camouflage_timer')) + ((entity.getWornHelmet().nbt().getBoolean('camoOnStand') && entity.is('DISPLAY')) ? 47 : 0) | 0",
       "values": {
         "min": 0,
         "max": 47

@@ -11,11 +11,11 @@
         "supply": "skyhighocs:cybernetic_left_leg_base"
       }
     ],
-    "out": "skyhighocs:generated/cyber_shadow_camouflage_left_leg_<TIMER>"
+    "out": "skyhighocs:generated/cyber_shadow_left_leg_camouflage_<TIMER>"
   },
   "getters": {
     "TIMER": {
-      "key": "Math.ceil(47 * entity.getInterpolatedData('skyhighocs:dyn/thermoptic_camouflage_timer')) | 0",
+      "key": "Math.ceil(47 * entity.getInterpolatedData('skyhighocs:dyn/thermoptic_camouflage_timer')) + ((entity.getWornHelmet().nbt().getBoolean('camoOnStand') && entity.is('DISPLAY')) ? 47 : 0) | 0",
       "values": {
         "min": 0,
         "max": 47

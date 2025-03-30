@@ -179,7 +179,7 @@ function chatMessage(player, message) {
 function systemMessage(player, message) {
   var id = getModelID(player);
   var color = id.split("-")[1];
-  chatMessage(player, formatSystem("\u00A7" + color + "SYSTEM<r>> " + message));
+  chatMessage(player, formatSystem("\u00A7" + color + "\u00A7lcyberOS" + "<r>> " + message));
 };
 /**
  * Sends log message
@@ -196,12 +196,12 @@ function logMessage(message) {
  * @param {string} message - Message content
  **/
 function moduleMessage(module, entity, message) {
-  var messageName = "SYSTEM";
+  var id = getModelID(entity);
+  var color = id.split("-")[1];
+  var messageName = "\u00A7lcyberOS";
   if (module.hasOwnProperty("moduleMessageName")) {
     messageName = module.moduleMessageName
   };
-  var id = getModelID(entity);
-  var color = id.split("-")[1];
   chatMessage(entity, formatSystem("\u00A7" + color + messageName + "<r>> " + message));
 };
 
@@ -555,7 +555,7 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
         cyberneticModulesMessage = cyberneticModulesMessage + ((isModuleDisabled(entity, moduleName))?"<n>, <eh>":"<n>, <nh>") + moduleName;
       };
     });
-    systemMessage(entity, "<n>cyberneticOS");
+    systemMessage(entity, "<n>cyberOS");
     systemMessage(entity, normalModulesMessage);
     systemMessage(entity, cyberneticModulesMessage);
     systemMessage(entity, "<n>computerID: <nh>" + entity.getWornHelmet().nbt().getString("computerID"));
