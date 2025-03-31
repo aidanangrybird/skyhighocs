@@ -1,5 +1,6 @@
 var uuid = "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0";
 var cybernetics = implement("skyhighocs:external/cybernetics");
+var settings = implement("skyhighocs:external/settings");
 var messaging = implement("skyhighheroes:external/messaging");
 var groupMessaging = implement("skyhighheroes:external/group_messaging");
 var groups = implement("skyhighheroes:external/groups");
@@ -18,6 +19,7 @@ var externalArms = implement("skyhighocs:external/external_arms");
 var suitDatastore = implement("skyhighocs:external/suit_datastore");
 var voiceSynthesizer = implement("skyhighocs:external/voice_synthesizer");
 var cyberOS = cybernetics.initSystem([
+  settings,
   messaging,
   groupMessaging,
   groups,

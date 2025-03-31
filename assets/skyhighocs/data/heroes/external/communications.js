@@ -53,7 +53,7 @@ function initModule(system) {
     suitsToReceive.forEach(entry => {
       if ((entry < txSuitDatastoreArray.length) && (entry > -1)) {
         var currentSuit = txSuitDatastoreArray[entry];
-        system.moduleMessage(this, rx, "<n>Receiveing suit \"<nh>" + currentSuit + "<n>\" from <nh>" + txName + "<n>!");
+        system.moduleMessage(this, rx, "<n>Receiving suit \"<nh>" + currentSuit + "<n>\" from <nh>" + txName + "<n>!");
         system.moduleMessage(this, tx, "<n>Transmitting suit \"<nh>" + currentSuit + "<n>\" to " + rxName + "!");
         if (rxSuitDatastoreArray.indexOf(currentSuit) == -1) {
           rxSuitDatastoreArray.push(currentSuit);
@@ -347,6 +347,14 @@ function initModule(system) {
       manager.setData(entity, "skyhighocs:dyn/satellite_rain_mode", false);
     },
     tickHandler: function (entity, manager) {
+      if (entity.getData("skyhighocs:dyn/satellite_timer") == 1) {
+        manager.setData(entity, "skyhighocs:dyn/transmitting", true);
+        manager.setData(entity, "skyhighocs:dyn/receiving", true);
+      };
+      if (!entity.getData("skyhighocs:dyn/satellite")) {
+        manager.setData(entity, "skyhighocs:dyn/transmitting", false);
+        manager.setData(entity, "skyhighocs:dyn/receiving", false);
+      };
     }
   };
 };

@@ -30,8 +30,8 @@ var months = [
 ];
 
 function assignID(entity, manager, cyberName, cyberShortName, color) {
-  manager.setString(entity.getWornHelmet().nbt(), "modelID", cyberShortName+"-"+color);
-  manager.setString(entity.getWornHelmet().nbt(), "cyberName", cyberName);
+  manager.setString(entity.getWornHelmet().nbt(), "cyberModelID", cyberShortName+"-"+color);
+  manager.setString(entity.getWornHelmet().nbt(), "cyberAliasName", cyberName);
   manager.setBoolean(entity.getWornHelmet().nbt(), "Unbreakable", true);
   if (!entity.getWornHelmet().nbt().hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
@@ -47,7 +47,7 @@ function assignID(entity, manager, cyberName, cyberShortName, color) {
  * @returns If the entity is cybernetic
  **/
 function hasCyberneticBody(entity) {
-  return entity.getWornHelmet().nbt().hasKey("modelID") && entity.getWornHelmet().nbt().getString("cyberName");
+  return entity.getWornHelmet().nbt().hasKey("cyberModelID") && entity.getWornHelmet().nbt().getString("cyberAliasName");
 };
 
 /**
@@ -56,15 +56,15 @@ function hasCyberneticBody(entity) {
  * @returns The Cyber ID
  **/
 function getModelID(entity) {
-  return entity.getWornHelmet().nbt().getString("modelID");
+  return entity.getWornHelmet().nbt().getString("cyberModelID");
 };
 /**
  * Gets the Cyber name
  * @param {JSEntity} entity - Entity getting checked
  * @returns The Cyber ID
  **/
-function getName(entity) {
-  return entity.getWornHelmet().nbt().getString("cyberName");
+function getAliasName(entity) {
+  return entity.getWornHelmet().nbt().getString("cyberAliasName");
 };
 
 /**
@@ -559,9 +559,7 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
     systemMessage(entity, normalModulesMessage);
     systemMessage(entity, cyberneticModulesMessage);
     systemMessage(entity, "<n>computerID: <nh>" + entity.getWornHelmet().nbt().getString("computerID"));
-    systemMessage(entity, "<n>Model: <nh>" + entity.getWornHelmet().nbt().getString("modelID"));
-    systemMessage(entity, "<n>Fight or Flight duration: <nh>" + entity.getWornHelmet().nbt().getShort("durationFightOrFlight"));
-    systemMessage(entity, "<n>Fight or Flight min health: <nh>" + entity.getWornHelmet().nbt().getShort("minHealthFightOrFlight"));
+    systemMessage(entity, "<n>Model: <nh>" + getModelID(entity));
   };
   function status(entity) {
     var date = new Date();
@@ -938,7 +936,7 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
           manager.setShort(entity.getWornHelmet().nbt(), "minHealthFightOrFlight", 5);
         };
         assignID(entity, manager, cyberName, cyberShortName, color);
-        systemMessage(entity, "<n>Hello <nh>" + entity.getWornHelmet().nbt().getString("modelID") + "<n> AKA <nh>" + entity.getWornHelmet().nbt().getString("cyberName") + "<n>!");
+        systemMessage(entity, "<n>Hello <nh>" + getModelID(entity) + "<n> AKA <nh>" + getAliasName(entity) + "<n>!");
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
       };
@@ -959,13 +957,13 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
         manager.setData(entity, "skyhighocs:dyn/fight_or_flight", false);
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
-        if (!(entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == disguisedName)) {
+        if (!(entity.getData("fiskheroes:disguise") == getAliasName(entity) || entity.getData("fiskheroes:disguise") == getModelID(entity) || entity.getData("fiskheroes:disguise") == disguisedName)) {
           if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
             manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
             manager.setData(entity, "fiskheroes:disguise", disguisedName);
           } else {
             manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-            manager.setData(entity, "fiskheroes:disguise", cyberName);
+            manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? getAliasName(entity) : getModelID(entity)));
           };
           manager.setData(entity, "fiskheroes:shape_shifting_to", null);
           manager.setData(entity, "fiskheroes:shape_shifting_from", null);
@@ -999,8 +997,6 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
                 });
                 systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
                 systemMessage(entity, "<n>!systemInfo <nh>-<n> Shows your system info");
-                systemMessage(entity, "<n>!fightOrFlightDur <number> <nh>-<n> Sets duration of fight or flight response");
-                systemMessage(entity, "<n>!fightOrFlightMin <number> <nh>-<n> Sets minimum health to activate fight or flight");
                 systemMessage(entity, "<n>!powerOn <nh>-<n> Powers you up");
                 systemMessage(entity, "<n>!powerOff <nh>-<n> Powers you down");
                 systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
@@ -1016,14 +1012,6 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
                 break;
               case "msg":
                 switchChats(entity, manager, args[1]);
-                break;
-              case "fightOrFlightDur":
-                manager.setShort(entity.getWornHelmet().nbt(), "durationFightOrFlight", parseInt(args[1]));
-                systemMessage(entity, "<n>Fight or Flight duration set to <nh>" + args[1] + "<n>!");
-                break;
-              case "fightOrFlightMin":
-                manager.setInteger(entity.getWornHelmet().nbt(), "minHealthFightOrFlight", parseInt(args[1]));
-                systemMessage(entity, "<n>Fight or Flight min health set to <nh>" + args[1] + "<n>!");
                 break;
               default:
                 var index = commands.indexOf(args[0]);
@@ -1044,8 +1032,8 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
           };
         };
       };
-      if (typeof cyberName === "string" && entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") < 1) {
-        manager.setData(entity, "fiskheroes:disguise", cyberName);
+      if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") < 1) {
+        manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? getAliasName(entity) : getModelID(entity)));
       };
       if (typeof disguisedName === "string" && entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
         manager.setData(entity, "fiskheroes:disguise", disguisedName);

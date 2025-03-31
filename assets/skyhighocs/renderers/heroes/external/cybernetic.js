@@ -112,10 +112,10 @@ function initCyberneticAnimations(renderer) {
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_stealth_timer"));
   });
   addAnimation(renderer, "cybernetic.LEFT_LEG_ROCKETS", "skyhighocs:cybernetic_left_leg_rockets").setData((entity, data) => {
-    data.load(entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
+    data.load((entity.getWornHelmet().nbt().getBoolean("innerRockets")) ? (entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer")) : 0.0);
   });
   addAnimation(renderer, "cybernetic.RIGHT_LEG_ROCKETS", "skyhighocs:cybernetic_right_leg_rockets").setData((entity, data) => {
-    data.load(entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
+    data.load((entity.getWornHelmet().nbt().getBoolean("innerRockets")) ? (entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer")) : 0.0);
   });
   addAnimation(renderer, "cybernetic.WING_LEFT", "skyhighocs:cybernetic_wing_left").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/wing_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/wings_timer"));
@@ -203,4 +203,44 @@ function initTentacles(renderer, model) {
   tentacles.setHeadModel(claw);
   tentacles.segmentLength = 1.8;
   tentacles.segments = 16;
+};
+
+function initTransceiveBeams(renderer, model, color) {
+  var receiveBase = model.getCubeOffset("head_satellite_dish_base");
+  var transmitBase = model.getCubeOffset("head_satellite_dish_antenna");
+
+  transmitBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:transmit");
+  var transmitShape = renderer.createResource("SHAPE", null);
+  transmitLine = transmitShape.bindLine({ "start": [0.0, 0.1875, 0.0], "end": [0.0, 0.1875, 0.0], "size": [0.5, 0.5] });
+  var transmitBeam = renderer.createEffect("fiskheroes:lines").setRenderer(transmitBeamRenderer).setShape(transmitShape).setOffset(0.0, 0.0, 0.0);
+  transmitBeam.mirror = false;
+  transmitBeam.setScale(16.0);
+  transmitBeam.anchor.set("head", transmitBase);
+  transmitBeam.color.set(color);
+
+  receiveBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:receive");
+  var receiveShape = renderer.createResource("SHAPE", null);
+  receiveLine = receiveShape.bindLine({ "start": [0.0, 300.375, 0.0], "end": [0.0, 300.375, 0.0], "size": [15.0, 15.0] });
+  var receiveBeam = renderer.createEffect("fiskheroes:lines").setRenderer(receiveBeamRenderer).setShape(receiveShape).setOffset(0.0, 0.0, 0.0);
+  receiveBeam.mirror = false;
+  receiveBeam.setScale(16.0);
+  receiveBeam.anchor.set("head", receiveBase);
+  receiveBeam.color.set(color);
+  
+  return {
+    render: function (entity, renderLayer, isFirstPersonArm) {
+      if (!isFirstPersonArm) {
+        var transmitTimer = entity.getInterpolatedData("skyhighocs:dyn/transmit_timer");
+        var receiveTimer = entity.getInterpolatedData("skyhighocs:dyn/receive_timer");
+        transmitLine.end.y = transmitLine.start.y+300*transmitTimer;
+        receiveLine.end.y = receiveLine.start.y-300*receiveTimer;
+        if (transmitTimer > 0) {
+          transmitBeam.render();
+        };
+        if (receiveTimer > 0) {
+          receiveBeam.render();
+        };
+      };
+    }
+  };
 };

@@ -358,10 +358,12 @@ function initLeftLegBoosters(renderer, model, color) {
         bloomOuterMiddle.render();
         bloomOuterCenter.render();
         //Inner
-        boosterInner.render();
-        bloomInnerEdge.render();
-        bloomInnerMiddle.render();
-        bloomInnerCenter.render();
+        if (entity.getWornHelmet().nbt().getBoolean("innerRockets")) {
+          boosterInner.render();
+          bloomInnerEdge.render();
+          bloomInnerMiddle.render();
+          bloomInnerCenter.render();
+        };
         //Front
         boosterFront.render();
         bloomFrontEdge.render();
@@ -743,10 +745,12 @@ function initRightLegBoosters(renderer, model, color) {
         bloomOuterMiddle.render();
         bloomOuterCenter.render();
         //Inner
-        boosterInner.render();
-        bloomInnerEdge.render();
-        bloomInnerMiddle.render();
-        bloomInnerCenter.render();
+        if (entity.getWornHelmet().nbt().getBoolean("innerRockets")) {
+          boosterInner.render();
+          bloomInnerEdge.render();
+          bloomInnerMiddle.render();
+          bloomInnerCenter.render();
+        };
         //Front
         boosterFront.render();
         bloomFrontEdge.render();
