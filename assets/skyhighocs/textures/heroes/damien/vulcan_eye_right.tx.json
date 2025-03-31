@@ -2,7 +2,7 @@
   "texture": "skyhighocs:damien/vulcan_eye_right_<TYPE>",
   "getters": {
     "TYPE": {
-      "key": "entity.getData('skyhighocs:dyn/astro_eye_right') == 1 ? 'normal' : 'human'",
+      "key": "(entity.getWornLeggings().nbt().getBoolean('rightEyeHuman')) ? 'human' : 'normal'",
       "values": ["human", "normal"]
     }
   },

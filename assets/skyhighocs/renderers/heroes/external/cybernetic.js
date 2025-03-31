@@ -138,7 +138,7 @@ function initCyberneticAnimations(renderer) {
   addAnimation(renderer, "cybernetic.BASE", "skyhighocs:cybernetic_base").setData((entity, data) => {
     data.load(1.0);
   })
-  .setCondition(entity => (entity.getInterpolatedData("skyhighocs:dyn/thermoptic_disguise_timer") < 1))
+  .setCondition(entity => !entity.is("DISPLAY") && !entity.getWornHelmet().nbt().getBoolean("naturalArms") && (entity.getInterpolatedData("skyhighocs:dyn/thermoptic_disguise_timer") < 1))
   .priority = -11;/* 
   addAnimation(renderer, "cybernetic.LEFT_ARM_PUNCH", "skyhighocs:cybernetic_left_arm_punch").setData((entity, data) => {
     data.load(entity.getPunchTimerInterpolated());

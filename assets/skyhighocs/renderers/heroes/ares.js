@@ -21,7 +21,7 @@ loadTextures({
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  rockets = astro.initCustomBoosters(renderer, 0xFF0000);
+  rockets = astro.initBoosters(renderer, 0xFF0000);
   astro.initBeams(renderer, 0xFF0000);
   stuff.bindSpeedTrail(renderer, "skyhighocs:ares_speed");
 };
