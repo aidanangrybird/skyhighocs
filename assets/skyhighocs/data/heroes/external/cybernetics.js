@@ -29,8 +29,8 @@ var months = [
   "December"
 ];
 
-function assignID(entity, manager, cyberName, cyberShortName, color) {
-  manager.setString(entity.getWornHelmet().nbt(), "cyberModelID", cyberShortName+"-"+color);
+function assignID(entity, manager, cyberName, cyberModelID, color) {
+  manager.setString(entity.getWornHelmet().nbt(), "cyberModelID", cyberModelID);
   manager.setString(entity.getWornHelmet().nbt(), "cyberAliasName", cyberName);
   manager.setBoolean(entity.getWornHelmet().nbt(), "Unbreakable", true);
   if (!entity.getWornHelmet().nbt().hasKey("computerID")) {
@@ -270,8 +270,8 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
   var powerArray = [];
   /** @var disguisedName - disguised name */
   var disguisedName = normalName;
-  /** @var cyberShortName - short cyber name */
-  var cyberShortName = shortName;
+  /** @var cyberModelID - cyber model name */
+  var cyberModelID = shortName + "-" + color;
   /** @var cyberName - cyber name */
   var cyberName = name;
   /** @var playerUUID - UUID */
@@ -935,10 +935,11 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
         if (!entity.getWornHelmet().nbt().hasKey("minHealthFightOrFlight")) {
           manager.setShort(entity.getWornHelmet().nbt(), "minHealthFightOrFlight", 5);
         };
-        assignID(entity, manager, cyberName, cyberShortName, color);
+        assignID(entity, manager, cyberName, cyberModelID);
         systemMessage(entity, "<n>Hello <nh>" + getModelID(entity) + "<n> AKA <nh>" + getAliasName(entity) + "<n>!");
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
+        manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
       };
       if ((Math.floor(entity.getHealth()) <= entity.getWornHelmet().nbt().getInteger("minHealthFightOrFlight")) && (entity.getData("fiskheroes:time_since_damaged") <= entity.getWornHelmet().nbt().getShort("durationFightOrFlight"))) {
         if (!entity.getData("skyhighocs:dyn/fight_or_flight")) {
@@ -957,13 +958,13 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
         manager.setData(entity, "skyhighocs:dyn/fight_or_flight", false);
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
-        if (!(entity.getData("fiskheroes:disguise") == getAliasName(entity) || entity.getData("fiskheroes:disguise") == getModelID(entity) || entity.getData("fiskheroes:disguise") == disguisedName)) {
+        if (!(entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == cyberModelID || entity.getData("fiskheroes:disguise") == disguisedName)) {
           if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
             manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
             manager.setData(entity, "fiskheroes:disguise", disguisedName);
           } else {
             manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-            manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? getAliasName(entity) : getModelID(entity)));
+            manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? cyberName : cyberModelID));
           };
           manager.setData(entity, "fiskheroes:shape_shifting_to", null);
           manager.setData(entity, "fiskheroes:shape_shifting_from", null);
