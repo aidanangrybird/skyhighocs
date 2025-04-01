@@ -47,15 +47,13 @@ function init(renderer) {
     return "null";
   });
   renderer.showModel("HELMET", "head", "headwear", "body", "rightArm", "leftArm", "rightLeg", "leftLeg");
-  //renderer.fixHatLayer("HELMET");
+  renderer.fixHatLayer("HELMET");
   renderer.setItemIcon("HELMET", "cyberbrain");
   initEffects(renderer);
   initAnimations(renderer);
 };
 
 function initEffects(renderer) {
-  //Add satellite beams
-  //Maybe remove the second layer stuff
   //Deploy + base
   var head = renderer.createResource("MODEL", "skyhighocs:CyberneticHead");
   head.texture.set("head", "head_lights");
