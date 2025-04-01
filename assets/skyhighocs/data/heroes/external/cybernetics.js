@@ -29,10 +29,36 @@ var months = [
   "December"
 ];
 
-function assignID(entity, manager, cyberName, cyberModelID, color) {
-  manager.setString(entity.getWornHelmet().nbt(), "cyberModelID", cyberModelID);
-  manager.setString(entity.getWornHelmet().nbt(), "cyberAliasName", cyberName);
-  manager.setBoolean(entity.getWornHelmet().nbt(), "Unbreakable", true);
+modelRegex = /[a-z\s]/gm;
+
+aliasRegex = /[\s]/gm;
+
+/**
+ * Formats name to short name
+ * @param {string} input - Message to format
+ * @returns Formatted message
+ **/
+function formatModel(input) {
+  output = input.replace(modelRegex, function(thing) {
+    return "";
+  });
+  return output;
+};
+
+/**
+ * Formats name to alias format
+ * @param {string} input - Message to format
+ * @returns Formatted message
+ **/
+function formatAlias(input) {
+  input = input.toLowerCase();
+  output = input.replace(aliasRegex, function(thing) {
+    return formatting[thing];
+  });
+  return output;
+};
+
+function assignID(entity, manager) {
   if (!entity.getWornHelmet().nbt().hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
       var computerID = Math.random().toFixed(8).toString().substring(2);
@@ -209,11 +235,11 @@ function moduleMessage(module, entity, message) {
  * Initializes cyber system
  * @param {object} moduleList - cyber system modules
  * @param {string} name - Name of the cybernetic being
- * @param {string} shortName - Shortened name of cybernetic being
  * @param {string} normalName - Disguised name of cybernetic being
  * @param {string} color - Color to set system thing to
+ * @param {string} uuid - UUID of player to be bound to
  **/
-function initSystem(moduleList, name, shortName, normalName, color, uuid) {
+function initSystem(moduleList, name, normalName, color, uuid) {
   var cyberInstance = this;
   //Type 1 - commands (can have data management)
   /** @var type1Specs - Type 1 Specs */
@@ -271,7 +297,7 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
   /** @var disguisedName - disguised name */
   var disguisedName = normalName;
   /** @var cyberModelID - cyber model name */
-  var cyberModelID = shortName + "-" + color;
+  var cyberModelID = formatModel(name) + "-" + color;
   /** @var cyberName - cyber name */
   var cyberName = name;
   /** @var playerUUID - UUID */
@@ -632,315 +658,331 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
       systemMessage(player, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
     };
   };
-  return {
-    /**
-     * Power stuff (I hate that I had to do it this way)
-     * @param {JSHero} hero - Required
-     **/
-    addPowers: (hero) => {
-      if (powerArray.length == 0) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body");
+  /**
+   * Modifier enabled stuff for em
+   * @param {JSEntity} entity - Required
+   * @param {string} modifier - Required
+   **/
+  function isModifierEnabled(entity, modifier) {
+    if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != playerUUID)) {
+      return false;
+    };
+    if (modifierIndexes.length == 1) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length == 2) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length == 3) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length == 4) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length == 5) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length == 6) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length == 7) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length == 8) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length == 9) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length == 10) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[9]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length == 11) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[9]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[10]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length == 12) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[9]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[10]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[11]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length == 13) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[9]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[10]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[11]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[12]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length == 14) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[9]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[10]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[11]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[12]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[13]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length == 15) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[9]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[10]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[11]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[12]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[13]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[14]].isModifierEnabled(entity, modifier);
+    };
+    if (modifierIndexes.length >= 16) {
+      return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[9]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[10]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[11]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[12]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[13]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[14]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[15]].isModifierEnabled(entity, modifier);
+    };
+  };
+  /**
+   * Power stuff (I hate that I had to do it this way)
+   * @param {JSHero} hero - Required
+   **/
+  function addPowers(hero) {
+    if (powerArray.length == 0) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body");
+    };
+    if (powerArray.length == 1) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0]);
+    };
+    if (powerArray.length == 2) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1]);
+    };
+    if (powerArray.length == 3) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2]);
+    };
+    if (powerArray.length == 4) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3]);
+    };
+    if (powerArray.length == 5) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4]);
+    };
+    if (powerArray.length == 6) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5]);
+    };
+    if (powerArray.length == 7) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6]);
+    };
+    if (powerArray.length == 8) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7]);
+    };
+    if (powerArray.length == 9) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8]);
+    };
+    if (powerArray.length == 10) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9]);
+    };
+    if (powerArray.length == 11) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10]);
+    };
+    if (powerArray.length == 12) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11]);
+    };
+    if (powerArray.length == 13) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12]);
+    };
+    if (powerArray.length == 14) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13]);
+    };
+    if (powerArray.length == 15) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13], powerArray[14]);
+    };
+    if (powerArray.length >= 16) {
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13], powerArray[14], powerArray[15]);
+    };
+  };
+  /**
+   * Basic keybinds
+   * @param {JSHero} hero - Required
+   **/
+  function keyBinds(hero) {
+    hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 5);
+    modules.forEach(module => {
+      if (module.hasOwnProperty("keyBinds")) {
+        module.keyBinds(hero);
       };
-      if (powerArray.length == 1) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0]);
+    });
+  };
+  /**
+   * Attribute profile stuff
+   * @param {JSEntity} entity - Required
+   * @returns attribute profile
+   **/
+  function getAttributeProfile(entity) {
+    var result = null;
+    if (entity.getUUID() != playerUUID) {
+      result = "UNAUTHORIZED";
+    };
+    if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
+      result = "SHUT_DOWN";
+    };
+    if (attributeProfileIndexes.length == 1) {
+      if (typeof modules[attributeProfileIndexes[0]].getAttributeProfile(entity) === "string") {
+        result = modules[attributeProfileIndexes[0]].getAttributeProfile(entity);
       };
-      if (powerArray.length == 2) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1]);
+    };
+    if (attributeProfileIndexes.length == 2) {
+      if (typeof modules[attributeProfileIndexes[0]].getAttributeProfile(entity) === "string") {
+        result = modules[attributeProfileIndexes[0]].getAttributeProfile(entity);
       };
-      if (powerArray.length == 3) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2]);
+      if (typeof modules[attributeProfileIndexes[1]].getAttributeProfile(entity) === "string") {
+        result = modules[attributeProfileIndexes[1]].getAttributeProfile(entity);
       };
-      if (powerArray.length == 4) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3]);
+    };
+    if (attributeProfileIndexes.length >= 3) {
+      if (typeof modules[attributeProfileIndexes[0]].getAttributeProfile(entity) === "string") {
+        result = modules[attributeProfileIndexes[0]].getAttributeProfile(entity);
       };
-      if (powerArray.length == 5) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4]);
+      if (typeof modules[attributeProfileIndexes[1]].getAttributeProfile(entity) === "string") {
+        result = modules[attributeProfileIndexes[1]].getAttributeProfile(entity);
       };
-      if (powerArray.length == 6) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5]);
+      if (typeof modules[attributeProfileIndexes[2]].getAttributeProfile(entity) === "string") {
+        result = modules[attributeProfileIndexes[2]].getAttributeProfile(entity);
       };
-      if (powerArray.length == 7) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6]);
+    };
+    return result;
+  };
+  /**
+   * Damage profile stuff
+   * @param {JSEntity} entity - Required
+   * @returns damage profile
+   **/
+  function getDamageProfile(entity) {
+    var result = null;
+    if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != playerUUID)) {
+      result = null;
+    };
+    if (damageProfileIndexes.length == 1) {
+      if (typeof modules[damageProfileIndexes[0]].getDamageProfile(entity) === "string") {
+        result = modules[damageProfileIndexes[0]].getDamageProfile(entity);
       };
-      if (powerArray.length == 8) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7]);
+    };
+    if (damageProfileIndexes.length == 2) {
+      if (typeof modules[damageProfileIndexes[0]].getDamageProfile(entity) === "string") {
+        result = modules[damageProfileIndexes[0]].getDamageProfile(entity);
       };
-      if (powerArray.length == 9) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8]);
+      if (typeof modules[damageProfileIndexes[1]].getDamageProfile(entity) === "string") {
+        result = modules[damageProfileIndexes[1]].getDamageProfile(entity);
       };
-      if (powerArray.length == 10) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9]);
+    };
+    if (damageProfileIndexes.length >= 3) {
+      if (typeof modules[damageProfileIndexes[0]].getDamageProfile(entity) === "string") {
+        result = modules[damageProfileIndexes[0]].getDamageProfile(entity);
       };
-      if (powerArray.length == 11) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10]);
+      if (typeof modules[damageProfileIndexes[1]].getDamageProfile(entity) === "string") {
+        result = modules[damageProfileIndexes[1]].getDamageProfile(entity);
       };
-      if (powerArray.length == 12) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11]);
+      if (typeof modules[damageProfileIndexes[2]].getDamageProfile(entity) === "string") {
+        result = modules[damageProfileIndexes[2]].getDamageProfile(entity);
       };
-      if (powerArray.length == 13) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12]);
+    };
+    return result;
+  };
+  function initProfiles(hero) {
+    hero.addAttribute("SPRINT_SPEED", 0.25, 1);
+    hero.addAttribute("STEP_HEIGHT", 0.5, 0);
+    hero.addAttribute("JUMP_HEIGHT", 1.0, 0);
+    hero.addAttribute("PUNCH_DAMAGE", 1.0, 1);
+    hero.addAttribute("ARROW_DAMAGE", 1.0, 1);
+    hero.addAttribute("BOW_DRAWBACK", 0.99, 1);
+    hero.addAttribute("REACH_DISTANCE", 5.0, 0);
+    hero.addAttribute("KNOCKBACK", 1.0, 0);
+    hero.addAttribute("WEAPON_DAMAGE", 1.0, 1);
+    hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
+    hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
+    hero.addAttributeProfile("SHUT_DOWN", function (profile) {
+      profile.addAttribute("BASE_SPEED", -1.0, 1);
+      profile.addAttribute("SPRINT_SPEED", -1.0, 1);
+      profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+      profile.addAttribute("JUMP_HEIGHT", -1.0, 1);
+      profile.addAttribute("STEP_HEIGHT", -1.0, 1);
+      profile.addAttribute("KNOCKBACK", -1.0, 1);
+      profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+    });
+    hero.addAttributeProfile("UNAUTHORIZED", function (profile) {
+      profile.addAttribute("BASE_SPEED", -1.0, 1);
+      profile.addAttribute("SPRINT_SPEED", -1.0, 1);
+      profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+      profile.addAttribute("JUMP_HEIGHT", -1.0, 1);
+      profile.addAttribute("STEP_HEIGHT", -1.0, 1);
+      profile.addAttribute("KNOCKBACK", -1.0, 1);
+      profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+      profile.addAttribute("MAX_HEALTH", -19.0, 0);
+    });
+    damageProfileIndexes.forEach(index => {
+      modules[index].initDamageProfiles(hero);
+    });
+    attributeProfileIndexes.forEach(index => {
+      modules[index].initAttributeProfiles(hero);
+    });
+  };
+  /**
+   * Keybind enabled stuff for em
+   * @param {JSEntity} entity - Required
+   * @param {string} keyBind - Required
+   **/
+  function isKeyBindEnabled(entity, keyBind) {
+    if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != playerUUID)) {
+      return false;
+    };
+    if (keyBindIndexes.length == 1) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length == 2) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length == 3) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length == 4) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length == 5) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length == 6) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length == 7) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length == 8) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length == 9) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length == 10) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length == 11) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[10]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length == 12) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[10]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[11]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length == 13) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[10]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[11]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[12]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length == 14) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[10]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[11]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[12]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[13]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length == 15) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[10]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[11]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[12]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[13]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[14]].isKeyBindEnabled(entity, keyBind);
+    };
+    if (keyBindIndexes.length >= 16) {
+      return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[10]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[11]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[12]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[13]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[14]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[15]].isKeyBindEnabled(entity, keyBind);
+    };
+  };
+  function tickHandler(entity, manager) {
+    if ((!entity.getData("skyhighheroes:dyn/system_init"))) {
+      manager.setString(entity.getWornHelmet().nbt(), "cyberModelID", cyberModelID);
+      manager.setString(entity.getWornHelmet().nbt(), "cyberAliasName", cyberName);
+      manager.setString(entity.getWornHelmet().nbt(), "boundUUID", playerUUID);
+      manager.setBoolean(entity.getWornHelmet().nbt(), "Unbreakable", true);
+      assignID(entity, manager);
+      if (!entity.getWornHelmet().nbt().hasKey("durationFightOrFlight")) {
+        manager.setShort(entity.getWornHelmet().nbt(), "durationFightOrFlight", 20);
       };
-      if (powerArray.length == 14) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13]);
+      if (!entity.getWornHelmet().nbt().hasKey("minHealthFightOrFlight")) {
+        manager.setShort(entity.getWornHelmet().nbt(), "minHealthFightOrFlight", 5);
       };
-      if (powerArray.length == 15) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13], powerArray[14]);
-      };
-      if (powerArray.length >= 16) {
-        hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13], powerArray[14], powerArray[15]);
-      };
-    },
-    /**
-     * Basic keybinds
-     * @param {JSHero} hero - Required
-     **/
-    keyBinds: (hero) => {
-      hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 5);
-      modules.forEach(module => {
-        if (module.hasOwnProperty("keyBinds")) {
-          module.keyBinds(hero);
-        };
-      });
-    },
-    /**
-     * Attribute profile stuff
-     * @param {JSEntity} entity - Required
-     * @returns attribute profile
-     **/
-    getAttributeProfile: function (entity) {
-      var result = null;
-      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != playerUUID)) {
-        result = "SHUT_DOWN";
-      };
-      if (attributeProfileIndexes.length == 1) {
-        if (typeof modules[attributeProfileIndexes[0]].getAttributeProfile(entity) === "string") {
-          result = modules[attributeProfileIndexes[0]].getAttributeProfile(entity);
-        };
-      };
-      if (attributeProfileIndexes.length == 2) {
-        if (typeof modules[attributeProfileIndexes[0]].getAttributeProfile(entity) === "string") {
-          result = modules[attributeProfileIndexes[0]].getAttributeProfile(entity);
-        };
-        if (typeof modules[attributeProfileIndexes[1]].getAttributeProfile(entity) === "string") {
-          result = modules[attributeProfileIndexes[1]].getAttributeProfile(entity);
-        };
-      };
-      if (attributeProfileIndexes.length >= 3) {
-        if (typeof modules[attributeProfileIndexes[0]].getAttributeProfile(entity) === "string") {
-          result = modules[attributeProfileIndexes[0]].getAttributeProfile(entity);
-        };
-        if (typeof modules[attributeProfileIndexes[1]].getAttributeProfile(entity) === "string") {
-          result = modules[attributeProfileIndexes[1]].getAttributeProfile(entity);
-        };
-        if (typeof modules[attributeProfileIndexes[2]].getAttributeProfile(entity) === "string") {
-          result = modules[attributeProfileIndexes[2]].getAttributeProfile(entity);
-        };
-      };
-      return result;
-    },
-    /**
-     * Damage profile stuff
-     * @param {JSEntity} entity - Required
-     * @returns damage profile
-     **/
-    getDamageProfile: function (entity) {
-      var result = null;
-      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != playerUUID)) {
-        result = null;
-      };
-      if (damageProfileIndexes.length == 1) {
-        if (typeof modules[damageProfileIndexes[0]].getDamageProfile(entity) === "string") {
-          result = modules[damageProfileIndexes[0]].getDamageProfile(entity);
-        };
-      };
-      if (damageProfileIndexes.length == 2) {
-        if (typeof modules[damageProfileIndexes[0]].getDamageProfile(entity) === "string") {
-          result = modules[damageProfileIndexes[0]].getDamageProfile(entity);
-        };
-        if (typeof modules[damageProfileIndexes[1]].getDamageProfile(entity) === "string") {
-          result = modules[damageProfileIndexes[1]].getDamageProfile(entity);
-        };
-      };
-      if (damageProfileIndexes.length >= 3) {
-        if (typeof modules[damageProfileIndexes[0]].getDamageProfile(entity) === "string") {
-          result = modules[damageProfileIndexes[0]].getDamageProfile(entity);
-        };
-        if (typeof modules[damageProfileIndexes[1]].getDamageProfile(entity) === "string") {
-          result = modules[damageProfileIndexes[1]].getDamageProfile(entity);
-        };
-        if (typeof modules[damageProfileIndexes[2]].getDamageProfile(entity) === "string") {
-          result = modules[damageProfileIndexes[2]].getDamageProfile(entity);
-        };
-      };
-      return result;
-    },
-    initProfiles: function (hero) {
-      hero.addAttribute("SPRINT_SPEED", 0.25, 1);
-      hero.addAttribute("STEP_HEIGHT", 0.5, 0);
-      hero.addAttribute("JUMP_HEIGHT", 1.0, 0);
-      hero.addAttribute("PUNCH_DAMAGE", 1.0, 1);
-      hero.addAttribute("ARROW_DAMAGE", 1.0, 1);
-      hero.addAttribute("BOW_DRAWBACK", 0.99, 1);
-      hero.addAttribute("REACH_DISTANCE", 5.0, 0);
-      hero.addAttribute("KNOCKBACK", 1.0, 0);
-      hero.addAttribute("WEAPON_DAMAGE", 1.0, 1);
-      hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
-      hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
-      hero.addAttributeProfile("SHUT_DOWN", function (profile) {
-        profile.addAttribute("BASE_SPEED", -1.0, 1);
-        profile.addAttribute("SPRINT_SPEED", -1.0, 1);
-        profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
-        profile.addAttribute("JUMP_HEIGHT", -1.0, 1);
-        profile.addAttribute("STEP_HEIGHT", -1.0, 1);
-        profile.addAttribute("KNOCKBACK", -1.0, 1);
-        profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
-      });
-      damageProfileIndexes.forEach(index => {
-        modules[index].initDamageProfiles(hero);
-      });
-      attributeProfileIndexes.forEach(index => {
-        modules[index].initAttributeProfiles(hero);
-      });
-    },
-    /**
-     * Keybind enabled stuff for em
-     * @param {JSEntity} entity - Required
-     * @param {string} keyBind - Required
-     **/
-    isKeyBindEnabled: function (entity, keyBind) {
-      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != playerUUID)) {
-        return false;
-      };
-      if (keyBindIndexes.length == 1) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length == 2) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length == 3) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length == 4) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length == 5) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length == 6) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length == 7) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length == 8) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length == 9) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length == 10) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length == 11) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[10]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length == 12) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[10]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[11]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length == 13) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[10]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[11]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[12]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length == 14) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[10]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[11]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[12]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[13]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length == 15) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[10]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[11]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[12]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[13]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[14]].isKeyBindEnabled(entity, keyBind);
-      };
-      if (keyBindIndexes.length >= 16) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[10]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[11]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[12]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[13]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[14]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[15]].isKeyBindEnabled(entity, keyBind);
-      };
-    },
-    /**
-     * Modifier enabled stuff for em
-     * @param {JSEntity} entity - Required
-     * @param {string} modifier - Required
-     **/
-    isModifierEnabled: function (entity, modifier) {
-      if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != playerUUID)) {
-        return false;
-      };
-      if (modifierIndexes.length == 1) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length == 2) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length == 3) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length == 4) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length == 5) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length == 6) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length == 7) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length == 8) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length == 9) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length == 10) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[9]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length == 11) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[9]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[10]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length == 12) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[9]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[10]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[11]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length == 13) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[9]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[10]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[11]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[12]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length == 14) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[9]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[10]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[11]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[12]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[13]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length == 15) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[9]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[10]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[11]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[12]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[13]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[14]].isModifierEnabled(entity, modifier);
-      };
-      if (modifierIndexes.length >= 16) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[3]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[4]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[5]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[6]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[7]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[8]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[9]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[10]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[11]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[12]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[13]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[14]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[15]].isModifierEnabled(entity, modifier);
-      };
-    },
-    /**
-     * Handles all cyber stuff
-     * @param {JSEntity} entity - Required
-     * @param {JSDataManager} manager - Required
-     **/
-    systemHandler: (entity, manager) => {
-      if ((!entity.getData("skyhighheroes:dyn/system_init")) && (entity.getUUID() == playerUUID)) {
+      if (entity.getUUID() == playerUUID) {
         onInitSystemIndexes.forEach(index => {
           var module = modules[index];
           module.onInitSystem(entity, manager);
         });
-        if (!entity.getWornHelmet().nbt().hasKey("durationFightOrFlight")) {
-          manager.setShort(entity.getWornHelmet().nbt(), "durationFightOrFlight", 20);
-        };
-        if (!entity.getWornHelmet().nbt().hasKey("minHealthFightOrFlight")) {
-          manager.setShort(entity.getWornHelmet().nbt(), "minHealthFightOrFlight", 5);
-        };
-        assignID(entity, manager, cyberName, cyberModelID);
         systemMessage(entity, "<n>Hello <nh>" + getModelID(entity) + "<n> AKA <nh>" + getAliasName(entity) + "<n>!");
         status(entity);
-        manager.setData(entity, "skyhighheroes:dyn/system_init", true);
-        manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
+      } else {
+        systemMessage(entity, "<e>\u00A7lUNAUTHORIZED USER!");
       };
+      manager.setData(entity, "skyhighheroes:dyn/system_init", true);
+      manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
+    };
+    if (entity.getUUID() == playerUUID) {
       if ((Math.floor(entity.getHealth()) <= entity.getWornHelmet().nbt().getInteger("minHealthFightOrFlight")) && (entity.getData("fiskheroes:time_since_damaged") <= entity.getWornHelmet().nbt().getShort("durationFightOrFlight"))) {
         if (!entity.getData("skyhighocs:dyn/fight_or_flight")) {
           systemMessage(entity, "<n>FIGHT OR FLIGHT MODE ACTIVATED!");
@@ -957,124 +999,210 @@ function initSystem(moduleList, name, shortName, normalName, color, uuid) {
       } else {
         manager.setData(entity, "skyhighocs:dyn/fight_or_flight", false);
       };
-      if (typeof entity.getData("fiskheroes:disguise") === "string") {
-        if (!(entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == cyberModelID || entity.getData("fiskheroes:disguise") == disguisedName)) {
-          if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
-            manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-            manager.setData(entity, "fiskheroes:disguise", disguisedName);
-          } else {
-            manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-            manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? cyberName : cyberModelID));
-          };
-          manager.setData(entity, "fiskheroes:shape_shifting_to", null);
-          manager.setData(entity, "fiskheroes:shape_shifting_from", null);
-          manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
-          var entry = entity.getData("skyhighheroes:dyn/entry");
-          if (entry.startsWith("!")) {
-            manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
-            var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
-            switch (args[0]) {
-              case "systemInfo":
-                systemInfo(entity);
-                break;
-              case "status":
-                status(entity);
-                break;
-              case "powerOff":
-                manager.setData(entity, "skyhighocs:dyn/powered_down", true);
-                systemMessage(entity, "<n>Powering down!");
-                break;
-              case "powerOn":
-                manager.setData(entity, "skyhighocs:dyn/powered_down", false);
-                systemMessage(entity, "<n>Powering on!");
-                break;
-              case "help":
-                systemMessage(entity, "<n>Available commands:");
-                commandIndexes.forEach(index => {
-                  var module = modules[index];
-                  if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
-                    systemMessage(entity, module.helpMessage);
-                  };
-                });
-                systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
-                systemMessage(entity, "<n>!systemInfo <nh>-<n> Shows your system info");
-                systemMessage(entity, "<n>!powerOn <nh>-<n> Powers you up");
-                systemMessage(entity, "<n>!powerOff <nh>-<n> Powers you down");
-                systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
-                break;
-              case "disable":
-                disableModule(entity, manager, args[1]);
-                break;
-              case "enable":
-                enableModule(entity, manager, args[1]);
-                break;
-              case "chatMode":
-                switchChatModes(entity, manager, args[1]);
-                break;
-              case "msg":
-                switchChats(entity, manager, args[1]);
-                break;
-              default:
-                var index = commands.indexOf(args[0]);
-                if (index > -1 && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
-                  var module = modules[commandIndexes[index]];
-                  if (!isModuleDisabled(entity, module.name)) {
-                    module.commandHandler(entity, manager, args);
-                  } else {
-                    systemMessage(entity, "<e>Module <eh>" + module.name +"<e> is disabled!");
-                  };
-                } else {
-                  systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
+    };
+    if (typeof entity.getData("fiskheroes:disguise") === "string") {
+      if (!((entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == cyberModelID) || entity.getData("fiskheroes:disguise") == disguisedName)) {
+        if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
+          manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+          manager.setData(entity, "fiskheroes:disguise", disguisedName);
+        } else {
+          manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+          manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? cyberName : cyberModelID));
+        };
+        manager.setData(entity, "fiskheroes:shape_shifting_to", null);
+        manager.setData(entity, "fiskheroes:shape_shifting_from", null);
+        manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
+        var entry = entity.getData("skyhighheroes:dyn/entry");
+        if (entry.startsWith("!")) {
+          manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
+          var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
+          switch (args[0]) {
+            case "systemInfo":
+              systemInfo(entity);
+              break;
+            case "status":
+              status(entity);
+              break;
+            case "powerOff":
+              manager.setData(entity, "skyhighocs:dyn/powered_down", true);
+              systemMessage(entity, "<n>Powering down!");
+              break;
+            case "powerOn":
+              manager.setData(entity, "skyhighocs:dyn/powered_down", false);
+              systemMessage(entity, "<n>Powering on!");
+              break;
+            case "help":
+              systemMessage(entity, "<n>Available commands:");
+              commandIndexes.forEach(index => {
+                var module = modules[index];
+                if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
+                  systemMessage(entity, module.helpMessage);
                 };
-                break;
-            }
-          } else {
-            modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity, name, 32);
-          };
+              });
+              systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
+              systemMessage(entity, "<n>!systemInfo <nh>-<n> Shows your system info");
+              systemMessage(entity, "<n>!powerOn <nh>-<n> Powers you up");
+              systemMessage(entity, "<n>!powerOff <nh>-<n> Powers you down");
+              systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
+              break;
+            case "disable":
+              disableModule(entity, manager, args[1]);
+              break;
+            case "enable":
+              enableModule(entity, manager, args[1]);
+              break;
+            case "chatMode":
+              switchChatModes(entity, manager, args[1]);
+              break;
+            case "msg":
+              switchChats(entity, manager, args[1]);
+              break;
+            default:
+              var index = commands.indexOf(args[0]);
+              if (index > -1 && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
+                var module = modules[commandIndexes[index]];
+                if (!isModuleDisabled(entity, module.name)) {
+                  module.commandHandler(entity, manager, args);
+                } else {
+                  systemMessage(entity, "<e>Module <eh>" + module.name +"<e> is disabled!");
+                };
+              } else {
+                systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
+              };
+              break;
+          }
+        } else {
+          modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity, name, 32);
         };
       };
-      if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") < 1) {
-        manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? getAliasName(entity) : getModelID(entity)));
+    };
+    if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") < 1) {
+      manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? getAliasName(entity) : getModelID(entity)));
+    };
+    if (typeof disguisedName === "string" && entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
+      manager.setData(entity, "fiskheroes:disguise", disguisedName);
+    };
+    tickHandlerIndexes.forEach(index => {
+      var module = modules[index];
+      if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
+        module.tickHandler(entity, manager);
       };
-      if (typeof disguisedName === "string" && entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
-        manager.setData(entity, "fiskheroes:disguise", disguisedName);
+    });
+    var x = entity.posX();
+    var y = entity.posY();
+    var z = entity.posZ();
+    if (entity.world().getDimension() == 0 && entity.posY() >= 4000 && (entity.rotPitch() <= -87.5) && entity.getData("fiskheroes:flight_boost_timer") == 1) {
+      manager.setData(entity, "fiskheroes:teleport_dest", manager.newCoords(x, y, z, 2595));
+      manager.setData(entity, "fiskheroes:teleport_delay", 6);
+    };
+    if (entity.world().getDimension() == 2595 && entity.posY() >= 1000 && (entity.rotPitch() <= -87.5) && entity.getData("fiskheroes:flight_boost_timer") == 1) {
+      manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 0));
+      manager.setData(entity, "fiskheroes:teleport_delay", 6);
+    };
+    var t = entity.getData("skyhighheroes:dyn/superhero_boosting_landing_ticks");
+    if (t == 0 && !entity.isSprinting() && !entity.isOnGround() && entity.motionY() < -1.25 && entity.getData("fiskheroes:flight_boost_timer") > 0 && entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() && entity.world().blockAt(entity.pos()).name() == "minecraft:air") {
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", t = 12);
+    } else if (t > 0) {
+      manager.setData(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", --t);
+    };
+    manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
+    var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
+    manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
+    if (PackLoader.getSide() == "SERVER" && entity.getData("skyhighocs:dyn/powering_down_timer") < 1 && entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
+      var moduleTotal = cyberneticModules.length;
+      var moduleTime = (80/moduleTotal).toFixed(0);
+      var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/powering_down_timer")*80);
+      if (currentTime % moduleTime == 0) {
+        var moduleName = cyberneticModules[(currentTime/moduleTime)-1];
+        var message = entity.getData("skyhighocs:dyn/powered_down") ? "<n>Shutting down <nh>" + moduleName + "<n>!" : "<n>Starting up <nh>" + moduleName + "<n>!";
+        systemMessage(entity, message);
       };
-      tickHandlerIndexes.forEach(index => {
-        var module = modules[index];
-        if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
-          module.tickHandler(entity, manager);
-        };
+    };
+  };
+  var colorDamage = {
+    //Orange gold
+    "6": "14",
+    //Green lime
+    "2": "10",
+    //Purple
+    "5": "5",
+    //Red
+    "4": "1",
+    //Cyan, figure this out
+    "3": "8"
+  };
+  return {
+    /**
+     * Handles all cyber stuff
+     * @param {JSHero} hero - Required
+     **/
+    initCybernetics: (hero) => {
+      hero.setAliases(formatAlias(cyberName));
+      hero.setName(cyberName + "/Model " + cyberModelID + " Cybernetic Body");
+      hero.setTier(9);
+      hero.setHelmet("Cybernetic Brain");
+      hero.setVersion("OC");
+    
+      hero.addPrimaryEquipment("fiskheroes:suit_data_drive@" + colorDamage[color] + "{display:{Name:\u00A7" + color + cyberName + "'s Data Drive}}", true, item => (item.damage() == colorDamage[color] && item.displayName() == "\u00A7" + color + cyberName + "'s Data Drive"));
+    
+      keyBinds(hero);
+      initProfiles(hero);
+      addPowers(hero);
+
+      hero.setTierOverride((entity) => (entity.getUUID() == playerUUID) ? 9 : 0);
+      
+      hero.setHasProperty((entity, property) => {
+        return property == "BREATHE_SPACE" && entity.getUUID() == playerUUID;
       });
-      var x = entity.posX();
-      var y = entity.posY();
-      var z = entity.posZ();
-      if (entity.world().getDimension() == 0 && entity.posY() >= 4000 && (entity.rotPitch() <= -87.5) && entity.getData("fiskheroes:flight_boost_timer") == 1) {
-        manager.setData(entity, "fiskheroes:teleport_dest", manager.newCoords(x, y, z, 2595));
-        manager.setData(entity, "fiskheroes:teleport_delay", 6);
-      };
-      if (entity.world().getDimension() == 2595 && entity.posY() >= 1000 && (entity.rotPitch() <= -87.5) && entity.getData("fiskheroes:flight_boost_timer") == 1) {
-        manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 0));
-        manager.setData(entity, "fiskheroes:teleport_delay", 6);
-      };
-      var t = entity.getData("skyhighheroes:dyn/superhero_boosting_landing_ticks");
-      if (t == 0 && !entity.isSprinting() && !entity.isOnGround() && entity.motionY() < -1.25 && entity.getData("fiskheroes:flight_boost_timer") > 0 && entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() && entity.world().blockAt(entity.pos()).name() == "minecraft:air") {
-        manager.setDataWithNotify(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", t = 12);
-      } else if (t > 0) {
-        manager.setData(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", --t);
-      };
-      manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
-      var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
-      manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
-      if (PackLoader.getSide() == "SERVER" && entity.getData("skyhighocs:dyn/powering_down_timer") < 1 && entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
-        var moduleTotal = cyberneticModules.length;
-        var moduleTime = (80/moduleTotal).toFixed(0);
-        var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/powering_down_timer")*80);
-        if (currentTime % moduleTime == 0) {
-          var moduleName = cyberneticModules[(currentTime/moduleTime)-1];
-          var message = entity.getData("skyhighocs:dyn/powered_down") ? "<n>Shutting down <nh>" + moduleName + "<n>!" : "<n>Starting up <nh>" + moduleName + "<n>!";
-          systemMessage(entity, message);
+      hero.setDefaultScale(1.0);
+      hero.setModifierEnabled((entity, modifier) => {
+        if (modifier.name() == "fiskheroes:shape_shifting") {
+          return entity.getUUID() == playerUUID;
         };
-      };
+        if (modifier.name() == "fiskheroes:potion_immunity") {
+          return entity.getUUID() == playerUUID;
+        };
+        if (modifier.name() == "fiskheroes:regeneration") {
+          return entity.getUUID() == playerUUID;
+        };
+        if (modifier.name() == "fiskheroes:healing_factor") {
+          return entity.getUUID() == playerUUID;
+        };
+        if (modifier.name() == "fiskheroes:water_breathing") {
+          return entity.getUUID() == playerUUID;
+        };
+        if (modifier.name() == "fiskheroes:fire_immunity") {
+          return entity.getUUID() == playerUUID;
+        };
+        if (modifier.name() == "fiskheroes:damage_immunity") {
+          return entity.getUUID() == playerUUID;
+        };
+        if (modifier.name() == "fiskheroes:projectile_immunity") {
+          return entity.getUUID() == playerUUID;
+        };
+        if (modifier.name() == "fiskheroes:transformation") {
+          return entity.getUUID() == playerUUID;
+        };
+        if (modifier.name() == "fiskheroes:metal_skin") {
+          return entity.getData("fiskheroes:metal_heat") < 1.0;
+        };
+        return isModifierEnabled(entity, modifier);
+      });
+      hero.setKeyBindEnabled((entity, keyBind) => {
+        if (keyBind == "SHAPE_SHIFT") {
+          return entity.getUUID() == playerUUID;
+        };
+        return isKeyBindEnabled(entity, keyBind);
+      });
+      hero.setDamageProfile((entity) => {
+        return getDamageProfile(entity);
+      });
+      hero.setAttributeProfile((entity) => {
+        return getAttributeProfile(entity);
+      });
+      hero.setTickHandler((entity, manager) => {
+        tickHandler(entity, manager);
+      });
     }
   };
 };

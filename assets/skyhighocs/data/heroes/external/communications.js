@@ -1,10 +1,3 @@
-var uuids = [
-  "a3d071d4-c912-41e1-a6b2-c0de99ea4a84",
-  "4da600b8-582a-4fc3-ac2e-ada03d3e478c",
-  "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0",
-  "c4bc5db6-3cf6-44fe-8427-304a7b211bc4",
-  "e51532a1-19fc-4d4f-9da0-f952c4645891"
-];
 /**
  * You put all of the required functions in here
  * @param system - Required
@@ -131,7 +124,7 @@ function initModule(system) {
             var entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
             entities.forEach(player => {
               if (player.is("PLAYER") && (player.getUUID() != entity.getUUID())) {
-                if (system.hasCyberneticBody(player) && (uuids.indexOf(player.getUUID()) > -1)) {
+                if (system.hasCyberneticBody(player)) {
                   foundPlayers.push(player);
                 };
               };
@@ -172,7 +165,7 @@ function initModule(system) {
             var entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
             entities.forEach(player => {
               if (player.is("PLAYER") && (player.getUUID() != entity.getUUID())) {
-                if (system.hasCyberneticBody(player) && (uuids.indexOf(player.getUUID()) > -1)) {
+                if (system.hasCyberneticBody(player)) {
                   foundPlayers.push(player);
                 };
               };
@@ -213,7 +206,7 @@ function initModule(system) {
             var entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
             entities.forEach(player => {
               if (player.is("PLAYER") && (player.getUUID() != entity.getUUID())) {
-                if (system.hasCyberneticBody(player) && (uuids.indexOf(player.getUUID()) > -1)) {
+                if (system.hasCyberneticBody(player)) {
                   foundPlayers.push(player);
                 };
               };
@@ -252,7 +245,7 @@ function initModule(system) {
             var entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
             entities.forEach(player => {
               if (player.is("PLAYER") && (player.getUUID() != entity.getUUID())) {
-                if (system.hasCyberneticBody(player) && (uuids.indexOf(player.getUUID()) > -1)) {
+                if (system.hasCyberneticBody(player)) {
                   foundPlayers.push(player);
                 };
               };

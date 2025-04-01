@@ -37,72 +37,7 @@ var cyberOS = cybernetics.initSystem([
   externalArms,
   suitDatastore,
   voiceSynthesizer,
-], "Cyber Flame", "CF", "FieryAceOfSpades", "4", uuid);
+], "Cyber Flame", "FieryAceOfSpades", "4", uuid);
 function init(hero) {
-  hero.setAliases("cyber_flame");
-  hero.setName("Cyber Flame/Model CF-4 Cybernetic Body");
-  hero.setTier(9);
-  hero.setHelmet("Cybernetic Brain");
-  hero.setVersion("OC");
-  hero.addPrimaryEquipment("fiskheroes:suit_data_drive@1{display:{Name:\u00A74Cyber Flame's Data Drive}}", true, item => (item.damage() == 1 && item.displayName() == "\u00A71Cyber Flame's Data Drive"));
-
-  cyberOS.keyBinds(hero);
-  cyberOS.initProfiles(hero);
-  cyberOS.addPowers(hero);
-  
-  hero.setHasProperty((entity, property) => {
-    return property == "BREATHE_SPACE" && entity.getUUID() == uuid;
-  });
-  hero.supplyFunction("canAim", (entity) => {
-    return entity.getHeldItem().isEmpty() && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
-  });
-  hero.setDefaultScale(1.0);
-  hero.setModifierEnabled((entity, modifier) => {
-    if (modifier.name() == "fiskheroes:shape_shifting") {
-      return entity.getUUID() == uuid;
-    };
-    if (modifier.name() == "fiskheroes:potion_immunity") {
-      return entity.getUUID() == uuid;
-    };
-    if (modifier.name() == "fiskheroes:regeneration") {
-      return entity.getUUID() == uuid;
-    };
-    if (modifier.name() == "fiskheroes:healing_factor") {
-      return entity.getUUID() == uuid;
-    };
-    if (modifier.name() == "fiskheroes:water_breathing") {
-      return entity.getUUID() == uuid;
-    };
-    if (modifier.name() == "fiskheroes:fire_immunity") {
-      return entity.getUUID() == uuid;
-    };
-    if (modifier.name() == "fiskheroes:damage_immunity") {
-      return entity.getUUID() == uuid;
-    };
-    if (modifier.name() == "fiskheroes:projectile_immunity") {
-      return entity.getUUID() == uuid;
-    };
-    if (modifier.name() == "fiskheroes:transformation") {
-      return entity.getUUID() == uuid;
-    };
-    if (modifier.name() == "fiskheroes:metal_skin") {
-      return entity.getData("fiskheroes:metal_heat") < 1.0;
-    };
-    return cyberOS.isModifierEnabled(entity, modifier);
-  });
-  hero.setKeyBindEnabled((entity, keyBind) => {
-    if (keyBind == "SHAPE_SHIFT") {
-      return entity.getUUID() == uuid;
-    };
-    return cyberOS.isKeyBindEnabled(entity, keyBind);
-  });
-  hero.setDamageProfile((entity) => {
-    return cyberOS.getDamageProfile(entity);
-  });
-  hero.setAttributeProfile((entity) => {
-    return cyberOS.getAttributeProfile(entity);
-  });
-  hero.setTickHandler((entity, manager) => {
-    cyberOS.systemHandler(entity, manager);
-  });
+  cyberOS.initCybernetics(hero);
 };
