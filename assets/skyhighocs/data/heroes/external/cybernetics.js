@@ -29,9 +29,35 @@ var months = [
   "December"
 ];
 
+var colorDamage = {
+  //Orange gold
+  "6": "14",
+  //Green lime
+  "2": "10",
+  //Purple
+  "5": "5",
+  //Red
+  "4": "1",
+  //Cyan, figure this out
+  "3": "8"
+};
+
 modelRegex = /[a-z\s]/gm;
 
 aliasRegex = /[\s]/gm;
+
+/**
+ * Gets colorDamage from color
+ * @param {string} input - Color
+ * @returns colorDamage
+ **/
+function getColorDamage(input) {
+  var output = "0";
+  if (colorDamage.hasOwnProperty(input)) {
+    output = colorDamage[input];
+  };
+  return output;
+};
 
 /**
  * Formats name to short name
@@ -237,6 +263,16 @@ function moduleMessage(module, entity, message) {
     messageName = module.moduleMessageName
   };
   chatMessage(entity, formatSystem("\u00A7" + color + messageName + "<r>> " + message));
+};
+
+/**
+ * Clamp
+ * @param value - input value
+ * @param min - minimum value
+ * @param max - maximum value
+ **/
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
 };
 
 /**
@@ -1059,6 +1095,9 @@ function initSystem(moduleList, name, normalName, color, uuid) {
             case "enable":
               enableModule(entity, manager, args[1]);
               break;
+            case "cv":
+              systemMessage(entity, entity.getDataOrDefault("skyhighocs:dyn/" + args[1], 0));
+              break;
             case "chatMode":
               switchChatModes(entity, manager, args[1]);
               break;
@@ -1126,18 +1165,6 @@ function initSystem(moduleList, name, normalName, color, uuid) {
         systemMessage(entity, message);
       };
     };
-  };
-  var colorDamage = {
-    //Orange gold
-    "6": "14",
-    //Green lime
-    "2": "10",
-    //Purple
-    "5": "5",
-    //Red
-    "4": "1",
-    //Cyan, figure this out
-    "3": "8"
   };
   return {
     /**

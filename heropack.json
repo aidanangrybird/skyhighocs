@@ -50,9 +50,8 @@
 
     "powered_down": { "type": "BOOLEAN", "resetOnDeath": false, "resetWithoutSuit": false },
     "powering_down_timer": { "type": "FLOAT_INTERP", "resetOnDeath": false, "resetWithoutSuit": false },
-
-    "suit_data_buffer": { "type": "STRING", "resetOnDeath": false, "resetWithoutSuit": false },
     "fight_or_flight": { "type": "BOOLEAN", "resetOnDeath": false, "resetWithoutSuit": false },
+    "suit_data_buffer": { "type": "STRING", "resetOnDeath": false, "resetWithoutSuit": false },
 
     "cannons_arms_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "cannons_arms": { "type": "BOOLEAN", "resetWithoutSuit": true },
