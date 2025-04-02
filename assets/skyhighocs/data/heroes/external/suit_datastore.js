@@ -77,36 +77,40 @@ function initModule(system) {
       suitDrive = nbt.getTagList("Equipment").getCompoundTag(0).getCompoundTag("Item").getCompoundTag("tag");
     };
     if (suitDrive != null) {
-      var dataDriveSuitsArray = system.getStringArray(suitDrive.getStringList("Suits"));
-      var suitsToDownload = [];
-      var suitDownloadQueue = [];
-      var suitDownloadTime = 0;
-      if (suitList == "*") {
-        for (var i = 0;i<dataDriveSuitsArray.length;i++) {
-          suitsToDownload.push(i);
-        };
-      } else {
-        suitsToDownload = suitList.split(",");
-      };
-      var downloadsQueued = 0;
-      suitsToDownload.forEach(entry => {
-        if ((entry < (dataDriveSuitsArray.length)) && (entry > -1)) {
-          var currentSuit = dataDriveSuitsArray[entry];
-          if (suitDownloadQueue.indexOf(currentSuit) == -1) {
-            suitDownloadQueue.push(entry);
-            var downloadTime = 0;
-            if (PackLoader.getSide() == "SERVER") {
-              downloadTime = system.clamp(Math.floor(Math.random() * 30), 10, 30)
-            };
-            suitDownloadTime = suitDownloadTime + downloadTime;
-            downloadsQueued = downloadsQueued + 1;
+      if (!entity.getData("skyhighocs:dyn/downloading")) {
+        var dataDriveSuitsArray = system.getStringArray(suitDrive.getStringList("Suits"));
+        var suitsToDownload = [];
+        var suitDownloadQueue = [];
+        var suitDownloadTime = 0;
+        if (suitList == "*") {
+          for (var i = 0;i<dataDriveSuitsArray.length;i++) {
+            suitsToDownload.push(i);
           };
+        } else {
+          suitsToDownload = suitList.split(",");
         };
-      });
-      manager.setString(nbt, "downloadBuffer", suitDownloadQueue);
-      manager.setShort(nbt, "downloadTime", suitDownloadTime);
-      system.moduleMessage(this, entity, "<n>Attempting to download <nh>" + downloadsQueued + "<n> " + ((downloadsQueued == 1) ? "suit!" : "suits!"));
-      manager.setData(entity, "skyhighocs:dyn/downloading", true);
+        var downloadsQueued = 0;
+        suitsToDownload.forEach(entry => {
+          if ((entry < (dataDriveSuitsArray.length)) && (entry > -1)) {
+            var currentSuit = dataDriveSuitsArray[entry];
+            if (suitDownloadQueue.indexOf(currentSuit) == -1) {
+              suitDownloadQueue.push(entry);
+              var downloadTime = 0;
+              if (PackLoader.getSide() == "SERVER") {
+                downloadTime = system.clamp(Math.floor(Math.random() * 30), 10, 30)
+              };
+              suitDownloadTime = suitDownloadTime + downloadTime;
+              downloadsQueued = downloadsQueued + 1;
+            };
+          };
+        });
+        manager.setString(nbt, "downloadBuffer", suitDownloadQueue);
+        manager.setShort(nbt, "downloadTime", suitDownloadTime);
+        system.moduleMessage(this, entity, "<n>Attempting to download <nh>" + downloadsQueued + "<n> " + ((downloadsQueued == 1) ? "suit!" : "suits!"));
+        manager.setData(entity, "skyhighocs:dyn/downloading", true);
+      } else {
+        system.moduleMessage(this, entity, "<e>Another upload is already in progress!");
+      };
     } else {
       system.moduleMessage(this, entity, "<e>Suit drive not plugged in!");
     };
@@ -162,29 +166,33 @@ function initModule(system) {
       suitDrive = nbt.getTagList("Equipment").getCompoundTag(0).getCompoundTag("Item").getCompoundTag("tag");
     };
     if (suitDrive != null) {
-      var suitDatastoreArray = system.getStringArray(nbt.getStringList("suitDatastore"));
-      var suitsToUpload = suitList.split(","); //Indexes of suits
-      var suitUploadQueue = [];
-      var suitUploadTime = 0;
-      var uploadsQueued = 0;
-      suitsToUpload.forEach(entry => {
-        if ((entry < (suitDatastoreArray.length)) && (entry > -1)) {
-          var currentSuit = suitDatastoreArray[entry];
-          if (suitUploadQueue.indexOf(currentSuit) == -1) {
-            suitUploadQueue.push(entry);
-            var uploadTime = 0;
-            if (PackLoader.getSide() == "SERVER") {
-              uploadTime = system.clamp(Math.floor(Math.random() * 30), 10, 30)
+      if (!entity.getData("skyhighocs:dyn/upload")) {
+        var suitDatastoreArray = system.getStringArray(nbt.getStringList("suitDatastore"));
+        var suitsToUpload = suitList.split(","); //Indexes of suits
+        var suitUploadQueue = [];
+        var suitUploadTime = 0;
+        var uploadsQueued = 0;
+        suitsToUpload.forEach(entry => {
+          if ((entry < (suitDatastoreArray.length)) && (entry > -1)) {
+            var currentSuit = suitDatastoreArray[entry];
+            if (suitUploadQueue.indexOf(currentSuit) == -1) {
+              suitUploadQueue.push(entry);
+              var uploadTime = 0;
+              if (PackLoader.getSide() == "SERVER") {
+                uploadTime = system.clamp(Math.floor(Math.random() * 30), 10, 30)
+              };
+              suitUploadTime = suitUploadTime + uploadTime;
+              uploadsQueued = uploadsQueued + 1;
             };
-            suitUploadTime = suitUploadTime + uploadTime;
-            uploadsQueued = uploadsQueued + 1;
           };
-        };
-      });
-      manager.setString(nbt, "uploadBuffer", suitUploadQueue);
-      manager.setShort(nbt, "uploadTime", suitUploadTime);
-      system.moduleMessage(this, entity, "<n>Attempting to upload <nh>" + uploadsQueued + "<n> " + ((uploadsQueued == 1) ? "suit!" : "suits!"));
-      manager.setData(entity, "skyhighocs:dyn/uploading", true);
+        });
+        manager.setString(nbt, "uploadBuffer", suitUploadQueue);
+        manager.setShort(nbt, "uploadTime", suitUploadTime);
+        system.moduleMessage(this, entity, "<n>Attempting to upload <nh>" + uploadsQueued + "<n> " + ((uploadsQueued == 1) ? "suit!" : "suits!"));
+        manager.setData(entity, "skyhighocs:dyn/uploading", true);
+      } else {
+        system.moduleMessage(this, entity, "<e>Another upload is already in progress!");
+      };
     } else {
       system.moduleMessage(this, entity, "<e>Suit drive not plugged in!");
     };
