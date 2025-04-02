@@ -340,17 +340,17 @@ function initModule(system) {
         manager.setString(nbt, "uploadBuffer", "");
         manager.setShort(nbt, "uploadTime", 0);
       };
-      var suitDownloadQueue = [];
+      var suitUploadQueue = [];
       if (nbt.getString("uploadBuffer") != null) {
-        suitDownloadQueue = nbt.getString("uploadBuffer").split(",");
+        suitUploadQueue = nbt.getString("uploadBuffer").split(",");
       };
       var uploadTime = nbt.getShort("uploadTime");
       manager.incrementData(entity, "skyhighocs:dyn/upload_timer", uploadTime, 1, entity.getData("skyhighocs:dyn/uploading"));
       if (PackLoader.getSide() == "SERVER" && (entity.getData("skyhighocs:dyn/upload_timer") < 1) && (entity.getData("skyhighocs:dyn/upload_timer") > 0) && entity.getData("skyhighocs:dyn/uploading")) {
-        var suitDownloadTime = (uploadTime/suitDownloadQueue.length).toFixed(0);
+        var suitUploadTime = (uploadTime/suitUploadQueue.length).toFixed(0);
         var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/upload_timer")*uploadTime);
-        if (currentTime % suitDownloadTime == 0) {
-          var suitIndex = suitDownloadQueue[(currentTime/suitDownloadTime)-1];
+        if (currentTime % suitUploadTime == 0) {
+          var suitIndex = suitUploadQueue[(currentTime/suitUploadTime)-1];
           uploadSuit(entity, manager, suitIndex);
         };
       };
