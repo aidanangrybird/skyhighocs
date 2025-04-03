@@ -578,6 +578,7 @@ function initModule(system) {
         manager.setData(entity, "skyhighocs:dyn/rockets_legs", legs);
         manager.setData(entity, "skyhighocs:dyn/rockets_body", body);
       };
+      manager.setData(entity, "skyhighocs:dyn/rocket_inner_legs", nbt.getBoolean("innerRockets"));
     },
     fightOrFlight: function (entity, manager) {
       manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsAux", true);

@@ -307,6 +307,14 @@
         "time": 40
       },
       "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_inner_legs": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/rocket_inner_legs",
+        "timerData": "skyhighocs:dyn/rocket_inner_legs_timer",
+        "time": 20
+      },
+      "isToggle": true
     }
   }
 }

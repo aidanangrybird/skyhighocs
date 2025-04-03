@@ -55,6 +55,8 @@ function init(renderer) {
 
 function initEffects(renderer) {
   //Deploy + base
+  //Add a clamp thing to the inner rockets so I can supress them with a timer instead of just a nbt boolean
+  //Use motion and look in these animations
   var head = renderer.createResource("MODEL", "skyhighocs:CyberneticHead");
   head.texture.set("head", "head_lights");
   head.bindAnimation("skyhighocs:cybernetic_head").setData((entity, data) => {
@@ -135,10 +137,11 @@ function initEffects(renderer) {
   left_leg.bindAnimation("skyhighocs:cybernetic_left_leg").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_main_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_outer_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
-    data.load(2, (entity.getWornHelmet().nbt().getBoolean("innerRockets")) ? (entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer")) : 0.0);
+    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer"));
   });
   left_leg_model = renderer.createEffect("fiskheroes:model").setModel(left_leg);
   left_leg_model.anchor.set("leftLeg");
@@ -149,10 +152,11 @@ function initEffects(renderer) {
   right_leg.bindAnimation("skyhighocs:cybernetic_right_leg").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_main_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_outer_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
-    data.load(2, (entity.getWornHelmet().nbt().getBoolean("innerRockets")) ? (entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer")) : 0.0);
+    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer"));
   });
   right_leg_model = renderer.createEffect("fiskheroes:model").setModel(right_leg);
   right_leg_model.anchor.set("rightLeg");
@@ -231,10 +235,11 @@ function initEffects(renderer) {
   left_leg_disguise.bindAnimation("skyhighocs:cybernetic_left_leg").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_main_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_outer_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
-    data.load(2, (entity.getWornHelmet().nbt().getBoolean("innerRockets")) ? (entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer")) : 0.0);
+    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer"));
   });
   left_leg_disguise_model = renderer.createEffect("fiskheroes:model").setModel(left_leg_disguise);
   left_leg_disguise_model.anchor.set("leftLeg");
@@ -244,10 +249,11 @@ function initEffects(renderer) {
   right_leg_disguise.bindAnimation("skyhighocs:cybernetic_right_leg").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_main_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_outer_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
-    data.load(2, (entity.getWornHelmet().nbt().getBoolean("innerRockets")) ? (entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer")) : 0.0);
+    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));;
-    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer"));
+    data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer"));
   });
   right_leg_disguise_model = renderer.createEffect("fiskheroes:model").setModel(right_leg_disguise);
   right_leg_disguise_model.anchor.set("rightLeg");
@@ -324,10 +330,11 @@ function initEffects(renderer) {
   left_leg_camouflage.bindAnimation("skyhighocs:cybernetic_left_leg").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_main_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_outer_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
-    data.load(2, (entity.getWornHelmet().nbt().getBoolean("innerRockets")) ? (entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer")) : 0.0);
+    data.load(2, stuff.clamp((entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"), 0.0, 1.0)) + entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer"));
   });
   left_leg_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(left_leg_camouflage);
   left_leg_camouflage_model.anchor.set("leftLeg");
@@ -337,10 +344,11 @@ function initEffects(renderer) {
   right_leg_camouflage.bindAnimation("skyhighocs:cybernetic_right_leg").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_main_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(1, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_outer_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
-    data.load(2, (entity.getWornHelmet().nbt().getBoolean("innerRockets")) ? (entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer")) : 0.0);
+    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer"));
   });
   right_leg_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(right_leg_camouflage);
   right_leg_camouflage_model.anchor.set("rightLeg");

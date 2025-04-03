@@ -1,6 +1,6 @@
 {main_rocket} = curve(clamp({data_0}, 0, 1))
 {outer_rocket} = curve(clamp({data_1}, 0, 1))
-{inner_rocket} = curve(clamp({data_2}, 0, 1))
+{inner_rocket} = curve(clamp({data_2}, 0, 1))(1-{data_6})
 {front_rocket} = curve(clamp({data_3}, 0, 1))
 {back_rocket} = curve(clamp({data_4}, 0, 1))
 {booster_rocket} = curve(clamp({data_5}, 0, 1))
