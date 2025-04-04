@@ -47,10 +47,9 @@
 {head_right_antenna_cover_posY} += 0.03{part0_antenna}
 {head_left_antenna_cover_posX} += 1{part1_antenna}
 {head_right_antenna_cover_posX} -= 1{part1_antenna}
-{head_antenna_base_rotX} += 35'{part2_antenna}
-{head_antenna_base_posY} -= 1.71{part2_antenna} + 6.79{part3_antenna}
-{head_antenna_base_posZ} -= 0.2{part2_antenna}
-{head_antenna_posY} -= 7.8{part4_antenna}
+{head_antenna_base_posY} -= 6.9{part2_antenna}
+{head_antenna_base_posZ} -= 1{part4_antenna}
+{head_antenna_posY} -= 6.95{part3_antenna}
 
 ;satellite dish
 {part0_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.0, 0.15, 0.0), 1)
