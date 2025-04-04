@@ -1,4 +1,4 @@
-{inner_rocket} = curve(clamp({data_0}, 0, 1))(1-{data_0})
+{inner_rocket} = curve(clamp({data_0}, 0, 1))curve({data_1})
 
 ;side rockets
 {part0_inner_rocket} = if({inner_rocket} != 1, animate2({inner_rocket}, 1.0, 0.0, 0.15, 0.0), 1)
