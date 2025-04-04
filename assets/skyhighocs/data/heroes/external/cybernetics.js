@@ -39,7 +39,7 @@ var colorDamage = {
   //Red
   "4": "1",
   //Cyan, figure this out
-  "3": "8"
+  "3": "6"
 };
 
 modelRegex = /[a-z\s]/gm;
