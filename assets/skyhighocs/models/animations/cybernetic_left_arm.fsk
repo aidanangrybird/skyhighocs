@@ -3,6 +3,7 @@
 {blade} = curve(clamp({data_2}, 0, 1))
 {shield} = curve(clamp({data_3}, 0, 1))
 {blade_stealth} = curve(clamp({data_4}, 0, 1))
+{cannon_flush} = curve(clamp({data_5}, 0, 1))
 
 ;cannon
 {part0_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.0, 0.15, 0.0), 1)
@@ -12,7 +13,7 @@
 {left_arm_outer_cannon_cover_posY} -= 0.03{part0_cannon}
 {left_arm_inner_cannon_cover_posX} -= 1{part1_cannon}
 {left_arm_outer_cannon_cover_posX} += 1{part1_cannon}
-{left_arm_cannon_posY} += 3{part2_cannon}
+{left_arm_cannon_posY} += 3{part2_cannon} - 2.9{part2_cannon}{cannon_flush}
 
 ;rocket
 {part0_rocket} = if({rocket} != 1, animate2({rocket}, 1.0, 0.0, 0.15, 0.0), 1)

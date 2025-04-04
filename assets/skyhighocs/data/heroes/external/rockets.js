@@ -578,13 +578,16 @@ function initModule(system) {
         manager.setData(entity, "skyhighocs:dyn/rockets_legs", legs);
         manager.setData(entity, "skyhighocs:dyn/rockets_body", body);
       };
-      manager.setData(entity, "skyhighocs:dyn/rocket_inner_legs", nbt.getBoolean("innerRockets"));
+      manager.setData(entity, "skyhighocs:dyn/rocket_inner_left_leg", nbt.getBoolean("innerLeftRocket"));
+      manager.setData(entity, "skyhighocs:dyn/rocket_inner_right_leg", nbt.getBoolean("innerRightRocket"));
     },
     fightOrFlight: function (entity, manager) {
-      manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsAux", true);
-      manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsBody", true);
-      manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsLegs", true);
-      system.moduleMessage(this, entity, "<n>Automatically armed <nh>rockets<n>!");
+      if (!entity.getWornHelmet().nbt().getBoolean("rocketsAux") || !entity.getWornHelmet().nbt().getBoolean("rocketsBody") || !entity.getWornHelmet().nbt().getBoolean("rocketsLegs")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsAux", true);
+        manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsBody", true);
+        manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsLegs", true);
+        system.systemMessage(entity, "<n>Automatically armed <nh>rockets<n>!");
+      };
     }
   };
 };

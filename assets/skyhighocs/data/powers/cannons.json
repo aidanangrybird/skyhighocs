@@ -205,7 +205,7 @@
         "transformation": {
           "toggleData": "skyhighocs:dyn/cannon_left_arm_deployed",
           "timerData": "skyhighocs:dyn/cannon_left_arm_deploy_timer",
-          "time": 60
+          "time": 40
         },
         "isToggle": true
     },
@@ -213,7 +213,7 @@
         "transformation": {
           "toggleData": "skyhighocs:dyn/cannon_right_arm_deployed",
           "timerData": "skyhighocs:dyn/cannon_right_arm_deploy_timer",
-          "time": 60
+          "time": 40
         },
         "isToggle": true
     },
@@ -221,7 +221,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/cannon_body_left_deployed",
         "timerData": "skyhighocs:dyn/cannon_body_left_deploy_timer",
-        "time": 60
+        "time": 40
       },
       "isToggle": true
     },
@@ -229,7 +229,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/cannon_body_right_deployed",
         "timerData": "skyhighocs:dyn/cannon_body_right_deploy_timer",
-        "time": 60
+        "time": 40
       },
       "isToggle": true
     },
@@ -237,7 +237,7 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/cannon_eye_left_deployed",
         "timerData": "skyhighocs:dyn/cannon_eye_left_deploy_timer",
-        "time": 60
+        "time": 40
       },
       "isToggle": true
     },
@@ -245,7 +245,39 @@
       "transformation": {
         "toggleData": "skyhighocs:dyn/cannon_eye_right_deployed",
         "timerData": "skyhighocs:dyn/cannon_eye_right_deploy_timer",
-        "time": 60
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|cannon_left_arm_flush": {
+        "transformation": {
+          "toggleData": "skyhighocs:dyn/cannon_left_arm_flush",
+          "timerData": "skyhighocs:dyn/cannon_left_arm_flush_timer",
+          "time": 10
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|cannon_right_arm_flush": {
+        "transformation": {
+          "toggleData": "skyhighocs:dyn/cannon_right_arm_flush",
+          "timerData": "skyhighocs:dyn/cannon_right_arm_flush_timer",
+          "time": 10
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|cannon_eye_left_flush": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/cannon_eye_left_flush",
+        "timerData": "skyhighocs:dyn/cannon_eye_left_flush_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|cannon_eye_right_flush": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/cannon_eye_right_flush",
+        "timerData": "skyhighocs:dyn/cannon_eye_right_flush_timer",
+        "time": 10
       },
       "isToggle": true
     }

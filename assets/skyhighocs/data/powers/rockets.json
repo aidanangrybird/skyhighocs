@@ -308,11 +308,19 @@
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|rocket_inner_legs": {
+    "fiskheroes:transformation|rocket_inner_left_leg": {
       "transformation": {
-        "toggleData": "skyhighocs:dyn/rocket_inner_legs",
-        "timerData": "skyhighocs:dyn/rocket_inner_legs_timer",
-        "time": 20
+        "toggleData": "skyhighocs:dyn/rocket_inner_left_leg",
+        "timerData": "skyhighocs:dyn/rocket_inner_left_leg_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_inner_right_leg": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/rocket_inner_right_leg",
+        "timerData": "skyhighocs:dyn/rocket_inner_right_leg_timer",
+        "time": 10
       },
       "isToggle": true
     }

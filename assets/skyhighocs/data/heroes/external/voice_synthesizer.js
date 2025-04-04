@@ -95,8 +95,14 @@ function initModule(system) {
       manager.setData(entity, "skyhighocs:dyn/mouth", false);
     },
     fightOrFlight: function (entity, manager) {
-      manager.setBoolean(entity.getWornHelmet().nbt(), "mouth", true);
-      system.moduleMessage(this, entity, "<n>Automatically armed <nh>mouth<n>!");
+      var nbt = entity.getWornHelmet().nbt();
+      manager.setData(entity, "skyhighocs:dyn/mouth_flush", nbt.getBoolean("flushMouth"));
+    },
+    fightOrFlight: function (entity, manager) {
+      if (!entity.getWornHelmet().nbt().getBoolean("mouth")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "mouth", true);
+        system.systemMessage(entity, "<n>Automatically armed <nh>mouth<n>!");
+      };
     }
   };
 };

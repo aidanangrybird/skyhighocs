@@ -358,7 +358,7 @@ function initLeftLegBoosters(renderer, model, color) {
         bloomOuterMiddle.render();
         bloomOuterCenter.render();
         //Inner
-        if (entity.getWornHelmet().nbt().getBoolean("innerRockets")) {
+        if (entity.getWornHelmet().nbt().getBoolean("innerLeftRocket")) {
           boosterInner.render();
           bloomInnerEdge.render();
           bloomInnerMiddle.render();
@@ -745,7 +745,7 @@ function initRightLegBoosters(renderer, model, color) {
         bloomOuterMiddle.render();
         bloomOuterCenter.render();
         //Inner
-        if (entity.getWornHelmet().nbt().getBoolean("innerRockets")) {
+        if (entity.getWornHelmet().nbt().getBoolean("innerRightRocket")) {
           boosterInner.render();
           bloomInnerEdge.render();
           bloomInnerMiddle.render();

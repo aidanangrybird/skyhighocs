@@ -28,6 +28,14 @@
         "time": 60
       },
       "isToggle": true
+    },
+    "fiskheroes:transformation|mouth_flush": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/mouth_flush",
+        "timerData": "skyhighocs:dyn/mouth_flush_timer",
+        "time": 10
+      },
+      "isToggle": true
     }
   }
 }

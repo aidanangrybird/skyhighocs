@@ -256,11 +256,16 @@ function initModule(system) {
       manager.setData(entity, "skyhighocs:dyn/blade_right_arm_stealth", rightStealth);
     },
     fightOrFlight: function (entity, manager) {
-      manager.setBoolean(entity.getWornHelmet().nbt(), "bladesLeft", true);
-      manager.setBoolean(entity.getWornHelmet().nbt(), "bladesRight", true);
-      system.moduleMessage(this, entity, "<n>Automatically armed <nh>blades<n>!");
-      manager.setData(entity, "fiskheroes:blade", true);
-      manager.setData(entity, "fiskheroes:blade_timer", 1.0);
+      if (!entity.getWornHelmet().nbt().getBoolean("bladesLeft") || !entity.getWornHelmet().nbt().getBoolean("bladesRight")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "bladesLeft", true);
+        manager.setBoolean(entity.getWornHelmet().nbt(), "bladesRight", true);
+        system.systemMessage(entity, "<n>Automatically armed <nh>blades<n>!");
+      };
+      if (entity.getData("fiskheroes:blade_timer") == 0) {
+        manager.setData(entity, "fiskheroes:blade", true);
+        manager.setData(entity, "fiskheroes:blade_timer", 1.0);
+        system.systemMessage(entity, "<n>Automatically deployed <nh>blades<n>!");
+      };
     }
   };
 };

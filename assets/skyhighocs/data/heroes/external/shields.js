@@ -233,9 +233,11 @@ function initModule(system) {
       };
     },
     fightOrFlight: function (entity, manager) {
-      manager.setBoolean(entity.getWornHelmet().nbt(), "shieldsLeft", true);
-      manager.setBoolean(entity.getWornHelmet().nbt(), "shieldsRight", true);
-      system.moduleMessage(this, entity, "<n>Automatically armed <nh>shields<n>!");
+      if (!entity.getWornHelmet().nbt().getBoolean("shieldsLeft") || !entity.getWornHelmet().nbt().getBoolean("shieldsRight")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "shieldsLeft", true);
+        manager.setBoolean(entity.getWornHelmet().nbt(), "shieldsRight", true);
+        system.systemMessage(entity, "<n>Automatically armed <nh>shields<n>!");
+      };
     }
   };
 };

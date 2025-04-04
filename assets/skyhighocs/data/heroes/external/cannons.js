@@ -263,12 +263,18 @@ function initModule(system) {
         manager.setData(entity, "skyhighocs:dyn/cannons_body", body);
         manager.setData(entity, "skyhighocs:dyn/cannons_eyes", eyes);
       };
+      manager.setData(entity, "skyhighocs:dyn/cannon_eye_left_flush", nbt.getBoolean("flushLeftEyeCannon"));
+      manager.setData(entity, "skyhighocs:dyn/cannon_eye_right_flush", nbt.getBoolean("flushRightEyeCannon"));
+      manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_flush", nbt.getBoolean("flushLeftArmCannon"));
+      manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_flush", nbt.getBoolean("flushRightArmCannon"));
     },
     fightOrFlight: function (entity, manager) {
-      manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsEyes", true);
-      manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsBody", true);
-      manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsArms", true);
-      system.moduleMessage(this, entity, "<n>Automatically armed <nh>cannons<n>!");
+      if (!entity.getWornHelmet().nbt().getBoolean("cannonsEyes") || !entity.getWornHelmet().nbt().getBoolean("cannonsBody") || !entity.getWornHelmet().nbt().getBoolean("cannonsArms")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsEyes", true);
+        manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsBody", true);
+        manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsArms", true);
+        system.systemMessage(entity, "<n>Automatically armed <nh>cannons<n>!");
+      }
     }
   };
 };

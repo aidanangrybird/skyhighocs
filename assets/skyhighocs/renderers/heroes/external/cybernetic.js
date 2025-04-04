@@ -113,11 +113,11 @@ function initCyberneticAnimations(renderer) {
   });
   addAnimation(renderer, "cybernetic.LEFT_LEG_ROCKETS", "skyhighocs:cybernetic_left_leg_rockets").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_left_leg_timer"));
   });
   addAnimation(renderer, "cybernetic.RIGHT_LEG_ROCKETS", "skyhighocs:cybernetic_right_leg_rockets").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_right_leg_timer"));
   });
   addAnimation(renderer, "cybernetic.WING_LEFT", "skyhighocs:cybernetic_wing_left").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/wing_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/wings_timer"));
