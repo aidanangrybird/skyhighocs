@@ -137,9 +137,11 @@
     "transmitting": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "receive_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "receiving": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "upload_timer": { "type": "FLOAT", "resetWithoutSuit": true },
+    "upload_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "upload_duration": { "type": "INTEGER", "resetWithoutSuit": true },
     "uploading": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "download_timer": { "type": "FLOAT", "resetWithoutSuit": true },
+    "download_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "download_duration": { "type": "INTEGER", "resetWithoutSuit": true },
     "downloading": { "type": "BOOLEAN", "resetWithoutSuit": true },
 
     "wings_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },

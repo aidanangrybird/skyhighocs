@@ -444,6 +444,10 @@ function initSystem(moduleList, name, normalName, color, uuid) {
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
               cyberneticModules.push(moduleInit.name);
+              var modulePowers = moduleInit.powers;
+              modulePowers.forEach(power => {
+                powerArray.push(power);
+              });
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
               if (moduleInit.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
@@ -1096,10 +1100,16 @@ function initSystem(moduleList, name, normalName, color, uuid) {
               enableModule(entity, manager, args[1]);
               break;
             case "cv":
-              systemMessage(entity, entity.getDataOrDefault("skyhighocs:dyn/" + args[1], 0));
+              entity.as("PLAYER").addChatMessage(entity.getDataOrDefault("skyhighocs:dyn/" + args[1], 0));
               break;
-            case "nbt":
-              systemMessage(entity, entity.getWornHelmet().nbt().getStringList(args[1]));
+            case "nbtStringList":
+              entity.as("PLAYER").addChatMessage(entity.getWornHelmet().nbt().getStringList(args[1]));
+              break;
+            case "nbtInt":
+              entity.as("PLAYER").addChatMessage(entity.getWornHelmet().nbt().getInteger(args[1]));
+              break;
+            case "nbtShort":
+              entity.as("PLAYER").addChatMessage(entity.getWornHelmet().nbt().getShort(args[1]));
               break;
             case "chatMode":
               switchChatModes(entity, manager, args[1]);

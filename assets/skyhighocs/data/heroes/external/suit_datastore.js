@@ -86,7 +86,7 @@ function initModule(system) {
       var suitsToDownload = [];
       var suitDownloadBuffer = nbt.getStringList("downloadBuffer")
       var suitDownloadBufferArray = system.getStringArray(nbt.getStringList("downloadBuffer"));
-      var suitDownloadTime = 0;
+      var suitDownloadDuration = 0;
       var downloadsBuffered = 0;
       if (suitList == "*") {
         for (var i = 0;i<dataDriveSuitsArray.length;i++) {
@@ -101,18 +101,18 @@ function initModule(system) {
           if (suitDownloadBufferArray.indexOf(currentSuit) == -1) {
             manager.appendString(suitDownloadBuffer, currentSuit);
             suitDownloadBufferArray.push(currentSuit);
-            var downloadTime = 0;
+            var downloadDuration = 0;
             if (PackLoader.getSide() == "SERVER") {
-              downloadTime = system.clamp(Math.floor(Math.random() * 50), 40, 50)
+              downloadDuration = system.clamp(Math.floor(Math.random() * 30), 10, 30)
             };
-            suitDownloadTime = suitDownloadTime + downloadTime;
+            suitDownloadDuration = suitDownloadDuration + downloadDuration;
             downloadsBuffered = downloadsBuffered + 1;
           };
         };
       });
-      manager.setShort(nbt, "downloadTime", suitDownloadTime);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/download_duration", entity.getData("skyhighocs:dyn/download_duration") + suitDownloadDuration);
       system.moduleMessage(module, entity, "<n>Attempting to download <nh>" + downloadsBuffered + "<n> " + ((downloadsBuffered == 1) ? "suit!" : "suits!"));
-      manager.setData(entity, "skyhighocs:dyn/downloading", true);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/downloading", true);
     } else {
       system.moduleMessage(module, entity, "<e>Suit drive not plugged in!");
     };
@@ -173,7 +173,7 @@ function initModule(system) {
       var suitsToUpload = suitList.split(","); //Indexes of suits
       var suitUploadBuffer = nbt.getStringList("uploadBuffer");
       var suitUploadBufferArray = system.getStringArray(nbt.getStringList("uploadBuffer"));
-      var suitUploadTime = 0;
+      var suitUploadDuration = 0;
       var uploadsBuffered = 0;
       suitsToUpload.forEach(entry => {
         if ((entry < (suitDatastoreArray.length)) && (entry > -1)) {
@@ -181,18 +181,18 @@ function initModule(system) {
           if (suitUploadBufferArray.indexOf(currentSuit) == -1) {
             manager.appendString(suitUploadBuffer, currentSuit);
             suitUploadBufferArray.push(currentSuit);
-            var uploadTime = 0;
+            var uploadDuration = 0;
             if (PackLoader.getSide() == "SERVER") {
-              uploadTime = system.clamp(Math.floor(Math.random() * 30), 10, 30)
+              uploadDuration = system.clamp(Math.floor(Math.random() * 30), 10, 30)
             };
-            suitUploadTime = suitUploadTime + uploadTime;
+            suitUploadDuration = suitUploadDuration + uploadDuration;
             uploadsBuffered = uploadsBuffered + 1;
           };
         };
       });
-      manager.setShort(nbt, "uploadTime", nbt.getShort("uploadTime") + suitUploadTime);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/upload_duration", entity.getData("skyhighocs:dyn/upload_duration") + suitUploadDuration);
       system.moduleMessage(module, entity, "<n>Attempting to upload <nh>" + uploadsBuffered + "<n> " + ((uploadsBuffered == 1) ? "suit!" : "suits!"));
-      manager.setData(entity, "skyhighocs:dyn/uploading", true);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/uploading", true);
     } else {
       system.moduleMessage(module, entity, "<e>Suit drive not plugged in!");
     };
@@ -238,15 +238,20 @@ function initModule(system) {
     var suitDatastoreArray = system.getStringArray(nbt.getStringList("suitDatastore"));
     var suitsRemoved = 0;
     var suitDatastore = nbt.getStringList("suitDatastore");
-    if ((suitIndex < suitDatastoreArray.length) && (suitIndex > -1)) {
-      var currentSuit = suitDatastoreArray[suitIndex];
-      system.moduleMessage(this, entity, "<n>Removeing suit \"<nh>" + currentSuit + "<n>\"!");
-      if (suitDatastoreArray.indexOf(currentSuit) > -1) {
-        manager.removeTag(suitDatastore, suitIndex);
-        system.moduleMessage(this, entity, "<s>Successfully removed suit \"<sh>" + currentSuit + "<s>\"!");
-        suitsRemoved = suitsRemoved + 1;
-      } else {
-        system.moduleMessage(this, entity, "<e>Failed to remove suit \"<eh>" + currentSuit + "<e>\"!");
+    if (suitIndex == "*") {
+      manager.removeTag(nbt, "suitDatastore");
+      system.moduleMessage(this, entity, "<s>Deleted the entire suit datastore!");
+    } else {
+      if ((suitIndex < suitDatastoreArray.length) && (suitIndex > -1)) {
+        var currentSuit = suitDatastoreArray[suitIndex];
+        system.moduleMessage(this, entity, "<n>Removeing suit \"<nh>" + currentSuit + "<n>\"!");
+        if (suitDatastoreArray.indexOf(currentSuit) > -1) {
+          manager.removeTag(suitDatastore, suitIndex);
+          system.moduleMessage(this, entity, "<s>Successfully removed suit \"<sh>" + currentSuit + "<s>\"!");
+          suitsRemoved = suitsRemoved + 1;
+        } else {
+          system.moduleMessage(this, entity, "<e>Failed to remove suit \"<eh>" + currentSuit + "<e>\"!");
+        };
       };
     };
   };
@@ -311,43 +316,54 @@ function initModule(system) {
     },
     tickHandler: function (entity, manager) {
       var nbt = entity.getWornHelmet().nbt();
-      if (entity.getData("skyhighocs:dyn/download_timer") == 1) {
-        manager.setData(entity, "skyhighocs:dyn/downloading", false);
+      if (entity.getData("skyhighocs:dyn/download_timer") >= 1) {
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/downloading", false);
         system.moduleMessage(this, entity, "<s>Finished downloading suits!");
         manager.setTagList(nbt, "downloadBuffer", manager.newTagList());
-        manager.setShort(nbt, "downloadTime", 0);
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/download_duration", 0);
       };
       var suitDownloadBuffer = manager.newTagList();
       if (nbt.getStringList("downloadBuffer") != null) {
         suitDownloadBuffer = nbt.getStringList("downloadBuffer");
       };
-      var downloadTime = nbt.getShort("downloadTime");
-      manager.incrementData(entity, "skyhighocs:dyn/download_timer", downloadTime, 1, entity.getData("skyhighocs:dyn/downloading"));
-      if (PackLoader.getSide() == "SERVER" && (entity.getData("skyhighocs:dyn/download_timer") < 1) && (entity.getData("skyhighocs:dyn/download_timer") > 0) && entity.getData("skyhighocs:dyn/downloading")) {
-        var suitDownloadTime = (downloadTime/suitDownloadBuffer.tagCount()).toFixed(0);
-        var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/download_timer")*downloadTime);
-        if (currentTime % suitDownloadTime == 0) {
-          var currentDownload = ((currentTime/suitDownloadTime)-1);
+      var downloadDuration = entity.getData("skyhighocs:dyn/download_duration")+10;
+      if (entity.getData("skyhighocs:dyn/downloading")) {
+        var step = (1/downloadDuration)
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/download_timer", entity.getData("skyhighocs:dyn/download_timer")+step);
+      };
+      if (!entity.getData("skyhighocs:dyn/downloading") && entity.getData("skyhighocs:dyn/upload_timer") >= 1) {
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/download_timer", 0);
+      };
+      if ((entity.getData("skyhighocs:dyn/download_timer") < 1) && (entity.getData("skyhighocs:dyn/download_timer") > 0) && entity.getData("skyhighocs:dyn/downloading")) {
+        var suitDownloadDuration = (downloadDuration/suitDownloadBuffer.tagCount()).toFixed(0);
+        var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/download_timer")*downloadDuration);
+        if (currentTime % suitDownloadDuration == 0) {
+          var currentDownload = ((currentTime/suitDownloadDuration)-1);
           downloadSuit(this, entity, manager, currentDownload);
         };
       };
       if (entity.getData("skyhighocs:dyn/upload_timer") == 1) {
-        manager.setData(entity, "skyhighocs:dyn/uploading", false);
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/uploading", false);
         system.moduleMessage(this, entity, "<s>Finished uploading suits!");
         manager.setTagList(nbt, "uploadBuffer", manager.newTagList());
-        manager.setShort(nbt, "uploadTime", 0);
       };
       var suitUploadBuffer = manager.newTagList();
       if (nbt.getStringList("uploadBuffer") != null) {
         suitUploadBuffer = nbt.getStringList("uploadBuffer");
       };
-      var uploadTime = nbt.getShort("uploadTime");
-      manager.incrementData(entity, "skyhighocs:dyn/upload_timer", uploadTime, 1, entity.getData("skyhighocs:dyn/uploading"));
+      var uploadDuration = entity.getData("skyhighocs:dyn/upload_duration")+10;
+      if (entity.getData("skyhighocs:dyn/uploading")) {
+        var step = (1/uploadDuration)
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/upload_timer", entity.getData("skyhighocs:dyn/upload_timer")+step);
+      };
+      if (!entity.getData("skyhighocs:dyn/uploading") && entity.getData("skyhighocs:dyn/upload_timer") >= 1) {
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/upload_timer", 0);
+      };
       if (PackLoader.getSide() == "SERVER" && (entity.getData("skyhighocs:dyn/upload_timer") < 1) && (entity.getData("skyhighocs:dyn/upload_timer") > 0) && entity.getData("skyhighocs:dyn/uploading")) {
-        var suitUploadTime = (uploadTime/suitUploadBuffer.tagCount()).toFixed(0);
-        var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/upload_timer")*uploadTime);
-        if (currentTime % suitUploadTime == 0) {
-          var currentUpload = ((currentTime/suitUploadTime)-1);
+        var suitUploadDuration = (uploadDuration/suitUploadBuffer.tagCount()).toFixed(0);
+        var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/upload_timer")*uploadDuration);
+        if (currentTime % suitUploadDuration == 0) {
+          var currentUpload = ((currentTime/suitUploadDuration)-1);
           uploadSuit(this, entity, manager, currentUpload);
         };
       };

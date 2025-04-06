@@ -5,12 +5,12 @@
   },
   "hud": [
     {
-      "type": "PROGRESS",
+      "type": "CHARGE",
       "texture": "fiskheroes:textures/gui/bars/cryo_charge.png",
       "data": "skyhighocs:dyn/upload_timer"
     },
     {
-      "type": "PROGRESS",
+      "type": "CHARGE",
       "texture": "fiskheroes:textures/gui/bars/cryo_charge.png",
       "data": "skyhighocs:dyn/download_timer"
     }
