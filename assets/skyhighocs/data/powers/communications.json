@@ -26,18 +26,18 @@
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|transmit": {
+    "fiskheroes:transformation|transmit_beam": {
       "transformation": {
-        "toggleData": "skyhighocs:dyn/transmitting",
-        "timerData": "skyhighocs:dyn/transmit_timer",
+        "toggleData": "skyhighocs:dyn/transmit_beam",
+        "timerData": "skyhighocs:dyn/transmit_beam_timer",
         "time": 160
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|receive": {
+    "fiskheroes:transformation|receive_beam": {
       "transformation": {
-        "toggleData": "skyhighocs:dyn/receiving",
-        "timerData": "skyhighocs:dyn/receive_timer",
+        "toggleData": "skyhighocs:dyn/receive_beam",
+        "timerData": "skyhighocs:dyn/receive_beam_timer",
         "time": 160
       },
       "isToggle": true

@@ -62,168 +62,165 @@ function initModule(system) {
   };
   /**
   * Downloads suits off of suit data drive
+  * @param module - module passthrough
   * @param entity - Required
   * @param manager - Required
   * @param suitList - List of suit indexes seperated by commas
   **/
-  function downloadSuits(entity, manager, suitList) {
+  function downloadSuits(module, entity, manager, suitList) {
     var nbt = entity.getWornHelmet().nbt();
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuitsList);
+    };
+    if (!nbt.hasKey("downloadBuffer")) {
+      var newBuffer = manager.newTagList();
+      manager.setTagList(nbt, "downloadBuffer", newBuffer);
     };
     var suitDrive = null;
     if (isSuitDriveInserted(entity)) {
       suitDrive = nbt.getTagList("Equipment").getCompoundTag(0).getCompoundTag("Item").getCompoundTag("tag");
     };
     if (suitDrive != null) {
-      if (!entity.getData("skyhighocs:dyn/downloading")) {
-        var dataDriveSuitsArray = system.getStringArray(suitDrive.getStringList("Suits"));
-        var suitsToDownload = [];
-        var suitDownloadQueue = [];
-        var suitDownloadTime = 0;
-        if (suitList == "*") {
-          for (var i = 0;i<dataDriveSuitsArray.length;i++) {
-            suitsToDownload.push(i);
-          };
-        } else {
-          suitsToDownload = suitList.split(",");
+      var dataDriveSuitsArray = system.getStringArray(suitDrive.getStringList("Suits"));
+      var suitsToDownload = [];
+      var suitDownloadBuffer = nbt.getStringList("downloadBuffer")
+      var suitDownloadBufferArray = system.getStringArray(nbt.getStringList("downloadBuffer"));
+      var suitDownloadTime = 0;
+      var downloadsBuffered = 0;
+      if (suitList == "*") {
+        for (var i = 0;i<dataDriveSuitsArray.length;i++) {
+          suitsToDownload.push(i);
         };
-        var downloadsQueued = 0;
-        suitsToDownload.forEach(entry => {
-          if ((entry < (dataDriveSuitsArray.length)) && (entry > -1)) {
-            var currentSuit = dataDriveSuitsArray[entry];
-            if (suitDownloadQueue.indexOf(currentSuit) == -1) {
-              suitDownloadQueue.push(entry);
-              var downloadTime = 0;
-              if (PackLoader.getSide() == "SERVER") {
-                downloadTime = system.clamp(Math.floor(Math.random() * 30), 10, 30)
-              };
-              suitDownloadTime = suitDownloadTime + downloadTime;
-              downloadsQueued = downloadsQueued + 1;
-            };
-          };
-        });
-        manager.setString(nbt, "downloadBuffer", suitDownloadQueue);
-        manager.setShort(nbt, "downloadTime", suitDownloadTime);
-        system.moduleMessage(this, entity, "<n>Attempting to download <nh>" + downloadsQueued + "<n> " + ((downloadsQueued == 1) ? "suit!" : "suits!"));
-        manager.setData(entity, "skyhighocs:dyn/downloading", true);
       } else {
-        system.moduleMessage(this, entity, "<e>Another upload is already in progress!");
+        suitsToDownload = suitList.split(",");
       };
+      suitsToDownload.forEach(entry => {
+        if ((entry < (dataDriveSuitsArray.length)) && (entry > -1)) {
+          var currentSuit = dataDriveSuitsArray[entry];
+          if (suitDownloadBufferArray.indexOf(currentSuit) == -1) {
+            manager.appendString(suitDownloadBuffer, currentSuit);
+            suitDownloadBufferArray.push(currentSuit);
+            var downloadTime = 0;
+            if (PackLoader.getSide() == "SERVER") {
+              downloadTime = system.clamp(Math.floor(Math.random() * 50), 40, 50)
+            };
+            suitDownloadTime = suitDownloadTime + downloadTime;
+            downloadsBuffered = downloadsBuffered + 1;
+          };
+        };
+      });
+      manager.setShort(nbt, "downloadTime", suitDownloadTime);
+      system.moduleMessage(module, entity, "<n>Attempting to download <nh>" + downloadsBuffered + "<n> " + ((downloadsBuffered == 1) ? "suit!" : "suits!"));
+      manager.setData(entity, "skyhighocs:dyn/downloading", true);
     } else {
-      system.moduleMessage(this, entity, "<e>Suit drive not plugged in!");
+      system.moduleMessage(module, entity, "<e>Suit drive not plugged in!");
     };
   };
   /**
   * Downloads suits off of suit data drive
+  * @param module - module passthrough
   * @param entity - Required
   * @param manager - Required
-  * @param suitIndex - Suit index
+  * @param currentDownload - Current suit being downloaded
   **/
-  function downloadSuit(entity, manager, suitIndex) {
+  function downloadSuit(module, entity, manager, currentDownload) {
     var nbt = entity.getWornHelmet().nbt();
-    /*
-    Another function that downloads an individual suit
-    Does all the same checks that the current downloadSuits function does
-    Also figure out a way to essentially set the download time so downloading or uploading suits takes a bit of time and is not instant
-    */
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuitsList);
     };
     if (isSuitDriveInserted(entity)) {
-      var suitDrive = nbt.getTagList("Equipment").getCompoundTag(0).getCompoundTag("Item").getCompoundTag("tag");
+      var downloadBuffer = nbt.getStringList("downloadBuffer");
       var suitDatastore = nbt.getStringList("suitDatastore");
       var suitDatastoreArray = system.getStringArray(nbt.getStringList("suitDatastore"));
-      var currentSuit = suitDrive.getStringList("Suits").getString(suitIndex);
-      system.moduleMessage(this, entity, "<n>Downloading suit \"<nh>" + currentSuit + "<n>\"!");
+      var currentSuit = downloadBuffer.getString(currentDownload);
+      system.moduleMessage(module, entity, "<n>Downloading suit \"<nh>" + currentSuit + "<n>\"!");
       if (suitDatastoreArray.indexOf(currentSuit) == -1) {
         suitDatastoreArray.push(currentSuit);
         manager.appendString(suitDatastore, currentSuit);
-        system.moduleMessage(this, entity, "<s>Successfully downloaded suit \"<sh>" + currentSuit + "<s>\" to " + system.getModelID(entity) + "!");
+        system.moduleMessage(module, entity, "<s>Successfully downloaded suit \"<sh>" + currentSuit + "<s>\" to " + system.getModelID(entity) + "!");
       } else {
-        system.moduleMessage(this, entity, "<e>Failed to download suit \"<eh>" + currentSuit + "<e>\"!");
+        system.moduleMessage(module, entity, "<e>Failed to download suit \"<eh>" + currentSuit + "<e>\"! Already exists in datastore!");
       };
     } else {
-      system.moduleMessage(this, entity, "<e>Suit drive not plugged in!");
+      system.moduleMessage(module, entity, "<e>Suit drive not plugged in!");
     };
   };
   /**
   * Uploads suits to suit data drive
+  * @param module - module passthrough
   * @param entity - Required
   * @param manager - Required
   * @param suitList - List of suit indexes seperated by commas
   **/
-  function uploadSuits(entity, manager, suitList) {
+  function uploadSuits(module, entity, manager, suitList) {
     var nbt = entity.getWornHelmet().nbt();
     if (!nbt.hasKey("suitDatastore")) {
       var newSuits = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuits);
     };
+    if (!nbt.hasKey("uploadBuffer")) {
+      var newBuffer = manager.newTagList();
+      manager.setTagList(nbt, "uploadBuffer", newBuffer);
+    };
     var suitDrive = null;
     if (isSuitDriveInserted(entity)) {
       suitDrive = nbt.getTagList("Equipment").getCompoundTag(0).getCompoundTag("Item").getCompoundTag("tag");
     };
     if (suitDrive != null) {
-      if (!entity.getData("skyhighocs:dyn/upload")) {
-        var suitDatastoreArray = system.getStringArray(nbt.getStringList("suitDatastore"));
-        var suitsToUpload = suitList.split(","); //Indexes of suits
-        var suitUploadQueue = [];
-        var suitUploadTime = 0;
-        var uploadsQueued = 0;
-        suitsToUpload.forEach(entry => {
-          if ((entry < (suitDatastoreArray.length)) && (entry > -1)) {
-            var currentSuit = suitDatastoreArray[entry];
-            if (suitUploadQueue.indexOf(currentSuit) == -1) {
-              suitUploadQueue.push(entry);
-              var uploadTime = 0;
-              if (PackLoader.getSide() == "SERVER") {
-                uploadTime = system.clamp(Math.floor(Math.random() * 30), 10, 30)
-              };
-              suitUploadTime = suitUploadTime + uploadTime;
-              uploadsQueued = uploadsQueued + 1;
+      var suitDatastoreArray = system.getStringArray(nbt.getStringList("suitDatastore"));
+      var suitsToUpload = suitList.split(","); //Indexes of suits
+      var suitUploadBuffer = nbt.getStringList("uploadBuffer");
+      var suitUploadBufferArray = system.getStringArray(nbt.getStringList("uploadBuffer"));
+      var suitUploadTime = 0;
+      var uploadsBuffered = 0;
+      suitsToUpload.forEach(entry => {
+        if ((entry < (suitDatastoreArray.length)) && (entry > -1)) {
+          var currentSuit = suitDatastoreArray[entry];
+          if (suitUploadBufferArray.indexOf(currentSuit) == -1) {
+            manager.appendString(suitUploadBuffer, currentSuit);
+            suitUploadBufferArray.push(currentSuit);
+            var uploadTime = 0;
+            if (PackLoader.getSide() == "SERVER") {
+              uploadTime = system.clamp(Math.floor(Math.random() * 30), 10, 30)
             };
+            suitUploadTime = suitUploadTime + uploadTime;
+            uploadsBuffered = uploadsBuffered + 1;
           };
-        });
-        manager.setString(nbt, "uploadBuffer", suitUploadQueue);
-        manager.setShort(nbt, "uploadTime", suitUploadTime);
-        system.moduleMessage(this, entity, "<n>Attempting to upload <nh>" + uploadsQueued + "<n> " + ((uploadsQueued == 1) ? "suit!" : "suits!"));
-        manager.setData(entity, "skyhighocs:dyn/uploading", true);
-      } else {
-        system.moduleMessage(this, entity, "<e>Another upload is already in progress!");
-      };
+        };
+      });
+      manager.setShort(nbt, "uploadTime", nbt.getShort("uploadTime") + suitUploadTime);
+      system.moduleMessage(module, entity, "<n>Attempting to upload <nh>" + uploadsBuffered + "<n> " + ((uploadsBuffered == 1) ? "suit!" : "suits!"));
+      manager.setData(entity, "skyhighocs:dyn/uploading", true);
     } else {
-      system.moduleMessage(this, entity, "<e>Suit drive not plugged in!");
+      system.moduleMessage(module, entity, "<e>Suit drive not plugged in!");
     };
   };
   /**
-  * Downloads suits off of suit data drive
+  * Uploads suiit to suit data drive
+  * @param module - module passthrough
   * @param entity - Required
   * @param manager - Required
-  * @param suitIndex - Suit index
+  * @param currentUpload - Suit index
   **/
-  function uploadSuit(entity, manager, suitIndex) {
+  function uploadSuit(module, entity, manager, currentUpload) {
     var nbt = entity.getWornHelmet().nbt();
-    if (!nbt.hasKey("suitDatastore")) {
-      var newSuitsList = manager.newTagList();
-      manager.setTagList(nbt, "suitDatastore", newSuitsList);
-    };
     if (isSuitDriveInserted(entity)) {
-      var suitDatastore = nbt.getStringList("suitDatastore");
+      var uploadBuffer = nbt.getStringList("uploadBuffer");
       var suitDrive = nbt.getTagList("Equipment").getCompoundTag(0).getCompoundTag("Item").getCompoundTag("tag");
       var suitDriveArray = system.getStringArray(suitDrive.getStringList("Suits"));
-      var currentSuit = suitDatastore.getString(suitIndex);
-      system.moduleMessage(this, entity, "<n>Uploading suit \"<nh>" + currentSuit + "<n>\"!");
+      var currentSuit = uploadBuffer.getString(currentUpload);
+      system.moduleMessage(module, entity, "<n>Uploading suit \"<nh>" + currentSuit + "<n>\"!");
       if ((suitDriveArray.indexOf(currentSuit) == -1) && (suitDriveArray.length < 9)) {
         suitDriveArray.push(currentSuit);
         manager.appendString(suitDrive.getStringList("Suits"), currentSuit);
-        system.moduleMessage(this, entity, "<s>Successfully uploading suit \"<sh>" + currentSuit + "<s>\" to " + suitDriveName(entity) + "<s>!");
+        system.moduleMessage(module, entity, "<s>Successfully uploading suit \"<sh>" + currentSuit + "<s>\" to " + suitDriveName(entity) + "<s>!");
       } else {
-        system.moduleMessage(this, entity, "<e>Failed to uploading suit \"<eh>" + currentSuit + "<e>\"!");
+        system.moduleMessage(module, entity, "<e>Failed to uploading suit \"<eh>" + currentSuit + "<e>\"! Already exists in datastore!");
       };
     } else {
-      system.moduleMessage(this, entity, "<e>Suit drive not plugged in!");
+      system.moduleMessage(module, entity, "<e>Suit drive not plugged in!");
     };
   };
   /**
@@ -284,10 +281,10 @@ function initModule(system) {
             listDriveSuits(entity, manager);
             break;
           case "download":
-            downloadSuits(entity, manager, arguments[2]);
+            downloadSuits(this, entity, manager, arguments[2]);
             break;
           case "upload":
-            uploadSuits(entity, manager, arguments[2]);
+            uploadSuits(this, entity, manager, arguments[2]);
             break;
           case "rem":
             removeSuit(entity, manager, arguments[2]);
@@ -317,41 +314,41 @@ function initModule(system) {
       if (entity.getData("skyhighocs:dyn/download_timer") == 1) {
         manager.setData(entity, "skyhighocs:dyn/downloading", false);
         system.moduleMessage(this, entity, "<s>Finished downloading suits!");
-        manager.setString(nbt, "downloadBuffer", "");
+        manager.setTagList(nbt, "downloadBuffer", manager.newTagList());
         manager.setShort(nbt, "downloadTime", 0);
       };
-      var suitDownloadQueue = [];
-      if (nbt.getString("downloadBuffer") != null) {
-        suitDownloadQueue = nbt.getString("downloadBuffer").split(",");
+      var suitDownloadBuffer = manager.newTagList();
+      if (nbt.getStringList("downloadBuffer") != null) {
+        suitDownloadBuffer = nbt.getStringList("downloadBuffer");
       };
       var downloadTime = nbt.getShort("downloadTime");
       manager.incrementData(entity, "skyhighocs:dyn/download_timer", downloadTime, 1, entity.getData("skyhighocs:dyn/downloading"));
       if (PackLoader.getSide() == "SERVER" && (entity.getData("skyhighocs:dyn/download_timer") < 1) && (entity.getData("skyhighocs:dyn/download_timer") > 0) && entity.getData("skyhighocs:dyn/downloading")) {
-        var suitDownloadTime = (downloadTime/suitDownloadQueue.length).toFixed(0);
+        var suitDownloadTime = (downloadTime/suitDownloadBuffer.tagCount()).toFixed(0);
         var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/download_timer")*downloadTime);
         if (currentTime % suitDownloadTime == 0) {
-          var suitIndex = suitDownloadQueue[(currentTime/suitDownloadTime)-1];
-          downloadSuit(entity, manager, suitIndex);
+          var currentDownload = ((currentTime/suitDownloadTime)-1);
+          downloadSuit(this, entity, manager, currentDownload);
         };
       };
       if (entity.getData("skyhighocs:dyn/upload_timer") == 1) {
         manager.setData(entity, "skyhighocs:dyn/uploading", false);
         system.moduleMessage(this, entity, "<s>Finished uploading suits!");
-        manager.setString(nbt, "uploadBuffer", "");
+        manager.setTagList(nbt, "uploadBuffer", manager.newTagList());
         manager.setShort(nbt, "uploadTime", 0);
       };
-      var suitUploadQueue = [];
-      if (nbt.getString("uploadBuffer") != null) {
-        suitUploadQueue = nbt.getString("uploadBuffer").split(",");
+      var suitUploadBuffer = manager.newTagList();
+      if (nbt.getStringList("uploadBuffer") != null) {
+        suitUploadBuffer = nbt.getStringList("uploadBuffer");
       };
       var uploadTime = nbt.getShort("uploadTime");
       manager.incrementData(entity, "skyhighocs:dyn/upload_timer", uploadTime, 1, entity.getData("skyhighocs:dyn/uploading"));
       if (PackLoader.getSide() == "SERVER" && (entity.getData("skyhighocs:dyn/upload_timer") < 1) && (entity.getData("skyhighocs:dyn/upload_timer") > 0) && entity.getData("skyhighocs:dyn/uploading")) {
-        var suitUploadTime = (uploadTime/suitUploadQueue.length).toFixed(0);
+        var suitUploadTime = (uploadTime/suitUploadBuffer.tagCount()).toFixed(0);
         var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/upload_timer")*uploadTime);
         if (currentTime % suitUploadTime == 0) {
-          var suitIndex = suitUploadQueue[(currentTime/suitUploadTime)-1];
-          uploadSuit(entity, manager, suitIndex);
+          var currentUpload = ((currentTime/suitUploadTime)-1);
+          uploadSuit(this, entity, manager, currentUpload);
         };
       };
     },

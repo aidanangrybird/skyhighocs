@@ -6,12 +6,12 @@
   "hud": [
     {
       "type": "PROGRESS",
-      "texture": "fiskheroes:textures/gui/bars/nanite_transformation.png",
+      "texture": "fiskheroes:textures/gui/bars/cryo_charge.png",
       "data": "skyhighocs:dyn/upload_timer"
     },
     {
       "type": "PROGRESS",
-      "texture": "fiskheroes:textures/gui/bars/nanite_transformation.png",
+      "texture": "fiskheroes:textures/gui/bars/cryo_charge.png",
       "data": "skyhighocs:dyn/download_timer"
     }
   ]

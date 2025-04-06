@@ -1098,6 +1098,9 @@ function initSystem(moduleList, name, normalName, color, uuid) {
             case "cv":
               systemMessage(entity, entity.getDataOrDefault("skyhighocs:dyn/" + args[1], 0));
               break;
+            case "nbt":
+              systemMessage(entity, entity.getWornHelmet().nbt().getStringList(args[1]));
+              break;
             case "chatMode":
               switchChatModes(entity, manager, args[1]);
               break;

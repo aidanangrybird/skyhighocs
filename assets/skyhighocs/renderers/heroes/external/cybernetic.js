@@ -213,7 +213,7 @@ function initTransceiveBeams(renderer, model, color) {
 
   transmitBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:transmit");
   var transmitShape = renderer.createResource("SHAPE", null);
-  transmitLine = transmitShape.bindLine({ "start": [0.0, 0.1875, 0.0], "end": [0.0, 0.1875, 0.0], "size": [0.5, 0.5] });
+  var transmitLine = transmitShape.bindLine({ "start": [0.0, 0.1875, 0.0], "end": [0.0, 0.1875, 0.0], "size": [0.5, 0.5] });
   var transmitBeam = renderer.createEffect("fiskheroes:lines").setRenderer(transmitBeamRenderer).setShape(transmitShape).setOffset(0.0, 0.0, 0.0);
   transmitBeam.mirror = false;
   transmitBeam.setScale(16.0);
@@ -222,7 +222,7 @@ function initTransceiveBeams(renderer, model, color) {
 
   receiveBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:receive");
   var receiveShape = renderer.createResource("SHAPE", null);
-  receiveLine = receiveShape.bindLine({ "start": [0.0, 300.375, 0.0], "end": [0.0, 300.375, 0.0], "size": [15.0, 15.0] });
+  var receiveLine = receiveShape.bindLine({ "start": [0.0, 300.375, 0.0], "end": [0.0, 300.375, 0.0], "size": [15.0, 15.0] });
   var receiveBeam = renderer.createEffect("fiskheroes:lines").setRenderer(receiveBeamRenderer).setShape(receiveShape).setOffset(0.0, 0.0, 0.0);
   receiveBeam.mirror = false;
   receiveBeam.setScale(16.0);
@@ -232,8 +232,8 @@ function initTransceiveBeams(renderer, model, color) {
   return {
     render: function (entity, renderLayer, isFirstPersonArm) {
       if (!isFirstPersonArm) {
-        var transmitTimer = entity.getInterpolatedData("skyhighocs:dyn/transmit_timer");
-        var receiveTimer = entity.getInterpolatedData("skyhighocs:dyn/receive_timer");
+        var transmitTimer = entity.getInterpolatedData("skyhighocs:dyn/transmit_beam_timer");
+        var receiveTimer = entity.getInterpolatedData("skyhighocs:dyn/receive_beam_timer");
         transmitLine.end.y = transmitLine.start.y+300*transmitTimer;
         receiveLine.end.y = receiveLine.start.y-300*receiveTimer;
         if (transmitTimer > 0) {

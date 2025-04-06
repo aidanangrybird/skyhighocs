@@ -23,58 +23,87 @@ function initModule(system) {
   };
   /**
   * Receives suits
-  * @param tx - Transmitter
-  * @param rx - Receiver
+  * @param module - module passthrough
+  * @param tx - Transmitter requried
+  * @param rx - Receiver requried
   * @param manager - Required
   **/
-  function receiveSuits(tx, rx, manager) {
+  function receiveSuits(module, tx, rx, manager) {
+    var nbt = rx.getWornHelmet().nbt();
+    if (!nbt.hasKey("suitDatastore")) {
+      var newSuitsList = manager.newTagList();
+      manager.setTagList(nbt, "suitDatastore", newSuitsList);
+    };
+    if (!nbt.hasKey("receiveBuffer")) {
+      var newBuffer = manager.newTagList();
+      manager.setTagList(nbt, "receiveBuffer", newBuffer);
+    };
+    var suitReceiveTime = 0;
+    var receivesBuffered = 0;
+    var transmitBuffer = tx.getWornHelmet().nbt().getStringList("transmitBuffer");
+    var receiveBuffer = nbt.getStringList("receiveBuffer");
+    var transmitBufferArray = system.getStringArray(transmitBuffer);
+    transmitBufferArray.forEach(entry => {
+      manager.appendString(receiveBuffer, entry);
+      var receiveTime = 0;
+      if (PackLoader.getSide() == "SERVER") {
+        receiveTime = system.clamp(Math.floor(Math.random() * 30), 10, 30)
+      };
+      suitReceiveTime = suitReceiveTime + receiveTime;
+      receivesBuffered = receivesBuffered + 1;
+    });
     var txName = system.getModelID(tx);
     var rxName = system.getModelID(rx);
-    if (!tx.getWornHelmet().nbt().hasKey("suitDatastore")) {
+    system.moduleMessage(module, rx, "<n>Receiving suits from <nh>" + txName + "<n>!");
+    system.moduleMessage(module, tx, "<n>Transmitting suits to " + rxName + "!");
+    manager.setShort(nbt, "receiveTime", suitReceiveTime);
+    system.moduleMessage(module, rx, "<n>Attempting to receive <nh>" + receivesBuffered + "<n> " + ((receivesBuffered == 1) ? "suit!" : "suits!"));
+    manager.setData(rx, "skyhighocs:dyn/receiving", true);
+  };
+  /**
+  * Receives suit
+  * @param module - module passthrough
+  * @param entity - Required
+  * @param manager - Required
+  * @param currentReceive - Current suit being received
+  **/
+  function receiveSuit(module, entity, manager, currentReceive) {
+    var nbt = entity.getWornHelmet().nbt();
+    if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
-      manager.setTagList(tx.getWornHelmet().nbt(), "suitDatastore", newSuitsList);
+      manager.setTagList(nbt, "suitDatastore", newSuitsList);
     };
-    if (!rx.getWornHelmet().nbt().hasKey("suitDatastore")) {
-      var newSuitsList = manager.newTagList();
-      manager.setTagList(rx.getWornHelmet().nbt(), "suitDatastore", newSuitsList);
+    var receiveBuffer = nbt.getStringList("receiveBuffer");
+    var suitDatastore = nbt.getStringList("suitDatastore");
+    var suitDatastoreArray = system.getStringArray(nbt.getStringList("suitDatastore"));
+    var currentSuit = receiveBuffer.getString(currentReceive);
+    system.moduleMessage(module, entity, "<n>Receiving suit \"<nh>" + currentSuit + "<n>\"!");
+    if (suitDatastoreArray.indexOf(currentSuit) == -1) {
+      suitDatastoreArray.push(currentSuit);
+      manager.appendString(suitDatastore, currentSuit);
+      system.moduleMessage(module, entity, "<s>Successfully received suit \"<sh>" + currentSuit + "<s>\" to " + system.getModelID(entity) + "!");
+    } else {
+      system.moduleMessage(module, entity, "<e>Failed to receive suit \"<eh>" + currentSuit + "<e>\"! Already exists in datastore!");
     };
-    var txSuitDatastoreArray = system.getStringArray(tx.getWornHelmet().nbt().getStringList("suitDatastore"));
-    var rxSuitDatastoreArray = system.getStringArray(rx.getWornHelmet().nbt().getStringList("suitDatastore"));
-    var suitsToReceive = tx.getData("skyhighocs:dyn/suit_data_buffer").split(",");
-    var suitsReceived = 0;
-    var rxSuitDatastore = rx.getWornHelmet().nbt().getStringList("suitDatastore");
-    suitsToReceive.forEach(entry => {
-      if ((entry < txSuitDatastoreArray.length) && (entry > -1)) {
-        var currentSuit = txSuitDatastoreArray[entry];
-        system.moduleMessage(this, rx, "<n>Receiving suit \"<nh>" + currentSuit + "<n>\" from <nh>" + txName + "<n>!");
-        system.moduleMessage(this, tx, "<n>Transmitting suit \"<nh>" + currentSuit + "<n>\" to " + rxName + "!");
-        if (rxSuitDatastoreArray.indexOf(currentSuit) == -1) {
-          rxSuitDatastoreArray.push(currentSuit);
-          manager.appendString(rxSuitDatastore, currentSuit);
-          system.moduleMessage(this, rx, "<s>Successfully received suit \"<sh>" + currentSuit + "<s>\" from " + txName + "!");
-          system.moduleMessage(this, tx, "<n>Successfully transmited suit \"<nh>" + currentSuit + "<n>\" to " + rxName + "!");
-          suitsReceived = suitsReceived + 1;
-        } else {
-          system.moduleMessage(this, rx, "<e>Failed to receive suit \"<eh>" + currentSuit + "<e>\" from " + txName + "!");
-          system.moduleMessage(this, tx, "<n>Failed to transmit suit \"<nh>" + currentSuit + "<n>\" to " + rxName + "!");
-        };
-      };
-    });
-    system.moduleMessage(this, rx, "<nh>" + suitsReceived + "<n> " + ((suitsReceived == 1) ? "suit received!" : "suits received!"));
   };
   /**
   * Transmits suits
+  * @param module - module passthrough
   * @param entity - Required
   * @param manager - Required
   * @param suitList - List of suit indexes seperated by commas
   **/
-  function transmitSuits(entity, manager, suitList) {
-    if (!entity.getWornHelmet().nbt().hasKey("suitDatastore")) {
+  function transmitSuits(module, entity, manager, suitList) {
+    var nbt = entity.getWornHelmet().nbt();
+    if (!nbt.hasKey("suitDatastore")) {
       var newSuits = manager.newTagList();
-      manager.setTagList(entity.getWornHelmet().nbt(), "suitDatastore", newSuits);
+      manager.setTagList(nbt, "suitDatastore", newSuits);
     };
-    var suitDatastoreArray = system.getStringArray(entity.getWornHelmet().nbt().getStringList("suitDatastore"));
-    var suitsToTransmit = [];
+    if (!nbt.hasKey("transmitBuffer")) {
+      var newBuffer = manager.newTagList();
+      manager.setTagList(nbt, "transmitBuffer", newBuffer);
+    };
+    var suitDatastoreArray = system.getStringArray(nbt.getStringList("suitDatastore"));
     if (suitList == "*") {
       for (var i = 0;i<suitDatastoreArray.length;i++) {
         suitsToTransmit.push(i);
@@ -82,26 +111,55 @@ function initModule(system) {
     } else {
       suitsToTransmit = suitList.split(",");
     };
-    var numSuitsTransmitted = 0;
-    var suitsTransmited = "-1";
+    var suitsToTransmit = [];
+    var suitTransmitBuffer = nbt.getStringList("transmitBuffer")
+    var suitTransmitBufferArray = system.getStringArray(nbt.getStringList("transmitBuffer"));
+    var suitTransmitTime = 0;
+    var transmitsBuffered = 0;
     suitsToTransmit.forEach(entry => {
-      system.moduleMessage(this, entity, "<n>Transmiting suit entry \"<nh>" + entry + "<n>\"!");
-      if ((entry < (suitDatastoreArray.length-1)) && (entry > -1)) {
-        var currentSuit = suitDatastoreArray[entry];
-        system.moduleMessage(this, entity, "<s>Successfully transmited suit \"<sh>" + currentSuit + "<s>\"!");
-        suitsTransmited = suitsTransmited + ("," + entry);
-        numSuitsTransmitted = numSuitsTransmitted + 1;
-      } else {
-        system.moduleMessage(this, entity, "<e>Failed to transmit suit entry \"<eh>" + entry + "<e>\"!");
+      if ((entry < (suitDatastoreArray.length)) && (entry > -1)) {
+        var currentSuit = dataDriveSuitsArray[entry];
+        if (suitTransmitBufferArray.indexOf(currentSuit) == -1) {
+          manager.appendString(suitTransmitBuffer, currentSuit);
+          suitTransmitBufferArray.push(currentSuit);
+          var transmitTime = 0;
+          if (PackLoader.getSide() == "SERVER") {
+            transmitTime = system.clamp(Math.floor(Math.random() * 30), 10, 30)
+          };
+          suitTransmitTime = suitTransmitTime + transmitTime;
+          transmitsBuffered = transmitsBuffered + 1;
+        };
       };
     });
-    manager.setData(entity, "skyhighocs:dyn/suit_data_buffer", suitsTransmited);
-    system.moduleMessage(this, entity, "<nh>" + numSuitsTransmitted + (numSuitsTransmitted == 1) ? "<n>suit transmited!" : "<n>suits transmited!");
+    manager.setTagList(nbt, "transmitBuffer", suitTransmitBuffer);
+    manager.setShort(nbt, "transmitTime", suitTransmitTime);
+    system.moduleMessage(module, entity, "<n>Attempting to transmit <nh>" + transmitsBuffered + "<n> " + ((transmitsBuffered == 1) ? "suit!" : "suits!"));
+    manager.setData(entity, "skyhighocs:dyn/transmitting", true);
+  };
+  /**
+  * Transmits suit
+  * @param module - module passthrough
+  * @param entity - Required
+  * @param manager - Required
+  * @param currentTransmission - Suit index
+  **/
+  function transmitSuit(module, entity, manager, currentTransmission) {
+    var nbt = entity.getWornHelmet().nbt();
+    if (!nbt.hasKey("suitDatastore")) {
+      var newSuitsList = manager.newTagList();
+      manager.setTagList(nbt, "suitDatastore", newSuitsList);
+    };
+    var suitDatastore = nbt.getStringList("suitDatastore");
+    var suitDatastoreArray = system.getStringArray(nbt.getStringList("suitDatastore"));
+    var currentSuit = suitDatastore.getString(currentTransmission);
+    system.moduleMessage(module, entity, "<n>Transmitting suit \"<nh>" + currentSuit + "<n>\"!");
+    if (suitDatastoreArray.indexOf(currentSuit) == -1) {
+      system.moduleMessage(module, entity, "<s>Successfully transmitted suit \"<sh>" + currentSuit + "<s>\" to other cybers in range!");
+    } else {
+      system.moduleMessage(module, entity, "<e>Failed to transmitted suit \"<eh>" + currentSuit + "<e>\"!");
+    };
   };
   return {
-    /*
-    Make similar functions to how I did download and upload for the suit data drive
-    */
     name: "communications",
     moduleMessageName: "Comms",
     type: 12,
@@ -194,7 +252,7 @@ function initModule(system) {
               system.moduleMessage(this, entity, "<n>No other cybers in range!")
             };
             break;
-          case "tx":
+          case "suits":
             var range = 32;
             var foundPlayers = [];
             var newRange = (range*1);
@@ -222,49 +280,11 @@ function initModule(system) {
                 var rxAntennaDeployed = (player.getData("skyhighocs:dyn/antenna_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
                 var rxSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
                 if (entity.pos().distanceTo(player.pos()) <= range) {
-                  receiveSuits(entity, player, manager);
+                  receiveSuits(this, entity, player, manager);
                 } else if (txAntennaDeployed && rxAntennaDeployed && (entity.pos().distanceTo(player.pos()) <= range*2)) {
-                  receiveSuits(entity, player, manager);
+                  receiveSuits(this, entity, player, manager);
                 } else if (txSatelliteDeployed && rxSatelliteDeployed && (entity.pos().distanceTo(player.pos()) <= range*4)) {
-                  receiveSuits(entity, player, manager);
-                };
-              });
-            } else {
-              system.moduleMessage(this, entity, "<n>No other cybers in range!")
-            };
-            break;
-          case "rx":
-            var range = 32;
-            var foundPlayers = [];
-            var newRange = (range*1);
-            var rxAntennaDeployed = (entity.getData("skyhighocs:dyn/antenna_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-            var rxSatelliteDeployed = (entity.getData("skyhighocs:dyn/satellite_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-            if (rxAntennaDeployed) {
-              newRange = (range*2);
-            };
-            if (rxSatelliteDeployed) {
-              newRange = (range*4);
-            };
-            var entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
-            entities.forEach(player => {
-              if (player.is("PLAYER") && (player.getUUID() != entity.getUUID())) {
-                if (system.hasCyberneticBody(player)) {
-                  foundPlayers.push(player);
-                };
-              };
-            });
-            if (foundPlayers.length > 0) {
-              //player = tx
-              //entity = rx
-              foundPlayers.forEach(player => {
-                var txAntennaDeployed = (player.getData("skyhighocs:dyn/antenna_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-                var txSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-                if (entity.pos().distanceTo(player.pos()) <= range) {
-                  receiveSuits(player, entity, manager);
-                } else if (rxAntennaDeployed && txAntennaDeployed && (entity.pos().distanceTo(player.pos()) <= range*2)) {
-                  receiveSuits(player, entity, manager);
-                } else if (rxSatelliteDeployed && txSatelliteDeployed && (entity.pos().distanceTo(player.pos()) <= range*4)) {
-                  receiveSuits(entity, player, manager);
+                  receiveSuits(this, entity, player, manager);
                 };
               });
             } else {
@@ -313,8 +333,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Communications commands:");
             system.moduleMessage(this, entity, "<n>!comms deploy <sat|ant|satRain> <nh>-<n> Deploys comms type");
             system.moduleMessage(this, entity, "<n>!comms retract <sat|ant|satRain> <nh>-<n> Retracts comms type");
-            system.moduleMessage(this, entity, "<n>!comms tx <suits> <nh>-<n> Transmits suits (comma seperated indexes) to other Cybers");
-            system.moduleMessage(this, entity, "<n>!comms rx <nh>-<n> Receives suits from other Cybers");
+            system.moduleMessage(this, entity, "<n>!comms suits <suits> <nh>-<n> Transmits suits (comma seperated indexes) to other Cybers");
             system.moduleMessage(this, entity, "<n>!comms pos <nh>-<n> Gets position of other Cybers");
             system.moduleMessage(this, entity, "<n>!comms stats <nh>-<n> Gets stats of other Cybers");
             system.moduleMessage(this, entity, "<n>!comms status <nh>-<n> Status of comms");
@@ -344,56 +363,54 @@ function initModule(system) {
     },
     tickHandler: function (entity, manager) {
       if (entity.getData("skyhighocs:dyn/satellite_timer") == 1) {
-        manager.setData(entity, "skyhighocs:dyn/transmitting", true);
-        manager.setData(entity, "skyhighocs:dyn/receiving", true);
+        manager.setData(entity, "skyhighocs:dyn/transmit_beam", true);
+        manager.setData(entity, "skyhighocs:dyn/receive_beam", true);
       };
       if (!entity.getData("skyhighocs:dyn/satellite")) {
-        manager.setData(entity, "skyhighocs:dyn/transmitting", false);
-        manager.setData(entity, "skyhighocs:dyn/receiving", false);
+        manager.setData(entity, "skyhighocs:dyn/transmit_beam", false);
+        manager.setData(entity, "skyhighocs:dyn/receive_beam", false);
       };
-      /* 
       var nbt = entity.getWornHelmet().nbt();
       if (entity.getData("skyhighocs:dyn/receive_timer") == 1) {
         manager.setData(entity, "skyhighocs:dyn/receiving", false);
         system.moduleMessage(this, entity, "<s>Finished receiving suits!");
-        manager.setString(nbt, "receiveBuffer", "");
+        manager.setTagList(nbt, "receiveBuffer", manager.newTagList());
         manager.setShort(nbt, "receiveTime", 0);
       };
-      var suitReceiveQueue = [];
-      if (nbt.getString("receiveBuffer") != null) {
-        suitReceiveQueue = nbt.getString("receiveBuffer").split(",");
+      var suitReceiveBuffer = manager.newTagList();
+      if (nbt.getStringList("receiveBuffer") != null) {
+        suitReceiveBuffer = nbt.getStringList("receiveBuffer");
       };
       var receiveTime = nbt.getShort("receiveTime");
       manager.incrementData(entity, "skyhighocs:dyn/receive_timer", receiveTime, 1, entity.getData("skyhighocs:dyn/receiving"));
       if (PackLoader.getSide() == "SERVER" && (entity.getData("skyhighocs:dyn/receive_timer") < 1) && (entity.getData("skyhighocs:dyn/receive_timer") > 0) && entity.getData("skyhighocs:dyn/receiving")) {
-        var suitReceiveTime = (receiveTime/suitReceiveQueue.length).toFixed(0);
+        var suitReceiveTime = (receiveTime/suitReceiveBuffer.tagCount()).toFixed(0);
         var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/receive_timer")*receiveTime);
         if (currentTime % suitReceiveTime == 0) {
-          var suitIndex = suitReceiveQueue[(currentTime/suitReceiveTime)-1];
-          receiveSuit(entity, manager, suitIndex);
+          var currentReceive = (currentTime/suitReceiveTime)-1;
+          receiveSuit(this, entity, manager, currentReceive);
         };
       };
       if (entity.getData("skyhighocs:dyn/transmit_timer") == 1) {
-        manager.setData(entity, "skyhighocs:dyn/transmiting", false);
-        system.moduleMessage(this, entity, "<s>Finished transmiting suits!");
-        manager.setString(nbt, "transmitBuffer", "");
+        manager.setData(entity, "skyhighocs:dyn/transmitting", false);
+        system.moduleMessage(this, entity, "<s>Finished transmitting suits!");
+        manager.setTagList(nbt, "transmitBuffer", manager.newTagList());
         manager.setShort(nbt, "transmitTime", 0);
       };
-      var suitTransmitQueue = [];
-      if (nbt.getString("transmitBuffer") != null) {
-        suitTransmitQueue = nbt.getString("transmitBuffer").split(",");
+      var suitTransmitBuffer = manager.newTagList();
+      if (nbt.getStringList("transmitBuffer") != null) {
+        suitTransmitBuffer = nbt.getStringList("transmitBuffer");
       };
       var transmitTime = nbt.getShort("transmitTime");
-      manager.incrementData(entity, "skyhighocs:dyn/transmit_timer", transmitTime, 1, entity.getData("skyhighocs:dyn/transmiting"));
-      if (PackLoader.getSide() == "SERVER" && (entity.getData("skyhighocs:dyn/transmit_timer") < 1) && (entity.getData("skyhighocs:dyn/transmit_timer") > 0) && entity.getData("skyhighocs:dyn/transmiting")) {
-        var suitTransmitTime = (transmitTime/suitTransmitQueue.length).toFixed(0);
+      manager.incrementData(entity, "skyhighocs:dyn/transmit_timer", transmitTime, 1, entity.getData("skyhighocs:dyn/transmitting"));
+      if (PackLoader.getSide() == "SERVER" && (entity.getData("skyhighocs:dyn/transmit_timer") < 1) && (entity.getData("skyhighocs:dyn/transmit_timer") > 0) && entity.getData("skyhighocs:dyn/transmitting")) {
+        var suitTransmitTime = (transmitTime/suitTransmitBuffer.tagCount()).toFixed(0);
         var currentTime = Math.ceil(entity.getData("skyhighocs:dyn/transmit_timer")*transmitTime);
         if (currentTime % suitTransmitTime == 0) {
-          var suitIndex = suitTransmitQueue[(currentTime/suitTransmitTime)-1];
-          transmitSuit(entity, manager, suitIndex);
+          var currentTransmit = (currentTime/suitTransmitTime)-1;
+          transmitSuit(this, entity, manager, currentTransmit);
         };
       };
-      */
     }
   };
 };
