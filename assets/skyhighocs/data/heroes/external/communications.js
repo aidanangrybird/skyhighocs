@@ -56,7 +56,7 @@ function initModule(system) {
     var rxName = system.getModelID(rx);
     system.moduleMessage(module, rx, "<n>Receiving suits from <nh>" + txName + "<n>!");
     system.moduleMessage(module, tx, "<n>Transmitting suits to " + rxName + "!");
-    manager.setShort(nbt, "skyhighocs:dyn/receive_duration", suitReceiveDuration);
+    manager.setDataWithNotify(tx, "skyhighocs:dyn/receive_duration", suitReceiveDuration);
     system.moduleMessage(module, rx, "<n>Attempting to receive <nh>" + receivesBuffered + "<n> " + ((receivesBuffered == 1) ? "suit!" : "suits!"));
     manager.setDataWithNotify(rx, "skyhighocs:dyn/receiving", true);
   };
@@ -381,7 +381,7 @@ function initModule(system) {
       if (nbt.getStringList("receiveBuffer") != null) {
         suitReceiveBuffer = nbt.getStringList("receiveBuffer");
       };
-      var receiveDuration = nbt.getData("skyhighocs:dyn/receive_duration");
+      var receiveDuration = entity.getData("skyhighocs:dyn/receive_duration");
       if (entity.getData("skyhighocs:dyn/receiving")) {
         var step = (1/receiveDuration)
         manager.setDataWithNotify(entity, "skyhighocs:dyn/receive_timer", entity.getData("skyhighocs:dyn/receive_timer")+step);
@@ -407,7 +407,7 @@ function initModule(system) {
       if (nbt.getStringList("transmitBuffer") != null) {
         suitTransmitBuffer = nbt.getStringList("transmitBuffer");
       };
-      var transmitDuration = nbt.getData("skyhighocs:dyn/transmit_duration");
+      var transmitDuration = entity.getData("skyhighocs:dyn/transmit_duration");
       if (entity.getData("skyhighocs:dyn/transmitting")) {
         var step = (1/transmitDuration)
         manager.setDataWithNotify(entity, "skyhighocs:dyn/transmit_timer", entity.getData("skyhighocs:dyn/transmit_timer")+step);
