@@ -1099,6 +1099,15 @@ function initSystem(moduleList, name, normalName, color, uuid) {
             case "enable":
               enableModule(entity, manager, args[1]);
               break;
+            case "bearing":
+              systemMessage(entity, "Calculated bearing: " + entity.getData("skyhighocs:dyn/bearing"));
+              systemMessage(entity, "Game bearing: " + entity.rotYaw());
+              break;
+            case "lookVector":
+              systemMessage(entity, "X: " + entity.getLookVector().x());
+              systemMessage(entity, "Y: " + entity.getLookVector().y());
+              systemMessage(entity, "Z: " + entity.getLookVector().z());
+              break;
             case "cv":
               entity.as("PLAYER").addChatMessage(entity.getDataOrDefault("skyhighocs:dyn/" + args[1], 0));
               break;
@@ -1178,6 +1187,9 @@ function initSystem(moduleList, name, normalName, color, uuid) {
         systemMessage(entity, message);
       };
     };
+    var rotation = entity.rotYaw()%360;
+    var bearing = ((Math.abs((rotation < 0) ? (rotation+360) : rotation)+180) % 360);
+    manager.setDataWithNotify(entity, "skyhighocs:dyn/bearing", bearing);
   };
   return {
     /**

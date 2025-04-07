@@ -52,6 +52,7 @@
     "powering_down_timer": { "type": "FLOAT_INTERP", "resetOnDeath": false, "resetWithoutSuit": false },
     "fight_or_flight": { "type": "BOOLEAN", "resetOnDeath": false, "resetWithoutSuit": false },
     "suit_data_buffer": { "type": "STRING", "resetOnDeath": false, "resetWithoutSuit": false },
+    "bearing": { "type": "DOUBLE", "resetWithoutSuit": true },
 
     "cannons_arms_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "cannons_arms": { "type": "BOOLEAN", "resetWithoutSuit": true },
@@ -134,8 +135,10 @@
     "receive_beam_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "receive_beam": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "transmit_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "transmit_duration": { "type": "INTEGER", "resetWithoutSuit": true },
     "transmitting": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "receive_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "receive_duration": { "type": "INTEGER", "resetWithoutSuit": true },
     "receiving": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "upload_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "upload_duration": { "type": "INTEGER", "resetWithoutSuit": true },
