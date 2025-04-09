@@ -10,12 +10,12 @@ function initModule(system) {
     powers: ["skyhighocs:external_arms"],
     helpMessage: "<n>!extarms <nh>-<n> ExtArms",
     disabledMessage: "<e>Module <eh>externalArms<e> is disabled!",
-    keyBinds: function (hero) {
-      hero.addKeyBind("TENTACLE_JAB", "Jab", 1);
-      hero.addKeyBind("TENTACLE_GRAB", "Grab", 3);
-      hero.addKeyBind("TENTACLE_STRIKE", "Strike", 4);
-      hero.addKeyBind("TENTACLES", "External Arms", 2);
-      hero.addKeyBind("EXTERNAL_ARMS", "External Arms", 2);
+    keyBinds: function (hero, color) {
+      hero.addKeyBind("TENTACLE_JAB", "\u00A7" + color + "Jab", 1);
+      hero.addKeyBind("TENTACLE_GRAB", "\u00A7" + color + "Grab", 3);
+      hero.addKeyBind("TENTACLE_STRIKE", "\u00A7" + color + "Strike", 4);
+      hero.addKeyBind("TENTACLES", "\u00A7" + color + "External Arms", 2);
+      hero.addKeyBind("EXTERNAL_ARMS", "\u00A7" + color + "External Arms", 2);
     },
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 3) {

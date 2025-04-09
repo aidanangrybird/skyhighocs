@@ -11,13 +11,13 @@ function initModule(system) {
     powers: ["skyhighocs:voice_synthesizer"],
     helpMessage: "<n>!vs <nh>-<n> Voice Synthesizer",
     disabledMessage: "<e>Module <eh>voiceSynthesizer<e> is disabled!",
-    keyBinds: function (hero) {
+    keyBinds: function (hero, color) {
       hero.addKeyBindFunc("MOUTH", (player, manager) => {
         system.moduleMessage(this, player, "<e>Mouth must be armed!");
         return false;
-      }, "Scream (Not armed)", 3);
-      hero.addKeyBind("SCREAM", "Scream", 3);
-      hero.addKeyBind("ENERGY_PROJECTION", "Scream", 3);
+      }, "\u00A7" + color + "Scream (Not armed)", 3);
+      hero.addKeyBind("SCREAM", "\u00A7" + color + "Scream", 3);
+      hero.addKeyBind("ENERGY_PROJECTION", "\u00A7" + color + "Scream", 3);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;

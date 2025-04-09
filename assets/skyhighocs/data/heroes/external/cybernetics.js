@@ -79,7 +79,7 @@ function formatModel(input) {
 function formatAlias(input) {
   input = input.toLowerCase();
   output = input.replace(aliasRegex, function(thing) {
-    return formatting[thing];
+    return "_";
   });
   return output;
 };
@@ -113,7 +113,7 @@ function getModelID(entity) {
 /**
  * Gets the Cyber name
  * @param {JSEntity} entity - Entity getting checked
- * @returns The Cyber ID
+ * @returns The Cyber alias
  **/
 function getAliasName(entity) {
   return entity.getWornHelmet().nbt().getString("cyberAliasName");
@@ -438,6 +438,8 @@ function initSystem(moduleList, name, normalName, color, uuid) {
   var cyberName = name;
   /** @var boundUUID - UUID */
   var boundUUID = uuid;
+  /** @var hudColor - UUID */
+  var hudColor = color;
   var hasError = false;
   var errors = [];
   logMessage("Attempting to initialize " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on cybernetic body " + cyberName + "!");
@@ -861,56 +863,58 @@ function initSystem(moduleList, name, normalName, color, uuid) {
    * @param {JSHero} hero - Required
    **/
   function addPowers(hero) {
+    var name = formatAlias(cyberName);
+    var hud = "skyhighocs:" + name + "_hud";
     if (powerArray.length == 0) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body");
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud);
     };
     if (powerArray.length == 1) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0]);
     };
     if (powerArray.length == 2) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1]);
     };
     if (powerArray.length == 3) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2]);
     };
     if (powerArray.length == 4) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3]);
     };
     if (powerArray.length == 5) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4]);
     };
     if (powerArray.length == 6) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5]);
     };
     if (powerArray.length == 7) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6]);
     };
     if (powerArray.length == 8) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7]);
     };
     if (powerArray.length == 9) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8]);
     };
     if (powerArray.length == 10) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9]);
     };
     if (powerArray.length == 11) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10]);
     };
     if (powerArray.length == 12) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11]);
     };
     if (powerArray.length == 13) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12]);
     };
     if (powerArray.length == 14) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13]);
     };
     if (powerArray.length == 15) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13], powerArray[14]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13], powerArray[14]);
     };
     if (powerArray.length >= 16) {
-      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13], powerArray[14], powerArray[15]);
+      hero.addPowers("skyhighocs:cybernetic_os", "skyhighocs:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13], powerArray[14], powerArray[15]);
     };
   };
   /**
@@ -918,10 +922,10 @@ function initSystem(moduleList, name, normalName, color, uuid) {
    * @param {JSHero} hero - Required
    **/
   function keyBinds(hero) {
-    hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 5);
+    hero.addKeyBind("SHAPE_SHIFT", "\u00A7" + hudColor + "Send message/Enter command", 5);
     modules.forEach(module => {
       if (module.hasOwnProperty("keyBinds")) {
-        module.keyBinds(hero);
+        module.keyBinds(hero, hudColor);
       };
     });
   };

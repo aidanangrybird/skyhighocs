@@ -1,0 +1,88 @@
+{
+  "name": "Green HUD",
+  "value": 1,
+  "modifiers": {
+  },
+  "hud": [
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_N.png",
+      "data": "(((entity.getData('skyhighocs:dyn/bearing') >= 0) && (entity.getData('skyhighocs:dyn/bearing') < 11.25)) || ((entity.getData('skyhighocs:dyn/bearing') > 348.75) && (entity.getData('skyhighocs:dyn/bearing') <= 360))) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_NNE.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 33.75) && (entity.getData('skyhighocs:dyn/bearing') > 11.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_NE.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 56.25) && (entity.getData('skyhighocs:dyn/bearing') > 33.75)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_ENE.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 78.75) && (entity.getData('skyhighocs:dyn/bearing') > 56.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_E.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 101.25) && (entity.getData('skyhighocs:dyn/bearing') > 78.75)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_ESE.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 123.75) && (entity.getData('skyhighocs:dyn/bearing') > 101.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_SE.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 146.25) && (entity.getData('skyhighocs:dyn/bearing') > 123.75)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_SSE.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 168.75) && (entity.getData('skyhighocs:dyn/bearing') > 146.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_S.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 191.25) && (entity.getData('skyhighocs:dyn/bearing') > 168.75)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_SSW.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 213.75) && (entity.getData('skyhighocs:dyn/bearing') > 191.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_SW.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 236.25) && (entity.getData('skyhighocs:dyn/bearing') > 213.75)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_WSW.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 258.75) && (entity.getData('skyhighocs:dyn/bearing') > 236.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_W.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 281.25) && (entity.getData('skyhighocs:dyn/bearing') > 258.75)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_WNW.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 303.75) && (entity.getData('skyhighocs:dyn/bearing') > 281.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_NW.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 326.25) && (entity.getData('skyhighocs:dyn/bearing') > 303.75)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_nebula_compass_NNW.png",
+      "data": "((entity.getData('skyhighocs:dyn/bearing') < 348.75) && (entity.getData('skyhighocs:dyn/bearing') > 326.25)) ? 1.0 : 0.0"
+    }
+  ]
+}

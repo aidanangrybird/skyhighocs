@@ -14,12 +14,12 @@ function initModule(system) {
     command: "cannons",
     helpMessage: "<n>!cannons <nh>-<n> Cannons",
     disabledMessage: "<e>Module <eh>cannons<e> is disabled!",
-    keyBinds: function (hero) {
+    keyBinds: function (hero, color) {
       hero.addKeyBindFunc("CANNONS", (player, manager) => {
         system.moduleMessage(this, player, "<e>At least one cannon set must be armed!");
-        return false;
-      }, "Cannons (None armed)", 4);
-      hero.addKeyBind("CHARGED_BEAM", "Cannons", 4);
+        return true;
+      }, "\u00A7" + color + "Cannons (None armed)", 4);
+      hero.addKeyBind("CHARGED_BEAM", "\u00A7" + color + "Cannons", 4);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;

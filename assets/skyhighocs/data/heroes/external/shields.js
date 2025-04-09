@@ -12,12 +12,12 @@ function initModule(system) {
     command: "shields",
     helpMessage: "<n>!shields <nh>-<n> Shields",
     disabledMessage: "<e>Module <eh>shields<e> is disabled!",
-    keyBinds: function (hero) {
+    keyBinds: function (hero, color) {
       hero.addKeyBindFunc("SHIELDS", (player, manager) => {
         system.moduleMessage(this, player, "<e>At least one shield must be armed!");
-        return false;
-      }, "Shields (None armed)", 1);
-      hero.addKeyBind("SHIELD", "Shields", 1);
+        return true;
+      }, "\u00A7" + color + "Shields (None armed)", 1);
+      hero.addKeyBind("SHIELD", "\u00A7" + color + "Shields", 1);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
