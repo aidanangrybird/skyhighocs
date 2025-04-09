@@ -382,13 +382,13 @@ function initEffects(renderer) {
   metal_heat.includeEffects(head_model, head_hair_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model);
   renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
     return 0.999999;
-  }).setCondition(entity => ((entity.isWearingFullSuit() && entity.getUUID() == getID()) || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));
+  }).setCondition(entity => ((entity.isWearingFullSuit() && entity.getUUID() == getBoundUUID(entity)) || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));
 
   var nv = renderer.bindProperty("fiskheroes:night_vision");
   nv.fogStrength = 0.0;
   nv.firstPersonOnly = false;
   nv.factor = 1.0;
-  nv.setCondition(entity => (entity.isWearingFullSuit() && entity.getUUID() == getID()));
+  nv.setCondition(entity => (entity.isWearingFullSuit() && entity.getUUID() == getBoundUUID(entity)));
 };
 
 function initAnimations(renderer) {
@@ -425,7 +425,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
     right_leg_model.render();
   };
   
-  if (entity.isWearingFullSuit() && (entity.getUUID() == getID()) && (entity.getInterpolatedData("skyhighocs:dyn/thermoptic_camouflage_timer") < 1)) {
+  if (entity.isWearingFullSuit() && (entity.getUUID() == getBoundUUID(entity)) && (entity.getInterpolatedData("skyhighocs:dyn/thermoptic_camouflage_timer") < 1)) {
     head_model.render();
     head_hair_model.render();
     body_model.render();
@@ -463,8 +463,8 @@ function render(entity, renderLayer, isFirstPersonArm) {
     metal_heat.render();
   };
 };
-function getID() {
-  return "";
+function getBoundUUID(entity) {
+  return entity.getWornHelmet().nbt().getString("boundUUID");
 };
 function getColor() {
   return "";

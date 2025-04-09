@@ -37,10 +37,6 @@ function initEffects(renderer) {
   parent.initEffects(renderer);
 };
 
-function getID() {
-  return "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
-};
-
 function getColor() {
   return 0xFF8900;
 }
