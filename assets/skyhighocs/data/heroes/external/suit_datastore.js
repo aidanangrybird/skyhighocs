@@ -331,7 +331,7 @@ function initModule(system) {
         var step = (1/downloadDuration)
         manager.setDataWithNotify(entity, "skyhighocs:dyn/download_timer", entity.getData("skyhighocs:dyn/download_timer")+step);
       };
-      if (!entity.getData("skyhighocs:dyn/downloading") && entity.getData("skyhighocs:dyn/upload_timer") >= 1) {
+      if (!entity.getData("skyhighocs:dyn/downloading") && entity.getData("skyhighocs:dyn/download_timer") >= 1) {
         manager.setDataWithNotify(entity, "skyhighocs:dyn/download_timer", 0);
       };
       if ((entity.getData("skyhighocs:dyn/download_timer") < 1) && (entity.getData("skyhighocs:dyn/download_timer") > 0) && entity.getData("skyhighocs:dyn/downloading")) {

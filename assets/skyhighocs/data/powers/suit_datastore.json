@@ -2,17 +2,5 @@
   "name": "Suit Data Storage",
   "value": 1,
   "modifiers": {
-  },
-  "hud": [
-    {
-      "type": "CHARGE",
-      "texture": "fiskheroes:textures/gui/bars/cryo_charge.png",
-      "data": "skyhighocs:dyn/upload_timer"
-    },
-    {
-      "type": "CHARGE",
-      "texture": "fiskheroes:textures/gui/bars/cryo_charge.png",
-      "data": "skyhighocs:dyn/download_timer"
-    }
-  ]
+  }
 }

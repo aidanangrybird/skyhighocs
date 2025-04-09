@@ -415,7 +415,7 @@ function initModule(system) {
         var step = (1/receiveDuration)
         manager.setDataWithNotify(entity, "skyhighocs:dyn/receive_timer", entity.getData("skyhighocs:dyn/receive_timer")+step);
       };
-      if (!entity.getData("skyhighocs:dyn/receiving") && entity.getData("skyhighocs:dyn/upload_timer") >= 1) {
+      if (!entity.getData("skyhighocs:dyn/receiving") && entity.getData("skyhighocs:dyn/receive_timer") >= 1) {
         manager.setDataWithNotify(entity, "skyhighocs:dyn/receive_timer", 0);
       };
       if (PackLoader.getSide() == "SERVER" && (entity.getData("skyhighocs:dyn/receive_timer") < 1) && (entity.getData("skyhighocs:dyn/receive_timer") > 0) && entity.getData("skyhighocs:dyn/receiving")) {
@@ -441,7 +441,7 @@ function initModule(system) {
         var step = (1/transmitDuration)
         manager.setDataWithNotify(entity, "skyhighocs:dyn/transmit_timer", entity.getData("skyhighocs:dyn/transmit_timer")+step);
       };
-      if (!entity.getData("skyhighocs:dyn/transmitting") && entity.getData("skyhighocs:dyn/upload_timer") >= 1) {
+      if (!entity.getData("skyhighocs:dyn/transmitting") && entity.getData("skyhighocs:dyn/transmit_timer") >= 1) {
         manager.setDataWithNotify(entity, "skyhighocs:dyn/transmit_timer", 0);
       };
       if (PackLoader.getSide() == "SERVER" && (entity.getData("skyhighocs:dyn/transmit_timer") < 1) && (entity.getData("skyhighocs:dyn/transmit_timer") > 0) && entity.getData("skyhighocs:dyn/transmitting")) {

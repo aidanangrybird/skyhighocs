@@ -83,6 +83,26 @@
       "type": "CHARGE",
       "texture": "skyhighocs:textures/gui/bars/cyber_asteroid_compass_NNW.png",
       "data": "((entity.getData('skyhighocs:dyn/bearing') < 348.75) && (entity.getData('skyhighocs:dyn/bearing') > 326.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_asteroid_downloading.png",
+      "data": "entity.getInterpolatedData('skyhighocs:dyn/download_timer')"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_asteroid_uploading.png",
+      "data": "entity.getInterpolatedData('skyhighocs:dyn/upload_timer')"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_asteroid_transmitting.png",
+      "data": "entity.getInterpolatedData('skyhighocs:dyn/transmit_timer')"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighocs:textures/gui/bars/cyber_asteroid_receiving.png",
+      "data": "entity.getInterpolatedData('skyhighocs:dyn/receive_timer')"
     }
   ]
 }
