@@ -42,5 +42,17 @@
       },
       "isToggle": true
     }
-  }
+  },
+  "hud": [
+    {
+      "type": "CHARGE",
+      "texture": "fiskheroes:textures/gui/bars/cryo_charge.png",
+      "data": "skyhighocs:dyn/transmit_timer"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "fiskheroes:textures/gui/bars/cryo_charge.png",
+      "data": "skyhighocs:dyn/receive_timer"
+    }
+  ]
 }

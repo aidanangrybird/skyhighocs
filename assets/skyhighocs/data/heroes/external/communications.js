@@ -10,7 +10,20 @@ function initModule(system) {
   **/
   function getPos(tx, rx) {
     var otherName = system.getModelID(tx);
-    system.moduleMessage(this, rx, "<nh>" + otherName + "<n> | <nh>" + tx.posX().toFixed(0) + "<n> | <nh>" + tx.posY().toFixed(0) + "<n> | <nh>" + tx.posZ().toFixed(0) + "<n> | <nh>" + tx.world().getLocation(tx.pos()).biome());
+    var positionMessage = "<nh>" + otherName + "<n> | (<nh>" + tx.posX().toFixed(0) + "<n>, <nh>" + tx.posY().toFixed(0) + "<n>, <nh>" + tx.posZ().toFixed(0) + "<n>)";
+    if (system.hasOwnProperty("distance")) {
+      var distance = system.distance(rx.pos(), tx.pos());
+      positionMessage = positionMessage + "<n> | <nh>" + distance;
+    };
+    if (system.hasOwnProperty("direction")) {
+      var direction = system.direction(rx.pos(), tx.pos());
+      positionMessage = positionMessage + "<n> | <nh>" + direction;
+    };
+    if (system.hasOwnProperty("elevation")) {
+      var elevation = system.elevation(rx.pos(), tx.pos());
+      positionMessage = positionMessage + "<n> | <nh>" + ((elevation == 0) ? "-" : ((elevation > 0) ? "+" + elevation : elevation));
+    };
+    system.moduleMessage(this, rx, positionMessage);
   };
   /**
   * Gets status of other cybers
@@ -170,7 +183,7 @@ function initModule(system) {
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 4) {
         switch (arguments[1]) {
-          case "pos":
+          case "cyberPos":
             var range = 32;
             var foundPlayers = [];
             var newRange = (range*1);
@@ -182,7 +195,10 @@ function initModule(system) {
             if (txSatelliteDeployed) {
               newRange = (range*4);
             };
-            var entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
+            var entities = [];
+            if (PackLoader.getSide() == "SERVER") {
+              entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
+            };
             entities.forEach(player => {
               if (player.is("PLAYER") && (player.getUUID() != entity.getUUID())) {
                 if (system.hasCyberneticBody(player)) {
@@ -192,8 +208,18 @@ function initModule(system) {
             });
             if (foundPlayers.length > 0) {
               var name = system.getModelID(entity);
-              system.moduleMessage(this, entity, "<nh>Name<n> | <nh>posX<n> | <nh>posY<n> | <nh>posZ<n> | <nh>Biome");
-              system.moduleMessage(this, entity, "<nh>" + name + "<n> | <nh>" + entity.posX().toFixed(0) + "<n> | <nh>" + entity.posY().toFixed(0) + "<n> | <nh>" + entity.posZ().toFixed(0) + "<n> | <nh>" + entity.world().getLocation(entity.pos()).biome());
+              system.moduleMessage(this, entity, "<nh>Name<n> | <nh>posX<n> | <nh>posY<n> | <nh>posZ<n> | <nh>Distance<n> | <nh>Direction<n> | <nh>Elevation");
+              var positionMessage = "<nh>" + name + "<n> | (<nh>" + entity.posX().toFixed(0) + "<n>, <nh>" + entity.posY().toFixed(0) + "<n>, <nh>" + entity.posZ().toFixed(0) + "<n>)";
+              if (system.hasOwnProperty("distance")) {
+                positionMessage = positionMessage + "<n> | <nh>0";
+              };
+              if (system.hasOwnProperty("direction")) {
+                positionMessage = positionMessage + "<n> | <nh>-";
+              };
+              if (system.hasOwnProperty("elevation")) {
+                positionMessage = positionMessage + "<n> | <nh>-";
+              };
+              system.moduleMessage(this, entity, positionMessage);
               //entity = tx
               //player = rx
               foundPlayers.forEach(player => {
@@ -211,7 +237,7 @@ function initModule(system) {
               system.moduleMessage(this, entity, "<n>No other cybers in range!")
             };
             break;
-          case "stats":
+          case "cyberStatus":
             var range = 32;
             var foundPlayers = [];
             var newRange = (range*1);
@@ -223,7 +249,10 @@ function initModule(system) {
             if (txSatelliteDeployed) {
               newRange = (range*4);
             };
-            var entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
+            var entities = [];
+            if (PackLoader.getSide() == "SERVER") {
+              entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
+            };
             entities.forEach(player => {
               if (player.is("PLAYER") && (player.getUUID() != entity.getUUID())) {
                 if (system.hasCyberneticBody(player)) {
@@ -334,8 +363,8 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!comms deploy <sat|ant|satRain> <nh>-<n> Deploys comms type");
             system.moduleMessage(this, entity, "<n>!comms retract <sat|ant|satRain> <nh>-<n> Retracts comms type");
             system.moduleMessage(this, entity, "<n>!comms suits <suits> <nh>-<n> Transmits suits (comma seperated indexes) to other Cybers");
-            system.moduleMessage(this, entity, "<n>!comms pos <nh>-<n> Gets position of other Cybers");
-            system.moduleMessage(this, entity, "<n>!comms stats <nh>-<n> Gets stats of other Cybers");
+            system.moduleMessage(this, entity, "<n>!comms cyberPos <nh>-<n> Gets position of other Cybers");
+            system.moduleMessage(this, entity, "<n>!comms cyberStatus <nh>-<n> Gets stats of other Cybers");
             system.moduleMessage(this, entity, "<n>!comms status <nh>-<n> Status of comms");
             system.moduleMessage(this, entity, "<n>!comms help <nh>-<n> Shows communications commands");
             break;

@@ -28,7 +28,10 @@ function initModule(system) {
       if (txSatelliteDeployed) {
         newRange = (range*4);
       };
-      var entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
+      var entities = [];
+      if (PackLoader.getSide() == "SERVER") {
+        entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
+      };
       entities.forEach(player => {
         if (player.is("PLAYER") && (player.getUUID() != entity.getUUID())) {
           if (system.hasCyberneticBody(player)) {
