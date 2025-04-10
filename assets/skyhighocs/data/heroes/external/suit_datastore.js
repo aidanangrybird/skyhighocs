@@ -215,9 +215,9 @@ function initModule(system) {
       if ((suitDriveArray.indexOf(currentSuit) == -1) && (suitDriveArray.length < 9)) {
         suitDriveArray.push(currentSuit);
         manager.appendString(suitDrive.getStringList("Suits"), currentSuit);
-        system.moduleMessage(module, entity, "<s>Successfully uploading suit \"<sh>" + currentSuit + "<s>\" to " + suitDriveName(entity) + "<s>!");
+        system.moduleMessage(module, entity, "<s>Successfully uploaded suit \"<sh>" + currentSuit + "<s>\" to " + suitDriveName(entity) + "<s>!");
       } else {
-        system.moduleMessage(module, entity, "<e>Failed to uploading suit \"<eh>" + currentSuit + "<e>\"! Already exists in datastore!");
+        system.moduleMessage(module, entity, "<e>Failed to uploaded suit \"<eh>" + currentSuit + "<e>\"! Already exists " + suitDriveName(entity) + "<e>!");
       };
     } else {
       system.moduleMessage(module, entity, "<e>Suit drive not plugged in!");
