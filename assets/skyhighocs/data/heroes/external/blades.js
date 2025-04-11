@@ -9,8 +9,8 @@ function initModule(system) {
     moduleMessageName: "Blades",
     type: 14,
     powers: ["skyhighocs:blades"],
-    command: "blades",
-    helpMessage: "<n>!blades <nh>-<n> Blades",
+    command: "blade",
+    helpMessage: "<n>!blade <nh>-<n> Blades",
     disabledMessage: "<e>Module <eh>bladeSystem<e> is disabled!",
     keyBinds: function (hero, color) {
       hero.addKeyBindFunc("BLADES", (player, manager) => {
@@ -142,14 +142,14 @@ function initModule(system) {
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Blades commands:");
-            system.moduleMessage(this, entity, "<n>!blades arm <left|right|*> <nh>-<n> Arms blades");
-            system.moduleMessage(this, entity, "<n>!blades disarm <left|right|*> <nh>-<n> Disarms blades");
-            system.moduleMessage(this, entity, "<n>!blades deploy <left|right|*> <nh>-<n> Deploys blades");
-            system.moduleMessage(this, entity, "<n>!blades retract <left|right|*> <nh>-<n> Retracts disarmed blades");
-            system.moduleMessage(this, entity, "<n>!blades stealthOn <left|right|*> <nh>-<n> Enables stealth mode for blades");
-            system.moduleMessage(this, entity, "<n>!blades stealthOff <left|right|*> <nh>-<n> Disables stealth mode for blades");
-            system.moduleMessage(this, entity, "<n>!blades status <nh>-<n> Shows status of blades");
-            system.moduleMessage(this, entity, "<n>!blades help <nh>-<n> Shows blades commands");
+            system.moduleMessage(this, entity, "<n>!blade arm <left|right|*> <nh>-<n> Arms blades");
+            system.moduleMessage(this, entity, "<n>!blade disarm <left|right|*> <nh>-<n> Disarms blades");
+            system.moduleMessage(this, entity, "<n>!blade deploy <left|right|*> <nh>-<n> Deploys blades");
+            system.moduleMessage(this, entity, "<n>!blade retract <left|right|*> <nh>-<n> Retracts disarmed blades");
+            system.moduleMessage(this, entity, "<n>!blade stealthOn <left|right|*> <nh>-<n> Enables stealth mode for blades");
+            system.moduleMessage(this, entity, "<n>!blade stealthOff <left|right|*> <nh>-<n> Disables stealth mode for blades");
+            system.moduleMessage(this, entity, "<n>!blade status <nh>-<n> Shows status of blades");
+            system.moduleMessage(this, entity, "<n>!blade help <nh>-<n> Shows blades commands");
             break;
           case "status":
             system.moduleMessage(this, entity, "<n>Blades status:");
@@ -159,11 +159,11 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Right stealth mode: <nh>" + (nbt.getBoolean("bladesRightStealth") ? "ENGAGED" : "DISENGAGED"));
             break;
           default:
-            system.moduleMessage(this, entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blades help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blade help<e> for a list of commands!");
             break;
         };
       } else {
-        system.moduleMessage(this, entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blades help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blade help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {

@@ -9,8 +9,8 @@ function initModule(system) {
     moduleMessageName: "Shields",
     type: 14,
     powers: ["skyhighocs:shields"],
-    command: "shields",
-    helpMessage: "<n>!shields <nh>-<n> Shields",
+    command: "shield",
+    helpMessage: "<n>!shield <nh>-<n> Shields",
     disabledMessage: "<e>Module <eh>shields<e> is disabled!",
     keyBinds: function (hero, color) {
       hero.addKeyBindFunc("SHIELDS", (player, manager) => {
@@ -116,12 +116,12 @@ function initModule(system) {
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Shields commands:");
-            system.moduleMessage(this, entity, "<n>!shields arm <left|right|*> <nh>-<n> Arms shields");
-            system.moduleMessage(this, entity, "<n>!shields disarm <left|right|*> <nh>-<n> Disarms shields");
-            system.moduleMessage(this, entity, "<n>!shields deploy <left|right|*> <nh>-<n> Deploys shields");
-            system.moduleMessage(this, entity, "<n>!shields retract <left|right|*> <nh>-<n> Retracts disarmed shields");
-            system.moduleMessage(this, entity, "<n>!shields status <nh>-<n> Shows status of shields");
-            system.moduleMessage(this, entity, "<n>!shields help <nh>-<n> Shows shields commands");
+            system.moduleMessage(this, entity, "<n>!shield arm <left|right|*> <nh>-<n> Arms shields");
+            system.moduleMessage(this, entity, "<n>!shield disarm <left|right|*> <nh>-<n> Disarms shields");
+            system.moduleMessage(this, entity, "<n>!shield deploy <left|right|*> <nh>-<n> Deploys shields");
+            system.moduleMessage(this, entity, "<n>!shield retract <left|right|*> <nh>-<n> Retracts disarmed shields");
+            system.moduleMessage(this, entity, "<n>!shield status <nh>-<n> Shows status of shields");
+            system.moduleMessage(this, entity, "<n>!shield help <nh>-<n> Shows shields commands");
             break;
           case "status":
             system.moduleMessage(this, entity, "<n>Shields status:");
@@ -129,11 +129,11 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Right: <nh>" + (nbt.getBoolean("shieldsRight") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighocs:dyn/shield_right_arm_deploy_timer") > 0) || (entity.getData("skyhighocs:dyn/shield_right_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             break;
           default:
-            system.moduleMessage(this, entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shields help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shield help<e> for a list of commands!");
             break;
         };
       } else {
-        system.moduleMessage(this, entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shields help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shield help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {

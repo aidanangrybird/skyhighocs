@@ -4,9 +4,8 @@
 {satellite_dish} = curve(clamp({data_3}, 0, 1))
 {rain_mode} = curve(clamp({data_4}, 0, 1))
 {antenna} = curve(clamp({data_5}, 0, 1))(1-{rain_mode}{satellite_dish})
-{cannon_left_flush} = curve(clamp({data_6}, 0, 1))
-{cannon_right_flush} = curve(clamp({data_7}, 0, 1))
-{mouth_flush} = curve(clamp({data_8}, 0, 1))
+{cannon_flush} = curve(clamp({data_6}, 0, 1))
+{mouth_flush} = curve(clamp({data_7}, 0, 1))
 
 ;eyes
 ;left cannon
@@ -17,7 +16,7 @@
 {head_left_eye_lower_cover_posZ} += 0.03{part0_cannon_left}
 {head_left_eye_upper_cover_posY} -= 1{part1_cannon_left}
 {head_left_eye_lower_cover_posY} += 1{part1_cannon_left}
-{head_left_eye_posZ} -= 2.9{part2_cannon_left} - 2.8{part2_cannon_left}{cannon_left_flush}
+{head_left_eye_posZ} -= 2.9{part2_cannon_left} - 2.8{part2_cannon_left}{cannon_flush}
 ;right cannon
 {part0_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.0, 0.15, 0.0), 1)
 {part1_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.2, 0.2, 0.0), 1)
@@ -26,7 +25,7 @@
 {head_right_eye_lower_cover_posZ} += 0.03{part0_cannon_right}
 {head_right_eye_upper_cover_posY} -= 1{part1_cannon_right}
 {head_right_eye_lower_cover_posY} += 1{part1_cannon_right}
-{head_right_eye_posZ} -= 2.9{part2_cannon_right} - 2.8{part2_cannon_right}{cannon_right_flush}
+{head_right_eye_posZ} -= 2.9{part2_cannon_right} - 2.8{part2_cannon_right}{cannon_flush}
 
 ;mouth
 {part0_mouth} = if({mouth} != 1, animate2({mouth}, 1.0, 0.0, 0.15, 0.0), 1)

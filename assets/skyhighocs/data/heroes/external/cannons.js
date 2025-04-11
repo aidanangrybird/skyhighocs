@@ -11,8 +11,8 @@ function initModule(system) {
     moduleMessageName: "Cannons",
     type: 13,
     powers: ["skyhighocs:cannons"],
-    command: "cannons",
-    helpMessage: "<n>!cannons <nh>-<n> Cannons",
+    command: "cannon",
+    helpMessage: "<n>!cannon <nh>-<n> Cannons",
     disabledMessage: "<e>Module <eh>cannons<e> is disabled!",
     keyBinds: function (hero, color) {
       hero.addKeyBindFunc("CANNONS", (player, manager) => {
@@ -132,21 +132,57 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<s>Deployed <sh>right body<s> cannon!");
                 break;
               case "arms":
-                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_deployed", true);
-                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_bottom_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_front_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_back_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_bottom_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_front_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_back_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>arm<s> cannons!");
                 break;
               case "leftArm":
-                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_bottom_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_front_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_back_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>left arm<s> cannon!");
                 break;
+              case "leftArmBottom":
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_bottom_deployed", true);
+                system.moduleMessage(this, entity, "<s>Deployed <sh>left arm bottom<s> cannon!");
+                break;
+              case "leftArmFront":
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_front_deployed", true);
+                system.moduleMessage(this, entity, "<s>Deployed <sh>left arm front<s> cannon!");
+                break;
+              case "leftArmBack":
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_back_deployed", true);
+                system.moduleMessage(this, entity, "<s>Deployed <sh>left arm back<s> cannon!");
+                break;
               case "rightArm":
-                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_bottom_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_front_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_back_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>right arm<s> cannon!");
                 break;
+              case "rightArmBottom":
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_bottom_deployed", true);
+                system.moduleMessage(this, entity, "<s>Deployed <sh>right arm bottom<s> cannon!");
+                break;
+              case "rightArmFront":
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_front_deployed", true);
+                system.moduleMessage(this, entity, "<s>Deployed <sh>right arm front<s> cannon!");
+                break;
+              case "rightArmBack":
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_back_deployed", true);
+                system.moduleMessage(this, entity, "<s>Deployed <sh>right arm back<s> cannon!");
+                break;
               case "*":
-                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_deployed", true);
-                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_bottom_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_front_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_back_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_bottom_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_front_deployed", true);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_back_deployed", true);
                 manager.setData(entity, "skyhighocs:dyn/cannon_eye_left_deployed", true);
                 manager.setData(entity, "skyhighocs:dyn/cannon_eye_right_deployed", true);
                 manager.setData(entity, "skyhighocs:dyn/cannon_body_left_deployed", true);
@@ -189,16 +225,48 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<s>Retracted <sh>arm<s> cannons!");
                 break;
               case "leftArm":
-                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_bottom_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_front_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_back_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>left arm<s> cannon!");
                 break;
+              case "leftArmBottom":
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_bottom_deployed", false);
+                system.moduleMessage(this, entity, "<s>Retracted <sh>left arm bottom<s> cannon!");
+                break;
+              case "leftArmFront":
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_front_deployed", false);
+                system.moduleMessage(this, entity, "<s>Retracted <sh>left arm front<s> cannon!");
+                break;
+              case "leftArmBack":
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_back_deployed", false);
+                system.moduleMessage(this, entity, "<s>Retracted <sh>left arm back<s> cannon!");
+                break;
               case "rightArm":
-                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_bottom_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_front_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_back_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>right arm<s> cannon!");
                 break;
+              case "rightArmBottom":
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_bottom_deployed", false);
+                system.moduleMessage(this, entity, "<s>Retracted <sh>right arm bottom<s> cannon!");
+                break;
+              case "rightArmFront":
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_front_deployed", false);
+                system.moduleMessage(this, entity, "<s>Retracted <sh>right arm front<s> cannon!");
+                break;
+              case "rightArmBack":
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_back_deployed", false);
+                system.moduleMessage(this, entity, "<s>Retracted <sh>right arm back<s> cannon!");
+                break;
               case "*":
-                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_deployed", false);
-                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_bottom_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_front_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_back_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_bottom_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_front_deployed", false);
+                manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_back_deployed", false);
                 manager.setData(entity, "skyhighocs:dyn/cannon_eye_left_deployed", false);
                 manager.setData(entity, "skyhighocs:dyn/cannon_eye_right_deployed", false);
                 manager.setData(entity, "skyhighocs:dyn/cannon_body_left_deployed", false);
@@ -209,11 +277,11 @@ function initModule(system) {
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Cannons commands:");
-            system.moduleMessage(this, entity, "<n>!cannons arm <eyes|body|arms|*> <nh>-<n> Arms set of cannons");
-            system.moduleMessage(this, entity, "<n>!cannons disarm <eyes|body|arms|*> <nh>-<n> Disarm set of cannons");
-            system.moduleMessage(this, entity, "<n>!cannons deploy <eyes|body|arms|*> <nh>-<n> Deploys cannons");
-            system.moduleMessage(this, entity, "<n>!cannons retract <eyes|body|arms|*> <nh>-<n> Retracts cannons");
-            system.moduleMessage(this, entity, "<n>!cannons help <nh>-<n> Shows cannons commands");
+            system.moduleMessage(this, entity, "<n>!cannon arm <eyes|body|arms|*> <nh>-<n> Arms set of cannons");
+            system.moduleMessage(this, entity, "<n>!cannon disarm <eyes|body|arms|*> <nh>-<n> Disarm set of cannons");
+            system.moduleMessage(this, entity, "<n>!cannon deploy <eyes|body|arms|*> <nh>-<n> Deploys cannons");
+            system.moduleMessage(this, entity, "<n>!cannon retract <eyes|body|arms|*> <nh>-<n> Retracts cannons");
+            system.moduleMessage(this, entity, "<n>!cannon help <nh>-<n> Shows cannons commands");
             break;
           case "status":
             var eyeSet = (entity.getData("skyhighocs:dyn/cannons_eyes_timer") > 0);
@@ -227,15 +295,19 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Right Eye: <nh>" + ((entity.getData("skyhighocs:dyn/cannon_eye_right_deploy_timer") > 0) || eyeSet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Left Body: <nh>" + ((entity.getData("skyhighocs:dyn/cannon_body_left_deploy_timer") > 0) || bodySet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Right Body: <nh>" + ((entity.getData("skyhighocs:dyn/cannon_body_right_deploy_timer") > 0) || bodySet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Left Arm: <nh>" + ((entity.getData("skyhighocs:dyn/cannon_left_arm_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Right Arm: <nh>" + ((entity.getData("skyhighocs:dyn/cannon_right_arm_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Left Arm bottom: <nh>" + ((entity.getData("skyhighocs:dyn/cannon_left_arm_bottom_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Left Arm front: <nh>" + ((entity.getData("skyhighocs:dyn/cannon_left_arm_front_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Left Arm back: <nh>" + ((entity.getData("skyhighocs:dyn/cannon_left_arm_back_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Right Arm bottom: <nh>" + ((entity.getData("skyhighocs:dyn/cannon_right_arm_bottom_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Right Arm front: <nh>" + ((entity.getData("skyhighocs:dyn/cannon_right_arm_front_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Right Arm back: <nh>" + ((entity.getData("skyhighocs:dyn/cannon_right_arm_back_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
             break;
           default:
-            system.moduleMessage(this, entity, "<e>Unknown <eh>cannons<e> command! Try <eh>!cannons help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>cannons<e> command! Try <eh>!cannon help<e> for a list of commands!");
             break;
         };
       } else {
-        system.moduleMessage(this, entity, "<e>Unknown <eh>cannons<e> command! Try <eh>!cannons help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>cannons<e> command! Try <eh>!cannon help<e> for a list of commands!");
       };
     },
     whenDisabled: function (entity, manager) {
@@ -246,8 +318,12 @@ function initModule(system) {
       manager.setData(entity, "skyhighocs:dyn/cannons_arms", false);
       manager.setData(entity, "skyhighocs:dyn/cannons_body", false);
       manager.setData(entity, "skyhighocs:dyn/cannons_eyes", false);
-      manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_deployed", false);
-      manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_deployed", false);
+      manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_bottom_deployed", false);
+      manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_front_deployed", false);
+      manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_back_deployed", false);
+      manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_bottom_deployed", false);
+      manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_front_deployed", false);
+      manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_back_deployed", false);
       manager.setData(entity, "skyhighocs:dyn/cannon_eye_left_deployed", false);
       manager.setData(entity, "skyhighocs:dyn/cannon_eye_right_deployed", false);
       manager.setData(entity, "skyhighocs:dyn/cannon_body_left_deployed", false);
@@ -263,8 +339,7 @@ function initModule(system) {
         manager.setData(entity, "skyhighocs:dyn/cannons_body", body);
         manager.setData(entity, "skyhighocs:dyn/cannons_eyes", eyes);
       };
-      manager.setData(entity, "skyhighocs:dyn/cannon_eye_left_flush", nbt.getBoolean("flushLeftEyeCannon"));
-      manager.setData(entity, "skyhighocs:dyn/cannon_eye_right_flush", nbt.getBoolean("flushRightEyeCannon"));
+      manager.setData(entity, "skyhighocs:dyn/cannon_eyes_flush", nbt.getBoolean("flushEyeCannons"));
       manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_flush", nbt.getBoolean("flushLeftArmCannon"));
       manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_flush", nbt.getBoolean("flushRightArmCannon"));
     },

@@ -196,21 +196,53 @@
         },
         "isToggle": true
     },
-    "fiskheroes:transformation|rocket_left_arm_booster_deployed": {
-      "transformation": {
-        "toggleData": "skyhighocs:dyn/rocket_left_arm_booster_deployed",
-        "timerData": "skyhighocs:dyn/rocket_left_arm_booster_deploy_timer",
-        "time": 40
-      },
-      "isToggle": true
+    "fiskheroes:transformation|rocket_left_arm_outer_booster_deployed": {
+        "transformation": {
+          "toggleData": "skyhighocs:dyn/rocket_left_arm_outer_booster_deployed",
+          "timerData": "skyhighocs:dyn/rocket_left_arm_outer_booster_deploy_timer",
+          "time": 40
+        },
+        "isToggle": true
     },
-    "fiskheroes:transformation|rocket_right_arm_booster_deployed": {
-      "transformation": {
-        "toggleData": "skyhighocs:dyn/rocket_right_arm_booster_deployed",
-        "timerData": "skyhighocs:dyn/rocket_right_arm_booster_deploy_timer",
-        "time": 40
-      },
-      "isToggle": true
+    "fiskheroes:transformation|rocket_left_arm_front_booster_deployed": {
+        "transformation": {
+          "toggleData": "skyhighocs:dyn/rocket_left_arm_front_booster_deployed",
+          "timerData": "skyhighocs:dyn/rocket_left_arm_front_booster_deploy_timer",
+          "time": 40
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_arm_back_booster_deployed": {
+        "transformation": {
+          "toggleData": "skyhighocs:dyn/rocket_left_arm_back_booster_deployed",
+          "timerData": "skyhighocs:dyn/rocket_left_arm_back_booster_deploy_timer",
+          "time": 40
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_arm_outer_booster_deployed": {
+        "transformation": {
+          "toggleData": "skyhighocs:dyn/rocket_right_arm_outer_booster_deployed",
+          "timerData": "skyhighocs:dyn/rocket_right_arm_outer_booster_deploy_timer",
+          "time": 40
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_arm_front_booster_deployed": {
+        "transformation": {
+          "toggleData": "skyhighocs:dyn/rocket_right_arm_front_booster_deployed",
+          "timerData": "skyhighocs:dyn/rocket_right_arm_front_booster_deploy_timer",
+          "time": 40
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_arm_back_booster_deployed": {
+        "transformation": {
+          "toggleData": "skyhighocs:dyn/rocket_right_arm_back_booster_deployed",
+          "timerData": "skyhighocs:dyn/rocket_right_arm_back_booster_deploy_timer",
+          "time": 40
+        },
+        "isToggle": true
     },
     "fiskheroes:transformation|rocket_left_leg_main_deployed": {
       "transformation": {
@@ -228,18 +260,66 @@
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|rocket_left_leg_booster_deployed": {
+    "fiskheroes:transformation|rocket_left_leg_inner_booster_deployed": {
       "transformation": {
-        "toggleData": "skyhighocs:dyn/rocket_left_leg_booster_deployed",
-        "timerData": "skyhighocs:dyn/rocket_left_leg_booster_deploy_timer",
+        "toggleData": "skyhighocs:dyn/rocket_left_leg_inner_booster_deployed",
+        "timerData": "skyhighocs:dyn/rocket_left_leg_inner_booster_deploy_timer",
         "time": 40
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|rocket_right_leg_booster_deployed": {
+    "fiskheroes:transformation|rocket_left_leg_outer_booster_deployed": {
       "transformation": {
-        "toggleData": "skyhighocs:dyn/rocket_right_leg_booster_deployed",
-        "timerData": "skyhighocs:dyn/rocket_right_leg_booster_deploy_timer",
+        "toggleData": "skyhighocs:dyn/rocket_left_leg_outer_booster_deployed",
+        "timerData": "skyhighocs:dyn/rocket_left_leg_outer_booster_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_leg_front_booster_deployed": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/rocket_left_leg_front_booster_deployed",
+        "timerData": "skyhighocs:dyn/rocket_left_leg_front_booster_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_leg_back_booster_deployed": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/rocket_left_leg_back_booster_deployed",
+        "timerData": "skyhighocs:dyn/rocket_left_leg_back_booster_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_leg_inner_booster_deployed": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/rocket_right_leg_inner_booster_deployed",
+        "timerData": "skyhighocs:dyn/rocket_right_leg_inner_booster_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_leg_outer_booster_deployed": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/rocket_right_leg_outer_booster_deployed",
+        "timerData": "skyhighocs:dyn/rocket_right_leg_outer_booster_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_leg_front_booster_deployed": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/rocket_right_leg_front_booster_deployed",
+        "timerData": "skyhighocs:dyn/rocket_right_leg_front_booster_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_leg_back_booster_deployed": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/rocket_right_leg_back_booster_deployed",
+        "timerData": "skyhighocs:dyn/rocket_right_leg_back_booster_deploy_timer",
         "time": 40
       },
       "isToggle": true
@@ -308,18 +388,10 @@
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|rocket_inner_left_leg": {
+    "fiskheroes:transformation|rocket_inner_legs": {
       "transformation": {
-        "toggleData": "skyhighocs:dyn/rocket_inner_left_leg",
-        "timerData": "skyhighocs:dyn/rocket_inner_left_leg_timer",
-        "time": 10
-      },
-      "isToggle": true
-    },
-    "fiskheroes:transformation|rocket_inner_right_leg": {
-      "transformation": {
-        "toggleData": "skyhighocs:dyn/rocket_inner_right_leg",
-        "timerData": "skyhighocs:dyn/rocket_inner_right_leg_timer",
+        "toggleData": "skyhighocs:dyn/rocket_inner_legs",
+        "timerData": "skyhighocs:dyn/rocket_inner_legs_timer",
         "time": 10
       },
       "isToggle": true

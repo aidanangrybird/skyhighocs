@@ -7,9 +7,9 @@ function initModule(system) {
     name: "wings",
     moduleMessageName: "Wings",
     type: 12,
-    command: "wings",
+    command: "wing",
     powers: ["skyhighocs:wings"],
-    helpMessage: "<n>!wings <nh>-<n> Wings",
+    helpMessage: "<n>!wing <nh>-<n> Wings",
     disabledMessage: "<e>Module <eh>wings<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 4) {
@@ -59,12 +59,12 @@ function initModule(system) {
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Wings commands:");
-            system.moduleMessage(this, entity, "<n>!wings arm <nh>-<n> Arms wings");
-            system.moduleMessage(this, entity, "<n>!wings disarm <nh>-<n> Disarms wings");
-            system.moduleMessage(this, entity, "<n>!wings deploy <nh>-<n> Deploys wings");
-            system.moduleMessage(this, entity, "<n>!wings retract <nh>-<n> Retracts wings");
-            system.moduleMessage(this, entity, "<n>!wings status <nh>-<n> Shows status of wings");
-            system.moduleMessage(this, entity, "<n>!wings help <nh>-<n> Shows wings commands");
+            system.moduleMessage(this, entity, "<n>!wing arm <nh>-<n> Arms wings");
+            system.moduleMessage(this, entity, "<n>!wing disarm <nh>-<n> Disarms wings");
+            system.moduleMessage(this, entity, "<n>!wing deploy <nh>-<n> Deploys wings");
+            system.moduleMessage(this, entity, "<n>!wing retract <nh>-<n> Retracts wings");
+            system.moduleMessage(this, entity, "<n>!wing status <nh>-<n> Shows status of wings");
+            system.moduleMessage(this, entity, "<n>!wing help <nh>-<n> Shows wings commands");
             break;
           case "status":
             var wings = (entity.getData("skyhighocs:dyn/wings_timer") > 0);
@@ -74,11 +74,11 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Right wing: <nh>" + ((entity.getData("skyhighocs:dyn/wing_right_deploy_timer") > 0) || wings ? "DEPLOYED" : "RETRACTED"));
             break;
           default:
-            system.moduleMessage(this, entity, "<e>Unknown <eh>wings<e> command! Try <eh>!wings help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>wings<e> command! Try <eh>!wing help<e> for a list of commands!");
             break;
         };
       } else {
-        system.moduleMessage(this, entity, "<e>Unknown <eh>wings<e> command! Try <eh>!wings help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>wings<e> command! Try <eh>!wing help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {
