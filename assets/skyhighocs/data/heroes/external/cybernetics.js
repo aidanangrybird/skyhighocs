@@ -38,9 +38,18 @@ var colorDamage = {
   "5": "5",
   //Red
   "4": "1",
-  //Cyan, figure this out
+  //Cyan
   "3": "6"
 };
+
+var cybers = [
+  "CF-4",
+  "CV-6",
+  "CA-4",
+  "CY-3",
+  "CN-2",
+  "CS-5"
+];
 
 modelRegex = /[a-z\s]/gm;
 
@@ -241,6 +250,51 @@ function direction(base, other) {
 };
 
 /**
+ * Attempts to get model of a cybernetic player by id
+ * @param {JSEntity} entity - Required
+ * @param {JSDataManager} manager - Requried
+ * @param {integer} id - ID
+ **/
+function maybeGetID(entity, manager, id) {
+  var otherEntity = entity.world().getEntityById(id);
+  if (otherEntity.exists() && otherEntity.isLivingEntity()) {
+    if (otherEntity.is("PLAYER")) {
+      var otherPlayer = otherEntity.as("PLAYER");
+      if (otherPlayer.isWearingFullSuit() && entity.getWornHelmet().nbt().hasKey("computerID")) {
+        if (hasCyberneticBody(otherPlayer)) {
+          var modelID = getModelID(otherPlayer);
+          manager.setInteger(entity.getWornHelmet().nbt(), "id" + modelID, id);
+          if (PackLoader.getSide() == "CLIENT") {
+            logMessage("Got id " + id + " for " + modelID);
+          };
+        };
+      };
+    };
+  };
+};
+
+/**
+ * Attempts to get model of a cybernetic player by id
+ * @param {JSEntity} entity - Required
+ * @param {integer} id - ID
+ **/
+function isStillCyber(entity, id) {
+  var result = false;
+  var otherEntity = entity.world().getEntityById(id);
+  if (otherEntity.exists() && otherEntity.isLivingEntity()) {
+    if (otherEntity.is("PLAYER")) {
+      var otherPlayer = otherEntity.as("PLAYER");
+      if (otherPlayer.isWearingFullSuit() && entity.getWornHelmet().nbt().hasKey("computerID")) {
+        if (hasCyberneticBody(otherPlayer)) {
+          result = true;
+        };
+      };
+    };
+  };
+  return result;
+};
+
+/**
  * Turns NBT String List into an array for easier use in code
  * @param {JSNBTList} nbtList - NBTList
  * @returns Array of values from the NBTList
@@ -305,12 +359,12 @@ function isModuleDisabled(entity, moduleName) {
 };
 /**
  * Prints message to player's chat
- * @param {JSPlayer} player - Required
+ * @param {JSEntity} entity - Required
  * @param {string} message - Message to be shown to player
  **/
-function chatMessage(player, message) {
+function chatMessage(entity, message) {
   if (PackLoader.getSide() == "SERVER") {
-    player.as("PLAYER").addChatMessage(message);
+    entity.as("PLAYER").addChatMessage(message);
   };
 };
 /**
@@ -325,13 +379,13 @@ function chatMessage(player, message) {
  * "<eh>": "\u00A76"
  * "<r>": "\u00A7r"
  * ```
- * @param {JSPlayer} player - Entity recieving message
+ * @param {JSEntity} entity - Entity recieving message
  * @param {string} message - Message content
  **/
-function systemMessage(player, message) {
-  var id = getModelID(player);
+function systemMessage(entity, message) {
+  var id = getModelID(entity);
   var color = id.split("-")[1];
-  chatMessage(player, formatSystem("\u00A7" + color + "\u00A7lcyberOS" + "<r>> " + message));
+  chatMessage(entity, formatSystem("\u00A7" + color + "\u00A7lcyberOS" + "<r>> " + message));
 };
 /**
  * Sends log message
@@ -693,18 +747,18 @@ function initSystem(moduleList, name, normalName, color, uuid) {
     };
   });
   logMessage("Successfully initialized " + modules.length + " out of " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on " + cyberName + "!");
-  function switchChatModes(player, manager, mode) {
+  function switchChatModes(entity, manager, mode) {
     var modeIndex = chatModes.indexOf(mode);
     if (modeIndex > -1) {
-      manager.setData(player, "skyhighheroes:dyn/chat_mode", modeIndex);
-      var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
-      systemMessage(player, modules[messagingIndexes[chatMode]].chatModeInfo);
-      modules[messagingIndexes[chatMode]].chatInfo(player, manager);
+      manager.setData(entity, "skyhighheroes:dyn/chat_mode", modeIndex);
+      var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
+      systemMessage(entity, modules[messagingIndexes[chatMode]].chatModeInfo);
+      modules[messagingIndexes[chatMode]].chatInfo(entity, manager);
     };
   };
-  function switchChats(player, manager, chat) {
-    var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
-    modules[messagingIndexes[chatMode]].chatInfo(player, manager, chat);
+  function switchChats(entity, manager, chat) {
+    var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
+    modules[messagingIndexes[chatMode]].chatInfo(entity, manager, chat);
   };
   function systemInfo(entity) {
     var normalModulesMessage = (normalModules.length > 1) ? "<n>Loaded " + normalModules.length + " modules: " : "<n>Loaded " + normalModules.length + " module: ";
@@ -737,11 +791,17 @@ function initSystem(moduleList, name, normalName, color, uuid) {
     systemMessage(entity, "<n>Biome: <nh>" + entity.world().getLocation(entity.pos()).biome());
     systemMessage(entity, "<n>Do <nh>!help<n> for available commands!");
   };
-  function silentEnableModule(player, manager, moduleName) {
+  /**
+   * Silently enables module
+   * @param {JSEntity} entity - Required
+   * @param {JSDataManager} manager - Required
+   * @param {integer} moduleName - Name of module to enable
+   **/
+  function silentEnableModule(entity, manager, moduleName) {
     if (moduleNames.indexOf(moduleName) > -1) {
-      if (!player.getWornHelmet().nbt().hasKey("disabledModules")) {
+      if (!entity.getWornHelmet().nbt().hasKey("disabledModules")) {
       } else {
-        var disabledModules = player.getWornHelmet().nbt().getStringList("disabledModules");
+        var disabledModules = entity.getWornHelmet().nbt().getStringList("disabledModules");
         if (disabledModules.tagCount() == 0) {
         } else {
           var index = getStringArray(disabledModules).indexOf(moduleName);
@@ -753,51 +813,58 @@ function initSystem(moduleList, name, normalName, color, uuid) {
       };
     };
   };
-  function enableModule(player, manager, moduleName) {
+  /**
+   * Enables module
+   * @param {JSEntity} entity - Required
+   * @param {JSDataManager} manager - Required
+   * @param {Array} moduleList - List of available module names
+   * @param {integer} moduleName - Name of module to enable
+   **/
+  function enableModule(entity, manager, moduleName) {
     if (moduleNames.indexOf(moduleName) > -1) {
-      if (!player.getWornHelmet().nbt().hasKey("disabledModules")) {
-        systemMessage(player, "<e>You have no disabled modules to enable!");
+      if (!entity.getWornHelmet().nbt().hasKey("disabledModules")) {
+        systemMessage(entity, "<e>You have no disabled modules to enable!");
       } else {
-        var disabledModules = player.getWornHelmet().nbt().getStringList("disabledModules");
+        var disabledModules = entity.getWornHelmet().nbt().getStringList("disabledModules");
         if (disabledModules.tagCount() == 0) {
-          systemMessage(player, "<e>You have no disabled modules to enable!");
+          systemMessage(entity, "<e>You have no disabled modules to enable!");
         } else {
           var index = getStringArray(disabledModules).indexOf(moduleName);
           if (index < 0) {
-            systemMessage(player, "<e>Module <eh>" + moduleName + "<e> is already enabled!");
+            systemMessage(entity, "<e>Module <eh>" + moduleName + "<e> is already enabled!");
           } else {
-            systemMessage(player, "<s>Successfully enabled <sh>" + moduleName + "<s> module!");
+            systemMessage(entity, "<s>Successfully enabled <sh>" + moduleName + "<s> module!");
             manager.removeTag(disabledModules, index);
           };
         };
       };
     } else {
-      systemMessage(player, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
+      systemMessage(entity, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
     };
   };
-  function disableModule(player, manager, moduleName) {
+  function disableModule(entity, manager, moduleName) {
     var moduleIndex = moduleNames.indexOf(moduleName);
     if (moduleIndex > -1) {
-      if (!player.getWornHelmet().nbt().hasKey("disabledModules")) {
+      if (!entity.getWornHelmet().nbt().hasKey("disabledModules")) {
         var disabledModules = manager.newTagList();
         manager.appendString(disabledModules, moduleName);
-        manager.setTagList(player.getWornHelmet().nbt(), "disabledModules", disabledModules);
-        systemMessage(player, "<s>Module <sh>" + moduleName + "<s> disabled!");
+        manager.setTagList(entity.getWornHelmet().nbt(), "disabledModules", disabledModules);
+        systemMessage(entity, "<s>Module <sh>" + moduleName + "<s> disabled!");
       } else {
-        var disabledModules = player.getWornHelmet().nbt().getStringList("disabledModules");
+        var disabledModules = entity.getWornHelmet().nbt().getStringList("disabledModules");
         var disabledModulesIndex = getStringArray(disabledModules).indexOf(moduleName);
         if (disabledModulesIndex > -1) {
-          systemMessage(player, "<e>You have already disabled module <eh>" + moduleName + "<e>!");
+          systemMessage(entity, "<e>You have already disabled module <eh>" + moduleName + "<e>!");
         } else {
-          systemMessage(player, "<s>Module <sh>" + moduleName + "<s> disabled!");
+          systemMessage(entity, "<s>Module <sh>" + moduleName + "<s> disabled!");
           manager.appendString(disabledModules, moduleName);
           if (modules[moduleIndex].hasOwnProperty("whenDisabled")) {
-            modules[moduleIndex].whenDisabled(player, manager);
+            modules[moduleIndex].whenDisabled(entity, manager);
           };
         };
       };
     } else {
-      systemMessage(player, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
+      systemMessage(entity, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
     };
   };
   /**
@@ -1277,6 +1344,46 @@ function initSystem(moduleList, name, normalName, color, uuid) {
     var rotation = entity.rotYaw()%360;
     var bearing = ((Math.abs((rotation < 0) ? (rotation+360) : rotation)+180) % 360);
     manager.setDataWithNotify(entity, "skyhighocs:dyn/bearing", bearing);
+    if ((entity.ticksExisted() % 6000) == 0) {
+      if (PackLoader.getSide() == "CLIENT") {
+        logMessage("Doing cyber id check");
+      };
+      for(var id = 0;id<2000;id++) {
+        maybeGetID(entity, manager, id);
+      };
+    };
+    if ((entity.ticksExisted() % 6000) == 1200) {
+      if (PackLoader.getSide() == "CLIENT") {
+        logMessage("Doing cyber id check");
+      };
+      for(var id = 2000;id<4000;id++) {
+        maybeGetID(entity, manager, id);
+      };
+    };
+    if ((entity.ticksExisted() % 6000) == 2400) {
+      if (PackLoader.getSide() == "CLIENT") {
+        logMessage("Doing cyber id check");
+      };
+      for(var id = 4000;id<6000;id++) {
+        maybeGetID(entity, manager, id);
+      };
+    };
+    if ((entity.ticksExisted() % 6000) == 3600) {
+      if (PackLoader.getSide() == "CLIENT") {
+        logMessage("Doing cyber id check");
+      };
+      for(var id = 6000;id<8000;id++) {
+        maybeGetID(entity, manager, id);
+      };
+    };
+    if ((entity.ticksExisted() % 6000) == 4800) {
+      if (PackLoader.getSide() == "CLIENT") {
+        logMessage("Doing cyber id check");
+      };
+      for(var id = 8000;id<10000;id++) {
+        maybeGetID(entity, manager, id);
+      };
+    };
   };
   return {
     /**

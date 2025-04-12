@@ -23,9 +23,6 @@ function initModule(system) {
       var txAntennaDeployed = (entity.getData("skyhighocs:dyn/antenna_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
       var txSatelliteDeployed = (entity.getData("skyhighocs:dyn/satellite_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
       if (txAntennaDeployed) {
-        newRange = (range*2);
-      };
-      if (txSatelliteDeployed) {
         newRange = (range*4);
       };
       var entities = [];
@@ -42,17 +39,26 @@ function initModule(system) {
       if (foundPlayers.length > 0) {
         foundPlayers.forEach(player => {
           var rxAntennaDeployed = (player.getData("skyhighocs:dyn/antenna_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-          var rxSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
           if (entity.pos().distanceTo(player.pos()) <= range) {
             cyberMessage(player, newName, message);
-          } else if (txAntennaDeployed && rxAntennaDeployed && (entity.pos().distanceTo(player.pos()) <= range*2)) {
-            cyberMessage(player, newName, message);
-          } else if (txSatelliteDeployed && rxSatelliteDeployed && (entity.pos().distanceTo(player.pos()) <= range*4)) {
+          } else if (txAntennaDeployed && rxAntennaDeployed && entity.canSee(player) && (entity.pos().distanceTo(player.pos()) <= range*4)) {
             cyberMessage(player, newName, message);
           };
         });
       } else {
         system.systemMessage(entity, "<n>No other cybers in range!")
+      };
+      if (txSatelliteDeployed) {
+        system.cybers.forEach(entry => {
+          var id = entity.getWornHelmet().nbt().getInteger("id" + entry);
+          if (id > -1) {
+            var player = entity.world().getEntityById(id);
+            var rxSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
+            if (rxSatelliteDeployed && player.getUUID() != entity.getUUID()) {
+              cyberMessage(player, newName, message);
+            };
+          };
+        });
       };
       cyberMessage(entity, newName, message);
     },
