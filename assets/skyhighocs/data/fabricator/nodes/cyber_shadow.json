@@ -1,0 +1,23 @@
+{
+  "suit": "skyhighocs:cyber_shadow",
+  "requirements": [
+    "skyhighocs:cybernetics",
+    "fiskheroes:tier8_9",
+    "skyhighocs:base"
+  ],
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:player_killed",
+      "description": {
+        "translate": "Die as Damien_"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_KILLED",
+          "damage": "DAMAGE_SOURCE"
+        },
+        "check": "(player.getUUID() == 'e51532a1-19fc-4d4f-9da0-f952c4645891') && player.isBurning() && damage.isFireDamage()"
+      }
+    }
+  }
+}

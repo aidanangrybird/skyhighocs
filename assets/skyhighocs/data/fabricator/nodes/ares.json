@@ -2,6 +2,7 @@
   "suit": "skyhighocs:ares",
   "requirements": [
     "skyhighheroes:robot",
+    "fiskheroes:tier8_9",
     "skyhighocs:base"
   ],
   "criteria": {

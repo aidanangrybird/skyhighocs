@@ -1,0 +1,23 @@
+{
+  "suit": "skyhighocs:cyber_vortex",
+  "requirements": [
+    "skyhighocs:cybernetics",
+    "fiskheroes:tier8_9",
+    "skyhighocs:base"
+  ],
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:player_killed",
+      "description": {
+        "translate": "Die as aidanangrybird"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_KILLED",
+          "damage": "DAMAGE_SOURCE"
+        },
+        "check": "(player.getUUID() == 'a3d071d4-c912-41e1-a6b2-c0de99ea4a84') && player.isBurning() && damage.isFireDamage()"
+      }
+    }
+  }
+}
