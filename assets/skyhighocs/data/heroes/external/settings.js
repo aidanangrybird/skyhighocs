@@ -38,7 +38,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Inner rockets set to <nh>" + nbt.getBoolean("innerRockets") + "<n>!");
             break;
           case "flushEyeCannons":
-            manager.setBoolean(nbt, "flushLeftEyeCannon", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("flushLeftEyeCannon")));
+            manager.setBoolean(nbt, "flushEyeCannons", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("flushEyeCannons")));
             system.moduleMessage(this, entity, "<n>Flush left eye cannon set to <nh>" + nbt.getBoolean("flushEyeCannons") + "<n>!");
             break;
           case "flushLeftArmCannon":
