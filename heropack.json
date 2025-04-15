@@ -247,13 +247,13 @@
     "OMEGA": "Omega Beams",
     "BLUE_KRYPTONITE": "Blue Kryptonite",
     "SOUND_BLAST": "Sound",
-    "NONE_ELEMENT": "None Element",
-    "ELEC_ELEMENT": "Electricity Element",
-    "FIRE_ELEMENT": "Fire Element",
-    "AQUA_ELEMENT": "Water Element",
-    "WOOD_ELEMENT": "Wood Element",
-    "SWORD_ELEMENT": "Sword Element",
-    "WIND_ELEMENT": "Wind Element"
+    "ELEMENT_NONE": "None Element",
+    "ELEMENT_ELEC": "Electricity Element",
+    "ELEMENT_FIRE": "Fire Element",
+    "ELEMENT_AQUA": "Water Element",
+    "ELEMENT_WOOD": "Wood Element",
+    "ELEMENT_SWORD": "Sword Element",
+    "ELEMENT_WIND": "Wind Element"
   },
   "alts" : {
     "skyhighocs:aero": {
