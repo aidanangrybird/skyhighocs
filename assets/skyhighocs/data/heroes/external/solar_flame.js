@@ -249,6 +249,41 @@ function initModule(system) {
     isModifierEnabled: function (entity, modifier) {
       var uuid = "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0";
       var result = false;
+      if (modifier.name() == "fiskheroes:potion_immunity") {
+        result = true;
+      };
+      if (modifier.name() == "fiskheroes:controlled_flight") {
+        result = true;
+      };
+      if (modifier.name() == "fiskheroes:teleportation") {
+        result = true;
+      };
+      if (modifier.name() == "fiskheroes:wall_crawling") {
+        result = true;
+      };
+      if (modifier.name() == "fiskheroes:intangibility") {
+        if (modifier.id() == "not_absolute") {
+          result = entity.getPunchTimer() > 0;
+        };
+        if (modifier.id() == "absolute") {
+          result = entity.getPunchTimer() == 0;
+        };
+      };
+      if (modifier.name() == "fiskheroes:regeneration") {
+        result = true;
+      };
+      if (modifier.name() == "fiskheroes:healing_factor") {
+        result = true;
+      };
+      if (modifier.name() == "fiskheroes:water_breathing") {
+        result = true;
+      };
+      if (modifier.name() == "fiskheroes:invisibility") {
+        result = true;
+      };
+      if (modifier.name() == "fiskheroes:fire_immunity") {
+        result = true;
+      };
       if (modifier.name() == "fiskheroes:damage_immunity") {/* 
         var invis = ["explosion", "magic", "shuriken", "sharp", "bullet", "blunt", "saitama"];
         var normal = ["fire","cactus", "cold", "energy", "electricity", "sound", "thorns", "radiation",
@@ -269,23 +304,6 @@ function initModule(system) {
       };
       if (modifier.name() == "fiskheroes:energy_manipulation") {
         result = true;
-      };
-      if (modifier.name() == "fiskheroes:controlled_flight") {
-        result = true;
-      };
-      if (modifier.name() == "fiskheroes:invisibility") {
-        result = true;
-      };
-      if (modifier.name() == "fiskheroes:teleportation") {
-        result = true;
-      };
-      if (modifier.name() == "fiskheroes:intangibility") {
-        if (modifier.id() == "not_absolute") {
-          result = entity.getPunchTimer() > 0;
-        };
-        if (modifier.id() == "absolute") {
-          result = entity.getPunchTimer() == 0;
-        };
       };
       if (modifier.name() == "fiskheroes:shield") {
         if (modifier.id() == "barrier") {
