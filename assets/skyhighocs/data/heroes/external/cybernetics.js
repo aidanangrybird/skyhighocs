@@ -1328,7 +1328,7 @@ function initSystem(moduleList, name, normalName, color, uuid) {
       if (PackLoader.getSide() == "CLIENT") {
         logMessage("Doing cyber id check");
       };
-      for(var id = 0;id<200000;id++) {
+      for(var id = 0;id<2000000;id++) {
         maybeGetID(entity, manager, id);
       };
     };
@@ -1336,7 +1336,7 @@ function initSystem(moduleList, name, normalName, color, uuid) {
       if (PackLoader.getSide() == "CLIENT") {
         logMessage("Doing cyber id check");
       };
-      for(var id = 200000;id<400000;id++) {
+      for(var id = 2000000;id<4000000;id++) {
         maybeGetID(entity, manager, id);
       };
     };
@@ -1344,7 +1344,7 @@ function initSystem(moduleList, name, normalName, color, uuid) {
       if (PackLoader.getSide() == "CLIENT") {
         logMessage("Doing cyber id check");
       };
-      for(var id = 400000;id<600000;id++) {
+      for(var id = 4000000;id<6000000;id++) {
         maybeGetID(entity, manager, id);
       };
     };
@@ -1352,7 +1352,7 @@ function initSystem(moduleList, name, normalName, color, uuid) {
       if (PackLoader.getSide() == "CLIENT") {
         logMessage("Doing cyber id check");
       };
-      for(var id = 600000;id<800000;id++) {
+      for(var id = 6000000;id<8000000;id++) {
         maybeGetID(entity, manager, id);
       };
     };
@@ -1360,7 +1360,7 @@ function initSystem(moduleList, name, normalName, color, uuid) {
       if (PackLoader.getSide() == "CLIENT") {
         logMessage("Doing cyber id check");
       };
-      for(var id = 800000;id<1000000;id++) {
+      for(var id = 8000000;id<10000000;id++) {
         maybeGetID(entity, manager, id);
       };
     };
