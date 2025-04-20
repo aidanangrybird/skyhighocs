@@ -213,7 +213,7 @@ function initTransceiveBeams(renderer, model, color) {
   var receiveBase = model.getCubeOffset("head_satellite_dish_base");
   var transmitBase = model.getCubeOffset("head_satellite_dish_antenna");
 
-  transmitBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:transmit");
+  var transmitBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:transmit");
   var transmitShape = renderer.createResource("SHAPE", null);
   var transmitLine = transmitShape.bindLine({ "start": [0.0, 0.1875, 0.0], "end": [0.0, 0.1875, 0.0], "size": [0.5, 0.5] });
   var transmitBeam = renderer.createEffect("fiskheroes:lines").setRenderer(transmitBeamRenderer).setShape(transmitShape).setOffset(0.0, 0.0, 0.0);
@@ -222,7 +222,7 @@ function initTransceiveBeams(renderer, model, color) {
   transmitBeam.anchor.set("head", transmitBase);
   transmitBeam.color.set(color);
 
-  receiveBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:receive");
+  var receiveBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:receive");
   var receiveShape = renderer.createResource("SHAPE", null);
   var receiveLine = receiveShape.bindLine({ "start": [0.0, 300.375, 0.0], "end": [0.0, 300.375, 0.0], "size": [15.0, 15.0] });
   var receiveBeam = renderer.createEffect("fiskheroes:lines").setRenderer(receiveBeamRenderer).setShape(receiveShape).setOffset(0.0, 0.0, 0.0);
@@ -244,6 +244,52 @@ function initTransceiveBeams(renderer, model, color) {
         if (receiveTimer > 0) {
           receiveBeam.render();
         };
+      };
+    }
+  };
+};
+
+/**
+ * Gets direction from one vector to another
+ * @param {JSVector3} base - Base vector
+ * @param {JSVector3} other - Vector to measure to
+ * @returns Direction
+ **/
+function direction(base, other) {
+  var angle = (((Math.atan2(-1*(other.z()-base.z()), -1*(other.x()-base.x())) * 180) / Math.PI) + 270) % 360;
+  var direction = angleToDirection(angle);
+  return direction;
+};
+
+function beamThing(renderer, color) {
+  
+  var beamRenderer = renderer.createResource("BEAM_RENDERER", "fiskheroes:energy_projection");
+  var shape = renderer.createResource("SHAPE", null);
+  var line = shape.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [5.0, 5.0] });
+  var beam = renderer.createEffect("fiskheroes:lines").setRenderer(beamRenderer).setShape(shape).setOffset(0.0, 0.0, 0.0);
+  beam.mirror = false;
+  beam.setScale(16.0);
+  beam.anchor.set("head");
+  beam.anchor.ignoreAnchor(true);
+  beam.color.set(color);
+  
+  return {
+    render: function (entity, renderLayer, isFirstPersonArm) {
+      if (isFirstPersonArm) {
+        var distance = entity.pos().distanceTo(208.5, 75.5, 410.5);
+        //Pitch
+        var pitch = (entity.rotPitch()/180)*Math.PI;
+        //Yaw
+        var yaw = (entity.rotYaw()/180)*Math.PI;
+        var direction = (((Math.atan2(-1*(208.5-entity.pos().z()), -1*(410.5-entity.pos().x())) * 180) / Math.PI) + 270) % 360;
+        var rotation = entity.rotYaw()%360;
+        var bearing = (((Math.abs((rotation < 0) ? (rotation+360) : rotation)+180) % 360)/180)*Math.PI;
+        line.end.x = line.start.x = distance*Math.cos(yaw-direction)*16;
+        line.start.y = 0.0;
+        line.end.y = line.start.y - 5.0;
+        line.end.z = line.start.z = distance*Math.sin(yaw-direction)*16;
+        beam.setRotation(0.0, -1*entity.rotPitch(), 0.0)
+        beam.render();
       };
     }
   };
