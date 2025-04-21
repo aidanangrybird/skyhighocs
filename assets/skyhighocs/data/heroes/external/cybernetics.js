@@ -263,9 +263,11 @@ function maybeGetID(entity, manager, id) {
       if (otherPlayer.isWearingFullSuit() && entity.getWornHelmet().nbt().hasKey("computerID")) {
         if (hasCyberneticBody(otherPlayer)) {
           var modelID = getModelID(otherPlayer);
-          manager.setInteger(entity.getWornHelmet().nbt(), "id" + modelID, id);
-          if (PackLoader.getSide() == "CLIENT") {
-            logMessage("Got id " + id + " for " + modelID);
+          if (cybers.indexOf(modelID)) {
+            manager.setInteger(entity.getWornHelmet().nbt(), "id" + modelID, id);
+            if (PackLoader.getSide() == "CLIENT") {
+              systemMessage(entity, "Got id " + id + " for " + modelID);
+            };
           };
         };
       };
@@ -1262,6 +1264,9 @@ function initSystem(moduleList, name, normalName, color, uuid) {
             case "enable":
               enableModule(entity, manager, args[1]);
               break;
+            case "idSet":
+              maybeGetID(entity, manager, args[1])
+              break;
             case "cv":
               entity.as("PLAYER").addChatMessage(entity.getDataOrDefault("skyhighocs:dyn/" + args[1], 0));
               break;
@@ -1324,45 +1329,11 @@ function initSystem(moduleList, name, normalName, color, uuid) {
     var rotation = entity.rotYaw()%360;
     var bearing = ((Math.abs((rotation < 0) ? (rotation+360) : rotation)+180) % 360);
     manager.setDataWithNotify(entity, "skyhighocs:dyn/bearing", bearing);
-    if ((entity.ticksExisted() % 6000) == 0) {
-      if (PackLoader.getSide() == "CLIENT") {
-        logMessage("Doing cyber id check");
-      };
-      for(var id = 0;id<2000000;id++) {
-        maybeGetID(entity, manager, id);
-      };
+    if (entity.getData("fiskheroes:grab_id") > -1) {
+      maybeGetID(entity, manager, entity.getData("fiskheroes:grab_id"));
     };
-    if ((entity.ticksExisted() % 6000) == 1200) {
-      if (PackLoader.getSide() == "CLIENT") {
-        logMessage("Doing cyber id check");
-      };
-      for(var id = 2000000;id<4000000;id++) {
-        maybeGetID(entity, manager, id);
-      };
-    };
-    if ((entity.ticksExisted() % 6000) == 2400) {
-      if (PackLoader.getSide() == "CLIENT") {
-        logMessage("Doing cyber id check");
-      };
-      for(var id = 4000000;id<6000000;id++) {
-        maybeGetID(entity, manager, id);
-      };
-    };
-    if ((entity.ticksExisted() % 6000) == 3600) {
-      if (PackLoader.getSide() == "CLIENT") {
-        logMessage("Doing cyber id check");
-      };
-      for(var id = 6000000;id<8000000;id++) {
-        maybeGetID(entity, manager, id);
-      };
-    };
-    if ((entity.ticksExisted() % 6000) == 4800) {
-      if (PackLoader.getSide() == "CLIENT") {
-        logMessage("Doing cyber id check");
-      };
-      for(var id = 8000000;id<10000000;id++) {
-        maybeGetID(entity, manager, id);
-      };
+    if (entity.getData("fiskheroes:grabbed_by") > -1) {
+      maybeGetID(entity, manager, entity.getData("fiskheroes:grabbed_by"));
     };
   };
   return {
