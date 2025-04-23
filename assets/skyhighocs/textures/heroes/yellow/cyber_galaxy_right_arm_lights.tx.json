@@ -1,0 +1,30 @@
+{
+  "texture": {
+    "in": "skyhighocs:yellow/cyber_galaxy_lights",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighocs:xor/cybernetic_thermoptic_base_<TIMER>"
+      },
+      {
+        "operation": "STITCH",
+        "supply": "skyhighocs:cybernetic_right_arm_base"
+      },
+      {
+        "operation": "ADD",
+        "supply": "skyhighocs:yellow/cyber_galaxy_right_arm_lights"
+      }
+    ],
+    "out": "skyhighocs:generated/cyber_galaxy_right_arm_lights_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.ceil(47*Math.min(Math.max((entity.getInterpolatedData('skyhighocs:dyn/thermoptic_disguise_timer') + entity.getInterpolatedData('skyhighocs:dyn/thermoptic_camouflage_timer')), 0), 1)) + (((entity.getWornHelmet().nbt().getBoolean('disguiseOnStand') || entity.getWornHelmet().nbt().getBoolean('camoOnStand')) && entity.is('DISPLAY')) ? 47 : 0) | 0",
+      "values": {
+        "min": 0,
+        "max": 47
+      }
+    }
+  },
+  "isDynamic": true
+}
