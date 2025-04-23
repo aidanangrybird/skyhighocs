@@ -1,4 +1,4 @@
-var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
+var uuid = "60f30003-1148-416b-8b4d-347002891126";
 var cybernetics = implement("skyhighocs:external/cybernetics");
 var settings = implement("skyhighocs:external/settings");
 var messaging = implement("skyhighheroes:external/messaging");
