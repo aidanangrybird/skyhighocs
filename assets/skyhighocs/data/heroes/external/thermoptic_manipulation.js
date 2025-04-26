@@ -41,6 +41,9 @@ function initModule(system) {
                 manager.setBoolean(nbt, "camoOnStand", true);
                 system.moduleMessage(this, entity, "<n>Enabled <nh>camouflage on stand<n>!");
                 break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>action<e>!");
+                break;
             };
             break;
           case "disable":
@@ -68,6 +71,9 @@ function initModule(system) {
               case "camoOnStand":
                 manager.setBoolean(nbt, "camoOnStand", false);
                 system.moduleMessage(this, entity, "<n>Disabled <nh>camouflage on stand<n>!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>action<e>!");
                 break;
             };
             break;

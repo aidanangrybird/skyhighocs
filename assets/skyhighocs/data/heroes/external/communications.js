@@ -330,7 +330,7 @@ function initModule(system) {
               system.moduleMessage(this, entity, "<n>No other cybers in range!")
             };
             break;
-          case "suitsC":
+          case "suitS":
             var range = 32;
             var foundPlayers = [];
             var newRange = (range*1);
@@ -389,6 +389,9 @@ function initModule(system) {
                 manager.setData(entity, "skyhighocs:dyn/satellite_rain_mode", true);
                 system.moduleMessage(this, entity, "<n>Activating satellite rain mode!");
                 break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>transmitter<e>!");
+                break;
             };
             break;
           case "hide":
@@ -405,6 +408,9 @@ function initModule(system) {
                 manager.setData(entity, "skyhighocs:dyn/satellite_rain_mode", false);
                 system.moduleMessage(this, entity, "<n>Deactivating satellite rain mode!");
                 break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>transmitter<e>!");
+                break;
             };
             break;
           case "status":
@@ -418,6 +424,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!comms show <sat|ant|satRain> <nh>-<n> Deploys comms type");
             system.moduleMessage(this, entity, "<n>!comms hide <sat|ant|satRain> <nh>-<n> Retracts comms type");
             system.moduleMessage(this, entity, "<n>!comms suits <suits> <nh>-<n> Transmits suits (comma seperated indexes) to other Cybers");
+            system.moduleMessage(this, entity, "<n>!comms suitS <suits> <nh>-<n> Transmits suits (comma seperated indexes) to other OC Cybers");
             system.moduleMessage(this, entity, "<n>!comms cyberPos <nh>-<n> Gets position of other Cybers");
             system.moduleMessage(this, entity, "<n>!comms cyberStatus <nh>-<n> Gets stats of other Cybers");
             system.moduleMessage(this, entity, "<n>!comms status <nh>-<n> Status of comms");
