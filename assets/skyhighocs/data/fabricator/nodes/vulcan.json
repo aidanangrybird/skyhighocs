@@ -9,7 +9,7 @@
     "exist": {
       "trigger": "fiskheroes:tick",
       "description": {
-        "translate": "Exist as aidanangrybird"
+        "translate": "Exist as Dam1en_"
       },
       "condition": {
         "variables": {
