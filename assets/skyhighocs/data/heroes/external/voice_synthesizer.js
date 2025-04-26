@@ -3,6 +3,7 @@
  * @param system - Required
  **/
 function initModule(system) {
+  //All of the required functions and stuff go here
   return {
     name: "voiceSynthesizer",
     moduleMessageName: "VoiceSynth",
@@ -13,7 +14,7 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>voiceSynthesizer<e> is disabled!",
     keyBinds: function (hero, color) {
       hero.addKeyBindFunc("MOUTH", (player, manager) => {
-        system.moduleMessage(this, player, "<e>Mouth must be armed!");
+        system.moduleMessage(this, player, "<e>To arm the mouth do <eh>!vs arm<e>.");
         return false;
       }, "\u00A7" + color + "Scream (Not armed)", 3);
       hero.addKeyBind("SCREAM", "\u00A7" + color + "Scream", 3);
