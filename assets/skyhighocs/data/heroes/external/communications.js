@@ -314,7 +314,43 @@ function initModule(system) {
             if (foundPlayers.length > 0) {
               //entity = tx
               //player = rx
-              transmitSuits(entity, manager, arguments[2]);
+              transmitSuits(this, entity, manager, arguments[2]);
+              foundPlayers.forEach(player => {
+                var rxAntennaDeployed = (player.getData("skyhighocs:dyn/antenna_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
+                var rxSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
+                if (entity.pos().distanceTo(player.pos()) <= range) {
+                  receiveSuits(this, entity, player, manager);
+                } else if (txAntennaDeployed && rxAntennaDeployed && entity.canSee(player) && (entity.pos().distanceTo(player.pos()) <= range*4)) {
+                  receiveSuits(this, entity, player, manager);
+                } else if (txSatelliteDeployed && rxSatelliteDeployed && (entity.pos().distanceTo(player.pos()) <= range*4)) {
+                  receiveSuits(this, entity, player, manager);
+                };
+              });
+            } else {
+              system.moduleMessage(this, entity, "<n>No other cybers in range!")
+            };
+            break;
+          case "suitsC":
+            var range = 32;
+            var foundPlayers = [];
+            var newRange = (range*1);
+            var txAntennaDeployed = (entity.getData("skyhighocs:dyn/antenna_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
+            var txSatelliteDeployed = (entity.getData("skyhighocs:dyn/satellite_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
+            if (txAntennaDeployed) {
+              newRange = (range*4);
+            };
+            var entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
+            entities.forEach(player => {
+              if (player.is("PLAYER") && (player.getUUID() != entity.getUUID())) {
+                if (system.hasCyberneticBody(player)) {
+                  foundPlayers.push(player);
+                };
+              };
+            });
+            if (foundPlayers.length > 0) {
+              //entity = tx
+              //player = rx
+              transmitSuits(this, entity, manager, arguments[2]);
               foundPlayers.forEach(player => {
                 var rxAntennaDeployed = (player.getData("skyhighocs:dyn/antenna_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
                 if (entity.pos().distanceTo(player.pos()) <= range) {
