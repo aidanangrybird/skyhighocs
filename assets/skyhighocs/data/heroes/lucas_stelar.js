@@ -1,14 +1,14 @@
-var bodyTemp = implement("skyhighheroes:external/body_temperature");
-var stelar = implement("skyhighheroes:external/stelar");
+var bodyTemp = implement("skyhighocs:external/body_temperature");
+var stelar = implement("skyhighocs:external/stelar");
 var uuid = "c4bc5db6-3cf6-44fe-8427-304a7b211bc4";
-var transer = implement("skyhighheroes:external/transer_system");
-var messaging = implement("skyhighheroes:external/messaging");
-var groupMessaging = implement("skyhighheroes:external/group_messaging");
-var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
-var groups = implement("skyhighheroes:external/groups");
-var contacts = implement("skyhighheroes:external/contacts");
-var scanner = implement("skyhighheroes:external/scanner");
-var waypoints = implement("skyhighheroes:external/waypoint");
+var transer = implement("skyhighocs:external/transer_system");
+var messaging = implement("skyhighocs:external/messaging");
+var groupMessaging = implement("skyhighocs:external/group_messaging");
+var transerBrotherBand = implement("skyhighocs:external/transer_brotherband");
+var groups = implement("skyhighocs:external/groups");
+var contacts = implement("skyhighocs:external/contacts");
+var scanner = implement("skyhighocs:external/scanner");
+var waypoints = implement("skyhighocs:external/waypoint");
 var stargazing = implement("skyhighocs:external/stargazing");
 var transerOS = transer.initSystem([
   messaging,
@@ -40,7 +40,7 @@ function init(hero) {
   
   hero.setDefaultScale(1.0);
   hero.setAttributeProfile(entity => {
-    if (entity.getData("skyhighheroes:dyn/calling_timer") == 0) {
+    if (entity.getData("skyhighocs:dyn/calling_timer") == 0) {
       return bodyTemp.getAttributeProfile(entity); 
     } else {
       return transerOS.getWaveProfile(entity);
@@ -54,13 +54,13 @@ function init(hero) {
   });
   hero.setKeyBindEnabled((entity, keyBind) => {
     if (keyBind == "VISUALIZER_TOGGLE") {
-      return entity.getUUID() == uuid && ((entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
+      return entity.getUUID() == uuid && ((entity.getData("skyhighocs:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
     };
     if (keyBind == "CYCLE_CLOTHES") {
       return entity.getUUID() == uuid;
     };
     if (keyBind == "HOOD_TOGGLE") {
-      return entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
+      return entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighocs:dyn/stelar_clothes") == 3;
     };
     if (keyBind == "CYCLE_CHATS") {
       return !entity.isSneaking();
@@ -76,6 +76,6 @@ function init(hero) {
   hero.setTickHandler((entity, manager) => {
     transerOS.systemHandler(entity, manager);
     transerOS.waveHandler(entity, hero);
-    bodyTemp.change(entity, manager, stelar.tempProfiles(), "skyhighheroes:dyn/body_temperature", 400.0, "skyhighheroes:dyn/stelar_clothes");
+    bodyTemp.change(entity, manager, stelar.tempProfiles(), "skyhighocs:dyn/body_temperature", 400.0, "skyhighocs:dyn/stelar_clothes");
   });
 };

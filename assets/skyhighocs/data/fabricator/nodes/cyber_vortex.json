@@ -1,7 +1,7 @@
 {
   "suit": "skyhighocs:cyber_vortex",
   "requirements": [
-    "skyhighheroes:cybernetics",
+    "skyhighocs:cybernetics",
     "fiskheroes:tier8_9",
     "skyhighocs:base"
   ],

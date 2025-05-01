@@ -1,18 +1,18 @@
-var robot = implement("skyhighheroes:external/astro_system");
-var messaging = implement("skyhighheroes:external/messaging");
-var groupMessaging = implement("skyhighheroes:external/group_messaging");
-var groups = implement("skyhighheroes:external/groups");
-var contacts = implement("skyhighheroes:external/contacts");
-var scanner = implement("skyhighheroes:external/scanner");
-var waypoints = implement("skyhighheroes:external/waypoint");
-var brain = implement("skyhighheroes:external/astro_brain");
-var engine = implement("skyhighheroes:external/astro_engine");
-var blaster = implement("skyhighheroes:external/astro_blaster");
-var buttMachineGuns = implement("skyhighheroes:external/astro_butt_machine_guns");
-var flight = implement("skyhighheroes:external/astro_flight");
-var panelStatus = implement("skyhighheroes:external/astro_panel_status");
-var opener = implement("skyhighheroes:external/astro_opener");
-var closer = implement("skyhighheroes:external/astro_closer");
+var robot = implement("skyhighocs:external/astro_system");
+var messaging = implement("skyhighocs:external/messaging");
+var groupMessaging = implement("skyhighocs:external/group_messaging");
+var groups = implement("skyhighocs:external/groups");
+var contacts = implement("skyhighocs:external/contacts");
+var scanner = implement("skyhighocs:external/scanner");
+var waypoints = implement("skyhighocs:external/waypoint");
+var brain = implement("skyhighocs:external/astro_brain");
+var engine = implement("skyhighocs:external/astro_engine");
+var blaster = implement("skyhighocs:external/astro_blaster");
+var buttMachineGuns = implement("skyhighocs:external/astro_butt_machine_guns");
+var flight = implement("skyhighocs:external/astro_flight");
+var panelStatus = implement("skyhighocs:external/astro_panel_status");
+var opener = implement("skyhighocs:external/astro_opener");
+var closer = implement("skyhighocs:external/astro_closer");
 var eyes = implement("skyhighocs:external/astro_eyes");
 var astrOS = robot.initSystem([
   messaging,
@@ -52,9 +52,9 @@ function init(hero) {
   astrOS.profiles(hero);
   astrOS.addPowers(hero);
   hero.addKeyBindFunc("CYCLE_CLOTHES", (player, manager) => {
-    manager.setData(player, "skyhighheroes:dyn/astro_clothes", player.getData("skyhighheroes:dyn/astro_clothes") + 1);
-    if (player.getData("skyhighheroes:dyn/astro_clothes") > 3) {
-      manager.setData(player, "skyhighheroes:dyn/astro_clothes", 0);
+    manager.setData(player, "skyhighocs:dyn/astro_clothes", player.getData("skyhighocs:dyn/astro_clothes") + 1);
+    if (player.getData("skyhighocs:dyn/astro_clothes") > 3) {
+      manager.setData(player, "skyhighocs:dyn/astro_clothes", 0);
     };
     return true;
   }, "Change Clothes", 1);

@@ -1,7 +1,7 @@
 extend("skyhighocs:base_astro");
 
-var astro = implement("skyhighheroes:external/astro");
-var stuff = implement("skyhighheroes:external/stuff");
+var astro = implement("skyhighocs:external/astro");
+var stuff = implement("skyhighocs:external/stuff");
 
 loadTextures({
   "full": "skyhighocs:damien/vulcan_full_base",

@@ -6,8 +6,8 @@
     }
   },
   "requirements": [
-    "skyhighheroes:wave_change",
-    "skyhighheroes:transers",
+    "skyhighocs:wave_change",
+    "skyhighocs:transers",
     "fiskheroes:tier10",
     "skyhighocs:base",
     "skyhighocs:chase_stelar"
@@ -23,7 +23,7 @@
           "player": "PLAYER_HURT",
           "damage": "DAMAGE_SOURCE"
         },
-        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_AQUA') && player.world().getLocation(player.pos()).biome().startsWith('Cold Taiga Hills') && player.getWornChestplate().suitType() == 'skyhighocs:chase_stelar'"
+        "check": "player.getData('skyhighocs:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_AQUA') && player.world().getLocation(player.pos()).biome().startsWith('Cold Taiga Hills') && player.getWornChestplate().suitType() == 'skyhighocs:chase_stelar'"
       }
     }
   }

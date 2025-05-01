@@ -16,7 +16,7 @@ function initModule(system) {
     modeID: "cyber",
     chatModeInfo: "<n>You are now in <nh>cyber<n> mode!",
     messageHandler: function (entity, name, range) {
-      var message = entity.getData("skyhighheroes:dyn/entry");
+      var message = entity.getData("skyhighocs:dyn/entry");
       var foundPlayers = [];
       var newRange = (range*1);
       var newName = system.getModelID(entity);

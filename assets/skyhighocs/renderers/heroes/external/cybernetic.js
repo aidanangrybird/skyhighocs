@@ -79,7 +79,7 @@ function addFlightAnimation(renderer, name, value, dataLoader) {
 };
 function addFlightAnimationWithLanding(renderer, name, value) {
   addFlightAnimation(renderer, name, value, (entity, data) => {
-    data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") * (1 - entity.getInterpolatedData("skyhighheroes:dyn/superhero_boosting_landing_timer") - entity.getInterpolatedData("skyhighheroes:dyn/superhero_landing_timer")));
+    data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") * (1 - entity.getInterpolatedData("skyhighocs:dyn/superhero_boosting_landing_timer") - entity.getInterpolatedData("skyhighocs:dyn/superhero_landing_timer")));
     data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
   });
 };
@@ -160,13 +160,13 @@ function initCyberneticAnimations(renderer) {
   .setCondition(entity => ((entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_timer") == 1) && (entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_timer") == 1)))
   .priority = -8;
   //Flight
-  addFlightAnimationWithLanding(renderer, "cybernetic.FLIGHT", "skyhighocs:cybernetic_flight.anim.json");
+  addFlightAnimationWithLanding(renderer, "cybernetic.FLIGHT", "skyhighocs:flight/cybernetic_flight.anim.json");
   //Landing
-  addAnimationWithData(renderer, "cybernetic.LAND", "skyhighocs:cybernetic_landing", "skyhighheroes:dyn/superhero_landing_timer")
+  addAnimationWithData(renderer, "cybernetic.LAND", "skyhighocs:cybernetic_landing", "skyhighocs:dyn/superhero_landing_timer")
     .priority = -8;
-  addAnimationWithData(renderer, "cybernetic.LAND_BOOST", "skyhighocs:cybernetic_boosting_landing", "skyhighheroes:dyn/superhero_boosting_landing_timer")
+  addAnimationWithData(renderer, "cybernetic.LAND_BOOST", "skyhighocs:cybernetic_boosting_landing", "skyhighocs:dyn/superhero_boosting_landing_timer")
     .priority = -8;
-  addAnimationWithData(renderer, "cybernetic.ROLL", "skyhighocs:cybernetic_barrel_roll", "fiskheroes:barrel_roll_timer")
+  addAnimationWithData(renderer, "cybernetic.ROLL", "skyhighocs:flight/cybernetic_barrel_roll", "fiskheroes:barrel_roll_timer")
   addHoverAnimation(renderer, "cybernetic.HOVER", "skyhighocs:cybernetic_hover");
   addAnimationWithData(renderer, "cybernetic.POWER", "skyhighocs:cybernetic_powering_down", "skyhighocs:dyn/powering_down_timer")
     .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighocs:dyn/powering_down_timer") > 0))
@@ -213,7 +213,7 @@ function initTransceiveBeams(renderer, model, color) {
   var receiveBase = model.getCubeOffset("head_satellite_dish_base");
   var transmitBase = model.getCubeOffset("head_satellite_dish_antenna");
 
-  var transmitBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:transmit");
+  var transmitBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:cybernetic_transmit");
   var transmitShape = renderer.createResource("SHAPE", null);
   var transmitLine = transmitShape.bindLine({ "start": [0.0, 0.1875, 0.0], "end": [0.0, 0.1875, 0.0], "size": [0.5, 0.5] });
   var transmitBeam = renderer.createEffect("fiskheroes:lines").setRenderer(transmitBeamRenderer).setShape(transmitShape).setOffset(0.0, 0.0, 0.0);
@@ -222,7 +222,7 @@ function initTransceiveBeams(renderer, model, color) {
   transmitBeam.anchor.set("head", transmitBase);
   transmitBeam.color.set(color);
 
-  var receiveBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:receive");
+  var receiveBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:cybernetic_receive");
   var receiveShape = renderer.createResource("SHAPE", null);
   var receiveLine = receiveShape.bindLine({ "start": [0.0, 300.375, 0.0], "end": [0.0, 300.375, 0.0], "size": [15.0, 15.0] });
   var receiveBeam = renderer.createEffect("fiskheroes:lines").setRenderer(receiveBeamRenderer).setShape(receiveShape).setOffset(0.0, 0.0, 0.0);

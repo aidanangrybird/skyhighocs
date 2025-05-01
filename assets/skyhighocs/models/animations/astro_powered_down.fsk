@@ -1,0 +1,13 @@
+{head_rotX} = 5'
+{head_rotY} = 65'
+{body_rotX} = -5'
+{rightLeg_posZ} = -1
+{leftLeg_posZ} = -1
+{rightLeg_posY} += -0.5
+{leftLeg_posY} += -0.5
+{rightLeg_rotZ} = 10'
+{leftLeg_rotZ} = -10'
+{rightArm_rotX} = -170'
+{rightArm_rotZ} = -37'
+{leftArm_rotX} = -170'
+{leftArm_rotZ} = 34'

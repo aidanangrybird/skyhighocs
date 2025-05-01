@@ -1,0 +1,16 @@
+{
+  "display": {
+    "name": {
+      "translate": "OC Transers"
+    },
+    "description": {
+      "translate": "Basic transers. Communication devices that are extremely useful."
+    },
+    "icon": {
+      "texture": "skyhighocs:textures/gui/nodes/star_force.png"
+    }
+  },
+  "requirements": [
+    "skyhighocs:base"
+  ]
+}

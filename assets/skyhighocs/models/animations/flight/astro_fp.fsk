@@ -1,0 +1,3 @@
+{data} = clamp(3curve({data}), 0, 1)
+out "firstPerson" (true)
+out "rotate" (-140{data}, 0, 0, 1)

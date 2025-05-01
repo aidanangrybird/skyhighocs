@@ -863,15 +863,15 @@ function initModule(system) {
         manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 0));
         manager.setData(entity, "fiskheroes:teleport_delay", 6);
       };
-      var t = entity.getData("skyhighheroes:dyn/superhero_boosting_landing_ticks");
+      var t = entity.getData("skyhighocs:dyn/superhero_boosting_landing_ticks");
       if (t == 0 && !entity.isSprinting() && !entity.isOnGround() && entity.motionY() < -1.25 && entity.getData("fiskheroes:flight_boost_timer") > 0 && entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() && entity.world().blockAt(entity.pos()).name() == "minecraft:air") {
-        manager.setDataWithNotify(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", t = 12);
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/superhero_boosting_landing_ticks", t = 12);
       } else if (t > 0) {
-        manager.setData(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", --t);
+        manager.setData(entity, "skyhighocs:dyn/superhero_boosting_landing_ticks", --t);
       };
-      manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
+      manager.incrementData(entity, "skyhighocs:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
       var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
-      manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
+      manager.incrementData(entity, "skyhighocs:dyn/superhero_landing_timer", 10, 10, pain);
     },
     fightOrFlight: function (entity, manager) {
       if (!entity.getWornHelmet().nbt().getBoolean("rocketsAux") || !entity.getWornHelmet().nbt().getBoolean("rocketsBody") || !entity.getWornHelmet().nbt().getBoolean("rocketsLegs")) {

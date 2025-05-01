@@ -4,18 +4,18 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/astro_right_leg_<OPENINGS>"
+        "supply": "skyhighocs:xor/astro_right_leg_<OPENINGS>"
       }
     ],
     "out": "skyhighocs:generated/aero_right_leg_<CLOTHING>_<OPENINGS>"
   },
   "getters": {
     "CLOTHING": {
-      "key": "entity.getData('skyhighheroes:dyn/astro_clothes') == 0 ? 'base' : entity.getData('skyhighheroes:dyn/astro_clothes') == 1 ? 'long' : entity.getData('skyhighheroes:dyn/astro_clothes') == 2 ? 'short' : 'normal'",
+      "key": "entity.getData('skyhighocs:dyn/astro_clothes') == 0 ? 'base' : entity.getData('skyhighocs:dyn/astro_clothes') == 1 ? 'long' : entity.getData('skyhighocs:dyn/astro_clothes') == 2 ? 'short' : 'normal'",
       "values": ["base", "long", "short", "normal"]
     },
     "OPENINGS": {
-      "key": "(entity.getData('skyhighheroes:dyn/right_leg_front_open_timer') > 0 || entity.getData('skyhighheroes:dyn/right_leg_back_open_timer') > 0) ? 'upper' : (entity.getData('skyhighheroes:dyn/right_leg_boot_front_open_timer') > 0 || entity.getData('skyhighheroes:dyn/right_leg_boot_back_open_timer') > 0) ? 'lower' : 'none'",
+      "key": "(entity.getData('skyhighocs:dyn/right_leg_front_open_timer') > 0 || entity.getData('skyhighocs:dyn/right_leg_back_open_timer') > 0) ? 'upper' : (entity.getData('skyhighocs:dyn/right_leg_boot_front_open_timer') > 0 || entity.getData('skyhighocs:dyn/right_leg_boot_back_open_timer') > 0) ? 'lower' : 'none'",
       "values": ["upper", "lower", "none"]
     }
   },

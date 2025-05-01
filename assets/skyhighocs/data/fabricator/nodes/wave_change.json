@@ -1,0 +1,16 @@
+{
+  "display": {
+    "name": {
+      "translate": "OC EM Wave Change"
+    },
+    "description": {
+      "translate": "EM Wave Change! On Air!"
+    },
+    "icon": {
+      "texture": "skyhighocs:textures/gui/nodes/star_force.png"
+    }
+  },
+  "requirements": [
+    "skyhighocs:base"
+  ]
+}

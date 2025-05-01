@@ -1,0 +1,34 @@
+{
+  "name": "Jet-powered Flight",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:controlled_flight": {
+      "speed": 0.1,
+      "boostSpeed": 0.5,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+        "ENABLE": ["skyhighocs:tenma_flight_enable", "skyhighocs:tenma_flight_loop"],
+        "BOOST": "skyhighocs:tenma_flight_boost"
+      }
+    },
+    "fiskheroes:teleportation": {
+      "canReachMoon": true,
+      "range": 1024.0,
+      "soundEvents": {
+        "TELEPORT": []
+      }
+    }
+  }
+}

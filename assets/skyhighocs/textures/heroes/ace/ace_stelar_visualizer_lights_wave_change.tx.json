@@ -4,18 +4,18 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/wave_change_<TIMER>"
+        "supply": "skyhighocs:xor/wave_change_<TIMER>"
       }
     ],
     "out": "skyhighocs:generated/ace_stelar_<VISUALIZER>_lights_<TIMER>"
   },
   "getters": {
     "VISUALIZER": {
-      "key": "entity.getData('skyhighheroes:dyn/visualizer_toggle') ? 'down' : entity.getData('skyhighheroes:dyn/stelar_clothes') == 3 ? (entity.getData('skyhighheroes:dyn/hood_toggle') ? 'up_winter_hood' : 'up') : 'up'",
+      "key": "entity.getData('skyhighocs:dyn/visualizer_toggle') ? 'down' : entity.getData('skyhighocs:dyn/stelar_clothes') == 3 ? (entity.getData('skyhighocs:dyn/hood_toggle') ? 'up_winter_hood' : 'up') : 'up'",
       "values": ["up", "down", "up_winter_hood"]
     },
     "TIMER": {
-      "key": "Math.ceil(80 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) | 0",
+      "key": "Math.ceil(80 * entity.getInterpolatedData('skyhighocs:dyn/wave_changing_timer')) | 0",
       "values": {
         "min": 0,
         "max": 40

@@ -9,8 +9,5 @@
     "icon": {
       "text": "OCs"
     }
-  },
-  "requirements": [
-    "skyhighheroes:base"
-  ]
+  }
 }

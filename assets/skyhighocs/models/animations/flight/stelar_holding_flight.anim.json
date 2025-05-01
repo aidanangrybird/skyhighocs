@@ -1,0 +1,8 @@
+{
+  "inputs": [
+    "skyhighocs:flight/stelar_holding_header",
+    "skyhighocs:flight/stelar_holding_idle",
+    "skyhighocs:flight/stelar_holding_boost",
+    "skyhighocs:flight/stelar_holding_fp"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "sound": "skyhighocs:wave.flying.loop",
+  "override": "skyhighocs:funcs/flying",
+  "loop": true,
+  "fadeIn": 10,
+  "fadeOut": 10
+}

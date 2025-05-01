@@ -1,0 +1,16 @@
+{
+  "name": "transerOS",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:shape_shifting": {
+    },
+    "fiskheroes:transformation|calling": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/calling",
+        "timerData": "skyhighocs:dyn/calling_timer",
+        "time": 600
+      },
+      "isToggle": true
+    }
+  }
+}

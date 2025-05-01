@@ -1,7 +1,7 @@
 extend("skyhighocs:base_em_wave_change");
 
-var stelar = implement("skyhighheroes:external/stelar");
-var stuff = implement("skyhighheroes:external/stuff");
+var stelar = implement("skyhighocs:external/stelar");
+var stuff = implement("skyhighocs:external/stuff");
 
 loadTextures({
   "base": "skyhighocs:aidan/squall_vortex_base",
@@ -83,7 +83,7 @@ var santaHat;
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
-  stelar.addAnimationWithData(renderer, "stelar.DERECHO_AIM", "skyhighheroes:stelar_aim", "fiskheroes:energy_projection_timer")
+  stelar.addAnimationWithData(renderer, "stelar.DERECHO_AIM", "skyhighocs:stelar_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
   renderer.setItemIcon("CHESTPLATE", "pegasus_transer");
 };
@@ -139,7 +139,7 @@ function initEffects(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
   if (renderLayer == "CHESTPLATE") {
-    if ((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("fiskheroes:mask_open_timer2") > 0) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
+    if ((entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("fiskheroes:mask_open_timer2") > 0) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
       if (!parent.isChristmasSeason) {
         helmetWaveChangingLights.render();
         helmet.render();
@@ -147,35 +147,35 @@ function render(entity, renderLayer, isFirstPersonArm) {
       maskWaveChangingLights.render();
       mask.render();
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || (entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
-      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) {
+    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") > 0 || (entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
+      if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) {
         headWaveChange.render();
       };
-      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/lightning_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/derecho_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/hail_cannon_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
+      if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighocs:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/lightning_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/derecho_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/hail_cannon_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
         head.render();
       }
-      if (((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/lightning_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/derecho_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/hail_cannon_timer") < 1)) {
+      if (((entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighocs:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/lightning_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/derecho_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/hail_cannon_timer") < 1)) {
         headWaveChanging.render();
       }
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) {
       predation.render();
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") > 0) {
+    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/sword_timer") > 0) {
       swordWaveChanging.render();
       swordMain.render();
       sword.render();
-      if (entity.getData("skyhighheroes:dyn/sword") && entity.getHeldItem().isEmpty()) {
+      if (entity.getData("skyhighocs:dyn/sword") && entity.getHeldItem().isEmpty()) {
         swordBlade.render();
       };
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/lightning_timer") > 0) {
+    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/lightning_timer") > 0) {
       lightning.render();
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/derecho_timer") > 0) {
+    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/derecho_timer") > 0) {
       derecho.render();
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/hail_cannon_timer") > 0) {
+    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/hail_cannon_timer") > 0) {
       hailCannon.render();
     };
   };

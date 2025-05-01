@@ -4,14 +4,14 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/sword_wave_changing_lights_<TIMER>"
+        "supply": "skyhighocs:xor/sword_wave_changing_lights_<TIMER>"
       }
     ],
     "out": "skyhighocs:generated/pryetak_nebula_sword_wave_changing_lights_<TIMER>"
   },
   "getters": {
     "TIMER": {
-      "key": "Math.min(Math.max(Math.ceil(28 - ((entity.getData('skyhighheroes:dyn/sword') ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighheroes:dyn/sword_timer') + (entity.getData('skyhighheroes:dyn/sword') ? 28 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 28 : 0))), 1), 24) | 0",
+      "key": "Math.min(Math.max(Math.ceil(28 - ((entity.getData('skyhighocs:dyn/sword') ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighocs:dyn/sword_timer') + (entity.getData('skyhighocs:dyn/sword') ? 28 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighocs:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 28 : 0))), 1), 24) | 0",
       "values": {
         "min": 0,
         "max": 25

@@ -1,0 +1,7 @@
+{
+  "sound": "fiskheroes:ambient.flight",
+  "override": "skyhighocs:funcs/flight",
+  "loop": true,
+  "fadeIn": 8,
+  "fadeOut": 15
+}

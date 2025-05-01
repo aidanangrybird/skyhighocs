@@ -6,8 +6,8 @@
     }
   },
   "requirements": [
-    "skyhighheroes:wave_change",
-    "skyhighheroes:transers",
+    "skyhighocs:wave_change",
+    "skyhighocs:transers",
     "fiskheroes:tier10",
     "skyhighocs:base",
     "skyhighocs:aidan_stelar"
@@ -23,7 +23,7 @@
           "player": "PLAYER_HURT",
           "damage": "DAMAGE_SOURCE"
         },
-        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_WIND') && damage.hasDamageType('ELEMENT_AQUA') && damage.hasDamageType('ELEMENT_ELEC') && (player.world().getLocation(player.pos()).biome().startsWith('Plains') || player.world().getLocation(player.pos()).biome().startsWith('Sunflower Plains')) && player.getWornChestplate().suitType() == 'skyhighocs:aidan_stelar'"
+        "check": "player.getData('skyhighocs:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_WIND') && damage.hasDamageType('ELEMENT_AQUA') && damage.hasDamageType('ELEMENT_ELEC') && (player.world().getLocation(player.pos()).biome().startsWith('Plains') || player.world().getLocation(player.pos()).biome().startsWith('Sunflower Plains')) && player.getWornChestplate().suitType() == 'skyhighocs:aidan_stelar'"
       }
     }
   }

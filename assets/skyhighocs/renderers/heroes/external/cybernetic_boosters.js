@@ -10,9 +10,9 @@ function initLeftLegBoosters(renderer, model, color) {
   var boosterFrontRocketOffset = model.getCubeOffset("left_leg_front_booster_rocket");
   var boosterBackRocketOffset = model.getCubeOffset("left_leg_back_booster_rocket");
 
-  var icon = renderer.createResource("ICON", "skyhighheroes:null");
+  var icon = renderer.createResource("ICON", "skyhighocs:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
+  beam = renderer.createResource("BEAM_RENDERER", "skyhighocs:cybernetic_booster");
   
   //Main
   var boosterMain = renderer.createEffect("fiskheroes:booster");
@@ -544,9 +544,9 @@ function initRightLegBoosters(renderer, model, color) {
   var boosterFrontRocketOffset = model.getCubeOffset("right_leg_front_booster_rocket");
   var boosterBackRocketOffset = model.getCubeOffset("right_leg_back_booster_rocket");
 
-  var icon = renderer.createResource("ICON", "skyhighheroes:null");
+  var icon = renderer.createResource("ICON", "skyhighocs:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
+  beam = renderer.createResource("BEAM_RENDERER", "skyhighocs:cybernetic_booster");
   
   //Main
   var boosterMain = renderer.createEffect("fiskheroes:booster");
@@ -1071,9 +1071,9 @@ function initBodyBoosters(renderer, model, color) {
   var leftRocketOffset = model.getCubeOffset("body_rocket_left");
   var rightRocketOffset = model.getCubeOffset("body_rocket_right");
 
-  var icon = renderer.createResource("ICON", "skyhighheroes:null");
+  var icon = renderer.createResource("ICON", "skyhighocs:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
+  beam = renderer.createResource("BEAM_RENDERER", "skyhighocs:cybernetic_booster");
 
   //Left
   var boosterLeft = renderer.createEffect("fiskheroes:booster");
@@ -1210,9 +1210,9 @@ function initLeftArmBoosters(renderer, model, color) {
   var boosterFrontRocketOffset = model.getCubeOffset("left_arm_front_rocket");
   var boosterBackRocketOffset = model.getCubeOffset("left_arm_back_rocket");
 
-  var icon = renderer.createResource("ICON", "skyhighheroes:null");
+  var icon = renderer.createResource("ICON", "skyhighocs:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
+  beam = renderer.createResource("BEAM_RENDERER", "skyhighocs:cybernetic_booster");
   
   //Booster
   //Outer
@@ -1391,9 +1391,9 @@ function initRightArmBoosters(renderer, model, color) {
   var boosterFrontRocketOffset = model.getCubeOffset("right_arm_front_rocket");
   var boosterBackRocketOffset = model.getCubeOffset("right_arm_back_rocket");
 
-  var icon = renderer.createResource("ICON", "skyhighheroes:null");
+  var icon = renderer.createResource("ICON", "skyhighocs:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
+  beam = renderer.createResource("BEAM_RENDERER", "skyhighocs:cybernetic_booster");
   
   //Booster
   var boosterOuterBooster = renderer.createEffect("fiskheroes:booster");

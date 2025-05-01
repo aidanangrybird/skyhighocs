@@ -1,7 +1,7 @@
 {
   "suit": "skyhighocs:vulcan",
   "requirements": [
-    "skyhighheroes:robot",
+    "skyhighocs:robot",
     "fiskheroes:tier8_9",
     "skyhighocs:base"
   ],

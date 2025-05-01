@@ -752,14 +752,14 @@ function initSystem(moduleList, name, normalName, color, uuid) {
   function switchChatModes(entity, manager, mode) {
     var modeIndex = chatModes.indexOf(mode);
     if (modeIndex > -1) {
-      manager.setData(entity, "skyhighheroes:dyn/chat_mode", modeIndex);
-      var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
+      manager.setData(entity, "skyhighocs:dyn/chat_mode", modeIndex);
+      var chatMode = entity.getData("skyhighocs:dyn/chat_mode");
       systemMessage(entity, modules[messagingIndexes[chatMode]].chatModeInfo);
       modules[messagingIndexes[chatMode]].chatInfo(entity, manager);
     };
   };
   function switchChats(entity, manager, chat) {
-    var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
+    var chatMode = entity.getData("skyhighocs:dyn/chat_mode");
     modules[messagingIndexes[chatMode]].chatInfo(entity, manager, chat);
   };
   function systemInfo(entity) {
@@ -1170,7 +1170,7 @@ function initSystem(moduleList, name, normalName, color, uuid) {
     };
   };
   function tickHandler(entity, manager) {
-    if ((!entity.getData("skyhighheroes:dyn/system_init"))) {
+    if ((!entity.getData("skyhighocs:dyn/system_init"))) {
       manager.setString(entity.getWornHelmet().nbt(), "cyberModelID", cyberModelID);
       manager.setString(entity.getWornHelmet().nbt(), "cyberAliasName", cyberName);
       manager.setString(entity.getWornHelmet().nbt(), "boundUUID", boundUUID);
@@ -1192,7 +1192,7 @@ function initSystem(moduleList, name, normalName, color, uuid) {
       } else {
         systemMessage(entity, "<e>\u00A7lUNAUTHORIZED USER!");
       };
-      manager.setData(entity, "skyhighheroes:dyn/system_init", true);
+      manager.setData(entity, "skyhighocs:dyn/system_init", true);
       manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
     };
     if (entity.getUUID() == boundUUID) {
@@ -1216,19 +1216,19 @@ function initSystem(moduleList, name, normalName, color, uuid) {
     if (typeof entity.getData("fiskheroes:disguise") === "string") {
       if (!((entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == cyberModelID) || entity.getData("fiskheroes:disguise") == disguisedName)) {
         if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
-          manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+          manager.setData(entity, "skyhighocs:dyn/entry", entity.getData("fiskheroes:disguise"));
           manager.setData(entity, "fiskheroes:disguise", disguisedName);
         } else {
-          manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+          manager.setData(entity, "skyhighocs:dyn/entry", entity.getData("fiskheroes:disguise"));
           manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? cyberName : cyberModelID));
         };
         manager.setData(entity, "fiskheroes:shape_shifting_to", null);
         manager.setData(entity, "fiskheroes:shape_shifting_from", null);
         manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
-        var entry = entity.getData("skyhighheroes:dyn/entry");
+        var entry = entity.getData("skyhighocs:dyn/entry");
         if (entry.startsWith("!")) {
-          manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
-          var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
+          manager.setData(entity, "skyhighocs:dyn/entry", entry.substring(1));
+          var args = entity.getData("skyhighocs:dyn/entry").split(" ");
           switch (args[0]) {
             case "systemInfo":
               systemInfo(entity);
@@ -1300,7 +1300,7 @@ function initSystem(moduleList, name, normalName, color, uuid) {
               break;
           };
         } else {
-          modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity, name, 32);
+          modules[messagingIndexes[entity.getData("skyhighocs:dyn/chat_mode")]].messageHandler(entity, name, 32);
         };
       };
     };

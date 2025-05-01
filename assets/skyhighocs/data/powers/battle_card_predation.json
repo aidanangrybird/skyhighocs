@@ -1,0 +1,30 @@
+{
+  "name": "Battle Card Predation",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:transformation|predation": {
+      "key": "PREDATION",
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/predation",
+        "timerData": "skyhighocs:dyn/predation_timer",
+        "time": 20
+      },
+      "isToggle": true
+    },
+    "fiskheroes:cooldown": {
+      "cooldown": {
+        "toggleData": "skyhighocs:dyn/predation",
+        "cooldownData": "skyhighocs:dyn/predation_cooldown",
+        "duration": 200,
+        "recovery": 50.0
+      }
+    }
+  },
+  "hud": [
+    {
+      "type": "PROGRESS",
+      "texture": "skyhighocs:textures/gui/bars/predation.png",
+      "data": "skyhighocs:dyn/predation_cooldown"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 var cybernetic = implement("skyhighocs:external/cybernetic");
 var cybernetic_boosters = implement("skyhighocs:external/cybernetic_boosters");
 var cybernetic_beams = implement("skyhighocs:external/cybernetic_beams");
-var stuff = implement("skyhighheroes:external/stuff");
+var stuff = implement("skyhighocs:external/stuff");
 
 var blank_model;
 var metal_heat;
@@ -428,7 +428,7 @@ function initEffects(renderer) {
 };
 
 function initAnimations(renderer) {
-  //stuff.initHoloFlightAnim(renderer, "cybernetic.HOLOGRAM_FLIGHT", "skyhighheroes:astro_holo_flight");
+  //stuff.initHoloFlightAnim(renderer, "cybernetic.HOLOGRAM_FLIGHT", "skyhighocs:astro_holo_flight");
   cybernetic.initCyberneticAnimations(renderer);
 };
 

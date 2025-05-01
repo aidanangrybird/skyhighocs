@@ -4,14 +4,14 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/em_being_wave_changing_left_lights_<TIMER>"
+        "supply": "skyhighocs:xor/em_being_wave_changing_left_lights_<TIMER>"
       }
     ],
     "out": "skyhighocs:generated/solar_wave_changing_left_lights_<TIMER>"
   },
   "getters": {
     "TIMER": {
-      "key": "Math.min(Math.max(Math.ceil((87 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 59) - ((entity.getData('skyhighocs:dyn/solar') ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighocs:dyn/solar_timer') + (entity.getData('skyhighocs:dyn/solar') ? 28 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 28 : 0))), 2), 28) | 0",
+      "key": "Math.min(Math.max(Math.ceil((87 * entity.getInterpolatedData('skyhighocs:dyn/wave_changing_timer') - 59) - ((entity.getData('skyhighocs:dyn/solar') ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighocs:dyn/solar_timer') + (entity.getData('skyhighocs:dyn/solar') ? 28 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighocs:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 28 : 0))), 2), 28) | 0",
       "values": {
         "min": 2,
         "max": 28

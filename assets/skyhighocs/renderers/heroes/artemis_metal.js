@@ -1,7 +1,7 @@
 extend("skyhighocs:artemis");
 
-var astro = implement("skyhighheroes:external/astro");
-var stuff = implement("skyhighheroes:external/stuff");
+var astro = implement("skyhighocs:external/astro");
+var stuff = implement("skyhighocs:external/stuff");
 
 loadTextures({
   "full": "skyhighocs:lucas/artemis_full_base_metal",

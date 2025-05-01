@@ -1,0 +1,18 @@
+{
+  "name": "EM Wave Change",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:transformation|wave_change": {
+      "key": "WAVE_CHANGE",
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/wave_changed",
+        "timerData": "skyhighocs:dyn/wave_changing_timer",
+        "time": 30
+      },
+      "soundEvents": {
+        "ENABLE": "skyhighocs:wave_transform",
+        "DISABLE": "skyhighocs:wave_transform"
+      }
+    }
+  }
+}

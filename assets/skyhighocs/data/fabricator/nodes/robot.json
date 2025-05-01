@@ -1,0 +1,13 @@
+{
+  "display": {
+    "name": {
+      "translate": "Robot OCs"
+    },
+    "icon": {
+      "item": "fiskheroes:suit_data_drive"
+    }
+  },
+  "requirements": [
+      "skyhighocs:base"
+  ]
+}

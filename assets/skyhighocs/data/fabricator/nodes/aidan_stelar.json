@@ -1,7 +1,7 @@
 {
   "suit": "skyhighocs:aidan_stelar",
   "requirements": [
-    "skyhighheroes:transers",
+    "skyhighocs:transers",
     "fiskheroes:tier1",
     "skyhighocs:base"
   ],
