@@ -185,7 +185,6 @@ function initModule(system) {
     moduleMessageName: "Comms",
     type: 12,
     command: "comms",
-    powers: ["skyhighocs:communications"],
     helpMessage: "<n>!comms <nh>-<n> Communications",
     disabledMessage: "<e>Module <eh>communications<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {

@@ -8,7 +8,6 @@ function initModule(system) {
     name: "shields",
     moduleMessageName: "Shields",
     type: 14,
-    powers: ["skyhighocs:shields"],
     command: "shield",
     helpMessage: "<n>!shield <nh>-<n> Shields",
     disabledMessage: "<e>Module <eh>shields<e> is disabled!",
