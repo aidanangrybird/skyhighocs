@@ -394,7 +394,7 @@ function systemMessage(entity, message) {
  * @param {string} message - Log message
  **/
 function logMessage(message) {
-  PackLoader.print(message);
+  PackLoader.print("skyhighocs: " + message);
 };
 
 /**
