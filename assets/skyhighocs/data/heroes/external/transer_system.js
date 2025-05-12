@@ -1,7 +1,7 @@
 //If I see anyone steal this, I will be very mad as I have spent a lot of time working on this to get it working well
 //So please don't steal this, it will look very bad on you
 
-regex = /((<ob>))|(<n>)|(<nh>)|(<s>)|(<sh>)|(<e>)|(<eh>)|(<r>)|(<d>)|(<l>)|(<p>)|(<dragon>)|(<leo>)|(<pegasus>)/gm;
+regex = /((<ob>))|(<n>)|(<nh>)|(<s>)|(<sh>)|(<e>)|(<eh>)|(<r>)|(<dragon>)|(<leo>)|(<pegasus>)/gm;
 
 var formatting = {
   "<ob>": "\u00A7k",
@@ -11,9 +11,6 @@ var formatting = {
   "<sh>": "\u00A7e",
   "<e>": "\u00A7c",
   "<eh>": "\u00A76",
-  "<d>": "\u00A72",
-  "<l>": "\u00A74",
-  "<p>": "\u00A71",
   "<dragon>": "\u00A72Dragon \u00A77Sky\u00A7r",
   "<leo>": "\u00A76Leo \u00A74Kingdom\u00A7r",
   "<pegasus>": "\u00A7bPegasus \u00A79Magic\u00A7r",
@@ -38,24 +35,26 @@ var months = [
 function assignTranser(entity, manager, satellite) {
   manager.setString(entity.getWornChestplate().nbt(), "satellite", satellite);
   manager.setBoolean(entity.getWornChestplate().nbt(), "Unbreakable", true);
-  if (!entity.getWornChestplate().nbt().hasKey("worthy") && (entity.getWornChestplate().suitType() == "skyhighocs:leo_transer" || entity.getWornChestplate().suitType() == "skyhighocs:pegasus_transer" || entity.getWornChestplate().suitType() == "skyhighocs:dragon_transer")) {
-    if (PackLoader.getSide() == "SERVER") {
-      var value = Math.random();
-      if (value < 0.05) {
-        manager.setBoolean(entity.getWornChestplate().nbt(), "worthy", true);
-        manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighocs:geo_stelar");
-      } else {
-        manager.setBoolean(entity.getWornChestplate().nbt(), "worthy", false);
-      };
-    };
-  };
-  if (entity.getWornChestplate().nbt().hasKey("worthy") && entity.getWornChestplate().suitType() == "skyhighocs:geo_stelar") {
-    manager.removeTag(entity.getWornChestplate().nbt(), "worthy")
-  };
   if (!entity.getWornChestplate().nbt().hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
       var computerID = Math.random().toFixed(8).toString().substring(2);
       manager.setString(entity.getWornChestplate().nbt(), "computerID", computerID);
+    };
+  };
+  if (!entity.getWornChestplate().nbt().hasKey("systemColor")) {
+    switch (satellite) {
+      case "dragon":
+        manager.setString(entity.getWornChestplate().nbt(), "systemColor", "2");
+        break;
+      case "leo":
+        manager.setString(entity.getWornChestplate().nbt(), "systemColor", "4");
+        break;
+      case "pegasus":
+        manager.setString(entity.getWornChestplate().nbt(), "systemColor", "1");
+        break;
+      default:
+        manager.setString(entity.getWornChestplate().nbt(), "systemColor", "0");
+        break;
     };
   };
 };
@@ -85,6 +84,15 @@ function hasComputer(entity) {
  **/
 function getAssignedSatellite(entity) {
   return entity.getWornChestplate().nbt().getString("satellite");
+};
+
+/**
+ * Gets the system color of a transer
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns The system color of a transer
+ **/
+function getSystemColor(entity) {
+  return "\u00A7" + entity.getWornChestplate().nbt().getString("systemColor");
 };
 
 /**
@@ -298,9 +306,6 @@ function chatMessage(entity, message) {
  * "<sh>": "\u00A7e"
  * "<e>": "\u00A7c"
  * "<eh>": "\u00A76"
- * "<d>": "\u00A72"
- * "<l>": "\u00A74"
- * "<p>": "\u00A71"
  * "<dragon>": "\u00A72Dragon \u00A77Sky\u00A7r"
  * "<leo>": "\u00A76Leo \u00A74Kingdom\u00A7r"
  * "<pegasus>": "\u00A7bPegasus \u00A79Magic\u00A7r"
@@ -310,20 +315,7 @@ function chatMessage(entity, message) {
  * @param {string} message - Message content
  **/
 function systemMessage(entity, message) {
-  switch (getAssignedSatellite(entity)) {
-    case "dragon":
-      chatMessage(entity, formatSystem("<d>\u00A7ltranserOS\u00A7r> " + message));
-      break;
-    case "leo":
-      chatMessage(entity, formatSystem("<l>\u00A7ltranserOS\u00A7r> " + message));
-      break;
-    case "pegasus":
-      chatMessage(entity, formatSystem("<p>\u00A7ltranserOS\u00A7r> " + message));
-      break;
-    default:
-      chatMessage(entity, formatSystem("<e>Transer is not assigned to a valid satellite!"));
-      break;
-  };
+  chatMessage(entity, formatSystem(getSystemColor(entity) + "\u00A7ltranserOS\u00A7r> " + message));
 };
 /**
  * Sends message in group format
@@ -344,20 +336,7 @@ function moduleMessage(module, entity, message) {
   if (module.hasOwnProperty("moduleMessageName")) {
     messageName = module.moduleMessageName;
   };
-  switch (getAssignedSatellite(entity)) {
-    case "dragon":
-      chatMessage(entity, formatSystem("<d>" + messageName + "<r>> " + message));
-      break;
-    case "leo":
-      chatMessage(entity, formatSystem("<l>" + messageName + "<r>> " + message));
-      break;
-    case "pegasus":
-      chatMessage(entity, formatSystem("<p>" + messageName + "<r>> " + message));
-      break;
-    default:
-      chatMessage(entity, formatSystem("<e>Transer is not assigned to a valid satellite!"));
-      break;
-  };
+  chatMessage(entity, formatSystem(getSystemColor(entity) + messageName + "<r>> " + message));
 };
 /**
  * Is the setKeyBind stuff for basic transers

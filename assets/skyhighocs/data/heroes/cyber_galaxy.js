@@ -1,6 +1,6 @@
 var uuid = "60f30003-1148-416b-8b4d-347002891126";
 var cybernetics = implement("skyhighocs:external/cybernetics");
-var settings = implement("skyhighocs:external/settings");
+var settings = implement("skyhighocs:external/cybernetic_settings");
 var messaging = implement("skyhighocs:external/messaging");
 var groupMessaging = implement("skyhighocs:external/group_messaging");
 var groups = implement("skyhighocs:external/groups");

@@ -1,7 +1,12 @@
-var cybernetic = implement("skyhighocs:external/cybernetic");
+var cybernetic = implement("skyhighocs:external/cybernetics");
 var cybernetic_boosters = implement("skyhighocs:external/cybernetic_boosters");
 var cybernetic_beams = implement("skyhighocs:external/cybernetic_beams");
 var stuff = implement("skyhighocs:external/stuff");
+
+var locations = [
+  {"posX": 223.0, "posY": 75.0, "posZ": 398.0, "color": 0xFF8900},
+  {"posX": 212.5, "posY": 74.0, "posZ": 415.5, "color": 0xFF0000}
+]
 
 var blank_model;
 var metal_heat;
@@ -36,6 +41,9 @@ var right_arm_disguise_model;
 var left_leg_disguise_model;
 var right_leg_disguise_model;
 
+var locationBeam;
+var entityLocationBeam;
+
 loadTextures({
   "null": "skyhighocs:null",
   "arm": "skyhighocs:cybernetic_arm_base",
@@ -54,6 +62,8 @@ function init(renderer) {
 };
 
 function initEffects(renderer) {
+  locationBeam = stuff.location(renderer);
+  entityLocationBeam = stuff.entityLocation(renderer);
   //Deploy + base
   //Add a clamp thing to the inner rockets so I can supress them with a timer instead of just a nbt boolean
   //Use motion and look in these animations
@@ -418,13 +428,13 @@ function initEffects(renderer) {
   metal_heat.includeEffects(head_model, head_hair_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model);
   renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
     return 0.999999;
-  }).setCondition(entity => ((entity.isWearingFullSuit() && entity.getUUID() == getBoundUUID(entity)) || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));
+  }).setCondition(entity => (entity.isWearingFullSuit() || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));
 
   var nv = renderer.bindProperty("fiskheroes:night_vision");
   nv.fogStrength = 0.0;
   nv.firstPersonOnly = false;
   nv.factor = 1.0;
-  nv.setCondition(entity => (entity.isWearingFullSuit() && entity.getUUID() == getBoundUUID(entity) && entity.getWornHelmet().nbt().getBoolean("nightVision")));
+  nv.setCondition(entity => (entity.isWearingFullSuit() && entity.getWornHelmet().nbt().getBoolean("nightVision")));
 };
 
 function initAnimations(renderer) {
@@ -435,8 +445,56 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
+  var nbt = entity.getWornHelmet().nbt();
+  cybernetic.cybers.forEach(cyber => {
+    var color = cybernetic.cyberColors[cybernetic.cybers.indexOf(cyber)];
+    var id = entity.getWornHelmet().nbt().getInteger("id" + cyber);
+    if (id > -1) {
+      if (cybernetic.isStillCyber(entity, id)) {
+        var scannedCyber = entity.world().getEntityById(id);
+        entityLocationBeam.render(isFirstPersonArm, entity, scannedCyber, color);
+      };
+    };
+  });
+  var entities = [];
+  if (nbt.getBoolean("hostilesOnHud") || nbt.getBoolean("friendliesOnHud") || nbt.getBoolean("playersOnHud")) {
+    entities = entity.world().getEntitiesInRangeOf(entity.pos(), nbt.getInteger("hudRange"));
+  };
+  if (entities.length > 0) {
+    entities.forEach(scannedEntity => {
+      if (scannedEntity.isAlive()) {
+        if (nbt.getBoolean("hostilesOnHud") && stuff.hostileEntities.indexOf(scannedEntity.getEntityName()) > -1) {
+          entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, 0x770000);
+        };
+        if (nbt.getBoolean("friendliesOnHud") && stuff.friendlyEntities.indexOf(scannedEntity.getEntityName()) > -1) {
+          entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, 0x007700);
+        };
+        if (nbt.getBoolean("playersOnHud") && scannedEntity.is("PLAYER") && !entity.getData("fiskheroes:invisible")) {
+          var color = 0x000077;
+          if (scannedEntity.isWearingFullSuit()) {
+            if (scannedEntity.getWornHelmet().nbt().hasKey("hudColorSkyHigh")) {
+              color = scannedEntity.getWornHelmet().nbt().getString("hudColorSkyHigh");
+            };
+            if (scannedEntity.getWornChestplate().nbt().hasKey("hudColorSkyHigh")) {
+              color = scannedEntity.getWornChestplate().nbt().getString("hudColorSkyHigh");
+            };
+            if (scannedEntity.getWornLeggings().nbt().hasKey("hudColorSkyHigh")) {
+              color = scannedEntity.getWornLeggings().nbt().getString("hudColorSkyHigh");
+            };
+            if (scannedEntity.getWornBoots().nbt().hasKey("hudColorSkyHigh")) {
+              color = scannedEntity.getWornBoots().nbt().getString("hudColorSkyHigh");
+            };
+          };
+          entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, color);
+        };
+      };
+    });
+  };
+  /* locations.forEach(locationThing => {
+    locationBeam.render(isFirstPersonArm, entity, locationThing["posX"], locationThing["posY"], locationThing["posZ"], locationThing["color"])
+  }); */
   if (entity.is("DISPLAY")) {
-    if (entity.getWornHelmet().nbt().getBoolean("camoOnStand")) {
+    if (nbt.getBoolean("camoOnStand")) {
       head_camouflage_model.render();
       head_hair_camouflage_model.render();
       body_camouflage_model.render();
@@ -445,7 +503,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
       left_leg_camouflage_model.render();
       right_leg_camouflage_model.render();
     };
-    if (entity.getWornHelmet().nbt().getBoolean("disguiseOnStand") && !entity.getWornHelmet().nbt().getBoolean("camoOnStand")) {
+    if (nbt.getBoolean("disguiseOnStand") && !nbt.getBoolean("camoOnStand")) {
       head_disguise_model.render();
       head_hair_disguise_model.render();
       body_disguise_model.render();
@@ -463,7 +521,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
     right_leg_model.render();
   };
   
-  if (entity.isWearingFullSuit() && (entity.getUUID() == getBoundUUID(entity)) && (entity.getInterpolatedData("skyhighocs:dyn/thermoptic_camouflage_timer") < 1)) {
+  if (entity.isWearingFullSuit() && (entity.getInterpolatedData("skyhighocs:dyn/thermoptic_camouflage_timer") < 1)) {
     head_model.render();
     head_hair_model.render();
     body_model.render();

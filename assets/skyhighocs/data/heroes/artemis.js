@@ -1,4 +1,5 @@
 var robot = implement("skyhighocs:external/astro_system");
+var settings = implement("skyhighocs:external/astro_settings");
 var messaging = implement("skyhighocs:external/messaging");
 var groupMessaging = implement("skyhighocs:external/group_messaging");
 var groups = implement("skyhighocs:external/groups");
@@ -13,8 +14,8 @@ var flight = implement("skyhighocs:external/astro_flight");
 var panelStatus = implement("skyhighocs:external/astro_panel_status");
 var opener = implement("skyhighocs:external/astro_opener");
 var closer = implement("skyhighocs:external/astro_closer");
-var eyes = implement("skyhighocs:external/astro_eyes");
 var astrOS = robot.initSystem([
+  settings,
   messaging,
   groupMessaging,
   groups,
@@ -28,8 +29,7 @@ var astrOS = robot.initSystem([
   flight,
   panelStatus,
   opener,
-  closer,
-  eyes
+  closer
 ], "Artemis", "4");
 function init(hero) {
   hero.setAliases("artemis");

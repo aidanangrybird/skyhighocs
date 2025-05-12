@@ -19,6 +19,9 @@ var right_arm_model;
 var left_leg_model;
 var right_leg_model;
 
+var locationBeam;
+var entityLocationBeam;
+
 loadTextures({
   "null": "skyhighocs:null",
   "santa_hat_normal": "skyhighocs:santa_hat",
@@ -57,6 +60,8 @@ function init(renderer) {
 };
 
 function initEffects(renderer) {
+  locationBeam = stuff.location(renderer);
+  entityLocationBeam = stuff.entityLocation(renderer);
   var blank = renderer.createResource("MODEL", "skyhighocs:BlankThing");
   blank.texture.set("blank");
   blank_model = renderer.createEffect("fiskheroes:model").setModel(blank);
@@ -272,6 +277,41 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
+  var nbt = entity.getWornLeggings().nbt();
+  var entities = [];
+  if (nbt.getBoolean("hostilesOnHud") || nbt.getBoolean("friendliesOnHud") || nbt.getBoolean("playersOnHud")) {
+    entities = entity.world().getEntitiesInRangeOf(entity.pos(), nbt.getInteger("hudRange"));
+  };
+  if (entities.length > 0) {
+    entities.forEach(scannedEntity => {
+      if (scannedEntity.isAlive()) {
+        if (nbt.getBoolean("hostilesOnHud") && stuff.hostileEntities.indexOf(scannedEntity.getEntityName()) > -1) {
+          entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, 0x770000);
+        };
+        if (nbt.getBoolean("friendliesOnHud") && stuff.friendlyEntities.indexOf(scannedEntity.getEntityName()) > -1) {
+          entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, 0x007700);
+        };
+        if (nbt.getBoolean("playersOnHud") && scannedEntity.is("PLAYER") && !scannedEntity.getData("fiskheroes:invisible")) {
+          var color = 0x000077;
+          if (scannedEntity.isWearingFullSuit()) {
+            if (scannedEntity.getWornHelmet().nbt().hasKey("hudColorSkyHigh")) {
+              color = scannedEntity.getWornHelmet().nbt().getString("hudColorSkyHigh");
+            };
+            if (scannedEntity.getWornChestplate().nbt().hasKey("hudColorSkyHigh")) {
+              color = scannedEntity.getWornChestplate().nbt().getString("hudColorSkyHigh");
+            };
+            if (scannedEntity.getWornLeggings().nbt().hasKey("hudColorSkyHigh")) {
+              color = scannedEntity.getWornLeggings().nbt().getString("hudColorSkyHigh");
+            };
+            if (scannedEntity.getWornBoots().nbt().hasKey("hudColorSkyHigh")) {
+              color = scannedEntity.getWornBoots().nbt().getString("hudColorSkyHigh");
+            };
+          };
+          entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, color);
+        };
+      };
+    });
+  };
   if (entity.isWearingFullSuit()) {
     if (isChristmasSeason) {
       if (entity.getData("skyhighocs:dyn/astro_clothes") == 3) {

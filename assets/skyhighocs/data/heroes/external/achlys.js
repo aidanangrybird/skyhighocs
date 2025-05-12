@@ -31,10 +31,10 @@ function initModule(system) {
         manager.setData(player, "skyhighocs:dyn/predation", false);
         manager.setData(player, "skyhighocs:dyn/achlys_timer", 0);
         manager.setData(player, "skyhighocs:dyn/achlys", false);
-        if (player.getData("skyhighocs:dyn/visualizer_toggle") == 1) {
+        if (player.getData("skyhighocs:dyn/visualizer_toggle")) {
           manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
         };
-        if (player.getData("skyhighocs:dyn/visualizer_toggle") == 0) {
+        if (!player.getData("skyhighocs:dyn/visualizer_toggle")) {
           manager.setData(player, "fiskheroes:penetrate_martian_invis", false);
         };
         return true;

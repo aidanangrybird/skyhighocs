@@ -46,10 +46,19 @@ var cybers = [
   "CF-4",
   "CV-6",
   "CA-4",
-  "CY-3",
+  "CG-3",
   "CN-2",
   "CS-5"
 ];
+
+var colorCyber = {
+  "CF-4": "0xFF0000",
+  "CV-6": "0xFF8900",
+  "CA-4": "0xFF0000",
+  "CG-3": "0x00FFFF",
+  "CN-2": "0x55FF00",
+  "CS-5": "0x8000FF"
+};
 
 modelRegex = /[a-z\s]/gm;
 
@@ -263,7 +272,7 @@ function maybeGetID(entity, manager, id) {
       if (otherPlayer.isWearingFullSuit() && entity.getWornHelmet().nbt().hasKey("computerID")) {
         if (hasCyberneticBody(otherPlayer)) {
           var modelID = getModelID(otherPlayer);
-          if (cybers.indexOf(modelID)) {
+          if (cybers.indexOf(modelID) > -1) {
             manager.setInteger(entity.getWornHelmet().nbt(), "id" + modelID, id);
             if (PackLoader.getSide() == "CLIENT") {
               systemMessage(entity, "Got id " + id + " for " + modelID);
@@ -1115,6 +1124,8 @@ function initSystem(moduleList, name, normalName, color, uuid) {
       if (!entity.getWornHelmet().nbt().hasKey("minHealthFightOrFlight")) {
         manager.setShort(entity.getWornHelmet().nbt(), "minHealthFightOrFlight", 5);
       };
+      var color = cyberColors[getModelID(entity)];
+      manager.setString(entity.getWornHelmet().nbt(), "hudColorSkyHigh", color);
       if (entity.getUUID() == boundUUID) {
         onInitSystemIndexes.forEach(index => {
           var module = modules[index];

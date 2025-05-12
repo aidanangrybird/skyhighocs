@@ -261,36 +261,60 @@ function direction(base, other) {
   return direction;
 };
 
-function beamThing(renderer, color) {
-  
-  var beamRenderer = renderer.createResource("BEAM_RENDERER", "fiskheroes:energy_projection");
-  var shape = renderer.createResource("SHAPE", null);
-  var line = shape.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [5.0, 5.0] });
-  var beam = renderer.createEffect("fiskheroes:lines").setRenderer(beamRenderer).setShape(shape).setOffset(0.0, 0.0, 0.0);
-  beam.mirror = false;
-  beam.setScale(16.0);
-  beam.anchor.set("head");
-  beam.anchor.ignoreAnchor(true);
-  beam.color.set(color);
-  
-  return {
-    render: function (entity, renderLayer, isFirstPersonArm) {
-      if (isFirstPersonArm) {
-        var distance = entity.pos().distanceTo(208.5, 75.5, 410.5);
-        //Pitch
-        var pitch = (entity.rotPitch()/180)*Math.PI;
-        //Yaw
-        var yaw = (entity.rotYaw()/180)*Math.PI;
-        var direction = (((Math.atan2(-1*(208.5-entity.pos().z()), -1*(410.5-entity.pos().x())) * 180) / Math.PI) + 270) % 360;
-        var rotation = entity.rotYaw()%360;
-        var bearing = (((Math.abs((rotation < 0) ? (rotation+360) : rotation)+180) % 360)/180)*Math.PI;
-        line.end.x = line.start.x = distance*Math.cos(yaw-direction)*16;
-        line.start.y = 0.0;
-        line.end.y = line.start.y - 5.0;
-        line.end.z = line.start.z = distance*Math.sin(yaw-direction)*16;
-        beam.setRotation(0.0, -1*entity.rotPitch(), 0.0)
-        beam.render();
-      };
-    }
-  };
+/**
+ * clamp as in FSK
+ * @param timer - input timer
+ * @param min - minimum value
+ * @param max - maximum
+ **/
+function clamp(timer, min, max) {
+  return Math.min(Math.max(timer, min), max);
 };
+
+/**
+ * Attempts to get model of a cybernetic player by id
+ * @param {JSEntity} entity - Required
+ * @param {integer} id - ID
+ **/
+function isStillCyber(entity, id) {
+  var result = false;
+  var otherEntity = entity.world().getEntityById(id);
+  if (otherEntity.exists() && otherEntity.isLivingEntity()) {
+    if (otherEntity.is("PLAYER")) {
+      var otherPlayer = otherEntity.as("PLAYER");
+      if (otherPlayer.isWearingFullSuit() && entity.getWornHelmet().nbt().hasKey("computerID")) {
+        if (hasCyberneticBody(otherPlayer)) {
+          result = true;
+        };
+      };
+    };
+  };
+  return result;
+};
+
+/**
+ * Checks if an entity is cybernetic
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns If the entity is cybernetic
+ **/
+function hasCyberneticBody(entity) {
+  return entity.getWornHelmet().nbt().hasKey("cyberModelID") && entity.getWornHelmet().nbt().getString("cyberAliasName");
+};
+
+var cybers = [
+  "CF-4",
+  "CV-6",
+  "CA-4",
+  "CG-3",
+  "CN-2",
+  "CS-5"
+];
+
+var cyberColors = [
+  0xFF0000,
+  0xFF8900,
+  0xFF0000,
+  0x00FFFF,
+  0x55FF00,
+  0x8000FF
+];

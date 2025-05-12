@@ -2,6 +2,7 @@ var bodyTemp = implement("skyhighocs:external/body_temperature");
 var stelar = implement("skyhighocs:external/stelar");
 var uuid = "e51532a1-19fc-4d4f-9da0-f952c4645891";
 var transer = implement("skyhighocs:external/transer_system");
+var settings = implement("skyhighocs:external/transer_settings");
 var messaging = implement("skyhighocs:external/messaging");
 var groupMessaging = implement("skyhighocs:external/group_messaging");
 var transerBrotherBand = implement("skyhighocs:external/transer_brotherband");
@@ -11,6 +12,7 @@ var scanner = implement("skyhighocs:external/scanner");
 var waypoints = implement("skyhighocs:external/waypoint");
 var theVoid = implement("skyhighocs:external/the_void");
 var transerOS = transer.initSystem([
+  settings,
   messaging,
   groupMessaging,
   transerBrotherBand,
