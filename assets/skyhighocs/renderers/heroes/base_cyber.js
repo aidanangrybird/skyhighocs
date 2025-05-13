@@ -447,11 +447,11 @@ function initAnimations(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
   var nbt = entity.getWornHelmet().nbt();
   cybernetic.cybers.forEach(cyber => {
-    var color = cybernetic.cyberColors[cybernetic.cybers.indexOf(cyber)];
     var id = entity.getWornHelmet().nbt().getInteger("id" + cyber);
     if (id > -1) {
       if (cybernetic.isStillCyber(entity, id)) {
         var scannedCyber = entity.world().getEntityById(id);
+        var color = scannedCyber.getWornHelmet().nbt().getString("hudColorSkyHigh");
         entityLocationBeam.render(isFirstPersonArm, entity, scannedCyber, color);
       };
     };
@@ -469,7 +469,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         if (nbt.getBoolean("friendliesOnHud") && stuff.friendlyEntities.indexOf(scannedEntity.getEntityName()) > -1) {
           entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, 0x007700);
         };
-        if (nbt.getBoolean("playersOnHud") && scannedEntity.is("PLAYER") && !entity.getData("fiskheroes:invisible")) {
+        if (nbt.getBoolean("playersOnHud") && entity.getUUID() != scannedEntity.getUUID() && scannedEntity.is("PLAYER") && !entity.getData("fiskheroes:invisible")) {
           var color = 0x000077;
           if (scannedEntity.isWearingFullSuit()) {
             if (scannedEntity.getWornHelmet().nbt().hasKey("hudColorSkyHigh")) {

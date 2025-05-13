@@ -135,7 +135,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
   };
   var nbt = entity.getWornChestplate().nbt();
   var entities = [];
-  if ((entity.getData("skyhighocs:dyn/visualizer_toggle") || entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) && (nbt.getBoolean("hostilesOnHud") || nbt.getBoolean("friendliesOnHud") || nbt.getBoolean("playersOnHud"))) {
+  if ((entity.getData("skyhighocs:dyn/visualizer_toggle") || (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1)) && (nbt.getBoolean("hostilesOnHud") || nbt.getBoolean("friendliesOnHud") || nbt.getBoolean("playersOnHud"))) {
     entities = entity.world().getEntitiesInRangeOf(entity.pos(), nbt.getInteger("hudRange"));
   };
   if (entities.length > 0) {
@@ -147,7 +147,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         if (nbt.getBoolean("friendliesOnHud") && stuff.friendlyEntities.indexOf(scannedEntity.getEntityName()) > -1) {
           entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, 0x007700);
         };
-        if (nbt.getBoolean("playersOnHud") && scannedEntity.is("PLAYER") && (!scannedEntity.getData("fiskheroes:invisible") || entity.getData("fiskheroes:penetrate_martian_invis"))) {
+        if (nbt.getBoolean("playersOnHud") && entity.getUUID() != scannedEntity.getUUID() && scannedEntity.is("PLAYER") && (!scannedEntity.getData("fiskheroes:invisible") || entity.getData("fiskheroes:penetrate_martian_invis"))) {
           var color = 0x000077;
           if (scannedEntity.isWearingFullSuit()) {
             if (scannedEntity.getWornHelmet().nbt().hasKey("hudColorSkyHigh")) {

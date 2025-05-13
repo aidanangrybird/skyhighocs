@@ -32,6 +32,14 @@ var months = [
   "December"
 ];
 
+var hexColors = {
+  "Ace Stelar": "0xFF0000",
+  "Aidan Stelar": "0xFF8900",
+  "Lucas Stelar": "0xFF0000",
+  "Chase Stelar": "0x55FF00",
+  "Damien Stelar": "0x8000FF"
+};
+
 function assignTranser(entity, manager, satellite) {
   manager.setString(entity.getWornChestplate().nbt(), "satellite", satellite);
   manager.setBoolean(entity.getWornChestplate().nbt(), "Unbreakable", true);
@@ -798,6 +806,22 @@ function initSystem(moduleList, transerName, satellite) {
       if (!entity.getData("skyhighocs:dyn/system_init")) {
         assignTranser(entity, manager, assignedSatellite);
         status(entity);
+        if (human != null) {
+          var hexColor = hexColors[human];
+          manager.setString(entity.getWornChestplate().nbt(), "hudColorSkyHigh", hexColor);
+        };
+      if (!entity.getWornChestplate().nbt().hasKey("hudRange")) {
+        manager.setShort(entity.getWornChestplate().nbt(), "hudRange", 32);
+      };
+      if (!entity.getWornChestplate().nbt().hasKey("hostilesOnHud")) {
+        manager.setBoolean(entity.getWornChestplate().nbt(), "hostilesOnHud", true);
+      };
+      if (!entity.getWornChestplate().nbt().hasKey("friendliesOnHud")) {
+        manager.setBoolean(entity.getWornChestplate().nbt(), "friendliesOnHud", true);
+      };
+      if (!entity.getWornChestplate().nbt().hasKey("playersOnHud")) {
+        manager.setBoolean(entity.getWornChestplate().nbt(), "playersOnHud", true);
+      };
         manager.setData(entity, "skyhighocs:dyn/system_init", true);
         manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
       };

@@ -291,7 +291,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         if (nbt.getBoolean("friendliesOnHud") && stuff.friendlyEntities.indexOf(scannedEntity.getEntityName()) > -1) {
           entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, 0x007700);
         };
-        if (nbt.getBoolean("playersOnHud") && scannedEntity.is("PLAYER") && !scannedEntity.getData("fiskheroes:invisible")) {
+        if (nbt.getBoolean("playersOnHud") && entity.getUUID() != scannedEntity.getUUID() && scannedEntity.is("PLAYER") && !scannedEntity.getData("fiskheroes:invisible")) {
           var color = 0x000077;
           if (scannedEntity.isWearingFullSuit()) {
             if (scannedEntity.getWornHelmet().nbt().hasKey("hudColorSkyHigh")) {

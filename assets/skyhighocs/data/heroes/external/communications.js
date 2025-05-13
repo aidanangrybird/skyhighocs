@@ -8,7 +8,7 @@ function initModule(system) {
   * @param tx - Transmitter
   * @param rx - Receiver
   **/
-  function getPos(tx, rx) {
+  function getPos(module, tx, rx) {
     var otherName = system.getModelID(tx);
     var positionMessage = "<nh>" + otherName + "<n> | (<nh>" + tx.posX().toFixed(0) + "<n>, <nh>" + tx.posY().toFixed(0) + "<n>, <nh>" + tx.posZ().toFixed(0) + "<n>)";
     if (system.hasOwnProperty("distance")) {
@@ -23,16 +23,16 @@ function initModule(system) {
       var elevation = system.elevation(rx.pos(), tx.pos());
       positionMessage = positionMessage + "<n> | <nh>" + ((elevation == 0) ? "-" : ((elevation > 0) ? "+" + elevation : elevation));
     };
-    system.moduleMessage(this, rx, positionMessage);
+    system.moduleMessage(module, rx, positionMessage);
   };
   /**
   * Gets status of other cybers
   * @param tx - Transmitter
   * @param rx - Receiver
   **/
-  function getStatus(tx, rx) {
+  function getStatus(module, tx, rx) {
     var otherName = system.getModelID(tx);
-    system.moduleMessage(this, rx, "<nh>" + otherName + "<n> | <nh>" + ((tx.getHealth()/tx.getMaxHealth())*100) + "%<n> | <nh>" + ((tx.as("PLAYER").getFoodLevel()/20)*100) + "%<n>");
+    system.moduleMessage(module, rx, "<nh>" + otherName + "<n> | <nh>" + ((tx.getHealth()/tx.getMaxHealth())*100) + "%<n> | <nh>" + ((tx.as("PLAYER").getFoodLevel()/20)*100) + "%<n>");
   };
   /**
   * Receives suits
@@ -193,131 +193,102 @@ function initModule(system) {
           case "cyberPos":
             var range = 32;
             var foundPlayers = [];
+            var foundPlayerNames = [];
             var newRange = (range*1);
             var txAntennaDeployed = (entity.getData("skyhighocs:dyn/antenna_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
             var txSatelliteDeployed = (entity.getData("skyhighocs:dyn/satellite_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
             if (txAntennaDeployed) {
               newRange = (range*4);
             };
-            var entities = [];
-            if (PackLoader.getSide() == "SERVER") {
-              entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
+            if (txSatelliteDeployed) {
+              newRange = (range*16);
             };
+            var entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
             entities.forEach(player => {
               if (player.is("PLAYER") && (player.getUUID() != entity.getUUID())) {
                 if (system.hasCyberneticBody(player)) {
-                  foundPlayers.push(player);
+                  if (foundPlayerNames.indexOf(player.getName()) == -1) {
+                    foundPlayerNames.push(player.getName());
+                    foundPlayers.push(player);
+                  };
                 };
               };
             });
-            if (foundPlayers.length > 0) {
-              var name = system.getModelID(entity);
-              system.moduleMessage(this, entity, "<nh>Name<n> | <nh>posX<n> | <nh>posY<n> | <nh>posZ<n> | <nh>Distance<n> | <nh>Direction<n> | <nh>Elevation");
-              var positionMessage = "<nh>" + name + "<n> | (<nh>" + entity.posX().toFixed(0) + "<n>, <nh>" + entity.posY().toFixed(0) + "<n>, <nh>" + entity.posZ().toFixed(0) + "<n>)";
-              if (system.hasOwnProperty("distance")) {
-                positionMessage = positionMessage + "<n> | <nh>0";
-              };
-              if (system.hasOwnProperty("direction")) {
-                positionMessage = positionMessage + "<n> | <nh>-";
-              };
-              if (system.hasOwnProperty("elevation")) {
-                positionMessage = positionMessage + "<n> | <nh>-";
-              };
-              system.moduleMessage(this, entity, positionMessage);
-              //entity = tx
-              //player = rx
-              foundPlayers.forEach(player => {
-                var rxAntennaDeployed = (player.getData("skyhighocs:dyn/antenna_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-                var rxSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-                if (entity.pos().distanceTo(player.pos()) <= range) {
-                  getPos(player, entity);
-                } else if (txAntennaDeployed && rxAntennaDeployed && entity.canSee(player) && (entity.pos().distanceTo(player.pos()) <= range*4)) {
-                  getPos(player, entity);
-                };
-              });
-            } else {
-              system.moduleMessage(this, entity, "<n>No other cybers in range!")
-            };
+            //Remove entire if statement below when adding to public version
             if (txSatelliteDeployed) {
               system.cybers.forEach(entry => {
                 var id = entity.getWornHelmet().nbt().getInteger("id" + entry);
                 if (id > -1) {
                   var player = entity.world().getEntityById(id);
-                  var rxSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-                  if (rxSatelliteDeployed && (player.getUUID() != entity.getUUID())) {
-                    getPos(player, entity);
+                  if (player.getUUID() != entity.getUUID()) {
+                    if (foundPlayerNames.indexOf(player.getName()) == -1) {
+                      foundPlayerNames.push(player.getName());
+                      foundPlayers.push(player);
+                    };
                   };
                 };
               });
+            };
+            if (foundPlayers.length > 0) {
+              //entity = tx
+              //player = rx
+              transmitSuits(this, entity, manager, arguments[2]);
+              foundPlayers.forEach(player => {
+                var rxAntennaDeployed = (player.getData("skyhighocs:dyn/antenna_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
+                var rxSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
+                if (entity.canSee(player) && entity.pos().distanceTo(player.pos()) <= range) {
+                  getPos(this, player, entity);
+                } else if (txAntennaDeployed && rxAntennaDeployed && entity.canSee(player) && (entity.pos().distanceTo(player.pos()) <= range*4)) {
+                  getPos(this, player, entity);
+                } else if (txSatelliteDeployed && rxSatelliteDeployed && (entity.pos().distanceTo(player.pos()) <= range*4)) {
+                  getPos(this, player, entity);
+                } else if (txSatelliteDeployed && rxSatelliteDeployed) {
+                  getPos(this, player, entity);
+                };
+              });
+            } else {
+              system.moduleMessage(this, entity, "<n>No other cybers in range!")
             };
             break;
           case "cyberStatus":
             var range = 32;
             var foundPlayers = [];
+            var foundPlayerNames = [];
             var newRange = (range*1);
             var txAntennaDeployed = (entity.getData("skyhighocs:dyn/antenna_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
             var txSatelliteDeployed = (entity.getData("skyhighocs:dyn/satellite_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
             if (txAntennaDeployed) {
               newRange = (range*4);
-            };
-            var entities = [];
-            if (PackLoader.getSide() == "SERVER") {
-              entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
-            };
-            entities.forEach(player => {
-              if (player.is("PLAYER") && (player.getUUID() != entity.getUUID())) {
-                if (system.hasCyberneticBody(player)) {
-                  foundPlayers.push(player);
-                };
-              };
-            });
-            var name = system.getModelID(entity);
-            system.moduleMessage(this, entity, "<nh>Name<n> | <nh>Health<n> | <nh>Hunger<n>");
-            system.moduleMessage(this, entity, "<nh>" + name + "<n> | <nh>" + ((entity.getHealth()/entity.getMaxHealth())*100) + "%<n> | <nh>" + ((entity.as("PLAYER").getFoodLevel()/20)*100) + "%<n>");
-            if (foundPlayers.length > 0) {
-              //entity = tx
-              //player = rx
-              foundPlayers.forEach(player => {
-                var rxAntennaDeployed = (player.getData("skyhighocs:dyn/antenna_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-                if (entity.pos().distanceTo(player.pos()) <= range) {
-                  getStatus(player, entity);
-                } else if (txAntennaDeployed && rxAntennaDeployed && (entity.pos().distanceTo(player.pos()) <= range*4)) {
-                  getStatus(player, entity);
-                };
-              });
-            } else {
-              system.moduleMessage(this, entity, "<n>No other cybers in range!")
             };
             if (txSatelliteDeployed) {
-              system.cybers.forEach(entry => {
-                var id = entity.getWornHelmet().nbt().getInteger("id" + entry);
-                if (id > -1) {
-                  var player = entity.world().getEntityById(id);
-                  var rxSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-                  if (rxSatelliteDeployed && (player.getUUID() != entity.getUUID())) {
-                    getStatus(player, entity);
-                  };
-                };
-              });
-            };
-            break;
-          case "suits":
-            var range = 32;
-            var foundPlayers = [];
-            var newRange = (range*1);
-            var txAntennaDeployed = (entity.getData("skyhighocs:dyn/antenna_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-            var txSatelliteDeployed = (entity.getData("skyhighocs:dyn/satellite_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-            if (txAntennaDeployed) {
-              newRange = (range*4);
+              newRange = (range*16);
             };
             var entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
             entities.forEach(player => {
               if (player.is("PLAYER") && (player.getUUID() != entity.getUUID())) {
                 if (system.hasCyberneticBody(player)) {
-                  foundPlayers.push(player);
+                  if (foundPlayerNames.indexOf(player.getName()) == -1) {
+                    foundPlayerNames.push(player.getName());
+                    foundPlayers.push(player);
+                  };
                 };
               };
             });
+            //Remove entire if statement below when adding to public version
+            if (txSatelliteDeployed) {
+              system.cybers.forEach(entry => {
+                var id = entity.getWornHelmet().nbt().getInteger("id" + entry);
+                if (id > -1) {
+                  var player = entity.world().getEntityById(id);
+                  if (player.getUUID() != entity.getUUID()) {
+                    if (foundPlayerNames.indexOf(player.getName()) == -1) {
+                      foundPlayerNames.push(player.getName());
+                      foundPlayers.push(player);
+                    };
+                  };
+                };
+              });
+            };
             if (foundPlayers.length > 0) {
               //entity = tx
               //player = rx
@@ -325,61 +296,78 @@ function initModule(system) {
               foundPlayers.forEach(player => {
                 var rxAntennaDeployed = (player.getData("skyhighocs:dyn/antenna_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
                 var rxSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-                if (entity.pos().distanceTo(player.pos()) <= range) {
-                  receiveSuits(this, entity, player, manager);
+                if (entity.canSee(player) && entity.pos().distanceTo(player.pos()) <= range) {
+                  getStatus(this, player, entity);
                 } else if (txAntennaDeployed && rxAntennaDeployed && entity.canSee(player) && (entity.pos().distanceTo(player.pos()) <= range*4)) {
-                  receiveSuits(this, entity, player, manager);
+                  getStatus(this, player, entity);
                 } else if (txSatelliteDeployed && rxSatelliteDeployed && (entity.pos().distanceTo(player.pos()) <= range*4)) {
-                  receiveSuits(this, entity, player, manager);
+                  getStatus(this, player, entity);
+                } else if (txSatelliteDeployed && rxSatelliteDeployed) {
+                  getStatus(this, player, entity);
                 };
               });
             } else {
               system.moduleMessage(this, entity, "<n>No other cybers in range!")
             };
             break;
-          case "suitS":
+          case "suits":
             var range = 32;
             var foundPlayers = [];
+            var foundPlayerNames = [];
             var newRange = (range*1);
             var txAntennaDeployed = (entity.getData("skyhighocs:dyn/antenna_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
             var txSatelliteDeployed = (entity.getData("skyhighocs:dyn/satellite_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
             if (txAntennaDeployed) {
               newRange = (range*4);
             };
+            if (txSatelliteDeployed) {
+              newRange = (range*16);
+            };
             var entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
             entities.forEach(player => {
               if (player.is("PLAYER") && (player.getUUID() != entity.getUUID())) {
                 if (system.hasCyberneticBody(player)) {
-                  foundPlayers.push(player);
+                  if (foundPlayerNames.indexOf(player.getName()) == -1) {
+                    foundPlayerNames.push(player.getName());
+                    foundPlayers.push(player);
+                  };
                 };
               };
             });
+            //Remove entire if statement below when adding to public version
+            if (txSatelliteDeployed) {
+              system.cybers.forEach(entry => {
+                var id = entity.getWornHelmet().nbt().getInteger("id" + entry);
+                if (id > -1) {
+                  var player = entity.world().getEntityById(id);
+                  if (player.getUUID() != entity.getUUID()) {
+                    if (foundPlayerNames.indexOf(player.getName()) == -1) {
+                      foundPlayerNames.push(player.getName());
+                      foundPlayers.push(player);
+                    };
+                  };
+                };
+              });
+            };
             if (foundPlayers.length > 0) {
               //entity = tx
               //player = rx
               transmitSuits(this, entity, manager, arguments[2]);
               foundPlayers.forEach(player => {
                 var rxAntennaDeployed = (player.getData("skyhighocs:dyn/antenna_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-                if (entity.pos().distanceTo(player.pos()) <= range) {
+                var rxSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
+                if (entity.canSee(player) && entity.pos().distanceTo(player.pos()) <= range) {
                   receiveSuits(this, entity, player, manager);
                 } else if (txAntennaDeployed && rxAntennaDeployed && entity.canSee(player) && (entity.pos().distanceTo(player.pos()) <= range*4)) {
+                  receiveSuits(this, entity, player, manager);
+                } else if (txSatelliteDeployed && rxSatelliteDeployed && (entity.pos().distanceTo(player.pos()) <= range*4)) {
+                  receiveSuits(this, entity, player, manager);
+                } else if (txSatelliteDeployed && rxSatelliteDeployed) {
                   receiveSuits(this, entity, player, manager);
                 };
               });
             } else {
               system.moduleMessage(this, entity, "<n>No other cybers in range!")
-            };
-            if (txSatelliteDeployed) {
-              system.cybers.forEach(entry => {
-                var id = entity.getWornHelmet().nbt().getInteger("id" + entry);
-                if (id > -1) {
-                  var player = entity.world().getEntityById(id);
-                  var rxSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-                  if (rxSatelliteDeployed && (player.getUUID() != entity.getUUID())) {
-                    receiveSuits(this, entity, player, manager);
-                  };
-                };
-              });
             };
             break;
           case "show":
@@ -431,7 +419,6 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!comms show <sat|ant|satRain> <nh>-<n> Deploys comms type");
             system.moduleMessage(this, entity, "<n>!comms hide <sat|ant|satRain> <nh>-<n> Retracts comms type");
             system.moduleMessage(this, entity, "<n>!comms suits <suits> <nh>-<n> Transmits suits (comma seperated indexes) to other Cybers");
-            system.moduleMessage(this, entity, "<n>!comms suitS <suits> <nh>-<n> Transmits suits (comma seperated indexes) to other OC Cybers");
             system.moduleMessage(this, entity, "<n>!comms cyberPos <nh>-<n> Gets position of other Cybers");
             system.moduleMessage(this, entity, "<n>!comms cyberStatus <nh>-<n> Gets stats of other Cybers");
             system.moduleMessage(this, entity, "<n>!comms status <nh>-<n> Status of comms");

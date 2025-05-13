@@ -171,10 +171,6 @@ function initCyberneticAnimations(renderer) {
   addAnimationWithData(renderer, "cybernetic.POWER", "skyhighocs:cybernetic_powering_down", "skyhighocs:dyn/powering_down_timer")
     .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighocs:dyn/powering_down_timer") > 0))
     .priority = -10;
-  addAnimation(renderer, "cybernetic.POWERED_DOWN", "skyhighocs:cybernetic_powering_down")
-    .setData((entity, data) => data.load(1.0))
-    .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighocs:dyn/powering_down_timer") == 1))
-    .priority = -10;
 };
 
 function initNV(renderer, uuid) {
@@ -308,13 +304,4 @@ var cybers = [
   "CG-3",
   "CN-2",
   "CS-5"
-];
-
-var cyberColors = [
-  0xFF0000,
-  0xFF8900,
-  0xFF0000,
-  0x00FFFF,
-  0x55FF00,
-  0x8000FF
 ];
