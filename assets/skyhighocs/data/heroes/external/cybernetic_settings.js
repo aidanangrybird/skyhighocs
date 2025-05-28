@@ -33,6 +33,10 @@ function initModule(system) {
             manager.setBoolean(nbt, "nightVision", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("nightVision")));
             system.moduleMessage(this, entity, "<n>nightVision set to <nh>" + nbt.getBoolean("nightVision") + "<n>!");
             break;
+          case "disguiseClothing":
+            manager.setBoolean(nbt, "disguiseClothing", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("disguiseClothing")));
+            system.moduleMessage(this, entity, "<n>disguiseClothing set to <nh>" + nbt.getBoolean("disguiseClothing") + "<n>!");
+            break;
           case "innerRockets":
             manager.setBoolean(nbt, "innerRockets", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("innerRockets")));
             system.moduleMessage(this, entity, "<n>innerRockets set to <nh>" + nbt.getBoolean("innerRockets") + "<n>!");
@@ -75,6 +79,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>naturalArms: <nh>" + nbt.getBoolean("naturalArms"));
             system.moduleMessage(this, entity, "<n>aliasActive: <nh>" + nbt.getBoolean("aliasActive"));
             system.moduleMessage(this, entity, "<n>nightVision: <nh>" + nbt.getBoolean("nightVision"));
+            system.moduleMessage(this, entity, "<n>disguiseClothing: <nh>" + nbt.getBoolean("disguiseClothing"));
             system.moduleMessage(this, entity, "<n>innerRockets: <nh>" + nbt.getBoolean("innerRockets"));
             system.moduleMessage(this, entity, "<n>flushEyeCannons: <nh>" + nbt.getBoolean("flushEyeCannons"));
             system.moduleMessage(this, entity, "<n>flushLeftArmCannon: <nh>" + nbt.getBoolean("flushLeftArmCannon"));
