@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighocs:lucas/cyber_asteroid_disguise",
+    "in": "skyhighocs:lucas/cyber_asteroid_<CLOTHING>",
     "transform": [
       {
         "operation": "XOR",
@@ -11,7 +11,7 @@
         "supply": "skyhighocs:cybernetic_head_hair"
       }
     ],
-    "out": "skyhighocs:generated/cyber_asteroid_head_hair_disguise<SWITCH>_<TIMER>"
+    "out": "skyhighocs:generated/cyber_asteroid_head_hair_<CLOTHING><SWITCH>_<TIMER>"
   },
   "getters": {
     "TIMER": {
@@ -24,6 +24,10 @@
     "SWITCH": {
       "key": "entity.getInterpolatedData('skyhighocs:dyn/thermoptic_camouflage_timer') > 0 ? '_base' : ''",
       "values": ["", "_base"]
+    },
+    "CLOTHING": {
+      "key": "(entity.getWornHelmet().nbt().getBoolean('disguiseClothing') ? 'disguise' : 'skin')",
+      "values": ["disguise", "skin"]
     }
   },
   "isDynamic": true

@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighocs:ace/cyber_flame_disguise",
+    "in": "skyhighocs:ace/cyber_flame_<CLOTHING>",
     "transform": [
       {
         "operation": "XOR",
@@ -11,7 +11,7 @@
         "supply": "skyhighocs:cybernetic_body"
       }
     ],
-    "out": "skyhighocs:generated/cyber_flame_body_disguise<SWITCH>_<TIMER>"
+    "out": "skyhighocs:generated/cyber_flame_body_<CLOTHING><SWITCH>_<TIMER>"
   },
   "getters": {
     "TIMER": {
@@ -24,6 +24,10 @@
     "SWITCH": {
       "key": "entity.getInterpolatedData('skyhighocs:dyn/thermoptic_camouflage_timer') > 0 ? '_base' : ''",
       "values": ["", "_base"]
+    },
+    "CLOTHING": {
+      "key": "(entity.getWornHelmet().nbt().getBoolean('disguiseClothing') ? 'disguise' : 'skin')",
+      "values": ["disguise", "skin"]
     }
   },
   "isDynamic": true

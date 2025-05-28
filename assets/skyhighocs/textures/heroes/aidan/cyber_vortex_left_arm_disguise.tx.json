@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighocs:aidan/cyber_vortex_disguise",
+    "in": "skyhighocs:aidan/cyber_vortex_<CLOTHING>",
     "transform": [
       {
         "operation": "XOR",
@@ -11,7 +11,7 @@
         "supply": "skyhighocs:cybernetic_left_arm"
       }
     ],
-    "out": "skyhighocs:generated/cyber_vortex_left_arm_disguise<SWITCH>_<TIMER>"
+    "out": "skyhighocs:generated/cyber_vortex_left_arm_<CLOTHING><SWITCH>_<TIMER>"
   },
   "getters": {
     "TIMER": {
@@ -24,6 +24,10 @@
     "SWITCH": {
       "key": "entity.getInterpolatedData('skyhighocs:dyn/thermoptic_camouflage_timer') > 0 ? '_base' : ''",
       "values": ["", "_base"]
+    },
+    "CLOTHING": {
+      "key": "(entity.getWornHelmet().nbt().getBoolean('disguiseClothing') ? 'disguise' : 'skin')",
+      "values": ["disguise", "skin"]
     }
   },
   "isDynamic": true

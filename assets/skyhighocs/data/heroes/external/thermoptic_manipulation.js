@@ -20,6 +20,10 @@ function initModule(system) {
                 manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise", true);
                 system.moduleMessage(this, entity, "<n>Enabled <nh>disguise<n>!");
                 break;
+              case "clothing":
+                manager.setBoolean(nbt, "disguiseClothing", true);
+                system.moduleMessage(this, entity, "<n>Enabled <nh>disguise clothing<n>!");
+                break;
               case "camo":
                 manager.setData(entity, "skyhighocs:dyn/thermoptic_camouflage", true);
                 system.moduleMessage(this, entity, "<n>Enabled <nh>camo<n>!");
@@ -51,6 +55,10 @@ function initModule(system) {
                 manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise", false);
                 system.moduleMessage(this, entity, "<n>Disabled <nh>disguise<n>!");
                 break;
+              case "clothing":
+                manager.setBoolean(nbt, "disguiseClothing", false);
+                system.moduleMessage(this, entity, "<n>Enabled <nh>disguise clothing<n>!");
+                break;
               case "camo":
                 manager.setData(entity, "skyhighocs:dyn/thermoptic_camouflage", false);
                 system.moduleMessage(this, entity, "<n>Disabled <nh>camo<n>!");
@@ -78,6 +86,7 @@ function initModule(system) {
             break;
           case "status":
             system.moduleMessage(this, entity, "<n>Thermoptics status:");
+            system.moduleMessage(this, entity, "<n>Clothing: <nh>" + (nbt.getBoolean("disguiseClothing") ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Camouflage: <nh>" + ((entity.getData("skyhighocs:dyn/thermoptic_camouflage_timer") > 0) ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Disguise: <nh>" + ((entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") > 0) ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Auto Disguise: <nh>" + (nbt.getBoolean("autoDisguise") ? "ARMED" : "DISARMED"));
@@ -85,8 +94,8 @@ function initModule(system) {
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Thermoptics commands:");
-            system.moduleMessage(this, entity, "<n>!thermo enable <disguise|camo> <nh>-<n> Enables function");
-            system.moduleMessage(this, entity, "<n>!thermo disable <disguise|camo> <nh>-<n> Disables function");
+            system.moduleMessage(this, entity, "<n>!thermo enable <disguise|clothing|camo|autoDisguise|autoCamo|disguiseOnStand|camoOnStand> <nh>-<n> Enables function");
+            system.moduleMessage(this, entity, "<n>!thermo disable <disguise|clothing|camo|autoDisguise|autoCamo|disguiseOnStand|camoOnStand> <nh>-<n> Disables function");
             system.moduleMessage(this, entity, "<n>!thermo help <nh>-<n> Shows thermoptics commands");
             break;
           default:

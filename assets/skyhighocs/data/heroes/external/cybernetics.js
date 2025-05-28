@@ -867,7 +867,7 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
    * @param {string} modifier - Required
    **/
   function isModifierEnabled(entity, modifier) {
-    if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != boundUUID)) {
+    if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
       return false;
     };
     if (modifierIndexes.length == 1) {
@@ -947,9 +947,6 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
    **/
   function getAttributeProfile(entity) {
     var result = null;
-    if (entity.getUUID() != boundUUID) {
-      result = "UNAUTHORIZED";
-    };
     if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
       result = "SHUT_DOWN";
     };
@@ -986,7 +983,7 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
    **/
   function getDamageProfile(entity) {
     var result = null;
-    if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != boundUUID)) {
+    if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
       result = null;
     };
     if (damageProfileIndexes.length == 1) {
@@ -1059,7 +1056,7 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
    * @param {string} keyBind - Required
    **/
   function isKeyBindEnabled(entity, keyBind) {
-    if ((entity.getData("skyhighocs:dyn/powering_down_timer") > 0) || (entity.getUUID() != boundUUID)) {
+    if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
       return false;
     };
     if (keyBindIndexes.length == 1) {
@@ -1139,15 +1136,15 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
       var hexColor = hexColors[getModelID(entity)];
       manager.setString(entity.getWornHelmet().nbt(), "hudColorSkyHigh", hexColor);
       if (entity.getUUID() == boundUUID) {
-        onInitSystemIndexes.forEach(index => {
-          var module = modules[index];
-          module.onInitSystem(entity, manager);
-        });
         systemMessage(entity, "<n>Hello <nh>" + getModelID(entity) + "<n> AKA <nh>" + getAliasName(entity) + "<n>!");
-        status(entity);
       } else {
         systemMessage(entity, "<e>\u00A7lUNAUTHORIZED USER!");
       };
+      onInitSystemIndexes.forEach(index => {
+        var module = modules[index];
+        module.onInitSystem(entity, manager);
+      });
+      status(entity);
       manager.setData(entity, "skyhighocs:dyn/system_init", true);
       manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
     };
@@ -1164,7 +1161,7 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
         });
         if (entity.getData("fiskheroes:time_since_damaged") == entity.getWornHelmet().nbt().getShort("durationFightOrFlight")) {
           systemMessage(entity, "<n>FIGHT OR FLIGHT MODE DEACTIVATED!");
-        }
+        };
       } else {
         manager.setData(entity, "skyhighocs:dyn/fight_or_flight", false);
       };
@@ -1309,40 +1306,38 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
       keyBinds(hero);
       initProfiles(hero);
       addPowers(hero);
-
-      hero.setTierOverride((entity) => (entity.getUUID() == boundUUID) ? 9 : 0);
       
       hero.setHasProperty((entity, property) => {
-        return property == "BREATHE_SPACE" && entity.getUUID() == boundUUID;
+        return property == "BREATHE_SPACE";
       });
       hero.setDefaultScale(1.0);
       hero.setModifierEnabled((entity, modifier) => {
         if (modifier.name() == "fiskheroes:shape_shifting") {
-          return entity.getUUID() == boundUUID;
+          return true;
         };
         if (modifier.name() == "fiskheroes:potion_immunity") {
-          return entity.getUUID() == boundUUID;
+          return true;
         };
         if (modifier.name() == "fiskheroes:regeneration") {
-          return entity.getUUID() == boundUUID;
+          return true;
         };
         if (modifier.name() == "fiskheroes:healing_factor") {
-          return entity.getUUID() == boundUUID;
+          return true;
         };
         if (modifier.name() == "fiskheroes:water_breathing") {
-          return entity.getUUID() == boundUUID;
+          return true;
         };
         if (modifier.name() == "fiskheroes:fire_immunity") {
-          return entity.getUUID() == boundUUID;
+          return true;
         };
         if (modifier.name() == "fiskheroes:damage_immunity") {
-          return entity.getUUID() == boundUUID;
+          return true;
         };
         if (modifier.name() == "fiskheroes:projectile_immunity") {
-          return entity.getUUID() == boundUUID;
+          return true;
         };
         if (modifier.name() == "fiskheroes:transformation") {
-          return entity.getUUID() == boundUUID;
+          return true;
         };
         if (modifier.name() == "fiskheroes:metal_skin") {
           return entity.getData("fiskheroes:metal_heat") < 1.0;
@@ -1351,7 +1346,7 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
       });
       hero.setKeyBindEnabled((entity, keyBind) => {
         if (keyBind == "SHAPE_SHIFT") {
-          return entity.getUUID() == boundUUID;
+          return true;
         };
         return isKeyBindEnabled(entity, keyBind);
       });
