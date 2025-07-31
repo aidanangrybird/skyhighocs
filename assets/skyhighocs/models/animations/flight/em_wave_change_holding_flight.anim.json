@@ -1,0 +1,8 @@
+{
+  "inputs": [
+    "skyhighocs:flight/em_wave_change_holding_header",
+    "skyhighocs:flight/em_wave_change_holding_idle",
+    "skyhighocs:flight/em_wave_change_holding_boost",
+    "skyhighocs:flight/em_wave_change_holding_fp"
+  ]
+}

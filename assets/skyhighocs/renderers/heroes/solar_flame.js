@@ -29,6 +29,8 @@ loadTextures({
   "solar_flare_front": "skyhighocs:ace/solar_flame_solar_flare_front.tx.json",
   "solar_flare_sides_lights": "skyhighocs:ace/solar_flame_solar_flare_sides_lights.tx.json",
   "solar_flare_front_lights": "skyhighocs:ace/solar_flame_solar_flare_front_lights.tx.json",
+  "em_being_base": "skyhighocs:ace/solar_base",
+  "em_being_lights": "skyhighocs:ace/solar_lights",
   "head_right": "skyhighocs:ace/solar_right.tx.json",
   "head_wave_change_right": "skyhighocs:ace/solar_wave_change_right.tx.json",
   "head_wave_change_right_lights": "skyhighocs:ace/solar_wave_change_right_lights.tx.json",
@@ -82,9 +84,9 @@ var santaHat;
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
-  stelar.addAnimationWithData(renderer, "stelar.SOLAR_WIND_AIM", "skyhighocs:stelar_aim", "fiskheroes:energy_projection_timer")
+  stelar.addAnimationWithData(renderer, "stelar.SOLAR_WIND_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
-  stelar.addAnimationWithData(renderer, "stelar.SOLAR_BLAST_AIM", "skyhighocs:stelar_aim", "fiskheroes:beam_charge")
+  stelar.addAnimationWithData(renderer, "stelar.SOLAR_BLAST_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:beam_charge")
   .priority = 10;
   renderer.setItemIcon("CHESTPLATE", "pegasus_transer");
 };

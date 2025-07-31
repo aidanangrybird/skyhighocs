@@ -4,6 +4,7 @@ loadTextures({
 });
 
 var stuff = implement("skyhighocs:external/stuff");
+var stelar = implement("skyhighocs:external/stelar");
 
 var santaHat;
 var santaHatEM;
@@ -85,6 +86,7 @@ function initEffects(renderer) {
   forcefield.setCondition(entity => {
     return entity.getData("skyhighocs:dyn/calling");
   });
+  stelar.initNV(renderer);
 };
 
 function initAnimations(renderer) {

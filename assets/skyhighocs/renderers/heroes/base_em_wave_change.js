@@ -11,6 +11,7 @@ var santaHatEM;
 var date = new Date();
 var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
 
+var emBeing;
 var locationBeam;
 var entityLocationBeam;
 
@@ -88,7 +89,14 @@ function initEffects(renderer) {
     santaHatEM.setOffset(0.0, -7.25, -0.25);
     santaHatEM.setRotation(-10.0, 0.0, 0.0);
   };
+  var em_being_model = renderer.createResource("MODEL", "skyhighocs:EMBeing");
+  em_being_model.texture.set("em_being_base", "em_being_lights");
+  emBeing = renderer.createEffect("fiskheroes:model").setModel(em_being_model);
+  emBeing.anchor.set("body");
+  emBeing.setScale(1.0);
+  emBeing.setOffset(0.0, -10.0, 8.0);
   stelar.initNV(renderer);
+  stelar.initWaveChangeNV(renderer);
   stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
   stelar.initForceField(renderer, getColor());
   stelar.initMegaBuster(renderer, getColor(), getColor());
@@ -102,12 +110,13 @@ function initEffects(renderer) {
 };
 
 function initAnimations(renderer) {
-  stuff.initHoloFlightAnim(renderer, "wave.HOLOGRAM_FLIGHT", "skyhighocs:stelar_holo_flight");
+  stuff.initHoloFlightAnim(renderer, "wave.HOLOGRAM_FLIGHT", "skyhighocs:em_wave_change_holo_flight");
   stuff.emCeilingAnimation(renderer);
   stelar.initStelarAnimations(renderer);
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
+  var nbt = entity.getWornChestplate().nbt();
   if (isChristmasSeason) {
     if (entity.isAlive() && entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 0) {
       santaHat.setScale(1.05);
@@ -133,7 +142,9 @@ function render(entity, renderLayer, isFirstPersonArm) {
   if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") > 0 && entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1) {
     wave_change_lights.render();
   };
-  var nbt = entity.getWornChestplate().nbt();
+  if (nbt.getBoolean("emBeing") && entity.getData("skyhighocs:dyn/wave_changing_timer") == 0) {
+    emBeing.render();
+  };
   var entities = [];
   if ((entity.getData("skyhighocs:dyn/visualizer_toggle") || (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1)) && (nbt.getBoolean("hostilesOnHud") || nbt.getBoolean("friendliesOnHud") || nbt.getBoolean("playersOnHud"))) {
     entities = entity.world().getEntitiesInRangeOf(entity.pos(), nbt.getInteger("hudRange"));

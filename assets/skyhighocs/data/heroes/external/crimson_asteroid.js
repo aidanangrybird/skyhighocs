@@ -113,12 +113,12 @@ function initModule(system) {
       hero.addSoundEvent("PUNCH", "skyhighocs:wave_punch");
     },
     initEquipment: function (hero) {
-      hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A74Crimson Asteroid's Katanas},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Dual") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A74Crimson Asteroid's Katanas"));
-      hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A74Crimson Asteroid's Scythe},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A74Crimson Asteroid's Scythe"));
-      hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A74Crimson Asteroid's Rifle},ench:[{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A74Crimson Asteroid's Rifle"));
-      hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A74Crimson Asteroid's Shield},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A74Crimson Asteroid's Shield"));
-      hero.addPrimaryEquipment("fiskheroes:tutridium_pickaxe{display:{Name:\u00A74Crimson Asteroid's Pickaxe},ench:[{id:32,lvl:7},{id:35,lvl:4},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A74Crimson Asteroid's Pickaxe"));
-      hero.addPrimaryEquipment("fiskheroes:tutridium_shovel{display:{Name:\u00A74Crimson Asteroid's Shovel},ench:[{id:32,lvl:7},{id:33,lvl:1},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A74Crimson Asteroid's Shovel"));
+      hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A74Crimson Asteroid's Katanas},Unbreakable:1,ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Dual") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.nbt().getBoolean("Unbreakable") && item.displayName() == "\u00A74Crimson Asteroid's Katanas"));
+      hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A74Crimson Asteroid's Scythe},Unbreakable:1,ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.nbt().getBoolean("Unbreakable") && item.displayName() == "\u00A74Crimson Asteroid's Scythe"));
+      hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A74Crimson Asteroid's Rifle},Unbreakable:1,ench:[{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(34) == 5 && item.nbt().getBoolean("Unbreakable") && item.displayName() == "\u00A74Crimson Asteroid's Rifle"));
+      hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A74Crimson Asteroid's Shield},Unbreakable:1,ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.nbt().getBoolean("Unbreakable") && item.displayName() == "\u00A74Crimson Asteroid's Shield"));
+      hero.addPrimaryEquipment("fiskheroes:tutridium_pickaxe{display:{Name:\u00A74Crimson Asteroid's Pickaxe},Unbreakable:1,ench:[{id:32,lvl:7},{id:35,lvl:4},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.nbt().getBoolean("Unbreakable") && item.displayName() == "\u00A74Crimson Asteroid's Pickaxe"));
+      hero.addPrimaryEquipment("fiskheroes:tutridium_shovel{display:{Name:\u00A74Crimson Asteroid's Shovel},Unbreakable:1,ench:[{id:32,lvl:7},{id:33,lvl:1},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.nbt().getBoolean("Unbreakable") && item.displayName() == "\u00A74Crimson Asteroid's Shovel"));
     },
     initDamageProfiles: function (hero) {
       hero.addDamageProfile("SWORD", {
@@ -342,25 +342,6 @@ function initModule(system) {
       };
       var item_holding = (!entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/wave_changing_timer") > 0);
       manager.incrementData(entity, "skyhighocs:dyn/item_holding_timer", 10, item_holding);
-      var equipment = entity.getWornChestplate().nbt().getTagList("Equipment");
-      if (equipment.getCompoundTag(0).getCompoundTag("Item").getShort("Damage") > 0) {
-        manager.setShort(equipment.getCompoundTag(0).getCompoundTag("Item"), "Damage", 0)
-      };
-      if (equipment.getCompoundTag(1).getCompoundTag("Item").getShort("Damage") > 0) {
-        manager.setShort(equipment.getCompoundTag(1).getCompoundTag("Item"), "Damage", 0)
-      };
-      if (equipment.getCompoundTag(2).getCompoundTag("Item").getShort("Damage") > 0) {
-        manager.setShort(equipment.getCompoundTag(2).getCompoundTag("Item"), "Damage", 0)
-      };
-      if (equipment.getCompoundTag(3).getCompoundTag("Item").getShort("Damage") > 0) {
-        manager.setShort(equipment.getCompoundTag(3).getCompoundTag("Item"), "Damage", 0)
-      };
-      if (equipment.getCompoundTag(4).getCompoundTag("Item").getShort("Damage") > 0) {
-        manager.setShort(equipment.getCompoundTag(4).getCompoundTag("Item"), "Damage", 0)
-      };
-      if (equipment.getCompoundTag(5).getCompoundTag("Item").getShort("Damage") > 0) {
-        manager.setShort(equipment.getCompoundTag(5).getCompoundTag("Item"), "Damage", 0)
-      };
       var sword = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/predation_timer") < 0.2 && entity.getData("skyhighocs:dyn/battle_card") == 2 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighocs:dyn/sword", sword);
       var sword_blade = entity.getData("skyhighocs:dyn/sword_timer") == 1 && entity.getData("skyhighocs:dyn/item_holding_timer") == 0;

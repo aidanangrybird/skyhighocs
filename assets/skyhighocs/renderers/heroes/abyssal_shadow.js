@@ -27,6 +27,8 @@ loadTextures({
   "shadow_blast_front": "skyhighocs:damien/abyssal_shadow_shadow_blast_front.tx.json",
   "abyssal_shroud_sides": "skyhighocs:damien/abyssal_shadow_abyssal_shroud_sides.tx.json",
   "abyssal_shroud_front": "skyhighocs:damien/abyssal_shadow_abyssal_shroud_front.tx.json",
+  "em_being_base": "skyhighocs:damien/achyls_base",
+  "em_being_lights": "skyhighocs:damien/achyls_lights",
   "head_right": "skyhighocs:damien/achlys_right.tx.json",
   "head_wave_change_right": "skyhighocs:damien/achlys_wave_change_right.tx.json",
   "head_wave_change_right_lights": "skyhighocs:damien/achlys_wave_change_right_lights.tx.json",
@@ -80,9 +82,9 @@ var santaHat;
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
-  stelar.addAnimationWithData(renderer, "stelar.SHADOW_BLAST_AIM", "skyhighocs:stelar_aim", "fiskheroes:energy_projection_timer")
+  stelar.addAnimationWithData(renderer, "stelar.SHADOW_BLAST_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
-  stelar.addAnimationWithData(renderer, "stelar.UNLEASHED_DARKNESS_AIM", "skyhighocs:stelar_aim", "fiskheroes:beam_charge")
+  stelar.addAnimationWithData(renderer, "stelar.UNLEASHED_DARKNESS_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:beam_charge")
   .priority = 10;
   renderer.setItemIcon("CHESTPLATE", "dragon_transer");
 };

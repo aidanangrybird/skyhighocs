@@ -27,6 +27,8 @@ loadTextures({
   "asteroid_blast_front_lights": "skyhighocs:lucas/crimson_asteroid_asteroid_blast_front_lights.tx.json",
   "asteroid_crash_sides": "skyhighocs:lucas/crimson_asteroid_asteroid_crash_sides.tx.json",
   "asteroid_crash_front": "skyhighocs:lucas/crimson_asteroid_asteroid_crash_front.tx.json",
+  "em_being_base": "skyhighocs:lucas/crimson_base",
+  "em_being_lights": "skyhighocs:lucas/crimson_lights",
   "head_right": "skyhighocs:lucas/crimson_right.tx.json",
   "head_wave_change_right": "skyhighocs:lucas/crimson_wave_change_right.tx.json",
   "head_wave_change_right_lights": "skyhighocs:lucas/crimson_wave_change_right_lights.tx.json",
@@ -80,7 +82,7 @@ var santaHat;
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
-  stelar.addAnimationWithData(renderer, "stelar.ASTEROID_BLAST_AIM", "skyhighocs:stelar_aim", "fiskheroes:energy_projection_timer")
+  stelar.addAnimationWithData(renderer, "stelar.ASTEROID_BLAST_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
   renderer.setItemIcon("CHESTPLATE", "dragon_transer");
 };

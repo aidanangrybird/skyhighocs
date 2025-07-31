@@ -171,22 +171,22 @@ function initForceField(renderer, color) {
 //Stelar Animations
 function initStelarAnimations(renderer) {
   //Aiming
-  addAnimationWithData(renderer, "stelar.AIMING", "skyhighocs:stelar_aim", "fiskheroes:aiming_timer")
+  addAnimationWithData(renderer, "em_wave_change.AIMING", "skyhighocs:em_wave_change_aim", "fiskheroes:aiming_timer")
     .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
     .priority = 10;
-  addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighocs:em_wall_ceiling_stand");
-  addPredationAnimation(renderer, "stelar.PREDATION", "skyhighocs:stelar_predation");
-  addSwordAnimations(renderer, "stelar.SWORD", "skyhighocs:stelar_sword");
+  addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighocs:em_wave_change_wall_ceiling_stand");
+  addPredationAnimation(renderer, "em_wave_change.PREDATION", "skyhighocs:em_wave_change_predation");
+  addSwordAnimations(renderer, "em_wave_change.SWORD", "skyhighocs:em_wave_change_sword");
   //Flight
-  addFlightBaseAnimation(renderer, "stelar.BASE_FLIGHT", "skyhighocs:flight/stelar_base_flight.anim.json");
-  addFlightHoldingAnimation(renderer, "stelar.HOLDING_FLIGHT", "skyhighocs:flight/stelar_holding_flight.anim.json");
-  addAnimationWithData(renderer, "stelar.LAND", "skyhighocs:stelar_landing", "skyhighocs:dyn/superhero_landing_timer")
+  addFlightBaseAnimation(renderer, "em_wave_change.BASE_FLIGHT", "skyhighocs:flight/em_wave_change_base_flight.anim.json");
+  addFlightHoldingAnimation(renderer, "em_wave_change.HOLDING_FLIGHT", "skyhighocs:flight/em_wave_change_holding_flight.anim.json");
+  addAnimationWithData(renderer, "em_wave_change.LAND", "skyhighocs:em_wave_change_landing", "skyhighocs:dyn/superhero_landing_timer")
     .priority = -8;
-  addAnimationWithData(renderer, "stelar.LAND_BOOST", "skyhighocs:stelar_boosting_landing", "skyhighocs:dyn/superhero_boosting_landing_timer")
+  addAnimationWithData(renderer, "em_wave_change.LAND_BOOST", "skyhighocs:em_wave_change_boosting_landing", "skyhighocs:dyn/superhero_boosting_landing_timer")
     .priority = -8;
-  addAnimationWithData(renderer, "stelar.ROLL", "skyhighocs:flight/stelar_barrel_roll", "fiskheroes:barrel_roll_timer")
+  addAnimationWithData(renderer, "em_wave_change.ROLL", "skyhighocs:flight/em_wave_change_barrel_roll", "fiskheroes:barrel_roll_timer")
     .priority = 10;
-  addHoverAnimation(renderer, "stelar.HOVER", "skyhighocs:stelar_hover");
+  addHoverAnimation(renderer, "em_wave_change.HOVER", "skyhighocs:em_wave_change_hover");
 };
 //Mega Buster
 function initMegaBuster(renderer, color, color_other) {
@@ -197,16 +197,19 @@ function initMegaBuster(renderer, color, color_other) {
 };
 
 function initNV(renderer) {
-  nv_wave_change = renderer.bindProperty("fiskheroes:night_vision");
-  nv_wave_change.fogStrength = 0.0;
-  nv_wave_change.factor = 1.0;
-  nv_wave_change.firstPersonOnly = true;
-  nv_wave_change.setCondition(entity => entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") > 0.75);
   nv_visualizer = renderer.bindProperty("fiskheroes:night_vision");
   nv_visualizer.fogStrength = 0.0;
   nv_visualizer.factor = 1.0;
   nv_visualizer.firstPersonOnly = true;
   nv_visualizer.setCondition(entity => entity.getData("skyhighocs:dyn/visualizer_toggle"));
+};
+
+function initWaveChangeNV(renderer) {
+  nv_wave_change = renderer.bindProperty("fiskheroes:night_vision");
+  nv_wave_change.fogStrength = 0.0;
+  nv_wave_change.factor = 1.0;
+  nv_wave_change.firstPersonOnly = true;
+  nv_wave_change.setCondition(entity => entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") > 0.75);
 };
 
 //Equipment
@@ -381,35 +384,4 @@ function initHandThing(renderer, battleCard, textureType, lightType, offset) {
       battleCardFront.render();
     }
   }
-}
-
-/**
- * Turns NBT String List into an array for easier use in code
- * @param {JSNBTList} nbtList - NBTList
- * @returns Array of values from the NBTList
- **/
-function getStringArray(nbtList) {
-  var count = nbtList.tagCount();
-  var result = [];
-  for (i=0;i<count;i++) {
-    result.push(nbtList.getString(i));
-  };
-  return result;
-};
-/**
- * Checks if a module is disabled
- * @param {JSEntity} entity - Player getting checked
- * @param {string} moduleName - Module being checked if disabled
- * @returns If module is disabled
- **/
-function isModuleDisabled(entity, moduleName) {
-  var disabledModules = entity.getWornChestplate().nbt().getStringList("disabledModules");
-  var modulesDisabled = getStringArray(disabledModules);
-  var result = false;
-  modulesDisabled.forEach(entry => {
-    if (entry == moduleName) {
-      result = true;
-    };
-  });
-  return result;
 };

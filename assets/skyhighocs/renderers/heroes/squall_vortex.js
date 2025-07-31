@@ -30,6 +30,8 @@ loadTextures({
   "lightning_front": "skyhighocs:aidan/squall_vortex_lightning_front.tx.json",
   "lightning_sides_lights": "skyhighocs:aidan/squall_vortex_lightning_sides_lights.tx.json",
   "lightning_front_lights": "skyhighocs:aidan/squall_vortex_lightning_front_lights.tx.json",
+  "em_being_base": "skyhighocs:aidan/jet_streak_base",
+  "em_being_lights": "skyhighocs:aidan/jet_streak_lights",
   "head_right": "skyhighocs:aidan/jet_streak_right.tx.json",
   "head_wave_change_right": "skyhighocs:aidan/jet_streak_wave_change_right.tx.json",
   "head_wave_change_right_lights": "skyhighocs:aidan/jet_streak_wave_change_right_lights.tx.json",
@@ -83,7 +85,7 @@ var santaHat;
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
-  stelar.addAnimationWithData(renderer, "stelar.DERECHO_AIM", "skyhighocs:stelar_aim", "fiskheroes:energy_projection_timer")
+  stelar.addAnimationWithData(renderer, "stelar.DERECHO_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
   renderer.setItemIcon("CHESTPLATE", "pegasus_transer");
 };

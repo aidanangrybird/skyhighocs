@@ -27,6 +27,8 @@ loadTextures({
   "ice_bomb_front": "skyhighocs:chase/pryetak_nebula_ice_bomb_front.tx.json",
   "predation_wave_changing_sides_lights": "skyhighocs:chase/pryetak_nebula_predation_wave_changing_sides_lights.tx.json",
   "predation_wave_changing_front_lights": "skyhighocs:chase/pryetak_nebula_predation_wave_changing_front_lights.tx.json",
+  "em_being_base": "skyhighocs:chase/pryetak_base",
+  "em_being_lights": "skyhighocs:chase/pryetak_lights",
   "head_right": "skyhighocs:chase/pryetak_right.tx.json",
   "head_wave_change_right": "skyhighocs:chase/pryetak_wave_change_right.tx.json",
   "head_wave_change_right_lights": "skyhighocs:chase/pryetak_wave_change_right_lights.tx.json",
@@ -80,9 +82,9 @@ var santaHat;
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
-  stelar.addAnimationWithData(renderer, "stelar.NEBULA_BLAST_AIM", "skyhighocs:stelar_aim", "fiskheroes:energy_projection_timer")
+  stelar.addAnimationWithData(renderer, "stelar.NEBULA_BLAST_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
-  stelar.addAnimationWithData(renderer, "stelar.NEBULA_BURST_AIM", "skyhighocs:stelar_aim", "fiskheroes:beam_charge")
+  stelar.addAnimationWithData(renderer, "stelar.NEBULA_BURST_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:beam_charge")
   .priority = 10;
   renderer.setItemIcon("CHESTPLATE", "leo_transer");
 };

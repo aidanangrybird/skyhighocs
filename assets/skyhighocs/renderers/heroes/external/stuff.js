@@ -251,3 +251,46 @@ function location(renderer) {
     }
   };
 };
+
+function glPerspectiveProjection(entity, inputCoords) {
+  var aspectRatio = 16.0/9.0;
+  var near = 0.05;
+  var hFOV = fovThing(entity);
+  var vFOV = 2*Math.atan(Math.tan(hFOV/2)/aspectRatio);
+  var far = chunkDistance(entity);
+  var matrix = [
+    //X
+    [(1/(aspectRatio*Math.tan(vFOV/2))), 0, 0, 0],
+    //Y
+    [0, (1/Math.tan(vFOV/2)), 0, 0],
+    //Z
+    [0, 0, ((far+near)/(far-near)), ((2*far*near)/(far-near))],
+    //W
+    [0, 0, -1, 0]
+  ];
+  var out = [0, 0, 0];
+  out[0] = inputCoords[0] * matrix[0][0] + inputCoords[1] * matrix[1][0] + inputCoords[2] * matrix[2][0] + matrix[3][0];
+  out[1] = inputCoords[0] * matrix[0][1] + inputCoords[1] * matrix[1][1] + inputCoords[2] * matrix[2][1] + matrix[3][1];
+  out[2] = inputCoords[0] * matrix[0][2] + inputCoords[1] * matrix[1][2] + inputCoords[2] * matrix[2][2] + matrix[3][2];
+  
+  return out;
+};
+
+function fovThing(entity) {
+  var initial = final;
+  var factor = 0.1;
+  var baseFOV = 90.0;
+  var final = entity.motionInterpolated().length();
+  if (final == 0) {
+    return baseFOV;
+  } else {
+    baseFOV *= final * factor;
+    //baseFOV *= initial + (final - initial) * factor;
+    return baseFOV;
+  };
+};
+
+function chunkDistance(entity) {
+  var renderRange = 10.0;
+  return renderRange*32.0;
+};
