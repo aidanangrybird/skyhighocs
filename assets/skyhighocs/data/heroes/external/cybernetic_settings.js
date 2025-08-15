@@ -143,6 +143,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!set naturalArms <true|false> <nh>-<n> Sets if natural arm movement is not supressed");
             system.moduleMessage(this, entity, "<n>!set aliasActive <true|false> <nh>-<n> Sets if alias name appears above head");
             system.moduleMessage(this, entity, "<n>!set nightVision <true|false> <nh>-<n> Sets if night vision is active");
+            system.moduleMessage(this, entity, "<n>!set disguiseClothing <true|false> <nh>-<n> Sets if your disguise should have clothing");
             system.moduleMessage(this, entity, "<n>!set innerRockets <true|false> <nh>-<n> Sets if inner rockets are enabled");
             system.moduleMessage(this, entity, "<n>!set flushEyeCannons <true|false> <nh>-<n> Sets if eye cannons are flush to head");
             system.moduleMessage(this, entity, "<n>!set flushLeftArmCannon <true|false> <nh>-<n> Sets if left arm cannons are flush to arm");
