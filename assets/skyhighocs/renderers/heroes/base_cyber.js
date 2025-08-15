@@ -70,8 +70,8 @@ function initEffects(renderer) {
   var head = renderer.createResource("MODEL", "skyhighocs:CyberneticHead");
   head.texture.set("head", "head_lights");
   head.bindAnimation("skyhighocs:cybernetic_head").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/mouth_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/mouth_timer") + cybernetics.getHoloBoolean(entity, "holoMouth"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer") + cybernetics.getHoloBoolean(entity, "holoSat"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
@@ -87,8 +87,8 @@ function initEffects(renderer) {
   var head_hair = renderer.createResource("MODEL", "skyhighocs:CyberneticHeadL2");
   head_hair.texture.set("head_hair", "head_hair_lights");
   head_hair.bindAnimation("skyhighocs:cybernetic_head").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/mouth_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/mouth_timer") + cybernetics.getHoloBoolean(entity, "holoMouth"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer") + cybernetics.getHoloBoolean(entity, "holoSat"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
@@ -121,9 +121,9 @@ function initEffects(renderer) {
   var left_arm = renderer.createResource("MODEL", "skyhighocs:CyberneticLeftArm");
   left_arm.texture.set("left_arm", "left_arm_lights");
   left_arm.bindAnimation("skyhighocs:cybernetic_left_arm").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
-    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_outer_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_front_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_back_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
@@ -140,9 +140,9 @@ function initEffects(renderer) {
   var right_arm = renderer.createResource("MODEL", "skyhighocs:CyberneticRightArm");
   right_arm.texture.set("right_arm", "right_arm_lights");
   right_arm.bindAnimation("skyhighocs:cybernetic_right_arm").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
-    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_outer_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_front_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_back_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
@@ -197,8 +197,8 @@ function initEffects(renderer) {
   var head_disguise = renderer.createResource("MODEL", "skyhighocs:CyberneticHeadL2");
   head_disguise.texture.set("head_disguise");
   head_disguise.bindAnimation("skyhighocs:cybernetic_head").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/mouth_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/mouth_timer") + cybernetics.getHoloBoolean(entity, "holoMouth"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer") + cybernetics.getHoloBoolean(entity, "holoSat"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
@@ -212,8 +212,8 @@ function initEffects(renderer) {
   var head_hair_disguise = renderer.createResource("MODEL", "skyhighocs:CyberneticHeadL2");
   head_hair_disguise.texture.set("head_hair_disguise");
   head_hair_disguise.bindAnimation("skyhighocs:cybernetic_head").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/mouth_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/mouth_timer") + cybernetics.getHoloBoolean(entity, "holoMouth"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer") + cybernetics.getHoloBoolean(entity, "holoSat"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
@@ -243,9 +243,9 @@ function initEffects(renderer) {
   var left_arm_disguise = renderer.createResource("MODEL", "skyhighocs:CyberneticLeftArmL2");
   left_arm_disguise.texture.set("left_arm_disguise");
   left_arm_disguise.bindAnimation("skyhighocs:cybernetic_left_arm").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
-    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_outer_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_front_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_back_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
@@ -260,9 +260,9 @@ function initEffects(renderer) {
   var right_arm_disguise = renderer.createResource("MODEL", "skyhighocs:CyberneticRightArmL2");
   right_arm_disguise.texture.set("right_arm_disguise");
   right_arm_disguise.bindAnimation("skyhighocs:cybernetic_right_arm").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
-    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_outer_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_front_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_back_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
@@ -312,8 +312,8 @@ function initEffects(renderer) {
   var head_camouflage = renderer.createResource("MODEL", "skyhighocs:CyberneticHead");
   head_camouflage.texture.set("head_camouflage");
   head_camouflage.bindAnimation("skyhighocs:cybernetic_head").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/mouth_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/mouth_timer") + cybernetics.getHoloBoolean(entity, "holoMouth"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer") + cybernetics.getHoloBoolean(entity, "holoSat"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
@@ -327,8 +327,8 @@ function initEffects(renderer) {
   var head_hair_camouflage = renderer.createResource("MODEL", "skyhighocs:CyberneticHeadL2");
   head_hair_camouflage.texture.set("head_hair_camouflage");
   head_hair_camouflage.bindAnimation("skyhighocs:cybernetic_head").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/mouth_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/mouth_timer") + cybernetics.getHoloBoolean(entity, "holoMouth"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer") + cybernetics.getHoloBoolean(entity, "holoSat"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
@@ -358,9 +358,9 @@ function initEffects(renderer) {
   var left_arm_camouflage = renderer.createResource("MODEL", "skyhighocs:CyberneticLeftArm");
   left_arm_camouflage.texture.set("left_arm_camouflage");
   left_arm_camouflage.bindAnimation("skyhighocs:cybernetic_left_arm").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
-    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_outer_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_front_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_back_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
@@ -375,9 +375,9 @@ function initEffects(renderer) {
   var right_arm_camouflage = renderer.createResource("MODEL", "skyhighocs:CyberneticRightArm");
   right_arm_camouflage.texture.set("right_arm_camouflage");
   right_arm_camouflage.bindAnimation("skyhighocs:cybernetic_right_arm").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
-    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
+    data.load(2, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsArms"));
     data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_outer_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
     data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_front_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_back_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsAux"));
