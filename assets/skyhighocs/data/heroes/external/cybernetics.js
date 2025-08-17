@@ -1109,7 +1109,7 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
     };
   };
   function tickHandler(entity, manager) {
-    if ((!entity.getData("skyhighocs:dyn/system_init"))) {
+    if ((!entity.getDataOrDefault("skyhighocs:dyn/system_init", true))) {
       manager.setString(entity.getWornHelmet().nbt(), "cyberModelID", cyberModelID);
       manager.setString(entity.getWornHelmet().nbt(), "cyberAliasName", cyberName);
       manager.setString(entity.getWornHelmet().nbt(), "boundUUID", boundUUID);

@@ -803,7 +803,7 @@ function initSystem(moduleList, transerName, satellite) {
      * @param {JSDataManager} manager - Required
      **/
     systemHandler: (entity, manager) => {
-      if (!entity.getData("skyhighocs:dyn/system_init")) {
+      if (!entity.getDataOrDefault("skyhighocs:dyn/system_init", true)) {
         assignTranser(entity, manager, assignedSatellite);
         status(entity);
         if (human != null) {
