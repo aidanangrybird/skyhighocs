@@ -60,19 +60,19 @@ function initRightArmBeams(renderer, color) {
 
 function initHeadBeams(renderer, color) {
   var position = [
-    { "firstPerson": [-2.2, 0.0, 2.0], "offset": [-2.0, -3.0, -6.8], "size": [2.0, 2.0] },
-    { "firstPerson": [2.2, 0.0, 2.0], "offset": [2.0, -3.0, -6.8], "size": [2.0, 2.0] }
+    { "firstPerson": [-8.15, 0.0, -1.0], "offset": [-8.15, -3.85, -1.0], "size": [2.0, 2.0] },
+    { "firstPerson": [8.15, 0.0, -1.0], "offset": [8.15, -3.85, -1.0], "size": [2.0, 2.0] }
   ];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:cybernetic_cannons", "head", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsEyes") && !entity.getWornHelmet().nbt().getBoolean("flushEyeCannons"));
+  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsHead") && !entity.getWornHelmet().nbt().getBoolean("flushHeadCannons"));
   var positionFlush = [
-    { "firstPerson": [-2.2, 0.0, 2.0], "offset": [-2.0, -3.0, -4.0], "size": [2.0, 2.0] },
-    { "firstPerson": [2.2, 0.0, 2.0], "offset": [2.0, -3.0, -4.0], "size": [2.0, 2.0] }
+    { "firstPerson": [-5.15, 0.0, -1.0], "offset": [-5.15, -3.85, -1.0], "size": [2.0, 2.0] },
+    { "firstPerson": [5.15, 0.0, -1.0], "offset": [5.15, -3.85, -1.0], "size": [2.0, 2.0] }
   ];
   var chargedBeamFlush = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:cybernetic_cannons", "head", color, positionFlush);
   chargedBeamFlush.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeamFlush.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsEyes") && entity.getWornHelmet().nbt().getBoolean("flushEyeCannons"));
+  chargedBeamFlush.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsHead") && entity.getWornHelmet().nbt().getBoolean("flushHeadCannons"));
   var scream = bindBeam(renderer, "fiskheroes:energy_projection", "skyhighocs:cybernetic_scream", "head", color, [
     { "firstPerson": [0.0, 2.5, -3.2], "offset": [0.0, -1.5, -4.9], "size": [10.0, 10.0] }
   ]);
@@ -91,4 +91,25 @@ function initBodyBeams(renderer, color) {
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:cybernetic_cannons", "body", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsBody"));
+};
+
+/**
+ * Checks a NBT boolean to be used on holographic display stand
+ * @param {JSEntity} entity - required
+ * @param {string} value - NBT boolean to check
+ * @returns NBT boolean if the entity is a holographic display stand
+ **/
+function getHoloBoolean(entity, value) {
+  return entity.is("DISPLAY") && entity.getWornHelmet().nbt().getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+};
+
+/**
+ * Checks two NBT booleans to be used on holographic display stand
+ * @param {JSEntity} entity - required
+ * @param {string} condition - NBT boolean to use for condition
+ * @param {string} value - NBT boolean to use for condition
+ * @returns NBT boolean if the entity is a holographic display stand
+ **/
+function getHoloBooleans(entity, condition, value) {
+  return entity.is("DISPLAY") && entity.getWornHelmet().nbt().getBoolean(condition) && entity.getWornHelmet().nbt().getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
 };
