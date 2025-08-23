@@ -16,20 +16,6 @@ function initModule(system) {
     };
     return true;
   };
-  function cycleUpCard(player, manager) {
-    manager.setData(player, "skyhighocs:dyn/selected_battle_card", player.getData("skyhighocs:dyn/selected_battle_card") + 1);
-    if (player.getData("skyhighocs:dyn/selected_battle_card") > 5) {
-      manager.setData(player, "skyhighocs:dyn/selected_battle_card", 0);
-    };
-    return true;
-  };
-  function cycleDownCard(player, manager) {
-    manager.setData(player, "skyhighocs:dyn/selected_battle_card", player.getData("skyhighocs:dyn/selected_battle_card") - 1);
-    if (player.getData("skyhighocs:dyn/selected_battle_card") < 0) {
-      manager.setData(player, "skyhighocs:dyn/selected_battle_card", 5);
-    };
-    return true;
-  };
   //All of the required functions and stuff go here
   return {
     name: "abyssalShadow",
@@ -43,48 +29,13 @@ function initModule(system) {
     ],
     keyBinds: function (hero) {
       hero.addKeyBind("TELEPORT", "Transmit", 1);
-      hero.addKeyBindFunc("CYCLE_UP_CARD", (player, manager) => cycleUpCard(player, manager), "Next Battle Card", 1);
-      hero.addKeyBindFunc("BATTLE_CARD_0", (player, manager) => {
-        manager.setData(player, "skyhighocs:dyn/battle_card", player.getData("skyhighocs:dyn/selected_battle_card"));
-        return true;
-      }, "Return To Shadow Buster", 2);
-      hero.addKeyBindFunc("BATTLE_CARD_1", (player, manager) => {
-        manager.setData(player, "skyhighocs:dyn/battle_card", player.getData("skyhighocs:dyn/selected_battle_card"));
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A75Abyssal Shadow\u00A7r> Battle Card Predation! \u00A75Barrier\u00A7r!");
-        };
-        return true;
-      }, "Battle Card! Barrier!", 2);
-      hero.addKeyBindFunc("BATTLE_CARD_2", (player, manager) => {
-        manager.setData(player, "skyhighocs:dyn/battle_card", player.getData("skyhighocs:dyn/selected_battle_card"));
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A75Abyssal Shadow\u00A7r> Battle Card Predation! \u00A75Sword\u00A7r!");
-        };
-        return true;
-      }, "Battle Card! Sword!", 2);
-      hero.addKeyBindFunc("BATTLE_CARD_3", (player, manager) => {
-        manager.setData(player, "skyhighocs:dyn/battle_card", player.getData("skyhighocs:dyn/selected_battle_card"));
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A75Abyssal Shadow\u00A7r> Battle Card Predation! \u00A75Abyssal Shroud\u00A7r!");
-        };
-        return true;
-      }, "Battle Card! Abyssal Shroud!", 2);
-      hero.addKeyBindFunc("BATTLE_CARD_4", (player, manager) => {
-        manager.setData(player, "skyhighocs:dyn/battle_card", player.getData("skyhighocs:dyn/selected_battle_card"));
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A75Abyssal Shadow\u00A7r> Battle Card Predation! \u00A75Unleashed Darkness\u00A7r!");
-        };
-        return true;
-      }, "Battle Card! Unleashed Darkness!", 2);
-      hero.addKeyBindFunc("BATTLE_CARD_5", (player, manager) => {
-        manager.setData(player, "skyhighocs:dyn/battle_card", player.getData("skyhighocs:dyn/selected_battle_card"));
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A75Abyssal Shadow\u00A7r> Battle Card Predation! \u00A75Shadow Blast\u00A7r!");
-        };
-        return true;
-      }, "Battle Card! Shadow Blast!", 2);
+      hero.addKeyBind("BATTLE_CARD_0", "Return To Shadow Buster", 2);
+      hero.addKeyBind("BATTLE_CARD_1", "Battle Card! Barrier!", 2);
+      hero.addKeyBind("BATTLE_CARD_2", "Battle Card! Sword!", 2);
+      hero.addKeyBind("BATTLE_CARD_3", "Battle Card! Abyssal Shroud!", 2);
+      hero.addKeyBind("BATTLE_CARD_4", "Battle Card! Unleashed Darkness!", 2);
+      hero.addKeyBind("BATTLE_CARD_5", "Battle Card! Shadow Blast!", 2);
       hero.addKeyBind("INVISIBILITY", "Wave World", 3);
-      hero.addKeyBindFunc("CYCLE_DOWN_CARD", (player, manager) => cycleDownCard(player, manager), "Previous Battle Card", 3);
       hero.addKeyBind("SHADOWDOME", "Abyssal Shroud", 4)
       hero.addKeyBind("CHARGED_BEAM", "Unleashed Darkness", 4);
       hero.addKeyBind("ENERGY_PROJECTION", "Shadow Blast", 4);
@@ -190,7 +141,6 @@ function initModule(system) {
     },
     isKeyBindEnabled: function (entity, keyBind) {
       var result = false;
-      var uuid = "e51532a1-19fc-4d4f-9da0-f952c4645891";
       if (keyBind == "CYCLE_CHATS_EM") {
         result = !entity.isSneaking() && entity.getData("skyhighocs:dyn/battle_card") == 0 && entity.getData("skyhighocs:dyn/achlys_timer") == 1;
       };
@@ -207,7 +157,7 @@ function initModule(system) {
         result = entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
       };
       if (keyBind == "TELEPORT" || keyBind == "INVISIBILITY") {
-        result = !entity.getData("skyhighocs:dyn/predation");
+        result = true;
       };
       if (keyBind == "SILK_SWITCH") {
         result = entity.getData("skyhighocs:dyn/tool_enchant") == 0 && (entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" || "fiskheroes:tutridium_pickaxe") && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5;
@@ -218,26 +168,23 @@ function initModule(system) {
       if (keyBind == "RIFLE_AIM") {
         result = entity.getHeldItem().name() == "fiskheroes:chronos_rifle";
       };
-      if (keyBind == "CYCLE_UP_CARD" || keyBind == "CYCLE_DOWN_CARD") {
-        result = entity.getData("skyhighocs:dyn/predation");
-      };
       if (keyBind == "BATTLE_CARD_0") {
-        result = entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/selected_battle_card") == 0;
+        result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighocs:dyn/selected_battle_card") == 0;
       };
       if (keyBind == "BATTLE_CARD_1") {
-        result = entity.getData("skyhighocs:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighocs:dyn/selected_battle_card") == 1;
+        result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighocs:dyn/selected_battle_card") == 1;
       };
       if (keyBind == "BATTLE_CARD_2") {
-        result = entity.getData("skyhighocs:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighocs:dyn/selected_battle_card") == 2;
+        result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighocs:dyn/selected_battle_card") == 2;
       };
       if (keyBind == "BATTLE_CARD_3") {
-        result = entity.getData("skyhighocs:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighocs:dyn/selected_battle_card") == 3;
+        result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighocs:dyn/selected_battle_card") == 3;
       };
       if (keyBind == "BATTLE_CARD_4") {
-        result = entity.getData("skyhighocs:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighocs:dyn/selected_battle_card") == 4;
+        result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighocs:dyn/selected_battle_card") == 4;
       };
       if (keyBind == "BATTLE_CARD_5") {
-        result = entity.getData("skyhighocs:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighocs:dyn/selected_battle_card") == 5;
+        result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighocs:dyn/selected_battle_card") == 5;
       };
       if (keyBind == "SHADOWDOME") {
         result = !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighocs:dyn/battle_card") == 3;
@@ -251,7 +198,6 @@ function initModule(system) {
       return result;
     },
     isModifierEnabled: function (entity, modifier) {
-      var uuid = "e51532a1-19fc-4d4f-9da0-f952c4645891";
       var result = false;
       if (modifier.name() == "fiskheroes:potion_immunity") {
         result = true;
@@ -346,59 +292,67 @@ function initModule(system) {
       };
       var item_holding = (!entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/wave_changing_timer") > 0);
       manager.incrementData(entity, "skyhighocs:dyn/item_holding_timer", 10, item_holding);
-      var sword = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/predation_timer") < 0.2 && entity.getData("skyhighocs:dyn/battle_card") == 2 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      var sword = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 2 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighocs:dyn/sword", sword);
       var sword_blade = entity.getData("skyhighocs:dyn/sword_timer") == 1 && entity.getData("skyhighocs:dyn/item_holding_timer") == 0;
       manager.setData(entity, "skyhighocs:dyn/sword_blade", sword_blade);
-      var abyssal_shroud = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/predation_timer") < 0.2 && entity.getData("skyhighocs:dyn/battle_card") == 3 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      var abyssal_shroud = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 3 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighocs:dyn/abyssal_shroud", abyssal_shroud);
-      var unleashed_darkness = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/predation_timer") < 0.2 && entity.getData("skyhighocs:dyn/battle_card") == 4 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      var unleashed_darkness = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 4 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighocs:dyn/unleashed_darkness", unleashed_darkness);
-      var shadow_blast = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/predation_timer") < 0.2 && entity.getData("skyhighocs:dyn/battle_card") == 5 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      var shadow_blast = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 5 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighocs:dyn/shadow_blast", shadow_blast);
-      if (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && !entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/predation_timer") > 0.3 && entity.getData("skyhighocs:dyn/predation_timer") < 0.4) {
+      if (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/predation_timer") > 0.0 && entity.getData("skyhighocs:dyn/predation_timer") < 0.1) {
+        manager.setData(entity, "skyhighocs:dyn/battle_card", 0);
+        manager.setData(entity, "skyhighocs:dyn/achlys", false);
+      };
+      if (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/predation_timer") > 0.6 && entity.getData("skyhighocs:dyn/predation_timer") < 0.7) {
+        manager.setData(entity, "skyhighocs:dyn/battle_card", entity.getData("skyhighocs:dyn/selected_battle_card"));
+        if (entity.getData("skyhighocs:dyn/battle_card") == 0) {
+          manager.setData(entity, "skyhighocs:dyn/achlys", false);
+        };
         if (entity.getData("skyhighocs:dyn/battle_card") == 1) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
-          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.35) {
+          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
+            system.shoutMessage(entity, "\u00A7r<\u00A75Abyssal Shadow\u00A7r> Battle Card Predation! \u00A75Barrier\u00A7r!", 16);
             system.systemMessage(entity, "<n>Inserted <nh>Barrier<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/achlys", false);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
           manager.setData(entity, "fiskheroes:shield", true);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 2) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
-          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.35) {
+          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
+            system.shoutMessage(entity, "\u00A7r<\u00A75Abyssal Shadow\u00A7r> Battle Card Predation! \u00A75Sword\u00A7r!", 16);
             system.systemMessage(entity, "<n>Inserted <nh>Sword<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/achlys", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
           manager.setData(entity, "fiskheroes:shield", true);
           manager.setData(entity, "fiskheroes:blade", true);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 3) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
-          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.35) {
+          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
+            system.shoutMessage(entity, "\u00A7r<\u00A75Abyssal Shadow\u00A7r> Battle Card Predation! \u00A75Abyssal Shroud\u00A7r!", 16);
             system.systemMessage(entity, "<n>Inserted <nh>Abyssal Shroud<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/achlys", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 4) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
-          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.35) {
+          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
+            system.shoutMessage(entity, "\u00A7r<\u00A75Abyssal Shadow\u00A7r> Battle Card Predation! \u00A75Unleashed Darkness\u00A7r!", 16);
             system.systemMessage(entity, "<n>Inserted <nh>Unleashed Darkness<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/achlys", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 5) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
-          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.35) {
+          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
+            system.shoutMessage(entity, "\u00A7r<\u00A75Abyssal Shadow\u00A7r> Battle Card Predation! \u00A75Shadow Blast\u00A7r!", 16);
             system.systemMessage(entity, "<n>Inserted <nh>Shadow Blast<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/achlys", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
         };
       };
       if (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && ((entity.getData("fiskheroes:flight_boost_timer") > 0 && entity.isSprinting()) || !entity.getHeldItem().isEmpty())) {
@@ -406,26 +360,21 @@ function initModule(system) {
       };
       if (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && (entity.getData("fiskheroes:flight_boost_timer") < 1 && !entity.isSprinting()) && entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/predation_timer") == 0) {
         if (entity.getData("skyhighocs:dyn/battle_card") == 1) {
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
           manager.setData(entity, "fiskheroes:shield", true);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 2) {
           manager.setData(entity, "skyhighocs:dyn/achlys", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
           manager.setData(entity, "fiskheroes:shield", true);
           manager.setData(entity, "fiskheroes:blade", true);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 3) {
           manager.setData(entity, "skyhighocs:dyn/achlys", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 4) {
           manager.setData(entity, "skyhighocs:dyn/achlys", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 5) {
           manager.setData(entity, "skyhighocs:dyn/achlys", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
         };
       };
     },

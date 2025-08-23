@@ -16,20 +16,6 @@ function initModule(system) {
     };
     return true;
   };
-  function cycleUpCard(player, manager) {
-    manager.setData(player, "skyhighocs:dyn/selected_battle_card", player.getData("skyhighocs:dyn/selected_battle_card") + 1);
-    if (player.getData("skyhighocs:dyn/selected_battle_card") > 5) {
-      manager.setData(player, "skyhighocs:dyn/selected_battle_card", 0);
-    };
-    return true;
-  };
-  function cycleDownCard(player, manager) {
-    manager.setData(player, "skyhighocs:dyn/selected_battle_card", player.getData("skyhighocs:dyn/selected_battle_card") - 1);
-    if (player.getData("skyhighocs:dyn/selected_battle_card") < 0) {
-      manager.setData(player, "skyhighocs:dyn/selected_battle_card", 5);
-    };
-    return true;
-  };
   //All of the required functions and stuff go here
   return {
     name: "crimsonAsteroid",
@@ -43,48 +29,13 @@ function initModule(system) {
     ],
     keyBinds: function (hero) {
       hero.addKeyBind("TELEPORT", "Transmit", 1);
-      hero.addKeyBindFunc("CYCLE_UP_CARD", (player, manager) => cycleUpCard(player, manager), "Next Battle Card", 1);
-      hero.addKeyBindFunc("BATTLE_CARD_0", (player, manager) => {
-        manager.setData(player, "skyhighocs:dyn/battle_card", player.getData("skyhighocs:dyn/selected_battle_card"));
-        return true;
-      }, "Return To Crimson Buster", 2);
-      hero.addKeyBindFunc("BATTLE_CARD_1", (player, manager) => {
-        manager.setData(player, "skyhighocs:dyn/battle_card", player.getData("skyhighocs:dyn/selected_battle_card"));
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A74Crimson Asteroid\u00A7r> Battle Card Predation! \u00A74Barrier\u00A7r!");
-        };
-        return true;
-      }, "Battle Card! Barrier!", 2);
-      hero.addKeyBindFunc("BATTLE_CARD_2", (player, manager) => {
-        manager.setData(player, "skyhighocs:dyn/battle_card", player.getData("skyhighocs:dyn/selected_battle_card"));
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A74Crimson Asteroid\u00A7r> Battle Card Predation! \u00A74Sword\u00A7r!");
-        };
-        return true;
-      }, "Battle Card! Sword!", 2);
-      hero.addKeyBindFunc("BATTLE_CARD_3", (player, manager) => {
-        manager.setData(player, "skyhighocs:dyn/battle_card", player.getData("skyhighocs:dyn/selected_battle_card"));
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A74Crimson Asteroid\u00A7r> Battle Card Predation! \u00A74Asteroid Crash\u00A7r!");
-        };
-        return true;
-      }, "Battle Card! Asteroid Crash!", 2);
-      hero.addKeyBindFunc("BATTLE_CARD_4", (player, manager) => {
-        manager.setData(player, "skyhighocs:dyn/battle_card", player.getData("skyhighocs:dyn/selected_battle_card"));
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A74Crimson Asteroid\u00A7r> Battle Card Predation! \u00A74Asteroid Strike\u00A7r!");
-        };
-        return true;
-      }, "Battle Card! Asteroid Strike!", 2);
-      hero.addKeyBindFunc("BATTLE_CARD_5", (player, manager) => {
-        manager.setData(player, "skyhighocs:dyn/battle_card", player.getData("skyhighocs:dyn/selected_battle_card"));
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A74Crimson Asteroid\u00A7r> Battle Card Predation! \u00A74Asteroid Blast\u00A7r!");
-        };
-        return true;
-      }, "Battle Card! Asteroid Blast!", 2);
+      hero.addKeyBind("BATTLE_CARD_0", "Return To Crimson Buster", 2);
+      hero.addKeyBind("BATTLE_CARD_1", "Battle Card! Barrier!", 2);
+      hero.addKeyBind("BATTLE_CARD_2", "Battle Card! Sword!", 2);
+      hero.addKeyBind("BATTLE_CARD_3", "Battle Card! Asteroid Crash!", 2);
+      hero.addKeyBind("BATTLE_CARD_4", "Battle Card! Asteroid Strike!", 2);
+      hero.addKeyBind("BATTLE_CARD_5", "Battle Card! Asteroid Blast!", 2);
       hero.addKeyBind("INVISIBILITY", "Wave World", 3);
-      hero.addKeyBindFunc("CYCLE_DOWN_CARD", (player, manager) => cycleDownCard(player, manager), "Previous Battle Card", 3);
       hero.addKeyBind("EARTHQUAKE", "Asteroid Crash", 4);
       hero.addKeyBind("ENERGY_PROJECTION", "Asteroid Blast", 4);
       hero.addKeyBindFunc("FORTUNE_SWITCH", (player, manager) => toolSwitchEnchant(player, manager), "Active Enchant: Silk Touch", 4);
@@ -189,7 +140,6 @@ function initModule(system) {
     },
     isKeyBindEnabled: function (entity, keyBind) {
       var result = false;
-      var uuid = "c4bc5db6-3cf6-44fe-8427-304a7b211bc4";
       if (keyBind == "CYCLE_CHATS_EM") {
         result = !entity.isSneaking() && entity.getData("skyhighocs:dyn/battle_card") == 0 && entity.getData("skyhighocs:dyn/crimson_timer") == 1;
       };
@@ -206,7 +156,7 @@ function initModule(system) {
         result = entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
       };
       if (keyBind == "TELEPORT" || keyBind == "INVISIBILITY") {
-        result = !entity.getData("skyhighocs:dyn/predation");
+        result = true;
       };
       if (keyBind == "SILK_SWITCH") {
         result = entity.getData("skyhighocs:dyn/tool_enchant") == 0 && (entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" || "fiskheroes:tutridium_pickaxe") && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5;
@@ -217,26 +167,23 @@ function initModule(system) {
       if (keyBind == "RIFLE_AIM") {
         result = entity.getHeldItem().name() == "fiskheroes:chronos_rifle";
       };
-      if (keyBind == "CYCLE_UP_CARD" || keyBind == "CYCLE_DOWN_CARD") {
-        result = entity.getData("skyhighocs:dyn/predation");
-      };
       if (keyBind == "BATTLE_CARD_0") {
-        result = entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/selected_battle_card") == 0;
+        result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighocs:dyn/selected_battle_card") == 0;
       };
       if (keyBind == "BATTLE_CARD_1") {
-        result = entity.getData("skyhighocs:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighocs:dyn/selected_battle_card") == 1;
+        result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighocs:dyn/selected_battle_card") == 1;
       };
       if (keyBind == "BATTLE_CARD_2") {
-        result = entity.getData("skyhighocs:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighocs:dyn/selected_battle_card") == 2;
+        result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighocs:dyn/selected_battle_card") == 2;
       };
       if (keyBind == "BATTLE_CARD_3") {
-        result = entity.getData("skyhighocs:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighocs:dyn/selected_battle_card") == 3;
+        result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighocs:dyn/selected_battle_card") == 3;
       };
       if (keyBind == "BATTLE_CARD_4") {
-        result = entity.getData("skyhighocs:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighocs:dyn/selected_battle_card") == 4;
+        result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighocs:dyn/selected_battle_card") == 4;
       };
       if (keyBind == "BATTLE_CARD_5") {
-        result = entity.getData("skyhighocs:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighocs:dyn/selected_battle_card") == 5;
+        result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighocs:dyn/selected_battle_card") == 5;
       };
       if (keyBind == "EARTHQUAKE") {
         result = !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighocs:dyn/battle_card") == 3;
@@ -247,7 +194,6 @@ function initModule(system) {
       return result;
     },
     isModifierEnabled: function (entity, modifier) {
-      var uuid = "c4bc5db6-3cf6-44fe-8427-304a7b211bc4";
       var result = false;
       if (modifier.name() == "fiskheroes:potion_immunity") {
         result = true;
@@ -342,59 +288,67 @@ function initModule(system) {
       };
       var item_holding = (!entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/wave_changing_timer") > 0);
       manager.incrementData(entity, "skyhighocs:dyn/item_holding_timer", 10, item_holding);
-      var sword = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/predation_timer") < 0.2 && entity.getData("skyhighocs:dyn/battle_card") == 2 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      var sword = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 2 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighocs:dyn/sword", sword);
       var sword_blade = entity.getData("skyhighocs:dyn/sword_timer") == 1 && entity.getData("skyhighocs:dyn/item_holding_timer") == 0;
       manager.setData(entity, "skyhighocs:dyn/sword_blade", sword_blade);
-      var asteroid_crash = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/predation_timer") < 0.2 && entity.getData("skyhighocs:dyn/battle_card") == 3 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      var asteroid_crash = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 3 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighocs:dyn/asteroid_crash", asteroid_crash);
-      var asteroid_strike = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/predation_timer") < 0.2 && entity.getData("skyhighocs:dyn/battle_card") == 4 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      var asteroid_strike = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 4 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighocs:dyn/asteroid_strike", asteroid_strike);
-      var asteroid_blast = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/predation_timer") < 0.2 && entity.getData("skyhighocs:dyn/battle_card") == 5 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      var asteroid_blast = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 5 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighocs:dyn/asteroid_blast", asteroid_blast);
-      if (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && !entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/predation_timer") > 0.3 && entity.getData("skyhighocs:dyn/predation_timer") < 0.4) {
+      if (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/predation_timer") > 0.0 && entity.getData("skyhighocs:dyn/predation_timer") < 0.1) {
+        manager.setData(entity, "skyhighocs:dyn/battle_card", 0);
+        manager.setData(entity, "skyhighocs:dyn/crimson", false);
+      };
+      if (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/predation_timer") > 0.6 && entity.getData("skyhighocs:dyn/predation_timer") < 0.7) {
+        manager.setData(entity, "skyhighocs:dyn/battle_card", entity.getData("skyhighocs:dyn/selected_battle_card"));
+        if (entity.getData("skyhighocs:dyn/battle_card") == 0) {
+          manager.setData(entity, "skyhighocs:dyn/crimson", false);
+        };
         if (entity.getData("skyhighocs:dyn/battle_card") == 1) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
-          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.35) {
+          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
+            system.shoutMessage(entity, "\u00A7r<\u00A74Crimson Asteroid\u00A7r> Battle Card Predation! \u00A74Barrier\u00A7r!", 16);
             system.systemMessage(entity, "<n>Inserted <nh>Barrier<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/crimson", false);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
           manager.setData(entity, "fiskheroes:shield", true);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 2) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
-          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.35) {
+          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
+            system.shoutMessage(entity, "\u00A7r<\u00A74Crimson Asteroid\u00A7r> Battle Card Predation! \u00A74Sword\u00A7r!", 16);
             system.systemMessage(entity, "<n>Inserted <nh>Sword<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
           manager.setData(entity, "fiskheroes:shield", true);
           manager.setData(entity, "fiskheroes:blade", true);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 3) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
-          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.35) {
+          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
+            system.shoutMessage(entity, "\u00A7r<\u00A74Crimson Asteroid\u00A7r> Battle Card Predation! \u00A74Asteroid Crash\u00A7r!", 16);
             system.systemMessage(entity, "<n>Inserted <nh>Asteroid Crash<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 4) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
-          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.35) {
+          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
+            system.shoutMessage(entity, "\u00A7r<\u00A74Crimson Asteroid\u00A7r> Battle Card Predation! \u00A74Asteroid Strike\u00A7r!", 16);
             system.systemMessage(entity, "<n>Inserted <nh>Asteroid Strike<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 5) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
-          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.35) {
+          if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
+            system.shoutMessage(entity, "\u00A7r<\u00A74Crimson Asteroid\u00A7r> Battle Card Predation! \u00A74Asteroid Blast\u00A7r!", 16);
             system.systemMessage(entity, "<n>Inserted <nh>Asteroid Blast<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
         };
       };
       if (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && ((entity.getData("fiskheroes:flight_boost_timer") > 0 && entity.isSprinting()) || !entity.getHeldItem().isEmpty())) {
@@ -402,26 +356,21 @@ function initModule(system) {
       };
       if (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && (entity.getData("fiskheroes:flight_boost_timer") < 1 && !entity.isSprinting()) && entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/predation_timer") == 0) {
         if (entity.getData("skyhighocs:dyn/battle_card") == 1) {
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
           manager.setData(entity, "fiskheroes:shield", true);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 2) {
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
           manager.setData(entity, "fiskheroes:shield", true);
           manager.setData(entity, "fiskheroes:blade", true);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 3) {
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 4) {
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
         };
         if (entity.getData("skyhighocs:dyn/battle_card") == 5) {
           manager.setData(entity, "skyhighocs:dyn/crimson", true);
-          manager.setData(entity, "skyhighocs:dyn/selected_battle_card", 0);
         };
       };
     },

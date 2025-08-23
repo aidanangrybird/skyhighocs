@@ -12,21 +12,27 @@ loadTextures({
   "mask": "skyhighocs:damien/abyssal_shadow_mask.tx.json",
   "mask_lights": "skyhighocs:damien/abyssal_shadow_mask_lights.tx.json",
   "mask_wave_changing_lights": "skyhighocs:damien/abyssal_shadow_mask_wave_changing_lights.tx.json",
-  "predation_wave_changing_sides_lights": "skyhighocs:damien/abyssal_shadow_predation_wave_changing_sides_lights.tx.json",
-  "predation_wave_changing_front_lights": "skyhighocs:damien/abyssal_shadow_predation_wave_changing_front_lights.tx.json",
   "sword_blade": "skyhighocs:damien/abyssal_shadow_sword_blade.tx.json",
   "sword": "skyhighocs:damien/abyssal_shadow_sword.tx.json",
   "sword_wave_changing_lights": "skyhighocs:damien/abyssal_shadow_sword_wave_changing_lights.tx.json",
   "sword_sides": "skyhighocs:damien/abyssal_shadow_sword_sides.tx.json",
   "sword_front": "skyhighocs:damien/abyssal_shadow_sword_front.tx.json",
-  "unleashed_darkness_sides": "skyhighocs:damien/abyssal_shadow_unleashed_darkness_sides.tx.json",
-  "unleashed_darkness_front_lights": "skyhighocs:damien/abyssal_shadow_unleashed_darkness_front_lights.tx.json",
-  "unleashed_darkness_front": "skyhighocs:damien/abyssal_shadow_unleashed_darkness_front.tx.json",
-  "shadow_blast_sides": "skyhighocs:damien/abyssal_shadow_shadow_blast_sides.tx.json",
-  "shadow_blast_front_lights": "skyhighocs:damien/abyssal_shadow_shadow_blast_front_lights.tx.json",
-  "shadow_blast_front": "skyhighocs:damien/abyssal_shadow_shadow_blast_front.tx.json",
+  "sword_wave_changing_sides_lights": "skyhighocs:damien/abyssal_shadow_sword_wave_changing_sides_lights.tx.json",
+  "sword_wave_changing_front_lights": "skyhighocs:damien/abyssal_shadow_sword_wave_changing_front_lights.tx.json",
   "abyssal_shroud_sides": "skyhighocs:damien/abyssal_shadow_abyssal_shroud_sides.tx.json",
   "abyssal_shroud_front": "skyhighocs:damien/abyssal_shadow_abyssal_shroud_front.tx.json",
+  "abyssal_shroud_wave_changing_sides_lights": "skyhighocs:damien/abyssal_shadow_abyssal_shroud_wave_changing_sides_lights.tx.json",
+  "abyssal_shroud_wave_changing_front_lights": "skyhighocs:damien/abyssal_shadow_abyssal_shroud_wave_changing_front_lights.tx.json",
+  "unleashed_darkness_sides": "skyhighocs:damien/abyssal_shadow_unleashed_darkness_sides.tx.json",
+  "unleashed_darkness_front": "skyhighocs:damien/abyssal_shadow_unleashed_darkness_front.tx.json",
+  "unleashed_darkness_front_lights": "skyhighocs:damien/abyssal_shadow_unleashed_darkness_front_lights.tx.json",
+  "unleashed_darkness_wave_changing_sides_lights": "skyhighocs:damien/abyssal_shadow_unleashed_darkness_wave_changing_sides_lights.tx.json",
+  "unleashed_darkness_wave_changing_front_lights": "skyhighocs:damien/abyssal_shadow_unleashed_darkness_wave_changing_front_lights.tx.json",
+  "shadow_blast_sides": "skyhighocs:damien/abyssal_shadow_shadow_blast_sides.tx.json",
+  "shadow_blast_front": "skyhighocs:damien/abyssal_shadow_shadow_blast_front.tx.json",
+  "shadow_blast_front_lights": "skyhighocs:damien/abyssal_shadow_shadow_blast_front_lights.tx.json",
+  "shadow_blast_wave_changing_sides_lights": "skyhighocs:damien/abyssal_shadow_shadow_blast_wave_changing_sides_lights.tx.json",
+  "shadow_blast_wave_changing_front_lights": "skyhighocs:damien/abyssal_shadow_shadow_blast_wave_changing_front_lights.tx.json",
   "em_being_base": "skyhighocs:damien/achyls_base",
   "em_being_lights": "skyhighocs:damien/achyls_lights",
   "head_right": "skyhighocs:damien/achlys_right.tx.json",
@@ -102,14 +108,15 @@ function initEffects(renderer) {
       { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-1.0, 9.0, -0.5], "size": [2.0, 2.0] }
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   stuff.bindFlightTrail(renderer, "skyhighocs:abyssal_shadow_flight");
-  //Battle card predation wave changing
-  predation = stelar.initHandThing(renderer, "predation_wave_changing", 0, 2);
-  //Lightning
+  //Abyssal Shroud
   abyssalShroud = stelar.initHandThing(renderer, "abyssal_shroud", 2, 0);
-  //Hail cannon
-  shadowBlast = stelar.initHandThing(renderer, "shadow_blast", 2, 3);
-  //Derecho
+  abyssalShroudPredation = stelar.initHandThing(renderer, "abyssal_shroud_wave_changing", 0, 2);
+  //Unleashed Darkness
   unleashedDarkness = stelar.initHandThing(renderer, "unleashed_darkness", 2, 3);
+  unleashedDarknessPredation = stelar.initHandThing(renderer, "unleashed_darkness_wave_changing", 0, 2);
+  //Shadow Blast
+  shadowBlast = stelar.initHandThing(renderer, "shadow_blast", 2, 3);
+  shadowBlastPredation = stelar.initHandThing(renderer, "shadow_blast_wave_changing", 0, 2);
   //Sword
   swordMain = renderer.createEffect("fiskheroes:shield");
   swordMain.texture.set("sword");
@@ -127,6 +134,7 @@ function initEffects(renderer) {
   swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
   swordWaveChanging.large = true;
   sword = stelar.initHandThing(renderer, "sword", 2, 0);
+  swordPredation = stelar.initHandThing(renderer, "sword_wave_changing", 0, 2);
   //Head
   head = stelar.initHandThing(renderer, "head", 1, 4, 3);
   headWaveChange = stelar.initHandThing(renderer, "head_wave_change", 1, 4, 3);
@@ -151,25 +159,26 @@ function render(entity, renderLayer, isFirstPersonArm) {
         headWaveChanging.render();
       };
     };
-    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) {
-      predation.render();
-    };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/sword_timer") > 0) {
       swordWaveChanging.render();
       swordMain.render();
       sword.render();
+      swordPredation.render();
       if (entity.getData("skyhighocs:dyn/sword") && entity.getHeldItem().isEmpty()) {
         swordBlade.render();
       };
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/abyssal_shroud_timer") > 0) {
       abyssalShroud.render();
+      abyssalShroudPredation.render();
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/unleashed_darkness_timer") > 0) {
       unleashedDarkness.render();
+      unleashedDarknessPredation.render();
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/shadow_blast_timer") > 0) {
       shadowBlast.render();
+      shadowBlastPredation.render();
     };
   };
 };

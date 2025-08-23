@@ -12,21 +12,27 @@ loadTextures({
   "mask": "skyhighocs:lucas/crimson_asteroid_mask.tx.json",
   "mask_lights": "skyhighocs:lucas/crimson_asteroid_mask_lights.tx.json",
   "mask_wave_changing_lights": "skyhighocs:lucas/crimson_asteroid_mask_wave_changing_lights.tx.json",
-  "predation_wave_changing_sides_lights": "skyhighocs:lucas/crimson_asteroid_predation_wave_changing_sides_lights.tx.json",
-  "predation_wave_changing_front_lights": "skyhighocs:lucas/crimson_asteroid_predation_wave_changing_front_lights.tx.json",
   "sword_blade": "skyhighocs:lucas/crimson_asteroid_sword_blade.tx.json",
   "sword": "skyhighocs:lucas/crimson_asteroid_sword.tx.json",
   "sword_wave_changing_lights": "skyhighocs:lucas/crimson_asteroid_sword_wave_changing_lights.tx.json",
   "sword_sides": "skyhighocs:lucas/crimson_asteroid_sword_sides.tx.json",
   "sword_front": "skyhighocs:lucas/crimson_asteroid_sword_front.tx.json",
+  "sword_wave_changing_sides_lights": "skyhighocs:lucas/crimson_asteroid_sword_wave_changing_sides_lights.tx.json",
+  "sword_wave_changing_front_lights": "skyhighocs:lucas/crimson_asteroid_sword_wave_changing_front_lights.tx.json",
+  "asteroid_crash_sides": "skyhighocs:lucas/crimson_asteroid_asteroid_crash_sides.tx.json",
+  "asteroid_crash_front": "skyhighocs:lucas/crimson_asteroid_asteroid_crash_front.tx.json",
+  "asteroid_crash_wave_changing_sides_lights": "skyhighocs:lucas/crimson_asteroid_asteroid_crash_wave_changing_sides_lights.tx.json",
+  "asteroid_crash_wave_changing_front_lights": "skyhighocs:lucas/crimson_asteroid_asteroid_crash_wave_changing_front_lights.tx.json",
   "asteroid_strike_sides": "skyhighocs:lucas/crimson_asteroid_asteroid_strike_sides.tx.json",
   "asteroid_strike_front": "skyhighocs:lucas/crimson_asteroid_asteroid_strike_front.tx.json",
   "asteroid_strike_front_lights": "skyhighocs:lucas/crimson_asteroid_asteroid_strike_front_lights.tx.json",
+  "asteroid_strike_wave_changing_sides_lights": "skyhighocs:lucas/crimson_asteroid_asteroid_strike_wave_changing_sides_lights.tx.json",
+  "asteroid_strike_wave_changing_front_lights": "skyhighocs:lucas/crimson_asteroid_asteroid_strike_wave_changing_front_lights.tx.json",
   "asteroid_blast_sides": "skyhighocs:lucas/crimson_asteroid_asteroid_blast_sides.tx.json",
   "asteroid_blast_front": "skyhighocs:lucas/crimson_asteroid_asteroid_blast_front.tx.json",
   "asteroid_blast_front_lights": "skyhighocs:lucas/crimson_asteroid_asteroid_blast_front_lights.tx.json",
-  "asteroid_crash_sides": "skyhighocs:lucas/crimson_asteroid_asteroid_crash_sides.tx.json",
-  "asteroid_crash_front": "skyhighocs:lucas/crimson_asteroid_asteroid_crash_front.tx.json",
+  "asteroid_blast_wave_changing_sides_lights": "skyhighocs:lucas/crimson_asteroid_asteroid_blast_wave_changing_sides_lights.tx.json",
+  "asteroid_blast_wave_changing_front_lights": "skyhighocs:lucas/crimson_asteroid_asteroid_blast_wave_changing_front_lights.tx.json",
   "em_being_base": "skyhighocs:lucas/crimson_base",
   "em_being_lights": "skyhighocs:lucas/crimson_lights",
   "head_right": "skyhighocs:lucas/crimson_right.tx.json",
@@ -97,14 +103,15 @@ function initEffects(renderer) {
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [4.0, 4.0] }
   ]);
   stuff.bindFlightTrail(renderer, "skyhighocs:crimson_asteroid_flight");
-  //Battle card predation wave changing
-  predation = stelar.initHandThing(renderer, "predation_wave_changing", 0, 2);
   //Asteroid Crash
   asteroidCrash = stelar.initHandThing(renderer, "asteroid_crash", 2, 0);
+  asteroidCrashPredation = stelar.initHandThing(renderer, "asteroid_crash_wave_changing", 0, 2);
   //Asteroid Blast
   asteroidBlast = stelar.initHandThing(renderer, "asteroid_blast", 2, 3);
+  asteroidBlastPredation = stelar.initHandThing(renderer, "asteroid_blast_wave_changing", 0, 2);
   //Asteroid Strike
   asteroidStrike = stelar.initHandThing(renderer, "asteroid_strike", 2, 3);
+  asteroidStrikePredation = stelar.initHandThing(renderer, "asteroid_strike_wave_changing", 0, 2);
   //Sword
   swordMain = renderer.createEffect("fiskheroes:shield");
   swordMain.texture.set("sword");
@@ -122,6 +129,7 @@ function initEffects(renderer) {
   swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
   swordWaveChanging.large = true;
   sword = stelar.initHandThing(renderer, "sword", 2, 0);
+  swordPredation = stelar.initHandThing(renderer, "sword_wave_changing", 0, 2);
   //Head
   head = stelar.initHandThing(renderer, "head", 1, 4, 3);
   headWaveChange = stelar.initHandThing(renderer, "head_wave_change", 1, 4, 3);
@@ -146,25 +154,26 @@ function render(entity, renderLayer, isFirstPersonArm) {
         headWaveChanging.render();
       }
     };
-    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) {
-      predation.render();
-    };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/sword_timer") > 0) {
       swordWaveChanging.render();
       swordMain.render();
       sword.render();
+      swordPredation.render();
       if (entity.getData("skyhighocs:dyn/sword") && entity.getHeldItem().isEmpty()) {
         swordBlade.render();
       };
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/asteroid_crash_timer") > 0) {
       asteroidCrash.render();
+      asteroidCrashPredation.render();
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/asteroid_strike_timer") > 0) {
       asteroidStrike.render();
+      asteroidStrikePredation.render();
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/asteroid_blast_timer") > 0) {
       asteroidBlast.render();
+      asteroidBlastPredation.render();
     };
   };
 };

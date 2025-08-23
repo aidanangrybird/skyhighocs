@@ -17,16 +17,22 @@ loadTextures({
   "sword_wave_changing_lights": "skyhighocs:chase/pryetak_nebula_sword_wave_changing_lights.tx.json",
   "sword_sides": "skyhighocs:chase/pryetak_nebula_sword_sides.tx.json",
   "sword_front": "skyhighocs:chase/pryetak_nebula_sword_front.tx.json",
+  "sword_wave_changing_sides_lights": "skyhighocs:chase/pryetak_nebula_sword_wave_changing_sides_lights.tx.json",
+  "sword_wave_changing_front_lights": "skyhighocs:chase/pryetak_nebula_sword_wave_changing_front_lights.tx.json",
   "nebula_blast_sides": "skyhighocs:chase/pryetak_nebula_nebula_blast_sides.tx.json",
   "nebula_blast_front": "skyhighocs:chase/pryetak_nebula_nebula_blast_front.tx.json",
   "nebula_blast_front_lights": "skyhighocs:chase/pryetak_nebula_nebula_blast_front_lights.tx.json",
+  "nebula_blast_wave_changing_sides_lights": "skyhighocs:chase/pryetak_nebula_nebula_blast_wave_changing_sides_lights.tx.json",
+  "nebula_blast_wave_changing_front_lights": "skyhighocs:chase/pryetak_nebula_nebula_blast_wave_changing_front_lights.tx.json",
+  "ice_bomb_sides": "skyhighocs:chase/pryetak_nebula_ice_bomb_sides.tx.json",
+  "ice_bomb_front": "skyhighocs:chase/pryetak_nebula_ice_bomb_front.tx.json",
+  "ice_bomb_wave_changing_sides_lights": "skyhighocs:chase/pryetak_nebula_ice_bomb_wave_changing_sides_lights.tx.json",
+  "ice_bomb_wave_changing_front_lights": "skyhighocs:chase/pryetak_nebula_ice_bomb_wave_changing_front_lights.tx.json",
   "nebula_burst_sides": "skyhighocs:chase/pryetak_nebula_nebula_burst_sides.tx.json",
   "nebula_burst_front": "skyhighocs:chase/pryetak_nebula_nebula_burst_front.tx.json",
   "nebula_burst_front_lights": "skyhighocs:chase/pryetak_nebula_nebula_burst_front_lights.tx.json",
-  "ice_bomb_sides": "skyhighocs:chase/pryetak_nebula_ice_bomb_sides.tx.json",
-  "ice_bomb_front": "skyhighocs:chase/pryetak_nebula_ice_bomb_front.tx.json",
-  "predation_wave_changing_sides_lights": "skyhighocs:chase/pryetak_nebula_predation_wave_changing_sides_lights.tx.json",
-  "predation_wave_changing_front_lights": "skyhighocs:chase/pryetak_nebula_predation_wave_changing_front_lights.tx.json",
+  "nebula_burst_wave_changing_sides_lights": "skyhighocs:chase/pryetak_nebula_nebula_burst_wave_changing_sides_lights.tx.json",
+  "nebula_burst_wave_changing_front_lights": "skyhighocs:chase/pryetak_nebula_nebula_burst_wave_changing_front_lights.tx.json",
   "em_being_base": "skyhighocs:chase/pryetak_base",
   "em_being_lights": "skyhighocs:chase/pryetak_lights",
   "head_right": "skyhighocs:chase/pryetak_right.tx.json",
@@ -102,14 +108,15 @@ function initEffects(renderer) {
       { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-1.0, 9.0, -0.5], "size": [2.0, 2.0] }
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   stuff.bindFlightTrail(renderer, "skyhighocs:pryetak_nebula_flight");
-  //Battle card predation wave changing
-  predation = stelar.initHandThing(renderer, "predation_wave_changing", 0, 2);
   //Nebula Blast
   nebulaBlast = stelar.initHandThing(renderer, "nebula_blast", 2, 3);
+  nebulaBlastPredation = stelar.initHandThing(renderer, "nebula_blast_wave_changing", 0, 2);
   //Ice Bomb
   iceBomb = stelar.initHandThing(renderer, "ice_bomb", 2, 0);
+  iceBombPredation = stelar.initHandThing(renderer, "ice_bomb_wave_changing", 0, 2);
   //Nebula Burst
   nebulaBurst = stelar.initHandThing(renderer, "nebula_burst", 2, 3);
+  nebulaBurstPredation = stelar.initHandThing(renderer, "nebula_burst_wave_changing", 0, 2);
   //Sword
   swordMain = renderer.createEffect("fiskheroes:shield");
   swordMain.texture.set("sword");
@@ -127,6 +134,7 @@ function initEffects(renderer) {
   swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
   swordWaveChanging.large = true;
   sword = stelar.initHandThing(renderer, "sword", 2, 0);
+  swordPredation = stelar.initHandThing(renderer, "sword_wave_changing", 0, 2);
   //Head
   head = stelar.initHandThing(renderer, "head", 1, 4, 3);
   headWaveChange = stelar.initHandThing(renderer, "head_wave_change", 1, 4, 3);
@@ -151,25 +159,26 @@ function render(entity, renderLayer, isFirstPersonArm) {
         headWaveChanging.render();
       };
     };
-    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) {
-      predation.render();
-    };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/sword_timer") > 0) {
       swordWaveChanging.render();
       swordMain.render();
       sword.render();
+      swordPredation.render();
       if (entity.getData("skyhighocs:dyn/sword") && entity.getHeldItem().isEmpty()) {
         swordBlade.render();
       };
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/nebula_blast_timer") > 0) {
       nebulaBlast.render();
+      nebulaBlastPredation.render();
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/ice_bomb_timer") > 0) {
       iceBomb.render();
+      iceBombPredation.render();
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/nebula_burst_timer") > 0) {
       nebulaBurst.render();
+      nebulaBurstPredation.render();
     };
   };
 };

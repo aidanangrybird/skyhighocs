@@ -12,23 +12,29 @@ loadTextures({
   "mask": "skyhighocs:ace/solar_flame_mask.tx.json",
   "mask_lights": "skyhighocs:ace/solar_flame_mask_lights.tx.json",
   "mask_wave_changing_lights": "skyhighocs:ace/solar_flame_mask_wave_changing_lights.tx.json",
-  "predation_wave_changing_sides_lights": "skyhighocs:ace/solar_flame_predation_wave_changing_sides_lights.tx.json",
-  "predation_wave_changing_front_lights": "skyhighocs:ace/solar_flame_predation_wave_changing_front_lights.tx.json",
   "sword_blade": "skyhighocs:ace/solar_flame_sword_blade.tx.json",
   "sword": "skyhighocs:ace/solar_flame_sword.tx.json",
   "sword_wave_changing_lights": "skyhighocs:ace/solar_flame_sword_wave_changing_lights.tx.json",
   "sword_sides": "skyhighocs:ace/solar_flame_sword_sides.tx.json",
   "sword_front": "skyhighocs:ace/solar_flame_sword_front.tx.json",
-  "solar_wind_sides": "skyhighocs:ace/solar_flame_solar_wind_sides.tx.json",
-  "solar_wind_front": "skyhighocs:ace/solar_flame_solar_wind_front.tx.json",
-  "solar_wind_front_lights": "skyhighocs:ace/solar_flame_solar_wind_front_lights.tx.json",
-  "solar_blast_sides": "skyhighocs:ace/solar_flame_solar_blast_sides.tx.json",
-  "solar_blast_front": "skyhighocs:ace/solar_flame_solar_blast_front.tx.json",
-  "solar_blast_front_lights": "skyhighocs:ace/solar_flame_solar_blast_front_lights.tx.json",
+  "sword_wave_changing_sides_lights": "skyhighocs:ace/solar_flame_sword_wave_changing_sides_lights.tx.json",
+  "sword_wave_changing_front_lights": "skyhighocs:ace/solar_flame_sword_wave_changing_front_lights.tx.json",
   "solar_flare_sides": "skyhighocs:ace/solar_flame_solar_flare_sides.tx.json",
   "solar_flare_front": "skyhighocs:ace/solar_flame_solar_flare_front.tx.json",
   "solar_flare_sides_lights": "skyhighocs:ace/solar_flame_solar_flare_sides_lights.tx.json",
   "solar_flare_front_lights": "skyhighocs:ace/solar_flame_solar_flare_front_lights.tx.json",
+  "solar_flare_wave_changing_sides_lights": "skyhighocs:ace/solar_flame_solar_flare_wave_changing_sides_lights.tx.json",
+  "solar_flare_wave_changing_front_lights": "skyhighocs:ace/solar_flame_solar_flare_wave_changing_front_lights.tx.json",
+  "solar_wind_sides": "skyhighocs:ace/solar_flame_solar_wind_sides.tx.json",
+  "solar_wind_front": "skyhighocs:ace/solar_flame_solar_wind_front.tx.json",
+  "solar_wind_front_lights": "skyhighocs:ace/solar_flame_solar_wind_front_lights.tx.json",
+  "solar_wind_wave_changing_sides_lights": "skyhighocs:ace/solar_flame_solar_wind_wave_changing_sides_lights.tx.json",
+  "solar_wind_wave_changing_front_lights": "skyhighocs:ace/solar_flame_solar_wind_wave_changing_front_lights.tx.json",
+  "solar_blast_sides": "skyhighocs:ace/solar_flame_solar_blast_sides.tx.json",
+  "solar_blast_front": "skyhighocs:ace/solar_flame_solar_blast_front.tx.json",
+  "solar_blast_front_lights": "skyhighocs:ace/solar_flame_solar_blast_front_lights.tx.json",
+  "solar_blast_wave_changing_sides_lights": "skyhighocs:ace/solar_flame_solar_blast_wave_changing_sides_lights.tx.json",
+  "solar_blast_wave_changing_front_lights": "skyhighocs:ace/solar_flame_solar_blast_wave_changing_front_lights.tx.json",
   "em_being_base": "skyhighocs:ace/solar_base",
   "em_being_lights": "skyhighocs:ace/solar_lights",
   "head_right": "skyhighocs:ace/solar_right.tx.json",
@@ -107,14 +113,15 @@ function initEffects(renderer) {
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-1.0, 9.0, -0.5], "size": [3.0, 3.0] }
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   stuff.bindFlightTrail(renderer, "skyhighocs:solar_flame_flight");
-  //Battle card predation wave changing
-  predation = stelar.initHandThing(renderer, "predation_wave_changing", 0, 2);
-  //solar Flare
+  //Solar Flare
   solarFlare = stelar.initHandThing(renderer, "solar_flare", 2, 2);
+  solarFlarePredation = stelar.initHandThing(renderer, "solar_flare_wave_changing", 0, 2);
   //Solar Blast
   solarBlast = stelar.initHandThing(renderer, "solar_blast", 2, 3);
-  //solarWind
+  solarBlastPredation = stelar.initHandThing(renderer, "solar_blast_wave_changing", 0, 2);
+  //Solar Wind
   solarWind = stelar.initHandThing(renderer, "solar_wind", 2, 3);
+  solarWindPredation = stelar.initHandThing(renderer, "solar_wind_wave_changing", 0, 2);
   //Sword
   swordMain = renderer.createEffect("fiskheroes:shield");
   swordMain.texture.set("sword");
@@ -132,6 +139,7 @@ function initEffects(renderer) {
   swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
   swordWaveChanging.large = true;
   sword = stelar.initHandThing(renderer, "sword", 2, 0);
+  swordPredation = stelar.initHandThing(renderer, "sword_wave_changing", 0, 2);
   //Head
   head = stelar.initHandThing(renderer, "head", 1, 4, 3);
   headWaveChange = stelar.initHandThing(renderer, "head_wave_change", 1, 4, 3);
@@ -156,25 +164,26 @@ function render(entity, renderLayer, isFirstPersonArm) {
         headWaveChanging.render();
       }
     };
-    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) {
-      predation.render();
-    };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/sword_timer") > 0) {
       swordWaveChanging.render();
       swordMain.render();
       sword.render();
+      swordPredation.render();
       if (entity.getData("skyhighocs:dyn/sword") && entity.getHeldItem().isEmpty()) {
         swordBlade.render();
       };
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/solar_flare_timer") > 0) {
       solarFlare.render();
+      solarBlastPredation.render();
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/solar_wind_timer") > 0) {
       solarWind.render();
+      solarWindPredation.render();
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/solar_blast_timer") > 0) {
       solarBlast.render();
+      solarBlastPredation.render();
     };
   };
 };

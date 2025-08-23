@@ -64,7 +64,7 @@ function addPredationAnimation(renderer, key, value) {
   };
   renderer.addCustomAnimation(key, anim);
   anim.setData((entity, data) => data.load(entity.getInterpolatedData("skyhighocs:dyn/predation_timer")));
-  anim.setCondition(entity => entity.getData("skyhighocs:dyn/battle_card") > 0)
+  anim.setCondition(entity => entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/selected_battle_card") > 0)
   anim.priority = -9.75;
 };
 
@@ -76,7 +76,7 @@ function addBasePredationAnimation(renderer, key, value) {
   anim.setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/predation_timer"));
   });
-  anim.setCondition(entity => entity.getData("skyhighocs:dyn/battle_card") == 0)
+  anim.setCondition(entity => entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/selected_battle_card") == 0)
   anim.priority = -9.75;
 };
 

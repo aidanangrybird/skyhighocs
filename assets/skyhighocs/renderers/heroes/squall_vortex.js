@@ -14,22 +14,28 @@ loadTextures({
   "mask": "skyhighocs:aidan/squall_vortex_mask.tx.json",
   "mask_lights": "skyhighocs:aidan/squall_vortex_mask_lights.tx.json",
   "mask_wave_changing_lights": "skyhighocs:aidan/squall_vortex_mask_wave_changing_lights.tx.json",
-  "predation_wave_changing_sides_lights": "skyhighocs:aidan/squall_vortex_predation_wave_changing_sides_lights.tx.json",
-  "predation_wave_changing_front_lights": "skyhighocs:aidan/squall_vortex_predation_wave_changing_front_lights.tx.json",
   "sword_blade": "skyhighocs:aidan/squall_vortex_sword_blade.tx.json",
   "sword": "skyhighocs:aidan/squall_vortex_sword.tx.json",
   "sword_lights": "skyhighocs:aidan/squall_vortex_sword_lights.tx.json",
   "sword_wave_changing_lights": "skyhighocs:aidan/squall_vortex_sword_wave_changing_lights.tx.json",
   "sword_sides": "skyhighocs:aidan/squall_vortex_sword_sides.tx.json",
   "sword_front": "skyhighocs:aidan/squall_vortex_sword_front.tx.json",
-  "derecho_sides": "skyhighocs:aidan/squall_vortex_derecho_sides.tx.json",
-  "derecho_front": "skyhighocs:aidan/squall_vortex_derecho_front.tx.json",
-  "hail_cannon_sides": "skyhighocs:aidan/squall_vortex_hail_cannon_sides.tx.json",
-  "hail_cannon_front": "skyhighocs:aidan/squall_vortex_hail_cannon_front.tx.json",
+  "sword_wave_changing_sides_lights": "skyhighocs:aidan/squall_vortex_sword_wave_changing_sides_lights.tx.json",
+  "sword_wave_changing_front_lights": "skyhighocs:aidan/squall_vortex_sword_wave_changing_front_lights.tx.json",
   "lightning_sides": "skyhighocs:aidan/squall_vortex_lightning_sides.tx.json",
   "lightning_front": "skyhighocs:aidan/squall_vortex_lightning_front.tx.json",
   "lightning_sides_lights": "skyhighocs:aidan/squall_vortex_lightning_sides_lights.tx.json",
   "lightning_front_lights": "skyhighocs:aidan/squall_vortex_lightning_front_lights.tx.json",
+  "lightning_wave_changing_sides_lights": "skyhighocs:aidan/squall_vortex_lightning_wave_changing_sides_lights.tx.json",
+  "lightning_wave_changing_front_lights": "skyhighocs:aidan/squall_vortex_lightning_wave_changing_front_lights.tx.json",
+  "derecho_sides": "skyhighocs:aidan/squall_vortex_derecho_sides.tx.json",
+  "derecho_front": "skyhighocs:aidan/squall_vortex_derecho_front.tx.json",
+  "derecho_wave_changing_sides_lights": "skyhighocs:aidan/squall_vortex_derecho_wave_changing_sides_lights.tx.json",
+  "derecho_wave_changing_front_lights": "skyhighocs:aidan/squall_vortex_derecho_wave_changing_front_lights.tx.json",
+  "hail_cannon_sides": "skyhighocs:aidan/squall_vortex_hail_cannon_sides.tx.json",
+  "hail_cannon_front": "skyhighocs:aidan/squall_vortex_hail_cannon_front.tx.json",
+  "hail_cannon_wave_changing_sides_lights": "skyhighocs:aidan/squall_vortex_hail_cannon_wave_changing_sides_lights.tx.json",
+  "hail_cannon_wave_changing_front_lights": "skyhighocs:aidan/squall_vortex_hail_cannon_wave_changing_front_lights.tx.json",
   "em_being_base": "skyhighocs:aidan/jet_streak_base",
   "em_being_lights": "skyhighocs:aidan/jet_streak_lights",
   "head_right": "skyhighocs:aidan/jet_streak_right.tx.json",
@@ -107,14 +113,15 @@ function initEffects(renderer) {
     { "firstPerson": [-4.5, 4.5, -20.0], "offset": [-0.5, 14.0, 0.0], "size": [50.0, 50.0] }
   ]);
   stuff.bindFlightTrail(renderer, "skyhighocs:squall_vortex_flight");
-  //Battle card predation wave changing
-  predation = stelar.initHandThing(renderer, "predation_wave_changing", 0, 2);
   //Lightning
   lightning = stelar.initHandThing(renderer, "lightning", 2, 2);
-  //Hail cannon
-  hailCannon = stelar.initHandThing(renderer, "hail_cannon", 2, 0);
+  lightningPredation = stelar.initHandThing(renderer, "lightning_wave_changing", 0, 2);
   //Derecho
   derecho = stelar.initHandThing(renderer, "derecho", 2, 0);
+  derechoPredation = stelar.initHandThing(renderer, "derecho_wave_changing", 0, 2);
+  //Hail cannon
+  hailCannon = stelar.initHandThing(renderer, "hail_cannon", 2, 0);
+  hailCannonPredation = stelar.initHandThing(renderer, "hail_cannon_wave_changing", 0, 2);
   //Sword
   swordMain = renderer.createEffect("fiskheroes:shield");
   swordMain.texture.set("sword", "sword_lights");
@@ -132,6 +139,7 @@ function initEffects(renderer) {
   swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
   swordWaveChanging.large = true;
   sword = stelar.initHandThing(renderer, "sword", 2, 0);
+  swordPredation = stelar.initHandThing(renderer, "sword_wave_changing", 0, 2);
   //Head
   head = stelar.initHandThing(renderer, "head", 1, 4, 3);
   headWaveChange = stelar.initHandThing(renderer, "head_wave_change", 1, 4, 3);
@@ -160,25 +168,26 @@ function render(entity, renderLayer, isFirstPersonArm) {
         headWaveChanging.render();
       }
     };
-    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) {
-      predation.render();
-    };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/sword_timer") > 0) {
       swordWaveChanging.render();
       swordMain.render();
       sword.render();
+      swordPredation.render();
       if (entity.getData("skyhighocs:dyn/sword") && entity.getHeldItem().isEmpty()) {
         swordBlade.render();
       };
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/lightning_timer") > 0) {
       lightning.render();
+      lightningPredation.render();
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/derecho_timer") > 0) {
       derecho.render();
+      derechoPredation.render();
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/hail_cannon_timer") > 0) {
       hailCannon.render();
+      hailCannonPredation.render();
     };
   };
 };

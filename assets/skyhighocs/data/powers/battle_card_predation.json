@@ -11,12 +11,13 @@
       },
       "isToggle": true
     },
-    "fiskheroes:cooldown": {
-      "cooldown": {
-        "toggleData": "skyhighocs:dyn/predation",
-        "cooldownData": "skyhighocs:dyn/predation_cooldown",
-        "duration": 200,
-        "recovery": 50.0
+    "fiskheroes:gravity_manipulation": {
+      "range": 0.0,
+      "radius": 0.0,
+      "minGravity": 1.0,
+      "maxGravity": 1.0,
+      "affectsUser": false,
+      "soundEvents": {
       }
     }
   },
