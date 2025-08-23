@@ -3,7 +3,6 @@
   "value": 1,
   "modifiers": {
     "fiskheroes:transformation|predation": {
-      "key": "PREDATION",
       "transformation": {
         "toggleData": "skyhighocs:dyn/predation",
         "timerData": "skyhighocs:dyn/predation_timer",
@@ -20,12 +19,5 @@
       "soundEvents": {
       }
     }
-  },
-  "hud": [
-    {
-      "type": "PROGRESS",
-      "texture": "skyhighocs:textures/gui/bars/predation.png",
-      "data": "skyhighocs:dyn/predation_cooldown"
-    }
-  ]
+  }
 }
