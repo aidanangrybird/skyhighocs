@@ -90,9 +90,9 @@ var santaHat;
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
-  stelar.addAnimationWithData(renderer, "stelar.SOLAR_WIND_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:energy_projection_timer")
+  stelar.addAnimationWithData(renderer, "em_wave_change.SOLAR_WIND_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
-  stelar.addAnimationWithData(renderer, "stelar.SOLAR_BLAST_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:beam_charge")
+  stelar.addAnimationWithData(renderer, "em_wave_change.SOLAR_BLAST_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:beam_charge")
   .priority = 10;
   renderer.setItemIcon("CHESTPLATE", "pegasus_transer");
 };

@@ -88,7 +88,7 @@ var santaHat;
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
-  stelar.addAnimationWithData(renderer, "stelar.ASTEROID_BLAST_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:energy_projection_timer")
+  stelar.addAnimationWithData(renderer, "em_wave_change.ASTEROID_BLAST_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
   renderer.setItemIcon("CHESTPLATE", "dragon_transer");
 };
