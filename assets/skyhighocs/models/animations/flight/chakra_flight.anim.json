@@ -1,0 +1,7 @@
+{
+  "inputs": [
+    "skyhighocs:flight/chakra_header",
+    "skyhighocs:flight/chakra_idle",
+    "skyhighocs:flight/chakra_boost"
+  ]
+}
