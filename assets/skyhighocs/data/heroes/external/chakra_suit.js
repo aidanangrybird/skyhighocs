@@ -43,6 +43,9 @@ function initChakras(hero, name, uuid) {
     return entity.getUUID() == uuid;
   });
   hero.setTickHandler((entity, manager) => {
+    if (!entity.getWornChestplate().nbt().getBoolean("Unbreakable")) {
+      manager.setBoolean(entity.getWornChestplate().nbt(), "Unbreakable", true);
+    };
     if (entity.getData("skyhighocs:dyn/chakra_suit")) {
       manager.setData(entity, "fiskheroes:disguise", suit_name);
     } else {
