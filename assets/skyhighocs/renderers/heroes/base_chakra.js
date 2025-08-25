@@ -54,6 +54,11 @@ function initEffects(renderer) {
   chakra.initBeams(renderer, getColor());
   chakra.initForceField(renderer, getColor());
   chakra.initTelekinesis(renderer, getName());
+  nv = renderer.bindProperty("fiskheroes:night_vision");
+  nv.fogStrength = 0.0;
+  nv.factor = 1.0;
+  nv.firstPersonOnly = true;
+  nv.setCondition(entity => entity.getUUID() == getID());
 };
 
 function initAnimations(renderer) {
