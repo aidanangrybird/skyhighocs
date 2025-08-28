@@ -1,0 +1,22 @@
+{
+  "suit": "skyhighocs:lucas_the_invincible",
+  "requirements": [
+    "skyhighocs:chakra",
+    "fiskheroes:tier8_9",
+    "skyhighocs:base"
+  ],
+  "criteria": {
+    "chance": {
+      "trigger": "fiskheroes:player_struck_by_lightning",
+      "description": {
+        "translate": "Get struck by lightning as pezzo134"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_STRUCK"
+        },
+        "check": "player.getUUID() == 'c4bc5db6-3cf6-44fe-8427-304a7b211bc4'"
+      }
+    }
+  }
+}

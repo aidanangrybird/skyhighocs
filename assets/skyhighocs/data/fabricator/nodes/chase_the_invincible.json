@@ -1,0 +1,22 @@
+{
+  "suit": "skyhighocs:chase_the_invincible",
+  "requirements": [
+    "skyhighocs:chakra",
+    "fiskheroes:tier8_9",
+    "skyhighocs:base"
+  ],
+  "criteria": {
+    "chance": {
+      "trigger": "fiskheroes:player_struck_by_lightning",
+      "description": {
+        "translate": "Get struck by lightning as OnesWife"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_STRUCK"
+        },
+        "check": "player.getUUID() == '4da600b8-582a-4fc3-ac2e-ada03d3e478c'"
+      }
+    }
+  }
+}

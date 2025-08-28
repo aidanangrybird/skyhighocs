@@ -1,0 +1,13 @@
+{
+  "display": {
+    "name": {
+      "translate": "Chakra OCs"
+    },
+    "icon": {
+      "texture": "skyhighocs:textures/gui/nodes/chakra.png"
+    }
+  },
+  "requirements": [
+      "skyhighocs:base"
+  ]
+}
