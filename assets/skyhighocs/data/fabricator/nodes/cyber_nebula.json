@@ -9,7 +9,7 @@
     "exist": {
       "trigger": "fiskheroes:player_killed",
       "description": {
-        "translate": "Die as C_sp"
+        "translate": "Die as OnesWife"
       },
       "condition": {
         "variables": {

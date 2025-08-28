@@ -9,7 +9,7 @@
     "exist": {
       "trigger": "fiskheroes:tick",
       "description": {
-        "translate": "Exist as C_sp"
+        "translate": "Exist as OnesWife"
       },
       "condition": {
         "variables": {
