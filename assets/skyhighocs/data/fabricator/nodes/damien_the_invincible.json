@@ -1,5 +1,5 @@
 {
-  "suit": "skyhighocs:aidan_the_invincible",
+  "suit": "skyhighocs:damien_the_invincible",
   "requirements": [
     "skyhighocs:chakra",
     "fiskheroes:tier8_9",
@@ -9,13 +9,13 @@
     "chance": {
       "trigger": "fiskheroes:player_struck_by_lightning",
       "description": {
-        "translate": "Get struck by lightning as aidanangrybird"
+        "translate": "Get struck by lightning as Dam1en_"
       },
       "condition": {
         "variables": {
           "player": "PLAYER_STRUCK"
         },
-        "check": "player.getUUID() == 'a3d071d4-c912-41e1-a6b2-c0de99ea4a84'"
+        "check": "player.getUUID() == 'e51532a1-19fc-4d4f-9da0-f952c4645891'"
       }
     }
   }
