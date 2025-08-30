@@ -111,6 +111,13 @@
     "fiskheroes:water_breathing": {
     },
     "fiskheroes:shape_shifting": {
+    },
+    "fiskheroes:teleportation": {
+      "canReachMoon": true,
+      "range": 1024.0,
+      "soundEvents": {
+        "TELEPORT": "skyhighocs:wave_teleport"
+      }
     }
   }
 }

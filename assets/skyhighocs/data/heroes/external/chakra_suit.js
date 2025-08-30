@@ -28,7 +28,7 @@ function initChakras(hero, name, uuid) {
     return (entity.getData("skyhighocs:dyn/chakra_suit")) ? 8 : 1;
   });
   hero.setHasProperty((entity, property) => {
-    return (property == "BREATHE_SPACE" || property == "MASK_TOGGLE") && entity.getUUID() == uuid;
+    return (property == "BREATHE_SPACE" || property == "MASK_TOGGLE") && entity.getUUID() == uuid || entity.is("DISPLAY");
   });
   hero.setModifierEnabled((entity, modifier) => {
     return entity.getUUID() == uuid;
@@ -58,6 +58,26 @@ function initChakras(hero, name, uuid) {
     if (entity.getData("fiskheroes:flight_boost_timer") > 0) {
       manager.setData(entity, "skyhighocs:dyn/chakra_suit", true);
     };
+    var x = entity.posX();
+    var y = entity.posY();
+    var z = entity.posZ();
+    if (entity.world().getDimension() == 0 && entity.posY() >= 4000 && (entity.rotPitch() <= -87.5) && entity.getData("fiskheroes:flight_boost_timer") == 1) {
+      manager.setData(entity, "fiskheroes:teleport_dest", manager.newCoords(x, y, z, 2595));
+      manager.setData(entity, "fiskheroes:teleport_delay", 6);
+    };
+    if (entity.world().getDimension() == 2595 && entity.posY() >= 1000 && (entity.rotPitch() <= -87.5) && entity.getData("fiskheroes:flight_boost_timer") == 1) {
+      manager.setData(entity, "fiskheroes:teleport_dest", manager.newCoords(x, y, z, 0));
+      manager.setData(entity, "fiskheroes:teleport_delay", 6);
+    };
+    var t = entity.getData("skyhighocs:dyn/superhero_boosting_landing_ticks");
+    if (t == 0 && !entity.isSprinting() && !entity.isOnGround() && entity.motionY() < -1.25 && entity.getData("fiskheroes:flight_boost_timer") > 0 && entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() && entity.world().blockAt(entity.pos()).name() == "minecraft:air") {
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/superhero_boosting_landing_ticks", t = 12);
+    } else if (t > 0) {
+      manager.setData(entity, "skyhighocs:dyn/superhero_boosting_landing_ticks", --t);
+    };
+    manager.incrementData(entity, "skyhighocs:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
+    var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
+    manager.incrementData(entity, "skyhighocs:dyn/superhero_landing_timer", 10, 10, pain);
   });
   hero.supplyFunction("canAim", (entity) => {
     return entity.getHeldItem().isEmpty();

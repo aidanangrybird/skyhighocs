@@ -14,7 +14,21 @@ var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMo
 function init(renderer) {
   renderer.setTexture((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if (entity.getData("skyhighocs:dyn/chakra_suit") || entity.is("DISPLAY")) {
+      if (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
+        if (!entity.getData("fiskheroes:mask_open")) {
+          return "suit_mask_on"
+        } else {
+          return "suit_mask_off";
+        };
+      };
+      if ((entity.getUUID() != getID() && !entity.is("DISPLAY")) || (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT")) {
+        if (!entity.getData("fiskheroes:mask_open")) {
+          return "suit_inactive_mask_on"
+        } else {
+          return "suit_inactive_mask_off";
+        };
+      };
+      if (entity.getData("skyhighocs:dyn/chakra_suit")) {
         if (!entity.getData("fiskheroes:mask_open")) {
           return "suit_mask_on"
         } else {
@@ -27,8 +41,14 @@ function init(renderer) {
   });
   renderer.setLights((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if (entity.getData("skyhighocs:dyn/chakra_suit") || entity.is("DISPLAY")) {
-        return "suit_lights"
+      if (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
+        return "suit_lights";
+      };
+      if ((entity.getUUID() != getID() && !entity.is("DISPLAY")) || (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT")) {
+        return "null";
+      };
+      if (entity.getData("skyhighocs:dyn/chakra_suit")) {
+        return "suit_lights";
       } else {
         return "null";
       };
