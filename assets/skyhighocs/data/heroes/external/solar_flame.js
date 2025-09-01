@@ -262,7 +262,7 @@ function initModule(system) {
       if (modifier.name() == "fiskheroes:blade") {
         result = entity.getData("skyhighocs:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
       };
-      if (modifier.name() == "fiskheroes:solar_flare_cast") {
+      if (modifier.name() == "fiskheroes:lightning_cast") {
         result = entity.getData("skyhighocs:dyn/battle_card") == 3 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
       };
       if (modifier.name() == "fiskheroes:energy_projection") {
