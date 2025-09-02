@@ -46,8 +46,6 @@
     "pryetak": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "solar_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "solar": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "crimson_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "crimson": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "achlys_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "achlys": { "type": "BOOLEAN", "resetWithoutSuit": true },
 
@@ -73,12 +71,6 @@
     "solar_wind_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "solar_blast": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "solar_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "asteroid_crash": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "asteroid_crash_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "asteroid_strike": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "asteroid_strike_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "asteroid_blast": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "asteroid_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "abyssal_shroud": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "abyssal_shroud_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "unleashed_darkness": { "type": "BOOLEAN", "resetWithoutSuit": true },
@@ -388,18 +380,10 @@
     "skyhighocs:ares": {
       "metal": "Metal Skin"
     },
-    "skyhighocs:artemis": {
-      "metal": "Metal Skin"
-    },
     "skyhighocs:vulcan": {
       "metal": "Metal Skin"
     },
     "skyhighocs:abyssal_shadow": {
-      "$DEFAULT": {
-        "maskToggleTicks": 10
-      }
-    },
-    "skyhighocs:crimson_asteroid": {
       "$DEFAULT": {
         "maskToggleTicks": 10
       }
