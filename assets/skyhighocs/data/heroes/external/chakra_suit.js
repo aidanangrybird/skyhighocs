@@ -4,6 +4,7 @@ function initChakras(hero, name, uuid) {
   hero.setName(suit_name);
   hero.setAliases(suit_alias);
   hero.setChestplate("Suit");
+  hero.setVersion("OC");
 
   hero.addPowers("skyhighocs:chakra_suit");
 
