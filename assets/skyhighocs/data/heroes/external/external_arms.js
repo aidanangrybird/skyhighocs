@@ -89,6 +89,9 @@ function initModule(system) {
       if (entity.getData("skyhighocs:dyn/external_arms")) {
         var tentacles = entity.getData("skyhighocs:dyn/external_arms_timer") == 1;
         manager.setData(entity, "fiskheroes:tentacles_retracting", !tentacles);
+        if (entity.getData("skyhighocs:dyn/external_arms_timer") < 0.1) {
+          system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating External Arms!", 16);
+        };
       };
       if (entity.getData("fiskheroes:tentacles_retracting")) {
         var tentacles = entity.getData("tentacle_extend_timer") == 0;
