@@ -1164,7 +1164,7 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
     };
     if (entity.getUUID() == boundUUID) {
       if ((Math.floor(entity.getHealth()) <= entity.getWornHelmet().nbt().getInteger("minHealthFightOrFlight")) && (entity.getData("fiskheroes:time_since_damaged") <= entity.getWornHelmet().nbt().getShort("durationFightOrFlight"))) {
-        if (!entity.getData("skyhighocs:dyn/fight_or_flight")) {
+        if (!entity.getDataOrDefault("skyhighocs:dyn/fight_or_flight", true)) {
           systemMessage(entity, "<n>FIGHT OR FLIGHT MODE ACTIVATED!");
           manager.setData(entity, "skyhighocs:dyn/fight_or_flight", true);
         };
@@ -1192,7 +1192,7 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
         manager.setData(entity, "fiskheroes:shape_shifting_to", null);
         manager.setData(entity, "fiskheroes:shape_shifting_from", null);
         manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
-        var entry = entity.getData("skyhighocs:dyn/entry");
+        var entry = entity.getDataOrDefault("skyhighocs:dyn/entry", "");
         if (entry.startsWith("!")) {
           manager.setData(entity, "skyhighocs:dyn/entry", entry.substring(1));
           var args = entity.getData("skyhighocs:dyn/entry").split(" ");
