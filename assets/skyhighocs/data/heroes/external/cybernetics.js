@@ -1180,109 +1180,120 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
         manager.setData(entity, "skyhighocs:dyn/fight_or_flight", false);
       };
     };
-    if (typeof entity.getData("fiskheroes:disguise") === "string") {
-      if (!((entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == cyberModelID) || entity.getData("fiskheroes:disguise") == disguisedName)) {
-        if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
-          manager.setData(entity, "skyhighocs:dyn/entry", entity.getData("fiskheroes:disguise"));
-          manager.setData(entity, "fiskheroes:disguise", disguisedName);
-        } else {
-          manager.setData(entity, "skyhighocs:dyn/entry", entity.getData("fiskheroes:disguise"));
-          manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? cyberName : cyberModelID));
-        };
-        manager.setData(entity, "fiskheroes:shape_shifting_to", null);
-        manager.setData(entity, "fiskheroes:shape_shifting_from", null);
-        manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
-        var entry = entity.getDataOrDefault("skyhighocs:dyn/entry", "");
-        if (entry.startsWith("!")) {
-          manager.setData(entity, "skyhighocs:dyn/entry", entry.substring(1));
-          var args = entity.getData("skyhighocs:dyn/entry").split(" ");
-          switch (args[0]) {
-            case "systemInfo":
-              systemInfo(entity);
-              break;
-            case "status":
-              status(entity);
-              break;
-            case "powerOff":
-              manager.setData(entity, "skyhighocs:dyn/powered_down", true);
-              systemMessage(entity, "<n>Powering down!");
-              break;
-            case "powerOn":
-              manager.setData(entity, "skyhighocs:dyn/powered_down", false);
-              systemMessage(entity, "<n>Powering on!");
-              break;
-            case "help":
-              systemMessage(entity, "<n>Available commands:");
-              commandIndexes.forEach(index => {
-                var module = modules[index];
-                if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
-                  systemMessage(entity, module.helpMessage);
-                };
-              });
-              systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
-              systemMessage(entity, "<n>!systemInfo <nh>-<n> Shows your system info");
-              systemMessage(entity, "<n>!powerOn <nh>-<n> Powers you up");
-              systemMessage(entity, "<n>!powerOff <nh>-<n> Powers you down");
-              systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
-              break;
-            case "disable":
-              disableModule(entity, manager, args[1]);
-              break;
-            case "enable":
-              enableModule(entity, manager, args[1]);
-              break;
-            case "idSet":
-              maybeGetID(entity, manager, args[1])
-              break;
-            case "cv":
-              entity.as("PLAYER").addChatMessage(entity.getDataOrDefault("skyhighocs:dyn/" + args[1], 0));
-              break;
-            case "nbtStringList":
-              entity.as("PLAYER").addChatMessage(entity.getWornHelmet().nbt().getStringList(args[1]));
-              break;
-            case "nbtInt":
-              entity.as("PLAYER").addChatMessage(entity.getWornHelmet().nbt().getInteger(args[1]));
-              break;
-            case "nbtShort":
-              entity.as("PLAYER").addChatMessage(entity.getWornHelmet().nbt().getShort(args[1]));
-              break;
-            case "chatMode":
-              switchChatModes(entity, manager, args[1]);
-              break;
-            case "msg":
-              switchChats(entity, manager, args[1]);
-              break;
-            default:
-              var index = commands.indexOf(args[0]);
-              if (index > -1 && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
-                var module = modules[commandIndexes[index]];
-                if (!isModuleDisabled(entity, module.name)) {
-                  module.commandHandler(entity, manager, args);
-                } else {
-                  systemMessage(entity, "<e>Module <eh>" + module.name +"<e> is disabled!");
-                };
-              } else {
-                systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
-              };
-              break;
+    if (entity.getDataOrDefault("skyhighocs:dyn/system_init", false)) {
+      if (typeof entity.getData("fiskheroes:disguise") === "string") {
+        if (!((entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == cyberModelID) || entity.getData("fiskheroes:disguise") == disguisedName)) {
+          if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
+            manager.setData(entity, "skyhighocs:dyn/entry", entity.getData("fiskheroes:disguise"));
+            manager.setData(entity, "fiskheroes:disguise", disguisedName);
+          } else {
+            manager.setData(entity, "skyhighocs:dyn/entry", entity.getData("fiskheroes:disguise"));
+            manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? cyberName : cyberModelID));
           };
-        } else {
-          modules[messagingIndexes[entity.getData("skyhighocs:dyn/chat_mode")]].messageHandler(entity, name, 32);
+          manager.setData(entity, "fiskheroes:shape_shifting_to", null);
+          manager.setData(entity, "fiskheroes:shape_shifting_from", null);
+          manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
+          var entry = entity.getDataOrDefault("skyhighocs:dyn/entry", "");
+          if (entry.startsWith("!")) {
+            manager.setData(entity, "skyhighocs:dyn/entry", entry.substring(1));
+            var args = entity.getData("skyhighocs:dyn/entry").split(" ");
+            switch (args[0]) {
+              case "systemInfo":
+                systemInfo(entity);
+                break;
+              case "status":
+                status(entity);
+                break;
+              case "powerOff":
+                manager.setData(entity, "skyhighocs:dyn/powered_down", true);
+                systemMessage(entity, "<n>Powering down!");
+                break;
+              case "powerOn":
+                manager.setData(entity, "skyhighocs:dyn/powered_down", false);
+                systemMessage(entity, "<n>Powering on!");
+                break;
+              case "help":
+                systemMessage(entity, "<n>Available commands:");
+                commandIndexes.forEach(index => {
+                  var module = modules[index];
+                  if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
+                    systemMessage(entity, module.helpMessage);
+                  };
+                });
+                systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
+                systemMessage(entity, "<n>!systemInfo <nh>-<n> Shows your system info");
+                systemMessage(entity, "<n>!powerOn <nh>-<n> Powers you up");
+                systemMessage(entity, "<n>!powerOff <nh>-<n> Powers you down");
+                systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
+                break;
+              case "disable":
+                disableModule(entity, manager, args[1]);
+                break;
+              case "enable":
+                enableModule(entity, manager, args[1]);
+                break;
+              case "idSet":
+                maybeGetID(entity, manager, args[1])
+                break;
+              case "cv":
+                entity.as("PLAYER").addChatMessage(entity.getDataOrDefault("skyhighocs:dyn/" + args[1], 0));
+                break;
+              case "nbtStringList":
+                entity.as("PLAYER").addChatMessage(entity.getWornHelmet().nbt().getStringList(args[1]));
+                break;
+              case "nbtInt":
+                entity.as("PLAYER").addChatMessage(entity.getWornHelmet().nbt().getInteger(args[1]));
+                break;
+              case "nbtShort":
+                entity.as("PLAYER").addChatMessage(entity.getWornHelmet().nbt().getShort(args[1]));
+                break;
+              case "chatMode":
+                switchChatModes(entity, manager, args[1]);
+                break;
+              case "msg":
+                switchChats(entity, manager, args[1]);
+                break;
+              default:
+                var index = commands.indexOf(args[0]);
+                if (index > -1 && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
+                  var module = modules[commandIndexes[index]];
+                  if (!isModuleDisabled(entity, module.name)) {
+                    module.commandHandler(entity, manager, args);
+                  } else {
+                    systemMessage(entity, "<e>Module <eh>" + module.name +"<e> is disabled!");
+                  };
+                } else {
+                  systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
+                };
+                break;
+            };
+          } else {
+            modules[messagingIndexes[entity.getData("skyhighocs:dyn/chat_mode")]].messageHandler(entity, name, 32);
+          };
         };
       };
-    };
-    if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") < 1) {
-      manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? getAliasName(entity) : getModelID(entity)));
-    };
-    if (typeof disguisedName === "string" && entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
-      manager.setData(entity, "fiskheroes:disguise", disguisedName);
-    };
-    tickHandlerIndexes.forEach(index => {
-      var module = modules[index];
-      if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
-        module.tickHandler(entity, manager);
+      if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") < 1) {
+        manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? getAliasName(entity) : getModelID(entity)));
       };
-    });
+      if (typeof disguisedName === "string" && entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
+        manager.setData(entity, "fiskheroes:disguise", disguisedName);
+      };
+      tickHandlerIndexes.forEach(index => {
+        var module = modules[index];
+        if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
+          module.tickHandler(entity, manager);
+        };
+      });
+      var rotation = entity.rotYaw()%360;
+      var bearing = ((Math.abs((rotation < 0) ? (rotation+360) : rotation)+180) % 360);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/bearing", bearing);
+      if (entity.getData("fiskheroes:grab_id") > -1) {
+        maybeGetID(entity, manager, entity.getData("fiskheroes:grab_id"));
+      };
+      if (entity.getData("fiskheroes:grabbed_by") > -1) {
+        maybeGetID(entity, manager, entity.getData("fiskheroes:grabbed_by"));
+      };
+    };
     if (PackLoader.getSide() == "SERVER" && entity.getData("skyhighocs:dyn/powering_down_timer") < 1 && entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
       var moduleTotal = cyberneticModules.length;
       var moduleTime = (80/moduleTotal).toFixed(0);
@@ -1292,15 +1303,6 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
         var message = entity.getData("skyhighocs:dyn/powered_down") ? "<n>Shutting down <nh>" + moduleName + "<n>!" : "<n>Starting up <nh>" + moduleName + "<n>!";
         systemMessage(entity, message);
       };
-    };
-    var rotation = entity.rotYaw()%360;
-    var bearing = ((Math.abs((rotation < 0) ? (rotation+360) : rotation)+180) % 360);
-    manager.setDataWithNotify(entity, "skyhighocs:dyn/bearing", bearing);
-    if (entity.getData("fiskheroes:grab_id") > -1) {
-      maybeGetID(entity, manager, entity.getData("fiskheroes:grab_id"));
-    };
-    if (entity.getData("fiskheroes:grabbed_by") > -1) {
-      maybeGetID(entity, manager, entity.getData("fiskheroes:grabbed_by"));
     };
   };
   return {
