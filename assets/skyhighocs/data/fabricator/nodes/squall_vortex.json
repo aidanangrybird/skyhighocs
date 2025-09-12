@@ -16,7 +16,7 @@
     "chance": {
       "trigger": "fiskheroes:player_hurt",
       "description": {
-        "translate": "That one storm"
+        "translate": "Stand in a Plains or Sunflower Plains biome as Aidan Stelar"
       },
       "condition": {
         "variables": {

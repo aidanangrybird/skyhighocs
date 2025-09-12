@@ -16,7 +16,7 @@
     "chance": {
       "trigger": "fiskheroes:player_hurt",
       "description": {
-        "translate": "Frostbite"
+        "translate": "Stand in a Cold Taiga Hills biome as Chase Stelar"
       },
       "condition": {
         "variables": {
