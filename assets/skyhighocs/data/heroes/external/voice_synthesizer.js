@@ -77,6 +77,24 @@ function initModule(system) {
         system.moduleMessage(this, entity, "<e>Unknown <eh>voiceSynthesizer<e> command! Try <eh>!vs help<e> for a list of commands!");
       };
     },
+    armHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "mouth":
+          manager.setBoolean(nbt, "mouth", true);
+          system.moduleMessage(this, entity, "<n>Armed mouth!");
+          return;
+      };
+    },
+    disarmHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "mouth":
+          manager.setBoolean(nbt, "mouth", false);
+          system.moduleMessage(this, entity, "<n>Disarmed mouth!");
+          return;
+      };
+    },
     isModifierEnabled: function (entity, modifier) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {

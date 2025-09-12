@@ -183,6 +183,42 @@ function initModule(system) {
         system.moduleMessage(this, entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blade help<e> for a list of commands!");
       };
     },
+    armHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "leftBlade":
+          manager.setBoolean(nbt, "bladesLeft", true);
+          system.moduleMessage(this, entity, "<s>Armed <sh>left arm<s> blade!");
+          return;
+        case "rightBlade":
+          manager.setBoolean(nbt, "bladesRight", true);
+          system.moduleMessage(this, entity, "<s>Armed <sh>right arm<s> blade!");
+          return;
+        case "blades":
+          manager.setBoolean(nbt, "bladesLeft", true);
+          manager.setBoolean(nbt, "bladesRight", true);
+          system.moduleMessage(this, entity, "<s>Armed <sh>all<s> blades!");
+          return;
+      };
+    },
+    disarmHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "leftBlade":
+          manager.setBoolean(nbt, "bladesLeft", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>left arm<s> blade!");
+          return;
+        case "rightBlade":
+          manager.setBoolean(nbt, "bladesRight", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>right arm<s> blade!");
+          return;
+        case "blades":
+          manager.setBoolean(nbt, "bladesLeft", false);
+          manager.setBoolean(nbt, "bladesRight", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>all<s> blades!");
+          return;
+      };
+    },
     isModifierEnabled: function (entity, modifier) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {

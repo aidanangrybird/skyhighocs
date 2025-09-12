@@ -324,6 +324,52 @@ function initModule(system) {
         system.moduleMessage(this, entity, "<e>Unknown <eh>cannons<e> command! Try <eh>!cannon help<e> for a list of commands!");
       };
     },
+    armHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "headCannons":
+          manager.setBoolean(nbt, "cannonsHead", true);
+          system.moduleMessage(this, entity, "<s>Armed <sh>head<s> cannons!");
+          return;
+        case "bodyCannons":
+          manager.setBoolean(nbt, "cannonsBody", true);
+          system.moduleMessage(this, entity, "<s>Armed <sh>body<s> cannons!");
+          return;
+        case "armCannons":
+          manager.setBoolean(nbt, "cannonsArms", true);
+          system.moduleMessage(this, entity, "<s>Armed <sh>arm<s> cannons!");
+          return;
+        case "cannons":
+          manager.setBoolean(nbt, "cannonsHead", true);
+          manager.setBoolean(nbt, "cannonsBody", true);
+          manager.setBoolean(nbt, "cannonsArms", true);
+          system.moduleMessage(this, entity, "<s>Armed <sh>all<s> cannons!");
+          return;
+      };
+    },
+    disarmHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "headCannons":
+          manager.setBoolean(nbt, "cannonsHead", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>head<s> cannons!");
+          return;
+        case "bodyCannons":
+          manager.setBoolean(nbt, "cannonsBody", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>body<s> cannons!");
+          return;
+        case "armCannons":
+          manager.setBoolean(nbt, "cannonsArms", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>arm<s> cannons!");
+          return;
+        case "cannons":
+          manager.setBoolean(nbt, "cannonsHead", false);
+          manager.setBoolean(nbt, "cannonsBody", false);
+          manager.setBoolean(nbt, "cannonsArms", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>all<s> cannons!");
+          return;
+      };
+    },
     whenDisabled: function (entity, manager) {
       var nbt = entity.getWornHelmet().nbt();
       manager.setBoolean(nbt, "cannonsHead", false);
