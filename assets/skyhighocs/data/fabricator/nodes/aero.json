@@ -6,16 +6,17 @@
     "skyhighocs:base"
   ],
   "criteria": {
-    "exist": {
-      "trigger": "fiskheroes:tick",
+    "death": {
+      "trigger": "fiskheroes:player_killed",
       "description": {
-        "translate": "Exist as aidanangrybird"
+        "translate": "As aidanangrybird, die by collision with another player while both players are boost flying"
       },
       "condition": {
         "variables": {
-          "player": "PLAYER_TICKING"
+          "player": "PLAYER_KILLED",
+          "other_player": "DAMAGE_SOURCE"
           },
-        "check": "player.getUUID() == 'a3d071d4-c912-41e1-a6b2-c0de99ea4a84'"
+        "check": "player.getUUID() == 'a3d071d4-c912-41e1-a6b2-c0de99ea4a84' && player.isWearingFullSuit() && other_player.getEntity().as('PLAYER').isWearingFullSuit() && player.getData('fiskheroes:flight_boost_timer') == 1 && other_player.getEntity().as('PLAYER').getData('fiskheroes:flight_boost_timer') == 1 && other_player.hasDamageType('COLLISION')"
       }
     }
   }

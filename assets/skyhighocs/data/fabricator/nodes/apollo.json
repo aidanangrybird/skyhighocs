@@ -6,16 +6,17 @@
     "skyhighocs:base"
   ],
   "criteria": {
-    "exist": {
-      "trigger": "fiskheroes:tick",
+    "death": {
+      "trigger": "fiskheroes:player_killed",
       "description": {
-        "translate": "Exist as OnesWife"
+        "translate": "As OnesWife, die by collision with another player while both players are boost flying"
       },
       "condition": {
         "variables": {
-          "player": "PLAYER_TICKING"
+          "player": "PLAYER_KILLED",
+          "other_player": "DAMAGE_SOURCE"
           },
-        "check": "player.getUUID() == '4da600b8-582a-4fc3-ac2e-ada03d3e478c'"
+        "check": "player.getUUID() == '4da600b8-582a-4fc3-ac2e-ada03d3e478c' && player.isWearingFullSuit() && other_player.getEntity().as('PLAYER').isWearingFullSuit() && player.getData('fiskheroes:flight_boost_timer') == 1 && other_player.getEntity().as('PLAYER').getData('fiskheroes:flight_boost_timer') == 1 && other_player.hasDamageType('COLLISION')"
       }
     }
   }

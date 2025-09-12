@@ -6,16 +6,17 @@
     "skyhighocs:base"
   ],
   "criteria": {
-    "exist": {
-      "trigger": "fiskheroes:tick",
+    "death": {
+      "trigger": "fiskheroes:player_killed",
       "description": {
-        "translate": "Exist as FieryAceOfSpades"
+        "translate": "As FieryAceOfSpades, die by collision with another player while both players are boost flying"
       },
       "condition": {
         "variables": {
-          "player": "PLAYER_TICKING"
+          "player": "PLAYER_KILLED",
+          "other_player": "DAMAGE_SOURCE"
           },
-        "check": "player.getUUID() == '87fa6187-4fa6-4dc6-8742-19a2b67c4cc0'"
+        "check": "player.getUUID() == '87fa6187-4fa6-4dc6-8742-19a2b67c4cc0' && player.isWearingFullSuit() && other_player.getEntity().as('PLAYER').isWearingFullSuit() && player.getData('fiskheroes:flight_boost_timer') == 1 && other_player.getEntity().as('PLAYER').getData('fiskheroes:flight_boost_timer') == 1 && other_player.hasDamageType('COLLISION')"
       }
     }
   }
