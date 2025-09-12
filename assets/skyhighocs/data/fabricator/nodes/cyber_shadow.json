@@ -9,7 +9,7 @@
     "exist": {
       "trigger": "fiskheroes:player_killed",
       "description": {
-        "translate": "Die as Dam1en_"
+        "translate": "Die in fire as Dam1en_"
       },
       "condition": {
         "variables": {

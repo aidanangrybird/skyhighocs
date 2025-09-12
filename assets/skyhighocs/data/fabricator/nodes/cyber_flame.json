@@ -9,7 +9,7 @@
     "exist": {
       "trigger": "fiskheroes:player_killed",
       "description": {
-        "translate": "Die as FieryAceOfSpades"
+        "translate": "Die in fire as FieryAceOfSpades"
       },
       "condition": {
         "variables": {

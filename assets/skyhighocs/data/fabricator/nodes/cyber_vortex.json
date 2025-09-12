@@ -9,7 +9,7 @@
     "exist": {
       "trigger": "fiskheroes:player_killed",
       "description": {
-        "translate": "Die as aidanangrybird"
+        "translate": "Die in fire as aidanangrybird"
       },
       "condition": {
         "variables": {
