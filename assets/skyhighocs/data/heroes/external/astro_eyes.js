@@ -10,12 +10,12 @@ function initModule(system) {
     command: "eyes",
     helpMessage: "<n>!eyes <nh>-<n> Eyes",
     disabledMessage: "<e>Module <eh>eyes<e> is disabled!",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
         var nbt = entity.getWornLeggings().nbt();
-        switch(arguments[1]) {
+        switch(argList[1]) {
           case "human":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "left":
                 manager.setBoolean(nbt, "leftEyeHuman", true);
                 system.moduleMessage(this, entity, "<s>Set <sh>left eye<s> to human eye!");
@@ -32,7 +32,7 @@ function initModule(system) {
             };
             break;
           case "normal":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "left":
                 manager.setBoolean(nbt, "leftEyeHuman", false);
                 system.moduleMessage(this, entity, "<s>Set <sh>left eye<s> to normal eye!");
@@ -49,7 +49,7 @@ function initModule(system) {
             };
             break;
           case "glowOn":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "left":
                 manager.setBoolean(nbt, "leftEyeGlow", true);
                 system.moduleMessage(this, entity, "<s>Set left eye to glow!");
@@ -66,7 +66,7 @@ function initModule(system) {
             };
             break;
           case "glowOff":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "left":
                 manager.setBoolean(nbt, "leftEyeGlow", false);
                 system.moduleMessage(this, entity, "<s>Set left eye to not glow!");

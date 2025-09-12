@@ -9,40 +9,40 @@ function initModule(system) {
     type: 1,
     command: "set",
     helpMessage: "<n>!set <nh>-<n> Settings",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
         var nbt = entity.getWornLeggings().nbt();
-        switch(arguments[1]) {
+        switch(argList[1]) {
           case "leftEyeHuman":
-            manager.setBoolean(nbt, "leftEyeHuman", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("leftEyeHuman")));
+            manager.setBoolean(nbt, "leftEyeHuman", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("leftEyeHuman")));
             system.moduleMessage(this, entity, "<n>leftEyeHuman set to <nh>" + nbt.getBoolean("leftEyeHuman") + "<n>!");
             break;
           case "rightEyeHuman":
-            manager.setBoolean(nbt, "rightEyeHuman", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("rightEyeHuman")));
+            manager.setBoolean(nbt, "rightEyeHuman", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("rightEyeHuman")));
             system.moduleMessage(this, entity, "<n>rightEyeHuman set to <nh>" + nbt.getBoolean("rightEyeHuman") + "<n>!");
             break;
           case "leftEyeGlow":
-            manager.setBoolean(nbt, "leftEyeGlow", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("leftEyeGlow")));
+            manager.setBoolean(nbt, "leftEyeGlow", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("leftEyeGlow")));
             system.moduleMessage(this, entity, "<n>leftEyeGlow set to <nh>" + nbt.getBoolean("leftEyeGlow") + "<n>!");
             break;
           case "rightEyeGlow":
-            manager.setBoolean(nbt, "rightEyeGlow", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("rightEyeGlow")));
+            manager.setBoolean(nbt, "rightEyeGlow", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("rightEyeGlow")));
             system.moduleMessage(this, entity, "<n>rightEyeGlow set to <nh>" + nbt.getBoolean("rightEyeHuman") + "<n>!");
             break;
           case "hudRange":
-            manager.setShort(nbt, "hudRange", parseInt(arguments[2]));
+            manager.setShort(nbt, "hudRange", parseInt(argList[2]));
             system.moduleMessage(this, entity, "<n>hudRange set to <nh>" + nbt.getShort("hudRange") + "<n>!");
             break;
           case "friendliesOnHud":
-            manager.setBoolean(nbt, "friendliesOnHud", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("friendliesOnHud")));
+            manager.setBoolean(nbt, "friendliesOnHud", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("friendliesOnHud")));
             system.moduleMessage(this, entity, "<n>friendliesOnHud set to <nh>" + nbt.getBoolean("friendliesOnHud") + "<n>!");
             break;
           case "hostilesOnHud":
-            manager.setBoolean(nbt, "hostilesOnHud", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("hostilesOnHud")));
+            manager.setBoolean(nbt, "hostilesOnHud", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("hostilesOnHud")));
             system.moduleMessage(this, entity, "<n>hostilesOnHud set to <nh>" + nbt.getBoolean("hostilesOnHud") + "<n>!");
             break;
           case "playersOnHud":
-            manager.setBoolean(nbt, "playersOnHud", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("playersOnHud")));
+            manager.setBoolean(nbt, "playersOnHud", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("playersOnHud")));
             system.moduleMessage(this, entity, "<n>playersOnHud set to <nh>" + nbt.getBoolean("playersOnHud") + "<n>!");
             break;
           case "list":

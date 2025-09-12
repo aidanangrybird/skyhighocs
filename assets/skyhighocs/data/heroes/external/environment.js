@@ -20,20 +20,20 @@ function initModule(system) {
     type: 1,
     command: "env",
     helpMessage: "<n>!env <nh>-<n> Environment",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 3) {
-        switch (arguments[1]) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 3) {
+        switch (argList[1]) {
           case "rainfall":
-            (arguments.length == 2) ? getRainfall(entity) : system.moduleMessage(this, entity, "<n>!env rainfall");
+            (argList.length == 2) ? getRainfall(entity) : system.moduleMessage(this, entity, "<n>!env rainfall");
             break;
           case "snow":
-            (arguments.length == 2) ? canSnow(entity) : system.moduleMessage(this, entity, "<n>!env snow");
+            (argList.length == 2) ? canSnow(entity) : system.moduleMessage(this, entity, "<n>!env snow");
             break;
           case "rain":
-            (arguments.length == 2) ? canRain(entity) : system.moduleMessage(this, entity, "<n>!env rain");
+            (argList.length == 2) ? canRain(entity) : system.moduleMessage(this, entity, "<n>!env rain");
             break;
           case "temp":
-            (arguments.length == 2) ? getTemp(entity) : system.moduleMessage(this, entity, "<n>!env temp");
+            (argList.length == 2) ? getTemp(entity) : system.moduleMessage(this, entity, "<n>!env temp");
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Environment commands:");

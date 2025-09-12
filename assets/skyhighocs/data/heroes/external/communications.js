@@ -187,9 +187,9 @@ function initModule(system) {
     command: "comms",
     helpMessage: "<n>!comms <nh>-<n> Communications",
     disabledMessage: "<e>Module <eh>communications<e> is disabled!",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
-        switch (arguments[1]) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
+        switch (argList[1]) {
           case "cyberPos":
             var range = 32;
             var foundPlayers = [];
@@ -232,7 +232,7 @@ function initModule(system) {
             if (foundPlayers.length > 0) {
               //entity = tx
               //player = rx
-              transmitSuits(this, entity, manager, arguments[2]);
+              transmitSuits(this, entity, manager, argList[2]);
               foundPlayers.forEach(player => {
                 var rxAntennaDeployed = (player.getData("skyhighocs:dyn/antenna_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
                 var rxSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
@@ -292,7 +292,7 @@ function initModule(system) {
             if (foundPlayers.length > 0) {
               //entity = tx
               //player = rx
-              transmitSuits(this, entity, manager, arguments[2]);
+              transmitSuits(this, entity, manager, argList[2]);
               foundPlayers.forEach(player => {
                 var rxAntennaDeployed = (player.getData("skyhighocs:dyn/antenna_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
                 var rxSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
@@ -352,7 +352,7 @@ function initModule(system) {
             if (foundPlayers.length > 0) {
               //entity = tx
               //player = rx
-              transmitSuits(this, entity, manager, arguments[2]);
+              transmitSuits(this, entity, manager, argList[2]);
               foundPlayers.forEach(player => {
                 var rxAntennaDeployed = (player.getData("skyhighocs:dyn/antenna_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
                 var rxSatelliteDeployed = (player.getData("skyhighocs:dyn/satellite_timer") == 1) && (player.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
@@ -371,7 +371,7 @@ function initModule(system) {
             };
             break;
           case "show":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "sat":
                 manager.setData(entity, "skyhighocs:dyn/satellite", true);
                 system.moduleMessage(this, entity, "<n>Deploying satellite!");
@@ -390,7 +390,7 @@ function initModule(system) {
             };
             break;
           case "hide":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "sat":
                 manager.setData(entity, "skyhighocs:dyn/satellite", false);
                 system.moduleMessage(this, entity, "<n>Retracting satellite!");
