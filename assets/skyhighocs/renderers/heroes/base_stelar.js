@@ -8,6 +8,7 @@ var stelar = implement("skyhighocs:external/stelar");
 
 var santaHat;
 var santaHatEM;
+var head;
 var date = new Date();
 var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
 
@@ -69,6 +70,7 @@ function initEffects(renderer) {
   ears.anchor.set("head");
   ears.angle = 0;
   ears.inset = -0.039;
+  head = stelar.initHandThing(renderer, "head", 1, 4, 3);
   beam = renderer.createResource("BEAM_RENDERER", "skyhighocs:wave_calling");
   var callingShape = renderer.createResource("SHAPE", null);
   callingLine = callingShape.bindLine({ "start": [0.0, -300.0, 0.0], "end": [0.0, -300.0, 0.0], "size": [20.0, 20.0] });
@@ -110,6 +112,9 @@ function render(entity, renderLayer, isFirstPersonArm) {
     };
   };
   var color = getColor(entity);
+  if (entity.getInterpolatedData("skyhighocs:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighocs:dyn/calling_timer") < 0.6) {
+    head.render();
+  };
   var callingTimer = entity.getInterpolatedData("skyhighocs:dyn/calling_timer");
   ears.render();
   forcefield.color.set(color);

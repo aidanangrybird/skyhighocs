@@ -7,7 +7,16 @@ loadTextures({
   "transer_default_lights": "skyhighocs:ace/ace_stelar_transer_lights",
   "base": "skyhighocs:ace/solar_flame_base",
   "lights": "skyhighocs:ace/solar_flame_lights",
-  "santa_hat_em": "skyhighocs:ace/solar_flame_santa_hat"
+  "santa_hat_em": "skyhighocs:ace/solar_flame_santa_hat",
+  "head_right": "skyhighocs:ace/solar_right",
+  "head_right_lights": "skyhighocs:ace/solar_right_lights",
+  "head_left": "skyhighocs:ace/solar_left",
+  "head_left_lights": "skyhighocs:ace/solar_left_lights",
+  "head_top": "skyhighocs:ace/solar_top",
+  "head_top_lights": "skyhighocs:ace/solar_top_lights",
+  "head_bottom": "skyhighocs:ace/solar_bottom",
+  "head_bottom_lights": "skyhighocs:ace/solar_bottom_lights",
+  "head_front": "skyhighocs:ace/solar_front",
 });
 
 function getColor() {
