@@ -88,7 +88,7 @@ function initModule(system) {
       }, "\u00A7mEM Wave Change!\u00A7r You are too hot", 5);
     },
     canAim: function (entity) {
-      return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("skyhighocs:dyn/battle_card") == 0 && entity.getData("skyhighocs:dyn/achlys_timer") == 0 && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1;
+      return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1;
     },
     isKeyBindEnabled: function (entity, keyBind) {
       var result = false;
@@ -123,6 +123,7 @@ function initModule(system) {
     },
     isModifierEnabled: function (entity, modifier) {
       var uuid = "e51532a1-19fc-4d4f-9da0-f952c4645891";
+      var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
       var result = false;
       if (modifier.name() == "fiskheroes:transformation") {
         if (modifier.id() == "predation" || modifier.id() == "achlys") {

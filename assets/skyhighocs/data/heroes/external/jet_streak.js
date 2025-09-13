@@ -86,7 +86,7 @@ function initModule(system) {
       }, "\u00A7mEM Wave Change!\u00A7r You are too hot", 5);
     },
     canAim: function (entity) {
-      return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("skyhighocs:dyn/battle_card") == 0 && entity.getData("skyhighocs:dyn/jet_streak_timer") == 0 && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1;
+      return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1;
     },
     isKeyBindEnabled: function (entity, keyBind) {
       var result = false;
