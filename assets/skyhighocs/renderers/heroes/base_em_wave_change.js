@@ -11,8 +11,6 @@ var santaHatEM;
 var date = new Date();
 var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
 
-var emBeing;
-
 function init(renderer) {
   renderer.setTexture((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
@@ -85,12 +83,6 @@ function initEffects(renderer) {
     santaHatEM.setOffset(0.0, -7.25, -0.25);
     santaHatEM.setRotation(-10.0, 0.0, 0.0);
   };
-  var em_being_model = renderer.createResource("MODEL", "skyhighocs:EMBeing");
-  em_being_model.texture.set("em_being_base", "em_being_lights");
-  emBeing = renderer.createEffect("fiskheroes:model").setModel(em_being_model);
-  emBeing.anchor.set("body");
-  emBeing.setScale(1.0);
-  emBeing.setOffset(0.0, -10.0, 8.0);
   stelar.initNV(renderer);
   stelar.initWaveChangeNV(renderer);
   stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
@@ -137,9 +129,6 @@ function render(entity, renderLayer, isFirstPersonArm) {
   ears.render();
   if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") > 0 && entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1) {
     wave_change_lights.render();
-  };
-  if (nbt.getBoolean("emBeing") && entity.getData("skyhighocs:dyn/wave_changing_timer") == 0) {
-    emBeing.render();
   };
 };
 
