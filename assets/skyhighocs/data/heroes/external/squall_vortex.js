@@ -31,7 +31,7 @@ function initModule(system) {
       hero.addKeyBind("TELEPORT", "Transmit", 1);
       hero.addKeyBind("BATTLE_CARD_0", "Vortex Buster!", 2);
       hero.addKeyBind("BATTLE_CARD_1", "Battle Card! Radome!", 2);
-      hero.addKeyBind("BATTLE_CARD_2", "Battle Card! Radar Beam!", 2);
+      hero.addKeyBind("BATTLE_CARD_2", "Battle Card! Radar!", 2);
       hero.addKeyBind("BATTLE_CARD_3", "Battle Card! Lightning!", 2);
       hero.addKeyBind("BATTLE_CARD_4", "Battle Card! Derecho!", 2);
       hero.addKeyBind("BATTLE_CARD_5", "Battle Card! Hail Cannon!", 2);
@@ -325,8 +325,8 @@ function initModule(system) {
         if (entity.getData("skyhighocs:dyn/battle_card") == 2) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
           if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
-            system.shoutMessage(entity, "\u00A7r<\u00A76Squall Vortex\u00A7r> Battle Card Predation! \u00A76Radar Beam\u00A7r!", 16);
-            system.systemMessage(entity, "<n>Inserted <nh>Radar Beam<n> battle card!");
+            system.shoutMessage(entity, "\u00A7r<\u00A76Squall Vortex\u00A7r> Battle Card Predation! \u00A76Radar\u00A7r!", 16);
+            system.systemMessage(entity, "<n>Inserted <nh>Radar<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/jet_streak", true);
           manager.setData(entity, "fiskheroes:shield", true);
