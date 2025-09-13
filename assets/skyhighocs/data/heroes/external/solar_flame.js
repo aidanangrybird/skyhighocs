@@ -30,8 +30,8 @@ function initModule(system) {
     keyBinds: function (hero) {
       hero.addKeyBind("TELEPORT", "Transmit", 1);
       hero.addKeyBind("BATTLE_CARD_0", "Return To Solar Buster", 2);
-      hero.addKeyBind("BATTLE_CARD_1", "Battle Card! Barrier!", 2);
-      hero.addKeyBind("BATTLE_CARD_2", "Battle Card! Sword!", 2);
+      hero.addKeyBind("BATTLE_CARD_1", "Battle Card! Eclipse!", 2);
+      hero.addKeyBind("BATTLE_CARD_2", "Battle Card! Solstice!", 2);
       hero.addKeyBind("BATTLE_CARD_3", "Battle Card! Solar Flare!", 2);
       hero.addKeyBind("BATTLE_CARD_4", "Battle Card! Solar Wind!", 2);
       hero.addKeyBind("BATTLE_CARD_5", "Battle Card! Solar Blast!", 2);
@@ -131,10 +131,10 @@ function initModule(system) {
       if (entity.getData("fiskheroes:shield_blocking")) {
         return "SHIELD";
       };
-      if (entity.getData("skyhighocs:dyn/sword_blade_timer") == 1) {
+      if (entity.getData("skyhighocs:dyn/solstice_blade_timer") == 1) {
         return "SWORD";
       };
-      if (entity.getData("skyhighocs:dyn/sword_blade_timer") < 1 && !entity.getData("fiskheroes:shield_blocking")) {
+      if (entity.getData("skyhighocs:dyn/solstice_blade_timer") < 1 && !entity.getData("fiskheroes:shield_blocking")) {
         return null;
       };
     },
@@ -252,10 +252,10 @@ function initModule(system) {
         result = true;
       };
       if (modifier.name() == "fiskheroes:shield") {
-        if (modifier.id() == "barrier") {
+        if (modifier.id() == "eclipse") {
           result = entity.getData("skyhighocs:dyn/battle_card") == 1 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
         };
-        if (modifier.id() == "sword") {
+        if (modifier.id() == "solstice") {
           result = entity.getData("skyhighocs:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
         };
       };
@@ -288,10 +288,10 @@ function initModule(system) {
       };
       var item_holding = (!entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/wave_changing_timer") > 0);
       manager.incrementData(entity, "skyhighocs:dyn/item_holding_timer", 10, item_holding);
-      var sword = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 2 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
-      manager.setData(entity, "skyhighocs:dyn/sword", sword);
-      var sword_blade = entity.getData("skyhighocs:dyn/sword_timer") == 1 && entity.getData("skyhighocs:dyn/item_holding_timer") == 0;
-      manager.setData(entity, "skyhighocs:dyn/sword_blade", sword_blade);
+      var solstice = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 2 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      manager.setData(entity, "skyhighocs:dyn/solstice", solstice);
+      var solstice_blade = entity.getData("skyhighocs:dyn/solstice_timer") == 1 && entity.getData("skyhighocs:dyn/item_holding_timer") == 0;
+      manager.setData(entity, "skyhighocs:dyn/solstice_blade", solstice_blade);
       var solar_flare = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 3 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighocs:dyn/solar_flare", solar_flare);
       var solar_wind = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 4 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
@@ -310,8 +310,8 @@ function initModule(system) {
         if (entity.getData("skyhighocs:dyn/battle_card") == 1) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
           if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
-            system.shoutMessage(entity, "\u00A7r<\u00A74Solar Flame\u00A7r> Battle Card Predation! \u00A74Barrier\u00A7r!", 16);
-            system.systemMessage(entity, "<n>Inserted <nh>Barrier<n> battle card!");
+            system.shoutMessage(entity, "\u00A7r<\u00A74Solar Flame\u00A7r> Battle Card Predation! \u00A74Eclipse\u00A7r!", 16);
+            system.systemMessage(entity, "<n>Inserted <nh>Eclipse<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/solar", false);
           manager.setData(entity, "fiskheroes:shield", true);
@@ -319,8 +319,8 @@ function initModule(system) {
         if (entity.getData("skyhighocs:dyn/battle_card") == 2) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
           if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
-            system.shoutMessage(entity, "\u00A7r<\u00A74Solar Flame\u00A7r> Battle Card Predation! \u00A74Sword\u00A7r!", 16);
-            system.systemMessage(entity, "<n>Inserted <nh>Sword<n> battle card!");
+            system.shoutMessage(entity, "\u00A7r<\u00A74Solar Flame\u00A7r> Battle Card Predation! \u00A74Solstice\u00A7r!", 16);
+            system.systemMessage(entity, "<n>Inserted <nh>Solstice<n> battle card!");
           };
           manager.setData(entity, "skyhighocs:dyn/solar", true);
           manager.setData(entity, "fiskheroes:shield", true);

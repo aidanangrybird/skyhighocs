@@ -1,17 +1,17 @@
 {
   "texture": {
-    "in": "skyhighocs:ace/solar_flame_sword_blade",
+    "in": "skyhighocs:ace/solar_flame_solstice_blade",
     "transform": [
       {
         "operation": "XOR",
         "supply": "skyhighocs:xor/sword_blade_<TIMER>"
       }
     ],
-    "out": "skyhighocs:generated/solar_flame_sword_blade_<TIMER>"
+    "out": "skyhighocs:generated/solar_flame_solstice_blade_<TIMER>"
   },
   "getters": {
     "TIMER": {
-      "key": "Math.min(Math.max(Math.ceil(14 * entity.getInterpolatedData('skyhighocs:dyn/sword_blade_timer')), 0), 14) | 0",
+      "key": "Math.min(Math.max(Math.ceil(14 * entity.getInterpolatedData('skyhighocs:dyn/solstice_blade_timer')), 0), 14) | 0",
       "values": {
         "min": 0,
         "max": 14

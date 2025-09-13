@@ -12,13 +12,13 @@ loadTextures({
   "mask": "skyhighocs:ace/solar_flame_mask.tx.json",
   "mask_lights": "skyhighocs:ace/solar_flame_mask_lights.tx.json",
   "mask_wave_changing_lights": "skyhighocs:ace/solar_flame_mask_wave_changing_lights.tx.json",
-  "sword_blade": "skyhighocs:ace/solar_flame_sword_blade.tx.json",
-  "sword": "skyhighocs:ace/solar_flame_sword.tx.json",
-  "sword_wave_changing_lights": "skyhighocs:ace/solar_flame_sword_wave_changing_lights.tx.json",
-  "sword_sides": "skyhighocs:ace/solar_flame_sword_sides.tx.json",
-  "sword_front": "skyhighocs:ace/solar_flame_sword_front.tx.json",
-  "sword_wave_changing_sides_lights": "skyhighocs:ace/solar_flame_sword_wave_changing_sides_lights.tx.json",
-  "sword_wave_changing_front_lights": "skyhighocs:ace/solar_flame_sword_wave_changing_front_lights.tx.json",
+  "solstice_blade": "skyhighocs:ace/solar_flame_solstice_blade.tx.json",
+  "solstice": "skyhighocs:ace/solar_flame_solstice.tx.json",
+  "solstice_wave_changing_lights": "skyhighocs:ace/solar_flame_solstice_wave_changing_lights.tx.json",
+  "solstice_sides": "skyhighocs:ace/solar_flame_solstice_sides.tx.json",
+  "solstice_front": "skyhighocs:ace/solar_flame_solstice_front.tx.json",
+  "solstice_wave_changing_sides_lights": "skyhighocs:ace/solar_flame_solstice_wave_changing_sides_lights.tx.json",
+  "solstice_wave_changing_front_lights": "skyhighocs:ace/solar_flame_solstice_wave_changing_front_lights.tx.json",
   "solar_flare_sides": "skyhighocs:ace/solar_flame_solar_flare_sides.tx.json",
   "solar_flare_front": "skyhighocs:ace/solar_flame_solar_flare_front.tx.json",
   "solar_flare_sides_lights": "skyhighocs:ace/solar_flame_solar_flare_sides_lights.tx.json",
@@ -90,6 +90,7 @@ var santaHat;
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
+  stelar.addSwordAnimations(renderer, "em_wave_change.SOLSTICE", "skyhighocs:em_wave_change_sword", "solstice");
   stelar.addAnimationWithData(renderer, "em_wave_change.SOLAR_WIND_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
   stelar.addAnimationWithData(renderer, "em_wave_change.SOLAR_BLAST_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:beam_charge")
@@ -122,24 +123,24 @@ function initEffects(renderer) {
   //Solar Wind
   solarWind = stelar.initHandThing(renderer, "solar_wind", 2, 3);
   solarWindPredation = stelar.initHandThing(renderer, "solar_wind_wave_changing", 0, 2);
-  //Sword
-  swordMain = renderer.createEffect("fiskheroes:shield");
-  swordMain.texture.set("sword");
-  swordMain.anchor.set("rightArm");
-  swordMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
-  swordMain.large = true;
-  swordBlade = renderer.createEffect("fiskheroes:shield");
-  swordBlade.texture.set(null, "sword_blade");
-  swordBlade.anchor.set("rightArm");
-  swordBlade.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
-  swordBlade.large = true;
-  swordWaveChanging = renderer.createEffect("fiskheroes:shield");
-  swordWaveChanging.texture.set(null, "sword_wave_changing_lights");
-  swordWaveChanging.anchor.set("rightArm");
-  swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
-  swordWaveChanging.large = true;
-  sword = stelar.initHandThing(renderer, "sword", 2, 0);
-  swordPredation = stelar.initHandThing(renderer, "sword_wave_changing", 0, 2);
+  //Solstice
+  solsticeMain = renderer.createEffect("fiskheroes:shield");
+  solsticeMain.texture.set("solstice");
+  solsticeMain.anchor.set("rightArm");
+  solsticeMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
+  solsticeMain.large = true;
+  solsticeBlade = renderer.createEffect("fiskheroes:shield");
+  solsticeBlade.texture.set(null, "solstice_blade");
+  solsticeBlade.anchor.set("rightArm");
+  solsticeBlade.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
+  solsticeBlade.large = true;
+  solsticeWaveChanging = renderer.createEffect("fiskheroes:shield");
+  solsticeWaveChanging.texture.set(null, "solstice_wave_changing_lights");
+  solsticeWaveChanging.anchor.set("rightArm");
+  solsticeWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
+  solsticeWaveChanging.large = true;
+  solstice = stelar.initHandThing(renderer, "solstice", 2, 0);
+  solsticePredation = stelar.initHandThing(renderer, "solstice_wave_changing", 0, 2);
   //Head
   head = stelar.initHandThing(renderer, "head", 1, 4, 3);
   headWaveChange = stelar.initHandThing(renderer, "head_wave_change", 1, 4, 3);
@@ -157,20 +158,20 @@ function render(entity, renderLayer, isFirstPersonArm) {
       if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) {
         headWaveChange.render();
       };
-      if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighocs:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_flare_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_wind_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_blast_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
+      if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighocs:dyn/solstice_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_flare_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_wind_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_blast_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
         head.render();
       }
-      if (((entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighocs:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_flare_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_wind_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_blast_timer") < 1)) {
+      if (((entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighocs:dyn/solstice_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_flare_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_wind_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/solar_blast_timer") < 1)) {
         headWaveChanging.render();
       }
     };
-    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/sword_timer") > 0) {
-      swordWaveChanging.render();
-      swordMain.render();
-      sword.render();
-      swordPredation.render();
-      if (entity.getData("skyhighocs:dyn/sword") && entity.getHeldItem().isEmpty()) {
-        swordBlade.render();
+    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/solstice_timer") > 0) {
+      solsticeWaveChanging.render();
+      solsticeMain.render();
+      solstice.render();
+      solsticePredation.render();
+      if (entity.getData("skyhighocs:dyn/solstice") && entity.getHeldItem().isEmpty()) {
+        solsticeBlade.render();
       };
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/solar_flare_timer") > 0) {
