@@ -44,8 +44,8 @@ function initModule(system) {
     keyBinds: function (hero) {
       hero.addKeyBind("TELEPORT", "Transmit", 1);
       hero.addKeyBind("BATTLE_CARD_0", "Return To Nebula Buster", 2);
-      hero.addKeyBind("BATTLE_CARD_1", "Battle Card! Barrier!", 2);
-      hero.addKeyBind("BATTLE_CARD_2", "Battle Card! Sword!", 2);
+      hero.addKeyBind("BATTLE_CARD_1", "Battle Card! Gaseous Cloud!", 2);
+      hero.addKeyBind("BATTLE_CARD_2", "Battle Card! Gas Jet!", 2);
       hero.addKeyBind("BATTLE_CARD_3", "Battle Card! Nebula Blast!", 2);
       hero.addKeyBind("BATTLE_CARD_4", "Battle Card! Ice Bomb!", 2);
       hero.addKeyBind("BATTLE_CARD_5", "Battle Card! Nebula Burst!", 2);
@@ -102,7 +102,7 @@ function initModule(system) {
     },
     damageProfiles: function (entity) {
       var result = null;
-      if (entity.getData("skyhighocs:dyn/sword_blade_timer") == 1 && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1) {
+      if (entity.getData("skyhighocs:dyn/gas_jet_blade_timer") == 1 && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1) {
         result = "SWORD";
       };
       if (entity.getHeldItem().name() == "fiskheroes:katana" && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1) {
@@ -148,10 +148,10 @@ function initModule(system) {
       if (entity.getData("fiskheroes:shield_blocking")) {
         return "SHIELD";
       };
-      if (entity.getData("skyhighocs:dyn/sword_blade_timer") == 1) {
+      if (entity.getData("skyhighocs:dyn/gas_jet_blade_timer") == 1) {
         return "SWORD";
       };
-      if (entity.getData("skyhighocs:dyn/sword_blade_timer") < 1 && !entity.getData("fiskheroes:shield_blocking")) {
+      if (entity.getData("skyhighocs:dyn/gas_jet_blade_timer") < 1 && !entity.getData("fiskheroes:shield_blocking")) {
         return null;
       };
     },
@@ -269,10 +269,10 @@ function initModule(system) {
         result = true;
       };
       if (modifier.name() == "fiskheroes:shield") {
-        if (modifier.id() == "barrier") {
+        if (modifier.id() == "gaseous_cloud") {
           result = entity.getData("skyhighocs:dyn/battle_card") == 1 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
         };
-        if (modifier.id() == "sword") {
+        if (modifier.id() == "gas_jet") {
           result = entity.getData("skyhighocs:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
         };
       };
@@ -305,10 +305,10 @@ function initModule(system) {
       };
       var item_holding = (!entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/wave_changing_timer") > 0);
       manager.incrementData(entity, "skyhighocs:dyn/item_holding_timer", 10, item_holding);
-      var sword = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 2 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
-      manager.setData(entity, "skyhighocs:dyn/sword", sword);
-      var sword_blade = entity.getData("skyhighocs:dyn/sword_timer") == 1 && entity.getData("skyhighocs:dyn/item_holding_timer") == 0;
-      manager.setData(entity, "skyhighocs:dyn/sword_blade", sword_blade);
+      var gas_jet = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 2 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      manager.setData(entity, "skyhighocs:dyn/gas_jet", gas_jet);
+      var gas_jet_blade = entity.getData("skyhighocs:dyn/gas_jet_timer") == 1 && entity.getData("skyhighocs:dyn/item_holding_timer") == 0;
+      manager.setData(entity, "skyhighocs:dyn/gas_jet_blade", gas_jet_blade);
       var nebula_blast = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 3 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighocs:dyn/nebula_blast", nebula_blast);
       var ice_bomb = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/battle_card") == 4 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
@@ -327,8 +327,8 @@ function initModule(system) {
         if (entity.getData("skyhighocs:dyn/battle_card") == 1) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
           if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
-            system.systemMessage(entity, "<n>Inserted <nh>Barrier<n> battle card!");
-            system.shoutMessage(entity, "\u00A7r<\u00A72Pryetak Nebula\u00A7r> Battle Card Predation! \u00A72Barrier\u00A7r!", 16);
+            system.systemMessage(entity, "<n>Inserted <nh>Gaseous Cloud<n> battle card!");
+            system.shoutMessage(entity, "\u00A7r<\u00A72Pryetak Nebula\u00A7r> Battle Card Predation! \u00A72Gaseous Cloud\u00A7r!", 16);
           };
           manager.setData(entity, "skyhighocs:dyn/pryetak", false);
           manager.setData(entity, "fiskheroes:shield", true);
@@ -336,8 +336,8 @@ function initModule(system) {
         if (entity.getData("skyhighocs:dyn/battle_card") == 2) {
           entity.playSound("skyhighocs:wave.equip", 1, 1);
           if (entity.getData("skyhighocs:dyn/predation_timer") > 0.65) {
-            system.systemMessage(entity, "<n>Inserted <nh>Sword<n> battle card!");
-            system.shoutMessage(entity, "\u00A7r<\u00A72Pryetak Nebula\u00A7r> Battle Card Predation! \u00A72Sword\u00A7r!", 16);
+            system.systemMessage(entity, "<n>Inserted <nh>Gas Jet<n> battle card!");
+            system.shoutMessage(entity, "\u00A7r<\u00A72Pryetak Nebula\u00A7r> Battle Card Predation! \u00A72Gas Jet\u00A7r!", 16);
           };
           manager.setData(entity, "skyhighocs:dyn/pryetak", true);
           manager.setData(entity, "fiskheroes:shield", true);

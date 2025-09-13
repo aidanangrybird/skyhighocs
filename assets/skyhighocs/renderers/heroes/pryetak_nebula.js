@@ -12,13 +12,13 @@ loadTextures({
   "mask": "skyhighocs:chase/pryetak_nebula_mask.tx.json",
   "mask_lights": "skyhighocs:chase/pryetak_nebula_mask_lights.tx.json",
   "mask_wave_changing_lights": "skyhighocs:chase/pryetak_nebula_mask_wave_changing_lights.tx.json",
-  "sword_blade": "skyhighocs:chase/pryetak_nebula_sword_blade.tx.json",
-  "sword": "skyhighocs:chase/pryetak_nebula_sword.tx.json",
-  "sword_wave_changing_lights": "skyhighocs:chase/pryetak_nebula_sword_wave_changing_lights.tx.json",
-  "sword_sides": "skyhighocs:chase/pryetak_nebula_sword_sides.tx.json",
-  "sword_front": "skyhighocs:chase/pryetak_nebula_sword_front.tx.json",
-  "sword_wave_changing_sides_lights": "skyhighocs:chase/pryetak_nebula_sword_wave_changing_sides_lights.tx.json",
-  "sword_wave_changing_front_lights": "skyhighocs:chase/pryetak_nebula_sword_wave_changing_front_lights.tx.json",
+  "gas_jet_blade": "skyhighocs:chase/pryetak_nebula_gas_jet_blade.tx.json",
+  "gas_jet": "skyhighocs:chase/pryetak_nebula_gas_jet.tx.json",
+  "gas_jet_wave_changing_lights": "skyhighocs:chase/pryetak_nebula_gas_jet_wave_changing_lights.tx.json",
+  "gas_jet_sides": "skyhighocs:chase/pryetak_nebula_gas_jet_sides.tx.json",
+  "gas_jet_front": "skyhighocs:chase/pryetak_nebula_gas_jet_front.tx.json",
+  "gas_jet_wave_changing_sides_lights": "skyhighocs:chase/pryetak_nebula_gas_jet_wave_changing_sides_lights.tx.json",
+  "gas_jet_wave_changing_front_lights": "skyhighocs:chase/pryetak_nebula_gas_jet_wave_changing_front_lights.tx.json",
   "nebula_blast_sides": "skyhighocs:chase/pryetak_nebula_nebula_blast_sides.tx.json",
   "nebula_blast_front": "skyhighocs:chase/pryetak_nebula_nebula_blast_front.tx.json",
   "nebula_blast_front_lights": "skyhighocs:chase/pryetak_nebula_nebula_blast_front_lights.tx.json",
@@ -88,6 +88,7 @@ var santaHat;
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
+  stelar.addSwordAnimations(renderer, "em_wave_change.GAS_JET", "skyhighocs:em_wave_change_sword", "gas_jet");
   stelar.addAnimationWithData(renderer, "em_wave_change.NEBULA_BLAST_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
   stelar.addAnimationWithData(renderer, "em_wave_change.NEBULA_BURST_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:beam_charge")
@@ -117,24 +118,24 @@ function initEffects(renderer) {
   //Nebula Burst
   nebulaBurst = stelar.initHandThing(renderer, "nebula_burst", 2, 3);
   nebulaBurstPredation = stelar.initHandThing(renderer, "nebula_burst_wave_changing", 0, 2);
-  //Sword
-  swordMain = renderer.createEffect("fiskheroes:shield");
-  swordMain.texture.set("sword");
-  swordMain.anchor.set("rightArm");
-  swordMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
-  swordMain.large = true;
-  swordBlade = renderer.createEffect("fiskheroes:shield");
-  swordBlade.texture.set(null, "sword_blade");
-  swordBlade.anchor.set("rightArm");
-  swordBlade.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
-  swordBlade.large = true;
-  swordWaveChanging = renderer.createEffect("fiskheroes:shield");
-  swordWaveChanging.texture.set(null, "sword_wave_changing_lights");
-  swordWaveChanging.anchor.set("rightArm");
-  swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
-  swordWaveChanging.large = true;
-  sword = stelar.initHandThing(renderer, "sword", 2, 0);
-  swordPredation = stelar.initHandThing(renderer, "sword_wave_changing", 0, 2);
+  //Gas Jet
+  gasJetMain = renderer.createEffect("fiskheroes:shield");
+  gasJetMain.texture.set("gas_jet");
+  gasJetMain.anchor.set("rightArm");
+  gasJetMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
+  gasJetMain.large = true;
+  gasJetBlade = renderer.createEffect("fiskheroes:shield");
+  gasJetBlade.texture.set(null, "gas_jet_blade");
+  gasJetBlade.anchor.set("rightArm");
+  gasJetBlade.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
+  gasJetBlade.large = true;
+  gasJetWaveChanging = renderer.createEffect("fiskheroes:shield");
+  gasJetWaveChanging.texture.set(null, "gas_jet_wave_changing_lights");
+  gasJetWaveChanging.anchor.set("rightArm");
+  gasJetWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
+  gasJetWaveChanging.large = true;
+  gasJet = stelar.initHandThing(renderer, "gas_jet", 2, 0);
+  gasJetPredation = stelar.initHandThing(renderer, "gas_jet_wave_changing", 0, 2);
   //Head
   head = stelar.initHandThing(renderer, "head", 1, 4, 3);
   headWaveChange = stelar.initHandThing(renderer, "head_wave_change", 1, 4, 3);
@@ -152,20 +153,20 @@ function render(entity, renderLayer, isFirstPersonArm) {
       if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) {
         headWaveChange.render();
       };
-      if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighocs:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/nebula_blast_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/ice_bomb_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/nebula_burst_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
+      if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighocs:dyn/gas_jet_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/nebula_blast_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/ice_bomb_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/nebula_burst_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
         head.render();
       };
-      if (((entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighocs:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/nebula_blast_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/ice_bomb_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/nebula_burst_timer") < 1)) {
+      if (((entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighocs:dyn/gas_jet_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/nebula_blast_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/ice_bomb_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/nebula_burst_timer") < 1)) {
         headWaveChanging.render();
       };
     };
-    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/sword_timer") > 0) {
-      swordWaveChanging.render();
-      swordMain.render();
-      sword.render();
-      swordPredation.render();
-      if (entity.getData("skyhighocs:dyn/sword") && entity.getHeldItem().isEmpty()) {
-        swordBlade.render();
+    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/gas_jet_timer") > 0) {
+      gasJetWaveChanging.render();
+      gasJetMain.render();
+      gasJet.render();
+      gasJetPredation.render();
+      if (entity.getData("skyhighocs:dyn/gas_jet") && entity.getHeldItem().isEmpty()) {
+        gasJetBlade.render();
       };
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/nebula_blast_timer") > 0) {
