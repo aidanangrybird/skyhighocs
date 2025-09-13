@@ -12,13 +12,13 @@ loadTextures({
   "mask": "skyhighocs:damien/abyssal_shadow_mask.tx.json",
   "mask_lights": "skyhighocs:damien/abyssal_shadow_mask_lights.tx.json",
   "mask_wave_changing_lights": "skyhighocs:damien/abyssal_shadow_mask_wave_changing_lights.tx.json",
-  "sword_blade": "skyhighocs:damien/abyssal_shadow_sword_blade.tx.json",
-  "sword": "skyhighocs:damien/abyssal_shadow_sword.tx.json",
-  "sword_wave_changing_lights": "skyhighocs:damien/abyssal_shadow_sword_wave_changing_lights.tx.json",
-  "sword_sides": "skyhighocs:damien/abyssal_shadow_sword_sides.tx.json",
-  "sword_front": "skyhighocs:damien/abyssal_shadow_sword_front.tx.json",
-  "sword_wave_changing_sides_lights": "skyhighocs:damien/abyssal_shadow_sword_wave_changing_sides_lights.tx.json",
-  "sword_wave_changing_front_lights": "skyhighocs:damien/abyssal_shadow_sword_wave_changing_front_lights.tx.json",
+  "soul_splitter_blade": "skyhighocs:damien/abyssal_shadow_soul_splitter_blade.tx.json",
+  "soul_splitter": "skyhighocs:damien/abyssal_shadow_soul_splitter.tx.json",
+  "soul_splitter_wave_changing_lights": "skyhighocs:damien/abyssal_shadow_soul_splitter_wave_changing_lights.tx.json",
+  "soul_splitter_sides": "skyhighocs:damien/abyssal_shadow_soul_splitter_sides.tx.json",
+  "soul_splitter_front": "skyhighocs:damien/abyssal_shadow_soul_splitter_front.tx.json",
+  "soul_splitter_wave_changing_sides_lights": "skyhighocs:damien/abyssal_shadow_soul_splitter_wave_changing_sides_lights.tx.json",
+  "soul_splitter_wave_changing_front_lights": "skyhighocs:damien/abyssal_shadow_soul_splitter_wave_changing_front_lights.tx.json",
   "abyssal_shroud_sides": "skyhighocs:damien/abyssal_shadow_abyssal_shroud_sides.tx.json",
   "abyssal_shroud_front": "skyhighocs:damien/abyssal_shadow_abyssal_shroud_front.tx.json",
   "abyssal_shroud_wave_changing_sides_lights": "skyhighocs:damien/abyssal_shadow_abyssal_shroud_wave_changing_sides_lights.tx.json",
@@ -88,6 +88,7 @@ var santaHat;
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
+  stelar.addSwordAnimations(renderer, "em_wave_change.SOUL_SPLITTER", "skyhighocs:em_wave_change_sword", "soul_splitter");
   stelar.addAnimationWithData(renderer, "em_wave_change.SHADOW_BLAST_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
   stelar.addAnimationWithData(renderer, "em_wave_change.UNLEASHED_DARKNESS_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:beam_charge")
@@ -117,24 +118,24 @@ function initEffects(renderer) {
   //Shadow Blast
   shadowBlast = stelar.initHandThing(renderer, "shadow_blast", 2, 3);
   shadowBlastPredation = stelar.initHandThing(renderer, "shadow_blast_wave_changing", 0, 2);
-  //Sword
-  swordMain = renderer.createEffect("fiskheroes:shield");
-  swordMain.texture.set("sword");
-  swordMain.anchor.set("rightArm");
-  swordMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
-  swordMain.large = true;
-  swordBlade = renderer.createEffect("fiskheroes:shield");
-  swordBlade.texture.set(null, "sword_blade");
-  swordBlade.anchor.set("rightArm");
-  swordBlade.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
-  swordBlade.large = true;
-  swordWaveChanging = renderer.createEffect("fiskheroes:shield");
-  swordWaveChanging.texture.set(null, "sword_wave_changing_lights");
-  swordWaveChanging.anchor.set("rightArm");
-  swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
-  swordWaveChanging.large = true;
-  sword = stelar.initHandThing(renderer, "sword", 2, 0);
-  swordPredation = stelar.initHandThing(renderer, "sword_wave_changing", 0, 2);
+  //Soul Splitter
+  soulSplitterMain = renderer.createEffect("fiskheroes:shield");
+  soulSplitterMain.texture.set("soul_splitter");
+  soulSplitterMain.anchor.set("rightArm");
+  soulSplitterMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
+  soulSplitterMain.large = true;
+  soulSplitterBlade = renderer.createEffect("fiskheroes:shield");
+  soulSplitterBlade.texture.set(null, "soul_splitter_blade");
+  soulSplitterBlade.anchor.set("rightArm");
+  soulSplitterBlade.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
+  soulSplitterBlade.large = true;
+  soulSplitterWaveChanging = renderer.createEffect("fiskheroes:shield");
+  soulSplitterWaveChanging.texture.set(null, "soul_splitter_wave_changing_lights");
+  soulSplitterWaveChanging.anchor.set("rightArm");
+  soulSplitterWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
+  soulSplitterWaveChanging.large = true;
+  soulSplitter = stelar.initHandThing(renderer, "soul_splitter", 2, 0);
+  soulSplitterPredation = stelar.initHandThing(renderer, "soul_splitter_wave_changing", 0, 2);
   //Head
   head = stelar.initHandThing(renderer, "head", 1, 4, 3);
   headWaveChange = stelar.initHandThing(renderer, "head_wave_change", 1, 4, 3);
@@ -152,20 +153,20 @@ function render(entity, renderLayer, isFirstPersonArm) {
       if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) {
         headWaveChange.render();
       };
-      if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighocs:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/abyssal_shroud_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/unleashed_darkness_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/shadow_blast_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
+      if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighocs:dyn/soul_splitter_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/abyssal_shroud_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/unleashed_darkness_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/shadow_blast_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
         head.render();
       };
-      if (((entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighocs:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/abyssal_shroud_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/unleashed_darkness_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/shadow_blast_timer") < 1)) {
+      if (((entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighocs:dyn/soul_splitter_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/abyssal_shroud_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/unleashed_darkness_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/shadow_blast_timer") < 1)) {
         headWaveChanging.render();
       };
     };
-    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/sword_timer") > 0) {
-      swordWaveChanging.render();
-      swordMain.render();
-      sword.render();
-      swordPredation.render();
-      if (entity.getData("skyhighocs:dyn/sword") && entity.getHeldItem().isEmpty()) {
-        swordBlade.render();
+    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/soul_splitter_timer") > 0) {
+      soulSplitterWaveChanging.render();
+      soulSplitterMain.render();
+      soulSplitter.render();
+      soulSplitterPredation.render();
+      if (entity.getData("skyhighocs:dyn/soul_splitter") && entity.getHeldItem().isEmpty()) {
+        soulSplitterBlade.render();
       };
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/abyssal_shroud_timer") > 0) {

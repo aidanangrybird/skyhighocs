@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighocs:damien/abyssal_shadow_soul_splitter_blade",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighocs:xor/sword_blade_<TIMER>"
+      }
+    ],
+    "out": "skyhighocs:generated/abyssal_shadow_soul_splitter_blade_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.min(Math.max(Math.ceil(14 * entity.getInterpolatedData('skyhighocs:dyn/soul_splitter_blade_timer')), 0), 14) | 0",
+      "values": {
+        "min": 0,
+        "max": 14
+      }
+    }
+  },
+  "isDynamic": true
+}
