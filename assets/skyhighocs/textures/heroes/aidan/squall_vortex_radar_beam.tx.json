@@ -1,17 +1,17 @@
 {
   "texture": {
-    "in": "skyhighocs:aidan/squall_vortex_sword_blade",
+    "in": "skyhighocs:aidan/squall_vortex_radar_beam",
     "transform": [
       {
         "operation": "XOR",
         "supply": "skyhighocs:xor/sword_blade_<TIMER>"
       }
     ],
-    "out": "skyhighocs:generated/squall_vortex_sword_blade_<TIMER>"
+    "out": "skyhighocs:generated/squall_vortex_radar_beam_<TIMER>"
   },
   "getters": {
     "TIMER": {
-      "key": "Math.min(Math.max(Math.ceil(14 * entity.getInterpolatedData('skyhighocs:dyn/sword_blade_timer')), 0), 14) | 0",
+      "key": "Math.min(Math.max(Math.ceil(14 * entity.getInterpolatedData('skyhighocs:dyn/radar_beam_timer')), 0), 14) | 0",
       "values": {
         "min": 0,
         "max": 14

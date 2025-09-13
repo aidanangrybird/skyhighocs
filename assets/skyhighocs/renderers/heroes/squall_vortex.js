@@ -14,14 +14,14 @@ loadTextures({
   "mask": "skyhighocs:aidan/squall_vortex_mask.tx.json",
   "mask_lights": "skyhighocs:aidan/squall_vortex_mask_lights.tx.json",
   "mask_wave_changing_lights": "skyhighocs:aidan/squall_vortex_mask_wave_changing_lights.tx.json",
-  "sword_blade": "skyhighocs:aidan/squall_vortex_sword_blade.tx.json",
-  "sword": "skyhighocs:aidan/squall_vortex_sword.tx.json",
-  "sword_lights": "skyhighocs:aidan/squall_vortex_sword_lights.tx.json",
-  "sword_wave_changing_lights": "skyhighocs:aidan/squall_vortex_sword_wave_changing_lights.tx.json",
-  "sword_sides": "skyhighocs:aidan/squall_vortex_sword_sides.tx.json",
-  "sword_front": "skyhighocs:aidan/squall_vortex_sword_front.tx.json",
-  "sword_wave_changing_sides_lights": "skyhighocs:aidan/squall_vortex_sword_wave_changing_sides_lights.tx.json",
-  "sword_wave_changing_front_lights": "skyhighocs:aidan/squall_vortex_sword_wave_changing_front_lights.tx.json",
+  "radar_beam": "skyhighocs:aidan/squall_vortex_radar_beam.tx.json",
+  "radar": "skyhighocs:aidan/squall_vortex_radar.tx.json",
+  "radar_lights": "skyhighocs:aidan/squall_vortex_radar_lights.tx.json",
+  "radar_wave_changing_lights": "skyhighocs:aidan/squall_vortex_radar_wave_changing_lights.tx.json",
+  "radar_sides": "skyhighocs:aidan/squall_vortex_radar_sides.tx.json",
+  "radar_front": "skyhighocs:aidan/squall_vortex_radar_front.tx.json",
+  "radar_wave_changing_sides_lights": "skyhighocs:aidan/squall_vortex_radar_wave_changing_sides_lights.tx.json",
+  "radar_wave_changing_front_lights": "skyhighocs:aidan/squall_vortex_radar_wave_changing_front_lights.tx.json",
   "lightning_sides": "skyhighocs:aidan/squall_vortex_lightning_sides.tx.json",
   "lightning_front": "skyhighocs:aidan/squall_vortex_lightning_front.tx.json",
   "lightning_sides_lights": "skyhighocs:aidan/squall_vortex_lightning_sides_lights.tx.json",
@@ -91,6 +91,7 @@ var santaHat;
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
+  stelar.addSwordAnimations(renderer, "em_wave_change.RADAR", "skyhighocs:em_wave_change_sword", "radar");
   stelar.addAnimationWithData(renderer, "em_wave_change.DERECHO_AIM", "skyhighocs:em_wave_change_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
   renderer.setItemIcon("CHESTPLATE", "pegasus_transer");
@@ -122,24 +123,24 @@ function initEffects(renderer) {
   //Hail cannon
   hailCannon = stelar.initHandThing(renderer, "hail_cannon", 2, 0);
   hailCannonPredation = stelar.initHandThing(renderer, "hail_cannon_wave_changing", 0, 2);
-  //Sword
-  swordMain = renderer.createEffect("fiskheroes:shield");
-  swordMain.texture.set("sword", "sword_lights");
-  swordMain.anchor.set("rightArm");
-  swordMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
-  swordMain.large = true;
-  swordBlade = renderer.createEffect("fiskheroes:shield");
-  swordBlade.texture.set(null, "sword_blade");
-  swordBlade.anchor.set("rightArm");
-  swordBlade.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
-  swordBlade.large = true;
-  swordWaveChanging = renderer.createEffect("fiskheroes:shield");
-  swordWaveChanging.texture.set(null, "sword_wave_changing_lights");
-  swordWaveChanging.anchor.set("rightArm");
-  swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
-  swordWaveChanging.large = true;
-  sword = stelar.initHandThing(renderer, "sword", 2, 0);
-  swordPredation = stelar.initHandThing(renderer, "sword_wave_changing", 0, 2);
+  //Radar
+  radarMain = renderer.createEffect("fiskheroes:shield");
+  radarMain.texture.set("radar", "radar_lights");
+  radarMain.anchor.set("rightArm");
+  radarMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
+  radarMain.large = true;
+  radarBeam = renderer.createEffect("fiskheroes:shield");
+  radarBeam.texture.set(null, "radar_beam");
+  radarBeam.anchor.set("rightArm");
+  radarBeam.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
+  radarBeam.large = true;
+  radarWaveChanging = renderer.createEffect("fiskheroes:shield");
+  radarWaveChanging.texture.set(null, "radar_wave_changing_lights");
+  radarWaveChanging.anchor.set("rightArm");
+  radarWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
+  radarWaveChanging.large = true;
+  radar = stelar.initHandThing(renderer, "radar", 2, 0);
+  radarPredation = stelar.initHandThing(renderer, "radar_wave_changing", 0, 2);
   //Head
   head = stelar.initHandThing(renderer, "head", 1, 4, 3);
   headWaveChange = stelar.initHandThing(renderer, "head_wave_change", 1, 4, 3);
@@ -161,20 +162,20 @@ function render(entity, renderLayer, isFirstPersonArm) {
       if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) {
         headWaveChange.render();
       };
-      if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighocs:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/lightning_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/derecho_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/hail_cannon_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
+      if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighocs:dyn/radar_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/lightning_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/derecho_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/hail_cannon_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
         head.render();
       }
-      if (((entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighocs:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/lightning_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/derecho_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/hail_cannon_timer") < 1)) {
+      if (((entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighocs:dyn/radar_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/lightning_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/derecho_timer") < 1) && (entity.getInterpolatedData("skyhighocs:dyn/hail_cannon_timer") < 1)) {
         headWaveChanging.render();
       }
     };
-    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/sword_timer") > 0) {
-      swordWaveChanging.render();
-      swordMain.render();
-      sword.render();
-      swordPredation.render();
-      if (entity.getData("skyhighocs:dyn/sword") && entity.getHeldItem().isEmpty()) {
-        swordBlade.render();
+    if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/radar_timer") > 0) {
+      radarWaveChanging.render();
+      radarMain.render();
+      radar.render();
+      radarPredation.render();
+      if (entity.getData("skyhighocs:dyn/radar") && entity.getHeldItem().isEmpty()) {
+        radarBeam.render();
       };
     };
     if (entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighocs:dyn/lightning_timer") > 0) {
