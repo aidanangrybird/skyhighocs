@@ -80,13 +80,13 @@ function addBasePredationAnimation(renderer, key, value) {
   anim.priority = -9.75;
 };
 
-function addSwordAnimations(renderer, key, value) {
+function addSwordAnimations(renderer, key, value, sword) {
   if (typeof value === "string") {
     anim = renderer.createResource("ANIMATION", value);
   };
   renderer.addCustomAnimation(key, anim);
   anim.setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/sword_timer"));
+    data.load(0, entity.getInterpolatedData("skyhighocs:dyn/" + sword + "_timer"));
     data.load(1, entity.getInterpolatedData("fiskheroes:shield_blocking_timer"));
   });
   anim.setCondition(entity => entity.getData("skyhighocs:dyn/battle_card") == 2);
@@ -176,7 +176,6 @@ function initStelarAnimations(renderer) {
     .priority = 10;
   addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighocs:em_wave_change_wall_ceiling_stand");
   addPredationAnimation(renderer, "em_wave_change.PREDATION", "skyhighocs:em_wave_change_predation");
-  addSwordAnimations(renderer, "em_wave_change.SWORD", "skyhighocs:em_wave_change_sword");
   //Flight
   addFlightBaseAnimation(renderer, "em_wave_change.BASE_FLIGHT", "skyhighocs:flight/em_wave_change_base_flight.anim.json");
   addFlightHoldingAnimation(renderer, "em_wave_change.HOLDING_FLIGHT", "skyhighocs:flight/em_wave_change_holding_flight.anim.json");
