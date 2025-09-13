@@ -3,7 +3,7 @@
   "value": 1,
   "modifiers": {
     "fiskheroes:transformation|achlys": {
-      "key": "ACHYLS_TOGGLE",
+      "key": "ACHLYS_TOGGLE",
       "transformation": {
         "toggleData": "skyhighocs:dyn/achlys",
         "timerData": "skyhighocs:dyn/achlys_timer",

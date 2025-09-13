@@ -32,9 +32,9 @@ function initModule(system) {
       "skyhighocs:shadow_buster"
     ],
     keyBinds: function (hero) {
-      hero.addKeyBindFunc("BATTLE_CARD_RESET_PREDATION", (player, manager) => resetBattleCard(player, manager), "Return To Shadow Buster", 2);
       hero.addKeyBind("GRAVITY_MANIPULATION", "Battle Card Predation", 2);
       hero.addKeyBind("AIM", "Aim Shadow Buster", 4);
+      hero.addKeyBindFunc("BATTLE_CARD_RESET", (player, manager) => resetBattleCard(player, manager), "Return To Shadow Buster", 5);
       hero.addKeyBindFunc("DESYNCHRONIZE_WAVES", (player, manager) => {
         manager.setData(player, "skyhighocs:dyn/battle_card", 0);
         manager.setData(player, "skyhighocs:dyn/selected_battle_card", 0);
@@ -69,7 +69,6 @@ function initModule(system) {
       }, "EM Wave Change!", 5);
       hero.addKeyBind("WAVE_CHANGE", "EM Wave Change!", 5);
       hero.addKeyBind("ACHLYS_TOGGLE", "Toggle Shadow Buster", 5);
-      hero.addKeyBind("AIM", "Aim Shadow Buster", 4);
       hero.addKeyBindFunc("COLD_TEMPERATURE", (player, manager) => {
         if (player.getUUID() == "e51532a1-19fc-4d4f-9da0-f952c4645891") {
           system.shoutMessage(player, "\u00A7r<\u00A75Achlys\u00A7r> You are too cold for us to EM Wave Change.", 16);
@@ -96,7 +95,7 @@ function initModule(system) {
         result = (entity.getData("skyhighocs:dyn/battle_card") > 0 || entity.getData("skyhighocs:dyn/achlys_timer") < 1) && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1;
       };
       if (keyBind == "BATTLE_CARD_RESET") {
-        result = entity.isSneaking() && (entity.getData("skyhighocs:dyn/predation") && entity.getData("skyhighocs:dyn/selected_battle_card") > 0) && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1;
+        result = entity.isSneaking() && (entity.getData("skyhighocs:dyn/selected_battle_card") > 0 && entity.getData("skyhighocs:dyn/battle_card") > 0) && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1;
       };
       if (keyBind == "SYNCHRONIZE_WAVES") {
         result = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getData("skyhighocs:dyn/body_temperature") < 0.25 && entity.getData("skyhighocs:dyn/body_temperature") > -0.25);
@@ -108,7 +107,7 @@ function initModule(system) {
         result = entity.getData("fiskheroes:flight_timer") == 0 && ((entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && !entity.isSneaking()) || (entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getData("skyhighocs:dyn/body_temperature") < 0.25 && entity.getData("skyhighocs:dyn/body_temperature") > -0.25));
       };
       if (keyBind == "AIM") {
-        result = entity.getData("skyhighocs:dyn/achlys_timer") < 1 && !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighocs:dyn/battle_card") == 0 && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1;
+        result = ((entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/battle_card") == 0 && entity.getData("skyhighocs:dyn/achlys_timer") < 1) || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1;
       };
       if (keyBind == "COLD_TEMPERATURE") {
         result = entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getData("skyhighocs:dyn/body_temperature") <= -0.25;
@@ -117,13 +116,12 @@ function initModule(system) {
         result = entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getData("skyhighocs:dyn/body_temperature") >= 0.25;
       };
       if (keyBind == "ACHLYS_TOGGLE") {
-        result = entity.getData("fiskheroes:flight_timer") == 0 && entity.isSneaking() && entity.getData("skyhighocs:dyn/battle_card") == 0 && entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getData("skyhighocs:dyn/predation_timer") < 1;
+        result = entity.getData("fiskheroes:flight_timer") == 0 && entity.isSneaking() && entity.getData("skyhighocs:dyn/battle_card") == 0 && entity.getHeldItem().isEmpty() && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1;
       };
       return result;
     },
     isModifierEnabled: function (entity, modifier) {
       var uuid = "e51532a1-19fc-4d4f-9da0-f952c4645891";
-      var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
       var result = false;
       if (modifier.name() == "fiskheroes:transformation") {
         if (modifier.id() == "predation" || modifier.id() == "achlys") {
