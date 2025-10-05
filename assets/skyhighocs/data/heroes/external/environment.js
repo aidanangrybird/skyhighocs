@@ -12,8 +12,8 @@ function initModule(system) {
     system.moduleMessage(this, entity, (rains)?"<n>It can rain here.":"<n>It can not rain here.");
   };
   function getTemp(entity) {
-    var temperature = entity.world().getLocation(entity.pos()).getTemperature();
-    system.moduleMessage(this, entity, "<n>Temperature at this location: <nh>" + temperature + "<n>!");
+    var temperature = entity.world().getLocation(entity.pos()).getTemperature()*80.0;
+    system.moduleMessage(this, entity, "<n>Temperature at this location: <nh>" + temperature + " <n>F!");
   };
   return {
     name: "Environment",
