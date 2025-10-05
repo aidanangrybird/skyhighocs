@@ -450,11 +450,10 @@ function clamp(value, min, max) {
  * Initializes cyber system
  * @param {object} moduleList - cyber system modules
  * @param {string} name - Name of the cybernetic being
- * @param {string} normalName - Disguised name of cybernetic being
  * @param {string} colorCode - Color to set system thing to
  * @param {string} uuid - UUID of player to be bound to
  **/
-function initSystem(moduleList, name, normalName, colorCode, uuid) {
+function initSystem(moduleList, name, colorCode, uuid) {
   var cyberInstance = this;
   //Type 1 - commands (can have data management)
   /** @var type1Specs - Type 1 Specs */
@@ -511,8 +510,6 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
   var armHandlerIndexes = [];
   /** @var disarmHandlerIndexes - Indexes of disarming capable modules */
   var disarmHandlerIndexes = [];
-  /** @var disguisedName - disguised name */
-  var disguisedName = normalName;
   /** @var cyberModelID - cyber model name */
   var cyberModelID = formatModel(name) + "-" + colorCode;
   /** @var cyberName - cyber name */
@@ -1210,10 +1207,10 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
     };
     if (entity.getDataOrDefault("skyhighocs:dyn/system_init", false)) {
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
-        if (!((entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == cyberModelID) || entity.getData("fiskheroes:disguise") == disguisedName)) {
+        if (!((entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == cyberModelID) || entity.getData("fiskheroes:disguise") == null)) {
           if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
             manager.setData(entity, "skyhighocs:dyn/entry", entity.getData("fiskheroes:disguise"));
-            manager.setData(entity, "fiskheroes:disguise", disguisedName);
+            manager.setData(entity, "fiskheroes:disguise", null);
           } else {
             manager.setData(entity, "skyhighocs:dyn/entry", entity.getData("fiskheroes:disguise"));
             manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? cyberName : cyberModelID));
@@ -1353,8 +1350,8 @@ function initSystem(moduleList, name, normalName, colorCode, uuid) {
       if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") < 1) {
         manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? getAliasName(entity) : getModelID(entity)));
       };
-      if (typeof disguisedName === "string" && entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
-        manager.setData(entity, "fiskheroes:disguise", disguisedName);
+      if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
+        manager.setData(entity, "fiskheroes:disguise", null);
       };
       tickHandlerIndexes.forEach(index => {
         var module = modules[index];

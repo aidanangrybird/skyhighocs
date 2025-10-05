@@ -37,7 +37,7 @@ var cyberOS = cybernetics.initSystem([
   externalArms,
   suitDatastore,
   voiceSynthesizer,
-], "Cyber Flame", "FieryAceOfSpades", "4", uuid);
+], "Cyber Flame", "4", uuid);
 function init(hero) {
   cyberOS.initCybernetics(hero);
 };

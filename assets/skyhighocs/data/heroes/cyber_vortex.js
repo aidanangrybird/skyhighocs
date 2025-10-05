@@ -37,7 +37,7 @@ var cyberOS = cybernetics.initSystem([
   externalArms,
   suitDatastore,
   voiceSynthesizer,
-], "Cyber Vortex", "aidanangrybird", "6", uuid);
+], "Cyber Vortex", "6", uuid);
 function init(hero) {
   cyberOS.initCybernetics(hero);
 };

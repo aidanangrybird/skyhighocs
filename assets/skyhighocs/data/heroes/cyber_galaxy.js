@@ -37,7 +37,7 @@ var cyberOS = cybernetics.initSystem([
   externalArms,
   suitDatastore,
   voiceSynthesizer,
-], "Cyber Galaxy", "yelloww69", "3", uuid);
+], "Cyber Galaxy", "3", uuid);
 function init(hero) {
   cyberOS.initCybernetics(hero);
 };
