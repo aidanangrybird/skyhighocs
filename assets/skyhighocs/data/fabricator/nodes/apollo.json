@@ -9,7 +9,7 @@
     "death": {
       "trigger": "fiskheroes:player_killed",
       "description": {
-        "translate": "As OnesWife, die by collision with another player while both players are boost flying"
+        "translate": "As C_sp, die by collision with another player while both players are boost flying"
       },
       "condition": {
         "variables": {

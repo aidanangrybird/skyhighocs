@@ -9,7 +9,7 @@
     "chance": {
       "trigger": "fiskheroes:player_struck_by_lightning",
       "description": {
-        "translate": "Get struck by lightning as OnesWife"
+        "translate": "Get struck by lightning as C_sp"
       },
       "condition": {
         "variables": {
