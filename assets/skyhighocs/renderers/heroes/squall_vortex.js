@@ -151,10 +151,11 @@ function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
   if (renderLayer == "CHESTPLATE") {
     if ((entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("fiskheroes:mask_open_timer2") > 0) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
+      /*
       if (!parent.isChristmasSeason) {
-        //helmetWaveChangingLights.render();
-        //helmet.render();
-      };
+        helmetWaveChangingLights.render();
+        helmet.render();
+      };*/
       maskWaveChangingLights.render();
       mask.render();
     };
