@@ -73,7 +73,7 @@
         },
         "properties": {
           "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 80,
+          "HEAT_TRANSFER": 160,
           "LIGHTNING_STRIKE": 0.0,
           "HIT_COOLDOWN": 0
         }
@@ -102,7 +102,7 @@
         "properties": {
           "ADD_KNOCKBACK": 5.0,
           "COOK_ENTITY": true,
-          "HEAT_TRANSFER": 80,
+          "HEAT_TRANSFER": 160,
           "HIT_COOLDOWN": 10
         }
       },
@@ -128,7 +128,7 @@
         "properties": {
           "COOK_ENTITY": true,
           "HIT_COOLDOWN": 5,
-          "HEAT_TRANSFER": 80
+          "HEAT_TRANSFER": 160
         }
       },
       "chargeTime": 10,

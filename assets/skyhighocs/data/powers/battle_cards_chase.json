@@ -74,7 +74,7 @@
         "properties": {
           "COOK_ENTITY": false,
           "HIT_COOLDOWN": 5,
-          "HEAT_TRANSFER": 0
+          "HEAT_TRANSFER": -160
         }
       },
       "range": 64.0,
@@ -97,7 +97,8 @@
           "ELEMENT_AQUA": 1.0
         },
         "properties": {
-          "HIT_COOLDOWN": 5
+          "HIT_COOLDOWN": 5,
+          "HEAT_TRANSFER": -160
         }
       },
       "cooldownTime": 20,
@@ -120,7 +121,7 @@
         "properties": {
           "COOK_ENTITY": false,
           "HIT_COOLDOWN": 5,
-          "HEAT_TRANSFER": 0
+          "HEAT_TRANSFER": -160
         }
       },
       "chargeTime": 10,

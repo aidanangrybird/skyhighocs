@@ -101,7 +101,7 @@
           "LIGHTNING_STRIKE": 0.01,
           "ADD_KNOCKBACK": 5.0,
           "HIT_COOLDOWN": 10,
-          "HEAT_TRANSFER": 0
+          "HEAT_TRANSFER": -160
         }
       },
       "range": 128.0,
