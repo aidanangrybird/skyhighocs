@@ -109,6 +109,22 @@ function initModule(system) {
             manager.setBoolean(nbt, "holoSat", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoSat")));
             system.moduleMessage(this, entity, "<n>holoSat set to <nh>" + nbt.getBoolean("holoSat") + "<n>!");
             break;
+          case "xSat":
+            manager.setShort(nbt, "xSat", parseInt(argList[2]));
+            system.moduleMessage(this, entity, "<n>xSat set to <nh>" + nbt.getShort("xSat") + "<n>!");
+            break;
+          case "ySat":
+            manager.setShort(nbt, "ySat", parseInt(argList[2]));
+            system.moduleMessage(this, entity, "<n>ySat set to <nh>" + nbt.getShort("ySat") + "<n>!");
+            break;
+          case "zSat":
+            manager.setShort(nbt, "zSat", parseInt(argList[2]));
+            system.moduleMessage(this, entity, "<n>zSat set to <nh>" + nbt.getShort("zSat") + "<n>!");
+            break;
+          case "freq":
+            manager.setShort(nbt, "freq", parseInt(argList[2]));
+            system.moduleMessage(this, entity, "<n>freq set to <nh>" + nbt.getShort("freq") + "<n>!");
+            break;
           case "list":
             system.moduleMessage(this, entity, "<n>fightOrFlightDur: <nh>" + nbt.getShort("durationFightOrFlight"));
             system.moduleMessage(this, entity, "<n>fightOrFlightMin: <nh>" + nbt.getShort("minHealthFightOrFlight"));
@@ -134,6 +150,10 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>holoMouth: <nh>" + nbt.getBoolean("holoMouth"));
             system.moduleMessage(this, entity, "<n>holoAnt: <nh>" + nbt.getBoolean("holoAnt"));
             system.moduleMessage(this, entity, "<n>holoSat: <nh>" + nbt.getBoolean("holoSat"));
+            system.moduleMessage(this, entity, "<n>xSat: <nh>" + nbt.getShort("xSat"));
+            system.moduleMessage(this, entity, "<n>ySat: <nh>" + nbt.getShort("ySat"));
+            system.moduleMessage(this, entity, "<n>zSat: <nh>" + nbt.getShort("zSat"));
+            system.moduleMessage(this, entity, "<n>freq: <nh>" + nbt.getShort("freq"));
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Settings commands:");
@@ -162,6 +182,10 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!set holoMouth <true|false> <nh>-<n> Sets if hologram will have mouth deployed");
             system.moduleMessage(this, entity, "<n>!set holoAnt <true|false> <nh>-<n> Sets if hologram will have antenna deployed");
             system.moduleMessage(this, entity, "<n>!set holoSat <true|false> <nh>-<n> Sets if hologram will have satellite dish deployed");
+            system.moduleMessage(this, entity, "<n>!set xSat <number> <nh>-<n> Sets x coordinate of satellite");
+            system.moduleMessage(this, entity, "<n>!set ySat <number> <nh>-<n> Sets y coordinate of satellite");
+            system.moduleMessage(this, entity, "<n>!set zSat <number> <nh>-<n> Sets z coordinate of satellite");
+            system.moduleMessage(this, entity, "<n>!set freq <number> <nh>-<n> Sets freqency of antenna");
             system.moduleMessage(this, entity, "<n>!set help <nh>-<n> Shows this list");
             break;
           default:

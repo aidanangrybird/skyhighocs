@@ -3,11 +3,6 @@ var cybernetic_boosters = implement("skyhighocs:external/cybernetic_boosters");
 var cybernetic_beams = implement("skyhighocs:external/cybernetic_beams");
 var stuff = implement("skyhighocs:external/stuff");
 
-var locations = [
-  {"posX": 223.0, "posY": 75.0, "posZ": 398.0, "color": 0xFF8900},
-  {"posX": 212.5, "posY": 74.0, "posZ": 415.5, "color": 0xFF0000}
-]
-
 var blank_model;
 var metal_heat;
 var head_model;
@@ -26,7 +21,8 @@ var right_arm_camouflage_model;
 var left_leg_camouflage_model;
 var right_leg_camouflage_model;
 
-var transceive_beams;
+var satellite_beams;
+//var antenna_beams;
 var body_boosters;
 var left_arm_boosters;
 var right_arm_boosters;
@@ -78,11 +74,22 @@ function initEffects(renderer) {
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer") + cybernetics.getHoloBoolean(entity, "holoAnt"));
     data.load(6, entity.getInterpolatedData("skyhighocs:dyn/cannon_head_flush_timer"));
     data.load(7, entity.getInterpolatedData("skyhighocs:dyn/mouth_flush_timer"));
+    data.load(8, stuff.getBearing(entity));
+    data.load(9, entity.rotationInterpolated().y());
+    data.load(10, stuff.directionAngle(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
+    data.load(11, stuff.elevation(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("ySat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
+    data.load(12, entity.getInterpolatedData("skyhighocs:dyn/eye_left_lid_timer"));
+    data.load(13, entity.getInterpolatedData("skyhighocs:dyn/eye_right_lid_timer"));
+    data.load(14, entity.getInterpolatedData("skyhighocs:dyn/eye_left_X_timer"));
+    data.load(15, entity.getInterpolatedData("skyhighocs:dyn/eye_right_X_timer"));
+    data.load(16, entity.getInterpolatedData("skyhighocs:dyn/eye_left_Y_timer"));
+    data.load(17, entity.getInterpolatedData("skyhighocs:dyn/eye_right_Y_timer"));
   });
   head_model = renderer.createEffect("fiskheroes:model").setModel(head);
   head_model.anchor.set("head");
   head_model.setScale(1.0);
-  transceive_beams = cybernetics.initTransceiveBeams(renderer, head, getColor());
+  satellite_beams = cybernetics.initSatelliteBeams(renderer, head, getColor());
+  //antenna_beams = cybernetics.initAntennaBeams(renderer, head, getColor());
   cybernetic_beams.initHeadBeams(renderer, getColor());
   var head_hair = renderer.createResource("MODEL", "skyhighocs:CyberneticHeadL2");
   head_hair.texture.set("head_hair", "head_hair_lights");
@@ -95,6 +102,10 @@ function initEffects(renderer) {
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer") + cybernetics.getHoloBoolean(entity, "holoAnt"));
     data.load(6, entity.getInterpolatedData("skyhighocs:dyn/cannon_head_flush_timer"));
     data.load(7, entity.getInterpolatedData("skyhighocs:dyn/mouth_flush_timer"));
+    data.load(8, stuff.getBearing(entity));
+    data.load(9, entity.rotationInterpolated().y());
+    data.load(10, stuff.directionAngle(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
+    data.load(11, stuff.elevation(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("ySat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
   });
   head_hair_model = renderer.createEffect("fiskheroes:model").setModel(head_hair);
   head_hair_model.setOffset(0.0, 0.5, 0.0);
@@ -205,6 +216,16 @@ function initEffects(renderer) {
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer") + cybernetics.getHoloBoolean(entity, "holoAnt"));
     data.load(6, entity.getInterpolatedData("skyhighocs:dyn/cannon_head_flush_timer"));
     data.load(7, entity.getInterpolatedData("skyhighocs:dyn/mouth_flush_timer"));
+    data.load(8, stuff.getBearing(entity));
+    data.load(9, entity.rotationInterpolated().y());
+    data.load(10, stuff.directionAngle(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
+    data.load(11, stuff.elevation(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("ySat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
+    data.load(12, entity.getInterpolatedData("skyhighocs:dyn/eye_left_lid_timer"));
+    data.load(13, entity.getInterpolatedData("skyhighocs:dyn/eye_right_lid_timer"));
+    data.load(14, entity.getInterpolatedData("skyhighocs:dyn/eye_left_X_timer"));
+    data.load(15, entity.getInterpolatedData("skyhighocs:dyn/eye_right_X_timer"));
+    data.load(16, entity.getInterpolatedData("skyhighocs:dyn/eye_left_Y_timer"));
+    data.load(17, entity.getInterpolatedData("skyhighocs:dyn/eye_right_Y_timer"));
   });
   head_disguise_model = renderer.createEffect("fiskheroes:model").setModel(head_disguise);
   head_disguise_model.anchor.set("head");
@@ -220,6 +241,10 @@ function initEffects(renderer) {
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer") + cybernetics.getHoloBoolean(entity, "holoAnt"));
     data.load(6, entity.getInterpolatedData("skyhighocs:dyn/cannon_head_flush_timer"));
     data.load(7, entity.getInterpolatedData("skyhighocs:dyn/mouth_flush_timer"));
+    data.load(8, stuff.getBearing(entity));
+    data.load(9, entity.rotationInterpolated().y());
+    data.load(10, stuff.directionAngle(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
+    data.load(11, stuff.elevation(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("ySat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
   });
   head_hair_disguise_model = renderer.createEffect("fiskheroes:model").setModel(head_hair_disguise);
   head_hair_disguise_model.anchor.set("head");
@@ -320,6 +345,16 @@ function initEffects(renderer) {
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer") + cybernetics.getHoloBoolean(entity, "holoAnt"));
     data.load(6, entity.getInterpolatedData("skyhighocs:dyn/cannon_head_flush_timer"));
     data.load(7, entity.getInterpolatedData("skyhighocs:dyn/mouth_flush_timer"));
+    data.load(8, stuff.getBearing(entity));
+    data.load(9, entity.rotationInterpolated().y());
+    data.load(10, stuff.directionAngle(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
+    data.load(11, stuff.elevation(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("ySat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
+    data.load(12, entity.getInterpolatedData("skyhighocs:dyn/eye_left_lid_timer"));
+    data.load(13, entity.getInterpolatedData("skyhighocs:dyn/eye_right_lid_timer"));
+    data.load(14, entity.getInterpolatedData("skyhighocs:dyn/eye_left_X_timer"));
+    data.load(15, entity.getInterpolatedData("skyhighocs:dyn/eye_right_X_timer"));
+    data.load(16, entity.getInterpolatedData("skyhighocs:dyn/eye_left_Y_timer"));
+    data.load(17, entity.getInterpolatedData("skyhighocs:dyn/eye_right_Y_timer"));
   });
   head_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(head_camouflage);
   head_camouflage_model.anchor.set("head");
@@ -335,6 +370,10 @@ function initEffects(renderer) {
     data.load(5, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer") + cybernetics.getHoloBoolean(entity, "holoAnt"));
     data.load(6, entity.getInterpolatedData("skyhighocs:dyn/cannon_head_flush_timer"));
     data.load(7, entity.getInterpolatedData("skyhighocs:dyn/mouth_flush_timer"));
+    data.load(8, stuff.getBearing(entity));
+    data.load(9, entity.rotationInterpolated().y());
+    data.load(10, stuff.directionAngle(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
+    data.load(11, stuff.elevation(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("ySat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
   });
   head_hair_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(head_hair_camouflage);
   head_hair_camouflage_model.setOffset(0.0, 0.5, 0.0);
@@ -445,49 +484,41 @@ function initAnimations(renderer) {
 
 function render(entity, renderLayer, isFirstPersonArm) {
   var nbt = entity.getWornHelmet().nbt();
-  cybernetics.cybers.forEach(cyber => {
-    var id = entity.getWornHelmet().nbt().getInteger("id" + cyber);
-    if (id > -1) {
-      if (cybernetics.isStillCyber(entity, id)) {
-        var scannedCyber = entity.world().getEntityById(id);
-        var color = scannedCyber.getWornHelmet().nbt().getString("hudColorSkyHigh");
-        entityLocationBeam.render(isFirstPersonArm, entity, scannedCyber, color);
-      };
+  if (nbt.getInteger("hudRange") > 0) {
+    var entities = [];
+    if (nbt.getBoolean("hostilesOnHud") || nbt.getBoolean("friendliesOnHud") || nbt.getBoolean("playersOnHud")) {
+      entities = entity.world().getEntitiesInRangeOf(entity.pos(), nbt.getInteger("hudRange"));
     };
-  });
-  var entities = [];
-  if (nbt.getBoolean("hostilesOnHud") || nbt.getBoolean("friendliesOnHud") || nbt.getBoolean("playersOnHud")) {
-    entities = entity.world().getEntitiesInRangeOf(entity.pos(), nbt.getInteger("hudRange"));
-  };
-  if (entities.length > 0) {
-    entities.forEach(scannedEntity => {
-      if (scannedEntity.isAlive()) {
-        if (nbt.getBoolean("hostilesOnHud") && stuff.hostileEntities.indexOf(scannedEntity.getEntityName()) > -1) {
-          entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, 0x770000);
-        };
-        if (nbt.getBoolean("friendliesOnHud") && stuff.friendlyEntities.indexOf(scannedEntity.getEntityName()) > -1) {
-          entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, 0x007700);
-        };
-        if (nbt.getBoolean("playersOnHud") && entity.getUUID() != scannedEntity.getUUID() && scannedEntity.is("PLAYER") && !entity.getData("fiskheroes:invisible")) {
-          var color = 0x000077;
-          if (scannedEntity.isWearingFullSuit()) {
-            if (scannedEntity.getWornHelmet().nbt().hasKey("hudColorSkyHigh")) {
-              color = scannedEntity.getWornHelmet().nbt().getString("hudColorSkyHigh");
-            };
-            if (scannedEntity.getWornChestplate().nbt().hasKey("hudColorSkyHigh")) {
-              color = scannedEntity.getWornChestplate().nbt().getString("hudColorSkyHigh");
-            };
-            if (scannedEntity.getWornLeggings().nbt().hasKey("hudColorSkyHigh")) {
-              color = scannedEntity.getWornLeggings().nbt().getString("hudColorSkyHigh");
-            };
-            if (scannedEntity.getWornBoots().nbt().hasKey("hudColorSkyHigh")) {
-              color = scannedEntity.getWornBoots().nbt().getString("hudColorSkyHigh");
-            };
+    if (entities.length > 0) {
+      entities.forEach(scannedEntity => {
+        if (scannedEntity.isAlive()) {
+          if (nbt.getBoolean("hostilesOnHud") && stuff.hostileEntities.indexOf(scannedEntity.getEntityName()) > -1) {
+            entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, 0x770000);
           };
-          entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, color);
+          if (nbt.getBoolean("friendliesOnHud") && stuff.friendlyEntities.indexOf(scannedEntity.getEntityName()) > -1) {
+            entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, 0x007700);
+          };
+          if (nbt.getBoolean("playersOnHud") && entity.getUUID() != scannedEntity.getUUID() && scannedEntity.is("PLAYER") && !entity.getData("fiskheroes:invisible")) {
+            var color = 0x000077;
+            if (scannedEntity.isWearingFullSuit()) {
+              if (scannedEntity.getWornHelmet().nbt().hasKey("hudColorSkyHigh")) {
+                color = scannedEntity.getWornHelmet().nbt().getString("hudColorSkyHigh");
+              };
+              if (scannedEntity.getWornChestplate().nbt().hasKey("hudColorSkyHigh")) {
+                color = scannedEntity.getWornChestplate().nbt().getString("hudColorSkyHigh");
+              };
+              if (scannedEntity.getWornLeggings().nbt().hasKey("hudColorSkyHigh")) {
+                color = scannedEntity.getWornLeggings().nbt().getString("hudColorSkyHigh");
+              };
+              if (scannedEntity.getWornBoots().nbt().hasKey("hudColorSkyHigh")) {
+                color = scannedEntity.getWornBoots().nbt().getString("hudColorSkyHigh");
+              };
+            };
+            entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, color);
+          };
         };
-      };
-    });
+      });
+    };
   };
   /* locations.forEach(locationThing => {
     locationBeam.render(isFirstPersonArm, entity, locationThing["posX"], locationThing["posY"], locationThing["posZ"], locationThing["color"])
@@ -547,7 +578,8 @@ function render(entity, renderLayer, isFirstPersonArm) {
       right_leg_disguise_model.render();
     };
 
-    transceive_beams.render(entity, renderLayer, isFirstPersonArm);
+    satellite_beams.render(entity, isFirstPersonArm);
+    //antenna_beams.render(entity, isFirstPersonArm);
     body_boosters.render(entity, renderLayer, isFirstPersonArm);
     left_arm_boosters.render(entity, renderLayer, isFirstPersonArm);
     right_arm_boosters.render(entity, renderLayer, isFirstPersonArm);

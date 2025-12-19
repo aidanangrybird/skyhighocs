@@ -18,6 +18,7 @@ var wings = implement("skyhighocs:external/wings");
 var externalArms = implement("skyhighocs:external/external_arms");
 var suitDatastore = implement("skyhighocs:external/suit_datastore");
 var voiceSynthesizer = implement("skyhighocs:external/voice_synthesizer");
+var cyberneticEyes = implement("skyhighocs:external/cybernetic_eyes");
 var cyberOS = cybernetics.initSystem([
   settings,
   messaging,
@@ -37,6 +38,7 @@ var cyberOS = cybernetics.initSystem([
   externalArms,
   suitDatastore,
   voiceSynthesizer,
+  cyberneticEyes,
 ], "Cyber Vortex", "6", uuid);
 function init(hero) {
   cyberOS.initCybernetics(hero);

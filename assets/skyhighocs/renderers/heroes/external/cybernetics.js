@@ -214,7 +214,7 @@ function initTentacles(renderer, model) {
   tentacles.segments = 16;
 };
 
-function initTransceiveBeams(renderer, model, color) {
+function initSatelliteBeams(renderer, model, color) {
   var receiveBase = model.getCubeOffset("head_satellite_dish_base");
   var transmitBase = model.getCubeOffset("head_satellite_dish_antenna");
 
@@ -237,43 +237,78 @@ function initTransceiveBeams(renderer, model, color) {
   receiveBeam.color.set(color);
   
   return {
-    render: function (entity, renderLayer, isFirstPersonArm) {
+    render: function (entity, isFirstPersonArm) {
+      var vector = PackLoader.asVec3(entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("ySat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5);
+      var transmitTimer = entity.getInterpolatedData("skyhighocs:dyn/transmit_beam_timer");
+      var receiveTimer = entity.getInterpolatedData("skyhighocs:dyn/receive_beam_timer");
+      var factor = entity.eyePos().add(0, 1, 0).distanceTo(vector);
+      receiveLine.start.y = factor+0.375;
+      receiveLine.end.y = factor+0.375;
+      transmitLine.end.y = transmitLine.start.y+factor*transmitTimer;
+      receiveLine.end.y = receiveLine.start.y-factor*receiveTimer;
       if (!isFirstPersonArm) {
-        var transmitTimer = entity.getInterpolatedData("skyhighocs:dyn/transmit_beam_timer");
-        var receiveTimer = entity.getInterpolatedData("skyhighocs:dyn/receive_beam_timer");
-        transmitLine.end.y = transmitLine.start.y+300*transmitTimer;
-        receiveLine.end.y = receiveLine.start.y-300*receiveTimer;
-        if (transmitTimer > 0) {
-          transmitBeam.render();
-        };
-        if (receiveTimer > 0) {
-          receiveBeam.render();
+        if (entity.world().isUnobstructed(entity.eyePos().add(0, 1, 0), vector) && entity.getData("skyhighocs:dyn/satellite")) {
+          if (transmitTimer > 0) {
+            transmitBeam.render();
+          };
+          if (receiveTimer > 0) {
+            receiveBeam.render();
+          };
         };
       };
     }
   };
 };
 
-/**
- * Gets direction from one vector to another
- * @param {JSVector3} base - Base vector
- * @param {JSVector3} other - Vector to measure to
- * @returns Direction
- **/
-function direction(base, other) {
-  var angle = (((Math.atan2(-1*(other.z()-base.z()), -1*(other.x()-base.x())) * 180) / Math.PI) + 270) % 360;
-  var direction = angleToDirection(angle);
-  return direction;
-};
+function initAntennaBeams(renderer, model, color) {
+  var receiveBase = model.getCubeOffset("head_antenna_upper");
+  var transmitBase = model.getCubeOffset("head_antenna_upper");
 
-/**
- * clamp as in FSK
- * @param timer - input timer
- * @param min - minimum value
- * @param max - maximum
- **/
-function clamp(timer, min, max) {
-  return Math.min(Math.max(timer, min), max);
+  var transmitBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:cybernetic_transmit");
+  var transmitShape = renderer.createResource("SHAPE", null);
+  var transmitLine = transmitShape.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.5, 0.5] });
+  var transmitBeam = renderer.createEffect("fiskheroes:lines").setRenderer(transmitBeamRenderer).setShape(transmitShape).setOffset(0.0, -6.0, 0.0);
+  transmitBeam.mirror = false;
+  transmitBeam.setScale(16.0);
+  transmitBeam.anchor.set("head", transmitBase);
+  transmitBeam.color.set(color);
+
+  var receiveBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:cybernetic_receive");
+  var receiveShape = renderer.createResource("SHAPE", null);
+  var receiveLine = receiveShape.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.75, 0.75] });
+  var receiveBeam = renderer.createEffect("fiskheroes:lines").setRenderer(receiveBeamRenderer).setShape(receiveShape).setOffset(0.0, -6.0, 0.0);
+  receiveBeam.mirror = false;
+  receiveBeam.setScale(16.0);
+  receiveBeam.anchor.set("head", receiveBase);
+  receiveBeam.color.set(color);
+  
+  return {
+    render: function (entity, isFirstPersonArm) {
+      if (!isFirstPersonArm) {
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 6);
+        entities.forEach(otherEntity => {
+          var otherVector = otherEntity.eyePos().add(crossProduct(PackLoader.asVec3(0, 1, 0), otherEntity.getLookVector()));
+          var factor = entity.eyePos().add(0, 1, 0).distanceTo(otherVector);
+          receiveLine.start.y = factor;
+          receiveLine.end.y = factor;
+          transmitLine.end.y = transmitLine.start.y+factor;
+          receiveLine.end.y = receiveLine.start.y-factor;
+          var otherPitch = elevation(entity, otherVector.x(), otherVector.y(), otherVector.z());
+          var otherYaw = directionAngle(entity, otherVector.x(), otherVector.z());
+          transmitBeam.setRotation(-1*otherPitch, 0, entity.rotationInterpolated().x()-otherYaw);
+          receiveBeam.setRotation(-1*otherPitch, 0, entity.rotationInterpolated().x()-otherYaw);
+          if (factor > 0 && entity.getData("skyhighocs:dyn/antenna_timer") == 1) {
+            transmitBeam.render();
+            receiveBeam.render();
+          };
+          /* if (hasCyberneticBody(otherEntity) && checkFrequency(entity, otherEntity)) {
+            if (entity.world().isUnobstructed(entity.eyePos().add(0, 1, 0), otherEntity.eyePos().add(0, 1, 0)) && entity.getData("skyhighocs:dyn/antenna") && otherEntity.getData("skyhighocs:dyn/antenna")) {
+            };
+          }; */
+        });
+      };
+    }
+  };
 };
 
 /**
@@ -306,15 +341,6 @@ function hasCyberneticBody(entity) {
   return entity.getWornHelmet().nbt().hasKey("cyberModelID") && entity.getWornHelmet().nbt().getString("cyberAliasName");
 };
 
-var cybers = [
-  "CF-4",
-  "CV-6",
-  "CA-4",
-  "CG-3",
-  "CN-2",
-  "CS-5"
-];
-
 /**
  * Checks a NBT boolean to be used on holographic display stand
  * @param {JSEntity} entity - required
@@ -334,4 +360,40 @@ function getHoloBoolean(entity, value) {
  **/
 function getHoloBooleans(entity, condition, value) {
   return entity.is("DISPLAY") && entity.getWornHelmet().nbt().getBoolean(condition) && entity.getWornHelmet().nbt().getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+};
+
+function checkFrequency(entity, otherEntity) {
+  var nbt = entity.getWornHelmet().nbt();
+  var nbtOther = otherEntity.getWornHelmet().nbt()
+  if (nbt.getShort("freq") == nbtOther.getShort("freq")) {
+    return true;
+  } else {
+    return false;
+  };
+};
+
+function elevation(entity, posX, posY, posZ) {
+  var distance = entity.pos().xz().distanceTo(posX, posZ);
+  var vector = PackLoader.asVec2(0, entity.pos().y());
+  var angle = 90-vector.angleTo(distance, posY);
+  return angle;
+};
+
+/**
+ * Gets direction from one vector to another
+ * @param {JSVector3} base - Base vector
+ * @param {JSVector3} other - Vector to measure to
+ * @returns Direction
+ **/
+function directionAngle(entity, posX, posZ) {
+  var angle = (entity.eyePos().add(0,1,0).xz().angleTo(posX, posZ) + 90);
+  return angle;
+};
+
+function crossProduct(vector, otherVector) {
+  var i = (vector.y()*otherVector.z()-vector.z()*otherVector.y());
+  var j = (vector.z()*otherVector.x()-vector.x()*otherVector.z());
+  var k = (vector.x()*otherVector.y()-vector.y()*otherVector.x());
+  var finalVector = PackLoader.asVec3(i,j,k);
+  return finalVector;
 };
