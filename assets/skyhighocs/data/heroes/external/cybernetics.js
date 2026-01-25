@@ -1090,7 +1090,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
       if (!entity.getWornHelmet().nbt().hasKey("disabledModules")) {
         var disabledModules = manager.newTagList();
         manager.appendString(disabledModules, moduleName);
-        manager.setTagList(nbt, "disabledModules", disabledModules);
+        manager.setTagList(entity.getWornHelmet().nbt(), "disabledModules", disabledModules);
         systemMessage(entity, "<s>Module <sh>" + moduleName + "<s> disabled!");
       } else {
         var disabledModules = entity.getWornHelmet().nbt().getStringList("disabledModules");
