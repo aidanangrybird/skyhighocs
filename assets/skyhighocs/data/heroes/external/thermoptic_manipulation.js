@@ -99,11 +99,11 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!thermo help <nh>-<n> Shows thermoptics commands");
             break;
           default:
-            system.moduleMessage(this, entity, "<e>Unknown <eh>disguise<e> command! Try <eh>!thermo help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>thermo<e> command! Try <eh>!thermo help<e> for a list of commands!");
             break;
         };
       } else {
-        system.moduleMessage(this, entity, "<e>Unknown <eh>disguise<e> command! Try <eh>!thermo help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>thermo<e> command! Try <eh>!thermo help<e> for a list of commands!");
       };
     },
     isModifierEnabled: function (entity, modifier) {
