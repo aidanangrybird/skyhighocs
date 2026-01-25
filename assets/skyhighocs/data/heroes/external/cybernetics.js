@@ -103,10 +103,11 @@ function formatAlias(input) {
 };
 
 function assignID(entity, manager) {
-  if (!entity.getWornHelmet().nbt().hasKey("computerID")) {
+  var nbt = entity.getWornHelmet().nbt();
+  if (!nbt.hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
       var computerID = Math.random().toFixed(8).toString().substring(2);
-      manager.setString(entity.getWornHelmet().nbt(), "computerID", computerID);
+      manager.setString(nbt, "computerID", computerID);
     };
   };
 };
@@ -519,43 +520,45 @@ function clamp(value, min, max) {
 };
 
 function cycleUp(entity, manager) {
-  if (entity.getData("skyhighocs:dyn/selected_side") == 0) {
-    manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_left", entity.getData("skyhighocs:dyn/selected_module_left") + 1);
-    if (entity.getData("skyhighocs:dyn/selected_module_left") > 3) {
-      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_left", 0);
+  var nbt = entity.getWornHelmet().nbt();
+  if (nbt.getInteger("hudSelectedSide") == 0) {
+    manager.setInteger(nbt, "hudLeftSide", nbt.getInteger("hudLeftSide") + 1);
+    if (nbt.getInteger("hudLeftSide") > 3) {
+      manager.setInteger(nbt, "hudLeftSide", 0);
     };
   };
-  if (entity.getData("skyhighocs:dyn/selected_side") == 1) {
-    manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_top", entity.getData("skyhighocs:dyn/selected_module_top") + 1);
-    if (entity.getData("skyhighocs:dyn/selected_module_top") > 2) {
-      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_top", 0);
+  if (nbt.getInteger("hudSelectedSide") == 1) {
+    manager.setInteger(nbt, "hudTopSide", nbt.getInteger("hudTopSide") + 1);
+    if (nbt.getInteger("hudTopSide") > 2) {
+      manager.setInteger(nbt, "hudTopSide", 0);
     };
   };
-  if (entity.getData("skyhighocs:dyn/selected_side") == 2) {
-    manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_right", entity.getData("skyhighocs:dyn/selected_module_right") + 1);
-    if (entity.getData("skyhighocs:dyn/selected_module_right") > 2) {
-      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_right", 0);
+  if (nbt.getInteger("hudSelectedSide") == 2) {
+    manager.setInteger(nbt, "hudRightSide", nbt.getInteger("hudRightSide") + 1);
+    if (nbt.getInteger("hudRightSide") > 2) {
+      manager.setInteger(nbt, "hudRightSide", 0);
     };
   };
 };
 
 function cycleDown(entity, manager) {
-  if (entity.getData("skyhighocs:dyn/selected_side") == 0) {
-    manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_left", entity.getData("skyhighocs:dyn/selected_module_left") - 1);
-    if (entity.getData("skyhighocs:dyn/selected_module_left") < 0) {
-      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_left", 3);
+  var nbt = entity.getWornHelmet().nbt();
+  if (nbt.getInteger("hudSelectedSide") == 0) {
+    manager.setInteger(nbt, "hudLeftSide", nbt.getInteger("hudLeftSide") - 1);
+    if (nbt.getInteger("hudLeftSide") < 0) {
+      manager.setInteger(nbt, "hudLeftSide", 3);
     };
   };
-  if (entity.getData("skyhighocs:dyn/selected_side") == 1) {
-    manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_top", entity.getData("skyhighocs:dyn/selected_module_top") - 1);
-    if (entity.getData("skyhighocs:dyn/selected_module_top") < 0) {
-      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_top", 2);
+  if (nbt.getInteger("hudSelectedSide") == 1) {
+    manager.setInteger(nbt, "hudTopSide", nbt.getInteger("hudTopSide") - 1);
+    if (nbt.getInteger("hudTopSide") < 0) {
+      manager.setInteger(nbt, "hudTopSide", 2);
     };
   };
-  if (entity.getData("skyhighocs:dyn/selected_side") == 2) {
-    manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_right", entity.getData("skyhighocs:dyn/selected_module_right") - 1);
-    if (entity.getData("skyhighocs:dyn/selected_module_right") < 0) {
-      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_right", 2);
+  if (nbt.getInteger("hudSelectedSide") == 2) {
+    manager.setInteger(nbt, "hudRightSide", nbt.getInteger("hudRightSide") - 1);
+    if (nbt.getInteger("hudRightSide") < 0) {
+      manager.setInteger(nbt, "hudRightSide", 2);
     };
   };
 };
@@ -1088,7 +1091,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
       if (!entity.getWornHelmet().nbt().hasKey("disabledModules")) {
         var disabledModules = manager.newTagList();
         manager.appendString(disabledModules, moduleName);
-        manager.setTagList(entity.getWornHelmet().nbt(), "disabledModules", disabledModules);
+        manager.setTagList(nbt, "disabledModules", disabledModules);
         systemMessage(entity, "<s>Module <sh>" + moduleName + "<s> disabled!");
       } else {
         var disabledModules = entity.getWornHelmet().nbt().getStringList("disabledModules");
@@ -1356,47 +1359,48 @@ function initSystem(moduleList, name, colorCode, uuid) {
     };
   };
   function tickHandler(entity, manager) {
+    var nbt = entity.getWornHelmet().nbt();
     if ((!entity.getDataOrDefault("skyhighocs:dyn/system_init", true))) {
-      manager.setString(entity.getWornHelmet().nbt(), "cyberModelID", cyberModelID);
-      manager.setString(entity.getWornHelmet().nbt(), "cyberAliasName", cyberName);
-      manager.setString(entity.getWornHelmet().nbt(), "boundUUID", boundUUID);
-      manager.setBoolean(entity.getWornHelmet().nbt(), "Unbreakable", true);
+      manager.setString(nbt, "cyberModelID", cyberModelID);
+      manager.setString(nbt, "cyberAliasName", cyberName);
+      manager.setString(nbt, "boundUUID", boundUUID);
+      manager.setBoolean(nbt, "Unbreakable", true);
       assignID(entity, manager);
       if (!entity.getWornHelmet().nbt().hasKey("durationFightOrFlight")) {
-        manager.setShort(entity.getWornHelmet().nbt(), "durationFightOrFlight", 20);
+        manager.setShort(nbt, "durationFightOrFlight", 20);
       };
       if (!entity.getWornHelmet().nbt().hasKey("minHealthFightOrFlight")) {
-        manager.setShort(entity.getWornHelmet().nbt(), "minHealthFightOrFlight", 5);
+        manager.setShort(nbt, "minHealthFightOrFlight", 5);
       };
       if (!entity.getWornHelmet().nbt().hasKey("hudRange")) {
-        manager.setShort(entity.getWornHelmet().nbt(), "hudRange", 0);
+        manager.setShort(nbt, "hudRange", 0);
       };
       if (!entity.getWornHelmet().nbt().hasKey("hostilesOnHud")) {
-        manager.setBoolean(entity.getWornHelmet().nbt(), "hostilesOnHud", true);
+        manager.setBoolean(nbt, "hostilesOnHud", true);
       };
       if (!entity.getWornHelmet().nbt().hasKey("friendliesOnHud")) {
-        manager.setBoolean(entity.getWornHelmet().nbt(), "friendliesOnHud", true);
+        manager.setBoolean(nbt, "friendliesOnHud", true);
       };
       if (!entity.getWornHelmet().nbt().hasKey("playersOnHud")) {
-        manager.setBoolean(entity.getWornHelmet().nbt(), "playersOnHud", true);
+        manager.setBoolean(nbt, "playersOnHud", true);
       };
       if (!entity.getWornHelmet().nbt().hasKey("xSat")) {
-        manager.setShort(entity.getWornHelmet().nbt(), "xSat", 0);
+        manager.setShort(nbt, "xSat", 0);
       };
       if (!entity.getWornHelmet().nbt().hasKey("ySat")) {
-        manager.setShort(entity.getWornHelmet().nbt(), "ySat", 1000);
+        manager.setShort(nbt, "ySat", 1000);
       };
       if (!entity.getWornHelmet().nbt().hasKey("zSat")) {
-        manager.setShort(entity.getWornHelmet().nbt(), "zSat", 0);
+        manager.setShort(nbt, "zSat", 0);
       };
       if (!entity.getWornHelmet().nbt().hasKey("freq")) {
-        manager.setShort(entity.getWornHelmet().nbt(), "freq", 100);
+        manager.setShort(nbt, "freq", 100);
       };
       if (!entity.getWornHelmet().nbt().hasKey("hudScale")) {
-        manager.setFloat(entity.getWornHelmet().nbt(), "hudScale", 1.0);
+        manager.setFloat(nbt, "hudScale", 1.0);
       };
       var hexColor = hexColors[getModelID(entity)];
-      manager.setString(entity.getWornHelmet().nbt(), "hudColorSkyHigh", hexColor);
+      manager.setString(nbt, "hudColorSkyHigh", hexColor);
       if (entity.getUUID() == boundUUID) {
         systemMessage(entity, "<n>Hello <nh>" + getModelID(entity) + "<n> AKA <nh>" + getAliasName(entity) + "<n>!");
       } else {
@@ -1436,7 +1440,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
             manager.setData(entity, "fiskheroes:disguise", null);
           } else {
             manager.setData(entity, "skyhighocs:dyn/entry", entity.getData("fiskheroes:disguise"));
-            manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? cyberName : cyberModelID));
+            manager.setData(entity, "fiskheroes:disguise", ((nbt.getBoolean("aliasActive")) ? cyberName : cyberModelID));
           };
           manager.setData(entity, "fiskheroes:shape_shifting_to", null);
           manager.setData(entity, "fiskheroes:shape_shifting_from", null);
@@ -1489,13 +1493,13 @@ function initSystem(moduleList, name, colorCode, uuid) {
                 entity.as("PLAYER").addChatMessage(entity.getDataOrDefault("skyhighocs:dyn/" + args[1], 0));
                 break;
               case "nbtStringList":
-                entity.as("PLAYER").addChatMessage(entity.getWornHelmet().nbt().getStringList(args[1]));
+                entity.as("PLAYER").addChatMessage(nbt.getStringList(args[1]));
                 break;
               case "nbtInt":
-                entity.as("PLAYER").addChatMessage(entity.getWornHelmet().nbt().getInteger(args[1]));
+                entity.as("PLAYER").addChatMessage(nbt.getInteger(args[1]));
                 break;
               case "nbtShort":
-                entity.as("PLAYER").addChatMessage(entity.getWornHelmet().nbt().getShort(args[1]));
+                entity.as("PLAYER").addChatMessage(nbt.getShort(args[1]));
                 break;
               case "chatMode":
                 switchChatModes(entity, manager, args[1]);
@@ -1504,7 +1508,6 @@ function initSystem(moduleList, name, colorCode, uuid) {
                 switchChats(entity, manager, args[1]);
                 break;
               case "arm":
-                var nbt = entity.getWornHelmet().nbt();
                 if (args[1] == "*") {
                   manager.setBoolean(nbt, "rocketsAux", true);
                   manager.setBoolean(nbt, "rocketsBody", true);
@@ -1528,7 +1531,6 @@ function initSystem(moduleList, name, colorCode, uuid) {
                 };
                 break;
               case "disarm":
-                var nbt = entity.getWornHelmet().nbt();
                 if (args[1] == "*") {
                   manager.setBoolean(nbt, "rocketsAux", false);
                   manager.setBoolean(nbt, "rocketsBody", false);
@@ -1571,7 +1573,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
         };
       };
       if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") < 1) {
-        manager.setData(entity, "fiskheroes:disguise", ((entity.getWornHelmet().nbt().getBoolean("aliasActive")) ? getAliasName(entity) : getModelID(entity)));
+        manager.setData(entity, "fiskheroes:disguise", ((nbt.getBoolean("aliasActive")) ? getAliasName(entity) : getModelID(entity)));
       };
       if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
         manager.setData(entity, "fiskheroes:disguise", null);
@@ -1604,49 +1606,49 @@ function initSystem(moduleList, name, colorCode, uuid) {
     };
     //Eyes
     //Lid
-    if ((entity.getWornHelmet().nbt().getShort("eyeLeftLid")/100.0) == round(entity.getData("skyhighocs:dyn/eye_left_lid_timer"))) {
+    if ((nbt.getShort("eyeLeftLid")/100.0) == round(entity.getData("skyhighocs:dyn/eye_left_lid_timer"))) {
       manager.setInterpolatedData(entity, "skyhighocs:dyn/prev_eye_left_lid_timer", round(entity.getData("skyhighocs:dyn/eye_left_lid_timer")));
     };
-    if ((entity.getWornHelmet().nbt().getShort("eyeLeftLid")/100.0) != round(entity.getData("skyhighocs:dyn/eye_left_lid_timer"))) {
-      var diff = Math.ceil(((entity.getWornHelmet().nbt().getShort("eyeLeftLid")/100.0) - entity.getData("skyhighocs:dyn/prev_eye_left_lid_timer"))*100.0)/2000.0;
-      manager.setInterpolatedData(entity, "skyhighocs:dyn/eye_left_lid_timer", clamp((round(entity.getData("skyhighocs:dyn/eye_left_lid_timer")) + round(diff)), Math.min((entity.getWornHelmet().nbt().getShort("eyeLeftLid")/100.0), entity.getData("skyhighocs:dyn/prev_eye_left_lid_timer")), Math.max((entity.getWornHelmet().nbt().getShort("eyeLeftLid")/100.0), entity.getData("skyhighocs:dyn/prev_eye_left_lid_timer"))));
+    if ((nbt.getShort("eyeLeftLid")/100.0) != round(entity.getData("skyhighocs:dyn/eye_left_lid_timer"))) {
+      var diff = Math.ceil(((nbt.getShort("eyeLeftLid")/100.0) - entity.getData("skyhighocs:dyn/prev_eye_left_lid_timer"))*100.0)/2000.0;
+      manager.setInterpolatedData(entity, "skyhighocs:dyn/eye_left_lid_timer", clamp((round(entity.getData("skyhighocs:dyn/eye_left_lid_timer")) + round(diff)), Math.min((nbt.getShort("eyeLeftLid")/100.0), entity.getData("skyhighocs:dyn/prev_eye_left_lid_timer")), Math.max((nbt.getShort("eyeLeftLid")/100.0), entity.getData("skyhighocs:dyn/prev_eye_left_lid_timer"))));
     };
-    if ((entity.getWornHelmet().nbt().getShort("eyeRightLid")/100.0) == round(entity.getData("skyhighocs:dyn/eye_right_lid_timer"))) {
+    if ((nbt.getShort("eyeRightLid")/100.0) == round(entity.getData("skyhighocs:dyn/eye_right_lid_timer"))) {
       manager.setInterpolatedData(entity, "skyhighocs:dyn/prev_eye_right_lid_timer", round(entity.getData("skyhighocs:dyn/eye_right_lid_timer")));
     };
-    if ((entity.getWornHelmet().nbt().getShort("eyeRightLid")/100.0) != round(entity.getData("skyhighocs:dyn/eye_right_lid_timer"))) {
-      var diff = Math.ceil(((entity.getWornHelmet().nbt().getShort("eyeRightLid")/100.0) - entity.getData("skyhighocs:dyn/prev_eye_right_lid_timer"))*100.0)/2000.0;
-      manager.setInterpolatedData(entity, "skyhighocs:dyn/eye_right_lid_timer", clamp((round(entity.getData("skyhighocs:dyn/eye_right_lid_timer")) + round(diff)), Math.min((entity.getWornHelmet().nbt().getShort("eyeRightLid")/100.0), entity.getData("skyhighocs:dyn/prev_eye_right_lid_timer")), Math.max((entity.getWornHelmet().nbt().getShort("eyeRightLid")/100.0), entity.getData("skyhighocs:dyn/prev_eye_right_lid_timer"))));
+    if ((nbt.getShort("eyeRightLid")/100.0) != round(entity.getData("skyhighocs:dyn/eye_right_lid_timer"))) {
+      var diff = Math.ceil(((nbt.getShort("eyeRightLid")/100.0) - entity.getData("skyhighocs:dyn/prev_eye_right_lid_timer"))*100.0)/2000.0;
+      manager.setInterpolatedData(entity, "skyhighocs:dyn/eye_right_lid_timer", clamp((round(entity.getData("skyhighocs:dyn/eye_right_lid_timer")) + round(diff)), Math.min((nbt.getShort("eyeRightLid")/100.0), entity.getData("skyhighocs:dyn/prev_eye_right_lid_timer")), Math.max((nbt.getShort("eyeRightLid")/100.0), entity.getData("skyhighocs:dyn/prev_eye_right_lid_timer"))));
     };
     //X
-    if ((entity.getWornHelmet().nbt().getShort("eyeLeftX")/100.0) == round(entity.getData("skyhighocs:dyn/eye_left_X_timer"))) {
+    if ((nbt.getShort("eyeLeftX")/100.0) == round(entity.getData("skyhighocs:dyn/eye_left_X_timer"))) {
       manager.setInterpolatedData(entity, "skyhighocs:dyn/prev_eye_left_X_timer", round(entity.getData("skyhighocs:dyn/eye_left_X_timer")));
     };
-    if ((entity.getWornHelmet().nbt().getShort("eyeLeftX")/100.0) != round(entity.getData("skyhighocs:dyn/eye_left_X_timer"))) {
-      var diff = Math.ceil(((entity.getWornHelmet().nbt().getShort("eyeLeftX")/100.0) - entity.getData("skyhighocs:dyn/prev_eye_left_X_timer"))*100.0)/2000.0;
-      manager.setInterpolatedData(entity, "skyhighocs:dyn/eye_left_X_timer", clamp((round(entity.getData("skyhighocs:dyn/eye_left_X_timer")) + round(diff)), Math.min((entity.getWornHelmet().nbt().getShort("eyeLeftX")/100.0), entity.getData("skyhighocs:dyn/prev_eye_left_X_timer")), Math.max((entity.getWornHelmet().nbt().getShort("eyeLeftX")/100.0), entity.getData("skyhighocs:dyn/prev_eye_left_X_timer"))));
+    if ((nbt.getShort("eyeLeftX")/100.0) != round(entity.getData("skyhighocs:dyn/eye_left_X_timer"))) {
+      var diff = Math.ceil(((nbt.getShort("eyeLeftX")/100.0) - entity.getData("skyhighocs:dyn/prev_eye_left_X_timer"))*100.0)/2000.0;
+      manager.setInterpolatedData(entity, "skyhighocs:dyn/eye_left_X_timer", clamp((round(entity.getData("skyhighocs:dyn/eye_left_X_timer")) + round(diff)), Math.min((nbt.getShort("eyeLeftX")/100.0), entity.getData("skyhighocs:dyn/prev_eye_left_X_timer")), Math.max((nbt.getShort("eyeLeftX")/100.0), entity.getData("skyhighocs:dyn/prev_eye_left_X_timer"))));
     };
-    if ((entity.getWornHelmet().nbt().getShort("eyeRightX")/100.0) == round(entity.getData("skyhighocs:dyn/eye_right_X_timer"))) {
+    if ((nbt.getShort("eyeRightX")/100.0) == round(entity.getData("skyhighocs:dyn/eye_right_X_timer"))) {
       manager.setInterpolatedData(entity, "skyhighocs:dyn/prev_eye_right_X_timer", round(entity.getData("skyhighocs:dyn/eye_right_X_timer")));
     };
-    if ((entity.getWornHelmet().nbt().getShort("eyeRightX")/100.0) != round(entity.getData("skyhighocs:dyn/eye_right_X_timer"))) {
-      var diff = Math.ceil(((entity.getWornHelmet().nbt().getShort("eyeRightX")/100.0) - entity.getData("skyhighocs:dyn/prev_eye_right_X_timer"))*100.0)/2000.0;
-      manager.setInterpolatedData(entity, "skyhighocs:dyn/eye_right_X_timer", clamp((round(entity.getData("skyhighocs:dyn/eye_right_X_timer")) + round(diff)), Math.min((entity.getWornHelmet().nbt().getShort("eyeRightX")/100.0), entity.getData("skyhighocs:dyn/prev_eye_right_X_timer")), Math.max((entity.getWornHelmet().nbt().getShort("eyeRightX")/100.0), entity.getData("skyhighocs:dyn/prev_eye_right_X_timer"))));
+    if ((nbt.getShort("eyeRightX")/100.0) != round(entity.getData("skyhighocs:dyn/eye_right_X_timer"))) {
+      var diff = Math.ceil(((nbt.getShort("eyeRightX")/100.0) - entity.getData("skyhighocs:dyn/prev_eye_right_X_timer"))*100.0)/2000.0;
+      manager.setInterpolatedData(entity, "skyhighocs:dyn/eye_right_X_timer", clamp((round(entity.getData("skyhighocs:dyn/eye_right_X_timer")) + round(diff)), Math.min((nbt.getShort("eyeRightX")/100.0), entity.getData("skyhighocs:dyn/prev_eye_right_X_timer")), Math.max((nbt.getShort("eyeRightX")/100.0), entity.getData("skyhighocs:dyn/prev_eye_right_X_timer"))));
     };
     //Y
-    if ((entity.getWornHelmet().nbt().getShort("eyeLeftY")/100.0) == round(entity.getData("skyhighocs:dyn/eye_left_Y_timer"))) {
+    if ((nbt.getShort("eyeLeftY")/100.0) == round(entity.getData("skyhighocs:dyn/eye_left_Y_timer"))) {
       manager.setInterpolatedData(entity, "skyhighocs:dyn/prev_eye_left_Y_timer", round(entity.getData("skyhighocs:dyn/eye_left_Y_timer")));
     };
-    if ((entity.getWornHelmet().nbt().getShort("eyeLeftY")/100.0) != round(entity.getData("skyhighocs:dyn/eye_left_Y_timer"))) {
-      var diff = Math.ceil(((entity.getWornHelmet().nbt().getShort("eyeLeftY")/100.0) - entity.getData("skyhighocs:dyn/prev_eye_left_Y_timer"))*100.0)/2000.0;
-      manager.setInterpolatedData(entity, "skyhighocs:dyn/eye_left_Y_timer", clamp((round(entity.getData("skyhighocs:dyn/eye_left_Y_timer")) + round(diff)), Math.min((entity.getWornHelmet().nbt().getShort("eyeLeftY")/100.0), entity.getData("skyhighocs:dyn/prev_eye_left_Y_timer")), Math.max((entity.getWornHelmet().nbt().getShort("eyeLeftY")/100.0), entity.getData("skyhighocs:dyn/prev_eye_left_Y_timer"))));
+    if ((nbt.getShort("eyeLeftY")/100.0) != round(entity.getData("skyhighocs:dyn/eye_left_Y_timer"))) {
+      var diff = Math.ceil(((nbt.getShort("eyeLeftY")/100.0) - entity.getData("skyhighocs:dyn/prev_eye_left_Y_timer"))*100.0)/2000.0;
+      manager.setInterpolatedData(entity, "skyhighocs:dyn/eye_left_Y_timer", clamp((round(entity.getData("skyhighocs:dyn/eye_left_Y_timer")) + round(diff)), Math.min((nbt.getShort("eyeLeftY")/100.0), entity.getData("skyhighocs:dyn/prev_eye_left_Y_timer")), Math.max((nbt.getShort("eyeLeftY")/100.0), entity.getData("skyhighocs:dyn/prev_eye_left_Y_timer"))));
     };
-    if ((entity.getWornHelmet().nbt().getShort("eyeRightY")/100.0) == round(entity.getData("skyhighocs:dyn/eye_right_Y_timer"))) {
+    if ((nbt.getShort("eyeRightY")/100.0) == round(entity.getData("skyhighocs:dyn/eye_right_Y_timer"))) {
       manager.setInterpolatedData(entity, "skyhighocs:dyn/prev_eye_right_Y_timer", round(entity.getData("skyhighocs:dyn/eye_right_Y_timer")));
     };
-    if ((entity.getWornHelmet().nbt().getShort("eyeRightY")/100.0) != round(entity.getData("skyhighocs:dyn/eye_right_Y_timer"))) {
-      var diff = Math.ceil(((entity.getWornHelmet().nbt().getShort("eyeRightY")/100.0) - entity.getData("skyhighocs:dyn/prev_eye_right_Y_timer"))*100.0)/2000.0;
-      manager.setInterpolatedData(entity, "skyhighocs:dyn/eye_right_Y_timer", clamp((round(entity.getData("skyhighocs:dyn/eye_right_Y_timer")) + round(diff)), Math.min((entity.getWornHelmet().nbt().getShort("eyeRightY")/100.0), entity.getData("skyhighocs:dyn/prev_eye_right_Y_timer")), Math.max((entity.getWornHelmet().nbt().getShort("eyeRightY")/100.0), entity.getData("skyhighocs:dyn/prev_eye_right_Y_timer"))));
+    if ((nbt.getShort("eyeRightY")/100.0) != round(entity.getData("skyhighocs:dyn/eye_right_Y_timer"))) {
+      var diff = Math.ceil(((nbt.getShort("eyeRightY")/100.0) - entity.getData("skyhighocs:dyn/prev_eye_right_Y_timer"))*100.0)/2000.0;
+      manager.setInterpolatedData(entity, "skyhighocs:dyn/eye_right_Y_timer", clamp((round(entity.getData("skyhighocs:dyn/eye_right_Y_timer")) + round(diff)), Math.min((nbt.getShort("eyeRightY")/100.0), entity.getData("skyhighocs:dyn/prev_eye_right_Y_timer")), Math.max((nbt.getShort("eyeRightY")/100.0), entity.getData("skyhighocs:dyn/prev_eye_right_Y_timer"))));
     };
     //Scroll to change module info displayed
     if (entity.getData("fiskheroes:gravity_manip")) {
@@ -1665,10 +1667,10 @@ function initSystem(moduleList, name, colorCode, uuid) {
       };
     };
     if (selectedSideMultiTap.conditionalMultiTap(entity, manager, 2, 20, 1, entity.getData("fiskheroes:gravity_manip"))) {
-      if (entity.getData("skyhighocs:dyn/selected_side") == 2) {
-        manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_side", 0);
+      if (nbt.getInteger("hudSelectedSide") == 2) {
+        manager.setInteger(nbt, "hudSelectedSide", 0);
       } else {
-        manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_side", entity.getData("skyhighocs:dyn/selected_side") + 1);
+        manager.setInteger(nbt, "hudSelectedSide", nbt.getInteger("hudSelectedSide") + 1);
       };
     };
     if (sneakMultiTap.conditionalMultiTap(entity, manager, 2, 10, 1, entity.isSneaking())) {
