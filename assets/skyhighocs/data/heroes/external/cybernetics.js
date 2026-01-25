@@ -521,19 +521,19 @@ function clamp(value, min, max) {
 function cycleUp(entity, manager) {
   if (entity.getData("skyhighocs:dyn/selected_side") == 0) {
     manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_left", entity.getData("skyhighocs:dyn/selected_module_left") + 1);
-    if (entity.getData("skyhighocs:dyn/selected_module_left") > 2) {
+    if (entity.getData("skyhighocs:dyn/selected_module_left") > 3) {
       manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_left", 0);
     };
   };
   if (entity.getData("skyhighocs:dyn/selected_side") == 1) {
     manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_top", entity.getData("skyhighocs:dyn/selected_module_top") + 1);
-    if (entity.getData("skyhighocs:dyn/selected_module_top") > 1) {
+    if (entity.getData("skyhighocs:dyn/selected_module_top") > 2) {
       manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_top", 0);
     };
   };
   if (entity.getData("skyhighocs:dyn/selected_side") == 2) {
     manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_right", entity.getData("skyhighocs:dyn/selected_module_right") + 1);
-    if (entity.getData("skyhighocs:dyn/selected_module_right") > 1) {
+    if (entity.getData("skyhighocs:dyn/selected_module_right") > 2) {
       manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_right", 0);
     };
   };
@@ -543,19 +543,19 @@ function cycleDown(entity, manager) {
   if (entity.getData("skyhighocs:dyn/selected_side") == 0) {
     manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_left", entity.getData("skyhighocs:dyn/selected_module_left") - 1);
     if (entity.getData("skyhighocs:dyn/selected_module_left") < 0) {
-      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_left", 2);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_left", 3);
     };
   };
   if (entity.getData("skyhighocs:dyn/selected_side") == 1) {
     manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_top", entity.getData("skyhighocs:dyn/selected_module_top") - 1);
     if (entity.getData("skyhighocs:dyn/selected_module_top") < 0) {
-      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_top", 1);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_top", 2);
     };
   };
   if (entity.getData("skyhighocs:dyn/selected_side") == 2) {
     manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_right", entity.getData("skyhighocs:dyn/selected_module_right") - 1);
     if (entity.getData("skyhighocs:dyn/selected_module_right") < 0) {
-      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_right", 1);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_right", 2);
     };
   };
 };
@@ -660,6 +660,7 @@ function initMultiTap(varPrefix) {
 function initSystem(moduleList, name, colorCode, uuid) {
   var sneakMultiTap = initMultiTap("skyhighocs:dyn/sneak");
   var punchMultiTap = initMultiTap("skyhighocs:dyn/punch");
+  var selectedSideMultiTap = initMultiTap("skyhighocs:dyn/selected_side");
   var cyberInstance = this;
   //Type 1 - commands (can have data management)
   /** @var type1Specs - Type 1 Specs */
@@ -1663,7 +1664,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
         manager.setDataWithNotify(entity, "skyhighocs:dyn/reset_gravity_manip", true);
       };
     };
-    if (punchMultiTap.conditionalMultiTap(entity, manager, 2, 20, 1, entity.isPunching())) {
+    if (selectedSideMultiTap.conditionalMultiTap(entity, manager, 2, 20, 1, entity.getData("fiskheroes:gravity_manip"))) {
       if (entity.getData("skyhighocs:dyn/selected_side") == 2) {
         manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_side", 0);
       } else {
@@ -1734,10 +1735,10 @@ function initSystem(moduleList, name, colorCode, uuid) {
       });
       hero.setKeyBindEnabled((entity, keyBind) => {
         if (keyBind == "SHAPE_SHIFT") {
-          return !entity.getData("skyhighocs:dyn/editing_mode");
+          return !entity.isSneaking();
         };
         if (keyBind == "GRAVITY_MANIPULATION") {
-          return entity.getData("skyhighocs:dyn/editing_mode");
+          return entity.isSneaking();
         };
         return isKeyBindEnabled(entity, keyBind);
       });
