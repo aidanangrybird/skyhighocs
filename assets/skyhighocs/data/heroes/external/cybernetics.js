@@ -1444,7 +1444,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
           var entry = entity.getDataOrDefault("skyhighocs:dyn/entry", "");
           if (entry.startsWith("!")) {
             manager.setData(entity, "skyhighocs:dyn/entry", entry.substring(1));
-            var args = entity.getData("skyhighocs:dyn/entry").split(" ");
+            var args = entity.getDataOrDefault("skyhighocs:dyn/entry", "").split(" ");
             switch (args[0]) {
               case "systemInfo":
                 systemInfo(entity);
