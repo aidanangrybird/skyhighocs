@@ -826,7 +826,6 @@ function initSystem(moduleList, name, colorCode, uuid) {
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
               cyberneticModules.push(moduleInit.name);
-              
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
               if (moduleInit.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
