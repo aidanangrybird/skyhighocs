@@ -37,6 +37,7 @@ function initModule(system) {
   };
   /**
   * Lists suits on suit data drive
+  * @param module - module passthrough
   * @param entity - Required
   * @param manager - Required
   **/
@@ -233,6 +234,7 @@ function initModule(system) {
   };
   /**
   * Removes suits by index
+  * @param module - module passthrough
   * @param {JSEntity} entity - Required
   * @param {JSDataManager} manager - Required
   * @param {string} suitIndex - Index of suit to remove
@@ -294,7 +296,7 @@ function initModule(system) {
       if (argList.length > 1 && argList.length < 4) {
         switch(argList[1]) {
           case "listDrive":
-            listDriveSuits(entity, manager);
+            listDriveSuits(this, entity, manager);
             break;
           case "download":
             downloadSuits(this, entity, manager, argList[2]);

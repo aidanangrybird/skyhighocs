@@ -518,6 +518,138 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 };
 
+function cycleUp(entity, manager) {
+  if (entity.getData("skyhighocs:dyn/selected_side") == 0) {
+    manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_left", entity.getData("skyhighocs:dyn/selected_module_left") + 1);
+    if (entity.getData("skyhighocs:dyn/selected_module_left") > 2) {
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_left", 0);
+    };
+  };
+  if (entity.getData("skyhighocs:dyn/selected_side") == 1) {
+    manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_top", entity.getData("skyhighocs:dyn/selected_module_top") + 1);
+    if (entity.getData("skyhighocs:dyn/selected_module_top") > 1) {
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_top", 0);
+    };
+  };
+  if (entity.getData("skyhighocs:dyn/selected_side") == 2) {
+    manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_right", entity.getData("skyhighocs:dyn/selected_module_right") + 1);
+    if (entity.getData("skyhighocs:dyn/selected_module_right") > 1) {
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_right", 0);
+    };
+  };
+};
+
+function cycleDown(entity, manager) {
+  if (entity.getData("skyhighocs:dyn/selected_side") == 0) {
+    manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_left", entity.getData("skyhighocs:dyn/selected_module_left") - 1);
+    if (entity.getData("skyhighocs:dyn/selected_module_left") < 0) {
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_left", 2);
+    };
+  };
+  if (entity.getData("skyhighocs:dyn/selected_side") == 1) {
+    manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_top", entity.getData("skyhighocs:dyn/selected_module_top") - 1);
+    if (entity.getData("skyhighocs:dyn/selected_module_top") < 0) {
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_top", 1);
+    };
+  };
+  if (entity.getData("skyhighocs:dyn/selected_side") == 2) {
+    manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_right", entity.getData("skyhighocs:dyn/selected_module_right") - 1);
+    if (entity.getData("skyhighocs:dyn/selected_module_right") < 0) {
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_module_right", 1);
+    };
+  };
+};
+
+/**
+ * Allows for multitapping of keys
+ * @param {string} varPrefix - Prefix of variables to use
+ * @returns Other functions
+ **/
+function initMultiTap(varPrefix) {
+  var varTimer = varPrefix + "_tap_timer";
+  var varCount = varPrefix + "_tap_count";
+  var varCooldown = varPrefix + "_tap_cooldown";
+  var varCoolingDown = varPrefix + "_tap_cooling_down";
+  var varTap = varPrefix + "_tapped";
+  return {
+  /**
+   * Allows for multitapping of keys with condition
+   * @param {JSEntity} entity - Entity getting checked
+   * @param {JSDataManager} manager - Data manager
+   * @param {number} taps - Taps before function returns true
+   * @param {number} duration - Ticks before timing out
+   * @param {number} cooldown - Ticks between taps
+   * @param {boolean} condition - Condition to increase tap count
+   * @returns If the number of taps has been reached
+   **/
+    conditionalMultiTap: function (entity, manager, taps, duration, cooldown, condition) {
+      manager.incrementData(entity, varTimer, duration, 0, (entity.getDataOrDefault(varCount, 0) > 0));
+      manager.incrementData(entity, varCooldown, 0, cooldown, entity.getDataOrDefault(varCoolingDown, false));
+      if (entity.getDataOrDefault(varTimer, 0) == 1 && entity.getDataOrDefault(varCount, 0) != taps) {
+        manager.setDataWithNotify(entity, varCount, 0);
+        manager.setDataWithNotify(entity, varTimer, 0.0);
+        return false;
+      };
+      if (entity.getDataOrDefault(varCount, 0) == taps && entity.getDataOrDefault(varTimer, 0) > 0) {
+        manager.setDataWithNotify(entity, varCount, 0);
+        manager.setDataWithNotify(entity, varTimer, 0.0);
+        return true;
+      };
+      if (condition) {
+        if (entity.getDataOrDefault(varCooldown, 0) == 0 && entity.getDataOrDefault(varTimer, 1) < 1) {
+          manager.setDataWithNotify(entity, varCount, entity.getDataOrDefault(varCount, 0) + 1);
+          manager.setDataWithNotify(entity, varCoolingDown, true);
+        };
+      };
+      if (!condition) {
+        manager.setDataWithNotify(entity, varCoolingDown, false);
+      };
+      return false;
+    },
+  /**
+   * Allows for multitapping of keys
+   * @param {JSEntity} entity - Entity getting checked
+   * @param {JSDataManager} manager - Data manager
+   * @param {number} taps - Taps before function returns true
+   * @param {number} duration - Ticks before timing out
+   * @param {number} cooldown - Ticks between taps
+   * @returns If the number of taps has been reached
+   **/
+    multiTap: function (entity, manager, taps, duration, cooldown) {
+      manager.incrementData(entity, varTimer, duration, 0, (entity.getDataOrDefault(varCount, 0) > 0));
+      manager.incrementData(entity, varCooldown, 0, cooldown, entity.getDataOrDefault(varCoolingDown, false));
+      if (entity.getDataOrDefault(varTimer, 0) == 1 && entity.getDataOrDefault(varCount, 0) != taps) {
+        manager.setDataWithNotify(entity, varCount, 0);
+        manager.setDataWithNotify(entity, varTimer, 0.0);
+        return false;
+      };
+      if (entity.getDataOrDefault(varCount, 0) == taps && entity.getDataOrDefault(varTimer, 0) > 0) {
+        manager.setDataWithNotify(entity, varCount, 0);
+        manager.setDataWithNotify(entity, varTimer, 0.0);
+        return true;
+      };
+      if (entity.getDataOrDefault(varTap, false)) {
+        if (entity.getDataOrDefault(varCooldown, 0) == 0 && entity.getDataOrDefault(varTimer, 1) < 1) {
+          manager.setDataWithNotify(entity, varCount, entity.getDataOrDefault(varCount, 0) + 1);
+          manager.setDataWithNotify(entity, varCoolingDown, true);
+        };
+      };
+      if (!entity.getDataOrDefault(varTap, true)) {
+        manager.setDataWithNotify(entity, varCoolingDown, false);
+      };
+      return false;
+    },
+    tap: function (entity, manager) {
+      manager.setDataWithNotify(entity, varTap, true);
+    },
+    tapReset: function (entity, manager) {
+      if (entity.getDataOrDefault(varTap, false)) {
+        manager.setDataWithNotify(entity, varTap, false);
+      };
+    }
+  };
+};
+
 /**
  * Initializes cyber system
  * @param {object} moduleList - cyber system modules
@@ -526,6 +658,8 @@ function clamp(value, min, max) {
  * @param {string} uuid - UUID of player to be bound to
  **/
 function initSystem(moduleList, name, colorCode, uuid) {
+  var sneakMultiTap = initMultiTap("skyhighocs:dyn/sneak");
+  var punchMultiTap = initMultiTap("skyhighocs:dyn/punch");
   var cyberInstance = this;
   //Type 1 - commands (can have data management)
   /** @var type1Specs - Type 1 Specs */
@@ -1045,6 +1179,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
    **/
   function keyBinds(hero) {
     hero.addKeyBind("SHAPE_SHIFT", "\u00A7" + color + "Send message/Enter command", 5);
+    hero.addKeyBind("GRAVITY_MANIPULATION", "\u00A7" + color + "Switch displayed module", 5);
     modules.forEach(module => {
       if (module.hasOwnProperty("keyBinds")) {
         module.keyBinds(hero, color);
@@ -1255,6 +1390,9 @@ function initSystem(moduleList, name, colorCode, uuid) {
       };
       if (!entity.getWornHelmet().nbt().hasKey("freq")) {
         manager.setShort(entity.getWornHelmet().nbt(), "freq", 100);
+      };
+      if (!entity.getWornHelmet().nbt().hasKey("hudScale")) {
+        manager.setFloat(entity.getWornHelmet().nbt(), "hudScale", 1.0);
       };
       var hexColor = hexColors[getModelID(entity)];
       manager.setString(entity.getWornHelmet().nbt(), "hudColorSkyHigh", hexColor);
@@ -1509,6 +1647,32 @@ function initSystem(moduleList, name, colorCode, uuid) {
       var diff = Math.ceil(((entity.getWornHelmet().nbt().getShort("eyeRightY")/100.0) - entity.getData("skyhighocs:dyn/prev_eye_right_Y_timer"))*100.0)/2000.0;
       manager.setInterpolatedData(entity, "skyhighocs:dyn/eye_right_Y_timer", clamp((round(entity.getData("skyhighocs:dyn/eye_right_Y_timer")) + round(diff)), Math.min((entity.getWornHelmet().nbt().getShort("eyeRightY")/100.0), entity.getData("skyhighocs:dyn/prev_eye_right_Y_timer")), Math.max((entity.getWornHelmet().nbt().getShort("eyeRightY")/100.0), entity.getData("skyhighocs:dyn/prev_eye_right_Y_timer"))));
     };
+    //Scroll to change module info displayed
+    if (entity.getData("fiskheroes:gravity_manip")) {
+      if (entity.getData("skyhighocs:dyn/reset_gravity_manip")) {
+        manager.setDataWithNotify(entity, "fiskheroes:gravity_amount", 0);
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/reset_gravity_manip", false);
+      };
+      var gravity_amount = entity.getData("fiskheroes:gravity_amount");
+      if (gravity_amount > 0) {
+        cycleUp(entity, manager);
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/reset_gravity_manip", true);
+      };
+      if (gravity_amount < 0) {
+        cycleDown(entity, manager);
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/reset_gravity_manip", true);
+      };
+    };
+    if (punchMultiTap.conditionalMultiTap(entity, manager, 2, 20, 1, entity.isPunching())) {
+      if (entity.getData("skyhighocs:dyn/selected_side") == 2) {
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_side", 0);
+      } else {
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_side", entity.getData("skyhighocs:dyn/selected_side") + 1);
+      };
+    };
+    if (sneakMultiTap.conditionalMultiTap(entity, manager, 2, 10, 1, entity.isSneaking())) {
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/battle_mode", !entity.getData("skyhighocs:dyn/battle_mode"));
+    };
   };
   return {
     /**
@@ -1534,6 +1698,9 @@ function initSystem(moduleList, name, colorCode, uuid) {
       hero.setDefaultScale(1.0);
       hero.setModifierEnabled((entity, modifier) => {
         if (modifier.name() == "fiskheroes:shape_shifting") {
+          return true;
+        };
+        if (modifier.name() == "fiskheroes:gravity_manipulation") {
           return true;
         };
         if (modifier.name() == "fiskheroes:potion_immunity") {
@@ -1567,7 +1734,10 @@ function initSystem(moduleList, name, colorCode, uuid) {
       });
       hero.setKeyBindEnabled((entity, keyBind) => {
         if (keyBind == "SHAPE_SHIFT") {
-          return true;
+          return !entity.getData("skyhighocs:dyn/editing_mode");
+        };
+        if (keyBind == "GRAVITY_MANIPULATION") {
+          return entity.getData("skyhighocs:dyn/editing_mode");
         };
         return isKeyBindEnabled(entity, keyBind);
       });

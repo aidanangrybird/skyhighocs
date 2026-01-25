@@ -63,19 +63,19 @@ function initModule(system) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
         if (keyBind == "TENTACLES") {
-          result = true;
+          result = entity.getData("skyhighocs:dyn/battle_mode");
         };
         if (keyBind == "TENTACLE_GRAB") {
-          result = entity.getData("fiskheroes:tentacles") != null;
+          result = entity.getData("skyhighocs:dyn/battle_mode");
         };
         if (keyBind == "TENTACLE_JAB") {
-          result = entity.getData("fiskheroes:tentacles") != null;
+          result = entity.getData("skyhighocs:dyn/battle_mode");
         };
         if (keyBind == "TENTACLE_STRIKE") {
-          result = entity.getData("fiskheroes:tentacles") != null;
+          result = entity.getData("skyhighocs:dyn/battle_mode");
         };
         if (keyBind == "EXTERNAL_ARMS") {
-          result = true;
+          result = entity.getData("skyhighocs:dyn/battle_mode");
         };
       };
       return result;

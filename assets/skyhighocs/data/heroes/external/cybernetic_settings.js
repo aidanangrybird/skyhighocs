@@ -125,6 +125,10 @@ function initModule(system) {
             manager.setShort(nbt, "freq", parseInt(argList[2]));
             system.moduleMessage(this, entity, "<n>freq set to <nh>" + nbt.getShort("freq") + "<n>!");
             break;
+          case "hudScale":
+            manager.setFloat(nbt, "hudScale", parseFloat(argList[2]));
+            system.moduleMessage(this, entity, "<n>hudScale set to <nh>" + nbt.getFloat("hudScale") + "<n>!");
+            break;
           case "list":
             system.moduleMessage(this, entity, "<n>fightOrFlightDur: <nh>" + nbt.getShort("durationFightOrFlight"));
             system.moduleMessage(this, entity, "<n>fightOrFlightMin: <nh>" + nbt.getShort("minHealthFightOrFlight"));
@@ -154,6 +158,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>ySat: <nh>" + nbt.getShort("ySat"));
             system.moduleMessage(this, entity, "<n>zSat: <nh>" + nbt.getShort("zSat"));
             system.moduleMessage(this, entity, "<n>freq: <nh>" + nbt.getShort("freq"));
+            system.moduleMessage(this, entity, "<n>hudScale: <nh>" + nbt.getShort("hudScale"));
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Settings commands:");
