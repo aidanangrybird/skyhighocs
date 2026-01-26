@@ -60,8 +60,8 @@ loadTextures({
   "right_arm": "skyhighocs:cybernetic_right_arm_base",
   "left_leg": "skyhighocs:cybernetic_left_leg_base",
   "right_leg": "skyhighocs:cybernetic_right_leg_base",
-  "santa_hat": "skyhighocs:santa_hat",
-  "santa_hat_cyber": "skyhighocs:cybernetic_santa_hat",
+  //"santa_hat": "skyhighocs:santa_hat",
+  //"santa_hat_cyber": "skyhighocs:cybernetic_santa_hat",
 });
 
 var santaHat;
@@ -81,7 +81,7 @@ function init(renderer) {
 };
 
 function initEffects(renderer) {
-  if (isChristmasSeason) {
+  /* if (isChristmasSeason) {
     var santa_hat_model = renderer.createResource("MODEL", "skyhighocs:SantaHat");
     santa_hat_model.texture.set("santa_hat");
     santaHat = renderer.createEffect("fiskheroes:model").setModel(santa_hat_model);
@@ -96,7 +96,7 @@ function initEffects(renderer) {
     santaHatCyber.setScale(1.13);
     santaHatCyber.setOffset(0.0, -7.25, -0.25);
     santaHatCyber.setRotation(-10.0, 0.0, 0.0);
-  };
+  }; */
   text_renderer = stuff.text(renderer);
   //Deploy + base
   //Add a clamp thing to the inner rockets so I can supress them with a timer instead of just a nbt boolean

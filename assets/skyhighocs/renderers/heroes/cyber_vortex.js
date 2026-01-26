@@ -39,7 +39,7 @@ loadTextures({
   "right_arm_camouflage": "skyhighocs:aidan/cyber_vortex_right_arm_camouflage.tx.json",
   "left_leg_camouflage": "skyhighocs:aidan/cyber_vortex_left_leg_camouflage.tx.json",
   "right_leg_camouflage": "skyhighocs:aidan/cyber_vortex_right_leg_camouflage.tx.json",
-  "santa_hat_cyber_lights": "skyhighocs:aidan/cyber_vortex_santa_hat_lights",
+  //"santa_hat_cyber_lights": "skyhighocs:aidan/cyber_vortex_santa_hat_lights",
   "character_0": "skyhighocs:aidan/characters/aidan_character_0",
   "character_1": "skyhighocs:aidan/characters/aidan_character_1",
   "character_2": "skyhighocs:aidan/characters/aidan_character_2",
