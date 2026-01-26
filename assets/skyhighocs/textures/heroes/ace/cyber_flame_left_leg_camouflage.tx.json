@@ -8,7 +8,7 @@
       },
       {
         "operation": "STITCH",
-        "supply": "skyhighocs:cybernetic_left_leg_base"
+        "supply": "skyhighocs:cybernetic_left_leg"
       }
     ],
     "out": "skyhighocs:generated/cyber_flame_left_leg_camouflage_<TIMER>"

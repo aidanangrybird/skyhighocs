@@ -521,6 +521,18 @@ function clamp(value, min, max) {
 
 function cycleUp(entity, manager) {
   var nbt = entity.getWornHelmet().nbt();
+  if (!nbt.hasKey("hudSelectedSide")) {
+    manager.setInteger(nbt, "hudSelectedSide", 0);
+  };
+  if (!nbt.hasKey("hudLeftSide")) {
+    manager.setInteger(nbt, "hudLeftSide", 0);
+  };
+  if (!nbt.hasKey("hudTopSide")) {
+    manager.setInteger(nbt, "hudTopSide", 0);
+  };
+  if (!nbt.hasKey("hudRightSide")) {
+    manager.setInteger(nbt, "hudRightSide", 0);
+  };
   if (nbt.getInteger("hudSelectedSide") == 0) {
     manager.setInteger(nbt, "hudLeftSide", nbt.getInteger("hudLeftSide") + 1);
     if (nbt.getInteger("hudLeftSide") > 3) {
@@ -543,6 +555,18 @@ function cycleUp(entity, manager) {
 
 function cycleDown(entity, manager) {
   var nbt = entity.getWornHelmet().nbt();
+  if (!nbt.hasKey("hudSelectedSide")) {
+    manager.setInteger(nbt, "hudSelectedSide", 0);
+  };
+  if (!nbt.hasKey("hudLeftSide")) {
+    manager.setInteger(nbt, "hudLeftSide", 0);
+  };
+  if (!nbt.hasKey("hudTopSide")) {
+    manager.setInteger(nbt, "hudTopSide", 0);
+  };
+  if (!nbt.hasKey("hudRightSide")) {
+    manager.setInteger(nbt, "hudRightSide", 0);
+  };
   if (nbt.getInteger("hudSelectedSide") == 0) {
     manager.setInteger(nbt, "hudLeftSide", nbt.getInteger("hudLeftSide") - 1);
     if (nbt.getInteger("hudLeftSide") < 0) {
@@ -1182,7 +1206,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
    **/
   function keyBinds(hero) {
     hero.addKeyBind("SHAPE_SHIFT", "\u00A7" + color + "Send message/Enter command", 5);
-    hero.addKeyBind("GRAVITY_MANIPULATION", "\u00A7" + color + "Switch displayed module", 5);
+    hero.addKeyBind("GRAVITY_MANIPULATION", "\u00A7" + color + "Switch displayed module (x2 to switch sides)", 5);
     modules.forEach(module => {
       if (module.hasOwnProperty("keyBinds")) {
         module.keyBinds(hero, color);
@@ -1370,18 +1394,6 @@ function initSystem(moduleList, name, colorCode, uuid) {
       };
       if (!entity.getWornHelmet().nbt().hasKey("minHealthFightOrFlight")) {
         manager.setShort(nbt, "minHealthFightOrFlight", 5);
-      };
-      if (!entity.getWornHelmet().nbt().hasKey("hudRange")) {
-        manager.setShort(nbt, "hudRange", 0);
-      };
-      if (!entity.getWornHelmet().nbt().hasKey("hostilesOnHud")) {
-        manager.setBoolean(nbt, "hostilesOnHud", true);
-      };
-      if (!entity.getWornHelmet().nbt().hasKey("friendliesOnHud")) {
-        manager.setBoolean(nbt, "friendliesOnHud", true);
-      };
-      if (!entity.getWornHelmet().nbt().hasKey("playersOnHud")) {
-        manager.setBoolean(nbt, "playersOnHud", true);
       };
       if (!entity.getWornHelmet().nbt().hasKey("xSat")) {
         manager.setShort(nbt, "xSat", 0);

@@ -8,11 +8,7 @@
       },
       {
         "operation": "STITCH",
-        "supply": "skyhighocs:cybernetic_body_base"
-      },
-      {
-        "operation": "ADD",
-        "supply": "skyhighocs:aidan/cyber_vortex_body_lights"
+        "supply": "skyhighocs:cybernetic_body"
       }
     ],
     "out": "skyhighocs:generated/cyber_vortex_body_lights_<TIMER>"

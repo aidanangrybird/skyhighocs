@@ -8,11 +8,7 @@
       },
       {
         "operation": "STITCH",
-        "supply": "skyhighocs:cybernetic_body_base"
-      },
-      {
-        "operation": "ADD",
-        "supply": "skyhighocs:chase/cyber_nebula_body_lights"
+        "supply": "skyhighocs:cybernetic_body"
       }
     ],
     "out": "skyhighocs:generated/cyber_nebula_body_lights_<TIMER>"

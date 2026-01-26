@@ -8,11 +8,7 @@
       },
       {
         "operation": "STITCH",
-        "supply": "skyhighocs:cybernetic_right_leg_base"
-      },
-      {
-        "operation": "ADD",
-        "supply": "skyhighocs:ace/cyber_flame_right_leg_lights"
+        "supply": "skyhighocs:cybernetic_right_leg"
       }
     ],
     "out": "skyhighocs:generated/cyber_flame_right_leg_lights_<TIMER>"

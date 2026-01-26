@@ -8,11 +8,7 @@
       },
       {
         "operation": "STITCH",
-        "supply": "skyhighocs:cybernetic_left_arm_base"
-      },
-      {
-        "operation": "ADD",
-        "supply": "skyhighocs:damien/cyber_shadow_left_arm_lights"
+        "supply": "skyhighocs:cybernetic_left_arm"
       }
     ],
     "out": "skyhighocs:generated/cyber_shadow_left_arm_lights_<TIMER>"
