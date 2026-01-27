@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighocs:cade/azure_asteroid_base",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighocs:xor/wave_change_<TIMER>"
+      }
+    ],
+    "out": "skyhighocs:generated/azure_asteroid_suit_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.min(Math.max(Math.ceil(80 * entity.getInterpolatedData('skyhighocs:dyn/wave_changing_timer')), 40), 80) | 0",
+      "values": {
+        "min": 40,
+        "max": 80
+      }
+    }
+  },
+  "isDynamic": true
+}

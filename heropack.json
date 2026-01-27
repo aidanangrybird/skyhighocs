@@ -100,6 +100,19 @@
     "unleashed_darkness_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "shadow_blast": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "shadow_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    
+    "aegir_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "aegir": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "gas_plume": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "gas_plume_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "gas_plume_blade": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "gas_plume_blade_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "asteroid_crash": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "asteroid_crash_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "asteroid_strike": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "asteroid_strike_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "azure_river": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "azure_river_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
 
     "astro_clothes": "BYTE",
     "arm_cannon_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
@@ -442,10 +455,18 @@
     "skyhighocs:ares": {
       "metal": "Metal Skin"
     },
+    "skyhighocs:poseidon": {
+      "metal": "Metal Skin"
+    },
     "skyhighocs:vulcan": {
       "metal": "Metal Skin"
     },
     "skyhighocs:abyssal_shadow": {
+      "$DEFAULT": {
+        "maskToggleTicks": 10
+      }
+    },
+    "skyhighocs:azure_asteroid": {
       "$DEFAULT": {
         "maskToggleTicks": 10
       }

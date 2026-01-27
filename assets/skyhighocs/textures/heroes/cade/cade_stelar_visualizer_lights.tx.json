@@ -1,0 +1,10 @@
+{
+  "texture": "skyhighocs:cade/cade_stelar_<VISUALIZER>_lights",
+  "getters": {
+    "VISUALIZER": {
+      "key": "entity.getData('skyhighocs:dyn/visualizer_toggle') ? 'down' : entity.getData('skyhighocs:dyn/stelar_clothes') == 3 ? (entity.getData('skyhighocs:dyn/hood_toggle') ? 'up_winter_hood' : 'up') : 'up'",
+      "values": ["up", "down", "up_winter_hood"]
+    }
+  },
+  "isDynamic": true
+}

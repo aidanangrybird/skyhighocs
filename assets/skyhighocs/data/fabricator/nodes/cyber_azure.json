@@ -1,0 +1,23 @@
+{
+  "suit": "skyhighocs:cyber_azure",
+  "requirements": [
+    "skyhighocs:cybernetics",
+    "fiskheroes:tier8_9",
+    "skyhighocs:base"
+  ],
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:player_killed",
+      "description": {
+        "translate": "Die in fire as Cade_Lolz"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_KILLED",
+          "damage": "DAMAGE_SOURCE"
+        },
+        "check": "(player.getUUID() == '6982b802-8dec-460a-b1fa-6f1596944e8f') && player.isBurning() && damage.isFireDamage()"
+      }
+    }
+  }
+}

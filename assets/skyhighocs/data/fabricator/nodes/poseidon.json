@@ -1,0 +1,23 @@
+{
+  "suit": "skyhighocs:poseidon",
+  "requirements": [
+    "skyhighocs:robot",
+    "fiskheroes:tier8_9",
+    "skyhighocs:base"
+  ],
+  "criteria": {
+    "death": {
+      "trigger": "fiskheroes:player_killed",
+      "description": {
+        "translate": "As Cade_Lolz, die by collision with another player while both players are boost flying"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_KILLED",
+          "other_player": "DAMAGE_SOURCE"
+          },
+        "check": "player.getUUID() == '6982b802-8dec-460a-b1fa-6f1596944e8f' && player.isWearingFullSuit() && other_player.getEntity().as('PLAYER').isWearingFullSuit() && player.getData('fiskheroes:flight_boost_timer') == 1 && other_player.getEntity().as('PLAYER').getData('fiskheroes:flight_boost_timer') == 1 && other_player.hasDamageType('COLLISION')"
+      }
+    }
+  }
+}

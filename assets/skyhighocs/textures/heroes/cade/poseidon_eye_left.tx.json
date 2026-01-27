@@ -1,0 +1,10 @@
+{
+  "texture": "skyhighocs:cade/poseidon_eye_left_<TYPE>",
+  "getters": {
+    "TYPE": {
+      "key": "(entity.getWornLeggings().nbt().getBoolean('leftEyeHuman')) ? 'human' : 'normal'",
+      "values": ["human", "normal"]
+    }
+  },
+  "isDynamic": true
+}

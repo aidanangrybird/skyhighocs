@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighocs:cade/azure_asteroid_asteroid_strike_front",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighocs:xor/predation_wave_change_front_<TIMER>"
+      }
+    ],
+    "out": "skyhighocs:generated/azure_asteroid_asteroid_strike_front_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.min(Math.max(Math.ceil(28 - ((entity.getData('skyhighocs:dyn/asteroid_strike') ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighocs:dyn/asteroid_strike_timer') + (entity.getData('skyhighocs:dyn/asteroid_strike') ? 28 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighocs:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 28 : 0))), (entity.getData('skyhighocs:dyn/asteroid_strike') && entity.getHeldItem().isEmpty() ? 14 : 0)), (entity.getData('skyhighocs:dyn/asteroid_strike') && entity.getHeldItem().isEmpty() ? 19 : 14)) | 0",
+      "values": {
+        "min": 0,
+        "max": 19
+      }
+    }
+  },
+  "isDynamic": true
+}

@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighocs:cade/azure_asteroid_gas_plume_blade",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighocs:xor/sword_blade_<TIMER>"
+      }
+    ],
+    "out": "skyhighocs:generated/azure_asteroid_gas_plume_blade_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.min(Math.max(Math.ceil(14 * entity.getInterpolatedData('skyhighocs:dyn/gas_plume_blade_timer')), 0), 14) | 0",
+      "values": {
+        "min": 0,
+        "max": 14
+      }
+    }
+  },
+  "isDynamic": true
+}

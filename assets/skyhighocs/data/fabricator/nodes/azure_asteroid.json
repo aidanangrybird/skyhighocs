@@ -1,0 +1,30 @@
+{
+  "suit": "skyhighocs:azure_asteroid",
+  "display": {
+    "description": {
+      "translate": "EM Wave Change! Cade Stelar, On-Air!"
+    }
+  },
+  "requirements": [
+    "skyhighocs:wave_change",
+    "skyhighocs:transers",
+    "fiskheroes:tier10",
+    "skyhighocs:base",
+    "skyhighocs:cade_stelar"
+  ],
+  "criteria": {
+    "chance": {
+      "trigger": "fiskheroes:player_hurt",
+      "description": {
+        "translate": "Stand in a Jungle biome as Cade Stelar"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_HURT",
+          "damage": "DAMAGE_SOURCE"
+        },
+        "check": "player.getData('skyhighocs:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_AQUA') && (player.world().getLocation(player.pos()).biome().startsWith('Jungle') || player.world().getLocation(player.pos()).biome().startsWith('Jungle M') || player.world().getLocation(player.pos()).biome().startsWith('JungleEdge') || player.world().getLocation(player.pos()).biome().startsWith('JungleEdge M') || player.world().getLocation(player.pos()).biome().startsWith('JungleHills')) && player.getWornChestplate().suitType() == 'skyhighocs:cade_stelar'"
+      }
+    }
+  }
+}

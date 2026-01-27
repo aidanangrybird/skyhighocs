@@ -1,0 +1,30 @@
+{
+  "texture": {
+    "in": "skyhighocs:cade/cade_stelar_<VISUALIZER>_<CLOTHING>",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighocs:xor/wave_change_<TIMER>"
+      }
+    ],
+    "out": "skyhighocs:generated/cade_stelar_<VISUALIZER>_<CLOTHING>_<TIMER>"
+  },
+  "getters": {
+    "CLOTHING": {
+      "key": "entity.getData('skyhighocs:dyn/stelar_clothes') == 0 ? 'transer' : entity.getData('skyhighocs:dyn/stelar_clothes') == 1 ? 'short' : entity.getData('skyhighocs:dyn/stelar_clothes') == 2 ? 'swimsuit' : entity.getData('skyhighocs:dyn/hood_toggle') ? 'winter_hood_up' : 'winter_hood_down'",
+      "values": ["transer", "short", "swimsuit", "winter_hood_up", "winter_hood_down"]
+    },
+    "VISUALIZER": {
+      "key": "entity.getData('skyhighocs:dyn/visualizer_toggle') ? 'down' : 'up'",
+      "values": ["up", "down"]
+    },
+    "TIMER": {
+      "key": "Math.min(Math.max(Math.ceil(80 * entity.getInterpolatedData('skyhighocs:dyn/wave_changing_timer')), 0), 40) | 0",
+      "values": {
+        "min": 0,
+        "max": 40
+      }
+    }
+  },
+  "isDynamic": true
+}
