@@ -17,7 +17,7 @@ function initModule(system) {
           case "enable":
             switch (argList[2]) {
               case "clothing":
-                manager.setBoolean(nbt, "disguiseClothing", false);
+                manager.setBoolean(nbt, "disguiseClothing", true);
                 system.moduleMessage(this, entity, "<n>Enabled <nh>disguise clothing<n>!");
                 break;
               case "disguise":
