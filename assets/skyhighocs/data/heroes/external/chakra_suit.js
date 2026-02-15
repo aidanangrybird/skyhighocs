@@ -38,10 +38,10 @@ function initChakras(hero, name, uuid) {
   });
   hero.setKeyBindEnabled((entity, keyBind) => {
     if (keyBind == "CHAKRA_SUIT") {
-      return entity.isSneaking();
+      return entity.isSneaking() && entity.getUUID() == uuid;
     };
     if (keyBind == "SHIELD") {
-      return !entity.isSneaking();
+      return !entity.isSneaking() && entity.getUUID() == uuid;
     };
     return entity.getUUID() == uuid;
   });

@@ -117,8 +117,8 @@ function initModule(system) {
     name: "eyes",
     moduleMessageName: "Eyes",
     type: 1,
-    command: "eyes",
-    helpMessage: "<n>!eyes <nh>-<n> Eyes",
+    command: "eye",
+    helpMessage: "<n>!eye <nh>-<n> Eyes",
     commandHandler: function (entity, manager, argList) {
       if (argList.length > 1 && argList.length < 5) {
         var nbt = entity.getWornHelmet().nbt();

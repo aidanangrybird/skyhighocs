@@ -330,6 +330,65 @@ function elevation(entity, posX, posY, posZ) {
   return angle;
 };
 
+/**
+ * Number degree to a cardinal direction
+ * @param {JSVector3} base - Base vector
+ * @param {JSVector3} other - Vector to measure to
+ * @returns Cardinal direction
+ **/
+function angleToDirection(angle) {
+  var direction = angle.toFixed(0);
+  if (((angle >= 0) && (angle <= 11.25)) || ((angle >= 348.75) && (angle <= 360))) {
+    direction = "N";
+  };
+  if ((angle <= 33.75) && (angle >= 11.25)) {
+    direction = "NNE";
+  };
+  if ((angle <= 56.25) && (angle >= 33.75)) {
+    direction = "NE";
+  };
+  if ((angle <= 78.75) && (angle >= 56.25)) {
+    direction = "ENE";
+  };
+  if ((angle <= 101.25) && (angle >= 78.75)) {
+    direction = "E";
+  };
+  if ((angle <= 123.75) && (angle >= 101.25)) {
+    direction = "ESE";
+  };
+  if ((angle <= 146.25) && (angle >= 123.75)) {
+    direction = "SE";
+  };
+  if ((angle <= 168.75) && (angle >= 146.25)) {
+    direction = "SSE";
+  };
+  if ((angle <= 191.25) && (angle >= 168.75)) {
+    direction = "S";
+  };
+  if ((angle <= 213.75) && (angle >= 191.25)) {
+    direction = "SSW";
+  };
+  if ((angle <= 236.25) && (angle >= 213.75)) {
+    direction = "SW";
+  };
+  if ((angle <= 258.75) && (angle >= 236.25)) {
+    direction = "WSW";
+  };
+  if ((angle <= 281.25) && (angle >= 258.75)) {
+    direction = "W";
+  };
+  if ((angle <= 303.75) && (angle >= 281.25)) {
+    direction = "WNW";
+  };
+  if ((angle <= 326.25) && (angle >= 303.75)) {
+    direction = "NW";
+  };
+  if ((angle <= 348.75) && (angle >= 326.25)) {
+    direction = "NNW";
+  };
+  return direction;
+};
+
 var chars = ["!","\"","#","$","%","&","'","(",")","*","+",",","-",".","/","0","1","2","3","4","5","6","7","8","9",":",";","<","=",">","?","@","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[","\\","]","^","_","`","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","{","|","}","~"];
 
 var charWidths = {
@@ -345,7 +404,7 @@ var charWidths = {
   "*": 5.0,
   "+": 5.0,
   ",": 1.0,
-  "-": 4.0,
+  "-": 5.0,
   ".": 1.0,
   "/": 5.0,
   "0": 5.0,
