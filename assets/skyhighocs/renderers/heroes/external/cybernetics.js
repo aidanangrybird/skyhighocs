@@ -113,12 +113,10 @@ function initCyberneticAnimations(renderer) {
   });
   addAnimation(renderer, "cybernetic.LEFT_LEG_ROCKETS", "skyhighocs:cybernetic_left_leg_rockets").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer") + getHoloBooleans(entity, "holoFlight", "rocketsLegs"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_inner_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer") + getHoloBooleans(entity, "holoFlight", "innerRockets"));
   });
   addAnimation(renderer, "cybernetic.RIGHT_LEG_ROCKETS", "skyhighocs:cybernetic_right_leg_rockets").setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer") + getHoloBooleans(entity, "holoFlight", "rocketsLegs"));
-    data.load(1, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_inner_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
     data.load(2, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer") + getHoloBooleans(entity, "holoFlight", "innerRockets"));
   });
   addAnimation(renderer, "cybernetic.WING_LEFT", "skyhighocs:cybernetic_wing_left").setData((entity, data) => {
@@ -138,12 +136,12 @@ function initCyberneticAnimations(renderer) {
   });
   addAnimation(renderer, "cybernetic.RIGHT_ARM_SHIELD", "skyhighocs:cybernetic_right_arm_shield").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/shield_right_arm_timer") * entity.getInterpolatedData("fiskheroes:shield_blocking_timer") * (1 - entity.getInterpolatedData("fiskheroes:beam_charge")));
-  });
+  });/*
   addAnimation(renderer, "cybernetic.BASE", "skyhighocs:cybernetic_base").setData((entity, data) => {
     data.load(1.0);
   })
   .setCondition(entity => !entity.is("DISPLAY") && !entity.getWornHelmet().nbt().getBoolean("naturalArms") && (entity.getInterpolatedData("skyhighocs:dyn/thermoptic_disguise_timer") < 1))
-  .priority = -11;/* 
+  .priority = -11;
   addAnimation(renderer, "cybernetic.LEFT_ARM_PUNCH", "skyhighocs:cybernetic_left_arm_punch").setData((entity, data) => {
     data.load(entity.getPunchTimerInterpolated());
   })
@@ -173,7 +171,7 @@ function initCyberneticAnimations(renderer) {
     .priority = -10;
 
   addAnimation(renderer, "cybernetic.HOLOGRAM_FLIGHT", "skyhighocs:cybernetic_holo_flight").setData((entity, data) => {
-    data.load(0, 0.0 + getHoloBoolean(entity, "holoFlight") ? (getHoloBoolean(entity, "rocketsAux") + getHoloBoolean(entity, "rocketsBody") + getHoloBoolean(entity, "rocketsLegs")) : 0.0);
+    data.load(0, 0.0 + getHoloBoolean(entity, "holoFlight") ? (getHoloBoolean(entity, "rocketsArms") + getHoloBoolean(entity, "rocketsBody") + getHoloBoolean(entity, "rocketsLegs")) : 0.0);
     data.load(1, 0.0 + getHoloBoolean(entity, "holoBoostFlight"));
   }).priority = -9;
 
@@ -362,22 +360,18 @@ function crossProduct(vector, otherVector) {
 function headAnimations(entity, data) {
   data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_head_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_head_timer") + getHoloBooleans(entity, "holoCannons", "cannonsHead"));
   data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_head_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_head_timer") + getHoloBooleans(entity, "holoCannons", "cannonsHead"));
-  data.load(2, entity.getInterpolatedData("skyhighocs:dyn/mouth_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/mouth_timer") + getHoloBoolean(entity, "holoMouth"));
-  data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer") + getHoloBoolean(entity, "holoSat"));
-  data.load(4, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
-  data.load(5, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer") + getHoloBoolean(entity, "holoAnt"));
-  data.load(6, entity.getInterpolatedData("skyhighocs:dyn/cannon_head_flush_timer"));
-  data.load(7, entity.getInterpolatedData("skyhighocs:dyn/mouth_flush_timer"));
-  data.load(8, stuff.getBearing(entity));
-  data.load(9, entity.rotationInterpolated().y());
-  data.load(10, stuff.directionAngle(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
-  data.load(11, stuff.elevation(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("ySat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
-  data.load(12, entity.getInterpolatedData("skyhighocs:dyn/eye_left_lid_timer"));
-  data.load(13, entity.getInterpolatedData("skyhighocs:dyn/eye_right_lid_timer"));
-  data.load(14, entity.getInterpolatedData("skyhighocs:dyn/eye_left_X_timer"));
-  data.load(15, entity.getInterpolatedData("skyhighocs:dyn/eye_right_X_timer"));
-  data.load(16, entity.getInterpolatedData("skyhighocs:dyn/eye_left_Y_timer"));
-  data.load(17, entity.getInterpolatedData("skyhighocs:dyn/eye_right_Y_timer"));
+  data.load(2, entity.getInterpolatedData("skyhighocs:dyn/satellite_timer") + getHoloBoolean(entity, "holoSat"));
+  data.load(3, entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer"));
+  data.load(4, entity.getInterpolatedData("skyhighocs:dyn/antenna_timer") + getHoloBoolean(entity, "holoAnt"));
+  data.load(5, entity.getInterpolatedData("skyhighocs:dyn/cannon_head_flush_timer"));
+  data.load(6, entity.getInterpolatedData("skyhighocs:dyn/intake_head_left_open_timer"));
+  data.load(7, entity.getInterpolatedData("skyhighocs:dyn/intake_head_right_open_timer"));
+  data.load(8, entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_head_left_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_head_left_start_up_timer") == 0)?0:1));
+  data.load(9, entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_head_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_head_right_start_up_timer") == 0)?0:1));
+  data.load(10, stuff.getBearing(entity));
+  data.load(11, entity.rotationInterpolated().y());
+  data.load(12, stuff.directionAngle(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
+  data.load(13, stuff.elevation(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("ySat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
 };
 
 function bodyAnimations(entity, data) {
@@ -389,32 +383,46 @@ function bodyAnimations(entity, data) {
   data.load(5, entity.getInterpolatedData("skyhighocs:dyn/wing_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/wings_timer") + getHoloBooleans(entity, "holoFlight", "rocketsWings") + getHoloBoolean(entity, "holoGlide"));
   data.load(6, entity.getInterpolatedData("skyhighocs:dyn/external_arm_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/external_arms_timer"));
   data.load(7, entity.getInterpolatedData("skyhighocs:dyn/external_arm_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/external_arms_timer"));
+  data.load(8, entity.getInterpolatedData("skyhighocs:dyn/intake_body_left_open_timer"));
+  data.load(9, entity.getInterpolatedData("skyhighocs:dyn/intake_body_right_open_timer"));
+  data.load(10, entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_body_left_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_body_left_start_up_timer") == 0)?0:1));
+  data.load(11, entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_body_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_body_right_start_up_timer") == 0)?0:1));
+  data.load(12, entity.getInterpolatedData("fiskheroes:flight_timer"));
+  data.load(13, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
 
 function leftArmAnimations(entity, data) {
   data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + getHoloBooleans(entity, "holoCannons", "cannonsArms"));
   data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + getHoloBooleans(entity, "holoCannons", "cannonsArms"));
   data.load(2, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + getHoloBooleans(entity, "holoCannons", "cannonsArms"));
-  data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_outer_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
-  data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_front_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
-  data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_back_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
+  data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_outer_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_arms_timer") + getHoloBooleans(entity, "holoFlight", "rocketsArms"));
+  data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_arms_timer") + getHoloBooleans(entity, "holoFlight", "rocketsArms"));
+  data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_arms_timer") + getHoloBooleans(entity, "holoFlight", "rocketsArms"));
   data.load(6, entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_timer") + getHoloBooleans(entity, "holoBlades", "bladesLeft"));
   data.load(7, entity.getInterpolatedData("skyhighocs:dyn/shield_left_arm_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/shield_left_arm_timer") + getHoloBooleans(entity, "holoShields", "shieldsLeft"));
   data.load(8, entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_stealth_timer") + getHoloBooleans(entity, "holoBlades", "bladesLeftStealth"));
   data.load(9, entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_flush_timer"));
+  data.load(10, entity.getInterpolatedData("skyhighocs:dyn/intake_left_arm_open_timer"));
+  data.load(11, entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_left_arm_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_left_arm_start_up_timer") == 0)?0:1));
+  data.load(12, entity.getInterpolatedData("fiskheroes:flight_timer"));
+  data.load(13, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
 
 function rightArmAnimations(entity, data) {
   data.load(0, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + getHoloBooleans(entity, "holoCannons", "cannonsArms"));
   data.load(1, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + getHoloBooleans(entity, "holoCannons", "cannonsArms"));
   data.load(2, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer") + getHoloBooleans(entity, "holoCannons", "cannonsArms"));
-  data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_outer_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
-  data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_front_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
-  data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_back_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
+  data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_outer_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_arms_timer") + getHoloBooleans(entity, "holoFlight", "rocketsArms"));
+  data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_arms_timer") + getHoloBooleans(entity, "holoFlight", "rocketsArms"));
+  data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_arms_timer") + getHoloBooleans(entity, "holoFlight", "rocketsArms"));
   data.load(6, entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_timer") + getHoloBooleans(entity, "holoBlades", "bladesRight"));
   data.load(7, entity.getInterpolatedData("skyhighocs:dyn/shield_right_arm_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/shield_right_arm_timer") + getHoloBooleans(entity, "holoShields", "shieldsRight"));
   data.load(8, entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_stealth_timer") + getHoloBooleans(entity, "holoBlades", "bladesRightStealth"));
   data.load(9, entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_flush_timer"));
+  data.load(10, entity.getInterpolatedData("skyhighocs:dyn/intake_right_arm_open_timer"));
+  data.load(11, entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_right_arm_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_right_arm_start_up_timer") == 0)?0:1));
+  data.load(12, entity.getInterpolatedData("fiskheroes:flight_timer"));
+  data.load(13, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
 
 function leftLegAnimations(entity, data) {
@@ -423,11 +431,11 @@ function leftLegAnimations(entity, data) {
   data.load(2, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer") + getHoloBooleans(entity, "holoFlight", "rocketsLegs"));
   data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer") + getHoloBooleans(entity, "holoFlight", "rocketsLegs"));
   data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer") + getHoloBooleans(entity, "holoFlight", "rocketsLegs"));
-  data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_outer_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
-  data.load(6, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_inner_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
-  data.load(7, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_front_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
-  data.load(8, entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_back_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
-  data.load(9, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer") + getHoloBooleans(entity, "holoFlight", "innerRockets"));
+  data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer") + getHoloBooleans(entity, "holoFlight", "innerRockets"));
+  data.load(6, entity.getInterpolatedData("skyhighocs:dyn/intake_left_leg_open_timer"));
+  data.load(7, entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_left_leg_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_left_leg_start_up_timer") == 0)?0:1));
+  data.load(8, entity.getInterpolatedData("fiskheroes:flight_timer"));
+  data.load(9, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
 
 function rightLegAnimations(entity, data) {
@@ -436,11 +444,11 @@ function rightLegAnimations(entity, data) {
   data.load(2, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer") + getHoloBooleans(entity, "holoFlight", "rocketsLegs"));
   data.load(3, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer") + getHoloBooleans(entity, "holoFlight", "rocketsLegs"));
   data.load(4, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer") + getHoloBooleans(entity, "holoFlight", "rocketsLegs"));
-  data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_outer_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
-  data.load(6, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_inner_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
-  data.load(7, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_front_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
-  data.load(8, entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_back_booster_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
-  data.load(9, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer") + getHoloBooleans(entity, "holoFlight", "innerRockets"));
+  data.load(5, entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer") + getHoloBooleans(entity, "holoFlight", "innerRockets"));
+  data.load(6, entity.getInterpolatedData("skyhighocs:dyn/intake_right_leg_open_timer"));
+  data.load(7, entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_right_leg_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_right_leg_start_up_timer") == 0)?0:1));
+  data.load(8, entity.getInterpolatedData("fiskheroes:flight_timer"));
+  data.load(9, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
 
 function hudPlayer(renderer) {
@@ -699,4 +707,90 @@ function isStillCyber(entity, id) {
  **/
 function hasCyberneticBody(entity) {
   return entity.getWornHelmet().nbt().hasKey("cyberModelID") && entity.getWornHelmet().nbt().getString("cyberAliasName");
+};
+
+function headConditions(entity) {
+  var data_0 = entity.getInterpolatedData("skyhighocs:dyn/cannon_head_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_head_timer");
+  var data_1 = entity.getInterpolatedData("skyhighocs:dyn/cannon_head_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_head_timer");
+  var data_2 = entity.getInterpolatedData("skyhighocs:dyn/satellite_timer");
+  var data_3 = entity.getInterpolatedData("skyhighocs:dyn/satellite_rain_mode_timer");
+  var data_4 = entity.getInterpolatedData("skyhighocs:dyn/antenna_timer");
+  var data_5 = entity.getInterpolatedData("skyhighocs:dyn/cannon_head_flush_timer");
+  var data_6 = entity.getInterpolatedData("skyhighocs:dyn/intake_head_left_open_timer");
+  var data_7 = entity.getInterpolatedData("skyhighocs:dyn/intake_head_right_open_timer");
+  var data_8 = entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_head_left_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_head_left_start_up_timer") == 0)?0:1);
+  var data_9 = entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_head_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_head_right_start_up_timer") == 0)?0:1);
+  return (data_0 > 0 || data_1 > 0 || data_2 > 0 || data_3 > 0 || data_4 > 0 || data_5 > 0 || data_6 > 0 || data_7 > 0 || data_8 > 0 || data_9 > 0);
+};
+
+function bodyConditions(entity) {
+  var data_0 = entity.getInterpolatedData("skyhighocs:dyn/rocket_body_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_body_timer");
+  var data_1 = entity.getInterpolatedData("skyhighocs:dyn/rocket_body_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_body_timer");
+  var data_2 = entity.getInterpolatedData("skyhighocs:dyn/cannon_body_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_body_timer");
+  var data_3 = entity.getInterpolatedData("skyhighocs:dyn/cannon_body_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_body_timer");
+  var data_4 = entity.getInterpolatedData("skyhighocs:dyn/wing_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/wings_timer");
+  var data_5 = entity.getInterpolatedData("skyhighocs:dyn/wing_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/wings_timer");
+  var data_6 = entity.getInterpolatedData("skyhighocs:dyn/external_arm_left_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/external_arms_timer");
+  var data_7 = entity.getInterpolatedData("skyhighocs:dyn/external_arm_right_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/external_arms_timer");
+  var data_8 = entity.getInterpolatedData("skyhighocs:dyn/intake_body_left_open_timer");
+  var data_9 = entity.getInterpolatedData("skyhighocs:dyn/intake_body_right_open_timer");
+  var data_10 = entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_body_left_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_body_left_start_up_timer") == 0)?0:1);
+  var data_11 = entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_body_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_body_right_start_up_timer") == 0)?0:1);
+  return (data_0 > 0 || data_1 > 0 || data_2 > 0 || data_3 > 0 || data_4 > 0 || data_5 > 0 || data_6 > 0 || data_7 > 0 || data_8 > 0 || data_9 > 0 || data_10 > 0 || data_11 > 0);
+};
+
+function leftArmConditions(entity) {
+  var data_0 = entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer");
+  var data_1 = entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer");
+  var data_2 = entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer");
+  var data_3 = entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_outer_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_arms_timer");
+  var data_4 = entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_arms_timer");
+  var data_5 = entity.getInterpolatedData("skyhighocs:dyn/rocket_left_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_arms_timer");
+  var data_6 = entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_timer");
+  var data_7 = entity.getInterpolatedData("skyhighocs:dyn/shield_left_arm_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/shield_left_arm_timer");
+  var data_8 = entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_stealth_timer");
+  var data_9 = entity.getInterpolatedData("skyhighocs:dyn/cannon_left_arm_flush_timer");
+  var data_10 = entity.getInterpolatedData("skyhighocs:dyn/intake_left_arm_open_timer");
+  var data_11 = entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_left_arm_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_left_arm_start_up_timer") == 0)?0:1);
+  return (data_0 > 0 || data_1 > 0 || data_2 > 0 || data_3 > 0 || data_4 > 0 || data_5 > 0 || data_6 > 0 || data_7 > 0 || data_8 > 0 || data_9 > 0 || data_10 > 0 || data_11 > 0);
+};
+
+function rightArmConditions(entity) {
+  var data_0 = entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer");
+  var data_1 = entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer");
+  var data_2 = entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/cannons_arms_timer");
+  var data_3 = entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_outer_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_arms_timer");
+  var data_4 = entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_arms_timer");
+  var data_5 = entity.getInterpolatedData("skyhighocs:dyn/rocket_right_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_arms_timer");
+  var data_6 = entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/blade_right_arm_timer");
+  var data_7 = entity.getInterpolatedData("skyhighocs:dyn/shield_right_arm_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/shield_right_arm_timer");
+  var data_8 = entity.getInterpolatedData("skyhighocs:dyn/blade_left_arm_stealth_timer");
+  var data_9 = entity.getInterpolatedData("skyhighocs:dyn/cannon_right_arm_flush_timer");
+  var data_10 = entity.getInterpolatedData("skyhighocs:dyn/intake_right_arm_open_timer");
+  var data_11 = entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_right_arm_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_right_arm_start_up_timer") == 0)?0:1);
+  return (data_0 > 0 || data_1 > 0 || data_2 > 0 || data_3 > 0 || data_4 > 0 || data_5 > 0 || data_6 > 0 || data_7 > 0 || data_8 > 0 || data_9 > 0 || data_10 > 0 || data_11 > 0);
+};
+
+function leftLegConditions(entity) {
+  var data_0 = entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_main_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer");
+  var data_1 = entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_outer_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer");
+  var data_2 = entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer");
+  var data_3 = entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer");
+  var data_4 = entity.getInterpolatedData("skyhighocs:dyn/rocket_left_leg_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer");
+  var data_5 = entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer");
+  var data_6 = entity.getInterpolatedData("skyhighocs:dyn/intake_left_leg_open_timer");
+  var data_7 = entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_left_leg_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_left_leg_start_up_timer") == 0)?0:1);
+  return (data_0 > 0 || data_1 > 0 || data_2 > 0 || data_3 > 0 || data_4 > 0 || data_5 > 0 || data_6 > 0 || data_7 > 0);
+};
+
+function rightLegConditions(entity) {
+  var data_0 = entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_main_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer");
+  var data_1 = entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_outer_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer");
+  var data_2 = entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer");
+  var data_3 = entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_front_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer");
+  var data_4 = entity.getInterpolatedData("skyhighocs:dyn/rocket_right_leg_back_deploy_timer") + entity.getInterpolatedData("skyhighocs:dyn/rockets_legs_timer");
+  var data_5 = entity.getInterpolatedData("skyhighocs:dyn/rocket_inner_legs_timer");
+  var data_6 = entity.getInterpolatedData("skyhighocs:dyn/intake_right_leg_open_timer");
+  var data_7 = entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_right_leg_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_right_leg_start_up_timer") == 0)?0:1);
+  return (data_0 > 0 || data_1 > 0 || data_2 > 0 || data_3 > 0 || data_4 > 0 || data_5 > 0 || data_6 > 0 || data_7 > 0);
 };
