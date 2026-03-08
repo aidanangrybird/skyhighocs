@@ -1,0 +1,19 @@
+{
+  "texture": {
+    "in": "skyhighocs:damien/vulcan_<CLOTHING>_metal",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighocs:astro_body"
+      }
+    ],
+    "out": "skyhighocs:generated/vulcan_body_<CLOTHING>_metal"
+  },
+  "getters": {
+    "CLOTHING": {
+      "key": "entity.getData('skyhighocs:dyn/astro_clothes') == 0 ? 'base' : entity.getData('skyhighocs:dyn/astro_clothes') == 1 ? 'long' : entity.getData('skyhighocs:dyn/astro_clothes') == 2 ? 'short' : 'normal'",
+      "values": ["base", "long", "short", "normal"]
+    }
+  },
+  "isDynamic": true
+}

@@ -7,7 +7,6 @@ var contacts = implement("skyhighocs:external/contacts");
 var scanner = implement("skyhighocs:external/scanner");
 var waypoints = implement("skyhighocs:external/waypoint");
 var brain = implement("skyhighocs:external/astro_brain");
-var engine = implement("skyhighocs:external/astro_engine");
 var blaster = implement("skyhighocs:external/astro_blaster");
 var buttMachineGuns = implement("skyhighocs:external/astro_butt_machine_guns");
 var flight = implement("skyhighocs:external/astro_flight");
@@ -23,7 +22,6 @@ var astrOS = robot.initSystem([
   scanner,
   waypoints,
   brain,
-  engine,
   blaster,
   buttMachineGuns,
   flight,
@@ -44,7 +42,6 @@ function init(hero) {
   hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
   hero.addAttribute("PUNCH_DAMAGE", 10.0, 0);
   hero.addAttribute("KNOCKBACK", 2.5, 0);
-  hero.addAttribute("BASE_SPEED_LEVELS", 30.0, 0);
   hero.addAttribute("IMPACT_DAMAGE", 25.0, 0);
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
@@ -95,7 +92,7 @@ function init(hero) {
   });
   hero.setKeyBindEnabled((entity, keyBind) => {
     if (keyBind == "SHAPE_SHIFT") {
-      return !entity.isSneaking();
+      return true;
     };
     if (keyBind == "CYCLE_CLOTHES") {
       return true;

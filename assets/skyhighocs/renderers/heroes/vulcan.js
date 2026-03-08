@@ -4,16 +4,19 @@ var astro = implement("skyhighocs:external/astro");
 var stuff = implement("skyhighocs:external/stuff");
 
 loadTextures({
-  "full": "skyhighocs:damien/vulcan_full_base",
-  "full_lights": "skyhighocs:damien/vulcan_full_lights",
-  "eye_left": "skyhighocs:damien/vulcan_eye_left.tx.json",
-  "eye_right": "skyhighocs:damien/vulcan_eye_right.tx.json",
-  "head": "skyhighocs:damien/vulcan_head.tx.json",
-  "body": "skyhighocs:damien/vulcan_body.tx.json",
-  "left_arm": "skyhighocs:damien/vulcan_left_arm.tx.json",
-  "right_arm": "skyhighocs:damien/vulcan_right_arm.tx.json",
-  "left_leg": "skyhighocs:damien/vulcan_left_leg.tx.json",
-  "right_leg": "skyhighocs:damien/vulcan_right_leg.tx.json",
+  "head_lights": "skyhighocs:damien/vulcan_head_lights",
+  "body_lights": "skyhighocs:damien/vulcan_body_lights",
+  "left_arm_lights": "skyhighocs:damien/vulcan_left_arm_lights",
+  "right_arm_lights": "skyhighocs:damien/vulcan_right_arm_lights",
+  "left_leg_lights": "skyhighocs:damien/vulcan_left_leg_lights",
+  "right_leg_lights": "skyhighocs:damien/vulcan_right_leg_lights",
+  "head_base": "skyhighocs:damien/vulcan_head_base.tx.json",
+  "head_hair_base": "skyhighocs:damien/vulcan_head_hair_base.tx.json",
+  "body_base": "skyhighocs:damien/vulcan_body_base.tx.json",
+  "left_arm_base": "skyhighocs:damien/vulcan_left_arm_base.tx.json",
+  "right_arm_base": "skyhighocs:damien/vulcan_right_arm_base.tx.json",
+  "left_leg_base": "skyhighocs:damien/vulcan_left_leg_base.tx.json",
+  "right_leg_base": "skyhighocs:damien/vulcan_right_leg_base.tx.json",
   "boots": "skyhighocs:damien/vulcan_boots",
   "shorts": "skyhighocs:damien/vulcan_shorts",
   "santa_hat": "skyhighocs:damien/vulcan_santa_hat"
@@ -21,13 +24,13 @@ loadTextures({
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  rockets = astro.initBoosters(renderer, 0x8000FF);
-  astro.initBeams(renderer, 0x8000FF);
-  stuff.bindSpeedTrail(renderer, "skyhighocs:vulcan_speed");
 };
 
 function getID() {
   return "e51532a1-19fc-4d4f-9da0-f952c4645891";
+};
+function getColor() {
+  return "0x8000FF";
 };
 
 function init(renderer) {
@@ -39,6 +42,5 @@ function init(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
   parent.render(entity, renderLayer, isFirstPersonArm);
 };

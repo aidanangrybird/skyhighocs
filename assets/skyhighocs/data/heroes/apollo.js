@@ -7,7 +7,6 @@ var contacts = implement("skyhighocs:external/contacts");
 var scanner = implement("skyhighocs:external/scanner");
 var waypoints = implement("skyhighocs:external/waypoint");
 var brain = implement("skyhighocs:external/astro_brain");
-var engine = implement("skyhighocs:external/astro_engine");
 var blaster = implement("skyhighocs:external/astro_blaster");
 var buttMachineGuns = implement("skyhighocs:external/astro_butt_machine_guns");
 var flight = implement("skyhighocs:external/astro_flight");
@@ -23,7 +22,6 @@ var astrOS = robot.initSystem([
   scanner,
   waypoints,
   brain,
-  engine,
   blaster,
   buttMachineGuns,
   flight,

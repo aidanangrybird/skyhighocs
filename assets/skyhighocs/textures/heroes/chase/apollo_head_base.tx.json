@@ -1,0 +1,19 @@
+{
+  "texture": {
+    "in": "skyhighocs:chase/apollo_<CLOTHING>",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighocs:astro_head"
+      }
+    ],
+    "out": "skyhighocs:generated/apollo_head_<CLOTHING>"
+  },
+  "getters": {
+    "CLOTHING": {
+      "key": "entity.getData('skyhighocs:dyn/astro_clothes') == 0 ? 'base' : entity.getData('skyhighocs:dyn/astro_clothes') == 1 ? 'long' : entity.getData('skyhighocs:dyn/astro_clothes') == 2 ? 'short' : 'normal'",
+      "values": ["base", "long", "short", "normal"]
+    }
+  },
+  "isDynamic": true
+}

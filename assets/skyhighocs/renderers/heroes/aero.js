@@ -4,16 +4,19 @@ var astro = implement("skyhighocs:external/astro");
 var stuff = implement("skyhighocs:external/stuff");
 
 loadTextures({
-  "full": "skyhighocs:aidan/aero_full_base",
-  "full_lights": "skyhighocs:aidan/aero_full_lights",
-  "eye_left": "skyhighocs:aidan/aero_eye_left.tx.json",
-  "eye_right": "skyhighocs:aidan/aero_eye_right.tx.json",
-  "head": "skyhighocs:aidan/aero_head.tx.json",
-  "body": "skyhighocs:aidan/aero_body.tx.json",
-  "left_arm": "skyhighocs:aidan/aero_left_arm.tx.json",
-  "right_arm": "skyhighocs:aidan/aero_right_arm.tx.json",
-  "left_leg": "skyhighocs:aidan/aero_left_leg.tx.json",
-  "right_leg": "skyhighocs:aidan/aero_right_leg.tx.json",
+  "head_lights": "skyhighocs:aidan/aero_head_lights",
+  "body_lights": "skyhighocs:aidan/aero_body_lights",
+  "left_arm_lights": "skyhighocs:aidan/aero_left_arm_lights",
+  "right_arm_lights": "skyhighocs:aidan/aero_right_arm_lights",
+  "left_leg_lights": "skyhighocs:aidan/aero_left_leg_lights",
+  "right_leg_lights": "skyhighocs:aidan/aero_right_leg_lights",
+  "head_base": "skyhighocs:aidan/aero_head_base.tx.json",
+  "head_hair_base": "skyhighocs:aidan/aero_head_hair_base.tx.json",
+  "body_base": "skyhighocs:aidan/aero_body_base.tx.json",
+  "left_arm_base": "skyhighocs:aidan/aero_left_arm_base.tx.json",
+  "right_arm_base": "skyhighocs:aidan/aero_right_arm_base.tx.json",
+  "left_leg_base": "skyhighocs:aidan/aero_left_leg_base.tx.json",
+  "right_leg_base": "skyhighocs:aidan/aero_right_leg_base.tx.json",
   "boots": "skyhighocs:aidan/aero_boots",
   "shorts": "skyhighocs:aidan/aero_shorts",
   "santa_hat": "skyhighocs:aidan/aero_santa_hat"
@@ -21,13 +24,13 @@ loadTextures({
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  rockets = astro.initBoosters(renderer, 0xFF8900);
-  astro.initBeams(renderer, 0xFF8900);
-  stuff.bindSpeedTrail(renderer, "skyhighocs:aero_speed");
 };
 
 function getID() {
   return "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
+};
+function getColor() {
+  return "0xFF8900";
 };
 
 function init(renderer) {
@@ -39,6 +42,5 @@ function init(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
   parent.render(entity, renderLayer, isFirstPersonArm);
 };
