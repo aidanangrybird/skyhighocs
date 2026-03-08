@@ -252,49 +252,6 @@ function location(renderer) {
   };
 };
 
-function glPerspectiveProjection(entity, inputCoords) {
-  var aspectRatio = 16.0/9.0;
-  var near = 0.05;
-  var hFOV = fovThing(entity);
-  var vFOV = 2*Math.atan(Math.tan(hFOV/2)/aspectRatio);
-  var far = chunkDistance(entity);
-  var matrix = [
-    //X
-    [(1/(aspectRatio*Math.tan(vFOV/2))), 0, 0, 0],
-    //Y
-    [0, (1/Math.tan(vFOV/2)), 0, 0],
-    //Z
-    [0, 0, ((far+near)/(far-near)), ((2*far*near)/(far-near))],
-    //W
-    [0, 0, -1, 0]
-  ];
-  var out = [0, 0, 0];
-  out[0] = inputCoords[0] * matrix[0][0] + inputCoords[1] * matrix[1][0] + inputCoords[2] * matrix[2][0] + matrix[3][0];
-  out[1] = inputCoords[0] * matrix[0][1] + inputCoords[1] * matrix[1][1] + inputCoords[2] * matrix[2][1] + matrix[3][1];
-  out[2] = inputCoords[0] * matrix[0][2] + inputCoords[1] * matrix[1][2] + inputCoords[2] * matrix[2][2] + matrix[3][2];
-  
-  return out;
-};
-
-function fovThing(entity) {
-  var initial = final;
-  var factor = 0.1;
-  var baseFOV = 90.0;
-  var final = entity.motionInterpolated().length();
-  if (final == 0) {
-    return baseFOV;
-  } else {
-    baseFOV *= final * factor;
-    //baseFOV *= initial + (final - initial) * factor;
-    return baseFOV;
-  };
-};
-
-function chunkDistance(entity) {
-  var renderRange = 10.0;
-  return renderRange*32.0;
-};
-
 function getBearing(entity) {
   var rotation = entity.rotationInterpolated().x()%360;
   var bearing = ((Math.abs((rotation < 0) ? (rotation+360) : rotation)+180) % 360);
@@ -684,45 +641,247 @@ function text(renderer) {
         });
       };
     },
-    renderEntity: (entity, isFirstPersonArm, otherEntity) => {
+    renderEntity: (entity, isFirstPersonArm, otherEntity, horizontalAlignment, verticalAlignment, scale) => {
       if (isFirstPersonArm) {
         if (otherEntity.isAlive() && otherEntity.getUUID() != entity.getUUID()) {
           var data = []
+          var angle = entity.rotationInterpolated().x()%360;
+          var bearing = ((Math.abs((angle < 0) ? (angle+360) : angle)) % 360);
           data.push(otherEntity.getName());
           data.push("Health: " + otherEntity.getHealth());
           var distance = entity.eyePos().distanceTo(otherEntity.pos().x(), otherEntity.pos().y(), otherEntity.pos().z());
-          var pitch = (entity.rotationInterpolated().y()/180)*Math.PI + Math.atan2((otherEntity.pos().y()-entity.eyePos().y()), (Math.sqrt(otherEntity.pos().x()^2 + otherEntity.pos().z()^2)-entity.eyePos().xz().distanceTo(otherEntity.pos().x(), otherEntity.pos().z())));
+          //Yaw difference
           var yaw = (entity.rotationInterpolated().x()/180)*Math.PI - Math.atan2((otherEntity.pos().z()-entity.eyePos().z()), (otherEntity.pos().x()-entity.eyePos().x()));
+          //Test yaw difference
+          var entityAngle = entity.eyePos().xz().angleTo(otherEntity.pos().xz())+90;
+          //var entityBearing = ((Math.abs((entityAngle < 0) ? (entityAngle+360) : entityAngle)) % 360);
+          var entityBearing = entityAngle % 360;
+          var yawTest = ((bearing - entityBearing) + 360)%180;
+          var yawTestRadians = -1*(yawTest/360)*Math.PI;
+          //Old Pitch
+          var pitch = (entity.rotationInterpolated().y()/180)*Math.PI + Math.atan2((otherEntity.pos().y()-entity.eyePos().y()), (Math.sqrt(otherEntity.pos().x()^2 + otherEntity.pos().z()^2)-entity.eyePos().xz().distanceTo(otherEntity.pos().x(), otherEntity.pos().z())));
+          //New Pitch
+          //var pitch = (entity.rotationInterpolated().y()/180)*Math.PI - ((Math.cos(yaw)*Math.atan2((otherEntity.pos().y()-entity.eyePos().y()), (otherEntity.pos().x()-entity.eyePos().x()))) - (Math.sin(yaw)*Math.atan2((otherEntity.pos().y()-entity.eyePos().y()), (otherEntity.pos().z()-entity.eyePos().z()))));
           var distanceXZ = entity.eyePos().multiply(1, 0, 1).distanceTo(otherEntity.pos().x(), 0, otherEntity.pos().z());
-          var x = distanceXZ*Math.cos(yaw);
-          var y = (entity.eyePos().y()-otherEntity.pos().y());
-          var z = distanceXZ*Math.sin(yaw);
-          var yOffset = 0.0;
-          data.forEach(entry => {
-            var overallOffsetPosX = 0.0;
-            var overallPosX = 0.0;
-            textCharacters = entry.split("");
-            textCharacters.forEach(textCharacter => {
-              var index = chars.indexOf(textCharacter);
-              if (index > -1) {
-                overallOffsetPosX = overallOffsetPosX + charWidths[textCharacter] + 0.5;
+          var distanceY = entity.eyePos().y()-otherEntity.pos().y();
+          var x = -1*(distanceXZ+180)*Math.cos(yaw);
+          var y = -1*(180)*Math.sin(pitch);
+          var z = (distanceXZ+180)*Math.sin(yaw);
+          //data.push("Hud Pos: " + x.toFixed(2) + "," + y.toFixed(2) + "," + z.toFixed(2));
+          data.push("Radians yaw difference: " + yaw.toFixed(2));
+          data.push("Yaw difference: " + yaw.toFixed(2));
+          data.push("Angle to entity: " + entityBearing.toFixed(2));
+          //data.push("Pitch difference: " + pitch.toFixed(2));
+          var distanceScale = scale + (1/clamp(distance, 1.0, 1024.0))*scale;
+          var overallPosY = 0.0;
+          var totalHeight = 11.0*((data.length-1)*1.0);
+          var overallPosX = 0.0;
+          var largestLineLength = 0.0;
+          //Overall X position
+          data.forEach(line => {
+            if (line != null) {
+              var textCharacters = line.toString().split("");
+              var lineLength = 0.0;
+              textCharacters.forEach(textCharacter => {
+                if (charWidths.hasOwnProperty(textCharacter)) {
+                  lineLength = lineLength + charWidths[textCharacter]*distanceScale + 1.0*distanceScale;
+                };
+                if (largestLineLength < lineLength) {
+                  largestLineLength = lineLength;
+                };
+              });
+            };
+          });
+          switch (horizontalAlignment.toLowerCase()) {
+            case "center":
+              overallPosX = largestLineLength/2;
+              break;
+            case "left":
+              overallPosX = 0.0;
+              break;
+            case "right":
+              overallPosX = largestLineLength;
+              break;
+            default:
+              overallPosX = 0.0;
+              break;
+          };
+          switch (verticalAlignment.toLowerCase()) {
+            case "center":
+              overallPosY = totalHeight/2;
+              break;
+            case "top":
+              overallPosY = 0.0;
+              break;
+            case "bottom":
+              overallPosY = -1*totalHeight;
+              break;
+            default:
+              overallPosY = 0.0;
+              break;
+          };
+          //Per line X position
+          var currentPosY = 0.0;
+          data.forEach(line => {
+            if (line != null) {
+              var textCharacters = line.toString().split("");
+              var currentPosX = 0.0;
+              var lineLength = 0.0;
+              var linePosX = 0.0;
+              textCharacters.forEach(textCharacter => {
+                if (charWidths.hasOwnProperty(textCharacter)) {
+                  lineLength = lineLength + charWidths[textCharacter]*distanceScale + 1.0*distanceScale;
+                };
+              });
+              switch (horizontalAlignment.toLowerCase()) {
+                case "center":
+                  var difference = largestLineLength - lineLength;
+                  linePosX = difference/2;
+                  break;
+                case "left":
+                  linePosX = 0.0;
+                  break;
+                case "right":
+                  var difference = lineLength - largestLineLength;
+                  linePosX = -1*difference;
+                  break;
+                default:
+                  linePosX = 0.0;
+                  break;
               };
-            });
-            overallOffsetPosX = overallOffsetPosX/2;
-            textCharacters.forEach(textCharacter => {
-              var index = chars.indexOf(textCharacter);
-              if (index > -1) {
-                var model = characterModels[index];
-                model.setRotation(0, 0, 0);
-                model.setOffset(x+overallPosX-overallOffsetPosX, y+yOffset, z);
-                model.render();
-                overallPosX = overallPosX + charWidths[textCharacter] + 0.5;
-              };
-            });
-            yOffset = yOffset + 10.0;
+              textCharacters.forEach(textCharacter => {
+                var index = chars.indexOf(textCharacter);
+                if (index > -1) {
+                  var model = characterModels[index];
+                  model.setRotation(0, 0, 0);
+                  model.setOffset(x+currentPosX-overallPosX+linePosX, y+currentPosY-overallPosY, z);
+                  model.setScale(distanceScale);
+                  model.render();
+                  currentPosX = currentPosX + charWidths[textCharacter]*distanceScale + 1.0*distanceScale;
+                };
+                if (textCharacter == " ") {
+                  currentPosX = currentPosX + charWidths[textCharacter]*distanceScale + 1.0*distanceScale;
+                };
+              });
+            };
+            currentPosY = currentPosY + 11.0*distanceScale;
           });
         };
       };
     }
   };
+};
+
+function entitySuitName(entity) {
+  var beingName = entity.getName();
+  if (entity.isWearingFullSuit()) {
+    if (!entity.getWornHelmet().isEmpty()) {
+      var itemName = entity.getWornHelmet().displayName().split("'s");
+      beingName = itemName[0];
+    };
+    if (!entity.getWornChestplate().isEmpty()) {
+      var itemName = entity.getWornChestplate().displayName().split("'s");
+      beingName = itemName[0];
+    };
+    if (!entity.getWornLeggings().isEmpty()) {
+      var itemName = entity.getWornLeggings().displayName().split("'s");
+      beingName = itemName[0];
+    };
+    if (!entity.getWornBoots().isEmpty()) {
+      var itemName = entity.getWornBoots().displayName().split("'s");
+      beingName = itemName[0];
+    };
+    if (!isTransformed(entity)) {
+      beingName = entity.getName();
+    };
+    if (entity.getDataOrDefault("secretheroes:dyn/moonknight_timer", 0) == 1) {
+      beingName = "Moon Knight";
+    };
+    if (entity.getDataOrDefault("secretheroes:dyn/mrknight_timer", 0) == 1) {
+      beingName = "Mr Knight";
+    };
+    if (entity.getWornChestplate().suitType() == "tmf:omnitrix" && entity.getDataOrDefault("tmf:dyn/transformed", -1) > -1) {
+      var alien = entity.getData("tmf:dyn/transformed") + 0;
+      system.moduleMessage(this, entity, alien);
+      beingName = tmfAliens[alien];
+    };
+    if (isTransformed(entity) && ((entity.getData("fiskheroes:mask_open_timer2") == 1) || (entity.getData("fiskheroes:mask_open_timer") == 5))) {
+      beingName = entity.getName();
+    };
+    if (entity.getData("fiskheroes:disguise") != null) {
+      beingName = entity.getData("fiskheroes:disguise");
+    };
+  };
+  return beingName;
+};
+
+var tmfAliens = [
+  "Heatblast",
+  "Wildmutt",
+  "Diamondhead",
+  "XLR8",
+  "Grey Matter",
+  "Four Arms",
+  "Stinkfly",
+  "Ripjaws",
+  "Upgrade",
+  "Ghostfreak",
+  "Heatjaws",
+  "Stinkarms",
+  "Diamondmatter",
+  "13",
+  "14",
+  "15",
+  "Cannonbolt",
+  "Wildvine",
+  "Blitzwolfer",
+  "Snare-oh",
+  "Frankenstrike",
+  "Zs'Skayr",
+  "Upchuck",
+  "Ditto",
+  "Eyeguy",
+  "Waybig"
+];
+
+var transformedVars = [
+  "fiskheroes:dyn/nanite_timer",
+  "dhhp:dyn/helmet_timer",
+  "nameless:dyn/backpack_timer",
+  "nameless:dyn/symbiote_timer",
+  "sabri:dyn/vibranium_nanite_timer",
+  "secretheroes:dyn/hulk_timer",
+  "stellar:dyn/danny_phantom_transform_timer",
+  "tmf:dyn/transform_timer",
+  "jmctheroes:dyn/fate_timer",
+  "jmctheroes:dyn/beetle_timer",
+  "jmctheroes:dyn/suit_timer",
+  "stellar:dyn/suit_timer",
+  "pwt:dyn/symbiot_timer",
+  "jmctheroes:dyn/symbiote_timer",
+  "skarredheroes:dyn/scarab_timer",
+  "sind:dyn/b_timer_model",
+  "sind:dyn/b_timer",
+  "ironmaniac:dyn/mk5_timer",
+  "secretheroes:dyn/moonknight_timer",
+  "secretheroes:dyn/mrknight_timer",
+  "skyhighocs:dyn/wave_changing_timer",
+  "skyhighheroes:dyn/wave_changing_timer",
+];
+
+function isTransformed(entity) {
+  var transformed = false;
+  transformedVars.forEach(variable => {
+    if (!transformed) {
+      transformed = (entity.getDataOrDefault(variable, 1) == 1);
+    };
+  });
+  return transformed;
+};
+
+function isLookingAtTarget(basePos, baseRot, targetPos, fov) {
+    var directionToEntity = targetPos.subtract(basePos).normalized();
+    var dotProduct = Math.max(-1, Math.min(1, baseRot.dot(directionToEntity)));
+    var angle = Math.acos(dotProduct) * (180 / Math.PI);
+    return Math.abs(angle) < fov;
 };
