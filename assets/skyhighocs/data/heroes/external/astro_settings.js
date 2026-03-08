@@ -13,21 +13,9 @@ function initModule(system) {
       if (argList.length > 1 && argList.length < 4) {
         var nbt = entity.getWornLeggings().nbt();
         switch(argList[1]) {
-          case "leftEyeHuman":
-            manager.setBoolean(nbt, "leftEyeHuman", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("leftEyeHuman")));
-            system.moduleMessage(this, entity, "<n>leftEyeHuman set to <nh>" + nbt.getBoolean("leftEyeHuman") + "<n>!");
-            break;
-          case "rightEyeHuman":
-            manager.setBoolean(nbt, "rightEyeHuman", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("rightEyeHuman")));
-            system.moduleMessage(this, entity, "<n>rightEyeHuman set to <nh>" + nbt.getBoolean("rightEyeHuman") + "<n>!");
-            break;
-          case "leftEyeGlow":
-            manager.setBoolean(nbt, "leftEyeGlow", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("leftEyeGlow")));
-            system.moduleMessage(this, entity, "<n>leftEyeGlow set to <nh>" + nbt.getBoolean("leftEyeGlow") + "<n>!");
-            break;
-          case "rightEyeGlow":
-            manager.setBoolean(nbt, "rightEyeGlow", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("rightEyeGlow")));
-            system.moduleMessage(this, entity, "<n>rightEyeGlow set to <nh>" + nbt.getBoolean("rightEyeHuman") + "<n>!");
+          case "hudScale":
+            manager.setFloat(nbt, "hudScale", parseFloat(argList[2]));
+            system.moduleMessage(this, entity, "<n>hudScale set to <nh>" + nbt.getFloat("hudScale") + "<n>!");
             break;
           case "hudRange":
             manager.setShort(nbt, "hudRange", parseInt(argList[2]));
@@ -46,26 +34,20 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>hudPlayers set to <nh>" + nbt.getBoolean("hudPlayers") + "<n>!");
             break;
           case "list":
-            system.moduleMessage(this, entity, "<n>leftEyeHuman: <nh>" + nbt.getBoolean("leftEyeHuman"));
-            system.moduleMessage(this, entity, "<n>rightEyeHuman: <nh>" + nbt.getBoolean("rightEyeHuman"));
-            system.moduleMessage(this, entity, "<n>leftEyeGlow: <nh>" + nbt.getBoolean("leftEyeGlow"));
-            system.moduleMessage(this, entity, "<n>rightEyeGlow: <nh>" + nbt.getBoolean("rightEyeGlow"));
             system.moduleMessage(this, entity, "<n>hudRange: <nh>" + nbt.getShort("hudRange"));
             system.moduleMessage(this, entity, "<n>hudFriendlies: <nh>" + nbt.getBoolean("hudFriendlies"));
             system.moduleMessage(this, entity, "<n>hudHostiles: <nh>" + nbt.getBoolean("hudHostiles"));
             system.moduleMessage(this, entity, "<n>hudPlayers: <nh>" + nbt.getBoolean("hudPlayers"));
+            system.moduleMessage(this, entity, "<n>hudScale: <nh>" + nbt.getFloat("hudScale"));
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Settings commands:");
             system.moduleMessage(this, entity, "<n>!set list <nh>-<n> Lists current settings and their values");
-            system.moduleMessage(this, entity, "<n>!set leftEyeHuman <true|false> <nh>-<n> Sets if left eye appears human");
-            system.moduleMessage(this, entity, "<n>!set rightEyeHuman <true|false> <nh>-<n> Sets if right eye appears human");
-            system.moduleMessage(this, entity, "<n>!set leftEyeGlow <true|false> <nh>-<n> Sets if left eye glows");
-            system.moduleMessage(this, entity, "<n>!set rightEyeGlow <true|false> <nh>-<n> Sets if right eye glows");
             system.moduleMessage(this, entity, "<n>!set hudRange <number> <nh>-<n> Sets range of HUD scanner");
             system.moduleMessage(this, entity, "<n>!set hudFriendlies <true|false> <nh>-<n> Sets if friendly mobs appear on HUD");
             system.moduleMessage(this, entity, "<n>!set hudHostiles <true|false> <nh>-<n> Sets if hostile mobs appear on HUD");
             system.moduleMessage(this, entity, "<n>!set hudPlayers <true|false> <nh>-<n> Sets if players appear on HUD");
+            system.moduleMessage(this, entity, "<n>!set hudScale <number> <nh>-<n> Sets scale of HUD elements");
             system.moduleMessage(this, entity, "<n>!set help <nh>-<n> Shows this list");
             break;
           default:

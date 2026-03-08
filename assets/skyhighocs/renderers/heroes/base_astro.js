@@ -30,6 +30,9 @@ var right_leg_booster;
 
 var locationBeam;
 var entityLocationBeam;
+var text_renderer;
+
+var panelList = astro.panels;
 
 loadTextures({
   "null": "skyhighocs:null",
@@ -67,8 +70,7 @@ function init(renderer) {
 };
 
 function initEffects(renderer) {
-  locationBeam = stuff.location(renderer);
-  entityLocationBeam = stuff.entityLocation(renderer);
+  text_renderer = stuff.text(renderer);
   var blank = renderer.createResource("MODEL", "skyhighocs:BlankThing");
   blank.texture.set("blank");
   blank_model = renderer.createEffect("fiskheroes:model").setModel(blank);
@@ -251,6 +253,27 @@ function render(entity, renderLayer, isFirstPersonArm) {
       blank_model.opacity = entity.getInterpolatedData("skyhighocs:dyn/powering_down_timer") + (astro.isModuleDisabled(entity, "eyes") ? 1 : 0);
       blank_model.anchor.ignoreAnchor(true);
       blank_model.render();
+    };
+    if (entity.isWearingFullSuit() && isFirstPersonArm) {
+      var openPanelCount = 0;
+      panelList.forEach(variable => {
+        if (entity.getInterpolatedData(variable) > 0) {
+          openPanelCount = openPanelCount + 1;
+        };
+      });
+      if (openPanelCount > 0) {
+        panelsToRender = []
+        var warning = "WARNING!";
+        panelsToRender.push(warning);
+        if (openPanelCount == 1) {
+          var openPanels = openPanelCount + " panel open!";
+          panelsToRender.push(openPanels);
+        } else {
+          var openPanels = openPanelCount + " panels open!";
+          panelsToRender.push(openPanels);
+        };
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", panelsToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+      };
     };
   };
   metal_heat.opacity = entity.getInterpolatedData("fiskheroes:metal_heat");

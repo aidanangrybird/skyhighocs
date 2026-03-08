@@ -22,11 +22,12 @@ function initModule(system) {
             break;
           case "body":
             system.moduleMessage(this, entity, "<n>Body panel status:");
-            system.moduleMessage(this, entity, "<n>Upper front panel: <nh>" + ((entity.getData("skyhighocs:dyn/torso_front_open_timer") > 0) ? "OPEN" : "CLOSED"));
-            system.moduleMessage(this, entity, "<n>Upper back panel: <nh>" + ((entity.getData("skyhighocs:dyn/torso_back_open_timer") > 0) ? "OPEN" : "CLOSED"));
-            system.moduleMessage(this, entity, "<n>Lower front panel: <nh>" + ((entity.getData("skyhighocs:dyn/shorts_front_open_timer") > 0) ? "OPEN" : "CLOSED"));
-            system.moduleMessage(this, entity, "<n>Lower back panel: <nh>" + ((entity.getData("skyhighocs:dyn/shorts_back_open_timer") > 0) ? "OPEN" : "CLOSED"));
+            system.moduleMessage(this, entity, "<n>Torso front panel: <nh>" + ((entity.getData("skyhighocs:dyn/torso_front_open_timer") > 0) ? "OPEN" : "CLOSED"));
+            system.moduleMessage(this, entity, "<n>Torso back panel: <nh>" + ((entity.getData("skyhighocs:dyn/torso_back_open_timer") > 0) ? "OPEN" : "CLOSED"));
+            system.moduleMessage(this, entity, "<n>Shorts front panel: <nh>" + ((entity.getData("skyhighocs:dyn/shorts_front_open_timer") > 0) ? "OPEN" : "CLOSED"));
+            system.moduleMessage(this, entity, "<n>Shorts back panel: <nh>" + ((entity.getData("skyhighocs:dyn/shorts_back_open_timer") > 0) ? "OPEN" : "CLOSED"));
             system.moduleMessage(this, entity, "<n>Machine gun panels: <nh>" + ((entity.getData("skyhighocs:dyn/machine_gun_open_timer") > 0) ? "OPEN" : "CLOSED"));
+            system.moduleMessage(this, entity, "<n>Core panels: <nh>" + ((entity.getData("skyhighocs:dyn/core_open_timer") > 0) ? "OPEN" : "CLOSED"));
             break;
           case "leftArm":
             system.moduleMessage(this, entity, "<n>Left Arm panel status:");

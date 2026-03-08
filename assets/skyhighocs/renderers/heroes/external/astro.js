@@ -101,6 +101,35 @@ function addHoverAnimation(renderer, name, value, dataLoader) {
   return anim;
 };
 
+var panels = [
+  "skyhighocs:dyn/head_top_front_open_timer",
+  "skyhighocs:dyn/head_top_back_open_timer",
+  "skyhighocs:dyn/head_bottom_front_open_timer",
+  "skyhighocs:dyn/head_bottom_back_open_timer",
+  "skyhighocs:dyn/torso_front_open_timer",
+  "skyhighocs:dyn/torso_back_open_timer",
+  "skyhighocs:dyn/shorts_front_open_timer",
+  "skyhighocs:dyn/shorts_back_open_timer",
+  "skyhighocs:dyn/machine_gun_open_timer",
+  "skyhighocs:dyn/core_open_timer",
+  "skyhighocs:dyn/left_arm_outer_open_timer",
+  "skyhighocs:dyn/left_cannon_outer_open_timer",
+  "skyhighocs:dyn/left_cannon_inner_open_timer",
+  "skyhighocs:dyn/right_arm_outer_open_timer",
+  "skyhighocs:dyn/right_cannon_outer_open_timer",
+  "skyhighocs:dyn/right_cannon_inner_open_timer",
+  "skyhighocs:dyn/left_leg_front_open_timer",
+  "skyhighocs:dyn/left_leg_back_open_timer",
+  "skyhighocs:dyn/left_boot_front_open_timer",
+  "skyhighocs:dyn/left_boot_back_open_timer",
+  "skyhighocs:dyn/left_boot_open_timer",
+  "skyhighocs:dyn/right_leg_front_open_timer",
+  "skyhighocs:dyn/right_leg_back_open_timer",
+  "skyhighocs:dyn/right_boot_front_open_timer",
+  "skyhighocs:dyn/right_boot_back_open_timer",
+  "skyhighocs:dyn/right_boot_open_timer"
+];
+
 //Astro Animations
 function initAstroAnimations(renderer) {
   //Aiming
