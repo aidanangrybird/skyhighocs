@@ -18,7 +18,7 @@ function init(renderer) {
       if (entity.getInterpolatedData("skyhighocs:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighocs:dyn/calling_timer") < 0.6) {
         return "base";
       };
-      if ((entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT")) {
+      if (entity.getUUID() != getID() || (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT")) {
         return "transer_default";
       } else {
         return "transer";
@@ -30,7 +30,7 @@ function init(renderer) {
       if (entity.getInterpolatedData("skyhighocs:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighocs:dyn/calling_timer") < 0.6) {
         return "lights";
       };
-      if ((entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT")) {
+      if (entity.getUUID() != getID() || (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT")) {
         return "transer_default_lights";
       } else {
         return "visualizer_lights";

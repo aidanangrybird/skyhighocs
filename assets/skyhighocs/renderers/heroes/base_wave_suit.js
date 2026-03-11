@@ -10,22 +10,13 @@ var visor_model;
 function init(renderer) {
   renderer.setTexture((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if ((entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND")) {
+      if (entity.getUUID() != getID() || (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND")) {
         return "suit";
       } else {
         return "base";
       };
     };
-  });/* 
-  renderer.setLights((entity, renderLayer) => {
-    if (renderLayer == "CHESTPLATE") {
-      if ((entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT")) {
-        return "visor";
-      } else {
-        return "visor";
-      };
-    };
-  }); */
+  });
   renderer.showModel("CHESTPLATE", "head", "headwear", "body", "rightArm", "leftArm", "leftLeg", "rightLeg");
   renderer.fixHatLayer("CHESTPLATE");
   renderer.setItemIcon("CHESTPLATE", "%s");
@@ -39,7 +30,12 @@ function initEffects(renderer) {
   visor_model = renderer.createEffect("fiskheroes:model").setModel(visor);
   visor_model.anchor.set("head");
   visor_model.setScale(1.0);
-  visor_model.setOffset(0.0, 0.0, 0.0)
+  visor_model.setOffset(0.0, 0.0, 0.0);
+  nv = renderer.bindProperty("fiskheroes:night_vision");
+  nv.fogStrength = 0.0;
+  nv.factor = 1.0;
+  nv.firstPersonOnly = true;
+  nv.setCondition(entity => true);
 };
 
 function initAnimations(renderer) {
