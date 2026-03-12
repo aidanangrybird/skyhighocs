@@ -885,3 +885,21 @@ function isLookingAtTarget(basePos, baseRot, targetPos, fov) {
     var angle = Math.acos(dotProduct) * (180 / Math.PI);
     return Math.abs(angle) < fov;
 };
+
+function getMainNBT(entity) {
+  if (entity.isWearingFullSuit()) {
+    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+      return entity.getWornHelmet().nbt();
+    };
+    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+      return entity.getWornChestplate().nbt();
+    };
+    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+      return entity.getWornLeggings().nbt();
+    };
+    if (entity.getWornBoots().nbt().hasKey("computerID")) {
+      return entity.getWornBoots().nbt();
+    };
+  };
+  return null;
+};

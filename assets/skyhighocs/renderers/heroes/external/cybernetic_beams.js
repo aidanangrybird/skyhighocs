@@ -17,8 +17,6 @@ function bindBeam(renderer, propertyName, beam, anchor, color, entries) {
   return prop;
 };
 
-//
-
 //Init
 //Beams
 function initLeftArmBeams(renderer, color) {
@@ -29,7 +27,7 @@ function initLeftArmBeams(renderer, color) {
   ];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:cybernetic_cannons", "leftArm", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms") && !entity.getWornHelmet().nbt().getBoolean("flushLeftArmCannons"));
+  chargedBeam.setCondition(entity => mainNBT(entity).getBoolean("cannonsArms") && !mainNBT(entity).getBoolean("flushLeftArmCannons"));
   var positionFlush = [
     { "firstPerson": [4.5, 3.75, -11.4], "offset": [0.5, 10.0, 0.0], "size": [2.0, 2.0] },
     { "firstPerson": [7.0, 3.75, -11.4], "offset": [0.5, 8.0, -2.5], "size": [2.0, 2.0] },
@@ -37,7 +35,7 @@ function initLeftArmBeams(renderer, color) {
   ];
   var chargedBeamFlush = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:cybernetic_cannons", "leftArm", color, positionFlush);
   chargedBeamFlush.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeamFlush.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms") && entity.getWornHelmet().nbt().getBoolean("flushLeftArmCannons"));
+  chargedBeamFlush.setCondition(entity => mainNBT(entity).getBoolean("cannonsArms") && mainNBT(entity).getBoolean("flushLeftArmCannons"));
 };
 function initRightArmBeams(renderer, color) {
   var position = [
@@ -47,7 +45,7 @@ function initRightArmBeams(renderer, color) {
   ];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:cybernetic_cannons", "rightArm", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms") && !entity.getWornHelmet().nbt().getBoolean("flushRightArmCannons"));
+  chargedBeam.setCondition(entity => mainNBT(entity).getBoolean("cannonsArms") && !mainNBT(entity).getBoolean("flushRightArmCannons"));
   var positionFlush = [
     { "firstPerson": [-4.5, 3.75, -11.4], "offset": [-0.5, 10.0, 0.0], "size": [2.0, 2.0] },
     { "firstPerson": [-7.0, 3.75, -11.4], "offset": [-0.5, 8.0, -2.5], "size": [2.0, 2.0] },
@@ -55,7 +53,7 @@ function initRightArmBeams(renderer, color) {
   ];
   var chargedBeamFlush = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:cybernetic_cannons", "rightArm", color, positionFlush);
   chargedBeamFlush.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeamFlush.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms") && entity.getWornHelmet().nbt().getBoolean("flushRightArmCannons"));
+  chargedBeamFlush.setCondition(entity => mainNBT(entity).getBoolean("cannonsArms") && mainNBT(entity).getBoolean("flushRightArmCannons"));
 };
 
 function initHeadBeams(renderer, color) {
@@ -65,14 +63,14 @@ function initHeadBeams(renderer, color) {
   ];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:cybernetic_cannons", "head", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsHead") && !entity.getWornHelmet().nbt().getBoolean("flushHeadCannons"));
+  chargedBeam.setCondition(entity => mainNBT(entity).getBoolean("cannonsHead") && !mainNBT(entity).getBoolean("flushHeadCannons"));
   var positionFlush = [
     { "firstPerson": [-5.15, 0.0, -1.0], "offset": [-5.15, -3.85, -1.0], "size": [2.0, 2.0] },
     { "firstPerson": [5.15, 0.0, -1.0], "offset": [5.15, -3.85, -1.0], "size": [2.0, 2.0] }
   ];
   var chargedBeamFlush = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:cybernetic_cannons", "head", color, positionFlush);
   chargedBeamFlush.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeamFlush.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsHead") && entity.getWornHelmet().nbt().getBoolean("flushHeadCannons"));
+  chargedBeamFlush.setCondition(entity => mainNBT(entity).getBoolean("cannonsHead") && mainNBT(entity).getBoolean("flushHeadCannons"));
 };
 
 function initBodyBeams(renderer, color) {
@@ -82,26 +80,9 @@ function initBodyBeams(renderer, color) {
   ];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighocs:cybernetic_cannons", "body", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsBody"));
+  chargedBeam.setCondition(entity => mainNBT(entity).getBoolean("cannonsBody"));
 };
 
-/**
- * Checks a NBT boolean to be used on holographic display stand
- * @param {JSEntity} entity - required
- * @param {string} value - NBT boolean to check
- * @returns NBT boolean if the entity is a holographic display stand
- **/
-function getHoloBoolean(entity, value) {
-  return entity.is("DISPLAY") && entity.getWornHelmet().nbt().getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
-};
-
-/**
- * Checks two NBT booleans to be used on holographic display stand
- * @param {JSEntity} entity - required
- * @param {string} condition - NBT boolean to use for condition
- * @param {string} value - NBT boolean to use for condition
- * @returns NBT boolean if the entity is a holographic display stand
- **/
-function getHoloBooleans(entity, condition, value) {
-  return entity.is("DISPLAY") && entity.getWornHelmet().nbt().getBoolean(condition) && entity.getWornHelmet().nbt().getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+function mainNBT(entity) {
+  return entity.getWornHelmet().nbt();
 };

@@ -42,8 +42,8 @@ function initModule(system) {
   * @param manager - Required
   **/
   function receiveSuits(module, tx, rx, manager) {
-    var nbtRX = rx.getWornHelmet().nbt();
-    var nbtTX = tx.getWornHelmet().nbt();
+    var nbtRX = system.mainNBT(rx)
+    var nbtTX = system.mainNBT(tx)
     if (!nbtRX.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
       manager.setTagList(nbtRX, "suitDatastore", newSuitsList);
@@ -83,7 +83,7 @@ function initModule(system) {
   * @param currentReceive - Current suit being received
   **/
   function receiveSuit(module, entity, manager, currentReceive) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuitsList);
@@ -116,7 +116,7 @@ function initModule(system) {
       system.moduleMessage(module, entity, "<e>Suit list cannot be empty!");
       return;
     };
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("suitDatastore")) {
       var newSuits = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuits);
@@ -166,7 +166,7 @@ function initModule(system) {
   * @param currentTransmission - Suit index
   **/
   function transmitSuit(module, entity, manager, currentTransmission) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuitsList);
@@ -484,7 +484,7 @@ function initModule(system) {
         manager.setData(entity, "skyhighocs:dyn/transmit_beam", false);
         manager.setData(entity, "skyhighocs:dyn/receive_beam", false);
       };
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       if (entity.getData("skyhighocs:dyn/receive_timer") >= 1) {
         if (PackLoader.getSide() == "CLIENT") {
           entity.playSound("minecraft:random.levelup", 1.0, 1.0);

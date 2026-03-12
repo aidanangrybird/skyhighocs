@@ -426,3 +426,7 @@ function initEMBeing(renderer) {
     }
   };
 };
+
+function mainNBT(entity) {
+  return entity.getWornChestplate().nbt();
+};

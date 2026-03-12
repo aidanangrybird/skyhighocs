@@ -38,11 +38,12 @@ var hexColors = {
 };
 
 function asssignID(entity, manager, robotName, color) {
-  manager.setString(entity.getWornLeggings().nbt(), "robotModel", robotName+"-"+color);
-  if (!entity.getWornLeggings().nbt().hasKey("computerID")) {
+  var nbt = mainNBT(entity);
+  manager.setString(nbt, "robotModel", robotName+"-"+color);
+  if (!nbt.hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
       var computerID = Math.random().toFixed(8).toString().substring(2);
-      manager.setString(entity.getWornLeggings().nbt(), "computerID", computerID);
+      manager.setString(nbt, "computerID", computerID);
     };
   };
 };
@@ -53,7 +54,7 @@ function asssignID(entity, manager, robotName, color) {
  * @returns If the entity is wearing a robot
  **/
 function isRobot(entity) {
-  return entity.getWornLeggings().nbt().hasKey("robotModel");
+  return mainNBT(entity).hasKey("robotModel");
 };
 
 /**
@@ -62,7 +63,7 @@ function isRobot(entity) {
  * @returns The satellite a robot is assigned to
  **/
 function getModel(entity) {
-  return entity.getWornLeggings().nbt().getString("robotModel");
+  return mainNBT(entity).getString("robotModel");
 };
 
 /**
@@ -71,7 +72,7 @@ function getModel(entity) {
  * @returns If the entity has a device that is a computer
  **/
 function hasComputer(entity) {
-  return entity.getWornHelmet().nbt().hasKey("computerID") || entity.getWornChestplate().nbt().hasKey("computerID") || entity.getWornLeggings().nbt().hasKey("computerID") || entity.getWornBoots().nbt().hasKey("computerID");
+  return getMainNBT(entity).hasKey("computerID");
 };
 
 /**
@@ -178,6 +179,28 @@ function direction(base, other) {
   return direction;
 };
 
+function mainNBT(entity) {
+  return entity.getWornLeggings().nbt();
+};
+
+function getMainNBT(entity) {
+  if (entity.isWearingFullSuit()) {
+    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+      return entity.getWornHelmet().nbt();
+    };
+    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+      return entity.getWornChestplate().nbt();
+    };
+    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+      return entity.getWornLeggings().nbt();
+    };
+    if (entity.getWornBoots().nbt().hasKey("computerID")) {
+      return entity.getWornBoots().nbt();
+    };
+  };
+  return null;
+};
+
 /**
  * Turns NBT String List into an array for easier use in code
  * @param {JSNBTList} nbtList - NBTList
@@ -199,14 +222,15 @@ function getStringArray(nbtList) {
  * @param {string} moduleName - Module name to disable
  **/
 function disableModule(entity, manager, moduleList, moduleName) {
+  var nbt = mainNBT(entity);
   if (moduleList.indexOf(moduleName) > -1) {
-    if (!entity.getWornLeggings().nbt().hasKey("disabledModules")) {
+    if (!nbt.hasKey("disabledModules")) {
       var disabledModules = manager.newTagList();
       manager.appendString(disabledModules, moduleName);
-      manager.setTagList(entity.getWornLeggings().nbt(), "disabledModules", disabledModules);
+      manager.setTagList(nbt, "disabledModules", disabledModules);
       systemMessage(entity, "<s>Module <sh>" + moduleName + "<s> disabled!");
     } else {
-      var disabledModules = entity.getWornLeggings().nbt().getStringList("disabledModules");
+      var disabledModules = nbt.getStringList("disabledModules");
       var disabledModulesIndex = getStringArray(disabledModules).indexOf(moduleName);
       if (disabledModulesIndex > -1) {
         systemMessage(entity, "<e>You have already disabled module <eh>" + moduleName + "<e>!");
@@ -227,11 +251,12 @@ function disableModule(entity, manager, moduleList, moduleName) {
  * @param {integer} moduleName - Name of module to enable
  **/
 function enableModule(entity, manager, moduleList, moduleName) {
+  var nbt = mainNBT(entity);
   if (moduleList.indexOf(moduleName) > -1) {
-    if (!entity.getWornLeggings().nbt().hasKey("disabledModules")) {
+    if (!nbt.hasKey("disabledModules")) {
       systemMessage(entity, "<e>You have no disabled modules to enable!");
     } else {
-      var disabledModules = entity.getWornLeggings().nbt().getStringList("disabledModules");
+      var disabledModules = nbt.getStringList("disabledModules");
       if (disabledModules.tagCount() == 0) {
         systemMessage(entity, "<e>You have no disabled modules to enable!");
       } else {
@@ -255,7 +280,7 @@ function enableModule(entity, manager, moduleList, moduleName) {
  * @returns If module is disabled
  **/
 function isModuleDisabled(entity, moduleName) {
-  var disabledModules = entity.getWornLeggings().nbt().getStringList("disabledModules");
+  var disabledModules = mainNBT(entity).getStringList("disabledModules");
   var modulesDisabled = getStringArray(disabledModules);
   var result = false;
   modulesDisabled.forEach(entry => {
@@ -519,7 +544,7 @@ function initSystem(moduleList, name, colorCode) {
     var chatMode = chatModes.indexOf(mode);
     if (chatMode > -1) {
       var chatModule = modules[messagingIndexes[chatMode]];
-      manager.setString(entity.getWornHelmet().nbt(), "chatMode", chatModule.modeID);
+      manager.setString(mainNBT(entity), "chatMode", chatModule.modeID);
       systemMessage(entity, chatModule.chatModeMessage);
       chatModule.chatModeInfo(entity);
     } else {
@@ -527,7 +552,7 @@ function initSystem(moduleList, name, colorCode) {
     };
   };
   function switchChats(entity, manager, chat) {
-    var modeID = entity.getWornLeggings().nbt().getString("chatMode");
+    var modeID = mainNBT(entity).getString("chatMode");
     var chatMode = chatModes.indexOf(modeID);
     modules[messagingIndexes[chatMode]].chatInfo(entity, manager, chat);
   };
@@ -542,7 +567,7 @@ function initSystem(moduleList, name, colorCode) {
     });
     systemMessage(entity, "<n>astrOS");
     systemMessage(entity, modulesMessage);
-    systemMessage(entity, "<n>computerID: <nh>" + entity.getWornLeggings().nbt().getString("computerID"));
+    systemMessage(entity, "<n>computerID: <nh>" + getMainNBT(entity).getString("computerID"));
   };
   function status(entity) {
     var date = new Date();
@@ -698,7 +723,7 @@ function initSystem(moduleList, name, colorCode) {
      * @param {JSDataManager} manager - Required
      **/
     systemHandler: (entity, manager) => {
-      var nbt = entity.getWornLeggings().nbt();
+      var nbt = mainNBT(entity);
       if (!entity.getDataOrDefault("skyhighocs:dyn/system_init", true) && entity.getData("skyhighocs:dyn/powering_down_timer") == 0) {
         asssignID(entity, manager, robotName, color);
         status(entity);

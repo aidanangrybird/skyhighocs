@@ -29,7 +29,7 @@ function initModule(system) {
     helpMessage: "<n>!set <nh>-<n> Settings",
     commandHandler: function (entity, manager, argList) {
       if (argList.length > 1 && argList.length < 4) {
-        var nbt = entity.getWornChestplate().nbt();
+        var nbt = system.mainNBT(entity);
         switch(argList[1]) {
           case "color":
             if (colors.indexOf(argList[2]) > -1) {

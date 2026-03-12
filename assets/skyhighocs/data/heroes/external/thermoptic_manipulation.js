@@ -12,7 +12,7 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>thermoptics<e> is disabled!",
     commandHandler: function (entity, manager, argList) {
       if (argList.length > 1 && argList.length < 4) {
-        var nbt = entity.getWornHelmet().nbt();
+        var nbt = system.mainNBT(entity);
         switch (argList[1]) {
           case "enable":
             switch (argList[2]) {
@@ -128,7 +128,7 @@ function initModule(system) {
       };
     },
     onInitSystem: function (entity, manager) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       var autoDisguise = nbt.getBoolean("autoDisguise");
       if (autoDisguise) {
         manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise", true);

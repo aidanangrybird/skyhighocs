@@ -241,7 +241,7 @@ function initEffects(renderer) {
   nv.fogStrength = 0.0;
   nv.firstPersonOnly = false;
   nv.factor = 1.0;
-  nv.setCondition(entity => (entity.isWearingFullSuit() && entity.getWornHelmet().nbt().getBoolean("nightVision")));
+  nv.setCondition(entity => (entity.isWearingFullSuit() && cybernetics.mainNBT(entity).getBoolean("nightVision")));
 };
 
 function initAnimations(renderer) {
@@ -251,8 +251,7 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  var suit = entity.getWornHelmet();
-  var nbt = suit.nbt();
+  var nbt = cybernetics.mainNBT(entity);
   if (entity.is("DISPLAY")) {
     if (nbt.getBoolean("disguiseOnStand")) {
       head_disguise_model.render();
@@ -583,7 +582,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
   };
 };
 function getBoundUUID(entity) {
-  return entity.getWornHelmet().nbt().getString("boundUUID");
+  return cybernetics.mainNBT(entity).getString("boundUUID");
 };
 function getColor() {
   return "";

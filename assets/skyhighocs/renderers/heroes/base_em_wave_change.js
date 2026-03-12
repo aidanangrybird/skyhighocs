@@ -104,7 +104,6 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  var nbt = entity.getWornChestplate().nbt();
   if (isChristmasSeason) {
     if (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighocs:dyn/wave_changing_timer") == 0) {
       santaHat.setScale(1.05);
