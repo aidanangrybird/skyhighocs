@@ -97,6 +97,9 @@ function initModule(system) {
       suitDatastoreArray.push(currentSuit);
       manager.appendString(suitDatastore, currentSuit);
       system.moduleMessage(module, entity, "<s>Successfully received suit \"<sh>" + currentSuit + "<s>\" to " + system.getModelID(entity) + "!");
+      if (PackLoader.getSide() == "CLIENT") {
+        entity.playSound("minecraft:random.orb", 1.0, 1.0);
+      };
     } else {
       system.moduleMessage(module, entity, "<e>Failed to receive suit \"<eh>" + currentSuit + "<e>\"! Already exists in datastore!");
     };
@@ -174,6 +177,9 @@ function initModule(system) {
     system.moduleMessage(module, entity, "<n>Transmitting suit \"<nh>" + currentSuit + "<n>\"!");
     if (suitDatastoreArray.indexOf(currentSuit) == -1) {
       system.moduleMessage(module, entity, "<s>Successfully transmitted suit \"<sh>" + currentSuit + "<s>\" to other cybers in range!");
+      if (PackLoader.getSide() == "CLIENT") {
+        entity.playSound("minecraft:random.orb", 1.0, 1.0);
+      };
     } else {
       system.moduleMessage(module, entity, "<e>Failed to transmit suit \"<eh>" + currentSuit + "<e>\"!");
     };
@@ -480,6 +486,9 @@ function initModule(system) {
       };
       var nbt = entity.getWornHelmet().nbt();
       if (entity.getData("skyhighocs:dyn/receive_timer") >= 1) {
+        if (PackLoader.getSide() == "CLIENT") {
+          entity.playSound("minecraft:random.levelup", 1.0, 1.0);
+        };
         manager.setBoolean(nbt, "receiving", false);
         manager.setDataWithNotify(entity, "skyhighocs:dyn/receiving", false);
         system.moduleMessage(this, entity, "<s>Finished receiving suits!");
@@ -507,6 +516,9 @@ function initModule(system) {
         };
       };
       if (entity.getData("skyhighocs:dyn/transmit_timer") >= 1) {
+        if (PackLoader.getSide() == "CLIENT") {
+          entity.playSound("minecraft:random.levelup", 1.0, 1.0);
+        };
         manager.setDataWithNotify(entity, "skyhighocs:dyn/transmitting", false);
         system.moduleMessage(this, entity, "<s>Finished transmitting suits!");
         manager.setTagList(nbt, "transmitBuffer", manager.newTagList());
