@@ -208,7 +208,7 @@ function initEffects(renderer) {
   nv.fogStrength = 0.0;
   nv.factor = 1.0;
   nv.firstPersonOnly = false;
-  nv.setCondition(entity => (entity.isWearingFullSuit()));
+  nv.setCondition(entity => (entity.isWearingFullSuit() && entity.getData("skyhighocs:dyn/night_vision")));
 };
 
 function initAnimations(renderer) {
@@ -272,7 +272,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
           var openPanels = openPanelCount + " panels open!";
           panelsToRender.push(openPanels);
         };
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", panelsToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", panelsToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighocs:dyn/hud_scale"));
       };
     };
   };

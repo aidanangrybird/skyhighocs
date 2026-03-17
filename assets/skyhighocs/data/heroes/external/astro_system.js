@@ -39,7 +39,6 @@ var hexColors = {
 
 function asssignID(entity, manager, robotName, color) {
   var nbt = mainNBT(entity);
-  manager.setString(nbt, "robotModel", robotName+"-"+color);
   if (!nbt.hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
       var computerID = Math.random().toFixed(8).toString().substring(2);
@@ -54,7 +53,7 @@ function asssignID(entity, manager, robotName, color) {
  * @returns If the entity is wearing a robot
  **/
 function isRobot(entity) {
-  return mainNBT(entity).hasKey("robotModel");
+  return mainNBT(entity).hasKey("robotModelID");
 };
 
 /**
@@ -63,7 +62,7 @@ function isRobot(entity) {
  * @returns The satellite a robot is assigned to
  **/
 function getModel(entity) {
-  return mainNBT(entity).getString("robotModel");
+  return entity.getData("skyhighocs:dyn/model_id");
 };
 
 /**
@@ -371,6 +370,8 @@ function initSystem(moduleList, name, colorCode) {
   var commands = [];
   /** @var commandIndexes - Indexes of command handlers */
   var commandIndexes = [];
+  /** @var onInitSystemIndexes - Indexes of system init capable modules */
+  var onInitSystemIndexes = [];
   /** @var messagingIndexes - Indexes of messaging handlers */
   var messagingIndexes = [];
   /** @var chatModes - Chat modes */
@@ -385,6 +386,8 @@ function initSystem(moduleList, name, colorCode) {
   var robotName = name;
   /** @var color - Color of robot */
   var color = colorCode;
+  /** @var robotModelID - robot model name */
+  var robotModelID = name+"-"+colorCode;
   var hasError = false;
   var errors = [];
   logMessage("Attempting to initialize " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on robot " + robotName + "!");
@@ -412,6 +415,10 @@ function initSystem(moduleList, name, colorCode) {
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on robot " + robotName + "!");
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
             };
             hasError = false;
             break;
@@ -434,6 +441,10 @@ function initSystem(moduleList, name, colorCode) {
               chatModes.push(moduleInit.modeID);
               messagingIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on robot " + robotName + "!");
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
             };
             hasError = false;
             break;
@@ -458,6 +469,10 @@ function initSystem(moduleList, name, colorCode) {
               commandIndexes.push(modules.length-1);
               messagingIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on robot " + robotName + "!");
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
             };
             hasError = false;
             break;
@@ -484,6 +499,10 @@ function initSystem(moduleList, name, colorCode) {
               });
               modifierIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on robot " + robotName + "!");
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
             };
             hasError = false;
             break;
@@ -511,6 +530,10 @@ function initSystem(moduleList, name, colorCode) {
               keyBindIndexes.push(modules.length-1);
               modifierIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on robot " + robotName + "!");
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
             };
             hasError = false;
             break;
@@ -525,26 +548,13 @@ function initSystem(moduleList, name, colorCode) {
     };
   });
   logMessage("Successfully initialized " + modules.length + " out of " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on robot " + robotName + "!");
-  function cycleChatModes(entity, manager) {
-    manager.setData(entity, "skyhighocs:dyn/chat_mode", entity.getData("skyhighocs:dyn/chat_mode") + 1);
-    if (entity.getData("skyhighocs:dyn/chat_mode") > (messagingIndexes.length-1)) {
-      manager.setData(entity, "skyhighocs:dyn/chat_mode", 0);
-    };
-    var chatMode = entity.getData("skyhighocs:dyn/chat_mode");
-    systemMessage(entity, modules[messagingIndexes[chatMode]].chatModeInfo);
-    modules[messagingIndexes[chatMode]].chatInfo(entity, manager);
-    return true;
-  };
-  function cycleChats(entity, manager) {
-    var chatMode = entity.getData("skyhighocs:dyn/chat_mode");
-    modules[messagingIndexes[chatMode]].chatInfo(entity, manager);
-    return true;
-  };
   function switchChatModes(entity, manager, mode) {
+    var nbt = mainNBT(entity);
     var chatMode = chatModes.indexOf(mode);
     if (chatMode > -1) {
       var chatModule = modules[messagingIndexes[chatMode]];
-      manager.setString(mainNBT(entity), "chatMode", chatModule.modeID);
+      manager.setData(entity, "skyhighocs:dyn/chat_mode", chatModule.modeID);
+      manager.setString(nbt, "chatMode", chatModule.modeID);
       systemMessage(entity, chatModule.chatModeMessage);
       chatModule.chatModeInfo(entity);
     } else {
@@ -552,7 +562,7 @@ function initSystem(moduleList, name, colorCode) {
     };
   };
   function switchChats(entity, manager, chat) {
-    var modeID = mainNBT(entity).getString("chatMode");
+    var modeID = entity.getData("skyhighocs:dyn/chat_mode");
     var chatMode = chatModes.indexOf(modeID);
     modules[messagingIndexes[chatMode]].chatInfo(entity, manager, chat);
   };
@@ -729,29 +739,18 @@ function initSystem(moduleList, name, colorCode) {
         status(entity);
         var hexColor = hexColors[robotName];
         manager.setString(nbt, "hudColorSkyHigh", hexColor);
-        if (!nbt.hasKey("hudRange")) {
-          manager.setShort(nbt, "hudRange", 0);
-        };
-        if (!nbt.hasKey("hudHostiles")) {
-          manager.setBoolean(nbt, "hudHostiles", true);
-        };
-        if (!nbt.hasKey("hudFriendlies")) {
-          manager.setBoolean(nbt, "hudFriendlies", true);
-        };
-        if (!nbt.hasKey("hudPlayers")) {
-          manager.setBoolean(nbt, "hudPlayers", true);
-        };
-        if (!entity.getWornHelmet().nbt().hasKey("hudScale")) {
-          manager.setFloat(nbt, "hudScale", 1.0);
-        };
-        chatModes.forEach(mode => {
-          if (!nbt.hasKey(mode + "Selected")) {
-            manager.setString(nbt, mode + "Selected", "");
-          };
-        });
         if (!nbt.hasKey("chatMode")) {
           manager.setString(nbt, "chatMode", "");
         };
+        manager.setData(entity, "skyhighocs:dyn/chat_mode", nbt.getString("chatMode"));
+        if (!nbt.hasKey("robotModelID")) {
+          manager.setString(nbt, "robotModelID", robotModelID);
+        };
+        manager.setData(entity, "skyhighocs:dyn/model_id", nbt.getString("robotModelID"));
+        onInitSystemIndexes.forEach(index => {
+          var module = modules[index];
+          module.onInitSystem(entity, manager);
+        });
         manager.setData(entity, "skyhighocs:dyn/system_init", true);
         manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
       };

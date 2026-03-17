@@ -33,6 +33,7 @@ function initModule(system) {
         switch(argList[1]) {
           case "color":
             if (colors.indexOf(argList[2]) > -1) {
+              manager.setData(entity, "skyhighocs:dyn/color", argList[2]);
               manager.setString(nbt, "systemColor", argList[2]);
               system.moduleMessage(this, entity, "<n>color set to <nh>\u00A7" + nbt.getString("systemColor") + "COLOR<n>!");
             } else {
@@ -40,7 +41,7 @@ function initModule(system) {
             };
             break;
           case "list":
-            system.moduleMessage(this, entity, "<n>color: <nh>\u00A7" + nbt.getString("systemColor") + "COLOR");
+            system.moduleMessage(this, entity, "<n>color: <nh>\u00A7" + entity.getData("skyhighocs:dyn/color") + "COLOR");
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Settings commands:");

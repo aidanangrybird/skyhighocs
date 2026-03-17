@@ -412,18 +412,22 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<n>holoSat set to <nh>" + nbt.getBoolean("holoSat") + "<n>!");
                 break;
               case "xSat":
+                manager.setData(entity, "skyhighocs:dyn/satellite_x", parseInt(argList[2]));
                 manager.setShort(nbt, "xSat", parseInt(argList[2]));
                 system.moduleMessage(this, entity, "<n>xSat set to <nh>" + nbt.getShort("xSat") + "<n>!");
                 break;
               case "ySat":
+                manager.setData(entity, "skyhighocs:dyn/satellite_y", parseInt(argList[2]));
                 manager.setShort(nbt, "ySat", parseInt(argList[2]));
                 system.moduleMessage(this, entity, "<n>ySat set to <nh>" + nbt.getShort("ySat") + "<n>!");
                 break;
               case "zSat":
+                manager.setData(entity, "skyhighocs:dyn/satellite_z", parseInt(argList[2]));
                 manager.setShort(nbt, "zSat", parseInt(argList[2]));
                 system.moduleMessage(this, entity, "<n>zSat set to <nh>" + nbt.getShort("zSat") + "<n>!");
                 break;
               case "freq":
+                manager.setData(entity, "skyhighocs:dyn/frequency", parseInt(argList[2]));
                 manager.setShort(nbt, "freq", parseInt(argList[2]));
                 system.moduleMessage(this, entity, "<n>Frequency set to <nh>" + nbt.getShort("freq") + "<n>!");
                 break;
@@ -434,11 +438,11 @@ function initModule(system) {
             break;
           case "status":
             system.moduleMessage(this, entity, "<n>Comms status:");
-            system.moduleMessage(this, entity, "<n>Antenna: <nh>" + ((entity.getData("skyhighocs:dyn/antenna_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Satellite: <nh>" + ((entity.getData("skyhighocs:dyn/satellite_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Satellite Rain Mode: <nh>" + ((entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Connected Satellite: <nh>" + entity.getWornHelmet().nbt().getShort("xSat") + "<n>, <nh>" + entity.getWornHelmet().nbt().getShort("ySat") + "<n>, <nh>" + entity.getWornHelmet().nbt().getShort("zSat"));
-            system.moduleMessage(this, entity, "<n>Frequency: <nh>" + entity.getWornHelmet().nbt().getShort("freq"));
+            system.moduleMessage(this, entity, "<n>Antenna: <nh>" + ((entity.getData("skyhighocs:dyn/antenna_timer") > 0) ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Satellite: <nh>" + ((entity.getData("skyhighocs:dyn/satellite_timer") > 0) ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Satellite Rain Mode: <nh>" + ((entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") > 0) ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Connected Satellite: <nh>" + entity.getData("skyhighocs:dyn/satellite_x") + "<n>, <nh>" + entity.getData("skyhighocs:dyn/satellite_y") + "<n>, <nh>" + entity.getData("skyhighocs:dyn/satellite_z"));
+            system.moduleMessage(this, entity, "<n>Frequency: <nh>" + entity.getData("skyhighocs:dyn/frequency"));
             system.moduleMessage(this, entity, "<n>Antenna Hologram: <nh>" + (nbt.getBoolean("holoAnt") ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Satellite Hologram: <nh>" + (nbt.getBoolean("holoSat") ? "ENABLED" : "DISABLED"));
             break;
@@ -489,7 +493,6 @@ function initModule(system) {
         if (PackLoader.getSide() == "CLIENT") {
           entity.playSound("minecraft:random.levelup", 1.0, 1.0);
         };
-        manager.setBoolean(nbt, "receiving", false);
         manager.setDataWithNotify(entity, "skyhighocs:dyn/receiving", false);
         system.moduleMessage(this, entity, "<s>Finished receiving suits!");
         manager.setTagList(nbt, "receiveBuffer", manager.newTagList());
@@ -554,6 +557,25 @@ function initModule(system) {
           manager.setData(entity, "skyhighocs:dyn/antenna", false);
         };
       };
+    },
+    onInitSystem: function (entity, manager) {
+      var nbt = system.mainNBT(entity);
+      if (!nbt.hasKey("xSat")) {
+        manager.setShort(nbt, "xSat", 0);
+      };
+      manager.setData(entity, "skyhighocs:dyn/satellite_x", nbt.getShort("xSat"));
+      if (!nbt.hasKey("ySat")) {
+        manager.setShort(nbt, "ySat", 1000);
+      };
+      manager.setData(entity, "skyhighocs:dyn/satellite_y", nbt.getShort("ySat"));
+      if (!nbt.hasKey("zSat")) {
+        manager.setShort(nbt, "zSat", 0);
+      };
+      manager.setData(entity, "skyhighocs:dyn/satellite_z", nbt.getShort("zSat"));
+      if (!nbt.hasKey("freq")) {
+        manager.setShort(nbt, "freq", 100);
+      };
+      manager.setData(entity, "skyhighocs:dyn/frequency", nbt.getShort("freq"));
     }
   };
 };
