@@ -484,8 +484,7 @@ function shoutMessage(entity, message, range) {
  * @param {string} message - Message content
  **/
 function systemMessage(entity, message) {
-  var id = getModelID(entity);
-  var color = id.split("-")[1];
+  var color = entity.getData("skyhighocs:dyn/color");
   chatMessage(entity, formatSystem("\u00A7" + color + "\u00A7lcyberOS" + "<r>> " + message));
 };
 /**
@@ -503,8 +502,7 @@ function logMessage(message) {
  * @param {string} message - Message content
  **/
 function moduleMessage(module, entity, message) {
-  var id = getModelID(entity);
-  var color = id.split("-")[1];
+  var color = entity.getData("skyhighocs:dyn/color");
   var messageName = "\u00A7lcyberOS";
   if (module.hasOwnProperty("moduleMessageName")) {
     messageName = module.moduleMessageName
@@ -1402,13 +1400,9 @@ function initSystem(moduleList, name, colorCode, uuid) {
       manager.setString(nbt, "boundUUID", boundUUID);
       manager.setBoolean(nbt, "Unbreakable", true);
       assignID(entity, manager);
-      if (!nbt.hasKey("cyberModelID")) {
-        manager.setString(nbt, "cyberModelID", cyberModelID);
-      };
+      manager.setString(nbt, "cyberModelID", cyberModelID);
       manager.setData(entity, "skyhighocs:dyn/model_id", nbt.getString("cyberModelID"));
-      if (!nbt.hasKey("cyberAliasName")) {
-        manager.setInteger(nbt, "cyberAliasName", cyberName);
-      };
+      manager.setString(nbt, "cyberAliasName", cyberName);
       manager.setData(entity, "skyhighocs:dyn/alias", nbt.getString("cyberAliasName"));
       if (!nbt.hasKey("hudSelectedSide")) {
         manager.setInteger(nbt, "hudSelectedSide", 0);
@@ -1432,6 +1426,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
       manager.setData(entity, "skyhighocs:dyn/chat_mode", nbt.getString("chatMode"));
       var hexColor = hexColors[getModelID(entity)];
       manager.setString(nbt, "hudColorSkyHigh", hexColor);
+      manager.setData(entity, "skyhighocs:dyn/color", color);
       if (entity.getUUID() == boundUUID) {
         systemMessage(entity, "<n>Hello <nh>" + getModelID(entity) + "<n> AKA <nh>" + getAliasName(entity) + "<n>!");
       } else {
@@ -1465,13 +1460,13 @@ function initSystem(moduleList, name, colorCode, uuid) {
     };
     if (entity.getDataOrDefault("skyhighocs:dyn/system_init", false)) {
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
-        if (!((entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == cyberModelID) || entity.getData("fiskheroes:disguise") == null)) {
+        if (!((entity.getData("fiskheroes:disguise") == getAliasName(entity) || entity.getData("fiskheroes:disguise") == getModelID(entity)) || entity.getData("fiskheroes:disguise") == null)) {
           if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
             manager.setData(entity, "skyhighocs:dyn/entry", entity.getData("fiskheroes:disguise"));
             manager.setData(entity, "fiskheroes:disguise", null);
           } else {
             manager.setData(entity, "skyhighocs:dyn/entry", entity.getData("fiskheroes:disguise"));
-            manager.setData(entity, "fiskheroes:disguise", ((nbt.getBoolean("aliasActive")) ? cyberName : cyberModelID));
+            manager.setData(entity, "fiskheroes:disguise", ((entity.getData("skyhighocs:dyn/alias_active")) ? getAliasName(entity) : getModelID(entity)));
           };
           manager.setData(entity, "fiskheroes:shape_shifting_to", null);
           manager.setData(entity, "fiskheroes:shape_shifting_from", null);
@@ -1606,7 +1601,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
         };
       };
       if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") < 1) {
-        manager.setData(entity, "fiskheroes:disguise", ((nbt.getBoolean("aliasActive")) ? getAliasName(entity) : getModelID(entity)));
+        manager.setData(entity, "fiskheroes:disguise", ((entity.getData("skyhighocs:dyn/alias_active")) ? getAliasName(entity) : getModelID(entity)));
       };
       if (entity.getData("skyhighocs:dyn/thermoptic_disguise_timer") == 1) {
         manager.setData(entity, "fiskheroes:disguise", null);
