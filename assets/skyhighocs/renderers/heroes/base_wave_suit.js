@@ -10,7 +10,14 @@ var visor_model;
 function init(renderer) {
   renderer.setTexture((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if (entity.getUUID() != getID() || (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND")) {
+      if (entity.is("DISPLAY")) {
+        if (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND") {
+          return "suit";
+        } else {
+          return "base";
+        };
+      };
+      if (entity.getUUID() != getID()) {
         return "suit";
       } else {
         return "base";
