@@ -1,45 +1,5 @@
+var waveSuit = implement("skyhighocs:external/wave_suit");
+var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
 function init(hero) {
-  hero.setAliases("aidan_stelar_wave_suit");
-  hero.setName("Aidan Stelar");
-  hero.setTier(1);
-  hero.setChestplate("Wave Suit");
-  hero.addPowers("skyhighocs:wave_suit")
-
-  hero.addKeyBind("INVISIBILITY", "Wave World", 4);
-  
-  hero.setDefaultScale(1.0);
-  hero.addDamageProfile("MAIN", {
-    "types": {
-      "ELEMENT_NONE": 1.0
-    }
-  });
-  hero.setDamageProfile((entity) => {
-    return "MAIN";
-  });
-  hero.setModifierEnabled((entity, modifier) => {
-    switch (modifier.name()) {
-      case "fiskheroes:invisibility":
-        return true;
-      case "fiskheroes:damage_immunity":
-        return entity.getData("fiskheroes:invisible");
-      case "fiskheroes:fire_immunity":
-        return entity.getData("fiskheroes:invisible");
-      case "fiskheroes:shape_shifting":
-        return true;
-      default:
-        return false;
-    };
-  });
-  hero.setKeyBindEnabled((entity, keyBind) => {
-    switch (keyBind) {
-      case "INVISIBILITY":
-        return true;
-      default:
-        return false;
-    };
-  });
-  hero.setTickHandler((entity, manager) => {
-    manager.setData(entity, "fiskheroes:penetrate_martian_invis", true);
-    manager.setData(entity, "fiskheroes:disguise", "Aidan Stelar");
-  });
+  waveSuit.initWaveSuit(hero, "Aidan Stelar", uuid);
 };
