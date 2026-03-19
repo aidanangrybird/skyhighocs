@@ -2,8 +2,7 @@
   "suit": "skyhighocs:cade_the_invincible",
   "requirements": [
     "skyhighocs:chakra",
-    "fiskheroes:tier8_9",
-    "skyhighocs:base"
+    "fiskheroes:tier8_9"
   ],
   "criteria": {
     "chance": {

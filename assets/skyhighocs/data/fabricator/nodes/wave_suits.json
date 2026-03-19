@@ -1,0 +1,16 @@
+{
+  "display": {
+    "name": {
+      "translate": "OC Wave Suits"
+    },
+    "description": {
+      "translate": "Access the Wave World!"
+    },
+    "icon": {
+      "texture": "skyhighocs:textures/gui/nodes/wave_suit.png"
+    }
+  },
+  "requirements": [
+    "skyhighocs:base"
+  ]
+}

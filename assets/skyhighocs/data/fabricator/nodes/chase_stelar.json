@@ -2,8 +2,7 @@
   "suit": "skyhighocs:chase_stelar",
   "requirements": [
     "skyhighocs:transers",
-    "fiskheroes:tier1",
-    "skyhighocs:base"
+    "fiskheroes:tier1"
   ],
   "criteria": {
     "exist": {

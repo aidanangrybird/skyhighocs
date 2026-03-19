@@ -1,0 +1,7 @@
+{
+  "suit": "skyhighocs:aidan_stelar_wave_suit",
+  "requirements": [
+    "skyhighocs:wave_suits",
+    "fiskheroes:tier1"
+  ]
+}

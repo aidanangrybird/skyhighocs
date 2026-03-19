@@ -2,8 +2,7 @@
   "suit": "skyhighocs:cyber_nebula",
   "requirements": [
     "skyhighocs:cybernetics",
-    "fiskheroes:tier8_9",
-    "skyhighocs:base"
+    "fiskheroes:tier8_9"
   ],
   "criteria": {
     "exist": {

@@ -7,9 +7,7 @@
   },
   "requirements": [
     "skyhighocs:wave_change",
-    "skyhighocs:transers",
     "fiskheroes:tier10",
-    "skyhighocs:base",
     "skyhighocs:aidan_stelar"
   ],
   "criteria": {

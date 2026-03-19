@@ -2,8 +2,7 @@
   "suit": "skyhighocs:apollo",
   "requirements": [
     "skyhighocs:robot",
-    "fiskheroes:tier8_9",
-    "skyhighocs:base"
+    "fiskheroes:tier8_9"
   ],
   "criteria": {
     "death": {
