@@ -1,0 +1,10 @@
+{
+  "texture": "skyhighocs:chase/chase_stelar_visualizer_<VISUALIZER>",
+  "getters": {
+    "VISUALIZER": {
+      "key": "entity.getData('skyhighocs:dyn/visualizer_toggle') ? 'down' : 'up'",
+      "values": ["up", "down"]
+    }
+  },
+  "isDynamic": true
+}

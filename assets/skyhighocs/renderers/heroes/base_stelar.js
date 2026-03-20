@@ -8,6 +8,7 @@ var stelar = implement("skyhighocs:external/stelar");
 
 var santaHat;
 var santaHatEM;
+var visualizerModel;
 var head;
 var date = new Date();
 var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
@@ -34,20 +35,10 @@ function init(renderer) {
   });
   renderer.setLights((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if (entity.is("DISPLAY")) {
-        if (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT") {
-          return "transer_default_lights";
-        } else {
-          return "visualizer_lights";
-        };
-      };
       if (entity.getInterpolatedData("skyhighocs:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighocs:dyn/calling_timer") < 0.6) {
         return "lights";
-      };
-      if (entity.getUUID() != getID()) {
-        return "transer_default_lights";
       } else {
-        return "visualizer_lights";
+        return "null";
       };
     };
   });
@@ -80,6 +71,11 @@ function initEffects(renderer) {
     santaHatEM.setOffset(0.0, -7.25, -0.25);
     santaHatEM.setRotation(-10.0, 0.0, 0.0);
   };
+  var visualizer = renderer.createResource("MODEL", "skyhighocs:Visualizer");
+  visualizer.texture.set("visualizer", "visualizer_lights");
+  visualizerModel = renderer.createEffect("fiskheroes:model").setModel(visualizer);
+  visualizerModel.anchor.set("head");
+  visualizerModel.setScale(1.0);
   ears = renderer.createEffect("fiskheroes:ears");
   ears.anchor.set("head");
   ears.angle = 0;
@@ -125,9 +121,11 @@ function render(entity, renderLayer, isFirstPersonArm) {
       santaHat.render();
     };
   };
-  var color = getColor(entity);
+  var color = getColor();
   if (entity.getInterpolatedData("skyhighocs:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighocs:dyn/calling_timer") < 0.6) {
     head.render();
+  } else {
+    visualizerModel.render();
   };
   var callingTimer = entity.getInterpolatedData("skyhighocs:dyn/calling_timer");
   ears.render();

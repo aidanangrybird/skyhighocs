@@ -2,9 +2,9 @@ extend("skyhighocs:base_stelar");
 
 loadTextures({
   "transer": "skyhighocs:damien/damien_stelar_transer.tx.json",
+  "visualizer": "skyhighocs:damien/damien_stelar_visualizer.tx.json",
   "visualizer_lights": "skyhighocs:damien/damien_stelar_visualizer_lights.tx.json",
   "transer_default": "skyhighocs:damien/damien_stelar_transer",
-  "transer_default_lights": "skyhighocs:damien/damien_stelar_transer_lights",
   "base": "skyhighocs:damien/abyssal_shadow_base",
   "lights": "skyhighocs:damien/abyssal_shadow_lights",
   "santa_hat_em": "skyhighocs:damien/abyssal_shadow_santa_hat",

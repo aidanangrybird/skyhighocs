@@ -2,9 +2,9 @@ extend("skyhighocs:base_stelar");
 
 loadTextures({
   "transer": "skyhighocs:cade/cade_stelar_transer.tx.json",
+  "visualizer": "skyhighocs:cade/cade_stelar_visualizer.tx.json",
   "visualizer_lights": "skyhighocs:cade/cade_stelar_visualizer_lights.tx.json",
   "transer_default": "skyhighocs:cade/cade_stelar_transer",
-  "transer_default_lights": "skyhighocs:cade/cade_stelar_transer_lights",
   "base": "skyhighocs:cade/azure_asteroid_base",
   "lights": "skyhighocs:cade/azure_asteroid_lights",
   //"santa_hat_em": "skyhighocs:cade/azure_asteroid_santa_hat",

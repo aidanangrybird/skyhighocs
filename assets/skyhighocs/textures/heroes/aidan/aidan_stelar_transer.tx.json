@@ -1,13 +1,9 @@
 {
-  "texture": "skyhighocs:aidan/aidan_stelar_<VISUALIZER>_<CLOTHING>",
+  "texture": "skyhighocs:aidan/aidan_stelar_<CLOTHING>",
   "getters": {
     "CLOTHING": {
-      "key": "entity.getData('skyhighocs:dyn/stelar_clothes') == 0 ? 'transer' : entity.getData('skyhighocs:dyn/stelar_clothes') == 1 ? 'short' : entity.getData('skyhighocs:dyn/stelar_clothes') == 2 ? 'swimsuit' : entity.getData('skyhighocs:dyn/hood_toggle') ? 'winter_hood_up' : 'winter_hood_down'",
-      "values": ["transer", "short", "swimsuit", "winter_hood_up", "winter_hood_down"]
-    },
-    "VISUALIZER": {
-      "key": "entity.getData('skyhighocs:dyn/visualizer_toggle') ? 'down' : 'up'",
-      "values": ["up", "down"]
+      "key": "entity.getData('skyhighocs:dyn/stelar_clothes') == 0 ? 'base' : entity.getData('skyhighocs:dyn/stelar_clothes') == 1 ? 'short' : entity.getData('skyhighocs:dyn/stelar_clothes') == 2 ? 'swimsuit' : entity.getData('skyhighocs:dyn/hood_toggle') ? 'winter_hood_up' : 'winter_hood_down'",
+      "values": ["base", "short", "swimsuit", "winter_hood_up", "winter_hood_down"]
     }
   },
   "isDynamic": true

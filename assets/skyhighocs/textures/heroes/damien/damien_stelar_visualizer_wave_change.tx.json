@@ -1,0 +1,26 @@
+{
+  "texture": {
+    "in": "skyhighocs:damien/damien_stelar_visualizer_<VISUALIZER>",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighocs:xor/wave_change_<TIMER>"
+      }
+    ],
+    "out": "skyhighocs:generated/damien_stelar_visualizer_<VISUALIZER>_<TIMER>"
+  },
+  "getters": {
+    "VISUALIZER": {
+      "key": "entity.getData('skyhighocs:dyn/visualizer_toggle') ? 'down' : 'up'",
+      "values": ["up", "down"]
+    },
+    "TIMER": {
+      "key": "Math.min(Math.max(Math.ceil(80 * entity.getInterpolatedData('skyhighocs:dyn/wave_changing_timer')), 16), 31) | 0",
+      "values": {
+        "min": 16,
+        "max": 31
+      }
+    }
+  },
+  "isDynamic": true
+}

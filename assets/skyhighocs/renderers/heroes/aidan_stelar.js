@@ -2,9 +2,9 @@ extend("skyhighocs:base_stelar");
 
 loadTextures({
   "transer": "skyhighocs:aidan/aidan_stelar_transer.tx.json",
+  "visualizer": "skyhighocs:aidan/aidan_stelar_visualizer.tx.json",
   "visualizer_lights": "skyhighocs:aidan/aidan_stelar_visualizer_lights.tx.json",
   "transer_default": "skyhighocs:aidan/aidan_stelar_transer",
-  "transer_default_lights": "skyhighocs:aidan/aidan_stelar_transer_lights",
   "base": "skyhighocs:aidan/squall_vortex_base",
   "lights": "skyhighocs:aidan/squall_vortex_lights",
   "santa_hat_em": "skyhighocs:aidan/squall_vortex_santa_hat",

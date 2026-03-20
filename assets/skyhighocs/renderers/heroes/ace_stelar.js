@@ -2,9 +2,9 @@ extend("skyhighocs:base_stelar");
 
 loadTextures({
   "transer": "skyhighocs:ace/ace_stelar_transer.tx.json",
+  "visualizer": "skyhighocs:ace/ace_stelar_visualizer.tx.json",
   "visualizer_lights": "skyhighocs:ace/ace_stelar_visualizer_lights.tx.json",
   "transer_default": "skyhighocs:ace/ace_stelar_transer",
-  "transer_default_lights": "skyhighocs:ace/ace_stelar_transer_lights",
   "base": "skyhighocs:ace/solar_flame_base",
   "lights": "skyhighocs:ace/solar_flame_lights",
   "santa_hat_em": "skyhighocs:ace/solar_flame_santa_hat",
