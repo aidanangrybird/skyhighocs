@@ -26,7 +26,7 @@ var transerOS = transer.initSystem([
 ], "pryetakNebula", "leo");
 function init(hero) {
   hero.setAliases("pryetak_nebula");
-  hero.setName("Chase Stelar/\u00A72Pryetak Nebula");
+  hero.setName("Chase Stelar/\u00A72Pryetak Nebula\u00A7r");
   hero.setTier(10);
   hero.setChestplate("Transer");
   hero.setVersion("OC");

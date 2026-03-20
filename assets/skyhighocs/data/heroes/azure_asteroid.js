@@ -26,7 +26,7 @@ var transerOS = transer.initSystem([
 ], "squallVortex", "dragon");
 function init(hero) {
   hero.setAliases("azure_asteroid");
-  hero.setName("Cade Stelar/\u00A71Azure Asteroid");
+  hero.setName("Cade Stelar/\u00A71Azure Asteroid\u00A7r");
   hero.setTier(10);
   hero.setChestplate("Transer");
   hero.setVersion("OC");

@@ -26,7 +26,7 @@ var transerOS = transer.initSystem([
 ], "solarFlame", "pegasus");
 function init(hero) {
   hero.setAliases("solar_flame");
-  hero.setName("Ace Stelar/\u00A74Solar Flame");
+  hero.setName("Ace Stelar/\u00A74Solar Flame\u00A7r");
   hero.setTier(10);
   hero.setChestplate("Transer");
   hero.setVersion("OC");
