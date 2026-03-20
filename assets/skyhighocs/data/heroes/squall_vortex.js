@@ -28,7 +28,7 @@ var transerOS = transer.initSystem([
 ], "squallVortex", "pegasus");
 function init(hero) {
   hero.setAliases("squall_vortex");
-  hero.setName("\u00A76Squall Vortex");
+  hero.setName("Aidan Stelar/\u00A76Squall Vortex");
   hero.setTier(10);
   hero.setChestplate("Transer");
   hero.setVersion("OC");

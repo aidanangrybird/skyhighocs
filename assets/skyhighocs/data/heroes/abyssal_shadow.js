@@ -26,7 +26,7 @@ var transerOS = transer.initSystem([
 ], "abyssalShadow", "dragon");
 function init(hero) {
   hero.setAliases("abyssal_shadow");
-  hero.setName("\u00A75Abyssal Shadow");
+  hero.setName("Damien Stelar/\u00A75Abyssal Shadow");
   hero.setTier(10);
   hero.setChestplate("Transer");
   hero.setVersion("OC");
