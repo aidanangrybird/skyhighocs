@@ -1,0 +1,7 @@
+{
+  "inputs": [
+    "skyhighocs:flight/wave_suit_header",
+    "skyhighocs:flight/wave_suit_idle",
+    "skyhighocs:flight/wave_suit_boost"
+  ]
+}

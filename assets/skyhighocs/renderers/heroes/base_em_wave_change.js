@@ -116,8 +116,7 @@ function initEffects(renderer) {
 
 function initAnimations(renderer) {
   stuff.initHoloFlightAnim(renderer, "wave.HOLOGRAM_FLIGHT", "skyhighocs:em_wave_change_holo_flight");
-  stuff.emCeilingAnimation(renderer);
-  stelar.initStelarAnimations(renderer);
+  stelar.initEMWaveChangeAnimations(renderer);
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {

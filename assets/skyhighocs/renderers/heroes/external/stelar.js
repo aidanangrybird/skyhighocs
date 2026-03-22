@@ -93,6 +93,27 @@ function addSwordAnimations(renderer, key, value, sword) {
   anim.priority = -9.75;
 };
 
+function addFlightAnimation(renderer, name, value, dataLoader) {
+  var anim = renderer.createResource("ANIMATION", value);
+  renderer.addCustomAnimation(name, anim);
+
+  if (typeof dataLoader === "undefined") {
+    anim.setData((entity, data) => {
+      data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") * (1 - entity.getInterpolatedData("skyhighocs:dyn/superhero_boosting_landing_timer") - entity.getInterpolatedData("skyhighocs:dyn/superhero_landing_timer")));
+      data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
+    });
+  } else {
+    anim.setData((entity, data) => dataLoader(entity, data));
+  };
+
+  anim.priority = -10;
+  renderer.reprioritizeDefaultAnimation("PUNCH", -9);
+  renderer.reprioritizeDefaultAnimation("HOLD_CHRONOS_RIFLE", -9);
+  renderer.reprioritizeDefaultAnimation("HOLD_PIZZA", -9);
+  renderer.reprioritizeDefaultAnimation("BLOCK_CAPS_SHIELD", -9);
+  renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
+};
+
 function addFlightHoldingAnimation(renderer, name, value, dataLoader) {
   var anim = renderer.createResource("ANIMATION", value);
   renderer.addCustomAnimation(name, anim);
@@ -169,12 +190,12 @@ function initForceField(renderer, color) {
 };
 
 //Stelar Animations
-function initStelarAnimations(renderer) {
+function initEMWaveChangeAnimations(renderer) {
   //Aiming
   addAnimationWithData(renderer, "em_wave_change.AIMING", "skyhighocs:em_wave_change_aim", "fiskheroes:aiming_timer")
     .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
     .priority = 10;
-  addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighocs:em_wave_change_wall_ceiling_stand");
+  addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighocs:wave_world_wall_ceiling_stand");
   addPredationAnimation(renderer, "em_wave_change.PREDATION", "skyhighocs:em_wave_change_predation");
   //Flight
   addFlightBaseAnimation(renderer, "em_wave_change.BASE_FLIGHT", "skyhighocs:flight/em_wave_change_base_flight.anim.json");
@@ -186,6 +207,19 @@ function initStelarAnimations(renderer) {
   addAnimationWithData(renderer, "em_wave_change.ROLL", "skyhighocs:flight/em_wave_change_barrel_roll", "fiskheroes:barrel_roll_timer")
     .priority = 10;
   addHoverAnimation(renderer, "em_wave_change.HOVER", "skyhighocs:em_wave_change_hover");
+};
+
+function initWaveSuitAnimations(renderer) {
+  addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighocs:wave_world_wall_ceiling_stand");
+  //Flight
+  addFlightAnimation(renderer, "wave_suit.FLIGHT", "skyhighocs:flight/wave_suit_flight.anim.json");
+  addAnimationWithData(renderer, "wave_suit.LAND", "skyhighocs:wave_suit_landing", "skyhighocs:dyn/superhero_landing_timer")
+    .priority = -8;
+  addAnimationWithData(renderer, "wave_suit.LAND_BOOST", "skyhighocs:wave_suit_boosting_landing", "skyhighocs:dyn/superhero_boosting_landing_timer")
+    .priority = -8;
+  addAnimationWithData(renderer, "wave_suit.ROLL", "skyhighocs:flight/wave_suit_barrel_roll", "fiskheroes:barrel_roll_timer")
+    .priority = 10;
+  addHoverAnimation(renderer, "wave_suit.HOVER", "skyhighocs:wave_suit_hover");
 };
 //Mega Buster
 function initMegaBuster(renderer, color, color_other) {
