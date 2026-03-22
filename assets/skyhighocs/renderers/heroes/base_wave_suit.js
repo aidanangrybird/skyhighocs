@@ -52,3 +52,7 @@ function initAnimations(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
   visor_model.render();
 };
+
+function getID() {
+  return "";
+};
