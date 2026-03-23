@@ -47,6 +47,7 @@ var transformedVars = [
   "sind:dyn/b_timer",
   "sind:dyn/mark42_full_timer",
   "sind:dyn/mark42_full_timer2",
+  "sind:dyn/nanite_timer",
   "ironmaniac:dyn/mk5_timer",
   "secretheroes:dyn/moonknight_timer",
   "secretheroes:dyn/mrknight_timer",
