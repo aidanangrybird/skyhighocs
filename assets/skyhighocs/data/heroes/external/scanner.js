@@ -45,9 +45,13 @@ var transformedVars = [
   "skarredheroes:dyn/scarab_timer",
   "sind:dyn/b_timer_model",
   "sind:dyn/b_timer",
+  "sind:dyn/mark42_full_timer",
+  "sind:dyn/mark42_full_timer2",
   "ironmaniac:dyn/mk5_timer",
   "secretheroes:dyn/moonknight_timer",
   "secretheroes:dyn/mrknight_timer",
+  "skyhighocs:dyn/wave_changing_timer",
+  "skyhighheroes:dyn/wave_changing_timer",
 ];
 
 function isTransformed(entity) {
