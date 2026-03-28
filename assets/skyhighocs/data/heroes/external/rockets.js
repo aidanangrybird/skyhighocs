@@ -702,6 +702,9 @@ function initModule(system) {
             result = entity.getData("skyhighocs:dyn/rockets_arms_armed") || entity.getData("skyhighocs:dyn/rockets_body_armed") || entity.getData("skyhighocs:dyn/rockets_legs_armed");
           };
         };
+        if (modifier.name() == "fiskheroes:teleportation") {
+          result = true;
+        };
       };
       if (modifier.name() == "fiskheroes:transformation") {
         result = true;
@@ -787,7 +790,7 @@ function initModule(system) {
         manager.setData(entity, "fiskheroes:teleport_delay", 6);
       };
       if (entity.world().getDimension() == 2595 && entity.posY() >= 1000 && (entity.rotPitch() <= -87.5) && entity.getData("fiskheroes:flight_boost_timer") == 1) {
-        manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 0));
+        manager.setData(entity, "fiskheroes:teleport_dest", manager.newCoords(x, y, z, 0));
         manager.setData(entity, "fiskheroes:teleport_delay", 6);
       };
       var t = entity.getData("skyhighocs:dyn/superhero_boosting_landing_ticks");
