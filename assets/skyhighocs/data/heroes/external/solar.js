@@ -35,7 +35,7 @@ function initModule(system) {
       hero.addKeyBind("GRAVITY_MANIPULATION", "Battle Card Predation", 2);
       hero.addKeyBind("AIM", "Aim Solar Buster", 4);
       hero.addKeyBindFunc("BATTLE_CARD_RESET", (player, manager) => resetBattleCard(player, manager), "Return To Flame Buster", 5);
-      hero.addKeyBindFunc("DESYNCHRONIZE_WAVES", (player, manager) => {
+      hero.addKeyBindFunc("PULSE_OUT", (player, manager) => {
         manager.setData(player, "skyhighocs:dyn/battle_card", 0);
         manager.setData(player, "skyhighocs:dyn/selected_battle_card", 0);
         manager.setData(player, "skyhighocs:dyn/body_temperature", 0.0);
@@ -50,7 +50,7 @@ function initModule(system) {
           manager.setData(player, "fiskheroes:penetrate_martian_invis", false);
         };
         return true;
-      }, "EM Wave Change!", 5);
+      }, "Pulse Out", 5);
       hero.addKeyBindFunc("SYNCHRONIZE_WAVES", (player, manager) => {
         if (player.getUUID() == "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0") {
           system.shoutMessage(player, "<Ace Stelar> EM Wave Change! \u00A74Ace Stelar\u00A7r, On-Air!", 16);
@@ -66,25 +66,25 @@ function initModule(system) {
           system.shoutMessage(player, "<\u00A74Solar\u00A7r> Who are you?", 16);
         };
         return true;
-      }, "EM Wave Change!", 5);
+      }, "Pulse In", 5);
       hero.addKeyBind("WAVE_CHANGE", "EM Wave Change!", 5);
       hero.addKeyBind("SOLAR_TOGGLE", "Toggle Flame Buster", 5);
       hero.addKeyBindFunc("COLD_TEMPERATURE", (player, manager) => {
         if (player.getUUID() == "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0") {
-          system.shoutMessage(player, "\u00A7r<\u00A74Solar\u00A7r> You are too cold for us to EM Wave Change.", 16);
+          system.shoutMessage(player, "\u00A7r<\u00A74Solar\u00A7r> You are too cold for us to pulse in.", 16);
         } else {
           system.shoutMessage(player, "<\u00A74Solar\u00A7r> Who are you?", 16);
         };
         return true;
-      }, "\u00A7mEM Wave Change!\u00A7r You are too cold", 5);
+      }, "\u00A7mPulse In\u00A7r You are too cold", 5);
       hero.addKeyBindFunc("HOT_TEMPERATURE", (player, manager) => {
         if (player.getUUID() == "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0") {
-          system.shoutMessage(player, "\u00A7r<\u00A74Solar\u00A7r> You are too hot for us to EM Wave Change.", 16);
+          system.shoutMessage(player, "\u00A7r<\u00A74Solar\u00A7r> You are too hot for us to pulse in.", 16);
         } else {
           system.shoutMessage(player, "<\u00A74Solar\u00A7r> Who are you?", 16);
         };
         return true;
-      }, "\u00A7mEM Wave Change!\u00A7r You are too hot", 5);
+      }, "\u00A7mPulse In\u00A7r You are too hot", 5);
     },
     canAim: function (entity) {
       return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1;
@@ -100,7 +100,7 @@ function initModule(system) {
       if (keyBind == "SYNCHRONIZE_WAVES") {
         result = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getData("skyhighocs:dyn/body_temperature") < 0.25 && entity.getData("skyhighocs:dyn/body_temperature") > -0.25);
       };
-      if (keyBind == "DESYNCHRONIZE_WAVES") {
+      if (keyBind == "PULSE_OUT") {
         result = entity.getData("fiskheroes:flight_timer") == 0 && (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1 && !entity.isSneaking());
       };
       if (keyBind == "WAVE_CHANGE") {
