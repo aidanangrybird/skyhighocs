@@ -37,7 +37,7 @@ var panelList = astro.panels;
 loadTextures({
   "null": "skyhighocs:null",
   "santa_hat_normal": "skyhighocs:santa_hat",
-  "blank": "skyhighocs:astro_blank",
+  "blank": "skyhighocs:darkness",
   "head": "skyhighocs:astro_head_base",
   "body": "skyhighocs:astro_body_base",
   "left_arm": "skyhighocs:astro_left_arm_base",
@@ -72,7 +72,7 @@ function init(renderer) {
 function initEffects(renderer) {
   text_renderer = stuff.text(renderer);
   var blank = renderer.createResource("MODEL", "skyhighocs:BlankThing");
-  blank.texture.set("blank");
+  blank.texture.set("darkness");
   blank_model = renderer.createEffect("fiskheroes:model").setModel(blank);
   blank_model.anchor.set("head");
   blank_model.setScale(100.0);
