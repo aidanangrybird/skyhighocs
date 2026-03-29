@@ -58,6 +58,20 @@ function addAnimationWithData(renderer, key, anim, dataVar) {
   return addAnimation(renderer, key, anim).setData((entity, data) => data.load(entity.getInterpolatedData(dataVar)));
 };
 
+function initHoloFlightAnim(renderer, name, value, emBeing) {
+  var anim = renderer.createResource("ANIMATION", value);
+  renderer.addCustomAnimation(name, anim);
+  anim.setData((entity, data) => data.load(entity.loop(20 * Math.PI) + 0.4));
+  anim.priority = -9.5;
+  anim.setCondition(entity => (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") && (entity.getWornChestplate().nbt().getString("emBeing") == emBeing));
+  renderer.reprioritizeDefaultAnimation("PUNCH", -9);
+  renderer.reprioritizeDefaultAnimation("HOLD_CHRONOS_RIFLE", -9);
+  renderer.reprioritizeDefaultAnimation("HOLD_PIZZA", -9);
+  renderer.reprioritizeDefaultAnimation("BLOCK_CAPS_SHIELD", -9);
+  renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
+  return anim;
+};
+
 function addPredationAnimation(renderer, key, value) {
   if (typeof value === "string") {
     anim = renderer.createResource("ANIMATION", value);
@@ -176,6 +190,12 @@ function addHoverAnimation(renderer, name, value, dataLoader) {
   return anim;
 };
 
+function forceFieldAnimation(renderer) {
+  addAnimationWithData(renderer, "skyhigh.BLOCKING", "skyhighocs:force_field_holding", "fiskheroes:shield_blocking_timer")
+    .setCondition(entity => entity.getData("skyhighocs:dyn/battle_card") == 1)
+    .priority = -5;
+};
+
 function initForceField(renderer, color) {
   addAnimationWithData(renderer, "skyhigh.BLOCKING", "skyhighocs:force_field_holding", "fiskheroes:shield_blocking_timer")
     .setCondition(entity => entity.getData("skyhighocs:dyn/battle_card") == 1)
@@ -207,6 +227,7 @@ function initEMWaveChangeAnimations(renderer) {
   addAnimationWithData(renderer, "em_wave_change.ROLL", "skyhighocs:flight/em_wave_change_barrel_roll", "fiskheroes:barrel_roll_timer")
     .priority = 10;
   addHoverAnimation(renderer, "em_wave_change.HOVER", "skyhighocs:em_wave_change_hover");
+  forceFieldAnimation(renderer);
 };
 
 function initWaveSuitAnimations(renderer) {
@@ -222,11 +243,8 @@ function initWaveSuitAnimations(renderer) {
   addHoverAnimation(renderer, "wave_suit.HOVER", "skyhighocs:wave_suit_hover");
 };
 //Mega Buster
-function initMegaBuster(renderer, color, color_other) {
+function initMegaBuster(renderer, color) {
   renderer.bindProperty("fiskheroes:energy_bolt").color.set(color);
-  bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", color_other, [
-    { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
-  ]);
 };
 
 function initNV(renderer) {

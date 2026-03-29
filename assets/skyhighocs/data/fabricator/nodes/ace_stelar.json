@@ -1,5 +1,10 @@
 {
   "suit": "skyhighocs:ace_stelar",
+  "display": {
+    "description": {
+      "translate": "EM Wave Change! Ace Stelar, On-Air!"
+    }
+  },
   "requirements": [
     "skyhighocs:transers",
     "fiskheroes:tier1"

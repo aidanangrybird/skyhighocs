@@ -1,5 +1,10 @@
 {
   "suit": "skyhighocs:aidan_stelar",
+  "display": {
+    "description": {
+      "translate": "EM Wave Change! Aidan Stelar, On-Air!"
+    }
+  },
   "requirements": [
     "skyhighocs:transers",
     "fiskheroes:tier1"

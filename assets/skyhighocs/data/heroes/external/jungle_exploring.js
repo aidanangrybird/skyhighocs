@@ -18,7 +18,7 @@ function initModule(system) {
       });
     },
     waveCalling: function (entity, manager) {
-      if (entity.getUUID() == "a3d071d4-c912-41e1-a6b2-c0de99ea4a84" && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && !entity.world().isRaining() && !entity.world().isThundering() && (entity.world().getLocation(entity.pos()).biome().startsWith("Jungle") || entity.world().getLocation(entity.pos()).biome().startsWith("Jungle M") || entity.world().getLocation(entity.pos()).biome().startsWith("JungleEdge") || entity.world().getLocation(entity.pos()).biome().startsWith("JungleEdge M") || entity.world().getLocation(entity.pos()).biome().startsWith("JungleHills"))) {
+      if (entity.getUUID() == system.getCompatibleUUID(entity) && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && !entity.world().isRaining() && !entity.world().isThundering() && (entity.world().getLocation(entity.pos()).biome().startsWith("Jungle") || entity.world().getLocation(entity.pos()).biome().startsWith("Jungle M") || entity.world().getLocation(entity.pos()).biome().startsWith("JungleEdge") || entity.world().getLocation(entity.pos()).biome().startsWith("JungleEdge M") || entity.world().getLocation(entity.pos()).biome().startsWith("JungleHills"))) {
         var value = Math.random();
         manager.setDataWithNotify(entity, "skyhighocs:dyn/calling_value", value);
         if (entity.getData("skyhighocs:dyn/calling_value") < 0.05) {
@@ -26,7 +26,10 @@ function initModule(system) {
         };
       };
       if (entity.getData("skyhighocs:dyn/calling_timer") == 1) {
-        manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighocs:azure_asteroid");
+        manager.setString(entity.getWornChestplate().nbt(), "emBeing", "Aegir");
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/em_being", "Aegir");
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/calling", false);
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/calling_timer", 0.0);
       };
     },
     waveHandler: function (entity, hero) {

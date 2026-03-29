@@ -1,5 +1,10 @@
 {
   "suit": "skyhighocs:damien_stelar",
+  "display": {
+    "description": {
+      "translate": "EM Wave Change! Damien Stelar, On-Air!"
+    }
+  },
   "requirements": [
     "skyhighocs:transers",
     "fiskheroes:tier1"

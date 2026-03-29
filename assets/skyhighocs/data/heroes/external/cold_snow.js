@@ -18,14 +18,17 @@ function initModule(system) {
       });
     },
     waveCalling: function (entity, manager) {
-      if (entity.getUUID() == "4da600b8-582a-4fc3-ac2e-ada03d3e478c" && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && !entity.world().isRaining() && !entity.world().isThundering() && entity.world().isDaytime() && entity.world().getLocation(entity.pos()).biome().startsWith("Cold Taiga Hills")) {
+      if (entity.getUUID() == system.getCompatibleUUID(entity) && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && !entity.world().isRaining() && !entity.world().isThundering() && entity.world().isDaytime() && entity.world().getLocation(entity.pos()).biome().startsWith("Cold Taiga Hills")) {
         var value = Math.random();
         manager.setDataWithNotify(entity, "skyhighocs:dyn/calling_value", value);
         if (entity.getData("skyhighocs:dyn/calling_value") < 0.05) {
           manager.setDataWithNotify(entity, "skyhighocs:dyn/calling", true);
         };
         if (entity.getData("skyhighocs:dyn/calling_timer") == 1) {
-          manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighocs:pryetak_nebula");
+        manager.setString(entity.getWornChestplate().nbt(), "emBeing", "Pryetak");
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/em_being", "Pryetak");
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/calling", false);
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/calling_timer", 0.0);
         };
       };
     },

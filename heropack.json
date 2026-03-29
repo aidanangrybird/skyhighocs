@@ -42,6 +42,13 @@
     
     "wave_changing_timer": "FLOAT_INTERP",
     "wave_changed": "BOOLEAN",
+    "em_being": { "type": "STRING", "resetWithoutSuit": true },
+    "wave_change": { "type": "STRING", "resetWithoutSuit": true },
+    "compatible_human": { "type": "STRING", "resetWithoutSuit": true },
+    "compatible_uuid": { "type": "STRING", "resetWithoutSuit": true },
+    "satellite": { "type": "STRING", "resetWithoutSuit": true },
+    "system_color": { "type": "STRING", "resetWithoutSuit": true },
+    "wave_color": { "type": "STRING", "resetWithoutSuit": true },
     "calling_value": { "type": "FLOAT", "resetWithoutSuit": true },
     "calling_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "calling": { "type": "BOOLEAN", "resetWithoutSuit": true },
@@ -317,12 +324,12 @@
     "satellite_y": "SHORT",
     "satellite_z": "SHORT",
     "frequency": "SHORT",
-    "satellite_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "satellite": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "satellite_deploy_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "satellite_deployed": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "satellite_rain_mode_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "satellite_rain_mode": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "antenna_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "antenna": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "antenna_deploy_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "antenna_deployed": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "transmit_beam_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "transmit_beam": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "receive_beam_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
@@ -510,27 +517,27 @@
     "skyhighocs:vulcan": {
       "metal": "Metal Skin"
     },
-    "skyhighocs:abyssal_shadow": {
+    "skyhighocs:ace_stelar": {
       "$DEFAULT": {
         "maskToggleTicks": 10
       }
     },
-    "skyhighocs:azure_asteroid": {
+    "skyhighocs:aidan_stelar": {
       "$DEFAULT": {
         "maskToggleTicks": 10
       }
     },
-    "skyhighocs:pryetak_nebula": {
+    "skyhighocs:cade_stelar": {
       "$DEFAULT": {
         "maskToggleTicks": 10
       }
     },
-    "skyhighocs:solar_flame": {
+    "skyhighocs:chase_stelar": {
       "$DEFAULT": {
         "maskToggleTicks": 10
       }
     },
-    "skyhighocs:squall_vortex": {
+    "skyhighocs:damien_stelar": {
       "$DEFAULT": {
         "maskToggleTicks": 10
       }

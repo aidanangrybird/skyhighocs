@@ -199,8 +199,8 @@ function initModule(system) {
             var foundPlayers = [];
             var foundPlayerNames = [];
             var newRange = (range*1);
-            var txAntennaDeployed = (entity.getData("skyhighocs:dyn/antenna_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-            var txSatelliteDeployed = (entity.getData("skyhighocs:dyn/satellite_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
+            var txAntennaDeployed = (entity.getData("skyhighocs:dyn/antenna_deploy_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
+            var txSatelliteDeployed = (entity.getData("skyhighocs:dyn/satellite_deploy_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
             if (txAntennaDeployed) {
               newRange = (range*4);
             };
@@ -235,7 +235,7 @@ function initModule(system) {
               //entity = tx
               //otherEntity = rx
               foundPlayers.forEach(otherEntity => {
-                var rxDomain = rx.getWornHelmet().suitType().split(":")[0];
+                var rxDomain = otherEntity.getWornHelmet().suitType().split(":")[0];
                 var rxAntennaDeployed = (otherEntity.getData(rxDomain + ":dyn/antenna_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
                 var rxSatelliteDeployed = (otherEntity.getData(rxDomain + ":dyn/satellite_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
                 if (entity.canSee(otherEntity) && entity.pos().distanceTo(otherEntity.pos()) <= range) {
@@ -255,8 +255,8 @@ function initModule(system) {
             var foundPlayers = [];
             var foundPlayerNames = [];
             var newRange = (range*1);
-            var txAntennaDeployed = (entity.getData("skyhighocs:dyn/antenna_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-            var txSatelliteDeployed = (entity.getData("skyhighocs:dyn/satellite_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
+            var txAntennaDeployed = (entity.getData("skyhighocs:dyn/antenna_deploy_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
+            var txSatelliteDeployed = (entity.getData("skyhighocs:dyn/satellite_deploy_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
             if (txAntennaDeployed) {
               newRange = (range*4);
             };
@@ -291,7 +291,7 @@ function initModule(system) {
               //entity = tx
               //otherEntity = rx
               foundPlayers.forEach(otherEntity => {
-                var rxDomain = rx.getWornHelmet().suitType().split(":")[0];
+                var rxDomain = otherEntity.getWornHelmet().suitType().split(":")[0];
                 var rxAntennaDeployed = (otherEntity.getData(rxDomain + ":dyn/antenna_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
                 var rxSatelliteDeployed = (otherEntity.getData(rxDomain + ":dyn/satellite_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
                 if (entity.canSee(otherEntity) && entity.pos().distanceTo(otherEntity.pos()) <= range) {
@@ -311,8 +311,8 @@ function initModule(system) {
             var foundPlayers = [];
             var foundPlayerNames = [];
             var newRange = (range*1);
-            var txAntennaDeployed = (entity.getData("skyhighocs:dyn/antenna_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
-            var txSatelliteDeployed = (entity.getData("skyhighocs:dyn/satellite_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
+            var txAntennaDeployed = (entity.getData("skyhighocs:dyn/antenna_deploy_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
+            var txSatelliteDeployed = (entity.getData("skyhighocs:dyn/satellite_deploy_timer") == 1) && (entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") == 0);
             if (txAntennaDeployed) {
               newRange = (range*4);
             };
@@ -366,11 +366,11 @@ function initModule(system) {
           case "show":
             switch (argList[2]) {
               case "sat":
-                manager.setData(entity, "skyhighocs:dyn/satellite", true);
+                manager.setData(entity, "skyhighocs:dyn/satellite_deployed", true);
                 system.moduleMessage(this, entity, "<n>Deploying satellite!");
                 break;
               case "ant":
-                manager.setData(entity, "skyhighocs:dyn/antenna", true);
+                manager.setData(entity, "skyhighocs:dyn/antenna_deployed", true);
                 system.moduleMessage(this, entity, "<n>Deploying antenna!");
                 break;
               case "satRain":
@@ -385,11 +385,11 @@ function initModule(system) {
           case "hide":
             switch (argList[2]) {
               case "sat":
-                manager.setData(entity, "skyhighocs:dyn/satellite", false);
+                manager.setData(entity, "skyhighocs:dyn/satellite_deployed", false);
                 system.moduleMessage(this, entity, "<n>Retracting satellite!");
                 break;
               case "ant":
-                manager.setData(entity, "skyhighocs:dyn/antenna", false);
+                manager.setData(entity, "skyhighocs:dyn/antenna_deployed", false);
                 system.moduleMessage(this, entity, "<n>Retracting antenna!");
                 break;
               case "satRain":
@@ -439,8 +439,8 @@ function initModule(system) {
             break;
           case "status":
             system.moduleMessage(this, entity, "<n>Comms status:");
-            system.moduleMessage(this, entity, "<n>Antenna: <nh>" + ((entity.getData("skyhighocs:dyn/antenna_timer") > 0) ? "DEPLOYED" : "STOWED"));
-            system.moduleMessage(this, entity, "<n>Satellite: <nh>" + ((entity.getData("skyhighocs:dyn/satellite_timer") > 0) ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Antenna: <nh>" + ((entity.getData("skyhighocs:dyn/antenna_deploy_timer") > 0) ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Satellite: <nh>" + ((entity.getData("skyhighocs:dyn/satellite_deploy_timer") > 0) ? "DEPLOYED" : "STOWED"));
             system.moduleMessage(this, entity, "<n>Satellite Rain Mode: <nh>" + ((entity.getData("skyhighocs:dyn/satellite_rain_mode_timer") > 0) ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Connected Satellite: <nh>" + entity.getData("skyhighocs:dyn/satellite_x") + "<n>, <nh>" + entity.getData("skyhighocs:dyn/satellite_y") + "<n>, <nh>" + entity.getData("skyhighocs:dyn/satellite_z"));
             system.moduleMessage(this, entity, "<n>Frequency: <nh>" + entity.getData("skyhighocs:dyn/frequency"));
@@ -476,16 +476,16 @@ function initModule(system) {
       return result;
     },
     whenDisabled: function (entity, manager) {
-      manager.setData(entity, "skyhighocs:dyn/satellite", false);
-      manager.setData(entity, "skyhighocs:dyn/antenna", false);
+      manager.setData(entity, "skyhighocs:dyn/satellite_deployed", false);
+      manager.setData(entity, "skyhighocs:dyn/antenna_deployed", false);
       manager.setData(entity, "skyhighocs:dyn/satellite_rain_mode", false);
     },
     tickHandler: function (entity, manager) {
-      if (entity.getData("skyhighocs:dyn/satellite_timer") == 1) {
+      if (entity.getData("skyhighocs:dyn/satellite_deploy_timer") == 1) {
         manager.setData(entity, "skyhighocs:dyn/transmit_beam", true);
         manager.setData(entity, "skyhighocs:dyn/receive_beam", true);
       };
-      if (!entity.getData("skyhighocs:dyn/satellite")) {
+      if (!entity.getData("skyhighocs:dyn/satellite_deployed")) {
         manager.setData(entity, "skyhighocs:dyn/transmit_beam", false);
         manager.setData(entity, "skyhighocs:dyn/receive_beam", false);
       };
@@ -549,13 +549,13 @@ function initModule(system) {
         };
       };
       if (entity.getData("fiskheroes:flight_timer") > 0) {
-        if (entity.getData("skyhighocs:dyn/satellite")) {
+        if (entity.getData("skyhighocs:dyn/satellite_deployed")) {
           system.moduleMessage(this, entity, "<e>Retracting Satellite!");
-          manager.setData(entity, "skyhighocs:dyn/satellite", false);
+          manager.setData(entity, "skyhighocs:dyn/satellite_deployed", false);
         };
-        if (entity.getData("skyhighocs:dyn/antenna")) {
+        if (entity.getData("skyhighocs:dyn/antenna_deployed")) {
           system.moduleMessage(this, entity, "<e>Retracting Antenna!");
-          manager.setData(entity, "skyhighocs:dyn/antenna", false);
+          manager.setData(entity, "skyhighocs:dyn/antenna_deployed", false);
         };
       };
     },

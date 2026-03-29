@@ -18,14 +18,17 @@ function initModule(system) {
       });
     },
     waveCalling: function (entity, manager) {
-      if (entity.getUUID() == "e51532a1-19fc-4d4f-9da0-f952c4645891" && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && !entity.world().isRaining() && !entity.world().isThundering() && !entity.world().isDaytime() && entity.world().getLocation(entity.pos()).biome() == "Cold Taiga") {
+      if (entity.getUUID() == system.getCompatibleUUID(entity) && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && !entity.world().isRaining() && !entity.world().isThundering() && !entity.world().isDaytime() && entity.world().getLocation(entity.pos()).biome() == "Cold Taiga") {
         var value = Math.random();
         manager.setDataWithNotify(entity, "skyhighocs:dyn/calling_value", value);
         if (entity.getData("skyhighocs:dyn/calling_value") < 0.05) {
           manager.setDataWithNotify(entity, "skyhighocs:dyn/calling", true);
         };
         if (entity.getData("skyhighocs:dyn/calling_timer") == 1) {
-          manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighocs:abyssal_shadow");
+        manager.setString(entity.getWornChestplate().nbt(), "emBeing", "Achlys");
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/em_being", "Achlys");
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/calling", false);
+        manager.setDataWithNotify(entity, "skyhighocs:dyn/calling_timer", 0.0);
         };
       };
     },

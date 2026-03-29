@@ -11,6 +11,8 @@ var contacts = implement("skyhighocs:external/contacts");
 var scanner = implement("skyhighocs:external/scanner");
 var waypoints = implement("skyhighocs:external/waypoint");
 var theVoid = implement("skyhighocs:external/the_void");
+var abyssalShadow = implement("skyhighocs:external/abyssal_shadow");
+var achlys = implement("skyhighocs:external/achlys");
 var transerOS = transer.initSystem([
   settings,
   messaging,
@@ -20,19 +22,21 @@ var transerOS = transer.initSystem([
   contacts,
   scanner,
   waypoints,
-  theVoid
+  theVoid,
+  abyssalShadow,
+  achlys
 ], "damienStelar", "dragon");
 function init(hero) {
   hero.setAliases("damien_stelar");
   hero.setName("Damien Stelar");
   hero.setTier(1);
   hero.setChestplate("Transer");
-  hero.setTierOverride(entity => 0);
   hero.setVersion("OC");
 
   transerOS.keyBinds(hero);
   transerOS.addPowers(hero);
   transerOS.profileWave(hero);
+  transerOS.initEMWaveChange(hero);
 
   bodyTemp.initProfiles(hero);
 
@@ -41,43 +45,46 @@ function init(hero) {
   hero.addKeyBindFunc("HOOD_TOGGLE", (player, manager) => stelar.hoodToggle(player, manager), "Toggle Hood", 2);
   
   hero.setDefaultScale(1.0);
+  hero.setHasProperty((entity, property) => transerOS.getProperty(entity, property));
   hero.setAttributeProfile(entity => {
-    if (entity.getData("skyhighocs:dyn/calling_timer") == 0) {
-      return bodyTemp.getAttributeProfile(entity); 
+    if (entity.getData("skyhighocs:dyn/wave_changing_timer") == 1) {
+      return transerOS.getAttributeProfile(entity);
     } else {
-      return transerOS.getWaveProfile(entity);
+      if (entity.getData("skyhighocs:dyn/calling_timer") == 0) {
+        return bodyTemp.getAttributeProfile(entity); 
+      } else {
+        return transerOS.getWaveProfile(entity);
+      };
     };
   });
   hero.setModifierEnabled((entity, modifier) => {
-    if (modifier.name() == "fiskheroes:shape_shifting") {
-      return true;
-    };
     return transerOS.isModifierEnabled(entity, modifier);
   });
   hero.setKeyBindEnabled((entity, keyBind) => {
     if (keyBind == "VISUALIZER_TOGGLE") {
-      return entity.getUUID() == uuid && ((entity.getData("skyhighocs:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
+      return entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getUUID() == transer.getCompatibleUUID(entity) && ((entity.getData("skyhighocs:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
     };
     if (keyBind == "CYCLE_CLOTHES") {
-      return entity.getUUID() == uuid;
+      return entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getUUID() == transer.getCompatibleUUID(entity);
     };
     if (keyBind == "HOOD_TOGGLE") {
-      return entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighocs:dyn/stelar_clothes") == 3;
+      return entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getUUID() == transer.getCompatibleUUID(entity) && entity.isSneaking() && entity.getData("skyhighocs:dyn/stelar_clothes") == 3;
     };
     if (keyBind == "CYCLE_CHATS") {
-      return !entity.isSneaking();
+      return !entity.isSneaking() && entity.getData("skyhighocs:dyn/wave_changing_timer") == 0;
     };
     if (keyBind == "CYCLE_CHAT_MODES") {
-      return entity.isSneaking();
+      return entity.isSneaking() && entity.getData("skyhighocs:dyn/wave_changing_timer") == 0;
     };
     if (keyBind == "SHAPE_SHIFT") {
-      return true;
+      return entity.getData("skyhighocs:dyn/battle_card") == 0 && ((entity.getData("skyhighocs:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighocs:dyn/jet_streak_timer") == 1);
     };
     return transerOS.isKeyBindEnabled(entity, keyBind);
   });
   hero.setTickHandler((entity, manager) => {
     transerOS.systemHandler(entity, manager);
     transerOS.waveHandler(entity, hero);
+    transerOS.emWaveHandler(entity, manager);
     bodyTemp.change(entity, manager, stelar.tempProfiles(), "skyhighocs:dyn/body_temperature", 400.0, "skyhighocs:dyn/stelar_clothes");
   });
 };

@@ -43,6 +43,7 @@ var hexColors = {
 function assignTranser(entity, manager, satellite) {
   var nbt = mainNBT(entity);
   manager.setString(nbt, "satellite", satellite);
+  manager.setData(entity, "skyhighocs:dyn/satellite", satellite);
   manager.setBoolean(nbt, "Unbreakable", true);
   if (!nbt.hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
@@ -50,21 +51,23 @@ function assignTranser(entity, manager, satellite) {
       manager.setString(nbt, "computerID", computerID);
     };
   };
-  if (!nbt.hasKey("systemColor")) {
-    switch (satellite) {
-      case "dragon":
-        manager.setString(nbt, "systemColor", "2");
-        break;
-      case "leo":
-        manager.setString(nbt, "systemColor", "4");
-        break;
-      case "pegasus":
-        manager.setString(nbt, "systemColor", "1");
-        break;
-      default:
-        manager.setString(nbt, "systemColor", "0");
-        break;
-    };
+  switch (satellite) {
+    case "dragon":
+      manager.setString(nbt, "systemColor", "2");
+      manager.setData(entity, "skyhighocs:dyn/system_color", nbt.getString("systemColor"));
+      break;
+    case "leo":
+      manager.setString(nbt, "systemColor", "4");
+      manager.setData(entity, "skyhighocs:dyn/system_color", nbt.getString("systemColor"));
+      break;
+    case "pegasus":
+      manager.setString(nbt, "systemColor", "1");
+      manager.setData(entity, "skyhighocs:dyn/system_color", nbt.getString("systemColor"));
+      break;
+    default:
+      manager.setString(nbt, "systemColor", "0");
+      manager.setData(entity, "skyhighocs:dyn/system_color", nbt.getString("systemColor"));
+      break;
   };
 };
 
@@ -78,6 +81,63 @@ function isWearingTranser(entity) {
 };
 
 /**
+ * Gets the Compatible EM Being
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns The Compatible EM Being
+ **/
+function getEMBeing(entity) {
+  return entity.getData("skyhighocs:dyn/em_being");
+};
+/**
+ * Gets the Compatible Human
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns The Compatible Human
+ **/
+function getCompatibleHuman(entity) {
+  return entity.getData("skyhighocs:dyn/compatible_human");
+};
+/**
+ * Gets the Compatible UUID
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns The Compatible UUID
+ **/
+function getCompatibleUUID(entity) {
+  return entity.getData("skyhighocs:dyn/compatible_uuid");
+};
+/**
+ * Gets the Wave Change name
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns The Wave Change name
+ **/
+function getWaveChange(entity) {
+  return entity.getData("skyhighocs:dyn/wave_change");
+};
+/**
+ * Gets the System Color
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns The System Color
+ **/
+function getSystemColorCode(entity) {
+  return entity.getData("skyhighocs:dyn/system_color");
+};
+/**
+ * Gets the Wave Color
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns The Wave Color
+ **/
+function getWaveColor(entity) {
+  return entity.getData("skyhighocs:dyn/wave_color");
+};
+/**
+ * Gets the assigned Satellite
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns The  assigned Satellite
+ **/
+function getAssignedSatellite(entity) {
+  return entity.getData("skyhighocs:dyn/satellite");
+};
+
+/**
  * Checks if an entity has a device that is a computer
  * @param {JSEntity} entity - Entity getting checked
  * @returns If the entity has a device that is a computer
@@ -87,21 +147,12 @@ function hasComputer(entity) {
 };
 
 /**
- * Gets the satellite a transer is assigned to
- * @param {JSEntity} entity - Entity getting checked
- * @returns The satellite a transer is assigned to
- **/
-function getAssignedSatellite(entity) {
-  return mainNBT(entity).getString("satellite");
-};
-
-/**
  * Gets the system color of a transer
  * @param {JSEntity} entity - Entity getting checked
  * @returns The system color of a transer
  **/
 function getSystemColor(entity) {
-  return "\u00A7" + mainNBT(entity).getString("systemColor");
+  return "\u00A7" + getSystemColorCode(entity);
 };
 
 /**
@@ -451,6 +502,8 @@ function initSystem(moduleList, transerName, satellite) {
   var powerArray = [];
   /** @var human - Untransformed name */
   var human = null;
+  /** @var compatibleUUID - Compatible human UUID */
+  var compatibleUUID = "";
   /** @var waveChange - Transformed name */
   var waveChange = null;
   /** @var waveColor - Transformd color */
@@ -592,6 +645,9 @@ function initSystem(moduleList, transerName, satellite) {
               if (moduleInit.hasOwnProperty("onInitSystem")) {
                 onInitSystemIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
+              if (moduleInit.hasOwnProperty("compatibleHumanUUID")) {
+                compatibleUUID = moduleInit.compatibleHumanUUID;
               };
             };
             break;
@@ -749,12 +805,8 @@ function initSystem(moduleList, transerName, satellite) {
         modules[waveChangeIndex].keyBinds(hero);
         modules[waveChangeIndex].initDamageProfiles(hero);
         modules[waveChangeIndex].initProfiles(hero);
-      };
-      if (waveChangeIndex > -1 && modules[waveChangeIndex].hasOwnProperty("initEquipment")) {
-        modules[waveChangeIndex].initEquipment(hero);
-      };
-      if (waveChangeIndex > -1 && modules[waveChangeIndex].hasOwnProperty("initSounds")) {
-        modules[waveChangeIndex].initSounds(hero);
+        hero.addSoundEvent("STEP", "skyhighocs:wave_footstep");
+        hero.addSoundEvent("PUNCH", "skyhighocs:wave_punch");
       };
     },
     /**
@@ -764,16 +816,7 @@ function initSystem(moduleList, transerName, satellite) {
      * @returns property
      **/
     getProperty: function (entity, property) {
-      return ((waveChangeIndex == -1) ? null : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].properties(entity, property)));
-    },
-    /**
-     * Property stuff
-     * @param {JSEntity} entity - Required
-     * @param {string} permission - Required
-     * @returns permission
-     **/
-    getPermission: function (entity, permission) {
-      return ((waveChangeIndex == -1) ? null : ((!modules[waveChangeIndex].hasOwnProperty("permissions") && isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].permissions(entity, permission)));
+      return ((waveChangeIndex == -1) ? null : (modules[waveChangeIndex].properties(entity, property)));
     },
     /**
      * Tier override stuff
@@ -781,7 +824,7 @@ function initSystem(moduleList, transerName, satellite) {
      * @returns tier
      **/
     getTierOverride: function (entity) {
-      return ((waveChangeIndex == -1) ? basicTierOverride(entity) : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? basicTierOverride(entity) : modules[waveChangeIndex].tierOverride(entity)));
+      return ((waveChangeIndex == -1) ? basicTierOverride(entity) : ((entity.getData("skyhighocs:dyn/em_being") != emBeing) ? basicTierOverride(entity) : modules[waveChangeIndex].tierOverride(entity)));
     },
     /**
      * Attribute profile stuff
@@ -789,7 +832,7 @@ function initSystem(moduleList, transerName, satellite) {
      * @returns attribute profile
      **/
     getAttributeProfile: function (entity) {
-      return ((waveChangeIndex == -1) ? null : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].attributeProfiles(entity)));
+      return ((waveChangeIndex == -1) ? null : ((entity.getData("skyhighocs:dyn/em_being") != emBeing) ? null : modules[waveChangeIndex].attributeProfiles(entity)));
     },
     /**
      * Damage profile stuff
@@ -797,7 +840,7 @@ function initSystem(moduleList, transerName, satellite) {
      * @returns damage profile
      **/
     getDamageProfile: function (entity) {
-      return ((waveChangeIndex == -1) ? null : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].damageProfiles(entity)));
+      return ((waveChangeIndex == -1) ? null : ((entity.getData("skyhighocs:dyn/em_being") != emBeing) ? null : modules[waveChangeIndex].damageProfiles(entity)));
     },
     /**
      * Wave calling profile
@@ -830,7 +873,7 @@ function initSystem(moduleList, transerName, satellite) {
      * @param {string} keyBind - Required
      **/
     isKeyBindEnabled: function (entity, keyBind) {
-      return ((emBeingIndex == -1) ? false : ((isModuleDisabled(entity, modules[emBeingIndex].name)) ? false : modules[emBeingIndex].isKeyBindEnabled(entity, keyBind))) || ((waveChangeIndex == -1) ? false : (((entity.getDataOrDefault("skyhighocs:dyn/wave_changing_timer", 0.0) < 1) || isModuleDisabled(entity, modules[waveChangeIndex].name)) ? false : modules[waveChangeIndex].isKeyBindEnabled(entity, keyBind)));
+      return ((emBeingIndex == -1) ? false : ((entity.getData("skyhighocs:dyn/em_being") != emBeing) ? false : modules[emBeingIndex].isKeyBindEnabled(entity, keyBind))) || ((waveChangeIndex == -1) ? false : (((entity.getDataOrDefault("skyhighocs:dyn/wave_changing_timer", 0.0) < 1) || (entity.getData("skyhighocs:dyn/em_being") != emBeing)) ? false : modules[waveChangeIndex].isKeyBindEnabled(entity, keyBind)));
     },
     /**
      * Modifier enabled stuff for em
@@ -838,7 +881,11 @@ function initSystem(moduleList, transerName, satellite) {
      * @param {string} modifier - Required
      **/
     isModifierEnabled: function (entity, modifier) {
-      return ((emBeingIndex == -1) ? false : ((isModuleDisabled(entity, modules[emBeingIndex].name)) ? false : modules[emBeingIndex].isModifierEnabled(entity, modifier))) || ((waveChangeIndex == -1) ? false : (((entity.getDataOrDefault("skyhighocs:dyn/wave_changing_timer", 0.0) < 1) || isModuleDisabled(entity, modules[waveChangeIndex].name)) ? false : modules[waveChangeIndex].isModifierEnabled(entity, modifier)));
+      if (modifier.name() == "fiskheroes:shape_shifting") {
+        return true;
+      } else {
+        return ((emBeingIndex == -1) ? false : ((entity.getData("skyhighocs:dyn/em_being") != emBeing) ? false : modules[emBeingIndex].isModifierEnabled(entity, modifier))) || ((waveChangeIndex == -1) ? false : (((entity.getDataOrDefault("skyhighocs:dyn/wave_changing_timer", 0.0) < 1) || (entity.getData("skyhighocs:dyn/em_being") != emBeing)) ? false : modules[waveChangeIndex].isModifierEnabled(entity, modifier)));
+      };
     },
     /**
      * Handles all transer stuff
@@ -858,6 +905,26 @@ function initSystem(moduleList, transerName, satellite) {
           manager.setString(nbt, "chatMode", "");
         };
         manager.setData(entity, "skyhighocs:dyn/chat_mode", nbt.getString("chatMode"));
+        //
+        if (!nbt.hasKey("emBeing")) {
+          manager.setString(nbt, "emBeing", "");
+        };
+        manager.setData(entity, "skyhighocs:dyn/em_being", nbt.getString("emBeing"));
+        //
+        manager.setString(nbt, "compatibleHuman", human);
+        manager.setData(entity, "skyhighocs:dyn/compatible_human", nbt.getString("compatibleHuman"));
+        //
+        manager.setString(nbt, "compatibleUUID", compatibleUUID);
+        manager.setData(entity, "skyhighocs:dyn/compatible_uuid", nbt.getString("compatibleUUID"));
+        //
+        manager.setString(nbt, "waveChange", waveChange);
+        manager.setData(entity, "skyhighocs:dyn/wave_change", nbt.getString("waveChange"));
+        //
+        manager.setString(nbt, "waveColor", waveColor);
+        manager.setData(entity, "skyhighocs:dyn/wave_color", nbt.getString("waveColor"));
+        //
+        manager.setString(nbt, "systemColor", "2");
+        manager.setData(entity, "skyhighocs:dyn/system_color", "2");
         onInitSystemIndexes.forEach(index => {
           var module = modules[index];
           module.onInitSystem(entity, manager);
@@ -891,6 +958,18 @@ function initSystem(moduleList, transerName, satellite) {
                   break;
                 case "status":
                   status(entity);
+                  break;
+                case "unlock":
+                  if ((emBeingIndex > -1 && waveChangeIndex > -1 && waveIndex > -1) && entity.as("PLAYER").isCreativeMode() && ((compatibleUUID != null) ? (entity.getUUID() == compatibleUUID) : true)) {
+                    manager.setString(entity.getWornChestplate().nbt(), "emBeing", emBeing);
+                    manager.setDataWithNotify(entity, "skyhighocs:dyn/em_being", emBeing);
+                  };
+                  break;
+                case "lock":
+                  if ((emBeingIndex > -1 && waveChangeIndex > -1 && waveIndex > -1) && entity.as("PLAYER").isCreativeMode() && ((compatibleUUID != null) ? (entity.getUUID() == compatibleUUID) : true)) {
+                    manager.setString(entity.getWornChestplate().nbt(), "emBeing", "");
+                    manager.setDataWithNotify(entity, "skyhighocs:dyn/em_being", "");
+                  };
                   break;
                 case "help":
                   systemMessage(entity, "<n>Available commands:");
@@ -950,7 +1029,7 @@ function initSystem(moduleList, transerName, satellite) {
           };
         };
         if (waveIndex > -1) {
-          if (PackLoader.getSide() == "SERVER") {
+          if (PackLoader.getSide() == "SERVER" && (entity.getData("skyhighocs:dyn/em_being") != emBeing)) {
             modules[waveIndex].waveCalling(entity, manager);
           };
         };
@@ -975,10 +1054,8 @@ function initSystem(moduleList, transerName, satellite) {
      * @param {JSDataManager} manager - Required
      **/
     emWaveHandler: (entity, manager) => {
-      if (entity.getDataOrDefault("skyhighocs:dyn/system_init", false) && waveChangeIndex > -1 && !isModuleDisabled(entity, modules[waveChangeIndex].name)) {
+      if (entity.getDataOrDefault("skyhighocs:dyn/system_init", false) && (entity.getDataOrDefault("skyhighocs:dyn/em_being", "") == emBeing) && (waveChangeIndex > -1) && (emBeingIndex > -1)) {
         modules[waveChangeIndex].tickHandler(entity, manager);
-      };
-      if (entity.getDataOrDefault("skyhighocs:dyn/system_init", false) && emBeingIndex > -1 && !isModuleDisabled(entity, modules[emBeingIndex].name)) {
         modules[emBeingIndex].tickHandler(entity, manager);
       };
     }

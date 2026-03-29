@@ -21,10 +21,31 @@ function initModule(system) {
       manager.setDataWithNotify(entity, "skyhighocs:dyn/selected_battle_card", 5);
     };
   };
+  function battleCardMessage(entity) {
+    if (entity.getData("skyhighocs:dyn/selected_battle_card") == 0) {
+      system.systemMessage(entity, "<n>No battle card selected!");
+    };
+    if (entity.getData("skyhighocs:dyn/selected_battle_card") == 1) {
+      system.systemMessage(entity, "<n>Selected <nh>Radar Dome<n> battle card!");
+    };
+    if (entity.getData("skyhighocs:dyn/selected_battle_card") == 2) {
+      system.systemMessage(entity, "<n>Selected <nh>Radar<n> battle card!");
+    };
+    if (entity.getData("skyhighocs:dyn/selected_battle_card") == 3) {
+      system.systemMessage(entity, "<n>Selected <nh>Lightning<n> battle card!");
+    };
+    if (entity.getData("skyhighocs:dyn/selected_battle_card") == 4) {
+      system.systemMessage(entity, "<n>Selected <nh>Derecho<n> battle card!");
+    };
+    if (entity.getData("skyhighocs:dyn/selected_battle_card") == 5) {
+      system.systemMessage(entity, "<n>Selected <nh>Hail Cannon<n> battle card!");
+    };
+  };
   return {
     name: "jetStreak",
     type: 8,
     emBeing: "Jet-Streak",
+    compatibleHumanUUID: "a3d071d4-c912-41e1-a6b2-c0de99ea4a84",
     powers: [
       "skyhighocs:jet_streak",
       "skyhighocs:em_wave_change",
@@ -52,7 +73,7 @@ function initModule(system) {
         return true;
       }, "Pulse Out", 5);
       hero.addKeyBindFunc("PULSE_IN", (player, manager) => {
-        if (player.getUUID() == "a3d071d4-c912-41e1-a6b2-c0de99ea4a84") {
+        if (player.getUUID() == system.getCompatibleUUID(player)) {
           system.shoutMessage(player, "<Aidan Stelar> EM Wave Change! \u00A76Aidan Stelar\u00A7r, On-Air!", 16);
           manager.setData(player, "skyhighocs:dyn/battle_card", 0);
           manager.setData(player, "skyhighocs:dyn/selected_battle_card", 0);
@@ -70,7 +91,7 @@ function initModule(system) {
       hero.addKeyBind("WAVE_CHANGE", "EM Wave Change!", 5);
       hero.addKeyBind("JET_STREAK_TOGGLE", "Toggle Vortex Buster", 5);
       hero.addKeyBindFunc("COLD_TEMPERATURE", (player, manager) => {
-        if (player.getUUID() == "a3d071d4-c912-41e1-a6b2-c0de99ea4a84") {
+        if (player.getUUID() == system.getCompatibleUUID(player)) {
           system.shoutMessage(player, "\u00A7r<\u00A76Jet-Streak\u00A7r> You are too cold for us to pulse in.", 16);
         } else {
           system.shoutMessage(player, "<\u00A76Jet-Streak\u00A7r> Who are you?", 16);
@@ -78,7 +99,7 @@ function initModule(system) {
         return true;
       }, "\u00A7mPulse In\u00A7r You are too cold", 5);
       hero.addKeyBindFunc("HOT_TEMPERATURE", (player, manager) => {
-        if (player.getUUID() == "a3d071d4-c912-41e1-a6b2-c0de99ea4a84") {
+        if (player.getUUID() == system.getCompatibleUUID(player)) {
           system.shoutMessage(player, "\u00A7r<\u00A76Jet-Streak\u00A7r> You are too hot for us to pulse in.", 16);
         } else {
           system.shoutMessage(player, "<\u00A76Jet-Streak\u00A7r> Who are you?", 16);
@@ -121,7 +142,7 @@ function initModule(system) {
       return result;
     },
     isModifierEnabled: function (entity, modifier) {
-      var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
+      var uuid = system.getCompatibleUUID(entity);
       var result = false;
       if (modifier.name() == "fiskheroes:transformation") {
         if (modifier.id() == "predation" || modifier.id() == "jet_streak") {
@@ -152,10 +173,12 @@ function initModule(system) {
         var gravity_amount = entity.getData("fiskheroes:gravity_amount");
         if (gravity_amount > 0) {
           cycleUpCard(entity, manager);
+          battleCardMessage(entity);
           manager.setDataWithNotify(entity, "skyhighocs:dyn/reset_gravity_manip", true);
         };
         if (gravity_amount < 0) {
           cycleDownCard(entity, manager);
+          battleCardMessage(entity);
           manager.setDataWithNotify(entity, "skyhighocs:dyn/reset_gravity_manip", true);
         };
       };

@@ -1,5 +1,10 @@
 {
   "suit": "skyhighocs:cade_stelar",
+  "display": {
+    "description": {
+      "translate": "EM Wave Change! Cade Stelar, On-Air!"
+    }
+  },
   "requirements": [
     "skyhighocs:transers",
     "fiskheroes:tier1"
