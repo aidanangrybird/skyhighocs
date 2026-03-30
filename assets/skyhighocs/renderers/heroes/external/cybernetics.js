@@ -136,12 +136,15 @@ function initCyberneticAnimations(renderer) {
   });
   addAnimation(renderer, "cybernetic.RIGHT_ARM_SHIELD", "skyhighocs:cybernetic_right_arm_shield").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighocs:dyn/shield_right_timer") * entity.getInterpolatedData("fiskheroes:shield_blocking_timer") * (1 - entity.getInterpolatedData("fiskheroes:beam_charge")));
-  });/*
-  addAnimation(renderer, "cybernetic.BASE", "skyhighocs:cybernetic_base").setData((entity, data) => {
+  });
+  addAnimation(renderer, "cybernetic.CONVERSION", "skyhighocs:cybernetic_base").setData((entity, data) => {
+    data.load(entity.getInterpolatedData("skyhighocs:dyn/cybernetic_conversion_sleep_timer"));
+  });
+  addAnimation(renderer, "cybernetic.STATUE", "skyhighocs:cybernetic_base").setData((entity, data) => {
     data.load(1.0);
   })
-  .setCondition(entity => !entity.is("DISPLAY") && !mainNBT(entity).getBoolean("naturalArms") && (entity.getInterpolatedData("skyhighocs:dyn/thermoptic_disguise_timer") < 1))
-  .priority = -11;
+  .setCondition(entity => !entity.is("DISPLAY") && mainNBT(entity).getBoolean("statueMode"))
+  .priority = -11;/*
   addAnimation(renderer, "cybernetic.LEFT_ARM_PUNCH", "skyhighocs:cybernetic_left_arm_punch").setData((entity, data) => {
     data.load(entity.getPunchTimerInterpolated());
   })
@@ -166,7 +169,7 @@ function initCyberneticAnimations(renderer) {
     .priority = -8;
   addAnimationWithData(renderer, "cybernetic.ROLL", "skyhighocs:flight/cybernetic_barrel_roll", "fiskheroes:barrel_roll_timer")
   addHoverAnimation(renderer, "cybernetic.HOVER", "skyhighocs:cybernetic_hover");
-  addAnimationWithData(renderer, "cybernetic.POWER", "skyhighocs:cybernetic_powering_down", "skyhighocs:dyn/powering_down_timer")
+  addAnimationWithData(renderer, "cybernetic.POWER", "skyhighocs:cybernetic_base", "skyhighocs:dyn/powering_down_timer")
     .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighocs:dyn/powering_down_timer") > 0))
     .priority = -10;
 
@@ -368,10 +371,10 @@ function headAnimations(entity, data) {
   data.load(7, entity.getInterpolatedData("skyhighocs:dyn/intake_head_right_open_timer"));
   data.load(8, entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_head_left_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_head_left_start_up_timer") == 0)?0:1));
   data.load(9, entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_head_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_head_right_start_up_timer") == 0)?0:1));
-  data.load(10, stuff.getBearing(entity));
-  data.load(11, entity.rotationInterpolated().y());
-  data.load(12, stuff.directionAngle(entity, entity.getData("skyhighocs:dyn/satellite_x")+0.5, entity.getData("skyhighocs:dyn/satellite_z")+0.5));
-  data.load(13, stuff.elevation(entity, entity.getData("skyhighocs:dyn/satellite_x")+0.5, entity.getData("skyhighocs:dyn/satellite_y")+0.5, entity.getData("skyhighocs:dyn/satellite_z")+0.5));
+  data.load(10, ((!entity.getData("skyhighocs:dyn/converted_cyber")) ? 0.0 : stuff.getBearing(entity)));
+  data.load(11, ((!entity.getData("skyhighocs:dyn/converted_cyber")) ? 0.0 : entity.rotationInterpolated().y()));
+  data.load(12, ((!entity.getData("skyhighocs:dyn/converted_cyber")) ? 0.0 : stuff.directionAngle(entity, entity.getData("skyhighocs:dyn/satellite_x")+0.5, entity.getData("skyhighocs:dyn/satellite_z")+0.5)));
+  data.load(13, ((!entity.getData("skyhighocs:dyn/converted_cyber")) ? 0.0 : stuff.elevation(entity, entity.getData("skyhighocs:dyn/satellite_x")+0.5, entity.getData("skyhighocs:dyn/satellite_y")+0.5, entity.getData("skyhighocs:dyn/satellite_z")+0.5)));
 };
 
 function bodyAnimations(entity, data) {
@@ -389,7 +392,7 @@ function bodyAnimations(entity, data) {
   data.load(11, entity.loop(500*(1-entity.getInterpolatedData("skyhighocs:dyn/intake_body_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighocs:dyn/intake_body_right_start_up_timer") == 0)?0:1));
   data.load(12, entity.getInterpolatedData("fiskheroes:flight_timer"));
   data.load(13, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
-  data.load(14, entity.getInterpolatedData("skyhighocs:dyn/power_core_open_timer"));
+  data.load(14, entity.getInterpolatedData("skyhighocs:dyn/system_core_open_timer"));
 };
 
 function leftArmAnimations(entity, data) {
@@ -797,5 +800,5 @@ function rightLegConditions(entity) {
 };
 
 function mainNBT(entity) {
-  return entity.getWornHelmet().nbt();
+  return entity.getWornChestplate().nbt();
 };

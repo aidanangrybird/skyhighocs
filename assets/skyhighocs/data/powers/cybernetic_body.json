@@ -1133,11 +1133,35 @@
         "ENABLE": "fiskheroes:gliding"
       }
     },
-    "fiskheroes:transformation|power_core_open": {
+    "fiskheroes:transformation|system_core_open": {
       "transformation": {
-        "toggleData": "skyhighocs:dyn/power_core_open",
-        "timerData": "skyhighocs:dyn/power_core_open_timer",
+        "toggleData": "skyhighocs:dyn/system_core_open",
+        "timerData": "skyhighocs:dyn/system_core_open_timer",
         "time": 100
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|cybernetic_conversion": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/cybernetic_conversion",
+        "timerData": "skyhighocs:dyn/cybernetic_conversion_timer",
+        "time": 3000
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|cybernetic_conversion_sleep": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/cybernetic_conversion_sleep",
+        "timerData": "skyhighocs:dyn/cybernetic_conversion_sleep_timer",
+        "time": 100
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|optics_enabled": {
+      "transformation": {
+        "toggleData": "skyhighocs:dyn/optics_enabled",
+        "timerData": "skyhighocs:dyn/optics_enabling_timer",
+        "time": 40
       },
       "isToggle": true
     }

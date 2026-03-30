@@ -145,7 +145,7 @@ function getAliasName(entity) {
  * @returns The UUID of the suits authorized user
  **/
 function getAuthorizedUser(entity) {
-  return entity.getWornHelmet().nbt().getString("boundUUID");
+  return mainNBT(entity).getString("boundUUID");
 };
 
 /**
@@ -262,7 +262,7 @@ function direction(base, other) {
 };
 
 function mainNBT(entity) {
-  return entity.getWornHelmet().nbt();
+  return entity.getWornChestplate().nbt();
 };
 
 function getMainNBT(entity) {
@@ -520,7 +520,7 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 };
 
-function cycleUp(entity, manager) {
+function cycleUpHud(entity, manager) {
   var nbt = mainNBT(entity);
   if (entity.getData("skyhighocs:dyn/hud_selected_side") == 0) {
     manager.setData(entity, "skyhighocs:dyn/hud_side_left", entity.getData("skyhighocs:dyn/hud_side_left") + 1);
@@ -548,7 +548,7 @@ function cycleUp(entity, manager) {
   };
 };
 
-function cycleDown(entity, manager) {
+function cycleDownHud(entity, manager) {
   var nbt = mainNBT(entity);
   if (entity.getData("skyhighocs:dyn/hud_selected_side") == 0) {
     manager.setData(entity, "skyhighocs:dyn/hud_side_left", entity.getData("skyhighocs:dyn/hud_side_left") - 1);
@@ -675,6 +675,7 @@ function initMultiTap(varPrefix) {
  **/
 function initSystem(moduleList, name, colorCode, uuid) {
   var sneakMultiTap = initMultiTap("skyhighocs:dyn/sneak");
+  var maskMultiTap = initMultiTap("skyhighocs:dyn/mask");
   var punchMultiTap = initMultiTap("skyhighocs:dyn/punch");
   var selectedSideMultiTap = initMultiTap("skyhighocs:dyn/hud_selected_side");
   var cyberInstance = this;
@@ -1140,13 +1141,46 @@ function initSystem(moduleList, name, colorCode, uuid) {
     };
   };
   /**
-   * Modifier enabled stuff for em
+   * Modifier enabled stuff for cybernetics
    * @param {JSEntity} entity - Required
    * @param {string} modifier - Required
    **/
-  function isModifierEnabled(entity, modifier) {
+  function cyberneticModifierEnabled(entity, modifier) {
     if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
       return false;
+    };
+    if (modifier.name() == "fiskheroes:shape_shifting") {
+      return true;
+    };
+    if (modifier.name() == "fiskheroes:gravity_manipulation") {
+      return true;
+    };
+    if (modifier.name() == "fiskheroes:potion_immunity") {
+      return entity.getData("skyhighocs:dyn/system_core_open_timer") == 0;
+    };
+    if (modifier.name() == "fiskheroes:regeneration") {
+      return true;
+    };
+    if (modifier.name() == "fiskheroes:healing_factor") {
+      return true;
+    };
+    if (modifier.name() == "fiskheroes:water_breathing") {
+      return true;
+    };
+    if (modifier.name() == "fiskheroes:fire_immunity") {
+      return entity.getData("skyhighocs:dyn/system_core_open_timer") == 0;
+    };
+    if (modifier.name() == "fiskheroes:damage_immunity") {
+      return entity.getData("skyhighocs:dyn/system_core_open_timer") == 0;
+    };
+    if (modifier.name() == "fiskheroes:projectile_immunity") {
+      return entity.getData("skyhighocs:dyn/system_core_open_timer") == 0;
+    };
+    if (modifier.name() == "fiskheroes:transformation") {
+      return true;
+    };
+    if (modifier.name() == "fiskheroes:metal_skin") {
+      return entity.getData("skyhighocs:dyn/system_core_open_timer") == 0 && entity.getData("fiskheroes:metal_heat") < 1.0;
     };
     if (modifierIndexes.length == 1) {
       return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier);
@@ -1198,7 +1232,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
     };
   };
   /**
-   * Power stuff (I hate that I had to do it this way)
+   * Power stuff
    * @param {JSHero} hero - Required
    **/
   function addPowers(hero) {
@@ -1211,6 +1245,47 @@ function initSystem(moduleList, name, colorCode, uuid) {
    * @param {JSHero} hero - Required
    **/
   function keyBinds(hero) {
+    hero.addKeyBindFunc("BYPASS_CONVERSION", (entity, manager) => {
+      var nbt = mainNBT(entity);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/optics_enabled", true);
+      manager.setBoolean(nbt, "bodyLights", true);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/cybernetic_body_lights", true);
+      manager.setBoolean(nbt, "convertedToCyber", true);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/converted_cyber", true);
+      manager.setBoolean(nbt, "disguiseClothing", true);
+      manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise_clothing", true);
+      manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise", true);
+      return true;
+    }, "Bypass Cybernetic Conversion", 5);
+    hero.addKeyBindFunc("TRIGGER_CONVERSION", (entity, manager) => {
+      manager.setData(entity, "skyhighocs:dyn/cybernetic_conversion_sleep", true);
+      return true;
+    }, "Trigger Cybernetic Conversion", 4);
+    hero.addKeyBindFunc("ACCEPT", (entity, manager) => {
+      var nbt = mainNBT(entity);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/optics_enabled", true);
+      manager.setBoolean(nbt, "bodyLights", true);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/cybernetic_body_lights", true);
+      manager.setBoolean(nbt, "convertedToCyber", true);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/converted_cyber", true);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/cybernetic_conversion", false);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/cybernetic_conversion_timer", 0.0);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/cybernetic_conversion_sleep", false);
+      return true;
+    }, "Accept your new body", 4);
+    hero.addKeyBindFunc("REJECT", (entity, manager) => {
+      var nbt = mainNBT(entity);
+      entity.hurt(hero, "CONVERSION", "%1$s died from cybernetic conversion", 1000.0);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/optics_enabled", false);
+      manager.setBoolean(nbt, "bodyLights", false);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/cybernetic_body_lights", false);
+      manager.setBoolean(nbt, "convertedToCyber", false);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/converted_cyber", false);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/cybernetic_conversion", false);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/cybernetic_conversion_timer", 0.0);
+      manager.setDataWithNotify(entity, "skyhighocs:dyn/cybernetic_conversion_sleep", false);
+      return true;
+    }, "Reject your new body", 5);
     hero.addKeyBindFunc("BATTLE_MODE", (entity, manager) => {
       manager.setData(entity, "skyhighocs:dyn/battle_mode", !entity.getData("skyhighocs:dyn/battle_mode"));
       if (!entity.getData("skyhighocs:dyn/battle_mode")) {
@@ -1227,11 +1302,11 @@ function initSystem(moduleList, name, colorCode, uuid) {
     });
   };
   /**
-   * Attribute profile stuff
+   * Attribute profile stuff for cybernetics
    * @param {JSEntity} entity - Required
    * @returns attribute profile
    **/
-  function getAttributeProfile(entity) {
+  function cyberneticAttributeProfile(entity) {
     var result = null;
     if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
       result = "SHUT_DOWN";
@@ -1263,11 +1338,11 @@ function initSystem(moduleList, name, colorCode, uuid) {
     return result;
   };
   /**
-   * Damage profile stuff
+   * Damage profile stuff for cybernetics
    * @param {JSEntity} entity - Required
    * @returns damage profile
    **/
-  function getDamageProfile(entity) {
+  function cyberneticDamageProfile(entity) {
     var result = null;
     if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
       result = null;
@@ -1329,7 +1404,59 @@ function initSystem(moduleList, name, colorCode, uuid) {
       profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
       profile.addAttribute("MAX_HEALTH", -19.0, 0);
     });
+    hero.addAttributeProfile("BEFORE_CONVERSION", function (profile) {
+    });
+    hero.addAttributeProfile("CONVERSION_1", function (profile) {
+      profile.addAttribute("BASE_SPEED", -0.05, 1);
+      profile.addAttribute("SPRINT_SPEED", -0.05, 1);
+      profile.addAttribute("WEAPON_DAMAGE", -0.05, 1);
+      profile.addAttribute("JUMP_HEIGHT", -0.05, 1);
+      profile.addAttribute("STEP_HEIGHT", -0.05, 1);
+      profile.addAttribute("KNOCKBACK", -0.05, 1);
+      profile.addAttribute("PUNCH_DAMAGE", -0.05, 1);
+    });
+    hero.addAttributeProfile("CONVERSION_2", function (profile) {
+      profile.addAttribute("BASE_SPEED", -0.1, 1);
+      profile.addAttribute("SPRINT_SPEED", -0.1, 1);
+      profile.addAttribute("WEAPON_DAMAGE", -0.1, 1);
+      profile.addAttribute("JUMP_HEIGHT", -0.1, 1);
+      profile.addAttribute("STEP_HEIGHT", -0.1, 1);
+      profile.addAttribute("KNOCKBACK", -0.1, 1);
+      profile.addAttribute("PUNCH_DAMAGE", -0.1, 1);
+    });
+    hero.addAttributeProfile("CONVERSION_3", function (profile) {
+      profile.addAttribute("BASE_SPEED", -0.25, 1);
+      profile.addAttribute("SPRINT_SPEED", -0.25, 1);
+      profile.addAttribute("WEAPON_DAMAGE", -0.25, 1);
+      profile.addAttribute("JUMP_HEIGHT", -0.25, 1);
+      profile.addAttribute("STEP_HEIGHT", -0.25, 1);
+      profile.addAttribute("KNOCKBACK", -0.25, 1);
+      profile.addAttribute("PUNCH_DAMAGE", -0.25, 1);
+    });
+    hero.addAttributeProfile("CONVERSION_4", function (profile) {
+      profile.addAttribute("BASE_SPEED", -0.6, 1);
+      profile.addAttribute("SPRINT_SPEED", -0.6, 1);
+      profile.addAttribute("WEAPON_DAMAGE", -0.6, 1);
+      profile.addAttribute("JUMP_HEIGHT", -0.6, 1);
+      profile.addAttribute("STEP_HEIGHT", -0.6, 1);
+      profile.addAttribute("KNOCKBACK", -0.6, 1);
+      profile.addAttribute("PUNCH_DAMAGE", -0.6, 1);
+    });
+    hero.addAttributeProfile("CONVERSION_5", function (profile) {
+      profile.addAttribute("BASE_SPEED", -1.0, 1);
+      profile.addAttribute("SPRINT_SPEED", -1.0, 1);
+      profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+      profile.addAttribute("JUMP_HEIGHT", -1.0, 1);
+      profile.addAttribute("STEP_HEIGHT", -1.0, 1);
+      profile.addAttribute("KNOCKBACK", -1.0, 1);
+      profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+    });
     damageProfileIndexes.forEach(index => {
+      hero.addDamageProfile("CONVERSION", {
+        "types": {
+          "CYBERNETIC_CONVERSION": 1.0
+        }
+      });
       modules[index].initDamageProfiles(hero);
     });
     attributeProfileIndexes.forEach(index => {
@@ -1337,11 +1464,20 @@ function initSystem(moduleList, name, colorCode, uuid) {
     });
   };
   /**
-   * Keybind enabled stuff for em
+   * Keybind enabled stuff for cybernetics
    * @param {JSEntity} entity - Required
    * @param {string} keyBind - Required
    **/
-  function isKeyBindEnabled(entity, keyBind) {
+  function cyberneticKeyBindEnabled(entity, keyBind) {
+    if (keyBind == "SHAPE_SHIFT") {
+      return !entity.isSneaking();
+    };
+    if (keyBind == "BATTLE_MODE") {
+      return entity.isSneaking();
+    };
+    if (keyBind == "GRAVITY_MANIPULATION") {
+      return !entity.getData("skyhighocs:dyn/battle_mode");
+    };
     if (entity.getData("skyhighocs:dyn/powering_down_timer") > 0) {
       return false;
     };
@@ -1394,9 +1530,15 @@ function initSystem(moduleList, name, colorCode, uuid) {
       return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[3]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[4]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[5]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[6]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[7]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[8]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[9]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[10]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[11]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[12]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[13]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[14]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[15]].isKeyBindEnabled(entity, keyBind);
     };
   };
-  function tickHandler(entity, manager) {
+  /**
+   * Tick handler for cybernetics
+   * @param {JSEntity} entity - Required
+   * @param {JSDataManager} manager - Required
+   **/
+  function cyberneticsHandler(entity, manager) {
     var nbt = mainNBT(entity);
     if ((!entity.getDataOrDefault("skyhighocs:dyn/system_init", true))) {
+      manager.setData(entity, "skyhighocs:dyn/optics_enabled", true);
       manager.setString(nbt, "boundUUID", boundUUID);
       manager.setBoolean(nbt, "Unbreakable", true);
       assignID(entity, manager);
@@ -1446,7 +1588,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
           systemMessage(entity, "<n>FIGHT OR FLIGHT MODE ACTIVATED!");
           manager.setData(entity, "skyhighocs:dyn/fight_or_flight", true);
         };
-        manager.setData(entity, "skyhighocs:dyn/power_core_open", false);
+        manager.setData(entity, "skyhighocs:dyn/system_core_open", false);
         fightOrFlightIndexes.forEach(index => {
           var module = modules[index];
           silentEnableModule(entity, manager, module.name);
@@ -1492,12 +1634,20 @@ function initSystem(moduleList, name, colorCode, uuid) {
                 systemMessage(entity, "<n>Powering on!");
                 break;
               case "openCore":
-                manager.setData(entity, "skyhighocs:dyn/power_core_open", true);
+                manager.setData(entity, "skyhighocs:dyn/system_core_open", true);
                 systemMessage(entity, "<n>Opening core!");
                 break;
               case "closeCore":
-                manager.setData(entity, "skyhighocs:dyn/power_core_open", false);
+                manager.setData(entity, "skyhighocs:dyn/system_core_open", false);
                 systemMessage(entity, "<n>Closing core!");
+                break;
+              case "enableOptics":
+                manager.setData(entity, "skyhighocs:dyn/optics_enabled", true);
+                systemMessage(entity, "<n>Enabling optics!");
+                break;
+              case "disableOptics":
+                manager.setData(entity, "skyhighocs:dyn/optics_enabled", false);
+                systemMessage(entity, "<n>Disabling optics!");
                 break;
               case "help":
                 systemMessage(entity, "<n>Available commands:");
@@ -1695,11 +1845,11 @@ function initSystem(moduleList, name, colorCode, uuid) {
       };
       var gravity_amount = entity.getData("fiskheroes:gravity_amount");
       if (gravity_amount > 0) {
-        cycleUp(entity, manager);
+        cycleUpHud(entity, manager);
         manager.setDataWithNotify(entity, "skyhighocs:dyn/reset_gravity_manip", true);
       };
       if (gravity_amount < 0) {
-        cycleDown(entity, manager);
+        cycleUpHud(entity, manager);
         manager.setDataWithNotify(entity, "skyhighocs:dyn/reset_gravity_manip", true);
       };
     };
@@ -1716,6 +1866,151 @@ function initSystem(moduleList, name, colorCode, uuid) {
       manager.setDataWithNotify(entity, "skyhighocs:dyn/thermoptic_disguise", !entity.getData("skyhighocs:dyn/thermoptic_disguise"));
     };
   };
+  /**
+   * Damage profile stuff for normal player
+   * @param {JSEntity} entity - Required
+   * @param {string} modifier - Required
+   **/
+  function normalDamageProfile(entity) {
+    return null;
+  };
+  /**
+   * Attribute profile stuff for normal player
+   * @param {JSEntity} entity - Required
+   * @param {string} modifier - Required
+   **/
+  function normalAttributeProfile(entity) {
+    var result = null;
+    if (entity.getData("skyhighocs:dyn/cybernetic_conversion_sleep_timer") == 0) {
+      result = "BEFORE_CONVERSION";
+    };
+    if (entity.getData("skyhighocs:dyn/cybernetic_conversion_sleep_timer") > 0) {
+      result = "CONVERSION_1";
+    };
+    if (entity.getData("skyhighocs:dyn/cybernetic_conversion_sleep_timer") > 0.2) {
+      result = "CONVERSION_2";
+    };
+    if (entity.getData("skyhighocs:dyn/cybernetic_conversion_sleep_timer") > 0.4) {
+      result = "CONVERSION_3";
+    };
+    if (entity.getData("skyhighocs:dyn/cybernetic_conversion_sleep_timer") > 0.6) {
+      result = "CONVERSION_4";
+    };
+    if (entity.getData("skyhighocs:dyn/cybernetic_conversion_sleep_timer") > 0.8) {
+      result = "CONVERSION_5";
+    };
+    return result;
+  };
+  /**
+   * Modifier enabled stuff for normal player
+   * @param {JSEntity} entity - Required
+   * @param {string} modifier - Required
+   **/
+  function normalModifierEnabled(entity, modifier) {
+    if ((modifier.name() == "fiskheroes:transformation")) {
+      return ((modifier.id() == "cybernetic_conversion") || (modifier.id() == "cybernetic_conversion_sleep"));
+    } else {
+      return false;
+    };
+  };
+  /**
+   * Keybind enabled stuff for normal player
+   * @param {JSEntity} entity - Required
+   * @param {string} keyBind - Required
+   **/
+  function normalKeyBindEnabled(entity, keyBind) {
+    if (keyBind == "TRIGGER_CONVERSION" || keyBind == "BYPASS_CONVERSION") {
+      return entity.getData("skyhighocs:dyn/cybernetic_conversion_sleep_timer") == 0;
+    };
+    if (keyBind == "ACCEPT" || keyBind == "REJECT") {
+      return entity.getData("skyhighocs:dyn/cybernetic_conversion_timer") == 1;
+    };
+    return false;
+  };
+  /**
+   * Handler for doing cybernetic conversion
+   * @param {JSEntity} entity - Required
+   * @param {JSDataManager} manager - Required
+   **/
+  function cyberneticConversionHandler(entity, manager, hero) {
+    var nbt = mainNBT(entity);
+    var conversionTimer = entity.getData("skyhighocs:dyn/cybernetic_conversion_timer");
+    var activationVariables = ["", "", "", "", "", "", "", "", "", "", "", "rockets", "cannons", "blades", "shields", "satellite", "antenna", "wings", "thermoptics", "optics"];
+    var numActivationVariables = activationVariables.length;
+    var numActivationVariableUsed = Math.ceil(conversionTimer*numActivationVariables);
+    var rockets = (activationVariables[numActivationVariableUsed] == "rockets");
+    var cannons = (activationVariables[numActivationVariableUsed] == "cannons");
+    var blades = (activationVariables[numActivationVariableUsed] == "blades");
+    var shields = (activationVariables[numActivationVariableUsed] == "shields");
+    var satellite = (activationVariables[numActivationVariableUsed] == "satellite");
+    var antenna = (activationVariables[numActivationVariableUsed] == "antenna");
+    var wings = (activationVariables[numActivationVariableUsed] == "wings");
+    var thermoptics = (activationVariables[numActivationVariableUsed] == "thermoptics");
+    var optics = (activationVariables[numActivationVariableUsed] == "optics");
+    
+    manager.setData(entity, "skyhighocs:dyn/rocket_left_arm_outer_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_left_arm_front_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_left_arm_back_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_right_arm_outer_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_right_arm_front_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_right_arm_back_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_outer_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_inner_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_front_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_back_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_outer_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_inner_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_front_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_back_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_left_leg_main_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_right_leg_main_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_body_left_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_body_right_deployed", rockets);
+    manager.setData(entity, "skyhighocs:dyn/rocket_inner_legs_enabled", rockets);
+    
+    manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_bottom_deployed", cannons);
+    manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_front_deployed", cannons);
+    manager.setData(entity, "skyhighocs:dyn/cannon_left_arm_back_deployed", cannons);
+    manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_bottom_deployed", cannons);
+    manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_front_deployed", cannons);
+    manager.setData(entity, "skyhighocs:dyn/cannon_right_arm_back_deployed", cannons);
+    manager.setData(entity, "skyhighocs:dyn/cannon_head_left_deployed", cannons);
+    manager.setData(entity, "skyhighocs:dyn/cannon_head_right_deployed", cannons);
+    manager.setData(entity, "skyhighocs:dyn/cannon_body_left_deployed", cannons);
+    manager.setData(entity, "skyhighocs:dyn/cannon_body_right_deployed", cannons);
+    
+    manager.setData(entity, "skyhighocs:dyn/blade_left_deployed", blades);
+    manager.setData(entity, "skyhighocs:dyn/blade_right_deployed", blades);
+
+    manager.setData(entity, "skyhighocs:dyn/shield_left_deployed", shields);
+    manager.setData(entity, "skyhighocs:dyn/shield_right_deployed", shields);
+    
+    manager.setData(entity, "skyhighocs:dyn/satellite_deployed", satellite);
+
+    manager.setData(entity, "skyhighocs:dyn/antenna_deployed", antenna);
+    
+    manager.setData(entity, "skyhighocs:dyn/wing_left_deployed", wings);
+    manager.setData(entity, "skyhighocs:dyn/wing_right_deployed", wings);
+
+    if (thermoptics) {
+      manager.setBoolean(nbt, "disguiseClothing", true);
+      manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise_clothing", true);
+      manager.setData(entity, "skyhighocs:dyn/thermoptic_disguise", true);
+    };
+    
+    if (optics) {
+      manager.setData(entity, "skyhighocs:dyn/optics_enabled", true);
+    };
+    
+    var nbt = mainNBT(entity);
+    var timer = entity.getData("skyhighocs:dyn/cybernetic_conversion_timer");
+    if (timer > 0 && timer < 1 && (Math.ceil(timer*150) % 30) == 0) {
+      entity.hurt(hero, "CONVERSION", "%1$s died from cybernetic conversion", 0.5 + timer*10.0);
+    };
+    if (entity.getData("skyhighocs:dyn/cybernetic_conversion_sleep_timer") == 1) {
+      manager.setData(entity, "skyhighocs:dyn/cybernetic_conversion", true);
+    };
+  };
   return {
     /**
      * Handles all cyber stuff
@@ -1725,7 +2020,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
       hero.setAliases(formatAlias(cyberName));
       hero.setName(cyberName + "/Model " + cyberModelID + " Cybernetic Body");
       hero.setTier(9);
-      hero.setHelmet("Cybernetic Brain");
+      hero.setChestplate("System Core");
       hero.setVersion("OC");
     
       hero.addPrimaryEquipment("fiskheroes:suit_data_drive@" + colorDamage[color] + "{display:{Name:\u00A7" + color + cyberName + "'s Data Drive}}", true, item => (item.damage() == colorDamage[color] && item.displayName() == "\u00A7" + color + cyberName + "'s Data Drive"));
@@ -1735,68 +2030,38 @@ function initSystem(moduleList, name, colorCode, uuid) {
       addPowers(hero);
       
       hero.setHasProperty((entity, property) => {
-        return property == "BREATHE_SPACE";
+        return (property == "BREATHE_SPACE" || property == "MASK_TOGGLE") && entity.getData("skyhighocs:dyn/converted_cyber");
       });
       hero.setTierOverride(entity => {
-        return (entity.getData("skyhighocs:dyn/power_core_open_timer") == 0) ? 9 : 1;
+        return (entity.getData("skyhighocs:dyn/converted_cyber")) ? ((entity.getData("skyhighocs:dyn/system_core_open_timer") == 0) ? 9 : 1) : 0;
       });
       hero.setDefaultScale(1.0);
       hero.setModifierEnabled((entity, modifier) => {
-        if (modifier.name() == "fiskheroes:shape_shifting") {
-          return true;
-        };
-        if (modifier.name() == "fiskheroes:gravity_manipulation") {
-          return true;
-        };
-        if (modifier.name() == "fiskheroes:potion_immunity") {
-          return entity.getData("skyhighocs:dyn/power_core_open_timer") == 0;
-        };
-        if (modifier.name() == "fiskheroes:regeneration") {
-          return true;
-        };
-        if (modifier.name() == "fiskheroes:healing_factor") {
-          return true;
-        };
-        if (modifier.name() == "fiskheroes:water_breathing") {
-          return true;
-        };
-        if (modifier.name() == "fiskheroes:fire_immunity") {
-          return entity.getData("skyhighocs:dyn/power_core_open_timer") == 0;
-        };
-        if (modifier.name() == "fiskheroes:damage_immunity") {
-          return entity.getData("skyhighocs:dyn/power_core_open_timer") == 0;
-        };
-        if (modifier.name() == "fiskheroes:projectile_immunity") {
-          return entity.getData("skyhighocs:dyn/power_core_open_timer") == 0;
-        };
-        if (modifier.name() == "fiskheroes:transformation") {
-          return true;
-        };
-        if (modifier.name() == "fiskheroes:metal_skin") {
-          return entity.getData("skyhighocs:dyn/power_core_open_timer") == 0 && entity.getData("fiskheroes:metal_heat") < 1.0;
-        };
-        return isModifierEnabled(entity, modifier);
+        return (entity.getData("skyhighocs:dyn/converted_cyber")) ? cyberneticModifierEnabled(entity, modifier) : normalModifierEnabled(entity, modifier);
       });
       hero.setKeyBindEnabled((entity, keyBind) => {
-        if (keyBind == "SHAPE_SHIFT") {
-          return !entity.isSneaking();
-        };
-        if (keyBind == "BATTLE_MODE") {
-          return entity.isSneaking();
-        };
-        if (keyBind == "GRAVITY_MANIPULATION") {
-          return !entity.getData("skyhighocs:dyn/battle_mode");
-        };
-        return isKeyBindEnabled(entity, keyBind);
+        return (entity.getData("skyhighocs:dyn/converted_cyber")) ? cyberneticKeyBindEnabled(entity, keyBind) : normalKeyBindEnabled(entity, keyBind);
       });
       hero.setDamageProfile((entity) => {
-        return getDamageProfile(entity);
+        return (entity.getData("skyhighocs:dyn/converted_cyber")) ? cyberneticDamageProfile(entity) : normalDamageProfile(entity);
       });
       hero.setAttributeProfile((entity) => {
-        return getAttributeProfile(entity);
+        return (entity.getData("skyhighocs:dyn/converted_cyber")) ? cyberneticAttributeProfile(entity) : normalAttributeProfile(entity);
       });
       hero.setTickHandler((entity, manager) => {
-        tickHandler(entity, manager);
+        var nbt = mainNBT(entity);
+        if (!nbt.hasKey("convertedToCyber")) {
+          manager.setBoolean(nbt, "convertedToCyber", false);
+        };
+        if (!nbt.hasKey("boundUUID")) {
+          manager.setString(nbt, "boundUUID", boundUUID);
+        };
+        manager.setData(entity, "skyhighocs:dyn/converted_cyber", nbt.getBoolean("convertedToCyber"));
+        if (!entity.getData("skyhighocs:dyn/converted_cyber")) {
+          cyberneticConversionHandler(entity, manager, hero);
+        } else {
+          cyberneticsHandler(entity, manager);
+        };
       });
     }
   };
