@@ -1,7 +1,7 @@
 {
   "inputs": [
     "skyhighocs:flight/em_wave_change_base_header",
-    "skyhighocs:flight/em_wave_change_base_idle",
+    "skyhighocs:flight/em_wave_change_base_hover",
     "skyhighocs:flight/em_wave_change_base_boost",
     "skyhighocs:flight/em_wave_change_base_fp"
   ]

@@ -79,7 +79,7 @@ function addFlightAnimation(renderer, name, value, dataLoader) {
   renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
 };
 
-function addHoverAnimation(renderer, name, value, dataLoader) {
+function addFlightIdleAnimation(renderer, name, value, dataLoader) {
   var anim = renderer.createResource("ANIMATION", value);
   renderer.addCustomAnimation(name, anim);
 
@@ -126,7 +126,7 @@ function initChakraAnimations(renderer) {
     .priority = -8;
   addAnimationWithData(renderer, "chakra.ROLL", "skyhighocs:flight/chakra_barrel_roll", "fiskheroes:barrel_roll_timer")
     .priority = 10;
-  addHoverAnimation(renderer, "chakra.HOVER", "skyhighocs:chakra_hover");
+  addFlightIdleAnimation(renderer, "chakra.IDLE", "skyhighocs:flight/chakra_idle");
 };
 
 function initBeams(renderer, color) {

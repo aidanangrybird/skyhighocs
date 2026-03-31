@@ -173,7 +173,7 @@ function addFlightBaseAnimation(renderer, name, value, dataLoader) {
   renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
 };
 
-function addHoverAnimation(renderer, name, value, dataLoader) {
+function addFlightIdleAnimation(renderer, name, value, dataLoader) {
   var anim = renderer.createResource("ANIMATION", value);
   renderer.addCustomAnimation(name, anim);
 
@@ -226,7 +226,7 @@ function initEMWaveChangeAnimations(renderer) {
     .priority = -8;
   addAnimationWithData(renderer, "em_wave_change.ROLL", "skyhighocs:flight/em_wave_change_barrel_roll", "fiskheroes:barrel_roll_timer")
     .priority = 10;
-  addHoverAnimation(renderer, "em_wave_change.HOVER", "skyhighocs:em_wave_change_hover");
+  addFlightIdleAnimation(renderer, "em_wave_change.IDLE", "skyhighocs:flight/em_wave_change_idle");
   forceFieldAnimation(renderer);
 };
 
@@ -240,7 +240,7 @@ function initWaveSuitAnimations(renderer) {
     .priority = -8;
   addAnimationWithData(renderer, "wave_suit.ROLL", "skyhighocs:flight/wave_suit_barrel_roll", "fiskheroes:barrel_roll_timer")
     .priority = 10;
-  addHoverAnimation(renderer, "wave_suit.HOVER", "skyhighocs:wave_suit_hover");
+  addFlightIdleAnimation(renderer, "wave_suit.IDLE", "skyhighocs:flight/wave_suit_idle");
 };
 //Mega Buster
 function initMegaBuster(renderer, color) {
