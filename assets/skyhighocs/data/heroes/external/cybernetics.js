@@ -288,6 +288,12 @@ function round(input) {
   return output;
 };
 
+function dieFromIncompatiblity(entity, hero) {
+  if (entity.getUUID() != getBoundUUID(entity)) {
+    entity.hurt(hero, "CONVERSION", "%1$s died from shock", 1000.0);
+  };
+};
+
 /**
  * Attempts to get model of a cybernetic player by id
  * @param {JSEntity} entity - Required
@@ -1247,6 +1253,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
   function keyBinds(hero) {
     hero.addKeyBindFunc("BYPASS", (entity, manager) => {
       var nbt = mainNBT(entity);
+      dieFromIncompatiblity(entity, hero);
       manager.setDataWithNotify(entity, "skyhighocs:dyn/optics_enabled", true);
       manager.setBoolean(nbt, "bodyLights", true);
       manager.setDataWithNotify(entity, "skyhighocs:dyn/cybernetic_body_lights", true);
@@ -1259,6 +1266,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
     }, "Bypass Cybernetic Conversion", 5);
     hero.addKeyBindFunc("WAKE_UP", (entity, manager) => {
       var nbt = mainNBT(entity);
+      dieFromIncompatiblity(entity, hero);
       manager.setDataWithNotify(entity, "skyhighocs:dyn/optics_enabled", true);
       manager.setBoolean(nbt, "bodyLights", true);
       manager.setDataWithNotify(entity, "skyhighocs:dyn/cybernetic_body_lights", true);
