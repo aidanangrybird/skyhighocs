@@ -53,19 +53,19 @@ function assignTranser(entity, manager, satellite) {
   };
   switch (satellite) {
     case "dragon":
-      manager.setString(nbt, "systemColor", "2");
+      manager.setString(nbt, "systemColor", "\u00A72");
       manager.setData(entity, "skyhighocs:dyn/system_color", nbt.getString("systemColor"));
       break;
     case "leo":
-      manager.setString(nbt, "systemColor", "4");
+      manager.setString(nbt, "systemColor", "\u00A74");
       manager.setData(entity, "skyhighocs:dyn/system_color", nbt.getString("systemColor"));
       break;
     case "pegasus":
-      manager.setString(nbt, "systemColor", "1");
+      manager.setString(nbt, "systemColor", "\u00A71");
       manager.setData(entity, "skyhighocs:dyn/system_color", nbt.getString("systemColor"));
       break;
     default:
-      manager.setString(nbt, "systemColor", "0");
+      manager.setString(nbt, "systemColor", "\u00A70");
       manager.setData(entity, "skyhighocs:dyn/system_color", nbt.getString("systemColor"));
       break;
   };
@@ -113,14 +113,6 @@ function getWaveChange(entity) {
   return entity.getData("skyhighocs:dyn/wave_change");
 };
 /**
- * Gets the System Color
- * @param {JSEntity} entity - Entity getting checked
- * @returns The System Color
- **/
-function getSystemColorCode(entity) {
-  return entity.getData("skyhighocs:dyn/system_color");
-};
-/**
  * Gets the Wave Color
  * @param {JSEntity} entity - Entity getting checked
  * @returns The Wave Color
@@ -152,7 +144,7 @@ function hasComputer(entity) {
  * @returns The system color of a transer
  **/
 function getSystemColor(entity) {
-  return "\u00A7" + getSystemColorCode(entity);
+  return entity.getData("skyhighocs:dyn/system_color");
 };
 
 /**
@@ -923,8 +915,6 @@ function initSystem(moduleList, transerName, satellite) {
         manager.setString(nbt, "waveColor", waveColor);
         manager.setData(entity, "skyhighocs:dyn/wave_color", nbt.getString("waveColor"));
         //
-        manager.setString(nbt, "systemColor", "2");
-        manager.setData(entity, "skyhighocs:dyn/system_color", "2");
         onInitSystemIndexes.forEach(index => {
           var module = modules[index];
           module.onInitSystem(entity, manager);
@@ -959,16 +949,11 @@ function initSystem(moduleList, transerName, satellite) {
                 case "status":
                   status(entity);
                   break;
-                case "unlock":
-                  if ((emBeingIndex > -1 && waveChangeIndex > -1 && waveIndex > -1) && entity.as("PLAYER").isCreativeMode() && ((compatibleUUID != null) ? (entity.getUUID() == compatibleUUID) : true)) {
-                    manager.setString(entity.getWornChestplate().nbt(), "emBeing", emBeing);
-                    manager.setDataWithNotify(entity, "skyhighocs:dyn/em_being", emBeing);
-                  };
-                  break;
-                case "lock":
-                  if ((emBeingIndex > -1 && waveChangeIndex > -1 && waveIndex > -1) && entity.as("PLAYER").isCreativeMode() && ((compatibleUUID != null) ? (entity.getUUID() == compatibleUUID) : true)) {
-                    manager.setString(entity.getWornChestplate().nbt(), "emBeing", "");
-                    manager.setDataWithNotify(entity, "skyhighocs:dyn/em_being", "");
+                case "waveCalling":
+                  if (entity.getUUID() == getCompatibleUUID(entity) && (emBeingIndex > -1 && waveChangeIndex > -1 && waveIndex > -1) && entity.as("PLAYER").isCreativeMode()) {
+                    manager.setDataWithNotify(entity, "skyhighheroes:dyn/calling", true);
+                  } else {
+                    systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
                   };
                   break;
                 case "help":
@@ -981,6 +966,9 @@ function initSystem(moduleList, transerName, satellite) {
                   });
                   systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
                   systemMessage(entity, "<n>!systemInfo <nh>-<n> Shows your system info");
+                  if (entity.getUUID() == getCompatibleUUID(entity) && (emBeingIndex > -1 && waveChangeIndex > -1 && waveIndex > -1) && entity.as("PLAYER").isCreativeMode()) {
+                    systemMessage(entity, "<n>!waveCalling <nh>-<n> Calls down your em being");
+                  };
                   systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
                   break;
                 case "disable":
