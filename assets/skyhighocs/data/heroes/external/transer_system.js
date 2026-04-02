@@ -951,7 +951,7 @@ function initSystem(moduleList, transerName, satellite) {
                   break;
                 case "waveCalling":
                   if (entity.getUUID() == getCompatibleUUID(entity) && (emBeingIndex > -1 && waveChangeIndex > -1 && waveIndex > -1) && entity.as("PLAYER").isCreativeMode()) {
-                    manager.setDataWithNotify(entity, "skyhighheroes:dyn/calling", true);
+                    manager.setDataWithNotify(entity, "skyhighocs:dyn/calling", true);
                   } else {
                     systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
                   };
