@@ -144,7 +144,7 @@ function getAliasName(entity) {
  * @param {JSEntity} entity - Entity getting checked
  * @returns The UUID of the suits authorized user
  **/
-function getAuthorizedUser(entity) {
+function getBoundUUID(entity) {
   return mainNBT(entity).getString("boundUUID");
 };
 
