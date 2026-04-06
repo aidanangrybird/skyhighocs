@@ -24,12 +24,12 @@ function initModule(system) {
         if (entity.getData("skyhighocs:dyn/calling_value") < 0.05) {
           manager.setDataWithNotify(entity, "skyhighocs:dyn/calling", true);
         };
-        if (entity.getData("skyhighocs:dyn/calling_timer") == 1) {
+      };
+      if (entity.getData("skyhighocs:dyn/calling_timer") == 1) {
         manager.setString(entity.getWornChestplate().nbt(), "emBeing", "Achlys");
         manager.setDataWithNotify(entity, "skyhighocs:dyn/em_being", "Achlys");
         manager.setDataWithNotify(entity, "skyhighocs:dyn/calling", false);
         manager.setDataWithNotify(entity, "skyhighocs:dyn/calling_timer", 0.0);
-        };
       };
     },
     waveHandler: function (entity, hero) {
