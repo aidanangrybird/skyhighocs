@@ -178,10 +178,6 @@ function getColor() {
   return 0x0000FF;
 };
 
-function getID(entity) {
-  return "6982b802-8dec-460a-b1fa-6f1596944e8f";
-};
-
 function getSatellite() {
   return "dragon";
 };

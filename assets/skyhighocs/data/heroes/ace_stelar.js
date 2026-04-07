@@ -63,13 +63,13 @@ function init(hero) {
   });
   hero.setKeyBindEnabled((entity, keyBind) => {
     if (keyBind == "VISUALIZER_TOGGLE") {
-      return entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getUUID() == transer.getCompatibleUUID && ((entity.getData("skyhighocs:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
+      return entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getUUID() == transer.getCompatibleUUID(entity) && ((entity.getData("skyhighocs:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
     };
     if (keyBind == "CYCLE_CLOTHES") {
-      return entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getUUID() == transer.getCompatibleUUID;
+      return entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getUUID() == transer.getCompatibleUUID(entity);
     };
     if (keyBind == "HOOD_TOGGLE") {
-      return entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getUUID() == transer.getCompatibleUUID && entity.isSneaking() && entity.getData("skyhighocs:dyn/stelar_clothes") == 3;
+      return entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getUUID() == transer.getCompatibleUUID(entity) && entity.isSneaking() && entity.getData("skyhighocs:dyn/stelar_clothes") == 3;
     };
     if (keyBind == "CYCLE_CHATS") {
       return !entity.isSneaking() && entity.getData("skyhighocs:dyn/wave_changing_timer") == 0;

@@ -187,10 +187,6 @@ function getColor() {
   return 0xFF0000;
 };
 
-function getID(entity) {
-  return "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0";
-};
-
 function getSatellite() {
   return "pegasus";
 };

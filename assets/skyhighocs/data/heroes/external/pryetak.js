@@ -72,7 +72,7 @@ function initModule(system) {
         };
         return true;
       }, "Pulse Out", 5);
-      hero.addKeyBindFunc("SYNCHRONIZE_WAVES", (player, manager) => {
+      hero.addKeyBindFunc("PULSE_IN", (player, manager) => {
         if (player.getUUID() == system.getCompatibleUUID(player)) {
           system.shoutMessage(player, "<Chase Stelar> EM Wave Change! \u00A72Chase Stelar\u00A7r, On-Air!", 16);
           manager.setData(player, "skyhighocs:dyn/battle_card", 0);
@@ -118,7 +118,7 @@ function initModule(system) {
       if (keyBind == "BATTLE_CARD_RESET") {
         result = entity.isSneaking() && (entity.getData("skyhighocs:dyn/selected_battle_card") > 0 && entity.getData("skyhighocs:dyn/battle_card") > 0) && entity.getData("skyhighocs:dyn/wave_changing_timer") == 1;
       };
-      if (keyBind == "SYNCHRONIZE_WAVES") {
+      if (keyBind == "PULSE_IN") {
         result = (entity.getData("skyhighocs:dyn/wave_changing_timer") == 0 && entity.getData("skyhighocs:dyn/body_temperature") < 0.25 && entity.getData("skyhighocs:dyn/body_temperature") > -0.25);
       };
       if (keyBind == "PULSE_OUT") {

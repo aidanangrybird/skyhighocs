@@ -171,14 +171,10 @@ function getColor() {
   return 0x8000FF;
 };
 
-function getID(entity) {
-  return "e51532a1-19fc-4d4f-9da0-f952c4645891";
-};
-
 function getSatellite() {
   return "dragon";
 };
 
 function getEMBeing() {
-  return "Achyls";
+  return "Achlys";
 };
