@@ -8,7 +8,7 @@
     "exist": {
       "trigger": "fiskheroes:player_killed",
       "description": {
-        "translate": "Die in fire as Dimlightt"
+        "translate": "Die in fire as C_sp"
       },
       "condition": {
         "variables": {
